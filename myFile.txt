@@ -1,0 +1,8 @@
+Grantley Morrison
+
+1. vi myFile.txt
+2. Press "I", to enter insert mode.
+3. Press "Esc", to exit insert mode.
+4. Press ":" to enter a command.
+5. Press "W" to write.
+6. Press "Q" to quit.
