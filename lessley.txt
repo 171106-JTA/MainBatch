@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-Matthew Snee
-=======
-Ryan Lessley
->>>>>>> b368830a2bca517968746b3e7721edbdd630b6d5
