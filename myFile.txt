@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 fuewvbk:wq
 :wq
 
@@ -5,3 +6,8 @@ fuewvbk:wq
 
 :wq
 
+=======
+Ryan yeahright Lessley
+Bobbert
+Ryan Lessley
+>>>>>>> 1888e72bba3db1c4e5200b7db0d3aa63a8e5e5e9
