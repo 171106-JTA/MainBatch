@@ -1,0 +1,40 @@
+Mini Project Week 1 - Bank
+A Console Application
+Have a login "screen" 
+	- Be able to login as a user
+	- Be able to create an account
+	- At least a username and password (Add more if want)
+Upon logging in:
+	- User should be able to see their balance
+	- User should be able to withdraw and deposit
+	- Have proper error handling for 0 balance (Bonus points for casting exception for 0 balance)
+All data relating to a user must be persisted through serialized files (File with user data)
+There must be at least 2 roles: User and Admin
+ 	- Admins can lock a user account
+ 	- Admins must approve an account's creation before the new user can log in
+ 	- Admins must be able to promote users to the admin level
+ 	- (Have 1 admin hardcoded into a file)
+
+ Additional Requirements
+ MUST COMMENT LIBERALLY!
+ - Every method must be commented
+ - Must Use Java Docs (for each of our methods)
+ Must use JUnit for unit testing
+ Must log transactions with Log4J
+
+ Note 1: Bank is an example. Can change this. (sub example: Starcraft resources)
+ Note 2: These are minimums. Feel free to exand!
+ Note 3: Prefer to have this as a Maven project. (If not Maven, then will have to import Jars manually)
+
+ Stretch Goals (optional): 
+ Be able to apply for a loan.
+ Be able to pay back loans.
+ Loans should have an approval process
+ Multiple user roles
+ Credit Lines
+ - open credit card
+ - sprend money
+ - pay back
+ - variable credit lines (probably based on current account balance)
+ Overdrawn Consequences
+ Interest rates over time
