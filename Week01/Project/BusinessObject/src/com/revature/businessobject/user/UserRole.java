@@ -5,6 +5,9 @@ package com.revature.businessobject.user;
  * @author Antony Lulciuc
  */
 public enum UserRole {
+	// User has no privileges 
+	NONE,
+	
 	// ADMIN has access to all accounts
 	ADMIN,
 	
