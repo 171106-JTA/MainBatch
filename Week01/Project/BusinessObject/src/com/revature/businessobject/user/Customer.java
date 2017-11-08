@@ -10,6 +10,6 @@ public class Customer extends User {
 	 * @param id user primary key
 	 */
 	public Customer(long id) {
-		super(id, UserRole.NONE);
+		super(id, UserRole.CUSTOMER);
 	}
 }

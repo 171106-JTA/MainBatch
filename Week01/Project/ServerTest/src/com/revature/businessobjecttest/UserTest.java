@@ -2,6 +2,7 @@ package com.revature.businessobjecttest;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
+import com.revature.businessobject.user.Admin;
 import com.revature.businessobject.user.Customer;
 import com.revature.businessobject.user.User;
 import com.revature.businessobject.user.UserRole;
@@ -31,4 +32,9 @@ class UserTest extends Assert {
 		assertTrue("Customer instance should have customer role", customer.getRole() == UserRole.CUSTOMER);
 	}
 	
+	@Test
+	void adminInstanceShouldHaveAdminRole() {
+		Admin admin = new Admin(123456);
+		assertTrue("Administrator instance should have admin. role", admin.getRole() == UserRole.ADMIN);
+	}
 }
