@@ -6,6 +6,6 @@ public class Admin extends User {
 	 * @param id user primary key
 	 */
 	public Admin(long id) {
-		super(id, UserRole.NONE);
+		super(id, UserRole.ADMIN);
 	}
 }
