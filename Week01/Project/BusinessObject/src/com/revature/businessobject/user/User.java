@@ -22,7 +22,7 @@ public class User extends BusinessObject {
 	 * @param id used throughout the system to access account data 
 	 * @param role user account privileges 
 	 */
-	User(long id, UserRole role) {
+	public User(long id, UserRole role) {
 		super();
 		this.id = id;
 		this.role = role;
