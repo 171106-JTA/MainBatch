@@ -10,7 +10,7 @@ Upon logging in:
 	- Have proper error handling for 0 balance (Bonus points for casting exception for 0 balance)
 All data relating to a user must be persisted through serialized files (File with user data)
 There must be at least 2 roles: User and Admin
- 	- Admins can lock a user account
+ 	- Admins can lock/unlock a user account
  	- Admins must approve an account's creation before the new user can log in
  	- Admins must be able to promote users to the admin level
  	- (Have 1 admin hardcoded into a file)
@@ -38,3 +38,13 @@ There must be at least 2 roles: User and Admin
  - variable credit lines (probably based on current account balance)
  Overdrawn Consequences
  Interest rates over time
+ Log exceptions
+
+ My Features: 
+ Password and username authentication for account creation
+ Change password
+ Change username
+ Delete account
+ Admins: veiw pending account approvals
+ Admins: delete account
+ Admins: create user account
