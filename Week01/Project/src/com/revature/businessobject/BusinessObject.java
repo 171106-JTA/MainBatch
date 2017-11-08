@@ -7,5 +7,9 @@ import java.io.Serializable;
  * @author Antony Lulciuc
  */
 public class BusinessObject implements Serializable {
-	// TODO : add method to convert to Json Instance 
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7615895150903957113L;
 }
