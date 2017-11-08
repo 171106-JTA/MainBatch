@@ -6,23 +6,30 @@ import com.revature.businessobject.BusinessObject;
  * Used to identify user and there role
  * @author Antony Lulciuc
  */
-public abstract class User extends BusinessObject {
+public class User extends BusinessObject {
 	/**
 	 * Unique identifier used to pull user data 
 	 */
 	private long id;
 	
 	/**
+	 * Value represents account privileges 
+	 */
+	private UserRole role;
+	
+	/**
 	 * Initializes user with specified id
 	 * @param id used throughout the system to access account data 
+	 * @param role user account privileges 
 	 */
-	User(long id) {
+	User(long id, UserRole role) {
 		super();
 		this.id = id;
+		this.role = role;
 	}
 	
 	/**
-	 * @return user id
+	 * @return user id (PRIMARY KEY)
 	 */
 	public long getId() {
 		return id;
@@ -32,5 +39,7 @@ public abstract class User extends BusinessObject {
 	 * Value represents user privileges (what they do and do not have access to).
 	 * @return user account status
 	 */
-	abstract public UserRole getRole();
+	public UserRole getRole() {
+		return role;
+	}
 }
