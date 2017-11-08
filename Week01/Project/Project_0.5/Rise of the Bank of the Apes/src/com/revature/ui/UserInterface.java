@@ -6,6 +6,7 @@ import java.util.Scanner;
 import com.revature.users.User;
 
 public class UserInterface {
+	public static Scanner scan;
 	
 	public UserInterface() {
 		
@@ -14,9 +15,8 @@ public class UserInterface {
 	private static String readInput() {
 		String result;
 		
-		Scanner scan = new Scanner(System.in);
+		scan = new Scanner(System.in);
 		result = scan.nextLine();
-		scan.close();
 		
 		return result;
 	}
@@ -28,19 +28,24 @@ public class UserInterface {
 		System.out.println("1. Login for existing user");
 		System.out.println("2. Create new user account");
 		
-		System.out.println("Please Enter Number: ");
+		System.out.print("Please Enter Number: ");
 		
 		return Integer.parseInt(UserInterface.readInput());
 	}
 	
 	public static int newUserScreen(HashMap<String, User> users) {
-		
-		
+		String user;
+		String password;
+		System.out.println("Username: ");
+		user = UserInterface.readInput();
+		System.out.println("Password: ");
+		password = UserInterface.readInput();
+		users.put(user, new User(user, password));
 		
 		return 0;
 	}
 	
-	public static int oldUserScreen(HashMap<String, User> users) {
+	public static void oldUserScreen(HashMap<String, User> users) {
 		String user;
 		String password;
 		String savedPassword;
@@ -52,15 +57,21 @@ public class UserInterface {
 			password = UserInterface.readInput();
 			savedPassword = users.get(user).getPassword();
 			if(password.equals(savedPassword)) {
-				return 0;
-			}
-			else {
-				return -1;
+				UserInterface.accountScreen(users.get(user));
 			}
 		}
-		else {
-			return -1;
-		}
+	}
+	
+	public static int accountScreen(User user) {
+		System.out.println("Hello");
+		return 0;
+	}
+	
+	public static void depositScreen(User user) {
+		
+	}
+	public static void withdrawScreen(User user) {
+		
 	}
 	
 	public static int adminScreen() {
