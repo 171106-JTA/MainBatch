@@ -6,6 +6,8 @@ public class MainApp {
 		System.out.println("Just Saying Something");
 	}
 	
+	
+	
 	/**
 	 * Allows user to login. 
 	 */
@@ -57,8 +59,57 @@ public class MainApp {
 		
 	}
 	
+	////////////////////////////////////////////////////////
+	//Admin Functionality
+	////////////////////////////////////////////////////////
+	/**
+	 * Lock the given client's account
+	 * @param clientUsername		Username of client account to lock
+	 */
+	public void lockClientAccount(String clientUsername) {
+		
+	}
 	
+	/**
+	 * Unlock the given client's account
+	 * @param clientUsername		Username of the client account to unlock
+	 */
+	public void unlockClientAccount(String clientUsername) {
+		
+	}
 	
+	/**
+	 * Approve the given client's account
+	 * @param clientUsername		Username of client account to approve
+	 */
+	public void approveClientAccount(String clientUsername) {
+		
+	}
 	
+	/**
+	 * Allows admins to promote clients to admin status
+	 * @param clientUsername
+	 */
+	public void promoteClientToAdmin(String clientUsername) {
+		
+	}
 	
+	////////////////////////////////////////////////////////
+	//Client Functionality
+	////////////////////////////////////////////////////////
+	/**
+	 * Add given amount to the Client's account
+	 * @param depositAmount			Amount to be deposited into Client's account
+	 */
+	public void deposit(double depositAmount) {
+		
+	}
+	
+	/**
+	 * Subtract given amount from the Client's account
+	 * @param withdrawAmount		Amount to be withdrawn from Clien'ts account
+	 */
+	public void withdraw(double withdrawAmount) {
+		
+	}	
 }
