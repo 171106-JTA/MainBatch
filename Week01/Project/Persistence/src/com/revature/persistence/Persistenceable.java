@@ -57,7 +57,6 @@ public interface Persistenceable {
 	int delete(BusinessObject businessObject);
 	
 	/**
-	 * 
 	 * Removes records from system
 	 * @param name data structure to remove
 	 * @param cnds conditions record must have to be deleted
