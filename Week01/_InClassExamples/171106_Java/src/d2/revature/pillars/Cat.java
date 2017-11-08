@@ -1,6 +1,8 @@
 package d2.revature.pillars;
 
 public abstract class Cat extends Animal{
+	public String word = "cat";
+	
 	/*
 	 * The only modifiers you can use for a class are public, abstract, and final, also
 	 * just the default modifier.
