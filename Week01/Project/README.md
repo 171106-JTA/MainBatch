@@ -1,4 +1,5 @@
-Mini Project Bank Application **Requirements**, must:
+## Mini Project Bank Application Requirements  
+Must:  
  - Be a console application  
  - Have Login screen  
    - Be able to create a account  
@@ -28,3 +29,26 @@ Mini Project Bank Application **Requirements**, must:
  - Credit lines   
  - Overdrawn consequences   
  - Interest rates over time  
+  
+## Project Structure  
+- BusinessObject - defines all structures system uses to store and manage its data  
+- Server - Defines application Business Logic Layer  
+- Persistance - Defines system data layer (defines how data is stored/accessed/updated/removed)  
+- SystemTests - Defines all JUnit tests  
+  
+## Project Internal Dependency  
+- BusinessObjects (**None**)  
+- Server:  
+  - **BusinessObject** 
+  - **Persistence**  
+- Persistence:  
+  - **BusinessObject**  
+- SystemTests:  
+  - **BusinessObject**  
+  - **Server**  
+  - **Persistence**  
+  
+
+
+
+
