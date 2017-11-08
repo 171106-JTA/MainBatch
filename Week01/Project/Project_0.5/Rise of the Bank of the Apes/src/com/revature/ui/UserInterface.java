@@ -20,6 +20,10 @@ public class UserInterface {
 		
 		return result;
 	}
+	
+	private static void closeScanner() {
+		scan.close();
+	}
 	public static int splashScreen() {
 		
 		System.out.println("Welcome to the Bank of the Apes!");
@@ -36,8 +40,16 @@ public class UserInterface {
 	public static int newUserScreen(HashMap<String, User> users) {
 		String user;
 		String password;
-		System.out.println("Username: ");
-		user = UserInterface.readInput();
+		while(true) {
+			System.out.println("Username: ");
+			user = UserInterface.readInput();
+			if(users.containsKey(user)) {
+				System.out.println("Username taken. Please try again.");
+			}
+			else {
+				break;
+			}
+		}
 		System.out.println("Password: ");
 		password = UserInterface.readInput();
 		users.put(user, new User(user, password));
@@ -63,10 +75,18 @@ public class UserInterface {
 	}
 	
 	public static int accountScreen(User user) {
-		System.out.println("Hello");
+		System.out.println("Welcome Back!");
+		System.out.println("You Have " + user.getBalance() + " Bananas");
+		System.out.println("1. Withdraw");
+		System.out.println("2. Deposit");
+		
 		return 0;
 	}
 	
+	/**
+	 * 
+	 * @param user
+	 */
 	public static void depositScreen(User user) {
 		
 	}
