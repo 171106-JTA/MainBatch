@@ -1,4 +1,4 @@
-package com.revature.businessobjecttest;
+package com.revature.test.businessobject;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
