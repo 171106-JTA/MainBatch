@@ -15,13 +15,22 @@ public class UserTest {
 		id = 123456;
 	}
 	
+	@Test
+	public void shouldBeEqualToInstanceWithSameValues() {
+		User user1 = new Admin(id);
+		User user2 = new Admin(id);
+		
+		// Perform tests
+		assertEquals(user1, user2);
+	}
+	
 	/**
 	 * Ensures user instance can have role of Administrator 
 	 */
 	@Test
 	public void shouldCreateUserWithAdminRole() {
 		User user = new User(id, UserRole.ADMIN);
-		assertEquals("Should get handle to list of business objects", user.getRole(), UserRole.ADMIN);
+		assertEquals("Should get handle to list of business objects", UserRole.ADMIN, user.getRole());
 	}
 	
 	/**
@@ -30,7 +39,7 @@ public class UserTest {
 	@Test
 	public void shouldCreateUserWithCustomerRole() {
 		User user = new User(id, UserRole.CUSTOMER);
-		assertEquals("User role should be customer", user.getRole(), UserRole.CUSTOMER);
+		assertEquals("User role should be customer", UserRole.CUSTOMER, user.getRole());
 	}
 	
 	/**
@@ -48,7 +57,7 @@ public class UserTest {
 	@Test
 	public void customerInstanceShouldHaveCustomerRole() {
 		Customer customer = new Customer(id);
-		assertEquals("Customer instance should have customer role", customer.getRole(), UserRole.CUSTOMER);
+		assertEquals("Customer instance should have customer role", UserRole.CUSTOMER, customer.getRole());
 	}
 	
 	/**
@@ -57,6 +66,6 @@ public class UserTest {
 	@Test
 	public void adminInstanceShouldHaveAdminRole() {
 		Admin admin = new Admin(id);
-		assertEquals("Administrator instance should have admin. role", admin.getRole(), UserRole.ADMIN);
+		assertEquals("Administrator instance should have admin. role", UserRole.ADMIN, admin.getRole());
 	}
 }

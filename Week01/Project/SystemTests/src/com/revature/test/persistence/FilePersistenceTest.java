@@ -54,13 +54,13 @@ public class FilePersistenceTest {
 	@Test
 	public void shouldStoreDataInCurrentWorkingDirectory() {
 		FilePersistence fp = new FilePersistence();
-		assertEquals("Should store data in working directory", fp.getDirectory(), System.getProperty("user.dir"));
+		assertEquals("Should store data in working directory", System.getProperty("user.dir"), fp.getDirectory());
 	}
 	
 	@Test
 	public void shouldStoreDataInDifferentDirectory() {
 		FilePersistence fp = new FilePersistence("C:\\");
-		assertEquals("Should store data in different directory", fp.getDirectory(), "C:\\");
+		assertEquals("Should store data in different directory", "C:\\", fp.getDirectory());
 	}
 	
 	///
@@ -72,7 +72,7 @@ public class FilePersistenceTest {
 	 */
 	@Test
 	public void shouldCreateNewAdminUserUsingBusinessObject() {
-		assertEquals("Should add admin with", manager.insert(admin), 1);
+		assertEquals("Should add admin with", 1, manager.insert(admin));
 	}
 	
 	/**
@@ -85,9 +85,12 @@ public class FilePersistenceTest {
 		values.put("role", admin.getRole().toString());
 		
 		// Perform test
-		assertEquals("Should add admin with", manager.insert("User", values), 1);
+		assertEquals("Should add admin with", 1, manager.insert("User", values));
 	}
 	
+	/**
+	 * Should be able to load user from memory 
+	 */
 	@Test
 	public void shouldBeAbleToGetExistingUser() {
 		// Set condition to pull from manager
@@ -96,7 +99,7 @@ public class FilePersistenceTest {
 		
 		// Perform test
 		assertNotNull("Should get handle to list of business objects", resultset = manager.select("User", conditions));
-		assertEquals("Should have one record in resultset", resultset.size(), 1);
+		assertEquals("Should have one record in resultset", 1, resultset.size());
 		assertTrue("Record should be newly created admin", admin.equals(resultset.get(0)));
 	}
 	
@@ -112,9 +115,9 @@ public class FilePersistenceTest {
 		manager.insert(admin);
 		
 		// Update account (demote to customer)
-		assertEquals("Should demote admin account to customer", manager.update(demote), 1);
+		assertEquals("Should demote admin account to customer", 1, manager.update(demote));
 		assertNotNull("Should be able to get updated record", resultset = manager.select("User", conditions));
-		assertEquals("Should have one record in resultset", resultset.size(), 1);
+		assertEquals("Should have one record in resultset", 1, resultset.size());
 		assertTrue("Record in system should reflect changes", demote.equals(resultset.get(0)));
 	}
 
@@ -130,28 +133,48 @@ public class FilePersistenceTest {
 		manager.insert(admin);
 		
 		// Update Account
-		assertEquals("Should demote admin account to customer", manager.update("User", conditions, values), 1);
+		assertEquals("Should demote admin account to customer", 1, manager.update("User", conditions, values));
 		assertNotNull("Should be able to get updated record", resultset = manager.select("User", conditions));
-		assertEquals("Should have one record in resultset", resultset.size(), 1);
+		assertEquals("Should have one record in resultset", 1, resultset.size());
 		assertTrue("Record in system should reflect changes", demote.equals(resultset.get(0)));
 	}
 	
+	/**
+	 * Should delete all User records from system
+	 */
+	@Test
+	public void shouldRemoveAllUsersFromSystem() {
+		// Set data
+		manager.insert(admin);
+		manager.insert(customer);
+		
+		// Perform test
+		assertEquals("Should all users from system (2 users)", 2, manager.delete("User", null));
+		assertEquals("Should have 0 users in system", 0, manager.select("User", null).size());
+	}
+	
+	/**
+	 * Should be able to remove existing user from system with BusinessObject
+	 */
 	@Test
 	public void shouldRemoveUserByBusinessObject() {
 		// Set data
 		manager.insert(admin);
 		
 		// Perform test
-		assertEquals("Should delete admin account", manager.delete(admin), 1);
+		assertEquals("Should delete admin account", 1, manager.delete(admin));
 	}
 	
+	/**
+	 * Should be able to remove existing user from system with FieldParams
+	 */
 	@Test
-	public void shouldRemoveUserByParams() {
+	public void shouldRemoveUserByFieldParams() {
 		// Set data
 		conditions.put("id", Long.toString(adminId));
 		manager.insert(admin);
 		
 		// Perform test
-		assertEquals("Should delete admin account", manager.delete("User", conditions), 1);
+		assertEquals("Should delete admin account", 1, manager.delete("User", conditions));
 	}
 }
