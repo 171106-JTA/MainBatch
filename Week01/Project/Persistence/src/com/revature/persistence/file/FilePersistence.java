@@ -1,12 +1,13 @@
 package com.revature.persistence.file;
 
-import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import com.revature.businessobject.BusinessObject;
+import com.revature.businessobject.info.Account;
+import com.revature.businessobject.info.UserInfo;
 import com.revature.businessobject.user.User;
 import com.revature.core.FieldParams;
 import com.revature.core.Resultset;
@@ -40,6 +41,8 @@ public class FilePersistence implements Persistenceable {
 	
 	// Datasets used to cache system records
 	private static List<User> users = new LinkedList<>();
+	private static List<UserInfo> userInfo = new LinkedList<>();
+	private static List<Account> accounts = new LinkedList<>();
 	
 	
 	
@@ -90,14 +93,32 @@ public class FilePersistence implements Persistenceable {
 
 	@Override
 	public int insert(BusinessObject businessObject) {
-		// TODO Auto-generated method stub
-		return 0;
+		String clazz = businessObject.getClass().getName();
+		
+		switch (clazz.toLowerCase()) {
+			case "user":
+				return addUser((User)businessObject);
+			case "userinfo":
+				return addUserInfo((UserInfo)businessObject);
+			case "account":
+				return addAccount((Account)businessObject);
+			default:
+				return 0;
+		}
 	}
 
 	@Override
 	public int insert(String name, FieldParams values) {
-		
-		return 0;
+		switch (name.toLowerCase()) {
+			case "user":
+				return addUser((User)factory.getBusinessObject(name, values));
+			case "userinfo":
+				return addUserInfo((UserInfo)factory.getBusinessObject(name, values));
+			case "account":
+				return addAccount((Account)factory.getBusinessObject(name, values));
+			default:
+				return 0;
+		}
 	}
 
 	@Override
@@ -181,11 +202,34 @@ public class FilePersistence implements Persistenceable {
 	}
 	
 	private static int addUser(User user) {
+		// If failed to generate user
+		if (user == null)
+			return -1;
+		
 		users.add(user);
 		saveData(directory + USERFILE, (BusinessObject[])users.toArray());
 		return 1;
 	}
 	
+	private static int addUserInfo(UserInfo info) {
+		// If failed to generate user
+		if (info == null)
+			return -1;
+		
+		userInfo.add(info);
+		saveData(directory + USERINFOFILE, (BusinessObject[])userInfo.toArray());
+		return 1;
+	}
+	
+	private static int addAccount(Account acct) {
+		// If failed to generate user
+		if (acct == null)
+			return -1;
+		
+		accounts.add(acct);
+		saveData(directory + ACCOUNTFILE, (BusinessObject[])accounts.toArray());
+		return 1;
+	}
 
 	
 	/**
