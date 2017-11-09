@@ -11,7 +11,7 @@ public class StringComp implements Comparator<String>{
 		min = s1.length() < s2.length() ? s1 : s2;
 		for(int i = 0; i < min.length(); i++) {
 			if(s1.trim().toLowerCase().charAt(i) != s2.trim().toLowerCase().charAt(i)) {
-				return s1.charAt(i) > s2.charAt(i) ? -1 : 1;
+				return s1.toLowerCase().charAt(i) > s2.toLowerCase().charAt(i) ? -1 : 1;
 			}
 		}
 		return -1;
