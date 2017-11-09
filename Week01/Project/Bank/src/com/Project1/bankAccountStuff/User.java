@@ -6,19 +6,34 @@ public class User {
 	//////////////////////////////////////////////////////////////
 	
 	/**
-	 * Username of Client
+	 * SSN for client. This is the unique identifier
 	 */
-	protected String name; 
+	private int[] ssn = new int[9];
 	
 	/**
-	 * Password of Client
+	 * First name of client
 	 */
-	protected String password;
+	private String firstName; 
+	
+	/**
+	 * Last name of client
+	 */
+	private String lastName; 
+	
+	/**
+	 * Middle initial of client
+	 */
+	private char middleInitial;
+	
+	/**
+	 * Password of client
+	 */
+	private String password;
 	
 	/**
 	 * Holds level of permissions for user. 0 = Client, 1 = Admin
 	 */
-	protected int permissions;
+	private int permissions;
 	
 	/**
 	 * Determines status of cleint's account. 0 = approval pending, 1 = active account, 2 = locked
@@ -35,69 +50,100 @@ public class User {
 	//////////////////////////////////////////////////////////////
 	/**
 	 * Initializes a new account, accepting the username and password for the new account
-	 * @param name - username for new account
-	 * @param password - password for new account
+	 * @param name 		username for new account
+	 * @param password 	password for new account
 	 */
-	User(String name, String password) {
-		this.name = name; 
+	User(String firstName, String lastName, char middleInitial, int[] ssn, String password) {
+		this.firstName = firstName; 
+		this.lastName = lastName;
+		this.middleInitial = middleInitial;
+		this.ssn = ssn; //Deep copy or shallow copy??? Check this!!!
 		this.password = password;
 		this.permissions = 0; //Initialize new accounts to Client level permissions
 		this.status = 0; //Initialize new accounts to require approval
 		this.accountAmount = 0; //Initialize new account amounts to 0
 	}
 	
-	
 	//////////////////////////////////////////////////////////////
 	//Getters and Setters
 	//////////////////////////////////////////////////////////////
 	/**
-	 * Fetch the username
-	 * @return Returns the username of the user
+	 * Fetch the first name of the user
+	 * @return Returns the first name of the user
 	 */
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
 	
 	/**
-	 * Set the username
-	 * @param name - contains the username
+	 * Set the first name of the user
+	 * @param firstName 	Contains the new first name of the user
 	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * Get the password
-	 * @return Returns the password of the user
-	 */
-	public String getPassword() {
-		return password;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 	
 	/**
-	 * Set the password
-	 * @param password - contains the password
+	 * Fetch the last name of the user
+	 * @return Returns the last name of the user
 	 */
-	public void setPassword(String password) {
-		this.password = password;
+	public String getLastName() {
+		return lastName;
 	}
 	
 	/**
-	 * Get the user's current permissions level
-	 * 0 = Client, 1 = Admin
-	 * @return Returns the user's current permissions level
+	 * Set the last name of the user
+	 * @param name 	Contains the new last name of the user
 	 */
-	public int getPermissions() {
-		return permissions;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	
 	/**
-	 * Set the permission level for the user
-	 * @param permissions - Holds the permission level to set
+	 * Fetch the middle initial of the user
+	 * @return Returns the middle initial of the user
 	 */
-	public void setPermissions(int permissions) {
-		this.permissions = permissions;
+	public char getMiddleInitial() {
+		return middleInitial;
 	}
 	
+	/**
+	 * Set the middle initial of the user
+	 * @param middleInitial		A char containing the middle initial of the user
+	 */
+	public void setMiddleInitial(char middleInitial) {
+		this.middleInitial = middleInitial;
+	}
 	
+	/**
+	 * Fetch the status of the user. 
+	 * @return		Returns the status of the user
+	 */
+	public int getStatus() {
+		return status;
+	}
+	
+	/**
+	 * Set the status of the user
+	 * @param status		An int containing the new status of the user
+	 */
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	
+	/**
+	 * Fetch the current amount in the account
+	 * @return		Returns an integer containing the current amount in the account
+	 */
+	public double getAccountAmount() {
+		return accountAmount;
+	}
+	
+	/**
+	 * Change the amount in the account
+	 * @param accountAmount		A double containing the new amount for the account
+	 */
+	public void setAccountAmount(double accountAmount) {
+		this.accountAmount = accountAmount;
+	}	
 }
