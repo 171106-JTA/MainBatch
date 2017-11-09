@@ -1,6 +1,14 @@
 package bank.accounts;
 
-public class Account {
+import java.io.Serializable;
+
+public class Account implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7208156833103705447L;
+	
 	private String username;
 	private String password;
 	private String firstName;
@@ -21,15 +29,24 @@ public class Account {
 		currentAccountNumber++;
 	}
 	
-	public Account(String username, String password, String firstName, String lastName, int pinNumber, int balance) {
+	public Account(String username, String password, String firstName, String lastName, int pinNumber) {
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.pinNumber = pinNumber;
-		this.balance = balance;
+		this.balance = 0;
 		this.setAccountNumber(currentAccountNumber);
 		currentAccountNumber++;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Account [username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", pinNumber=" + pinNumber + ", accountNumber=" + accountNumber + ", balance=" + balance
+				+ "]";
 	}
 	public String getUsername() {
 		return username;
