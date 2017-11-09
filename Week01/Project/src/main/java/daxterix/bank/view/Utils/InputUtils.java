@@ -4,6 +4,8 @@ import daxterix.bank.view.Page;
 
 import java.io.Console;
 import java.util.Scanner;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class InputUtils {
     public static String DIVIDER = "______________________________________________________________________";
@@ -51,6 +53,25 @@ public class InputUtils {
         Console console = System.console();
         char[] masked = console.readPassword();
         return new String(masked);
+    }
+
+
+    /**
+     * @return
+     */
+    public static <T> T readConfirmed(Supplier<T> inputSupply) {
+        T firstEntry;
+        T secondEntry;
+
+        do {
+            firstEntry = inputSupply.get();
+            System.out.println("Confirm");
+            secondEntry = inputSupply.get();
+            if (firstEntry != secondEntry)
+                System.out.println("both entries must be the same; please try again");
+        }
+        while(!firstEntry.equals(secondEntry));
+        return firstEntry;
     }
 
     public static void printDivider() {
