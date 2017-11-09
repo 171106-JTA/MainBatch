@@ -117,6 +117,9 @@ public class FilePersistence implements Persistenceable {
 	}
 	
 
-	
+	@Override
+	protected void finalize() {
+		// Save data to file 
+	}
 	
 }
