@@ -1,5 +1,6 @@
 package com.revature.persistence.file;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -17,6 +18,20 @@ public class BusinessObjectFileIO {
 	private ObjectOutputStream oos;
 	private ObjectInputStream ois;
 	private String fileName;
+	
+	/**
+	 * @return true is stream is open else false
+	 */
+	public boolean isReadStreamOpen() {
+		return ois != null;
+	}
+	
+	/**
+	 * @return true is stream is open else false
+	 */
+	public boolean isWriteStreamOpen() {
+		return oos != null;
+	}
 	
 	/**
 	 * Opens object read stream and closes Write stream if opened 
@@ -117,6 +132,17 @@ public class BusinessObjectFileIO {
 		} catch (IOException e) {
 			logger.error("Failed to closed object stream for file:>" + fileName + " message:>" + e.getMessage());
 		}
+	}
+	
+	/**
+	 * Deletes file at specified path
+	 * @param path where file is located
+	 * @return true if file was deleted else false
+	 */
+	public boolean deleteFile(String path) {
+		File file = new File(path);
+		logger.debug("removing file:>" + path);
+		return file.delete();
 	}
 	
 	/**

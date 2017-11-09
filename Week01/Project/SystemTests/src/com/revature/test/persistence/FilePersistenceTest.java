@@ -21,7 +21,7 @@ import com.revature.persistence.Persistenceable;
 import com.revature.persistence.file.FilePersistence;
 
 public class FilePersistenceTest {
-	static Persistenceable manager;
+	static FilePersistence manager;
 	static Resultset resultset;
 	static FieldParams conditions;
 	static FieldParams values;
@@ -32,35 +32,35 @@ public class FilePersistenceTest {
 	
 	@BeforeClass
 	public static void setupBeforeClass() {
+		manager = FilePersistence.getManager();
 		adminId = 1423412;
 		customerId = 42135132;
 	}
 	
 	@Before
 	public void setUp() throws Exception {
-		manager = new FilePersistence();
 		resultset = new Resultset();
 		conditions = new FieldParams();
 		values = new FieldParams();
 		admin = new Admin(adminId);
 		customer = new Customer(customerId);
+		FilePersistence.setDirectory(System.getProperty("user.dir"));
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		manager.delete("User", null);
+		FilePersistence.deleteData();
 	}
 
 	@Test
 	public void shouldStoreDataInCurrentWorkingDirectory() {
-		FilePersistence fp = new FilePersistence();
-		assertEquals("Should store data in working directory", System.getProperty("user.dir"), fp.getDirectory());
+		assertEquals("Should store data in working directory", System.getProperty("user.dir"), FilePersistence.getDirectory());
 	}
 	
 	@Test
 	public void shouldStoreDataInDifferentDirectory() {
-		FilePersistence fp = new FilePersistence("C:\\");
-		assertEquals("Should store data in different directory", "C:\\", fp.getDirectory());
+		FilePersistence.setDirectory("C:\\");
+		assertEquals("Should store data in different directory", "C:\\", FilePersistence.getDirectory());
 	}
 	
 	///
