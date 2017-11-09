@@ -3,6 +3,10 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Users/hanju/Downloads/log4j-1.2.17.jar"/>
+=======
+	<classpathentry kind="lib" path="C:/Users/ryanm/Desktop/Work/Resources/log4j-1.2.17.jar"/>
+>>>>>>> 908c4a08b3cf9c5cb65e60015f7c54cf564145ce
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,5 +1,6 @@
 package d3.revature.threads;
 
+<<<<<<< HEAD
 public class ThreadRunnable implements Runnable {
 	
 	@Override
@@ -11,6 +12,22 @@ public class ThreadRunnable implements Runnable {
 			Thread.sleep(50);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+=======
+public class ThreadRunnable implements Runnable{
+	
+	@Override
+	public void run() {
+		for(int i = 0; i < 20; i++){
+			System.out.println("\t\t" + Thread.currentThread().getName());
+			try {
+				Thread.sleep(50);
+				
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
+			
+>>>>>>> 908c4a08b3cf9c5cb65e60015f7c54cf564145ce
 		}
 	}
 }
