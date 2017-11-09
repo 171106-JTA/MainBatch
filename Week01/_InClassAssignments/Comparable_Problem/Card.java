@@ -45,9 +45,9 @@ public class Card implements Comparable<Card>{
 	
 	@Override
 	public String toString() {
-		int paddingAmt = 24 - this.name.length();
+		int paddingAmt = 32 - this.name.length();
 		String padding = ""; 
-		while(paddingAmt >= 0) {
+		while(paddingAmt > 0) {
 			padding += "\t"; 
 			paddingAmt -= 8; 
 		}
