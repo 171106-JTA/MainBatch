@@ -10,7 +10,7 @@ public class Universe implements Comparable<Universe>{
 	////////////////////////////////
 	/**
 	 * Natural ordering for Universe class:
-	 * Sort by number of dimensions
+	 * Sort by number of dimensions in ascending order
 	 */
 	@Override
 	public int compareTo(Universe universe) {
