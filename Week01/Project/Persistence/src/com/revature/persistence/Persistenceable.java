@@ -1,9 +1,8 @@
 package com.revature.persistence;
 
-import java.util.AbstractMap.SimpleEntry;
-import java.util.List;
-
 import com.revature.businessobject.BusinessObject;
+import com.revature.core.FieldParams;
+import com.revature.core.Resultset;
 
 /**
  * Defines Data and Business Logic Layer communication protocol 
@@ -16,7 +15,7 @@ public interface Persistenceable {
 	 * @param cnds values data must have in-order to be returned 
 	 * @return list of all records which pass query conditions 
 	 */
-	List<BusinessObject> select(String name, List<SimpleEntry<String,String>> cnds);
+	Resultset select(String name, FieldParams cnds);
 	
 	/**
 	 * Updates existing record
@@ -32,7 +31,7 @@ public interface Persistenceable {
 	 * @param values fields to update
 	 * @return if less than or equal to 0 then failed, else how many records were updated 
 	 */
-	int update(String name, List<SimpleEntry<String,String>> cnds, List<SimpleEntry<String,String>> values);
+	int update(String name, FieldParams cnds, FieldParams values);
 	
 	/**
 	 * Creates new record from business object
@@ -47,7 +46,7 @@ public interface Persistenceable {
 	 * @param values assigned to record
 	 * @return if less than or equal to then 0 failed else 1 and was successful
 	 */
-	int insert(String name, List<SimpleEntry<String,String>> values);
+	int insert(String name, FieldParams values);
 	
 	/**
 	 * Removes record from system
@@ -62,5 +61,5 @@ public interface Persistenceable {
 	 * @param cnds conditions record must have to be deleted
 	 * @return if less than or equal to 0 then failed, else how many records were removed 
 	 */
-	int delete(String name, List<SimpleEntry<String,String>> cnds);
+	int delete(String name, FieldParams cnds);
 }
