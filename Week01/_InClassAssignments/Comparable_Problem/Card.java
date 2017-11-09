@@ -45,8 +45,17 @@ public class Card implements Comparable<Card>{
 	
 	@Override
 	public String toString() {
-		return "Card [name=" + name + ", cmc=" + cmc + ", cardText=" + cardText + ", power=" + power + ", tough="
-				+ tough + "]";
+		int paddingAmt = 24 - this.name.length();
+		String padding = ""; 
+		while(paddingAmt >= 0) {
+			padding += "\t"; 
+			paddingAmt -= 8; 
+		}
+		 
+		return this.name + padding + this.cmc + "\t" + power + "/" + tough + "\n\t" + this.cardText;
+//		
+//		return "Card [name=" + name + ", cmc=" + cmc + ", cardText=" + cardText + ", power=" + power + ", tough="
+//				+ tough + "]";
 	}
 	public Card(String name, String cmc, String cardText, int power, int tough) {
 		super();

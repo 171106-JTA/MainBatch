@@ -17,20 +17,23 @@ public class CollectionsProblem {
 		cards.add(new Card("Reassembling Skeleton", "B", "1B: Return Reassembling Skeleton from your graveyard to play.", 1, 1)); 
 		
 		System.out.println("=====UNSORTED CARDS=====");
+		int i = 1; 
 		for(Card c : cards) {
-			System.out.println(c);
+			System.out.println(i++ + ": " +  c);
 		}
 		
 		System.out.println("\n=====CARDS SORTED BY NAME=====");
 		cards.sort(null); 
+		i = 1; 
 		for(Card c : cards) {
-			System.out.println(c);
+			System.out.println(i++ + ": " +  c);
 		}
 		
 		System.out.println("\n=====ALTERNATIVE SORT: BY CONVERTED MANA COST=====");
 		cards.sort(new CardCMCComparator());
+		i = 1; 
 		for(Card c : cards) {
-			System.out.println(c);
+			System.out.println(i++ + ": " +  c);
 		}
 				
 		
