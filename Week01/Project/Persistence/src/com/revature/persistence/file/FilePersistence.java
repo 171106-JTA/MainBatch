@@ -1,5 +1,6 @@
 package com.revature.persistence.file;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -188,9 +189,16 @@ public class FilePersistence implements Persistenceable {
 	}
 	
 	///
-	//	PRIVATE METHODS 
+	// PRIVATE METHODS 
+	//
+	// SELECT HELPER METHODS 
 	///
 	
+	/**
+	 * Attempts to locate user data with FieldParams
+	 * @param cnds must meet all conditions to be added to result set
+	 * @return all instances which meet conditions 
+	 */
 	private Resultset findUser(FieldParams cnds) {
 		Resultset found = new Resultset();
 		
@@ -209,14 +217,33 @@ public class FilePersistence implements Persistenceable {
 		return found;
 	}
 	
+	/**
+	 * Attempts to locate userinfo data with FieldPaams
+	 * @param cnds must meet all conditions to be added to result set
+	 * @return all instances which meet conditions 
+	 */
 	private Resultset findUserInfo(FieldParams cnds) {
 		return null;
 	}
 	
+	/**
+	 * Attempts to locate account data with FieldPaams
+	 * @param cnds must meet all conditions to be added to result set
+	 * @return all instances which meet conditions 
+	 */
 	private Resultset findAccount(FieldParams cnds) {
 		return null;
 	}
 	
+	///
+	// INSERT HELPER METHODS 
+	///
+	
+	/**
+	 * Adds new user 
+	 * @param user new user instance 
+	 * @return 1 if user was added else -1
+	 */
 	private static int addUser(User user) {
 		// If failed to generate user
 		if (user == null)
@@ -227,6 +254,11 @@ public class FilePersistence implements Persistenceable {
 		return 1;
 	}
 	
+	/**
+	 * Adds new user info
+	 * @param info new user info data 
+	 * @return 1 if added else -1
+	 */
 	private static int addUserInfo(UserInfo info) {
 		// If failed to generate user
 		if (info == null)
@@ -237,6 +269,11 @@ public class FilePersistence implements Persistenceable {
 		return 1;
 	}
 	
+	/**
+	 * Creates new account record
+	 * @param acct new account data
+	 * @return 1 if added else -1
+	 */
 	private static int addAccount(Account acct) {
 		// If failed to generate user
 		if (acct == null)
@@ -247,7 +284,64 @@ public class FilePersistence implements Persistenceable {
 		return 1;
 	}
 	
+	///
+	// DELETE HELPER METHODS 
+	///
 	
+	/**
+	 * Removes user from system
+	 * @param cnds what to remove
+	 * @return greater than 0 if records were removed
+	 */
+	private static int removeUser(FieldParams cnds) {
+		FieldParamsUserComparator comparator = new FieldParamsUserComparator();
+		List<Integer> indices = new ArrayList<>();
+		int size = users.size();
+		
+		// Log transaction request
+		logger.debug("Attempting to remove user data");
+		
+		for (int i = 0; i < size; i++) {
+			
+		}
+		
+		if ((size = indices.size()) > 0) {
+			
+			
+			saveUserData();
+			
+			// Log transaction
+			logger.debug("Removed " + size + " user records");;
+		}
+		
+		return 0;
+	}
+	
+	/**
+	 * Removes user from system
+	 * @param cnds what to remove
+	 * @return greater than 0 if records were removed
+	 */
+	private static int removeUserInfo(FieldParams cnds) {
+		
+		
+		return 0;
+	}
+	
+	/**
+	 * Removes account from system
+	 * @param cnds what to remove
+	 * @return greater than 0 if records were removed
+	 */
+	private static int removeAccount(FieldParams cnds) {
+		
+		
+		return 0;
+	}
+	
+	///
+	// UPDATE HELPER METHODS 
+	///
 	
 	/**
 	 * Saves user data to file
