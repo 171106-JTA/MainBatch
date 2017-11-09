@@ -1,5 +1,7 @@
 package com.Project1.bankAccountStuff;
 
+import java.util.Arrays;
+
 public class User {
 	//////////////////////////////////////////////////////////////
 	//Member Variables
@@ -8,7 +10,8 @@ public class User {
 	/**
 	 * SSN for client. This is the unique identifier
 	 */
-	private int[] ssn = new int[9];
+//	private int[] ssn = new int[9];
+	private String ssn;
 	
 	/**
 	 * First name of client
@@ -23,7 +26,8 @@ public class User {
 	/**
 	 * Middle initial of client
 	 */
-	private char middleInitial;
+//	private char middleInitial;
+	private String middleInitial;
 	
 	/**
 	 * Password of client
@@ -53,7 +57,9 @@ public class User {
 	 * @param name 		username for new account
 	 * @param password 	password for new account
 	 */
-	User(String firstName, String lastName, char middleInitial, int[] ssn, String password) {
+	//to do: Convert ssn to a 9 digit integer array
+	//to do: Convert middleInitial to char
+	User(String firstName, String lastName, String middleInitial, String ssn, String password) {
 		this.firstName = firstName; 
 		this.lastName = lastName;
 		this.middleInitial = middleInitial;
@@ -145,5 +151,18 @@ public class User {
 	 */
 	public void setAccountAmount(double accountAmount) {
 		this.accountAmount = accountAmount;
+	}
+
+	@Override
+	public String toString() {
+//		return "User [ssn=" + Arrays.toString(ssn) + ", firstName=" + firstName + ", lastName=" + lastName
+//				+ ", middleInitial=" + middleInitial + ", password=" + password + ", permissions=" + permissions
+//				+ ", status=" + status + ", accountAmount=" + accountAmount + "]";
+		//ssn is a string for now. Will eventually convert this to a 9-digit number
+		return "User [ssn=" + ssn + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", middleInitial=" + middleInitial + ", password=" + password + ", permissions=" + permissions
+				+ ", status=" + status + ", accountAmount=" + accountAmount + "]";
 	}	
+	
+	
 }

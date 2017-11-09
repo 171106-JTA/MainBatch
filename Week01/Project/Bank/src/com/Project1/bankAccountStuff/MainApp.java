@@ -1,11 +1,12 @@
 package com.Project1.bankAccountStuff;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Hashtable;
+import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class MainApp {
 	
@@ -17,19 +18,36 @@ public class MainApp {
 	private static BufferedReader br;  
 //	private BufferedWriter bw;
 	
-	public static void main(String[] args) {
-		System.out.println("Just Saying Something");
+	public static void main(String[] args) {		
+		MainApp mp = new MainApp();
+		boolean exit = false;
 		
-		try {
-			readDatabase(databaseFile);
-		} catch(IOException ioe){
-			ioe.getStackTrace();
+		while(!exit) {
+			String userChoice = mp.initialMenu();
+			
+			if (userChoice.equals("1")) {
+				//Call login
+			} else if (userChoice.equals("2")) {
+				mp.createNewClientAccount();
+			} else if (userChoice.equals("3")) {
+				System.out.println("Closing Program");
+				exit = true;
+			} else {
+				//Add counter and exit after 5 incorrect attempts
+				System.out.println("Not an option");
+			}			
 		}
+		//Save the database stuff for later
+//		try {
+//			readDatabase(databaseFile);
+//		} catch(IOException ioe){
+//			ioe.getStackTrace();
+//		}
 		
 	}
 	
 	/**
-	 * Read serialized 'User' objects from file and store in the 'db' object
+	 * Read serialized 'User' objects from file and store in the 'db' member object.
 	 * @param fileName 		Name of file containing serialized User objects
 	 */
 	private static void readDatabase(String fileName) throws IOException {
@@ -46,6 +64,26 @@ public class MainApp {
 				br.close();
 			}
 		}
+	}
+	
+	/**
+	 * Displays initial menu
+	 * @return Contains user's choice from the initial menu
+	 */
+	private String initialMenu() {
+		System.out.println("Welcome");
+		System.out.println("_______________________________");
+		System.out.println("1) Login");
+		System.out.println("2) Create New Account");
+		System.out.println("3) Exit");
+		System.out.print("Choice: ");
+		
+		Scanner aScanner = new Scanner(System.in);
+		String userInput = aScanner.nextLine();
+		//Build input validation later
+		
+		return userInput;
+//		StringTokenizer st = new StringTokenizer(s);
 	}
 	
 	/**
@@ -70,14 +108,36 @@ public class MainApp {
 		//Get username and password
 		//Check username against existing usernames
 		//If unique, add information 
-	}
-	
-	/**
-	 * Displays initial menu
-	 */
-	private void displayLoginMenu() {
+		Scanner aScanner = new Scanner(System.in);
+		
+		//Variables to hold user's input
+		//to do: Convert ssn to 9 digits, eventually
+		//to do: Convert middleInitial to char
+		String firstName, lastName, middleInitial, password, ssn; 
+		
+		System.out.println("First Name: ");
+		firstName = aScanner.nextLine();
+		
+		System.out.println("Last Name: ");
+		lastName = aScanner.nextLine();
+		
+		System.out.println("Middle Initial: ");
+		middleInitial = aScanner.nextLine();
+		
+		System.out.println("Social Security Number: "); //re-enter password at some point
+		ssn = aScanner.nextLine();
+		
+		System.out.println("Password: "); //re-entered password at some point
+		password = aScanner.nextLine();
+		
+		
+		User newUser = new User(firstName, lastName, middleInitial, ssn, password);
+		
+		System.out.println(newUser.toString());
 		
 	}
+	
+	
 	
 	/**
 	 * Get user's response to menus
