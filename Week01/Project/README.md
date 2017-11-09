@@ -32,19 +32,25 @@ Must:
   
 ## Project Structure  
 - BusinessObject - defines all structures system uses to store and manage its data  
+- Core - Helper/Collection classes
 - Server - Defines application Business Logic Layer  
 - Persistance - Defines system data layer (defines how data is stored/accessed/updated/removed)  
 - SystemTests - Defines all JUnit tests  
   
 ## Project Internal Dependency  
 - BusinessObjects (**None**)  
+- Core  
+  - **BusinessObject**  
 - Server:  
   - **BusinessObject** 
+  - **Core**  
   - **Persistence**  
 - Persistence:  
-  - **BusinessObject**  
+  - **BusinessObject** 
+  - **Core**   
 - SystemTests:  
   - **BusinessObject**  
+  - **Core**  
   - **Server**  
   - **Persistence**  
   
