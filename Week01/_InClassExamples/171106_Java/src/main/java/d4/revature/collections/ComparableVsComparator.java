@@ -32,6 +32,15 @@ public class ComparableVsComparator {
 			System.out.println(book.getPageCount() + ": " + book.getName());
 		}
 		
+		List list = new ArrayList();
+		list.add("Stuff");
+		list.add("Apples");
+		list.add("Zebras");
+		list.sort(null);
+		System.out.println(list);
+		list.sort(new StringZ2AComparator());
+		System.out.println(list);
+		
 	}
 
 }
