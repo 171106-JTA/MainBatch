@@ -1,5 +1,8 @@
 package d3.revature.collections;
 
+/**
+* Car.
+*/
 public class Car implements Comparable<Car> {
 	
 	private int cost, year;
