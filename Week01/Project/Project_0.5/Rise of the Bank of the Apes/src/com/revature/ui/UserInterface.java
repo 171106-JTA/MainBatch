@@ -74,13 +74,29 @@ public class UserInterface {
 		}
 	}
 	
-	public static int accountScreen(User user) {
+	public static void accountScreen(User user) {
 		System.out.println("Welcome Back!");
-		System.out.println("You Have " + user.getBalance() + " Bananas");
-		System.out.println("1. Withdraw");
-		System.out.println("2. Deposit");
+		int option = 0;
+		while(option != 3) {
+			System.out.println("You Have " + user.getBalance() + " Bananas");
+			System.out.println("1. Withdraw");
+			System.out.println("2. Deposit");
+			System.out.println("3. Log Out");
+			System.out.println("Enter Option: ");
+			option = Integer.parseInt(UserInterface.readInput());
+			
+			
+			if(option == 1) {
+				UserInterface.withdrawScreen(user);
+			}
+			else if(option == 2) {
+				UserInterface.depositScreen(user);
+			}
+			else if(option > 3) {
+				System.out.println("Invalid option. Please try again.");
+			}
+		}	
 		
-		return 0;
 	}
 	
 	/**
@@ -88,10 +104,32 @@ public class UserInterface {
 	 * @param user
 	 */
 	public static void depositScreen(User user) {
+		System.out.println("Depositing");
+		System.out.println("Please enter amount to be deposited: ");
+		//TODO Fix the datatype
+		double amount = Integer.parseInt(UserInterface.readInput());
+		double prevAmount = user.getBalance();
+		double currAmount = prevAmount + amount;
+		user.setBalance(currAmount);
 		
+		return;
 	}
 	public static void withdrawScreen(User user) {
+		System.out.println("Withdrawing");
+		while(true) {
+			System.out.println("Please enter withdrawl amount: ");
+			double amount = Integer.parseInt(UserInterface.readInput());
+			double prevAmount = user.getBalance();
+			double currAmount = prevAmount - amount;
+			if(currAmount > 0) {
+				user.setBalance(currAmount);
+				System.out.println("$" + currAmount + " has been withdrawn.");
+				break;
+			}
+			System.out.println("Invalid input. Please try again.");
 		
+		}
+		return;
 	}
 	
 	public static int adminScreen() {

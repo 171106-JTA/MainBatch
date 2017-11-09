@@ -9,9 +9,12 @@ import com.revature.users.User;
 
 public class BankOfTheApes {
 	private HashMap<String, User> users;
+	static int instanceCount = 0;
+	private static BankOfTheApes bota;
 	
-	public BankOfTheApes() {
+	private BankOfTheApes() {
 		this.users = ProcessData.unserialize();
+		instanceCount++;
 	}
 	
 		
@@ -19,6 +22,13 @@ public class BankOfTheApes {
 		return users;
 	}
 
+	public static BankOfTheApes getBank() {
+		if(bota == null) {
+			bota = new BankOfTheApes();
+		}
+		return bota;
+	}
+	
 	public void displayOperationScreen(int option) {
 		
 		switch(option) {
@@ -31,16 +41,6 @@ public class BankOfTheApes {
 			default:
 				System.out.println("Option not available. Please try again.");
 		}
-	}
-	
-	public static void main(String[] args) {
-		int option = UserInterface.splashScreen();
-		
-		BankOfTheApes bota = new BankOfTheApes();
-		
-		bota.displayOperationScreen(option);
-		
-		ProcessData.serialize(bota.getUsers());
 	}
 	
 }
