@@ -16,11 +16,11 @@ public class VideoGameCompareDriver {
 		s.add("Soursop");
 		s.add("Zruit");
 		
-		games.add(new VideoGame(60, "Diablo IV", 2019));
+		games.add(new VideoGame(60, "Diablo IV", 2018));
 		games.add(new VideoGame(4, "Sonic: Underground", 2000));
-		games.add(new VideoGame(59, "Elder Scrolls VI: Morrowsky", 2018));
+		games.add(new VideoGame(59, "Elder Scrolls VI: Morrowsky", 2019));
 		games.add(new VideoGame(1, "Bobbert's Revenge", 2001));
-		games.add(new VideoGame(1000, "Half-Life 3", 3020));
+		games.add(new VideoGame(3, "Half-Life 3", 3020));
 		
 		//natural order: publish date
 		games.sort(null);
