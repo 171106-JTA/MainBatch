@@ -8,7 +8,7 @@ import com.revature.businessobject.BusinessObject;
  * Used to identify user and there role
  * @author Antony Lulciuc
  */
-public class User extends BusinessObject implements Comparable<HashMap<String, String>> {
+public class User extends BusinessObject implements Comparable<User> {
 	/**
 	 * Unique identifier used to pull user data 
 	 */
@@ -118,11 +118,14 @@ public class User extends BusinessObject implements Comparable<HashMap<String, S
 	}
 
 	@Override
-	public int compareTo(HashMap<String, String> args) {
-		int result = -2;
+	public int compareTo(User user) {
+		int result;
 		
-		//if (args)
+		if ((result = Long.compare(id, user.getId())) == 0)
+			if ((result = username.compareTo(user.getUsername())) == 0)
+				if ((result = password.compareTo(user.getPassword())) == 0)
+					return Integer.compare(role.ordinal(), user.getRole().ordinal());
 		
-		return 0;
+		return result;
 	}
 }

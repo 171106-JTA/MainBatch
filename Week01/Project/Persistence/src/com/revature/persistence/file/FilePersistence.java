@@ -1,7 +1,6 @@
 package com.revature.persistence.file;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,6 +12,7 @@ import com.revature.businessobject.info.UserInfo;
 import com.revature.businessobject.user.User;
 import com.revature.core.FieldParams;
 import com.revature.core.Resultset;
+import com.revature.core.comparator.FieldParamsUserComparator;
 import com.revature.core.factory.BusinessObjectFactory;
 import com.revature.persistence.Persistenceable;
 
@@ -193,35 +193,20 @@ public class FilePersistence implements Persistenceable {
 	
 	private Resultset findUser(FieldParams cnds) {
 		Resultset found = new Resultset();
-		Boolean result;
 		
 		// if No conditions provided return all
 		if (cnds == null)
 			found.addAll(users);
 		else {
+			FieldParamsUserComparator comparator = new FieldParamsUserComparator();
+			
 			for (User user : users) {
-				// Reset compare result flag
-				result = true;
-				
-				if (cnds.containsKey("id")) {
-					
-				}
-				
-				if (cnds.containsKey("username")) {
-					
-				}
-				
-				if (cnds.containsKey("password")) {
-					
-				}
-				
-				if (cnds.containsKey("role")) {
-					
-				}
+				if (comparator.compare(cnds, user) == 0)
+					found.add(user);
 			}
 		}
 		
-		return null;
+		return found;
 	}
 	
 	private Resultset findUserInfo(FieldParams cnds) {
