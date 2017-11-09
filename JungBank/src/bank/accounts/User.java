@@ -1,24 +1,19 @@
 package bank.accounts;
 
-public class User extends Account implements Manageable {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4565388540799755650L;
-
-	public User() {
-		super();
-		
-	}
-
-	public User(String username, String password, String firstName, String lastName, int pinNumber) {
-		super(username, password, firstName, lastName, pinNumber);
-		
-	}
-
-	@Override
-	public void showBalance() {
-		System.out.println("Your current balance is: $" + getBalance());
-	}
+	private static final long serialVersionUID = 4590648012139772907L;
+	
+	private static int uid = 0;
+	private String username;
+	private String password;
+	private String firstName;
+	private String lastName;
+	
+	
 }
