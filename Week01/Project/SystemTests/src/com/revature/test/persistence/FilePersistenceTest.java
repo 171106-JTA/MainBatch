@@ -53,7 +53,7 @@ public class FilePersistenceTest {
 		values = new FieldParams();
 		admin = new Admin(adminId, adminUsername, adminPassword);
 		customer = new Customer(customerId, customerUsername, customerPassword);
-		FilePersistence.setDirectory(System.getProperty("user.dir"));
+		FilePersistence.setDirectory(System.getProperty("user.dir") + "\\data\\");
 	}
 
 	@After

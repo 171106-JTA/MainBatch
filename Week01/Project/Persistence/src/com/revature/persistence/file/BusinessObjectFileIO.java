@@ -48,7 +48,7 @@ public class BusinessObjectFileIO {
 			
 			logger.debug("Opened object read stream for file:>" + fileName);
 		} catch (IOException e) {
-			logger.debug("Opened object read stream for file:>" + fileName);
+			logger.debug("Failed to open object read stream for file:>" + fileName);
 		}
 	}
 	

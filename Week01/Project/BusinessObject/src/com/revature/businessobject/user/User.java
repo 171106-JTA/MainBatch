@@ -1,12 +1,14 @@
 package com.revature.businessobject.user;
 
+import java.util.HashMap;
+
 import com.revature.businessobject.BusinessObject;
 
 /**
  * Used to identify user and there role
  * @author Antony Lulciuc
  */
-public class User extends BusinessObject {
+public class User extends BusinessObject implements Comparable<HashMap<String, String>> {
 	/**
 	 * Unique identifier used to pull user data 
 	 */
@@ -113,5 +115,14 @@ public class User extends BusinessObject {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username="  + username + ", password=" + password + ", role=" + role + "]";
+	}
+
+	@Override
+	public int compareTo(HashMap<String, String> args) {
+		int result = -2;
+		
+		//if (args)
+		
+		return 0;
 	}
 }
