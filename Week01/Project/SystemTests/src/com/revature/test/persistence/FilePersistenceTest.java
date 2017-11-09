@@ -29,12 +29,21 @@ public class FilePersistenceTest {
 	static User customer;
 	static long adminId;
 	static long customerId;
+	static String adminUsername;
+	static String adminPassword;
+	static String customerUsername;
+	static String customerPassword;
 	
 	@BeforeClass
 	public static void setupBeforeClass() {
 		manager = FilePersistence.getManager();
 		adminId = 1423412;
+		adminUsername = "myAdmin";
+		adminPassword = "adogmsjdfh";
+		
 		customerId = 42135132;
+		customerUsername = "billy";
+		customerPassword = "password";
 	}
 	
 	@Before
@@ -42,8 +51,8 @@ public class FilePersistenceTest {
 		resultset = new Resultset();
 		conditions = new FieldParams();
 		values = new FieldParams();
-		admin = new Admin(adminId);
-		customer = new Customer(customerId);
+		admin = new Admin(adminId, adminUsername, adminPassword);
+		customer = new Customer(customerId, customerUsername, customerPassword);
 		FilePersistence.setDirectory(System.getProperty("user.dir"));
 	}
 
@@ -108,7 +117,7 @@ public class FilePersistenceTest {
 	 */
 	@Test
 	public void shouldUpdateUserByBusinessObject() {
-		User demote = new Customer(adminId);
+		User demote = new Customer(adminId, adminUsername, adminPassword);
 		
 		// Set data
 		conditions.put("id", Long.toString(adminId));
@@ -126,7 +135,7 @@ public class FilePersistenceTest {
 	 */
 	@Test
 	public void shouldUpdateUserByFieldParams() {
-		User demote = new Customer(adminId);
+		User demote = new Customer(adminId, adminUsername, adminPassword);
 		// Set data
 		conditions.put("id", Long.toString(adminId));
 		values.put("role", demote.getRole().toString());

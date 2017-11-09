@@ -8,8 +8,10 @@ public class Customer extends User {
 	/**
 	 * Creates user with customer privileges 
 	 * @param id user primary key
+	 * @param username account name
+	 * @param password account password
 	 */
-	public Customer(long id) {
-		super(id, UserRole.CUSTOMER);
+	public Customer(long id, String username, String password) {
+		super(id, username, password, UserRole.CUSTOMER);
 	}
 }

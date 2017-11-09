@@ -1,5 +1,7 @@
 package com.revature.persistence.file;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -44,13 +46,12 @@ public class FilePersistence implements Persistenceable {
 	private static List<UserInfo> userInfo = new LinkedList<>();
 	private static List<Account> accounts = new LinkedList<>();
 	
-	
-	
 	/**
 	 * Initializes system data if any found 
 	 */
 	private FilePersistence() {
-		loadData();
+		directory = System.getProperty("user.dir");
+		load();
 	}
 	
 	/**
@@ -148,25 +149,19 @@ public class FilePersistence implements Persistenceable {
 		FilePersistence.directory = directory;
 		
 		// Update Manager data
-		loadData();
+		load();
 	}
 	
-	public static void loadData() {
+	public static void load() {
 		BusinessObject object;
 		
 		// clear data
 		clean();
 		
-		// Load user data
-		io.openReadStream(directory + USERFILE);
-		
-		// Is user.ser file found
-		if (io.isReadStreamOpen()) {
-			while ((object = io.read()) != null) 
-				users.add((User)object);
-		}
-		
-		
+		// Load data
+		users.addAll(Arrays.asList((User[])loadData(directory + USERFILE)));
+		userInfo.addAll(Arrays.asList((UserInfo[])loadData(directory + USERINFOFILE)));
+		accounts.addAll(Arrays.asList((Account[])loadData(directory + ACCOUNTFILE)));
 	}
 	
 	public static void deleteData() {
@@ -190,6 +185,17 @@ public class FilePersistence implements Persistenceable {
 	///
 	
 	private Resultset findUser(FieldParams cnds) {
+		Resultset found = new Resultset();
+		
+		// if No conditions provided return all
+		if (cnds == null)
+			found.addAll(users);
+		else {
+			for (User user : users) {
+				
+			}
+		}
+		
 		return null;
 	}
 	
@@ -230,7 +236,52 @@ public class FilePersistence implements Persistenceable {
 		saveData(directory + ACCOUNTFILE, (BusinessObject[])accounts.toArray());
 		return 1;
 	}
-
+	
+	
+	
+	/**
+	 * Saves data to files
+	 * @param path where to store data
+	 * @param data what to write to file
+	 */
+	private static void saveData(String path, BusinessObject[] data) {
+		// Open write stream 
+		io.openWriteStream(path);
+		
+		// Save if file opened 
+		if (io.isWriteStreamOpen()) {
+			for (BusinessObject item : data) {
+				io.write(item);
+			}
+		}
+		
+		// free resources 
+		io.close();
+	}
+	
+	/**
+	 * Loads Data into memory
+	 * @param path where to read data
+	 * @return Contents of file 
+	 */
+	private static BusinessObject[] loadData(String path) {
+		List<BusinessObject> data = new LinkedList<>();
+		BusinessObject object;
+		
+		// Open write stream 
+		io.openReadStream(path);
+				
+		// Save if file opened 
+		if (io.isReadStreamOpen()) {
+			while ((object = io.read()) != null)
+				data.add(object);
+		}
+				
+		// free resources 
+		io.close();
+		
+		return (BusinessObject[])data.toArray();
+	}
 	
 	/**
 	 * Clear collections 
@@ -238,25 +289,4 @@ public class FilePersistence implements Persistenceable {
 	private static void clean() {
 		users.clear();
 	}
-
-	/**
-	 * Saves data to files
-	 * @param path where to store data
-	 * @param data what to write to file
-	 */
-	private static void saveData(String path, BusinessObject[] data) {
-		BusinessObjectFileIO writer = new BusinessObjectFileIO();
-		
-		// Load user data
-		writer.openWriteStream(path);
-		
-		// Save if file opened 
-		if (writer.isWriteStreamOpen()) {
-			for (BusinessObject item : data) {
-				writer.write(item);
-			}
-		}
-	}
-	
-	
 }

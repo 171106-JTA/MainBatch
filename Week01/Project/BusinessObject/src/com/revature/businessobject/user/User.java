@@ -13,6 +13,16 @@ public class User extends BusinessObject {
 	private long id;
 	
 	/**
+	 * Name associated with user
+	 */
+	private String username;
+	
+	/**
+	 * Password used for user to access account information
+	 */
+	private String password;
+	
+	/**
 	 * Value represents account privileges 
 	 */
 	private UserRole role;
@@ -20,14 +30,18 @@ public class User extends BusinessObject {
 	/**
 	 * Initializes user with specified id
 	 * @param id used throughout the system to access account data 
+	 * @param username account name
+	 * @param password account password
 	 * @param role user account privileges 
 	 */
-	public User(long id, UserRole role) {
+	public User(long id, String username, String password, UserRole role) {
 		super();
 		this.id = id;
+		this.username = username;
+		this.password = password;
 		this.role = role;
 	}
-	
+
 	/**
 	 * @return user id (PRIMARY KEY)
 	 */
@@ -36,6 +50,20 @@ public class User extends BusinessObject {
 	}
 
 	/**
+	 * @return Account name
+	 */
+	public String getUsername() {
+		return username;
+	}
+
+	/**
+	 * @return Account password
+	 */
+	public String getPassword() {
+		return password;
+	}
+	
+	/**
 	 * Value represents user privileges (what they do and do not have access to).
 	 * @return user account status
 	 */
@@ -43,14 +71,16 @@ public class User extends BusinessObject {
 		return role;
 	}
 
-	
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result
+				+ ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
+		result = prime * result
+				+ ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
 
@@ -62,17 +92,26 @@ public class User extends BusinessObject {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		
 		User other = (User) obj;
 		if (id != other.id)
 			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
 		if (role != other.role)
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", role=" + role + "]";
+		return "User [id=" + id + ", username="  + username + ", password=" + password + ", role=" + role + "]";
 	}
 }
