@@ -45,6 +45,9 @@ public class Animal {
 		return true;
 	}
 
+	public void eat(){
+		System.out.println("I need to know what animal I actually am...");
+	}
 	
 	
 }
