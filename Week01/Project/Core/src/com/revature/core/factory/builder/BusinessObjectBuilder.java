@@ -13,4 +13,11 @@ public interface BusinessObjectBuilder {
 	 * @return new BusinessObject on success else null
 	 */
 	public BusinessObject getBusinessObject(FieldParams args);
+	
+	/**
+	 * Used to ensure all arguments needed to instantiate object
+	 * @param args what to check
+	 * @return true is arguments for class to create are valid else false
+	 */
+	public boolean isValid(FieldParams args);
 }

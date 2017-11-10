@@ -11,4 +11,10 @@ public class AccountBuilder implements BusinessObjectBuilder {
 		return null;
 	}
 
+	@Override
+	public boolean isValid(FieldParams args) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

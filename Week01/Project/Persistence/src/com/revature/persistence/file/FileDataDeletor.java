@@ -1,13 +1,10 @@
 package com.revature.persistence.file;
 
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 import com.revature.businessobject.BusinessObject;
 import com.revature.core.FieldParams;
-import com.revature.core.comparator.FieldParamsCheckingComparator;
-import com.revature.core.comparator.FieldParamsCreditComparator;
 
 public abstract class FileDataDeletor extends FileDataInserter {
 
