@@ -1,8 +1,13 @@
 package com.Project1.bankAccountStuff;
 
-import java.util.Arrays;
+import java.io.Serializable;
 
-public class User {
+public class User { //implements Serializable
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	//////////////////////////////////////////////////////////////
 	//Member Variables
 	//////////////////////////////////////////////////////////////
@@ -109,7 +114,7 @@ public class User {
 	 * Fetch the middle initial of the user
 	 * @return Returns the middle initial of the user
 	 */
-	public char getMiddleInitial() {
+	public String getMiddleInitial() {
 		return middleInitial;
 	}
 	
@@ -117,7 +122,7 @@ public class User {
 	 * Set the middle initial of the user
 	 * @param middleInitial		A char containing the middle initial of the user
 	 */
-	public void setMiddleInitial(char middleInitial) {
+	public void setMiddleInitial(String middleInitial) {
 		this.middleInitial = middleInitial;
 	}
 	
@@ -152,6 +157,22 @@ public class User {
 	public void setAccountAmount(double accountAmount) {
 		this.accountAmount = accountAmount;
 	}
+	
+	/**
+	 * Fetch the Social Security Number for the user
+	 * @return Returns the Social Security Number for the user
+	 */
+	public String getSsn() {
+		return ssn;
+	}
+	
+	/**
+	 * Set the Social Security Number for the user
+	 * @param ssn 		A String containing the social security number for the user
+	 */
+	public void setSsn(String ssn) {
+		this.ssn = ssn;
+	}
 
 	@Override
 	public String toString() {
@@ -162,7 +183,5 @@ public class User {
 		return "User [ssn=" + ssn + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", middleInitial=" + middleInitial + ", password=" + password + ", permissions=" + permissions
 				+ ", status=" + status + ", accountAmount=" + accountAmount + "]";
-	}	
-	
-	
+	}	 
 }
