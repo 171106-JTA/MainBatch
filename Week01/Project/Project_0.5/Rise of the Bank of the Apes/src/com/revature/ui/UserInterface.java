@@ -6,13 +6,13 @@ import java.util.Scanner;
 import com.revature.users.User;
 
 public class UserInterface {
-	public static Scanner scan;
+	private static Scanner scan;
 	
 	public UserInterface() {
 		
 	}
 	
-	private static String readInput() {
+	protected static String readInput() {
 		String result;
 		
 		scan = new Scanner(System.in);
@@ -23,19 +23,6 @@ public class UserInterface {
 	
 	private static void closeScanner() {
 		scan.close();
-	}
-	public static int splashScreen() {
-		
-		System.out.println("Welcome to the Bank of the Apes!");
-		System.out.println("Where Humans Fear to Tread!");
-		System.out.println("Please Select one of the following:");
-		System.out.println("1. Login for existing user");
-		System.out.println("2. Create new user account");
-		System.out.println("3. Administrator Login");
-		
-		System.out.print("Please Enter Number: ");
-		
-		return Integer.parseInt(UserInterface.readInput());
 	}
 	
 	public static int newUserScreen(HashMap<String, User> users) {
