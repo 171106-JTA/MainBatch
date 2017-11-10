@@ -29,7 +29,7 @@ public class ProcessData {
 		
 		try {
 			ois = new ObjectInputStream(new FileInputStream("user.ser"));
-			hm = (HashMap)ois.readObject();
+			hm = (HashMap) ois.readObject();
 			System.out.println(hm.keySet());
 			
 		}catch(IOException | ClassNotFoundException e) {

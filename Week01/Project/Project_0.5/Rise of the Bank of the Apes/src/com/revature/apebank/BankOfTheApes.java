@@ -14,6 +14,10 @@ public class BankOfTheApes {
 	
 	private BankOfTheApes() {
 		this.users = ProcessData.unserialize();
+		User admin = new User("a!joe", "d");
+		admin.setAccess_level(2);
+		admin.setApproved(true);
+		users.put("a!joe", admin);
 		instanceCount++;
 	}
 	
@@ -37,6 +41,9 @@ public class BankOfTheApes {
 				break;
 			case 2:
 				UserInterface.newUserScreen(users);
+				break;
+			case 3:
+				UserInterface.adminScreen(users);
 				break;
 			default:
 				System.out.println("Option not available. Please try again.");

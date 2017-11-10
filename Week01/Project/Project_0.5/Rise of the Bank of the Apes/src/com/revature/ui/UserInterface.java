@@ -31,6 +31,7 @@ public class UserInterface {
 		System.out.println("Please Select one of the following:");
 		System.out.println("1. Login for existing user");
 		System.out.println("2. Create new user account");
+		System.out.println("3. Administrator Login");
 		
 		System.out.print("Please Enter Number: ");
 		
@@ -59,6 +60,7 @@ public class UserInterface {
 	
 	public static void oldUserScreen(HashMap<String, User> users) {
 		String user;
+		User u;
 		String password;
 		String savedPassword;
 		
@@ -67,9 +69,15 @@ public class UserInterface {
 		if(users.containsKey(user)) {
 			System.out.println("Password");
 			password = UserInterface.readInput();
-			savedPassword = users.get(user).getPassword();
+			u = users.get(user);
+			savedPassword = u.getPassword();
 			if(password.equals(savedPassword)) {
-				UserInterface.accountScreen(users.get(user));
+				if(!u.isBanned() && u.isApproved()) {
+					UserInterface.accountScreen(users.get(user));
+				}
+				else {
+					System.out.println("Unable to access account. Contact admin");
+				}
 			}
 		}
 	}
@@ -96,7 +104,8 @@ public class UserInterface {
 				System.out.println("Invalid option. Please try again.");
 			}
 		}	
-		
+		System.out.println("Thank you. Have a nice day! Hail Ceasar!");
+		UserInterface.closeScanner();
 	}
 	
 	/**
@@ -132,7 +141,114 @@ public class UserInterface {
 		return;
 	}
 	
-	public static int adminScreen() {
+	public static int adminScreen(HashMap<String, User> users) {
+		String user;
+		User u = null;
+		String password;
+		String savedPassword;
+		
+		System.out.println("Username: ");
+		user = UserInterface.readInput();
+		if(users.containsKey(user)) {
+			System.out.println("Password");
+			password = UserInterface.readInput();
+			u = users.get(user);
+			savedPassword = u.getPassword();
+			if(password.equals(savedPassword)) {
+				if(u.getAccess_level() != 2) {
+					System.out.println("Sorry. Not Found. Wrong Menu.");
+					return 0;
+				}
+			}
+			
+		}
+		
+		System.out.println("Welcome Admin " + u.getName());
+		int option = 0;
+		while(option != 5) {
+			System.out.println("1. Show all users");
+			System.out.println("2. Approve user");
+			System.out.println("3. Ban user");
+			System.out.println("4. Promote user");
+			System.out.println("5. Log out");
+			System.out.println("Enter option: ");
+			option = Integer.parseInt(UserInterface.readInput());
+			
+			switch(option) {
+				case 1:
+					UserInterface.showAllUserScreen(users);
+					break;
+				case 2:
+					UserInterface.approveUserScreen(users);
+					break;
+				case 3:
+					UserInterface.banUserScreen(users);
+					break;
+				case 4:
+					UserInterface.promoteUser();
+					break;
+				case 5:
+					break;
+				default:
+					System.out.println("Invalid input. Please try again");
+			}
+		}
 		return 0;
+	}
+	
+	public static void showAllUserScreen(HashMap<String, User> users) {
+		
+		System.out.println("User : Approval Status: Ban Status");
+		for(String u: users.keySet()) {
+			System.out.println(u + " : " + users.get(u).isApproved() + " : " + users.get(u).isBanned());
+		}
+	}
+	
+	public static void approveUserScreen(HashMap<String, User> users) {
+		System.out.println("Approval Screen");
+		String input = "";
+		User u;
+		System.out.println("Enter user name to be approved: ");
+		input = UserInterface.readInput();
+		u = users.get(input);
+		
+		if(u == null) {
+			System.out.println("User not found.");
+		}
+		System.out.println("To approve, enter a; To disprove, enter d");
+		input = UserInterface.readInput();
+		switch(input) {
+			case "a":
+				u.setApproved(true);
+				break;
+			case "d":
+				u.setApproved(false);
+		}
+	}
+	
+	public static void banUserScreen(HashMap<String, User> users) {
+		System.out.println("Ban Screen");
+		String input = "";
+		User u;
+		
+		System.out.println("Enter user name: ");
+		input = UserInterface.readInput();
+		u = users.get(input);
+		if(u == null) {
+			System.out.println("User not found.");
+		}
+		System.out.println("To ban, enter b; To unban, enter u");
+		input = UserInterface.readInput();
+		switch(input) {
+			case "b":
+				u.setBanned(true);
+				break;
+			case "u":
+				u.setBanned(false);
+		}
+	}
+	
+	public static void promoteUser() {
+		
 	}
 }
