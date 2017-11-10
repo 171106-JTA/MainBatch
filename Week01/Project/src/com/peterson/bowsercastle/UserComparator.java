@@ -15,9 +15,9 @@ public class UserComparator implements Comparator<User>, java.io.Serializable {
 	 */
 	@Override
 	public int compare(final User user1, final User user2) {
-		if (user1.getRole().getSalary() > user2.getRole().getSalary()) {
+		if (user1.getRole().getValue() > user2.getRole().getValue()) {
 			return - 1;
-		} else if (user1.getRole().getSalary() < user2.getRole().getSalary()) {
+		} else if (user1.getRole().getValue() < user2.getRole().getValue()) {
 			return 1;
 		}
 		return 0;

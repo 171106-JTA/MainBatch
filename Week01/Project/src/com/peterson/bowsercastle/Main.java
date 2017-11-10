@@ -1,9 +1,8 @@
 package com.peterson.bowsercastle;
 
 /**
- * 
+ * Driver class for Bowser's castle.
  * @author Alex Peterson
- *
  */
 public final class Main {
 

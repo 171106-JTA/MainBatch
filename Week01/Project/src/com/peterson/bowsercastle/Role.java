@@ -6,18 +6,19 @@ package com.peterson.bowsercastle;
  */
 public enum Role {
 
+	LOCKED(-5),
 	UNVERIFIED(0),
-	MEMBER(5),
-	ADMIN(20),
+	MEMBER(10),
+	ADMIN(25),
 	KING(100);
 	
-	private final int salary; //salary of member
+	private final int value; //amount of stars a member earns
 	
 	Role(final int value) {
-		this.salary = value;
+		this.value = value;
 	}
 	
-	public int getSalary() {
-		return salary;
+	public int getValue() {
+		return value;
 	}
 }
