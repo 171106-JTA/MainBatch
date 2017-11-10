@@ -45,14 +45,45 @@ public class FieldParamsFactory {
 	//	PRIVATE METHODS 
 	///
 	
+	/**
+	 * Converts user instance into FieldParams instance 
+	 * @param user what to convert
+	 * @return FieldParams representation of user
+	 */
 	private FieldParams convertUserToFieldParams(User user) {
-		return null;
+		FieldParams params = new FieldParams();
+		
+		// Set field param data 
+		params.put("id", Long.toString(user.getId()));
+		params.put("username", user.getUsername());
+		params.put("password", user.getPassword());
+		params.put("role", Integer.toString(user.getRole().ordinal();))
+		
+		return params;
 	}
 	
+	/**
+	 * Converts userInfo instance into FieldParams instance 
+	 * @param userInfo what to convert
+	 * @return FieldParams representation of userInfo
+	 */
 	private FieldParams convertUserInfoToFieldParams(UserInfo userInfo) {
+		FieldParams params = new FieldParams();
+		
+		// Set field param data 
+		params.put("userid", Long.toString(userInfo.getUserId()));
+		params.put("email", userInfo.getEmail());
+		params.put("address", userInfo.getAddress());
+		params.put("phonenumber", userInfo.getPhonenumber());
+		
 		return null;
 	}
 	
+	/**
+	 * Converts account instance into FieldParams instance 
+	 * @param user what to convert
+	 * @return FieldParams representation of account
+	 */
 	private FieldParams convertAccountToFieldParams(Account acct) {
 		return null;
 	}
