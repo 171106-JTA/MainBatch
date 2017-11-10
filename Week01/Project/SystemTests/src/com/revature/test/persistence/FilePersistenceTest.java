@@ -2,6 +2,7 @@ package com.revature.test.persistence;
 
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -10,6 +11,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.Admin;
 import com.revature.businessobject.user.Customer;
 import com.revature.businessobject.user.User;
@@ -25,13 +27,14 @@ public class FilePersistenceTest {
 	static FieldParams values;
 	static User admin;
 	static User customer;
+	static UserInfo adminInfo;
 	static long adminId;
 	static long customerId;
 	static String adminUsername;
 	static String adminPassword;
 	static String customerUsername;
 	static String customerPassword;
-	
+
 	@BeforeClass
 	public static void setupBeforeClass() {
 		manager = FileDataManager.getManager();
@@ -51,6 +54,7 @@ public class FilePersistenceTest {
 		values = new FieldParams();
 		admin = new Admin(adminId, adminUsername, adminPassword);
 		customer = new Customer(customerId, customerUsername, customerPassword);
+		adminInfo = new UserInfo(adminId, "abc@xyz.com", "My Street and stuff", "1234567890");
 		FilePersistence.setDirectory(System.getProperty("user.dir") + "\\data\\");
 	}
 
@@ -71,7 +75,9 @@ public class FilePersistenceTest {
 	}
 	
 	///
-	// Data management Class Tests 
+	// Data management Class Tests
+	//
+	//	USER RECORDS
 	///
 	
 	/**
@@ -184,4 +190,169 @@ public class FilePersistenceTest {
 		// Perform test
 		assertEquals("Should delete admin account", 1, manager.delete("User", conditions));
 	}
+	
+	///
+	//	USERINFO TESTS
+	///
+	
+	@Test 
+	public void shouldCreateNewUserInfoWithBusinessObject() {
+		assertEquals("Should create UserInfo record", 1, manager.insert(adminInfo));
+	}
+	
+	@Test 
+	public void shouldCreateNewUserInfoWithFieldParams() {
+		FieldParams params = new FieldParams();
+		
+		// Set data
+		params.put("userid", Long.toString(adminId));
+		params.put("email", "abc@xyz.com");
+		params.put("address", "My Street and Stuff");
+		params.put("pnonenumber", "1234567890");
+		
+		// Test
+		assertEquals("Should create UserInfo record", 1, manager.insert("userinfo", params));
+	}
+	
+	@Test
+	public void shouldBeAbleToGetExistingUserInfo() {
+		FieldParams cnds = new FieldParams();
+		Resultset resultset;
+		
+		// Set data 
+		cnds.put("userid", Long.toString(adminId));
+		manager.insert(adminInfo);
+		
+		// Perform test
+		assertNotNull("Should get resultset for userinfo query", resultset = manager.select("userinfo", cnds));
+		assertTrue("Should exist single record from query", resultset.size() == 1);
+		assertEquals(adminInfo, resultset.get(0));
+	}
+	
+	@Test
+	public void shouldBeAbleToUpdateExistingUserInfoRecordWithBusinessObject() {
+		UserInfo data = new UserInfo(adminId, "new_email@xyz.com", "new place dr. something", "0987654321");
+		FieldParams cnds = new FieldParams();
+		Resultset resultset;
+		
+		// Set data
+		cnds.put("userid", Long.toString(adminId));
+		manager.insert(adminInfo);
+		
+		// Perform test
+		assertEquals("Should update a single userinfo record", 1, manager.update(data));
+		assertNotNull("Should have resultset from query", resultset = manager.select("userinfo", cnds));
+		assertTrue("Should exist single record from query", resultset.size() == 1);
+		assertFalse(adminInfo.equals(resultset.get(0)));
+		assertEquals(data, resultset.get(0));
+	}
+	
+	
+	@Test
+	public void shouldBeAbleToUpdateExistingUserInfoRecordWithFieldParams() {
+		UserInfo data = new UserInfo(adminId, "new_email@xyz.com", "new place dr. something", "0987654321");
+		FieldParams params = new FieldParams();
+		FieldParams cnds = new FieldParams();
+		
+		// Set data
+		cnds.put("userid", Long.toString(adminId));
+		params.put("email", "new_email@xyz.com");
+		params.put("address", "new place dr. something");
+		params.put("phonenumber", "0987654321");
+		
+		// Perform test
+		assertEquals("Should update a single userinfo record", 1, manager.update("userinfo", cnds, params));
+		assertNotNull("Should have resultset from query", resultset = manager.select("userinfo", cnds));
+		assertTrue("Should exist single record from query", resultset.size() == 1);
+		assertFalse(adminInfo.equals(resultset.get(0)));
+		assertEquals(data, resultset.get(0));
+	}
+	
+	@Test 
+	public void shouldRemoveExistingRecordWithBusinessObject() {
+		FieldParams cnds = new FieldParams();
+		Resultset resultset;
+		
+		// Set data 
+		cnds.put("userid", Long.toString(adminId));
+		manager.insert(adminInfo);
+		
+		assertEquals("Should remove admin userinfo record", 1, manager.delete(adminInfo));
+		assertNotNull("Should have resultset from query", resultset = manager.select("userinfo", cnds));
+		assertTrue("Should have 0 records", resultset.size() == 0);
+	}
+	
+	@Test 
+	public void shouldRemoveExistingRecordWithFieldParams() {
+		FieldParams cnds = new FieldParams();
+		Resultset resultset;
+		
+		// Set data 
+		cnds.put("userid", Long.toString(adminId));
+		manager.insert(adminInfo);
+		
+		assertEquals("Should remove admin userinfo record", 1, manager.delete("userinfo", cnds));
+		assertNotNull("Should have resultset from query", resultset = manager.select("userinfo", cnds));
+		assertTrue("Should have 0 records", resultset.size() == 0);
+	}
+	
+	@Test
+	public void shouldRemoveAllUserInfoRecords() {
+		Resultset resultset;
+		
+		// Set data
+		manager.insert(adminInfo);
+		manager.insert(new UserInfo(customerId, "me@people.com", "cardboard box", ""));
+		
+		// Perform test
+		assertEquals("Should exist a total of 2 userinfo records", 2, manager.select("userinfo", null).size());
+		assertEquals("Should remove all userinfo records", 2, manager.delete("userinfo", null));
+		assertNotNull("Should have resultset from query", resultset = manager.select("userinfo", null));
+		assertTrue("Should have 0 records", resultset.size() == 0);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

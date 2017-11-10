@@ -1,4 +1,6 @@
-package com.revature.businessobject.info;
+package com.revature.businessobject.info.user;
+
+import com.revature.businessobject.info.Info;
 
 public class UserInfo extends Info {
 	private String email;

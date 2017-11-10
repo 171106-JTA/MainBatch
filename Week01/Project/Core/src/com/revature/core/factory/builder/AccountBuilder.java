@@ -1,7 +1,7 @@
 package com.revature.core.factory.builder;
 
 import com.revature.businessobject.BusinessObject;
-import com.revature.businessobject.info.AccountType;
+import com.revature.businessobject.info.account.AccountType;
 import com.revature.businessobject.info.account.Checking;
 import com.revature.businessobject.info.account.Credit;
 import com.revature.core.FieldParams;

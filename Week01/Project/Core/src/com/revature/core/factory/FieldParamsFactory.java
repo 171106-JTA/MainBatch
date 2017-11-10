@@ -1,10 +1,10 @@
 package com.revature.core.factory;
 
 import com.revature.businessobject.BusinessObject;
-import com.revature.businessobject.info.Account;
-import com.revature.businessobject.info.UserInfo;
+import com.revature.businessobject.info.account.Account;
 import com.revature.businessobject.info.account.Checking;
 import com.revature.businessobject.info.account.Credit;
+import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.User;
 import com.revature.core.FieldParams;
 
@@ -77,7 +77,7 @@ public class FieldParamsFactory {
 		params.put("address", userInfo.getAddress());
 		params.put("phonenumber", userInfo.getPhonenumber());
 		
-		return null;
+		return params;
 	}
 	
 	/**

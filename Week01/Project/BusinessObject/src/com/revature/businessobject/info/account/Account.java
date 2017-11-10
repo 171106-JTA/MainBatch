@@ -1,4 +1,6 @@
-package com.revature.businessobject.info;
+package com.revature.businessobject.info.account;
+
+import com.revature.businessobject.info.Info;
 
 public class Account extends Info {
 	private long number;

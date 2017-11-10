@@ -1,7 +1,7 @@
 package com.revature.core.factory.builder;
 
 import com.revature.businessobject.BusinessObject;
-import com.revature.businessobject.info.UserInfo;
+import com.revature.businessobject.info.user.UserInfo;
 import com.revature.core.FieldParams;
 
 public class UserInfoBuilder implements BusinessObjectBuilder {

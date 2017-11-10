@@ -1,8 +1,5 @@
 package com.revature.businessobject.info.account;
 
-import com.revature.businessobject.info.Account;
-import com.revature.businessobject.info.AccountType;
-
 public class Credit extends Account {
 	private float total;
 	private float interest;

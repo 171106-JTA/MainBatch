@@ -2,7 +2,7 @@ package com.revature.core.comparator;
 
 import java.util.Comparator;
 
-import com.revature.businessobject.info.UserInfo;
+import com.revature.businessobject.info.user.UserInfo;
 import com.revature.core.FieldParams;
 
 public class FieldParamsUserInfoComparator implements Comparator<Object> {

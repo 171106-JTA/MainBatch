@@ -1,8 +1,8 @@
 package com.revature.persistence.file;
 
 import com.revature.businessobject.BusinessObject;
-import com.revature.businessobject.info.Account;
-import com.revature.businessobject.info.UserInfo;
+import com.revature.businessobject.info.account.Account;
+import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.User;
 import com.revature.core.FieldParams;
 
