@@ -11,8 +11,6 @@ public class Driver {
 		BankOfTheApes bota = BankOfTheApes.getBank();
 		
 		bota.setUp();
-
-		ProcessData.serialize(bota.getUsers());
 	}
 
 }

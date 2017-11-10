@@ -35,6 +35,6 @@ public class Account extends UserInterface{
 			}
 		}	
 		System.out.println("Thank you. Have a nice day! Hail Ceasar!");
-		UserInterface.closeScanner();
+		UserInterface.cleanUp(users);
 	}
 }

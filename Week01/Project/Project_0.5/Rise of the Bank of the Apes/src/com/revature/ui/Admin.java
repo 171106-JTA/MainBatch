@@ -43,7 +43,7 @@ public class Admin extends UserInterface{
 					break;
 				case 5:
 					System.out.println("Thank you for the hard work!");
-					UserInterface.closeScanner();
+					UserInterface.cleanUp(users);
 					break;
 				default:
 					System.out.println("Invalid input. Please try again");

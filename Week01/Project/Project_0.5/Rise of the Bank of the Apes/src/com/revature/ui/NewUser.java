@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import com.revature.users.User;
 
-public class NewUser {
+public class NewUser extends UserInterface{
 	
 	public static void Screen(HashMap<String, User> users) {
 		String user;
@@ -24,5 +24,6 @@ public class NewUser {
 		users.put(user, new User(user, password));
 		
 		System.out.println("Have a nice day!");
+		UserInterface.cleanUp(users);
 	}
 }

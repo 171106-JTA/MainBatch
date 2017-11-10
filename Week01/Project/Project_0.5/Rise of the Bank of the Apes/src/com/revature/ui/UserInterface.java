@@ -3,6 +3,7 @@ package com.revature.ui;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import com.revature.data.ProcessData;
 import com.revature.users.User;
 
 public class UserInterface {
@@ -34,8 +35,9 @@ public class UserInterface {
 		return i;
 	}
 	
-	protected static void closeScanner() {
+	protected static void cleanUp(HashMap<String, User> users) {
 		scan.close();
+		ProcessData.serialize(users);
 	}	
 	
 	public static User loginScreen(HashMap<String, User> users) {
