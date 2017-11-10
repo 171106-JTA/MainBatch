@@ -42,6 +42,7 @@ public class Admin extends UserInterface{
 					AdminTool.promoteUser(users);
 					break;
 				case 5:
+					System.out.println("Thank you for the hard work!");
 					UserInterface.closeScanner();
 					break;
 				default:

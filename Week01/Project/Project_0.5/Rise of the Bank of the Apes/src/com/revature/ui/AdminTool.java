@@ -8,9 +8,9 @@ public class AdminTool {
 	
 	public static void showAllUser(HashMap<String, User> users) {
 		
-		System.out.println("User : Approval Status: Ban Status");
+		System.out.println("User : Approval Status : Ban Status : Access Level");
 		for(String u: users.keySet()) {
-			System.out.println(u + " : " + users.get(u).isApproved() + " : " + users.get(u).isBanned());
+			System.out.println(u + " : " + users.get(u).isApproved() + " : " + users.get(u).isBanned() + " : " + users.get(u).getAccess_level());
 		}
 	}
 	
@@ -18,14 +18,20 @@ public class AdminTool {
 		System.out.println("Approval Screen");
 		String input = "";
 		User u;
-		System.out.println("Enter user name to be approved: ");
+		System.out.print("Enter user name to be approved: ");
 		input = UserInterface.readInput();
 		u = users.get(input);
 		
 		if(u == null) {
 			System.out.println("User not found.");
 		}
-		System.out.println("To approve, enter a; To disprove, enter d");
+		
+		if(u.getAccess_level() == 2) {
+			System.out.println("You cannot approve another admin");
+			return;
+		}
+		
+		System.out.print("To approve, enter a; To disprove, enter d --->");
 		input = UserInterface.readInput();
 		switch(input) {
 			case "a":
@@ -41,13 +47,18 @@ public class AdminTool {
 		String input = "";
 		User u;
 		
-		System.out.println("Enter user name: ");
+		System.out.print("Enter user name: ");
 		input = UserInterface.readInput();
 		u = users.get(input);
 		if(u == null) {
 			System.out.println("User not found.");
 		}
-		System.out.println("To ban, enter b; To unban, enter u");
+		if(u.getAccess_level() == 2) {
+			System.out.println("You cannot ban another admin");
+			return;
+		}
+		
+		System.out.print("To ban, enter b; To unban, enter u --->");
 		input = UserInterface.readInput();
 		switch(input) {
 			case "b":
@@ -63,12 +74,19 @@ public class AdminTool {
 		String input = "";
 		User u;
 		
-		System.out.println("Enter user name: ");
+		System.out.print("Enter user name: ");
 		input = UserInterface.readInput();
 		u = users.get(input);
+		
 		if(u == null) {
 			System.out.println("User not found.");
 		}
+		
+		if(u.getAccess_level() == 2) {
+			System.out.println("You cannot promote another admin");
+			return;
+		}
+		
 		u.setAccess_level(2);
 		System.out.println(u.getName() + " has been promoted to admin");
 	}

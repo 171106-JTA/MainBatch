@@ -6,11 +6,11 @@ import com.revature.users.User;
 
 public class NewUser {
 	
-	public static int Screen(HashMap<String, User> users) {
+	public static void Screen(HashMap<String, User> users) {
 		String user;
 		String password;
 		while(true) {
-			System.out.println("Username: ");
+			System.out.print("Username: ");
 			user = UserInterface.readInput();
 			if(users.containsKey(user)) {
 				System.out.println("Username taken. Please try again.");
@@ -19,10 +19,10 @@ public class NewUser {
 				break;
 			}
 		}
-		System.out.println("Password: ");
+		System.out.print("Password: ");
 		password = UserInterface.readInput();
 		users.put(user, new User(user, password));
 		
-		return 0;
+		System.out.println("Have a nice day!");
 	}
 }
