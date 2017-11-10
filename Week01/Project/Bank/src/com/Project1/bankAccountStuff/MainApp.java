@@ -2,33 +2,41 @@ package com.Project1.bankAccountStuff;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class MainApp {
-	
-	/**
-	 * Contains all user information
-	 */
 	private static final String databaseFile = "database.txt"; //File containing database
 	private HashMap<String, User> db;
-	private BufferedWriter bw;
-	private static BufferedReader br;  
-//	private BufferedWriter bw;
+	
+	//Used the tutorials listed below for the ObjectInputStream and ObjectOutputStream
+	//http://www.studytonight.com/java/serialization-and-deserialization.php
+	//http://www.tutorialspoint.com/java/io/objectinputstream_readobject.htm
+	//Date Accessed: 11/10/2017
+	ObjectInputStream  ois;
+	ObjectOutputStream oos;
 	
 	public static void main(String[] args) {		
 		MainApp mp = new MainApp();
 		mp.db = new HashMap<>();
 		boolean exit = false;
 		
+		//Read database from the file
+		try {
+			mp.readDatabase(mp.databaseFile);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} //To Do: Any finally statement?
+		
+		//Loop over the Main Menu
 		while(!exit) {
-			String userChoice = mp.initialMenu();
+			String userChoice = mp.mainMenu();
 			
 			if (userChoice.equals("1")) {
 				//Call login
@@ -69,39 +77,41 @@ public class MainApp {
 				System.out.println("Not an option");
 			}			
 		}
-		//Save the database stuff for later
-//		try {
-//			readDatabase(databaseFile);
-//		} catch(IOException ioe){
-//			ioe.getStackTrace();
-//		}
-		//Might be able to abstract this try/catch statement
 		
-		
+		//Save the database to the 'database.txt' file. Erase whatever is in the file currently
+		//To Do: Might be able to abstract this try/catch statement with the one at readDatabase() call
 		try {
-			mp.saveDb(mp.db);
+			mp.saveDb();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+			//To Do: Return message with catch statement???
+		} //To Do: Any finally statement? 
 	}
 	
 	/**
-	 * Read serialized 'User' objects from file and store in the 'db' member object.
-	 * @param fileName 		Name of file containing serialized User objects
+	 * Read serialized HashMap object from file and store in the 'db' member object.
+	 * @param fileName			Name of file containing serialized HashMap database
+	 * @throws IOException		Throws this exception if input stream cannot be closed (in finally statement)
 	 */
-	private static void readDatabase(String fileName) throws IOException {
-		//Read in all user info stored in file
-		//Store in a hash table. Key = pair of username and password. value = user object
-		//Return hash table?
+	private void readDatabase(String fileName) throws IOException {		
 		try {
-			br = new BufferedReader(new FileReader(fileName));
-		} catch (FileNotFoundException e) {
+			//Read in File
+			ois = new ObjectInputStream (new FileInputStream(databaseFile));
+			
+			/*
+			 * To Do: There is a warning generated here because casting the 'Object' returned from 
+			 * readObject to a HashMap. See the link below for a possible fix
+			 * https://stackoverflow.com/questions/262367/type-safety-unchecked-cast
+			 */
+			this.db = (HashMap<String,User>)ois.readObject();
+			System.out.println("The Database!!!!: " + this.db);
+		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
-			if(br!=null) {
-				br.close();
+			//Close input stream
+			if(ois!=null) {
+				ois.close();
 			}
 		}
 	}
@@ -110,7 +120,7 @@ public class MainApp {
 	 * Displays initial menu
 	 * @return Contains user's choice from the initial menu
 	 */
-	private String initialMenu() {
+	private String mainMenu() {
 		System.out.println("Welcome");
 		System.out.println("_______________________________");
 		System.out.println("1) Login");
@@ -181,8 +191,6 @@ public class MainApp {
 		
 		System.out.println(db);
 	}
-	
-	
 	
 	/**
 	 * Get user's response to menus
@@ -267,22 +275,18 @@ public class MainApp {
 		
 	}	
 	
-	public void saveDb(HashMap<String, User> db) throws IOException{
+	public void saveDb() throws IOException{
+		//To Do: Don't pass in database! use  this.db to access!!!!!
 		try {
-			String str = "Hello There!!!";
-//			bw = new BufferedWriter(new FileWriter(databaseFile));
-//			bw.write(str);
-//			bw.write(db.toString());
-			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(databaseFile));
-			
-			oos.writeObject(db);
+			oos = new ObjectOutputStream(new FileOutputStream(databaseFile));
+			oos.writeObject(this.db);
 			oos.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			//To Do: Return message with catch statement???
 			e.printStackTrace();
 		} finally {
-			if(bw!=null) {
-				bw.close();
+			if(oos!=null) {
+				oos.close();
 			}
 		}
 	}
