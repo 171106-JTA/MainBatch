@@ -22,7 +22,6 @@ public class FileDataUpdator extends FileDataDeletor {
 			default:
 				return -1;
 		}
-		
 	}
 
 	@Override
@@ -44,7 +43,13 @@ public class FileDataUpdator extends FileDataDeletor {
 	///
 	
 	private static int updateUser(User user) {
-		return 0;
+		FieldParams cnds = new FieldParams();
+		FieldParams values = new FieldParams();
+		
+		// Set condition (primary key)
+		cnds.put("id", Long.toString(user.getId()));
+		
+		return updateUser(cnds, values);
 	}
 	
 	private static int updateUser(FieldParams cnds, FieldParams values) {
