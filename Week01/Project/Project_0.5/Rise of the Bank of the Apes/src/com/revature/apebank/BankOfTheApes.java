@@ -1,10 +1,10 @@
 package com.revature.apebank;
 
 import java.util.HashMap;
-import java.util.Scanner;
 
 import com.revature.data.ProcessData;
 import com.revature.ui.UserInterface;
+import com.revature.ui.newUser;
 import com.revature.users.User;
 
 public class BankOfTheApes {
@@ -40,7 +40,7 @@ public class BankOfTheApes {
 				UserInterface.oldUserScreen(users);
 				break;
 			case 2:
-				UserInterface.newUserScreen(users);
+				newUser.Screen(users);
 				break;
 			case 3:
 				UserInterface.adminScreen(users);
