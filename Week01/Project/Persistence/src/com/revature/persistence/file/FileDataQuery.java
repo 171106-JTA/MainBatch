@@ -12,7 +12,7 @@ public abstract class FileDataQuery extends FilePersistence {
 	@Override
 	public Resultset select(String name, FieldParams cnds) {
 		// Log request
-		logger.debug("select:>" + name + " with " + cnds.toString());
+		logger.debug("select:>" + name + " with " + cnds);
 				
 		switch (name.toLowerCase()) {
 			case "user":

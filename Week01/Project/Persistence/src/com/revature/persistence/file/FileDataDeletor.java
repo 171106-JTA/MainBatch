@@ -61,26 +61,34 @@ public abstract class FileDataDeletor extends FileDataInserter {
 			
 		// Log transaction request
 		logger.debug("Attempting to remove user data");
-			
-		for (int i = 0; userIt.hasNext(); i++) {
-			if (comparator.compare(cnds, userIt.next()) == 0)
-				indices.add(i);
+		
+		if (cnds == null) {
+			logger.debug("Removing all users");
+			users.clear();
 		}
-			
-		if ((size = indices.size()) > 0) {
-			foundIt = indices.iterator();
+		else {
+			for (int i = 0; userIt.hasNext(); i++) {
+				if (comparator.compare(cnds, userIt.next()) == 0)
+					indices.add(i);
+			}
 				
-			for (int i = 0; foundIt.hasNext(); i++) 
-				users.remove(foundIt.next() - i);
-				
-			// Commit changes 
+			if ((size = indices.size()) > 0) {
+				foundIt = indices.iterator();
+					
+				for (int i = 0; foundIt.hasNext(); i++) 
+					users.remove(foundIt.next() - i);
+			}
+		}
+		
+		// Commit changes 
+		if (size > 0) {
 			saveUserData();
-				
+			
 			// Log transaction
 			logger.debug("Removed " + size + " user records");;
 		}
-			
-		return 0;
+		
+		return size;
 	}
 		
 	/**
