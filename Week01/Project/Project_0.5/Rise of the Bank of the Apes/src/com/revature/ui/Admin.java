@@ -25,8 +25,8 @@ public class Admin extends UserInterface{
 			System.out.println("3. Ban user");
 			System.out.println("4. Promote user");
 			System.out.println("5. Log out");
-			System.out.println("Enter option: ");
-			option = Integer.parseInt(UserInterface.readInput());
+			System.out.print("Enter option: ");
+			option = UserInterface.readNumberInput();
 			
 			switch(option) {
 				case 1:
@@ -39,7 +39,7 @@ public class Admin extends UserInterface{
 					AdminTool.banUser(users);
 					break;
 				case 4:
-					AdminTool.promoteUser();
+					AdminTool.promoteUser(users);
 					break;
 				case 5:
 					UserInterface.closeScanner();

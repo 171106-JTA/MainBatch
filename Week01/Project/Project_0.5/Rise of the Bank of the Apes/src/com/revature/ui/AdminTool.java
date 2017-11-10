@@ -58,7 +58,18 @@ public class AdminTool {
 		}
 	}
 	
-	public static void promoteUser() {
+	public static void promoteUser(HashMap<String, User> users) {
+		System.out.println("Promote Screen");
+		String input = "";
+		User u;
 		
+		System.out.println("Enter user name: ");
+		input = UserInterface.readInput();
+		u = users.get(input);
+		if(u == null) {
+			System.out.println("User not found.");
+		}
+		u.setAccess_level(2);
+		System.out.println(u.getName() + " has been promoted to admin");
 	}
 }
