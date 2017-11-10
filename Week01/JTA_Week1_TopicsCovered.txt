@@ -3,7 +3,7 @@ JTA Week 1 Topics covered
 =========================================================
 JAVA
 =========================================================
-- OOP
+- OOP Programming Language
 - Fast, reliable, secure, portable
 
 =========================================================
@@ -22,6 +22,7 @@ JDK - Java Development Kit
 =========================================================
 Command line java
 =========================================================
+?????
 
 =========================================================
 Heap vs stack
@@ -46,20 +47,35 @@ Do-While
 =========================================================
 primitive datatypes
 =========================================================
-int - 32 bits - default = 0
-long - 32 bits - default = 0.0f
-double - 64 bits - default = 0.0
-char - 64 bits??? - default = 
+boolean - technically 8 bits, theoretically 1 bits - default = false
 byte - 8 bits - default = 0
-boolean - technically 8 bits - default = false
+char - 16 bits - default = \u0000
+short - 16 bits - default = 0
+int - 32 bits - default = 0
+float - 32 bits - default = 0.0f
+long - 64 bits - default = 0
+double - 64 bits - default = 0.0
+object - null
 
 =========================================================
 Implicit and explicit typecasting
 =========================================================
+Typcasting: Assigning a value of one type to a variable of 
+another type. In Java we can typecast both primative and 
+Object data types 
+Implicit typecasting: Typecasting that does not require extra 
+notation. In general, we can implicitly typecast when we downcast 
+(example: Setting a class parent reference equal to a child object)
+Explicit typecasting: Typecasting that requires explicit 
+notation. Usually needed for upcasting
 
 =========================================================
 wrapper classes, autoboxing
 =========================================================
+Wrapper Classes: The objects that encapsulate primative 
+data types in Java
+Autoboxing: The automatic conversion between primative datatypes
+and their wrapper classes. 
 
 =========================================================
 Design patterns: Pojo, Singleton, Factory
@@ -99,7 +115,7 @@ Polymorphism
 =========================================================
 Is-A/Has-A relationships
 =========================================================
-Is-A -> inheritance. i.e. the child class 'is-a' parent class
+Is-A -> inheritance/covariance. i.e. the child class 'is-a' parent class
 Has-A -> Objects inside of objects. i.e. a class 'has-a' instance of another class. 
 
 =========================================================
@@ -109,22 +125,62 @@ Child classes can be set to parent classes
 (Related to inheritance)
 
 =========================================================
-Exceptions, checked vs unchecked, ducking/propagating
+Exceptions, checked exceptions, unchecked exceptions, ducking/propagating, Exception vs Errors, Exception Inheritance Tree
 =========================================================
+Exception: An event when a program does not perform as expected. 
+In other words, when an application behanves in a manner it shouldn't
+Exception VS Error: An error is its own class and is any situation
+where the programm cannot reasonably recover. Error examples: OutOfMemoryError (heap) StackOverflowError (stack)
+Checked Exception: An exception that must have a try/catch statement
+at compile time. An exception that must be handled at compile time. Examples: FileNotFoundException and Exception
+Unchecked Exception: Need not have a try/catch statement at compile time. An exception that does not need to be handled at compile time. 
+Example: RuntimeException
+Ducking/Propogating/Abstring exceptions: 'Throws keyword'
 
-Exception vs Errors
-
+=========================================================
 serialization, transient
+=========================================================
+Serialization:
+What is serialization? The conversion of an object to s series of bytes, so that it can be easily saved.
+How to serialize? Overload the toString() method to return a string
 
+=========================================================
 Short circuit operators
+=========================================================
+Operators that stop evaluating once the result is definite. 
+(when True shows us in an OR statement or when False shows up in 
+an AND statement)
 
+=========================================================
 Access Modifiers
+=========================================================
+The methods that allow for fetching and changing member variables
+Also known at Getters and Setters
 
+=========================================================
 Constructors
+=========================================================
+Functions called when an instance of a class is instantiated
+They usually involve initializing member variables
 
-Scopes of variables
+=========================================================
+Scopes
+=========================================================
+Static
+Instance
+Method
+Local
 
+=========================================================
 Static, final
+=========================================================
+Static - static members of a class are shared among all instances of that class
+Final - Final (in general): cannot be changed. Values in final varialbes cannot be changed and final variables cannot be reassigned. Final methods cannot be overloaded ????????????????????
+
+=========================================================
+Diamond Problem
+=========================================================
+Arises from multiple inheritance. Arises when a two classes (call them B and C) derive from a common parent (call it A), and then a fourth class (Class D) derives from both B and C. There is ambiguity related to which version of a method D should use: the version from B or C
 
 interfaces vs abstract classes
 
