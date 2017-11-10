@@ -45,8 +45,9 @@ public class Main {
 					System.out.println("Please enter new balance: $");
 					double b = scan.nextDouble();
 					Account a = new Account(b);
+					a.balance = b;
 					
-					User newUser = new User (uNew, pNew, "User", a, false);
+					User newUser = new User (uNew, pNew, "User", a, b, false);
 					//User newUser = new User (uNew, pNew, "Admin", a, false);
 
 					System.out.println(newUser.toString());

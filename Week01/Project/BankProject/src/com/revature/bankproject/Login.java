@@ -1,8 +1,10 @@
 package com.revature.bankproject;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 
 public class Login {
@@ -18,11 +20,21 @@ public class Login {
 		 */
 			try {
 				ois = new ObjectInputStream(new FileInputStream("C:\\Users\\Sherdil Khawaja\\Documents\\workspace\\BankProject\\src" + u + ".ser"));
-				
 				user = (User)ois.readObject();
-			
+				
+				FileOutputStream file = new FileOutputStream("C:\\Users\\Sherdil Khawaja\\Documents\\workspace\\BankProject\\src" + u + ".ser");
+		        ObjectOutputStream out = new ObjectOutputStream(file);
+				
+				/*
+				 * If the user's role is an administrator
+				 */
 				if (user.getRole().equals("Admin")) {
 					System.out.println("Hello Admin");
+					
+					
+					
+					
+					
 					
 				} else {
 					
@@ -40,24 +52,32 @@ public class Login {
 					 */
 				if (user.getName().equals(u) && user.getPassword().equals(p)) {
 
-					System.out.print("Welcome " + u + "!\nYour Balance: " + user.getAccount().balance);
-					System.out.print("\nWould you like to (1)deposit or (2)withdraw money or (0) exit");
+					System.out.print("Welcome " + u + "!\nYour Balance: " + user.getAccount().getBalance());
+					System.out.print("\nWould you like to (1)Deposit or (2)Withdraw money or (0)Exit");
 					int c = scan.nextInt();
 					
 					if (c == 1) {
 						System.out.println("Please enter the amount you want to deposit");
 						double amount = scan.nextDouble();
 						user.getAccount().deposit(amount);
-						
-						System.out.println("You now have: " + user.getAccount().balance);
-						
-						
+
+				        out.writeObject(user);
+				        out.close();
+				        file.close();
+
+						System.out.println("You now have: " + user.getAccount().getBalance());
+		
 					}
 					
 					if (c == 2) {
 						System.out.println("Please enter the amount you want to withdraw");
 						double amount = scan.nextDouble();
 						user.getAccount().withdraw(amount);
+						
+						out.writeObject(user);
+				        out.close();
+				        file.close();
+						
 						System.out.println("You have: " + user.getAccount().balance);
 
 					}

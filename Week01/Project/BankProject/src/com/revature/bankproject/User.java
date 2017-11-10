@@ -15,13 +15,14 @@ public class User implements java.io.Serializable {
 	private Account account = new Account();
 	private double balance = account.balance;
 
-	public User(String name, String password, String role, Account account, boolean verify) {
+	public User(String name, String password, String role, Account account, double balance, boolean verify) {
 		super();
 		this.name = name;
 		this.password = password;
 		this.role = role;
 		this.account = account;
 		this.verify = verify;
+		this.balance = balance;
 	}
 	
 	/*	private double balance;
@@ -33,7 +34,7 @@ public class User implements java.io.Serializable {
 		this.role = role;
 		this.balance = balance;
 		this.verify = verify;
-	}
+	}*/
 
 	public double getBalance() {
 		return balance;
@@ -41,7 +42,7 @@ public class User implements java.io.Serializable {
 
 	public void setBalance(double balance) {
 		this.balance = balance;
-	}*/
+	}
 
 	public Account getAccount() {
 		return account;

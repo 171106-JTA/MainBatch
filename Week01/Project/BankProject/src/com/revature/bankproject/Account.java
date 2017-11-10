@@ -1,27 +1,24 @@
 package com.revature.bankproject;
 
-public class Account extends Bank implements java.io.Serializable {
+public class Account implements Bank, java.io.Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	protected double balance;
+
+	public Account() {super();}
 	
-	public Account() {
+	public Account(double b) {
 		super();
 	}
-	
-	public Account(double balance) {
-		super(balance);
-	}
 
 
-	@Override
 	public void deposit(double d) {
 		balance += d;
 	}
 
-	@Override
 	public void withdraw(double w) {
 		if (w > balance) {
 			System.out.println("You don't have sufficent funds.");
@@ -31,9 +28,13 @@ public class Account extends Bank implements java.io.Serializable {
 		}
 	}
 
-	@Override
 	public double getBalance() {
 		return balance;
+		
+	}
+	
+	public void setBalance(double balance) {
+		this.balance = balance;	
 	}
 
 }
