@@ -3,9 +3,8 @@ package com.revature.core.factory;
 import com.revature.businessobject.BusinessObject;
 import com.revature.businessobject.info.Account;
 import com.revature.businessobject.info.UserInfo;
-import com.revature.businessobject.user.User;
-import com.revature.businessobject.info.Account;
-import com.revature.businessobject.info.UserInfo;
+import com.revature.businessobject.info.account.Checking;
+import com.revature.businessobject.info.account.Credit;
 import com.revature.businessobject.user.User;
 import com.revature.core.FieldParams;
 
@@ -35,6 +34,8 @@ public class FieldParamsFactory {
 			case "userinfo":
 				return convertUserInfoToFieldParams((UserInfo)businessObject);
 			case "account":
+			case "checking":
+			case "credit":
 				return convertAccountToFieldParams((Account)businessObject);
 			default:
 				return null;
@@ -81,11 +82,70 @@ public class FieldParamsFactory {
 	
 	/**
 	 * Converts account instance into FieldParams instance 
-	 * @param user what to convert
+	 * @param acct what to convert
 	 * @return FieldParams representation of account
 	 */
 	private FieldParams convertAccountToFieldParams(Account acct) {
-		return null;
+		// Convert based on type
+		switch (acct.getType()) {
+			case CHECKING:
+				return convertCheckingToFieldParams((Checking)acct);
+			case CREDIT:
+				return convertCreditToFieldParams((Credit)acct);
+			default:
+				return null;
+		}
 	}
+	
+	/**
+	 * Converts checking account instance into FieldParams instance 
+	 * @param checking what to convert
+	 * @return FieldParams representation of account
+	 */
+	private FieldParams convertCheckingToFieldParams(Checking checking) {
+		FieldParams params = new FieldParams();
+		
+		// Set field param data 
+		params.put("userid", Long.toString(checking.getUserId()));
+		params.put("number", Long.toString(checking.getNumber()));
+		params.put("total", Float.toString(checking.getTotal()));
+		params.put("type", Integer.toString(checking.getType().ordinal()));
+		
+		return params;
+	}
+	
+	/**
+	 * Converts credit account instance into FieldParams instance 
+	 * @param acct what to convert
+	 * @return FieldParams representation of account
+	 */
+	private FieldParams convertCreditToFieldParams(Credit credit) {
+		FieldParams params = new FieldParams();
+		
+		// Set field param data 
+		params.put("userid", Long.toString(credit.getUserId()));
+		params.put("number", Long.toString(credit.getNumber()));
+		params.put("total", Float.toString(credit.getTotal()));
+		params.put("interest", Float.toString(credit.getInterest()));
+		params.put("creditlimit", Float.toString(credit.getCreditLimit()));
+		params.put("type", Integer.toString(credit.getType().ordinal()));
+		
+		return params;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
