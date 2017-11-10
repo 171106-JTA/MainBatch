@@ -14,10 +14,12 @@ public class BankOfTheApes {
 	
 	private BankOfTheApes() {
 		this.users = ProcessData.unserialize();
-		User admin = new User("a!joe", "d");
-		admin.setAccess_level(2);
-		admin.setApproved(true);
-		users.put("a!joe", admin);
+		if(users.get("a!joe") == null) {
+			User admin = new User("a!joe", "d");
+			admin.setAccess_level(2);
+			admin.setApproved(true);
+			users.put("a!joe", admin);
+		}
 		instanceCount++;
 	}
 	
@@ -37,7 +39,7 @@ public class BankOfTheApes {
 		
 		switch(option) {
 			case 1:
-				UserInterface.oldUserScreen(users);
+				UserInterface.accountScreen(users);
 				break;
 			case 2:
 				newUser.Screen(users);

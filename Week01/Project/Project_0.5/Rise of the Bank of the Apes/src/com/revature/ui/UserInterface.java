@@ -11,7 +11,7 @@ public class UserInterface {
 	public UserInterface() {
 		
 	}
-	
+	//TODO Fix exception when inputting letter in parseInt
 	protected static String readInput() {
 		String result;
 		
@@ -23,9 +23,9 @@ public class UserInterface {
 	
 	private static void closeScanner() {
 		scan.close();
-	}
+	}	
 	
-	public static void oldUserScreen(HashMap<String, User> users) {
+	public static User loginScreen(HashMap<String, User> users) {
 		String user;
 		User u;
 		String password;
@@ -40,20 +40,29 @@ public class UserInterface {
 			savedPassword = u.getPassword();
 			if(password.equals(savedPassword)) {
 				if(!u.isBanned() && u.isApproved()) {
-					UserInterface.accountScreen(users.get(user));
+					return u;
 				}
 				else {
-					System.out.println("Unable to access account. Contact admin");
+					System.out.println("Contact admin");
+					return null;
 				}
 			}
 		}
+		System.out.println("Sorry. Incorrect Username or password.");
+		return null;
 	}
 	
-	public static void accountScreen(User user) {
+	public static void accountScreen(HashMap<String, User> users) {
+		User u = UserInterface.loginScreen(users);
+		
+		if(u == null) {
+			return;
+		}
+		
 		System.out.println("Welcome Back!");
 		int option = 0;
 		while(option != 3) {
-			System.out.println("You Have " + user.getBalance() + " Bananas");
+			System.out.println("You Have " + u.getBalance() + " Bananas");
 			System.out.println("1. Withdraw");
 			System.out.println("2. Deposit");
 			System.out.println("3. Log Out");
@@ -62,10 +71,10 @@ public class UserInterface {
 			
 			
 			if(option == 1) {
-				UserInterface.withdrawScreen(user);
+				UserInterface.withdrawScreen(u);
 			}
 			else if(option == 2) {
-				UserInterface.depositScreen(user);
+				UserInterface.depositScreen(u);
 			}
 			else if(option > 3) {
 				System.out.println("Invalid option. Please try again.");
@@ -109,25 +118,14 @@ public class UserInterface {
 	}
 	
 	public static int adminScreen(HashMap<String, User> users) {
-		String user;
-		User u = null;
-		String password;
-		String savedPassword;
+		User u = UserInterface.loginScreen(users);
 		
-		System.out.println("Username: ");
-		user = UserInterface.readInput();
-		if(users.containsKey(user)) {
-			System.out.println("Password");
-			password = UserInterface.readInput();
-			u = users.get(user);
-			savedPassword = u.getPassword();
-			if(password.equals(savedPassword)) {
-				if(u.getAccess_level() != 2) {
-					System.out.println("Sorry. Not Found. Wrong Menu.");
-					return 0;
-				}
-			}
-			
+		if(u == null) {
+			return 0;
+		}
+		if(u.getAccess_level() != 2) {
+			System.out.println("Wrong Menu");
+			return 0;
 		}
 		
 		System.out.println("Welcome Admin " + u.getName());
