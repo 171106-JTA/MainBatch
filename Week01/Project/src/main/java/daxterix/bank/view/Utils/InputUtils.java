@@ -4,11 +4,10 @@ import daxterix.bank.view.Page;
 
 import java.io.Console;
 import java.util.Scanner;
-import java.util.function.Predicate;
 import java.util.function.Supplier;
 
 public class InputUtils {
-    public static String DIVIDER = "______________________________________________________________________";
+    private static String DIVIDER = "______________________________________________________________________";
 
     public static void printPrompt(String fieldName) {
         System.out.printf("enter %s: ", fieldName);
@@ -59,7 +58,7 @@ public class InputUtils {
     /**
      * @return
      */
-    public static <T> T readConfirmed(Supplier<T> inputSupply) {
+    public static <T> T readAndConfirm(Supplier<T> inputSupply) {
         T firstEntry;
         T secondEntry;
 
@@ -67,14 +66,14 @@ public class InputUtils {
             firstEntry = inputSupply.get();
             System.out.println("Confirm");
             secondEntry = inputSupply.get();
-            if (firstEntry != secondEntry)
+            if (!secondEntry.equals(firstEntry))
                 System.out.println("both entries must be the same; please try again");
         }
         while(!firstEntry.equals(secondEntry));
         return firstEntry;
     }
 
-    public static void printDivider() {
+    private static void printDivider() {
         System.out.println(DIVIDER );
     }
 
@@ -82,5 +81,6 @@ public class InputUtils {
         printDivider();
         System.out.println(p.getTitle());
         printDivider();
+        System.out.println();
     }
 }
