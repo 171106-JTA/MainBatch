@@ -2,7 +2,7 @@ package com.revature.ui;
 
 public class Splash extends UserInterface {
 
-	public static int Screen() {
+	public static int Screen() throws NumberFormatException{
 		System.out.println("Welcome to the Bank of the Apes!");
 		System.out.println("Where Humans Fear to Tread!");
 		System.out.println("Please Select one of the following:");

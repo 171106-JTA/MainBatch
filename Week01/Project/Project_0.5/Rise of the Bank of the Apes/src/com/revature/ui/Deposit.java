@@ -6,7 +6,7 @@ public class Deposit {
 	
 	public static void Screen(User user) {
 		System.out.println("Depositing");
-		System.out.println("Please enter amount to be deposited: ");
+		System.out.print("Please enter amount to be deposited: ");
 		//TODO Fix the datatype
 		double amount = Integer.parseInt(UserInterface.readInput());
 		double prevAmount = user.getBalance();

@@ -6,6 +6,7 @@ import com.revature.data.ProcessData;
 import com.revature.ui.Account;
 import com.revature.ui.Admin;
 import com.revature.ui.NewUser;
+import com.revature.ui.Splash;
 import com.revature.users.User;
 
 public class BankOfTheApes {
@@ -34,6 +35,12 @@ public class BankOfTheApes {
 			bota = new BankOfTheApes();
 		}
 		return bota;
+	}
+	
+	public void setUp() {
+		int option = Splash.Screen();
+		displayOperationScreen(option);
+		
 	}
 	
 	public void displayOperationScreen(int option) {

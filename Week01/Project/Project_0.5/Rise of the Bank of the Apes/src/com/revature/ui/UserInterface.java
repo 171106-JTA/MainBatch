@@ -31,10 +31,10 @@ public class UserInterface {
 		String password;
 		String savedPassword;
 		
-		System.out.println("Username: ");
+		System.out.print("Username: ");
 		user = UserInterface.readInput();
 		if(users.containsKey(user)) {
-			System.out.println("Password");
+			System.out.print("Password: ");
 			password = UserInterface.readInput();
 			u = users.get(user);
 			savedPassword = u.getPassword();
@@ -43,7 +43,7 @@ public class UserInterface {
 					return u;
 				}
 				else {
-					System.out.println("Contact admin");
+					System.out.println("Contact Administrators");
 					return null;
 				}
 			}

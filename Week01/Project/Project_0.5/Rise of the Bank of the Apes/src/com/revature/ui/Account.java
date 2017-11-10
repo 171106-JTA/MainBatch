@@ -20,7 +20,7 @@ public class Account extends UserInterface{
 			System.out.println("1. Withdraw");
 			System.out.println("2. Deposit");
 			System.out.println("3. Log Out");
-			System.out.println("Enter Option: ");
+			System.out.print("Enter Option: ");
 			option = Integer.parseInt(UserInterface.readInput());
 			
 			

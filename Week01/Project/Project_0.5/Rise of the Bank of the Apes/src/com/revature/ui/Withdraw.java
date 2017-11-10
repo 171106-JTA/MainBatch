@@ -7,7 +7,7 @@ public class Withdraw {
 	public static void Screen(User user) {
 		System.out.println("Withdrawing");
 		while(true) {
-			System.out.println("Please enter withdrawl amount: ");
+			System.out.print("Please enter withdrawal amount: ");
 			double amount = Integer.parseInt(UserInterface.readInput());
 			double prevAmount = user.getBalance();
 			double currAmount = prevAmount - amount;

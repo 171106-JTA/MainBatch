@@ -7,12 +7,11 @@ public class Driver {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int option = Splash.Screen();
 		
 		BankOfTheApes bota = BankOfTheApes.getBank();
 		
-		bota.displayOperationScreen(option);
-		
+		bota.setUp();
+
 		ProcessData.serialize(bota.getUsers());
 	}
 
