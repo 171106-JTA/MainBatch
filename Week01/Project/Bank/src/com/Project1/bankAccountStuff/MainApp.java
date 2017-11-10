@@ -1,12 +1,15 @@
 package com.Project1.bankAccountStuff;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Hashtable;
+import java.io.ObjectOutputStream;
+import java.util.HashMap;
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 public class MainApp {
 	
@@ -14,12 +17,14 @@ public class MainApp {
 	 * Contains all user information
 	 */
 	private static final String databaseFile = "database.txt"; //File containing database
-	private Hashtable<String, User> db;
+	private HashMap<String, User> db;
+	private BufferedWriter bw;
 	private static BufferedReader br;  
 //	private BufferedWriter bw;
 	
 	public static void main(String[] args) {		
 		MainApp mp = new MainApp();
+		mp.db = new HashMap<>();
 		boolean exit = false;
 		
 		while(!exit) {
@@ -32,6 +37,33 @@ public class MainApp {
 			} else if (userChoice.equals("3")) {
 				System.out.println("Closing Program");
 				exit = true;
+			} else if (userChoice.equals("42")) { //Testing user creation
+				String firstName = "Evan";
+				String lastName = "West";
+				String middleInitial = "A"; 
+				String ssn = "000000000"; 
+				String password = "password";
+				User default_user_1 = new User(firstName, lastName, middleInitial, ssn, password);
+				
+				firstName = "A";
+				lastName = "A";
+				middleInitial = "A"; 
+				ssn = "111111111"; 
+				password = "A";
+				User default_user_2 = new User(firstName, lastName, middleInitial, ssn, password);
+				
+				firstName = "B";
+				lastName = "B";
+				middleInitial = "B"; 
+				ssn = "222222222"; 
+				password = "B";
+				User default_user_3 = new User(firstName, lastName, middleInitial, ssn, password);
+				
+				mp.db.put(default_user_1.getSsn(), default_user_1);
+				mp.db.put(default_user_2.getSsn(), default_user_2);
+				mp.db.put(default_user_3.getSsn(), default_user_3);
+				
+				System.out.println(mp.db);
 			} else {
 				//Add counter and exit after 5 incorrect attempts
 				System.out.println("Not an option");
@@ -43,7 +75,15 @@ public class MainApp {
 //		} catch(IOException ioe){
 //			ioe.getStackTrace();
 //		}
+		//Might be able to abstract this try/catch statement
 		
+		
+//		try {
+//			mp.saveDb(mp.db);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 	
 	/**
@@ -130,11 +170,16 @@ public class MainApp {
 		System.out.println("Password: "); //re-entered password at some point
 		password = aScanner.nextLine();
 		
-		
 		User newUser = new User(firstName, lastName, middleInitial, ssn, password);
 		
 		System.out.println(newUser.toString());
 		
+		//To Do: Duplicate check. And test case for this duplicate check
+		//To Do: Run the ssn key through a Hash function so that it's not stored in the db as a key
+		//To Do: Run the object serialization through a ?hash function? 
+		this.db.put(newUser.getSsn(), newUser);
+		
+		System.out.println(db);
 	}
 	
 	
@@ -221,4 +266,27 @@ public class MainApp {
 	public void withdraw(double withdrawAmount) {
 		
 	}	
+	
+	public void saveDb(HashMap<String, User> db) throws IOException{
+		try {
+			String str = "Hello There!!!";
+//			bw = new BufferedWriter(new FileWriter(databaseFile));
+//			bw.write(str);
+//			bw.write(db.toString());
+			
+			FileOutputStream foo = new FileOutputStream(databaseFile);
+			ObjectOutputStream oos = new ObjectOutputStream(foo);
+			
+			oos.writeObject(db);
+			oos.close();
+			foo.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if(bw!=null) {
+				bw.close();
+			}
+		}
+	}
 }
