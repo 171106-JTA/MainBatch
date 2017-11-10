@@ -78,12 +78,12 @@ public class MainApp {
 		//Might be able to abstract this try/catch statement
 		
 		
-//		try {
-//			mp.saveDb(mp.db);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		try {
+			mp.saveDb(mp.db);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -273,13 +273,10 @@ public class MainApp {
 //			bw = new BufferedWriter(new FileWriter(databaseFile));
 //			bw.write(str);
 //			bw.write(db.toString());
-			
-			FileOutputStream foo = new FileOutputStream(databaseFile);
-			ObjectOutputStream oos = new ObjectOutputStream(foo);
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(databaseFile));
 			
 			oos.writeObject(db);
 			oos.close();
-			foo.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
