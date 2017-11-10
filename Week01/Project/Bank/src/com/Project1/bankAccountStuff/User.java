@@ -75,6 +75,29 @@ public class User implements Serializable {
 		this.accountAmount = 0; //Initialize new account amounts to 0
 	}
 	
+	User(String firstName, String lastName, String middleInitial, String ssn, String password, 
+			int permissions, int status, int accountAmount) {
+		this.firstName = firstName; 
+		this.lastName = lastName;
+		this.middleInitial = middleInitial;
+		this.ssn = ssn; //Deep copy or shallow copy??? Check this!!!
+		this.password = password;
+		this.permissions = permissions; //Initialize new accounts to Client level permissions
+		this.status = status; //Initialize new accounts to require approval
+		this.accountAmount = accountAmount; //Initialize new account amounts to 0
+	}
+	
+	public User(User user) {
+		this.firstName = user.getFirstName(); 
+		this.lastName = user.getLastName();
+		this.middleInitial = user.getMiddleInitial();
+		this.ssn = user.getSsn(); //Deep copy or shallow copy??? Check this!!!
+		this.password = user.getPassword();
+		this.permissions = user.getPermissions(); //Initialize new accounts to Client level permissions
+		this.status = user.getStatus(); //Initialize new accounts to require approval
+		this.accountAmount = user.getAccountAmount(); //Initialize new account amounts to 0
+	}
+
 	//////////////////////////////////////////////////////////////
 	//Getters and Setters
 	//////////////////////////////////////////////////////////////
@@ -172,6 +195,38 @@ public class User implements Serializable {
 	 */
 	public void setSsn(String ssn) {
 		this.ssn = ssn;
+	}
+	
+	/**
+	 * Get the user's password
+	 * @return Returns a user's password
+	 */
+	public String getPassword( ) {
+		return this.password;
+	}
+	
+	/**
+	 * Change the user's password
+	 * @param password		A String containing the user's password
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	/**
+	 * Fetch the permissions for the user
+	 * @return		Returns an integer containing the permissions for the user
+	 */
+	public int getPermissions() {
+		return permissions;
+	}
+	
+	/**
+	 * Set the permissions for the user
+	 * @param permissions		An int containing the permissions for the user
+	 */
+	public void setPermissions(int permissions) {
+		this.permissions = permissions;
 	}
 
 	@Override
