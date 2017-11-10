@@ -8,7 +8,11 @@ import com.revature.core.FieldParams;
 public class FieldParamsUserComparator implements Comparator<Object> {
 
 	/**
-	 * 
+	 * @param left instance of FieldParams
+	 * @param right instance of User
+	 * @see FieldParams
+	 * @see User
+	 * @return 0 if match successful else -1
 	 */
 	@Override
 	public int compare(Object left, Object right) {

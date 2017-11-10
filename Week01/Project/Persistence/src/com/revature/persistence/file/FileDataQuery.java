@@ -1,11 +1,11 @@
 package com.revature.persistence.file;
 
-import com.revature.businessobject.info.Account;
 import com.revature.businessobject.info.UserInfo;
 import com.revature.businessobject.user.User;
 import com.revature.core.FieldParams;
 import com.revature.core.Resultset;
 import com.revature.core.comparator.FieldParamsUserComparator;
+import com.revature.core.comparator.FieldParamsUserInfoComparator;
 
 public abstract class FileDataQuery extends FilePersistence {
 
@@ -57,7 +57,21 @@ public abstract class FileDataQuery extends FilePersistence {
 	 * @return all instances which meet conditions 
 	 */
 	private Resultset findUserInfo(FieldParams cnds) {
-		return null;
+		Resultset found = new Resultset();
+		
+		// if No conditions provided return all
+		if (cnds == null)
+			found.addAll(userInfo);
+		else {
+			FieldParamsUserInfoComparator comparator = new FieldParamsUserInfoComparator();
+			
+			for (UserInfo info : userInfo) {
+				if (comparator.compare(cnds, info) == 0)
+					found.add(info);
+			}
+		}
+		
+		return found;
 	}
 	
 	/**
