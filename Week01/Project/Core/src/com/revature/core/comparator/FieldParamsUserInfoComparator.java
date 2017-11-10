@@ -11,7 +11,7 @@ public class FieldParamsUserInfoComparator implements Comparator<Object> {
 	 * @param left instance of FieldParams
 	 * @param right instance of User
 	 * @see FieldParams
-	 * @see User
+	 * @see UserInfo
 	 * @return 0 if match successful else -1
 	 */
 	@Override

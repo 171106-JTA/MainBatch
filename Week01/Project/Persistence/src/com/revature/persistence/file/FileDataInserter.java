@@ -30,11 +30,11 @@ public abstract class FileDataInserter extends FileDataQuery {
 	public int insert(String name, FieldParams values) {
 		switch (name.toLowerCase()) {
 			case "user":
-				return addUser((User)factory.getBusinessObject(name, values));
+				return addUser((User)businessObjectFactory.getBusinessObject(name, values));
 			case "userinfo":
-				return addUserInfo((UserInfo)factory.getBusinessObject(name, values));
+				return addUserInfo((UserInfo)businessObjectFactory.getBusinessObject(name, values));
 			case "account":
-				return addAccount((Account)factory.getBusinessObject(name, values));
+				return addAccount((Account)businessObjectFactory.getBusinessObject(name, values));
 			default:
 				return 0;
 		}

@@ -57,7 +57,7 @@ public class FieldParamsFactory {
 		params.put("id", Long.toString(user.getId()));
 		params.put("username", user.getUsername());
 		params.put("password", user.getPassword());
-		params.put("role", Integer.toString(user.getRole().ordinal();))
+		params.put("role", Integer.toString(user.getRole().ordinal()));
 		
 		return params;
 	}

@@ -1,13 +1,13 @@
 package com.revature.persistence.file;
 
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 import com.revature.businessobject.BusinessObject;
-import com.revature.businessobject.user.User;
 import com.revature.core.FieldParams;
-import com.revature.core.comparator.FieldParamsUserComparator;
+import com.revature.core.comparator.FieldParamsCheckingComparator;
+import com.revature.core.comparator.FieldParamsCreditComparator;
 
 public abstract class FileDataDeletor extends FileDataInserter {
 
@@ -36,8 +36,10 @@ public abstract class FileDataDeletor extends FileDataInserter {
 				return removeUser(cnds);
 			case "userinfo": 
 				return removeUserInfo(cnds);
-			case "account": 
-				return removeAccount(cnds);
+			case "checking": 
+				return removeAccount(cnds, new FieldParamsCheckingComparator());
+			case "credit": 
+				return removeAccount(cnds, new FieldParamsCreditComparator());
 			default:
 				return -1;
 		}
@@ -53,10 +55,8 @@ public abstract class FileDataDeletor extends FileDataInserter {
 	 * @return greater than 0 if records were removed
 	 */
 	private static int removeUser(FieldParams cnds) {
-		FieldParamsUserComparator comparator = new FieldParamsUserComparator();
-		List<Integer> indices = new ArrayList<>();
-		Iterator<User> userIt = users.iterator();
-		Iterator<Integer> foundIt;
+		List<Integer> indices;
+		Iterator<Integer> it;
 		int size = users.size();
 			
 		// Log transaction request
@@ -67,16 +67,13 @@ public abstract class FileDataDeletor extends FileDataInserter {
 			users.clear();
 		}
 		else {
-			for (int i = 0; userIt.hasNext(); i++) {
-				if (comparator.compare(cnds, userIt.next()) == 0)
-					indices.add(i);
-			}
+			indices = findAllUserIndex(cnds);
 				
 			if ((size = indices.size()) > 0) {
-				foundIt = indices.iterator();
+				it = indices.iterator();
 					
-				for (int i = 0; foundIt.hasNext(); i++) 
-					users.remove(foundIt.next() - i);
+				for (int i = 0; it.hasNext(); i++) 
+					users.remove(it.next() - i);
 			}
 		}
 		
@@ -97,9 +94,37 @@ public abstract class FileDataDeletor extends FileDataInserter {
 	 * @return greater than 0 if records were removed
 	 */
 	private static int removeUserInfo(FieldParams cnds) {
+		List<Integer> indices;
+		Iterator<Integer> it;
+		int size = userInfo.size();
 			
+		// Log transaction request
+		logger.debug("Attempting to remove userinfo data");
+		
+		if (cnds == null) {
+			logger.debug("Removing all userinfo");
+			userInfo.clear();
+		}
+		else {
+			indices = findAllUserInfoIndex(cnds);
+				
+			if ((size = indices.size()) > 0) {
+				it = indices.iterator();
+					
+				for (int i = 0; it.hasNext(); i++) 
+					userInfo.remove(it.next() - i);
+			}
+		}
+		
+		// Commit changes 
+		if (size > 0) {
+			saveUserInfoData();
 			
-		return 0;
+			// Log transaction
+			logger.debug("Removed " + size + " userinfo records");;
+		}
+		
+		return size;
 	}
 		
 	/**
@@ -107,9 +132,37 @@ public abstract class FileDataDeletor extends FileDataInserter {
 	 * @param cnds what to remove
 	 * @return greater than 0 if records were removed
 	 */
-	private static int removeAccount(FieldParams cnds) {
+	private static int removeAccount(FieldParams cnds, Comparator<Object> comparator) {
+		List<Integer> indices;
+		Iterator<Integer> it;
+		int size = accounts.size();
 			
+		// Log transaction request
+		logger.debug("Attempting to remove account data");
+		
+		if (cnds == null) {
+			logger.debug("Removing all accounts");
+			accounts.clear();
+		}
+		else {
+			indices = findAllAccountIndex(cnds);
+				
+			if ((size = indices.size()) > 0) {
+				it = indices.iterator();
+					
+				for (int i = 0; it.hasNext(); i++) 
+					accounts.remove(it.next() - i);
+			}
+		}
+		
+		// Commit changes 
+		if (size > 0) {
+			saveAccountData();
 			
-		return 0;
+			// Log transaction
+			logger.debug("Removed " + size + " account records");;
+		}
+		
+		return size;
 	}
 }
