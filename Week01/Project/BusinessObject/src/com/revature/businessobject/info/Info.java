@@ -27,4 +27,26 @@ public class Info extends BusinessObject {
 	public long getUserId() {
 		return userId;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (userId ^ (userId >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Info))
+			return false;
+		Info other = (Info) obj;
+		if (userId != other.userId)
+			return false;
+		return true;
+	}
 }

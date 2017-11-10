@@ -259,6 +259,8 @@ public class FilePersistenceTest {
 		params.put("email", "new_email@xyz.com");
 		params.put("address", "new place dr. something");
 		params.put("phonenumber", "0987654321");
+		manager.insert(adminInfo);
+		
 		
 		// Perform test
 		assertEquals("Should update a single userinfo record", 1, manager.update("userinfo", cnds, params));
