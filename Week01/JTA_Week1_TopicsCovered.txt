@@ -1,0 +1,158 @@
+JTA Week 1 Topics covered
+
+=========================================================
+JAVA
+=========================================================
+- OOP
+- Fast, reliable, secure, portable
+
+=========================================================
+JRE, JDK, JVM
+=========================================================
+JVM - Java Virtual Machine
+- Works on top of an OS to provide an environment for compiled java code
+- Only reads Java byte code
+JRE - Java Runtime Environment
+- The minimal environment required to run Java
+- Includes the JVM and all compiled files required to run JAVA 
+JDK - Java Development Kit
+- All libraries required to develope Java code
+- Includes the Java compiler, JavaDoc, Jar, and the debugger
+
+=========================================================
+Command line java
+=========================================================
+
+=========================================================
+Heap vs stack
+=========================================================
+Heap: Stores Objects, Instance Variables, and contains the String Pool
+Stack: Stores local variables and function calls. One Stack per thread
+
+=========================================================
+String Pool
+=========================================================
+Stores string literals 
+Saves memory by offering references to the same string to be used by multiple resources
+
+=========================================================
+control statements
+=========================================================
+If else 
+For
+While
+Do-While
+
+=========================================================
+primitive datatypes
+=========================================================
+int - 32 bits - default = 0
+long - 32 bits - default = 0.0f
+double - 64 bits - default = 0.0
+char - 64 bits??? - default = 
+byte - 8 bits - default = 0
+boolean - technically 8 bits - default = false
+
+=========================================================
+Implicit and explicit typecasting
+=========================================================
+
+=========================================================
+wrapper classes, autoboxing
+=========================================================
+
+=========================================================
+Design patterns: Pojo, Singleton, Factory
+=========================================================
+
+=========================================================
+String api, Reflections api
+=========================================================
+
+=========================================================
+StringBuffer vs StringBuilder
+=========================================================
+
+=========================================================
+Variable Shadowing, overloading, overriding
+=========================================================
+
+=========================================================
+Pillars of OOP: Inheritance, Abstraction, Polymorphism, Encapsulation
+=========================================================
+Abstraction 
+- Hides implementation of code
+- Writing code once (abstracting duplicate code to separate module)
+- Example: 
+Encapsulation
+- Data/information hiding
+- Access 'hidden' data through access modifiers
+- Hides internal module data
+- Example: 
+Inheritance
+- The ability to inherit functionality and properties from a superclass
+- And to alter the functionality of child classes.
+Polymorphism 
+- Allow components to change functionality. 
+- Achieved through method overloading, method overwritting, and covariance
+
+=========================================================
+Is-A/Has-A relationships
+=========================================================
+Is-A -> inheritance. i.e. the child class 'is-a' parent class
+Has-A -> Objects inside of objects. i.e. a class 'has-a' instance of another class. 
+
+=========================================================
+Covariance
+=========================================================
+Child classes can be set to parent classes
+(Related to inheritance)
+
+=========================================================
+Exceptions, checked vs unchecked, ducking/propagating
+=========================================================
+
+Exception vs Errors
+
+serialization, transient
+
+Short circuit operators
+
+Access Modifiers
+
+Constructors
+
+Scopes of variables
+
+Static, final
+
+interfaces vs abstract classes
+
+Garbage Collector
+
+varargs
+
+Multithreeading, threads in general, thread states
+
+producer consumer problem, synchronization, deadlock/livvelock
+
+How create a thread
+
+File IO
+
+Java Docs
+
+Junit, unit testing, junit annotations
+
+logging, log4j
+
+Collections, know heirachy, iterators, 
+
+comparable v comparator
+
+Generics
+
+Maven Lifecycle, Maven, POM.xml
+
+git
+
