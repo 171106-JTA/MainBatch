@@ -13,13 +13,26 @@ import java.util.Scanner;
 public class MainApp {
 	private static final String databaseFile = "database.txt"; //File containing database
 	private HashMap<String, User> db;
+	private User currentUser;
 	
+	//Status values for user accounts
+	private static final int status_approvalPending = 0;
+	private static final int status_active = 1;
+	private static final int status_locked = 2;
 	//Used the tutorials listed below for the ObjectInputStream and ObjectOutputStream
 	//http://www.studytonight.com/java/serialization-and-deserialization.php
 	//http://www.tutorialspoint.com/java/io/objectinputstream_readobject.htm
 	//Date Accessed: 11/10/2017
 	ObjectInputStream  ois;
 	ObjectOutputStream oos;
+	
+	/*
+	 * To Do's:
+	 * Add a Username field to the User class. Propogate this change through all relevant 
+	 * functions in Main
+	 * For login() function, allow user to enter 'q' or something to go back
+	 * Disable 'q' as a valid passoword
+	 */
 	
 	public static void main(String[] args) {		
 		MainApp mp = new MainApp();
@@ -37,9 +50,31 @@ public class MainApp {
 		//Loop over the Main Menu
 		while(!exit) {
 			String userChoice = mp.mainMenu();
-			
+			//To Do: Refactor the control statements to a separate function
+			//(i.e. No control statements in main
 			if (userChoice.equals("1")) {
-				//Call login
+				boolean loggedIn = mp.login(); 
+				
+				//If successfully logged in, check the user's status
+				if(loggedIn) {
+					int status = mp.currentUser.getStatus();
+					if(status==status_approvalPending) {
+						System.out.println("Account Approval Pending");
+					} else if (status==status_locked) {
+						System.out.println("Account Locked");
+					} else if (status==status_active) {
+						System.out.println("Successfully Logged In!");
+					}
+					else {
+						//To Do: Put throw statement here with custom error message
+						System.out.println("FATAL ERROR #1: Should NEVER See This!!!!");
+						System.exit(1);
+					}
+					
+					
+				} else {
+					System.out.println("NOT Logged In");
+				}
 			} else if (userChoice.equals("2")) {
 				mp.createNewClientAccount();
 			} else if (userChoice.equals("3")) {
@@ -49,23 +84,35 @@ public class MainApp {
 				String firstName = "Evan";
 				String lastName = "West";
 				String middleInitial = "A"; 
-				String ssn = "000000000"; 
-				String password = "password";
-				User default_user_1 = new User(firstName, lastName, middleInitial, ssn, password);
+				String ssn = "0"; 
+				String password = "0";
+				int permissions = 0; 
+				int status = 0; 
+				int accountAmount = 0;
+				User default_user_1 = new User(firstName, lastName, middleInitial, ssn, 
+						password, permissions, status, accountAmount);
 				
 				firstName = "A";
 				lastName = "A";
 				middleInitial = "A"; 
-				ssn = "111111111"; 
-				password = "A";
-				User default_user_2 = new User(firstName, lastName, middleInitial, ssn, password);
+				ssn = "1"; 
+				password = "1";
+				permissions = 0; 
+				status = 1; 
+				accountAmount = 0;
+				User default_user_2 = new User(firstName, lastName, middleInitial, ssn, 
+						password, permissions, status, accountAmount);
 				
 				firstName = "B";
 				lastName = "B";
 				middleInitial = "B"; 
-				ssn = "222222222"; 
-				password = "B";
-				User default_user_3 = new User(firstName, lastName, middleInitial, ssn, password);
+				ssn = "2"; 
+				password = "2";
+				permissions = 0; 
+				status = 2; 
+				accountAmount = 0;
+				User default_user_3 = new User(firstName, lastName, middleInitial, ssn, 
+						password, permissions, status, accountAmount);
 				
 				mp.db.put(default_user_1.getSsn(), default_user_1);
 				mp.db.put(default_user_2.getSsn(), default_user_2);
@@ -141,14 +188,48 @@ public class MainApp {
 	 * @return True - successful login. False - Too many login attempts, end program
 	 */
 	private boolean login() { 
-		//Get user's username and password
-		//Check against allusers
-		//Allow user to re-enter username and password 5 times. 
-		//If successful, return true
-		//If unsuccessful, return false (end program)
-		//Note: probably use try/catch statements for this
+		Scanner aScanner = new Scanner(System.in);
+		String snn; 
+		String password; 
+		boolean loggedIn = false;
 		
-		return false; //Place holder
+		System.out.println("Social Security Number: "); //re-enter password at some point
+		String ssn = aScanner.nextLine();
+		
+		if(this.db.containsKey(ssn)) {
+			boolean correctPassword = false; 	//Control's execution of password loop
+			final int maxPasswordLoop = 5; 			//Maximum number of password retries
+			
+			//Password loop
+			for(int i = 0; i < maxPasswordLoop && !correctPassword; i ++)
+			{
+				System.out.println("Password: "); //re-entered password at some point
+				password = aScanner.nextLine();
+				if(password.equals(this.db.get(ssn).getPassword())) {
+					//Stop the loop
+					correctPassword = true;
+					
+					//Signal that the user is logged in
+					loggedIn = true;
+					
+					//Fetch the current user's information from the database
+					this.currentUser = new User(this.db.get(ssn));
+				}
+				else {
+					System.out.println("Incorrect password");
+				}
+			}
+			
+			//Print message is user exceeded the number of password tries
+			if(!correctPassword) {
+				System.out.println("Too many incorrect tries\n");
+			}
+		} else
+		{
+			System.out.println("No user by that name\n\n");
+		}
+				
+		return loggedIn;
 	}
 	
 	/**
