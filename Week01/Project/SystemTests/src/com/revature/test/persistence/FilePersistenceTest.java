@@ -4,7 +4,6 @@ package com.revature.test.persistence;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.Before;
@@ -14,10 +13,9 @@ import org.junit.Test;
 import com.revature.businessobject.user.Admin;
 import com.revature.businessobject.user.Customer;
 import com.revature.businessobject.user.User;
-import com.revature.businessobject.user.UserRole;
 import com.revature.core.FieldParams;
 import com.revature.core.Resultset;
-import com.revature.persistence.Persistenceable;
+import com.revature.persistence.file.FileDataManager;
 import com.revature.persistence.file.FilePersistence;
 
 public class FilePersistenceTest {
@@ -36,7 +34,7 @@ public class FilePersistenceTest {
 	
 	@BeforeClass
 	public static void setupBeforeClass() {
-		manager = FilePersistence.getManager();
+		manager = FileDataManager.getManager();
 		adminId = 1423412;
 		adminUsername = "myAdmin";
 		adminPassword = "adogmsjdfh";

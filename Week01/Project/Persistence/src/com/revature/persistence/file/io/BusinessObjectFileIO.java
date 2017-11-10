@@ -1,4 +1,4 @@
-package com.revature.persistence.file;
+package com.revature.persistence.file.io;
 
 import java.io.File;
 import java.io.FileInputStream;
