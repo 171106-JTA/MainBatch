@@ -22,10 +22,14 @@ public class FileDataUpdator extends FileDataDeletor {
 		
 		switch (clazz.toLowerCase()) {
 			case "user":
+			case "admin":
+			case "customer":
 				return updateUser((User)businessObject);
 			case "userinfo":
 				return updateUserInfo((UserInfo)businessObject);
 			case "account":
+			case "checking":
+			case "credit":
 				return updateAccount((Account)businessObject);
 			default:
 				return -1;
@@ -99,7 +103,7 @@ public class FileDataUpdator extends FileDataDeletor {
 				params.put(key, values.get(key));
 			
 			// update users record
-			users.set(index, (User)businessObjectFactory.getBusinessObject("User", values));
+			users.set(index, (User)businessObjectFactory.getBusinessObject("User", params));
 		}
 		
 		// Commit changes 
@@ -153,7 +157,7 @@ public class FileDataUpdator extends FileDataDeletor {
 				params.put(key, values.get(key));
 			
 			// update userinfo record
-			userInfo.set(index, (UserInfo)businessObjectFactory.getBusinessObject("UserInfo", values));
+			userInfo.set(index, (UserInfo)businessObjectFactory.getBusinessObject("UserInfo", params));
 		}
 		
 		// Commit changes 
@@ -208,7 +212,7 @@ public class FileDataUpdator extends FileDataDeletor {
 				params.put(key, values.get(key));
 			
 			// update account record
-			accounts.set(index, (Account)businessObjectFactory.getBusinessObject("Account", values));
+			accounts.set(index, (Account)businessObjectFactory.getBusinessObject("Account", params));
 		}
 		
 		// Commit changes 

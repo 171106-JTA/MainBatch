@@ -36,7 +36,6 @@ public class Credit extends Account {
 		return interest;
 	}
 
-
 	public void setInterest(float interest) {
 		this.interest = interest;
 	}

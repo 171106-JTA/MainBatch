@@ -61,7 +61,7 @@ public class FilePersistenceTest {
 
 	@Test
 	public void shouldStoreDataInCurrentWorkingDirectory() {
-		assertEquals("Should store data in working directory", System.getProperty("user.dir"), FilePersistence.getDirectory());
+		assertEquals("Should store data in working directory", System.getProperty("user.dir") + "\\data\\", FilePersistence.getDirectory());
 	}
 	
 	@Test
@@ -89,7 +89,7 @@ public class FilePersistenceTest {
 	public void shouldCreateNewAdminUserUsingFieldParams() {
 		// Set data
 		values.put("id", Long.toString(adminId));
-		values.put("role", admin.getRole().toString());
+		values.put("role", Integer.toString(admin.getRole().ordinal()));
 		
 		// Perform test
 		assertEquals("Should add admin with", 1, manager.insert("User", values));
@@ -136,7 +136,7 @@ public class FilePersistenceTest {
 		User demote = new Customer(adminId, adminUsername, adminPassword);
 		// Set data
 		conditions.put("id", Long.toString(adminId));
-		values.put("role", demote.getRole().toString());
+		values.put("role", Integer.toString(demote.getRole().ordinal()));
 		manager.insert(admin);
 		
 		// Update Account

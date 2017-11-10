@@ -20,6 +20,8 @@ public abstract class FileDataDeletor extends FileDataInserter {
 			case "userinfo": 
 				return removeUserInfo(fieldParamsFactory.getFieldParams(businessObject));
 			case "account": 
+			case "checking":
+			case "credit":
 				return removeAccount(fieldParamsFactory.getFieldParams(businessObject));
 			default:
 				return -1;

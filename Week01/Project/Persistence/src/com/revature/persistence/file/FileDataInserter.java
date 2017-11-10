@@ -20,6 +20,8 @@ public abstract class FileDataInserter extends FileDataQuery {
 			case "userinfo":
 				return addUserInfo((UserInfo)businessObject);
 			case "account":
+			case "credit":
+			case "checking":
 				return addAccount((Account)businessObject);
 			default:
 				return 0;
