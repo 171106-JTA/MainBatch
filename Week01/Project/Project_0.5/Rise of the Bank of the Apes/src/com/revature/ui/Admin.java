@@ -30,16 +30,16 @@ public class Admin extends UserInterface{
 			
 			switch(option) {
 				case 1:
-					UserInterface.showAllUserScreen(users);
+					AdminTool.showAllUser(users);
 					break;
 				case 2:
-					UserInterface.approveUserScreen(users);
+					AdminTool.approveUser(users);
 					break;
 				case 3:
-					UserInterface.banUserScreen(users);
+					AdminTool.banUser(users);
 					break;
 				case 4:
-					UserInterface.promoteUser();
+					AdminTool.promoteUser();
 					break;
 				case 5:
 					UserInterface.closeScanner();

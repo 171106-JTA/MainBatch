@@ -25,10 +25,10 @@ public class Account extends UserInterface{
 			
 			
 			if(option == 1) {
-				UserInterface.withdrawScreen(u);
+				Withdraw.Screen(u);
 			}
 			else if(option == 2) {
-				UserInterface.depositScreen(u);
+				Deposit.Screen(u);
 			}
 			else if(option > 3) {
 				System.out.println("Invalid option. Please try again.");
