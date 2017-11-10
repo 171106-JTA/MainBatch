@@ -21,6 +21,19 @@ public class UserInterface {
 		return result;
 	}
 	
+	protected static int readNumberInput() {
+		int i = -1;
+		
+		scan = new Scanner(System.in);
+		
+		try {
+			i = Integer.parseInt(scan.nextLine());
+		}catch (NumberFormatException ne){
+			System.out.println("Input invalid.");
+		}
+		return i;
+	}
+	
 	protected static void closeScanner() {
 		scan.close();
 	}	

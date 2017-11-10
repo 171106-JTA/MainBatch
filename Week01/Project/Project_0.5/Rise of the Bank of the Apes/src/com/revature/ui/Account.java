@@ -21,7 +21,7 @@ public class Account extends UserInterface{
 			System.out.println("2. Deposit");
 			System.out.println("3. Log Out");
 			System.out.print("Enter Option: ");
-			option = Integer.parseInt(UserInterface.readInput());
+			option = UserInterface.readNumberInput();
 			
 			
 			if(option == 1) {
@@ -30,7 +30,7 @@ public class Account extends UserInterface{
 			else if(option == 2) {
 				Deposit.Screen(u);
 			}
-			else if(option > 3) {
+			else if(option > 3 || option < 1) {
 				System.out.println("Invalid option. Please try again.");
 			}
 		}	

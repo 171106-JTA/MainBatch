@@ -8,11 +8,13 @@ public class Deposit {
 		System.out.println("Depositing");
 		System.out.print("Please enter amount to be deposited: ");
 		//TODO Fix the datatype
-		double amount = Integer.parseInt(UserInterface.readInput());
+		double amount = UserInterface.readNumberInput();
+		if(amount < 0) {
+			System.out.println("Invalid input.");
+			return;
+		}
 		double prevAmount = user.getBalance();
 		double currAmount = prevAmount + amount;
 		user.setBalance(currAmount);
-		
-		return;
 	}
 }

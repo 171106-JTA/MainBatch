@@ -8,10 +8,14 @@ public class Withdraw {
 		System.out.println("Withdrawing");
 		while(true) {
 			System.out.print("Please enter withdrawal amount: ");
-			double amount = Integer.parseInt(UserInterface.readInput());
+			double amount = UserInterface.readNumberInput();
+			if(amount < 0) {
+				System.out.println("Invalid input.");
+				continue;
+			}
 			double prevAmount = user.getBalance();
 			double currAmount = prevAmount - amount;
-			if(currAmount > 0) {
+			if(currAmount >= 0) {
 				user.setBalance(currAmount);
 				System.out.println("$" + currAmount + " has been withdrawn.");
 				break;

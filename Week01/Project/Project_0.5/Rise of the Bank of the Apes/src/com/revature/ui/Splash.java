@@ -12,7 +12,7 @@ public class Splash extends UserInterface {
 		
 		System.out.print("Please Enter Number: ");
 		
-		return Integer.parseInt(UserInterface.readInput());
+		return UserInterface.readNumberInput();
 	}
 	
 }
