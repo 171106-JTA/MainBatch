@@ -21,7 +21,7 @@ public class UserInterface {
 		return result;
 	}
 	
-	private static void closeScanner() {
+	protected static void closeScanner() {
 		scan.close();
 	}	
 	
@@ -50,38 +50,6 @@ public class UserInterface {
 		}
 		System.out.println("Sorry. Incorrect Username or password.");
 		return null;
-	}
-	
-	public static void accountScreen(HashMap<String, User> users) {
-		User u = UserInterface.loginScreen(users);
-		
-		if(u == null) {
-			return;
-		}
-		
-		System.out.println("Welcome Back!");
-		int option = 0;
-		while(option != 3) {
-			System.out.println("You Have " + u.getBalance() + " Bananas");
-			System.out.println("1. Withdraw");
-			System.out.println("2. Deposit");
-			System.out.println("3. Log Out");
-			System.out.println("Enter Option: ");
-			option = Integer.parseInt(UserInterface.readInput());
-			
-			
-			if(option == 1) {
-				UserInterface.withdrawScreen(u);
-			}
-			else if(option == 2) {
-				UserInterface.depositScreen(u);
-			}
-			else if(option > 3) {
-				System.out.println("Invalid option. Please try again.");
-			}
-		}	
-		System.out.println("Thank you. Have a nice day! Hail Ceasar!");
-		UserInterface.closeScanner();
 	}
 	
 	/**
@@ -115,50 +83,6 @@ public class UserInterface {
 		
 		}
 		return;
-	}
-	
-	public static int adminScreen(HashMap<String, User> users) {
-		User u = UserInterface.loginScreen(users);
-		
-		if(u == null) {
-			return 0;
-		}
-		if(u.getAccess_level() != 2) {
-			System.out.println("Wrong Menu");
-			return 0;
-		}
-		
-		System.out.println("Welcome Admin " + u.getName());
-		int option = 0;
-		while(option != 5) {
-			System.out.println("1. Show all users");
-			System.out.println("2. Approve user");
-			System.out.println("3. Ban user");
-			System.out.println("4. Promote user");
-			System.out.println("5. Log out");
-			System.out.println("Enter option: ");
-			option = Integer.parseInt(UserInterface.readInput());
-			
-			switch(option) {
-				case 1:
-					UserInterface.showAllUserScreen(users);
-					break;
-				case 2:
-					UserInterface.approveUserScreen(users);
-					break;
-				case 3:
-					UserInterface.banUserScreen(users);
-					break;
-				case 4:
-					UserInterface.promoteUser();
-					break;
-				case 5:
-					break;
-				default:
-					System.out.println("Invalid input. Please try again");
-			}
-		}
-		return 0;
 	}
 	
 	public static void showAllUserScreen(HashMap<String, User> users) {

@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import com.revature.users.User;
 
-public class newUser {
+public class NewUser {
 	
 	public static int Screen(HashMap<String, User> users) {
 		String user;

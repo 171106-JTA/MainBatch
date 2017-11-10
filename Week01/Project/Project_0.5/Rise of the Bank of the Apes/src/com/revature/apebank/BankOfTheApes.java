@@ -3,8 +3,9 @@ package com.revature.apebank;
 import java.util.HashMap;
 
 import com.revature.data.ProcessData;
-import com.revature.ui.UserInterface;
-import com.revature.ui.newUser;
+import com.revature.ui.Account;
+import com.revature.ui.Admin;
+import com.revature.ui.NewUser;
 import com.revature.users.User;
 
 public class BankOfTheApes {
@@ -39,13 +40,13 @@ public class BankOfTheApes {
 		
 		switch(option) {
 			case 1:
-				UserInterface.accountScreen(users);
+				Account.Screen(users);
 				break;
 			case 2:
-				newUser.Screen(users);
+				NewUser.Screen(users);
 				break;
 			case 3:
-				UserInterface.adminScreen(users);
+				Admin.Screen(users);
 				break;
 			default:
 				System.out.println("Option not available. Please try again.");
