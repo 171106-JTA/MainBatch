@@ -1,4 +1,4 @@
-package com.revature.core.exceptions;
+package com.revature.core.exception;
 
 import com.revature.core.FieldParams;
 
