@@ -26,4 +26,29 @@ public class Account extends Info {
 	public AccountType getType() {
 		return type;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + (int) (number ^ (number >>> 32));
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Account other = (Account) obj;
+		if (number != other.number)
+			return false;
+		if (type != other.type)
+			return false;
+		return true;
+	}
 }

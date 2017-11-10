@@ -18,7 +18,7 @@ public class AccountBuilder implements BusinessObjectBuilder {
 				case CHECKING:
 					object =  new Checking(Long.parseLong(args.get("userid")), 
 										Long.parseLong(args.get("number")),
-										Float.parseFloat("total"));
+										Float.parseFloat(args.get("total")));
 					break;
 				case CREDIT:
 					object =  new Credit(Long.parseLong(args.get("userid")),
@@ -37,5 +37,4 @@ public class AccountBuilder implements BusinessObjectBuilder {
 	public boolean isValid(FieldParams args) {
 		return args != null && args.get("userid") != null && args.get("number") != null && args.get("type") != null;
 	}
-
 }

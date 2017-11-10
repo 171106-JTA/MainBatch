@@ -46,4 +46,34 @@ public class Credit extends Account {
 	public void setCreditLimit(float creditLimit) {
 		this.creditLimit = creditLimit;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Float.floatToIntBits(creditLimit);
+		result = prime * result + Float.floatToIntBits(interest);
+		result = prime * result + Float.floatToIntBits(total);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Credit other = (Credit) obj;
+		if (Float.floatToIntBits(creditLimit) != Float
+				.floatToIntBits(other.creditLimit))
+			return false;
+		if (Float.floatToIntBits(interest) != Float
+				.floatToIntBits(other.interest))
+			return false;
+		if (Float.floatToIntBits(total) != Float.floatToIntBits(other.total))
+			return false;
+		return true;
+	}
 }

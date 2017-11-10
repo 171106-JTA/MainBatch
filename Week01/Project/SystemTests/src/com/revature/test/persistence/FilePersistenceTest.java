@@ -11,6 +11,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.revature.businessobject.info.account.Account;
+import com.revature.businessobject.info.account.Checking;
+import com.revature.businessobject.info.account.Credit;
 import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.Admin;
 import com.revature.businessobject.user.Customer;
@@ -28,13 +31,16 @@ public class FilePersistenceTest {
 	static User admin;
 	static User customer;
 	static UserInfo adminInfo;
+	static Checking customerCheckingAcct;
+	static Credit customerCreditAcct;
 	static long adminId;
 	static long customerId;
 	static String adminUsername;
 	static String adminPassword;
 	static String customerUsername;
 	static String customerPassword;
-
+	static long checkingId;
+	static long creditId;
 	@BeforeClass
 	public static void setupBeforeClass() {
 		manager = FileDataManager.getManager();
@@ -45,6 +51,7 @@ public class FilePersistenceTest {
 		customerId = 42135132;
 		customerUsername = "billy";
 		customerPassword = "password";
+		checkingId = 518973822;
 	}
 	
 	@Before
@@ -55,6 +62,8 @@ public class FilePersistenceTest {
 		admin = new Admin(adminId, adminUsername, adminPassword);
 		customer = new Customer(customerId, customerUsername, customerPassword);
 		adminInfo = new UserInfo(adminId, "abc@xyz.com", "My Street and stuff", "1234567890");
+		customerCheckingAcct = new Checking(customerId, checkingId, 100.0f);
+		customerCreditAcct = new Credit(customerId, creditId, 345.0f, 10.5f, 1500.0f);
 		FilePersistence.setDirectory(System.getProperty("user.dir") + "\\data\\");
 	}
 
@@ -156,7 +165,7 @@ public class FilePersistenceTest {
 	 * Should delete all User records from system
 	 */
 	@Test
-	public void shouldRemoveAllUsersFromSystem() {
+	public void shouldRemoveAllUserRecords() {
 		// Set data
 		manager.insert(admin);
 		manager.insert(customer);
@@ -271,7 +280,7 @@ public class FilePersistenceTest {
 	}
 	
 	@Test 
-	public void shouldRemoveExistingRecordWithBusinessObject() {
+	public void shouldRemoveUserInfoWithBusinessObject() {
 		FieldParams cnds = new FieldParams();
 		Resultset resultset;
 		
@@ -285,7 +294,7 @@ public class FilePersistenceTest {
 	}
 	
 	@Test 
-	public void shouldRemoveExistingRecordWithFieldParams() {
+	public void shouldRemoveUserInfoWithFieldParams() {
 		FieldParams cnds = new FieldParams();
 		Resultset resultset;
 		
@@ -313,48 +322,247 @@ public class FilePersistenceTest {
 		assertTrue("Should have 0 records", resultset.size() == 0);
 	}
 	
+	///
+	//	ACCOUNT TESTS
+	//	
+	//	CHECKING ACCOUNTS
+	///
 	
+
+	@Test
+	public void shouldCreateNewCheckingAccountWithBusinessObject() {
+		assertEquals("Should create new checking account", 1, manager.insert(customerCheckingAcct));
+	}
 	
+	@Test
+	public void shouldCreateNewCheckingAccountWithFieldParams() {
+		FieldParams params = new FieldParams();
+		
+		// Set data;
+		params.put("userid", Long.toString(customerId));
+		params.put("number", Long.toString(checkingId));
+		params.put("total", Float.toString(100.0f));
+		params.put("type", Integer.toString(customerCheckingAcct.getType().ordinal()));
+		
+		// Perform test
+		assertEquals("Should add new account with fieldparams", 1, manager.insert("account", params));
+	}
 	
+	@Test
+	public void shouldBeAbleToGetExistingCheckingAccount() {
+		FieldParams cnds = new FieldParams();
+		Resultset resultset;
+		
+		// Set data
+		cnds.put("userid", Long.toString(customerId));
+		manager.insert(customerCheckingAcct);
+		
+		// Perform test
+		assertNotNull("Should have resultset from query", resultset = manager.select("account", cnds));
+		assertTrue("Should exist single record from query", resultset.size() == 1);
+		assertEquals(customerCheckingAcct, resultset.get(0));
+	}
 	
+	@Test
+	public void shouldBeAbleToUpdateExistingCheckingAccountRecordWithBusinessObject() {
+		Account data = new Checking(customerId, checkingId, 20.0f);
+		FieldParams cnds = new FieldParams();
+		Resultset resultset;
+		
+		// Set Data 
+		cnds.put("userid", Long.toString(customerId));
+		manager.insert(customerCheckingAcct);
+		
+		// Perform test
+		assertEquals("Should update a single account record", 1, manager.update(data));
+		assertNotNull("Should have resultset from query", resultset = manager.select("account", cnds));
+		assertTrue("Should exist single record from query", resultset.size() == 1);
+		assertFalse(customerCheckingAcct.equals(resultset.get(0)));
+		assertEquals(data, resultset.get(0));
+	}
 	
+	@Test
+	public void shouldBeAbleToUpdateExistingCheckingAccountWithFieldParams() {
+		Account data = new Checking(customerId, checkingId, 1.0f);
+		FieldParams cnds = new FieldParams();
+		FieldParams params = new FieldParams();
+		Resultset resultset;
+		
+		// Set Data 
+		cnds.put("userid", Long.toString(customerId));
+		params.put("total", Float.toString(1.0f));
+		manager.insert(customerCheckingAcct);
+		
+		// Perform test
+		assertEquals("Should update a single account record", 1, manager.update("account", cnds, params));
+		assertNotNull("Should have resultset from query", resultset = manager.select("account", cnds));
+		assertTrue("Should exist single record from query", resultset.size() == 1);
+		assertFalse(customerCheckingAcct.equals(resultset.get(0)));
+		assertEquals(data, resultset.get(0));
+	}
 	
+	@Test 
+	public void shouldRemoveCheckingAccountWithBusinessObject() {
+		FieldParams cnds = new FieldParams();
+		Resultset resultset;
+		
+		// Set data 
+		cnds.put("userid", Long.toString(customerId));
+		manager.insert(customerCheckingAcct);
+		
+		assertEquals("Should remove admin checking acct record", 1, manager.delete(customerCheckingAcct));
+		assertNotNull("Should have resultset from query", resultset = manager.select("account", cnds));
+		assertTrue("Should have 0 records", resultset.size() == 0);
+	}
 	
+	@Test 
+	public void shouldRemoveCheckingAccountWithFieldParams() {
+		FieldParams cnds = new FieldParams();
+		Resultset resultset;
+		
+		// Set data 
+		cnds.put("userid", Long.toString(customerId));
+		manager.insert(customerCheckingAcct);
+		
+		assertEquals("Should remove checking record", 1, manager.delete("account", cnds));
+		assertNotNull("Should have resultset from query", resultset = manager.select("account", cnds));
+		assertTrue("Should have 0 records", resultset.size() == 0);
+	}
 	
+	@Test
+	public void shouldRemoveAllCheckingAccountRecords() {
+		Resultset resultset;
+		
+		// Set data
+		manager.insert(customerCheckingAcct);
+		manager.insert(new Checking(41181, 512423, 1.0f));
+		
+		// Perform test
+		assertEquals("Should exist a total of 2 checking records", 2, manager.select("account", null).size());
+		assertEquals("Should remove all checking records", 2, manager.delete("account", null));
+		assertNotNull("Should have resultset from query", resultset = manager.select("account", null));
+		assertTrue("Should have 0 records", resultset.size() == 0);
+	}
 	
+	///
+	//	CREDIT ACCOUNT TESTS 
+	///
+
+	@Test
+	public void shouldCreateNewCreditAccountWithBusinessObject() {
+		assertEquals("Should create new credit account", 1, manager.insert(customerCreditAcct));
+	}
 	
+	@Test
+	public void shouldCreateNewCreditAccountWithFieldParams() {
+		FieldParams params = new FieldParams();
+		
+		// Set data;
+		params.put("userid", Long.toString(customerId));
+		params.put("number", Long.toString(checkingId));
+		params.put("total", Float.toString(100.0f));
+		params.put("type", Integer.toString(customerCheckingAcct.getType().ordinal()));
+		params.put("interest", Float.toString(10.05f));
+		params.put("creditlimit", Float.toString(1500.0f));
+		
+		// Perform test
+		assertEquals("Should add new account with fieldparams", 1, manager.insert("account", params));
+	}
 	
+	@Test
+	public void shouldBeAbleToGetExistingCreditAccount() {
+		FieldParams cnds = new FieldParams();
+		Resultset resultset;
+		
+		// Set data
+		cnds.put("userid", Long.toString(customerId));
+		manager.insert(customerCreditAcct);
+		
+		// Perform test
+		assertNotNull("Should have resultset from query", resultset = manager.select("account", cnds));
+		assertTrue("Should exist single record from query", resultset.size() == 1);
+		assertEquals(customerCreditAcct, resultset.get(0));
+	}
 	
+	@Test
+	public void shouldBeAbleToUpdateExistingCreditAccountRecordWithBusinessObject() {
+		Account data = new Credit(customerId, creditId, 20.0f, 100.0f, 1500.0f);
+		FieldParams cnds = new FieldParams();
+		Resultset resultset;
+		
+		// Set Data 
+		cnds.put("userid", Long.toString(customerId));
+		manager.insert(customerCreditAcct);
+		
+		// Perform test
+		assertEquals("Should update a single account record", 1, manager.update(data));
+		assertNotNull("Should have resultset from query", resultset = manager.select("account", cnds));
+		assertTrue("Should exist single record from query", resultset.size() == 1);
+		assertFalse(customerCreditAcct.equals(resultset.get(0)));
+		assertEquals(data, resultset.get(0));
+	}
 	
+	@Test
+	public void shouldBeAbleToUpdateExistingCreditAccountWithFieldParams() {
+		Account data = new Credit(customerId, creditId, 1.0f, customerCreditAcct.getInterest(), customerCreditAcct.getCreditLimit());
+		FieldParams cnds = new FieldParams();
+		FieldParams params = new FieldParams();
+		Resultset resultset;
+		
+		// Set Data 
+		cnds.put("userid", Long.toString(customerId));
+		params.put("total", Float.toString(1.0f));
+		manager.insert(customerCreditAcct);
+		
+		// Perform test
+		assertEquals("Should update a single account record", 1, manager.update("account", cnds, params));
+		assertNotNull("Should have resultset from query", resultset = manager.select("account", cnds));
+		assertTrue("Should exist single record from query", resultset.size() == 1);
+		assertFalse(customerCreditAcct.equals(resultset.get(0)));
+		assertEquals(data, resultset.get(0));
+	}
 	
+	@Test 
+	public void shouldRemoveCreditAccountWithBusinessObject() {
+		FieldParams cnds = new FieldParams();
+		Resultset resultset;
+		
+		// Set data 
+		cnds.put("userid", Long.toString(customerId));
+		manager.insert(customerCreditAcct);
+		
+		assertEquals("Should remove credit acct record", 1, manager.delete(customerCreditAcct));
+		assertNotNull("Should have resultset from query", resultset = manager.select("account", cnds));
+		assertTrue("Should have 0 records", resultset.size() == 0);
+	}
 	
+	@Test 
+	public void shouldRemoveCreditAccountWithFieldParams() {
+		FieldParams cnds = new FieldParams();
+		Resultset resultset;
+		
+		// Set data 
+		cnds.put("userid", Long.toString(customerId));
+		manager.insert(customerCreditAcct);
+		
+		assertEquals("Should remove credit record", 1, manager.delete("account", cnds));
+		assertNotNull("Should have resultset from query", resultset = manager.select("account", cnds));
+		assertTrue("Should have 0 records", resultset.size() == 0);
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@Test
+	public void shouldRemoveAllCreditAccountRecords() {
+		Resultset resultset;
+		
+		// Set data
+		manager.insert(customerCreditAcct);
+		manager.insert(new Credit(41181, 512423, 1.0f, 10.0f, 1500.0f));
+		
+		// Perform test
+		assertEquals("Should exist a total of 2 credit acct records", 2, manager.select("account", null).size());
+		assertEquals("Should remove all account records", 2, manager.delete("account", null));
+		assertNotNull("Should have resultset from query", resultset = manager.select("account", null));
+		assertTrue("Should have 0 records", resultset.size() == 0);
+	}
 	
 }
