@@ -19,11 +19,11 @@ public abstract class FileDataDeletor extends FileDataInserter {
 			case "user":
 			case "admin":
 			case "customer":
-				return 0;
+				return removeUser(fieldParamsFactory.getFieldParams(businessObject));
 			case "userinfo": 
-				return 0;
+				return removeUserInfo(fieldParamsFactory.getFieldParams(businessObject));
 			case "account": 
-				return 0;
+				return removeAccount(fieldParamsFactory.getFieldParams(businessObject));
 			default:
 				return -1;
 		}
@@ -36,10 +36,8 @@ public abstract class FileDataDeletor extends FileDataInserter {
 				return removeUser(cnds);
 			case "userinfo": 
 				return removeUserInfo(cnds);
-			case "checking": 
-				return removeAccount(cnds, new FieldParamsCheckingComparator());
-			case "credit": 
-				return removeAccount(cnds, new FieldParamsCreditComparator());
+			case "account": 
+				return removeAccount(cnds);
 			default:
 				return -1;
 		}
@@ -132,7 +130,7 @@ public abstract class FileDataDeletor extends FileDataInserter {
 	 * @param cnds what to remove
 	 * @return greater than 0 if records were removed
 	 */
-	private static int removeAccount(FieldParams cnds, Comparator<Object> comparator) {
+	private static int removeAccount(FieldParams cnds) {
 		List<Integer> indices;
 		Iterator<Integer> it;
 		int size = accounts.size();

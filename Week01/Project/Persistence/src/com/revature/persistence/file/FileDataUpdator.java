@@ -11,6 +11,11 @@ import com.revature.core.FieldParams;
 
 public class FileDataUpdator extends FileDataDeletor {
 	
+	/**
+	 * Updates existing record
+	 * @param businessObject must have unique identifier to update record
+	 * @return if less than or equal to then 0 failed else 1 and was successful
+	 */
 	@Override
 	public int update(BusinessObject businessObject) {
 		String clazz = businessObject.getClass().getSimpleName();
@@ -27,6 +32,13 @@ public class FileDataUpdator extends FileDataDeletor {
 		}
 	}
 
+	/**
+	 * Updates existing records
+	 * @param name data structure to update
+	 * @param cnds values data must have to perform update
+	 * @param values fields to update
+	 * @return if less than or equal to 0 then failed, else how many records were updated 
+	 */
 	@Override
 	public int update(String name, FieldParams cnds, FieldParams values) {
 		switch (name.toLowerCase()) {
@@ -99,19 +111,112 @@ public class FileDataUpdator extends FileDataDeletor {
 		return indices.size();
 	}
 
+	/**
+	 * Condition to update account is instance userid
+	 * @param info what to update 
+	 * @return 1 if updated else 0
+	 */
 	private static int updateUserInfo(UserInfo info) {
-		return 0;
+		FieldParams cnds = new FieldParams();
+		
+		// Set condition (primary key)
+		cnds.put("userid", Long.toString(info.getUserId()));
+		
+		return updateUserInfo(cnds, fieldParamsFactory.getFieldParams(info));
 	}
 	
+	/**
+	 * Attempts to update all records which meet specified conditions 
+	 * @param cnds what values userinfo needs to be updated 
+	 * @param values what to update
+	 * @return total number of records updated
+	 */
 	private static int updateUserInfo(FieldParams cnds, FieldParams values) {
-		return 0;
+		List<Integer> indices = findAllUserInfoIndex(cnds);
+		Iterator<Integer> it = indices.iterator();
+		FieldParams params;
+		int index;
+		
+		// Log update request
+		logger.debug("Attempting to update userinfo records");
+		
+		// Updates userinfo data 
+		while (it.hasNext()) {
+			// Get position
+			index = it.next();
+			
+			// Convert to FieldParams
+			params = fieldParamsFactory.getFieldParams(userInfo.get(index));
+			
+			// update values 
+			for (String key : values.keySet()) 
+				params.put(key, values.get(key));
+			
+			// update userinfo record
+			userInfo.set(index, (UserInfo)businessObjectFactory.getBusinessObject("UserInfo", values));
+		}
+		
+		// Commit changes 
+		saveUserInfoData();
+		
+		// Log commit 
+		logger.debug("Updated " + indices.size() + " userinfo records");
+		
+		return indices.size();
 	}
 	
+	/**
+	 * Condition to update account is instance userid and number (composite key)
+	 * @param acct what to update 
+	 * @return 1 if updated else 0
+	 */
 	private static int updateAccount(Account acct) {
-		return 0;
+		FieldParams cnds = new FieldParams();
+		
+		// Set condition (composite key)
+		cnds.put("id", Long.toString(acct.getUserId()));
+		cnds.put("number", Long.toString(acct.getNumber()));
+	
+		return updateAccount(cnds, fieldParamsFactory.getFieldParams(acct));
 	}
 	
+	/**
+	 * Attempts to update all records which meet specified conditions 
+	 * @param cnds what values account needs to be updated 
+	 * @param values what to update
+	 * @return total number of records updated
+	 */
 	private static int updateAccount(FieldParams cnds, FieldParams values) {
-		return 0;
+		List<Integer> indices = findAllAccountIndex(cnds);
+		Iterator<Integer> it = indices.iterator();
+		FieldParams params;
+		int index;
+		
+		// Log update request
+		logger.debug("Attempting to update account records");
+		
+		// Updates account data 
+		while (it.hasNext()) {
+			// Get position
+			index = it.next();
+			
+			// Convert to FieldParams
+			params = fieldParamsFactory.getFieldParams(accounts.get(index));
+			
+			// update values 
+			for (String key : values.keySet()) 
+				params.put(key, values.get(key));
+			
+			// update account record
+			accounts.set(index, (Account)businessObjectFactory.getBusinessObject("Account", values));
+		}
+		
+		// Commit changes 
+		saveAccountData();
+		
+		// Log commit 
+		logger.debug("Updated " + indices.size() + " account records");
+		
+		return indices.size();
 	}
 }
