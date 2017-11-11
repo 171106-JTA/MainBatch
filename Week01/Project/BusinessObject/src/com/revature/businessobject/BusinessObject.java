@@ -7,9 +7,5 @@ import java.io.Serializable;
  * @author Antony Lulciuc
  */
 public class BusinessObject implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -7615895150903957113L;
+	public static final String SESSIONID = "sessionid";
 }

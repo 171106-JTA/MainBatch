@@ -8,6 +8,7 @@ import java.util.List;
 import com.revature.businessobject.info.account.Account;
 import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.User;
+import com.revature.core.BusinessClass;
 import com.revature.core.FieldParams;
 import com.revature.core.Resultset;
 import com.revature.core.comparator.FieldParamsAccountComparator;
@@ -22,11 +23,11 @@ public abstract class FileDataQuery extends FilePersistence {
 		logger.debug("select:>" + name + " with " + cnds);
 				
 		switch (name.toLowerCase()) {
-			case "user":
+			case BusinessClass.USER:
 				return findUser(cnds);
-			case "account":
+			case BusinessClass.ACCOUNT:
 				return findAccount(cnds);
-			case "userinfo":
+			case BusinessClass.USERINFO:
 				return findUserInfo(cnds);
 			default:
 				// invalid type

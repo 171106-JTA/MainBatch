@@ -3,6 +3,9 @@ package com.revature.businessobject.info.account;
 import com.revature.businessobject.info.Info;
 
 public class Account extends Info {
+	public static final String NUMBER = "number";
+	public static final String TYPE = "type";
+	
 	private long number;
 	private AccountType type;
 

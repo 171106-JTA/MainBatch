@@ -1,6 +1,6 @@
 package com.revature.processor;
 
-import com.revature.core.FieldParams;
+import com.revature.core.Request;
 import com.revature.core.Resultset;
 import com.revature.core.exception.RequestException;
 
@@ -10,10 +10,7 @@ import com.revature.core.exception.RequestException;
  */
 public class BankingProcessor implements Processorable {
 
-	@Override
-	public Resultset process(FieldParams requestParams) throws RequestException {
+	public Resultset process(Request request) throws RequestException {
 		return null;
 	}
-
-	
 }

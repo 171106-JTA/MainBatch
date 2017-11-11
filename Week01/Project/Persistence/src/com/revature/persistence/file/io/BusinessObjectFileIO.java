@@ -1,5 +1,6 @@
 package com.revature.persistence.file.io;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -10,6 +11,7 @@ import java.io.ObjectOutputStream;
 import org.apache.log4j.Logger;
 
 import com.revature.businessobject.BusinessObject;
+import com.revature.businessobject.user.*;
 
 public class BusinessObjectFileIO {
 	// Get class logger 
@@ -81,13 +83,12 @@ public class BusinessObjectFileIO {
 		try {
 			// Attempt file read 
 			result = ois != null ? (BusinessObject)ois.readObject() : null;
-			logger.debug("fread data from file:>" + fileName);
+			logger.debug("read data from file:>" + fileName);
 		} catch (ClassNotFoundException e) {
 			logger.warn("failed to read data from file:>" + fileName + " message:>" + e.getMessage());
 			e.printStackTrace();
 		} catch (IOException e) {
 			logger.warn("failed to read data from file:>" + fileName + " message:>" + e.getMessage());
-			e.printStackTrace();
 		}
 
 		return result;
@@ -120,14 +121,14 @@ public class BusinessObjectFileIO {
 			if (oos != null) {
 				oos.close();
 				oos = null;
-				logger.debug("Closed object read stream for file:>" + fileName);
+				logger.debug("Closed object write stream for file:>" + fileName);
 			}
 			
 			// If Read Stream opened
 			if (ois != null) {
 				ois.close();
 				ois = null;
-				logger.debug("Closed object write stream for file:>" + fileName);
+				logger.debug("Closed object read stream for file:>" + fileName);
 			}
 		} catch (IOException e) {
 			logger.error("Failed to closed object stream for file:>" + fileName + " message:>" + e.getMessage());

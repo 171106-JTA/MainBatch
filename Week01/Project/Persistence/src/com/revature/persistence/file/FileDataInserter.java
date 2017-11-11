@@ -4,6 +4,7 @@ import com.revature.businessobject.BusinessObject;
 import com.revature.businessobject.info.account.Account;
 import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.User;
+import com.revature.core.BusinessClass;
 import com.revature.core.FieldParams;
 
 public abstract class FileDataInserter extends FileDataQuery {
@@ -13,15 +14,15 @@ public abstract class FileDataInserter extends FileDataQuery {
 		String clazz = businessObject.getClass().getSimpleName();
 		
 		switch (clazz.toLowerCase()) {
-			case "user":
-			case "admin":
-			case "customer":
+			case BusinessClass.USER:
+			case BusinessClass.ADMIN:
+			case BusinessClass.CUSTOMER:
 				return addUser((User)businessObject);
-			case "userinfo":
+			case BusinessClass.USERINFO:
 				return addUserInfo((UserInfo)businessObject);
-			case "account":
-			case "credit":
-			case "checking":
+			case BusinessClass.ACCOUNT:
+			case BusinessClass.CREDIT:
+			case BusinessClass.CHECKING:
 				return addAccount((Account)businessObject);
 			default:
 				return 0;
@@ -31,11 +32,11 @@ public abstract class FileDataInserter extends FileDataQuery {
 	@Override
 	public int insert(String name, FieldParams values) {
 		switch (name.toLowerCase()) {
-			case "user":
+			case BusinessClass.USER:
 				return addUser((User)businessObjectFactory.getBusinessObject(name, values));
-			case "userinfo":
+			case BusinessClass.USERINFO:
 				return addUserInfo((UserInfo)businessObjectFactory.getBusinessObject(name, values));
-			case "account":
+			case BusinessClass.ACCOUNT:
 				return addAccount((Account)businessObjectFactory.getBusinessObject(name, values));
 			default:
 				return 0;

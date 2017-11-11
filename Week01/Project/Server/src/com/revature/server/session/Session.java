@@ -1,40 +1,43 @@
 package com.revature.server.session;
 
 import com.revature.businessobject.user.User;
-import com.revature.businessobject.user.UserRole;
+import com.revature.businessobject.user.Checkpoint;
 import com.revature.core.FieldParams;
+import com.revature.core.Request;
 import com.revature.core.Resultset;
 import com.revature.core.exception.RequestException;
 import com.revature.server.Server;
 
 public final class Session extends Thread {
 	private User user;
-	private FieldParams requestParams;
+	private Request request;
 	private Resultset response;
 	private RequestException exception;
 	private boolean ready;
 	private boolean error;
+	private boolean runThread;
 	
 	public Session(User user) {
 		super();
 		this.user = user;
 		this.ready = true;
+		this.runThread = true;
 	}
 	
-	public boolean hasCheckpoint(UserRole checkpoint) {
-		return user == null ? false : user.getRole() == checkpoint;
+	public boolean hasCheckpoint(Checkpoint checkpoint) {
+		return user == null ? false : user.getCheckpoint() == checkpoint;
 	}
 	
 	@Override
 	public void run() {
-		while (true) {
-			if (!this.ready && this.requestParams != null) {
+		while (runThread) {
+			if (!this.ready && this.request != null) {
 				try {
 					// Set what user has access to
-					requestParams.put("checkpoint", Integer.toString(user.getRole().ordinal()));
+					request.setCheckpoint(user.getCheckpoint());
 					
 					// Make request 
-					response = Server.router.handleRequest(requestParams);
+					response = Server.router.handleRequest(request);
 				} catch (RequestException e) {
 					// Cache exception and set error flag to true
 					exception = e;
@@ -54,6 +57,14 @@ public final class Session extends Thread {
 		}
 	}
 	
+	public void kill() {
+		runThread = false;
+	}
+	
+	public Checkpoint getCheckpoint() {
+		return user.getCheckpoint();
+	}
+	
 	public boolean isResponseReady() {
 		return ready;
 	}
@@ -66,17 +77,17 @@ public final class Session extends Thread {
 		return exception;
 	}
 	
-	public FieldParams getRequestParams() {
-		return requestParams;
+	public Request getRequestParams() {
+		return request;
 	}
 	
 	public Resultset getResponse() {
 		return response;
 	}
 	
-	public synchronized void setRequestParams(FieldParams requestParams) {
+	public synchronized void setRequestParams(Request request) {
 		if (this.ready) {
-			this.requestParams = requestParams;
+			this.request = request;
 			this.response = null;
 			this.exception = null;
 			this.error = false;

@@ -7,6 +7,7 @@ import com.revature.businessobject.BusinessObject;
 import com.revature.businessobject.info.account.Account;
 import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.User;
+import com.revature.core.BusinessClass;
 import com.revature.core.FieldParams;
 
 public class FileDataUpdator extends FileDataDeletor {
@@ -21,15 +22,15 @@ public class FileDataUpdator extends FileDataDeletor {
 		String clazz = businessObject.getClass().getSimpleName();
 		
 		switch (clazz.toLowerCase()) {
-			case "user":
-			case "admin":
-			case "customer":
+			case BusinessClass.USER:
+			case BusinessClass.ADMIN:
+			case BusinessClass.CUSTOMER:
 				return updateUser((User)businessObject);
-			case "userinfo":
+			case BusinessClass.USERINFO:
 				return updateUserInfo((UserInfo)businessObject);
-			case "account":
-			case "checking":
-			case "credit":
+			case BusinessClass.ACCOUNT:
+			case BusinessClass.CREDIT:
+			case BusinessClass.CHECKING:
 				return updateAccount((Account)businessObject);
 			default:
 				return -1;
@@ -46,11 +47,11 @@ public class FileDataUpdator extends FileDataDeletor {
 	@Override
 	public int update(String name, FieldParams cnds, FieldParams values) {
 		switch (name.toLowerCase()) {
-			case "user":
+			case BusinessClass.USER:
 				return updateUser(cnds, values);
-			case "userinfo":
+			case BusinessClass.USERINFO:
 				return updateUserInfo(cnds, values);
-			case "account":
+			case BusinessClass.ACCOUNT:
 				return updateAccount(cnds, values);
 			default:
 				return -1;
@@ -103,7 +104,7 @@ public class FileDataUpdator extends FileDataDeletor {
 				params.put(key, values.get(key));
 			
 			// update users record
-			users.set(index, (User)businessObjectFactory.getBusinessObject("User", params));
+			users.set(index, (User)businessObjectFactory.getBusinessObject(BusinessClass.USER, params));
 		}
 		
 		// Commit changes 
@@ -157,7 +158,7 @@ public class FileDataUpdator extends FileDataDeletor {
 				params.put(key, values.get(key));
 			
 			// update userinfo record
-			userInfo.set(index, (UserInfo)businessObjectFactory.getBusinessObject("UserInfo", params));
+			userInfo.set(index, (UserInfo)businessObjectFactory.getBusinessObject(BusinessClass.USERINFO, params));
 		}
 		
 		// Commit changes 
@@ -212,7 +213,7 @@ public class FileDataUpdator extends FileDataDeletor {
 				params.put(key, values.get(key));
 			
 			// update account record
-			accounts.set(index, (Account)businessObjectFactory.getBusinessObject("Account", params));
+			accounts.set(index, (Account)businessObjectFactory.getBusinessObject(BusinessClass.ACCOUNT, params));
 		}
 		
 		// Commit changes 

@@ -1,9 +1,13 @@
 package com.revature.app;
 import java.util.Scanner;
 
-import com.revature.app.view.*;
-import com.revature.businessobject.user.UserRole;
+import com.revature.app.view.AdminView;
+import com.revature.app.view.CustomerView;
+import com.revature.businessobject.user.Checkpoint;
+import com.revature.businessobject.user.User;
 import com.revature.core.FieldParams;
+import com.revature.core.Request;
+import com.revature.core.Resultset;
 import com.revature.server.Server;
 
 public class MyBank {
@@ -13,29 +17,47 @@ public class MyBank {
 	public static void main(String[] args) {
 		String input = "";
 
-		printMenu();
+		// Start Server
+		server.start();
 		
+		Menu.printMenu();
+		
+		// Run application until user exits 
 		while (!input.toLowerCase().equals("exit")) {
-			input = getInput("enter:>");
+			input = Menu.getInput("enter:>");
 			
+			// Handle possible inputs by user 
 			switch (input.toLowerCase()) {
 				case "new":
 					break;
 				case "login":
 					login();
+					break;
+				case "exit":
+					break;
+				default:
+					System.out.println(input + " is unknown input!");
 			}
 			
+			// Data is non-null value on successful login
 			if (data != null) {
+				// Start application based on user checkpoints
 				start();
+				
+				// Terminate session when done 
+				server.kill(Integer.parseInt(data.get(User.SESSIONID)));
 				
 				// reset data 
 				data = null;
 			}
 		}
+		
+		// Tell server to stop when app complete
+		server.kill();
 	}
 	
 	public static void start() {
-		switch (UserRole.values()[Integer.parseInt(data.get("role"))]) {
+		switch (Checkpoint.values()[Integer.parseInt(data.get(User.CHECKPOINT))]) {
 			case ADMIN:
 				new AdminView().run();
 				break;
@@ -48,8 +70,8 @@ public class MyBank {
 	}
 	
 	public static void login() {
-		String username = getInput("Username:>");
-		String password = getInput("Password:>");
+		String username = Menu.getInput("Username:>");
+		String password = Menu.getInput("Password:>");
 		
 		try {	
 			data = server.login(username, password);
@@ -57,31 +79,6 @@ public class MyBank {
 			System.out.println("error:>" + e.getMessage());
 			data = null;
 		}
-	}
-	
-	public static String getInput(String prefix) {
-		Scanner stream = new Scanner(System.in);
-		
-		// Print content before input
-		System.out.print(prefix);
-		
-		// get input
-		return stream.nextLine();
-	}
-	
-	public static void printMenu() {
-		System.out.println("===============================================================");
-		System.out.println("====================== WELCOME TO MYBANK ======================");
-		System.out.println("===============================================================");
-		System.out.println("= Options, type:                                              =");
-		System.out.println("=                                                             =");
-		System.out.println("=   - new - to create new account                             =");
-		System.out.println("=                                                             =");
-		System.out.println("=   - login - signing for existing users                      =");
-		System.out.println("=                                                             =");
-		System.out.println("=   - exit - to quit the application                          =");
-		System.out.println("=                                                             =");
-		System.out.println("===============================================================");
 	}
 	
 }

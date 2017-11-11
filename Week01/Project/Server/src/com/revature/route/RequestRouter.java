@@ -1,12 +1,11 @@
 package com.revature.route;
 
-import com.revature.core.FieldParams;
+import com.revature.core.Request;
 import com.revature.core.Resultset;
 import com.revature.core.exception.RequestException;
 import com.revature.processor.BankingProcessor;
 import com.revature.processor.Processorable;
 import com.revature.processor.UserProcessor;
-import com.revature.processor.handler.*;
 
 public class RequestRouter implements Routeable {
 	
@@ -15,14 +14,14 @@ public class RequestRouter implements Routeable {
 	private static Processorable userProc = new UserProcessor();
 	
 	@Override
-	public Resultset handleRequest(FieldParams requestParams) throws RequestException {
-		switch (requestParams.get("route")) {
+	public Resultset handleRequest(Request request) throws RequestException {
+		switch (request.getRoute()) {
 			case "BANKING": 
-				return banking.process(requestParams);
+				return banking.process(request);
 			case "USER":
-				return userProc.process(requestParams);
+				return userProc.process(request);
 			default:
-				throw new RequestException(requestParams, 0, "Unknown route!");
+				throw new RequestException(request, "Route=[\'" + request.getRoute() + "\'] is unknown!");
 		}
 	}
 

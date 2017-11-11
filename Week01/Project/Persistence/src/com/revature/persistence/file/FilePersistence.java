@@ -50,6 +50,33 @@ public abstract class FilePersistence implements Persistenceable {
 	protected static List<UserInfo> userInfo = new LinkedList<>();
 	protected static List<Account> accounts = new LinkedList<>();
 
+	// Initialization flag
+	private static boolean initialized = false;
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public void setup(Object data) {
+		if (!initialized) {
+			if (data == null) {
+				load();
+				initialized = users.size() > 0;
+			} else {	
+				initialized = true;
+				
+				// Free all resources 
+				deleteData();
+				
+				// If we have any startup data on initialization 
+				if (data instanceof List<?> && ((List<?>)data).get(0) instanceof BusinessObject) {
+					for (BusinessObject item : ((List<BusinessObject>)data)) {
+						insert(item);
+					}
+				}
+			}
+		}
+	}
+	
+	
 	/**
 	 * @return path where system files are stored
 	 */
@@ -75,16 +102,25 @@ public abstract class FilePersistence implements Persistenceable {
 		clean();
 		
 		// Load user data
-		if ((data = loadData(directory + USERFILE)) != null)
-			users.addAll(Arrays.asList((User[])data));
+		if ((data = loadData(directory + USERFILE)) != null) {
+			for (Object item : data) {
+				users.add((User)item);
+			}
+		}
 		
 		// Load user info data 
-		if ((data = loadData(directory + USERINFOFILE)) != null)
-			userInfo.addAll(Arrays.asList((UserInfo[])data));
+		if ((data = loadData(directory + USERINFOFILE)) != null) {
+			for (Object item : data) {
+				userInfo.add((UserInfo)item);
+			}
+		}
 		
 		// Load account data 
-		if ((data = loadData(directory + ACCOUNTFILE)) != null)
-			accounts.addAll(Arrays.asList((Account[])data));
+		if ((data = loadData(directory + ACCOUNTFILE)) != null) {
+			for (Object item : data) {
+				accounts.add((Account)item);
+			}
+		}
 	}
 	
 	public static void deleteData() {

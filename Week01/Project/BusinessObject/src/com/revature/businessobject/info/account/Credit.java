@@ -1,6 +1,10 @@
 package com.revature.businessobject.info.account;
 
 public class Credit extends Account {
+	public static final String TOTAL = "total";
+	public static final String INTEREST = "insterest";
+	public static final String CREDITLIMIT = "creditlimit";
+	
 	private float total;
 	private float interest;
 	private float creditLimit;

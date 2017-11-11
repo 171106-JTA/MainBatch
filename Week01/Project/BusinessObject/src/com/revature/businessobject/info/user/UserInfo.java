@@ -3,6 +3,10 @@ package com.revature.businessobject.info.user;
 import com.revature.businessobject.info.Info;
 
 public class UserInfo extends Info {
+	public static final String EMAIL = "email";
+	public static final String ADDRESS = "address";
+	public static final String PHONENUMBER = "phonenumber";
+	
 	private String email;
 	private String address;
 	private String phonenumber;

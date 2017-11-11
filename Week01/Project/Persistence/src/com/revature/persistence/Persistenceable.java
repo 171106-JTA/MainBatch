@@ -1,5 +1,7 @@
 package com.revature.persistence;
 
+import java.util.List;
+
 import com.revature.businessobject.BusinessObject;
 import com.revature.core.FieldParams;
 import com.revature.core.Resultset;
@@ -9,6 +11,8 @@ import com.revature.core.Resultset;
  * @author Antony Lulciuc
  */
 public interface Persistenceable {
+	void setup(Object data);
+	
 	/**
 	 * Acquires BusinessObject which meets the conditions supplied by the second parameter
 	 * @param name data structure we wish to perform query on

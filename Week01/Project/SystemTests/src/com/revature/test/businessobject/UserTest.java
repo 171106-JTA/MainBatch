@@ -33,8 +33,8 @@ public class UserTest {
 	 */
 	@Test
 	public void shouldCreateUserWithAdminRole() {
-		User user = new User(id, username, password, UserRole.ADMIN);
-		assertEquals("Should get handle to list of business objects", UserRole.ADMIN, user.getRole());
+		User user = new User(id, username, password, Checkpoint.ADMIN);
+		assertEquals("Should get handle to list of business objects", Checkpoint.ADMIN, user.getCheckpoint());
 	}
 	
 	/**
@@ -42,8 +42,8 @@ public class UserTest {
 	 */
 	@Test
 	public void shouldCreateUserWithCustomerRole() {
-		User user = new User(id, username, password, UserRole.CUSTOMER);
-		assertEquals("User role should be customer", UserRole.CUSTOMER, user.getRole());
+		User user = new User(id, username, password, Checkpoint.CUSTOMER);
+		assertEquals("User role should be customer", Checkpoint.CUSTOMER, user.getCheckpoint());
 	}
 	
 	/**
@@ -51,7 +51,7 @@ public class UserTest {
 	 */
 	@Test
 	public void shouldGetCorrectUserId() {
-		User user = new User(id, username, password, UserRole.ADMIN);
+		User user = new User(id, username, password, Checkpoint.ADMIN);
 		assertEquals("User id should be " + id, user.getId(), id);
 	}
 	
@@ -61,7 +61,7 @@ public class UserTest {
 	@Test
 	public void customerInstanceShouldHaveCustomerRole() {
 		Customer customer = new Customer(id, username, password);
-		assertEquals("Customer instance should have customer role", UserRole.CUSTOMER, customer.getRole());
+		assertEquals("Customer instance should have customer role", Checkpoint.CUSTOMER, customer.getCheckpoint());
 	}
 	
 	/**
@@ -70,6 +70,6 @@ public class UserTest {
 	@Test
 	public void adminInstanceShouldHaveAdminRole() {
 		Admin admin = new Admin(id, username, password);
-		assertEquals("Administrator instance should have admin. role", UserRole.ADMIN, admin.getRole());
+		assertEquals("Administrator instance should have admin. role", Checkpoint.ADMIN, admin.getCheckpoint());
 	}
 }

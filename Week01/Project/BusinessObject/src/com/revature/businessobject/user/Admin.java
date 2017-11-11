@@ -8,6 +8,6 @@ public class Admin extends User {
 	 * @param password account password
 	 */
 	public Admin(long id, String username, String password) {
-		super(id, username, password, UserRole.ADMIN);
+		super(id, username, password, Checkpoint.ADMIN);
 	}
 }

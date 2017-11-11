@@ -1,6 +1,8 @@
 package com.revature.businessobject.info.account;
 
 public class Checking extends Account {
+	public static final String TOTAL = "total";
+	
 	private float total;
 	
 	public Checking(long userId, long number, float total) {

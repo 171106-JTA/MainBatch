@@ -18,6 +18,7 @@ import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.Admin;
 import com.revature.businessobject.user.Customer;
 import com.revature.businessobject.user.User;
+import com.revature.core.BusinessClass;
 import com.revature.core.FieldParams;
 import com.revature.core.Resultset;
 import com.revature.persistence.file.FileDataManager;
@@ -103,11 +104,11 @@ public class FilePersistenceTest {
 	@Test
 	public void shouldCreateNewAdminUserUsingFieldParams() {
 		// Set data
-		values.put("id", Long.toString(adminId));
-		values.put("role", Integer.toString(admin.getRole().ordinal()));
+		values.put(User.ID, Long.toString(adminId));
+		values.put(User.CHECKPOINT, Integer.toString(admin.getCheckpoint().ordinal()));
 		
 		// Perform test
-		assertEquals("Should add admin with", 1, manager.insert("User", values));
+		assertEquals("Should add admin with", 1, manager.insert(BusinessClass.USER, values));
 	}
 	
 	/**
@@ -116,11 +117,11 @@ public class FilePersistenceTest {
 	@Test
 	public void shouldBeAbleToGetExistingUser() {
 		// Set condition to pull from manager
-		conditions.put("id", Long.toString(adminId));
+		conditions.put(User.ID, Long.toString(adminId));
 		manager.insert(admin);
 		
 		// Perform test
-		assertNotNull("Should get handle to list of business objects", resultset = manager.select("User", conditions));
+		assertNotNull("Should get handle to list of business objects", resultset = manager.select(BusinessClass.USER, conditions));
 		assertEquals("Should have one record in resultset", 1, resultset.size());
 		assertTrue("Record should be newly created admin", admin.equals(resultset.get(0)));
 	}
@@ -133,12 +134,12 @@ public class FilePersistenceTest {
 		User demote = new Customer(adminId, adminUsername, adminPassword);
 		
 		// Set data
-		conditions.put("id", Long.toString(adminId));
+		conditions.put(User.ID, Long.toString(adminId));
 		manager.insert(admin);
 		
 		// Update account (demote to customer)
 		assertEquals("Should demote admin account to customer", 1, manager.update(demote));
-		assertNotNull("Should be able to get updated record", resultset = manager.select("User", conditions));
+		assertNotNull("Should be able to get updated record", resultset = manager.select(BusinessClass.USER, conditions));
 		assertEquals("Should have one record in resultset", 1, resultset.size());
 		assertTrue("Record in system should reflect changes", demote.equals(resultset.get(0)));
 	}
@@ -150,13 +151,13 @@ public class FilePersistenceTest {
 	public void shouldUpdateUserByFieldParams() {
 		User demote = new Customer(adminId, adminUsername, adminPassword);
 		// Set data
-		conditions.put("id", Long.toString(adminId));
-		values.put("role", Integer.toString(demote.getRole().ordinal()));
+		conditions.put(User.ID, Long.toString(adminId));
+		values.put(User.CHECKPOINT, Integer.toString(demote.getCheckpoint().ordinal()));
 		manager.insert(admin);
 		
 		// Update Account
-		assertEquals("Should demote admin account to customer", 1, manager.update("User", conditions, values));
-		assertNotNull("Should be able to get updated record", resultset = manager.select("User", conditions));
+		assertEquals("Should demote admin account to customer", 1, manager.update(BusinessClass.USER, conditions, values));
+		assertNotNull("Should be able to get updated record", resultset = manager.select(BusinessClass.USER, conditions));
 		assertEquals("Should have one record in resultset", 1, resultset.size());
 		assertTrue("Record in system should reflect changes", demote.equals(resultset.get(0)));
 	}
@@ -171,8 +172,8 @@ public class FilePersistenceTest {
 		manager.insert(customer);
 		
 		// Perform test
-		assertEquals("Should all users from system (2 users)", 2, manager.delete("User", null));
-		assertEquals("Should have 0 users in system", 0, manager.select("User", null).size());
+		assertEquals("Should all users from system (2 users)", 2, manager.delete(BusinessClass.USER, null));
+		assertEquals("Should have 0 users in system", 0, manager.select(BusinessClass.USER, null).size());
 	}
 	
 	/**
@@ -193,11 +194,11 @@ public class FilePersistenceTest {
 	@Test
 	public void shouldRemoveUserByFieldParams() {
 		// Set data
-		conditions.put("id", Long.toString(adminId));
+		conditions.put(User.ID, Long.toString(adminId));
 		manager.insert(admin);
 		
 		// Perform test
-		assertEquals("Should delete admin account", 1, manager.delete("User", conditions));
+		assertEquals("Should delete admin account", 1, manager.delete(BusinessClass.USER, conditions));
 	}
 	
 	///
@@ -214,13 +215,13 @@ public class FilePersistenceTest {
 		FieldParams params = new FieldParams();
 		
 		// Set data
-		params.put("userid", Long.toString(adminId));
-		params.put("email", "abc@xyz.com");
-		params.put("address", "My Street and Stuff");
-		params.put("pnonenumber", "1234567890");
+		params.put(UserInfo.USERID, Long.toString(adminId));
+		params.put(UserInfo.EMAIL, "abc@xyz.com");
+		params.put(UserInfo.ADDRESS, "My Street and Stuff");
+		params.put(UserInfo.PHONENUMBER, "1234567890");
 		
 		// Test
-		assertEquals("Should create UserInfo record", 1, manager.insert("userinfo", params));
+		assertEquals("Should create UserInfo record", 1, manager.insert(BusinessClass.USERINFO, params));
 	}
 	
 	@Test
@@ -229,11 +230,11 @@ public class FilePersistenceTest {
 		Resultset resultset;
 		
 		// Set data 
-		cnds.put("userid", Long.toString(adminId));
+		cnds.put(UserInfo.USERID, Long.toString(adminId));
 		manager.insert(adminInfo);
 		
 		// Perform test
-		assertNotNull("Should get resultset for userinfo query", resultset = manager.select("userinfo", cnds));
+		assertNotNull("Should get resultset for userinfo query", resultset = manager.select(BusinessClass.USERINFO, cnds));
 		assertTrue("Should exist single record from query", resultset.size() == 1);
 		assertEquals(adminInfo, resultset.get(0));
 	}
@@ -245,12 +246,12 @@ public class FilePersistenceTest {
 		Resultset resultset;
 		
 		// Set data
-		cnds.put("userid", Long.toString(adminId));
+		cnds.put(UserInfo.USERID, Long.toString(adminId));
 		manager.insert(adminInfo);
 		
 		// Perform test
 		assertEquals("Should update a single userinfo record", 1, manager.update(data));
-		assertNotNull("Should have resultset from query", resultset = manager.select("userinfo", cnds));
+		assertNotNull("Should have resultset from query", resultset = manager.select(BusinessClass.USERINFO, cnds));
 		assertTrue("Should exist single record from query", resultset.size() == 1);
 		assertFalse(adminInfo.equals(resultset.get(0)));
 		assertEquals(data, resultset.get(0));
@@ -264,16 +265,16 @@ public class FilePersistenceTest {
 		FieldParams cnds = new FieldParams();
 		
 		// Set data
-		cnds.put("userid", Long.toString(adminId));
-		params.put("email", "new_email@xyz.com");
-		params.put("address", "new place dr. something");
-		params.put("phonenumber", "0987654321");
+		cnds.put(UserInfo.USERID, Long.toString(adminId));
+		params.put(UserInfo.EMAIL, "new_email@xyz.com");
+		params.put(UserInfo.ADDRESS, "new place dr. something");
+		params.put(UserInfo.PHONENUMBER, "0987654321");
 		manager.insert(adminInfo);
 		
 		
 		// Perform test
-		assertEquals("Should update a single userinfo record", 1, manager.update("userinfo", cnds, params));
-		assertNotNull("Should have resultset from query", resultset = manager.select("userinfo", cnds));
+		assertEquals("Should update a single userinfo record", 1, manager.update(BusinessClass.USERINFO, cnds, params));
+		assertNotNull("Should have resultset from query", resultset = manager.select(BusinessClass.USERINFO, cnds));
 		assertTrue("Should exist single record from query", resultset.size() == 1);
 		assertFalse(adminInfo.equals(resultset.get(0)));
 		assertEquals(data, resultset.get(0));
@@ -285,11 +286,11 @@ public class FilePersistenceTest {
 		Resultset resultset;
 		
 		// Set data 
-		cnds.put("userid", Long.toString(adminId));
+		cnds.put(UserInfo.USERID, Long.toString(adminId));
 		manager.insert(adminInfo);
 		
 		assertEquals("Should remove admin userinfo record", 1, manager.delete(adminInfo));
-		assertNotNull("Should have resultset from query", resultset = manager.select("userinfo", cnds));
+		assertNotNull("Should have resultset from query", resultset = manager.select(BusinessClass.USERINFO, cnds));
 		assertTrue("Should have 0 records", resultset.size() == 0);
 	}
 	
@@ -299,11 +300,11 @@ public class FilePersistenceTest {
 		Resultset resultset;
 		
 		// Set data 
-		cnds.put("userid", Long.toString(adminId));
+		cnds.put(UserInfo.USERID, Long.toString(adminId));
 		manager.insert(adminInfo);
 		
-		assertEquals("Should remove admin userinfo record", 1, manager.delete("userinfo", cnds));
-		assertNotNull("Should have resultset from query", resultset = manager.select("userinfo", cnds));
+		assertEquals("Should remove admin userinfo record", 1, manager.delete(BusinessClass.USERINFO, cnds));
+		assertNotNull("Should have resultset from query", resultset = manager.select(BusinessClass.USERINFO, cnds));
 		assertTrue("Should have 0 records", resultset.size() == 0);
 	}
 	
@@ -316,9 +317,9 @@ public class FilePersistenceTest {
 		manager.insert(new UserInfo(customerId, "me@people.com", "cardboard box", ""));
 		
 		// Perform test
-		assertEquals("Should exist a total of 2 userinfo records", 2, manager.select("userinfo", null).size());
-		assertEquals("Should remove all userinfo records", 2, manager.delete("userinfo", null));
-		assertNotNull("Should have resultset from query", resultset = manager.select("userinfo", null));
+		assertEquals("Should exist a total of 2 userinfo records", 2, manager.select(BusinessClass.USERINFO, null).size());
+		assertEquals("Should remove all userinfo records", 2, manager.delete(BusinessClass.USERINFO, null));
+		assertNotNull("Should have resultset from query", resultset = manager.select(BusinessClass.USERINFO, null));
 		assertTrue("Should have 0 records", resultset.size() == 0);
 	}
 	
@@ -339,13 +340,13 @@ public class FilePersistenceTest {
 		FieldParams params = new FieldParams();
 		
 		// Set data;
-		params.put("userid", Long.toString(customerId));
-		params.put("number", Long.toString(checkingId));
-		params.put("total", Float.toString(100.0f));
-		params.put("type", Integer.toString(customerCheckingAcct.getType().ordinal()));
+		params.put(Checking.USERID, Long.toString(customerId));
+		params.put(Checking.NUMBER, Long.toString(checkingId));
+		params.put(Checking.TOTAL, Float.toString(100.0f));
+		params.put(Checking.TYPE, Integer.toString(customerCheckingAcct.getType().ordinal()));
 		
 		// Perform test
-		assertEquals("Should add new account with fieldparams", 1, manager.insert("account", params));
+		assertEquals("Should add new account with fieldparams", 1, manager.insert(BusinessClass.ACCOUNT, params));
 	}
 	
 	@Test
@@ -354,11 +355,11 @@ public class FilePersistenceTest {
 		Resultset resultset;
 		
 		// Set data
-		cnds.put("userid", Long.toString(customerId));
+		cnds.put(Checking.USERID, Long.toString(customerId));
 		manager.insert(customerCheckingAcct);
 		
 		// Perform test
-		assertNotNull("Should have resultset from query", resultset = manager.select("account", cnds));
+		assertNotNull("Should have resultset from query", resultset = manager.select(BusinessClass.ACCOUNT, cnds));
 		assertTrue("Should exist single record from query", resultset.size() == 1);
 		assertEquals(customerCheckingAcct, resultset.get(0));
 	}
@@ -370,12 +371,12 @@ public class FilePersistenceTest {
 		Resultset resultset;
 		
 		// Set Data 
-		cnds.put("userid", Long.toString(customerId));
+		cnds.put(Checking.USERID, Long.toString(customerId));
 		manager.insert(customerCheckingAcct);
 		
 		// Perform test
 		assertEquals("Should update a single account record", 1, manager.update(data));
-		assertNotNull("Should have resultset from query", resultset = manager.select("account", cnds));
+		assertNotNull("Should have resultset from query", resultset = manager.select(BusinessClass.ACCOUNT, cnds));
 		assertTrue("Should exist single record from query", resultset.size() == 1);
 		assertFalse(customerCheckingAcct.equals(resultset.get(0)));
 		assertEquals(data, resultset.get(0));
@@ -389,13 +390,13 @@ public class FilePersistenceTest {
 		Resultset resultset;
 		
 		// Set Data 
-		cnds.put("userid", Long.toString(customerId));
-		params.put("total", Float.toString(1.0f));
+		cnds.put(Checking.USERID, Long.toString(customerId));
+		params.put(Checking.TOTAL, Float.toString(1.0f));
 		manager.insert(customerCheckingAcct);
 		
 		// Perform test
-		assertEquals("Should update a single account record", 1, manager.update("account", cnds, params));
-		assertNotNull("Should have resultset from query", resultset = manager.select("account", cnds));
+		assertEquals("Should update a single account record", 1, manager.update(BusinessClass.ACCOUNT, cnds, params));
+		assertNotNull("Should have resultset from query", resultset = manager.select(BusinessClass.ACCOUNT, cnds));
 		assertTrue("Should exist single record from query", resultset.size() == 1);
 		assertFalse(customerCheckingAcct.equals(resultset.get(0)));
 		assertEquals(data, resultset.get(0));
@@ -407,11 +408,11 @@ public class FilePersistenceTest {
 		Resultset resultset;
 		
 		// Set data 
-		cnds.put("userid", Long.toString(customerId));
+		cnds.put(Checking.USERID, Long.toString(customerId));
 		manager.insert(customerCheckingAcct);
 		
 		assertEquals("Should remove admin checking acct record", 1, manager.delete(customerCheckingAcct));
-		assertNotNull("Should have resultset from query", resultset = manager.select("account", cnds));
+		assertNotNull("Should have resultset from query", resultset = manager.select(BusinessClass.ACCOUNT, cnds));
 		assertTrue("Should have 0 records", resultset.size() == 0);
 	}
 	
@@ -421,11 +422,11 @@ public class FilePersistenceTest {
 		Resultset resultset;
 		
 		// Set data 
-		cnds.put("userid", Long.toString(customerId));
+		cnds.put(Checking.USERID, Long.toString(customerId));
 		manager.insert(customerCheckingAcct);
 		
-		assertEquals("Should remove checking record", 1, manager.delete("account", cnds));
-		assertNotNull("Should have resultset from query", resultset = manager.select("account", cnds));
+		assertEquals("Should remove checking record", 1, manager.delete(BusinessClass.ACCOUNT, cnds));
+		assertNotNull("Should have resultset from query", resultset = manager.select(BusinessClass.ACCOUNT, cnds));
 		assertTrue("Should have 0 records", resultset.size() == 0);
 	}
 	
@@ -438,9 +439,9 @@ public class FilePersistenceTest {
 		manager.insert(new Checking(41181, 512423, 1.0f));
 		
 		// Perform test
-		assertEquals("Should exist a total of 2 checking records", 2, manager.select("account", null).size());
-		assertEquals("Should remove all checking records", 2, manager.delete("account", null));
-		assertNotNull("Should have resultset from query", resultset = manager.select("account", null));
+		assertEquals("Should exist a total of 2 checking records", 2, manager.select(BusinessClass.ACCOUNT, null).size());
+		assertEquals("Should remove all checking records", 2, manager.delete(BusinessClass.ACCOUNT, null));
+		assertNotNull("Should have resultset from query", resultset = manager.select(BusinessClass.ACCOUNT, null));
 		assertTrue("Should have 0 records", resultset.size() == 0);
 	}
 	
@@ -458,15 +459,15 @@ public class FilePersistenceTest {
 		FieldParams params = new FieldParams();
 		
 		// Set data;
-		params.put("userid", Long.toString(customerId));
-		params.put("number", Long.toString(checkingId));
-		params.put("total", Float.toString(100.0f));
-		params.put("type", Integer.toString(customerCheckingAcct.getType().ordinal()));
-		params.put("interest", Float.toString(10.05f));
-		params.put("creditlimit", Float.toString(1500.0f));
+		params.put(Credit.USERID, Long.toString(customerId));
+		params.put(Credit.NUMBER, Long.toString(checkingId));
+		params.put(Credit.TOTAL, Float.toString(100.0f));
+		params.put(Credit.TYPE, Integer.toString(customerCheckingAcct.getType().ordinal()));
+		params.put(Credit.INTEREST, Float.toString(10.05f));
+		params.put(Credit.CREDITLIMIT, Float.toString(1500.0f));
 		
 		// Perform test
-		assertEquals("Should add new account with fieldparams", 1, manager.insert("account", params));
+		assertEquals("Should add new account with fieldparams", 1, manager.insert(BusinessClass.ACCOUNT, params));
 	}
 	
 	@Test
@@ -475,11 +476,11 @@ public class FilePersistenceTest {
 		Resultset resultset;
 		
 		// Set data
-		cnds.put("userid", Long.toString(customerId));
+		cnds.put(Credit.USERID, Long.toString(customerId));
 		manager.insert(customerCreditAcct);
 		
 		// Perform test
-		assertNotNull("Should have resultset from query", resultset = manager.select("account", cnds));
+		assertNotNull("Should have resultset from query", resultset = manager.select(BusinessClass.ACCOUNT, cnds));
 		assertTrue("Should exist single record from query", resultset.size() == 1);
 		assertEquals(customerCreditAcct, resultset.get(0));
 	}
@@ -491,12 +492,12 @@ public class FilePersistenceTest {
 		Resultset resultset;
 		
 		// Set Data 
-		cnds.put("userid", Long.toString(customerId));
+		cnds.put(Credit.USERID, Long.toString(customerId));
 		manager.insert(customerCreditAcct);
 		
 		// Perform test
 		assertEquals("Should update a single account record", 1, manager.update(data));
-		assertNotNull("Should have resultset from query", resultset = manager.select("account", cnds));
+		assertNotNull("Should have resultset from query", resultset = manager.select(BusinessClass.ACCOUNT, cnds));
 		assertTrue("Should exist single record from query", resultset.size() == 1);
 		assertFalse(customerCreditAcct.equals(resultset.get(0)));
 		assertEquals(data, resultset.get(0));
@@ -510,13 +511,13 @@ public class FilePersistenceTest {
 		Resultset resultset;
 		
 		// Set Data 
-		cnds.put("userid", Long.toString(customerId));
-		params.put("total", Float.toString(1.0f));
+		cnds.put(Credit.USERID, Long.toString(customerId));
+		params.put(Credit.TOTAL, Float.toString(1.0f));
 		manager.insert(customerCreditAcct);
 		
 		// Perform test
-		assertEquals("Should update a single account record", 1, manager.update("account", cnds, params));
-		assertNotNull("Should have resultset from query", resultset = manager.select("account", cnds));
+		assertEquals("Should update a single account record", 1, manager.update(BusinessClass.ACCOUNT, cnds, params));
+		assertNotNull("Should have resultset from query", resultset = manager.select(BusinessClass.ACCOUNT, cnds));
 		assertTrue("Should exist single record from query", resultset.size() == 1);
 		assertFalse(customerCreditAcct.equals(resultset.get(0)));
 		assertEquals(data, resultset.get(0));
@@ -528,11 +529,11 @@ public class FilePersistenceTest {
 		Resultset resultset;
 		
 		// Set data 
-		cnds.put("userid", Long.toString(customerId));
+		cnds.put(Credit.USERID, Long.toString(customerId));
 		manager.insert(customerCreditAcct);
 		
 		assertEquals("Should remove credit acct record", 1, manager.delete(customerCreditAcct));
-		assertNotNull("Should have resultset from query", resultset = manager.select("account", cnds));
+		assertNotNull("Should have resultset from query", resultset = manager.select(BusinessClass.ACCOUNT, cnds));
 		assertTrue("Should have 0 records", resultset.size() == 0);
 	}
 	
@@ -542,11 +543,11 @@ public class FilePersistenceTest {
 		Resultset resultset;
 		
 		// Set data 
-		cnds.put("userid", Long.toString(customerId));
+		cnds.put(Credit.USERID, Long.toString(customerId));
 		manager.insert(customerCreditAcct);
 		
-		assertEquals("Should remove credit record", 1, manager.delete("account", cnds));
-		assertNotNull("Should have resultset from query", resultset = manager.select("account", cnds));
+		assertEquals("Should remove credit record", 1, manager.delete(BusinessClass.ACCOUNT, cnds));
+		assertNotNull("Should have resultset from query", resultset = manager.select(BusinessClass.ACCOUNT, cnds));
 		assertTrue("Should have 0 records", resultset.size() == 0);
 	}
 	
@@ -559,9 +560,9 @@ public class FilePersistenceTest {
 		manager.insert(new Credit(41181, 512423, 1.0f, 10.0f, 1500.0f));
 		
 		// Perform test
-		assertEquals("Should exist a total of 2 credit acct records", 2, manager.select("account", null).size());
-		assertEquals("Should remove all account records", 2, manager.delete("account", null));
-		assertNotNull("Should have resultset from query", resultset = manager.select("account", null));
+		assertEquals("Should exist a total of 2 credit acct records", 2, manager.select(BusinessClass.ACCOUNT, null).size());
+		assertEquals("Should remove all account records", 2, manager.delete(BusinessClass.ACCOUNT, null));
+		assertNotNull("Should have resultset from query", resultset = manager.select(BusinessClass.ACCOUNT, null));
 		assertTrue("Should have 0 records", resultset.size() == 0);
 	}
 	

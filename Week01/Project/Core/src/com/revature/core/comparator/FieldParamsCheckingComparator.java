@@ -25,17 +25,17 @@ public class FieldParamsCheckingComparator implements Comparator<Object> {
 			// Set result value 
 			result = 0;
 			
-			if (fieldParams.containsKey("userid")) 
-				result = fieldParams.get("userid").equals(Long.toString(account.getUserId())) ? 0 : -1;
+			if (fieldParams.containsKey(Checking.USERID)) 
+				result = fieldParams.get(Checking.USERID).equals(Long.toString(account.getUserId())) ? 0 : -1;
 			
-			if (fieldParams.containsKey("number")) 
-				result = fieldParams.get("number").equals(Long.toString(account.getNumber())) ? 0 : -1;
+			if (fieldParams.containsKey(Checking.NUMBER)) 
+				result = fieldParams.get(Checking.NUMBER).equals(Long.toString(account.getNumber())) ? 0 : -1;
 			
-			if (result != -1 && fieldParams.containsKey("total")) 
-				result = fieldParams.get("total").equals(Float.toString(account.getTotal())) ? 0 : -1;
+			if (result != -1 && fieldParams.containsKey(Checking.TOTAL)) 
+				result = fieldParams.get(Checking.TOTAL).equals(Float.toString(account.getTotal())) ? 0 : -1;
 			
-			if (result != -1 && fieldParams.containsKey("type")) 
-				result = fieldParams.get("type").equals(Integer.toString(account.getType().ordinal())) ? 0 : -1;
+			if (result != -1 && fieldParams.containsKey(Checking.TYPE)) 
+				result = fieldParams.get(Checking.TYPE).equals(Integer.toString(account.getType().ordinal())) ? 0 : -1;
 		}
 		
 		return result;

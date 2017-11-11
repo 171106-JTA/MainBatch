@@ -1,43 +1,37 @@
 package com.revature.core.exception;
 
 import com.revature.core.FieldParams;
+import com.revature.core.Request;
 
 public class RequestException extends Exception {
-	private FieldParams request;
-	private long userId;
+	private Request request;
 	
-	public RequestException(FieldParams request, long userId) {
+	public RequestException(Request request) {
 		super();
 		this.request = request;
-		this.userId = userId;
 	}
 	
-	public RequestException(FieldParams request, long userId, String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+	public RequestException(Request request, String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 		this.request = request;
-		this.userId = userId;
 	}
-	public RequestException(FieldParams request, long userId, String message, Throwable cause) {
+	
+	public RequestException(Request request, String message, Throwable cause) {
 		super(message, cause);
 		this.request = request;
-		this.userId = userId;
 	}
-	public RequestException(FieldParams request, long userId, String message) {
+	
+	public RequestException(Request request, String message) {
 		super(message);
 		this.request = request;
-		this.userId = userId;
 	}
-	public RequestException(FieldParams request, long userId, Throwable cause) {
+	
+	public RequestException(Request request, Throwable cause) {
 		super(cause);
 		this.request = request;
-		this.userId = userId;
 	}
 	
-	public FieldParams getRequest() {
+	public Request getRequest() {
 		return request;
-	}
-	
-	public long getUserId() {
-		return userId;
 	}
 }

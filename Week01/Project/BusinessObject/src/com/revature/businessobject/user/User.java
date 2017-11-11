@@ -10,6 +10,16 @@ import com.revature.businessobject.BusinessObject;
  */
 public class User extends BusinessObject implements Comparable<User> {
 	/**
+	 * Fields used to convert/access data from FieldParams
+	 * @see FieldParams
+	 */
+	public static final String ID = "id";
+	public static final String USERNAME = "username";
+	public static final String PASSWORD = "password";
+	public static final String CHECKPOINT = "checkpoint";
+	
+	
+	/**
 	 * Unique identifier used to pull user data 
 	 */
 	private long id;
@@ -27,7 +37,7 @@ public class User extends BusinessObject implements Comparable<User> {
 	/**
 	 * Value represents account privileges 
 	 */
-	private UserRole role;
+	private Checkpoint checkpoint;
 	
 	/**
 	 * Initializes user with specified id
@@ -36,12 +46,12 @@ public class User extends BusinessObject implements Comparable<User> {
 	 * @param password account password
 	 * @param role user account privileges 
 	 */
-	public User(long id, String username, String password, UserRole role) {
+	public User(long id, String username, String password, Checkpoint role) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
-		this.role = role;
+		this.checkpoint = role;
 	}
 
 	/**
@@ -69,8 +79,8 @@ public class User extends BusinessObject implements Comparable<User> {
 	 * Value represents user privileges (what they do and do not have access to).
 	 * @return user account status
 	 */
-	public UserRole getRole() {
-		return role;
+	public Checkpoint getCheckpoint() {
+		return checkpoint;
 	}
 
 	@Override
@@ -80,7 +90,7 @@ public class User extends BusinessObject implements Comparable<User> {
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((role == null) ? 0 : role.hashCode());
+		result = prime * result + ((checkpoint == null) ? 0 : checkpoint.hashCode());
 		result = prime * result
 				+ ((username == null) ? 0 : username.hashCode());
 		return result;
@@ -102,7 +112,7 @@ public class User extends BusinessObject implements Comparable<User> {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
-		if (role != other.role)
+		if (checkpoint != other.checkpoint)
 			return false;
 		if (username == null) {
 			if (other.username != null)
@@ -114,7 +124,7 @@ public class User extends BusinessObject implements Comparable<User> {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username="  + username + ", password=" + password + ", role=" + role + "]";
+		return "User [id=" + id + ", username="  + username + ", password=" + password + ", role=" + checkpoint + "]";
 	}
 
 	@Override
@@ -124,7 +134,7 @@ public class User extends BusinessObject implements Comparable<User> {
 		if ((result = Long.compare(id, user.getId())) == 0)
 			if ((result = username.compareTo(user.getUsername())) == 0)
 				if ((result = password.compareTo(user.getPassword())) == 0)
-					return Integer.compare(role.ordinal(), user.getRole().ordinal());
+					return Integer.compare(checkpoint.ordinal(), user.getCheckpoint().ordinal());
 		
 		return result;
 	}

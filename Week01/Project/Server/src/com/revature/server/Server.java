@@ -1,10 +1,16 @@
 package com.revature.server;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.revature.businessobject.BusinessObject;
+import com.revature.businessobject.user.Admin;
+import com.revature.businessobject.user.Checkpoint;
 import com.revature.businessobject.user.User;
 import com.revature.core.FieldParams;
+import com.revature.core.Request;
 import com.revature.core.Resultset;
 import com.revature.core.exception.RequestException;
 import com.revature.core.factory.FieldParamsFactory;
@@ -24,6 +30,54 @@ public class Server extends Thread {
 	// For Sessions waiting for response
 	private Map<Integer, Session> requests = new HashMap<>();
 	
+	// Flag used to exit server thread
+	private boolean runThread = true;
+	
+	public Server() {
+		super();
+		initBoss();
+	}
+
+	public Server(Runnable arg0, String arg1) {
+		super(arg0, arg1);
+		initBoss();
+	}
+
+	public Server(Runnable arg0) {
+		super(arg0);
+		initBoss();
+	}
+
+	public Server(String arg0) {
+		super(arg0);
+		initBoss();
+	}
+	
+	@Override
+	public void run() {
+		while (runThread) {
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+			}
+		}
+	}
+
+	
+	public void kill() {
+		runThread = false;
+	}
+	
+	public void kill(int sessionId) {
+		Session session = sessions.get(sessionId);
+		
+		if (session != null) {
+			session.kill();
+			sessions.remove(sessionId);
+			requests.remove(sessionId);
+		}
+	}
+	
 	/**
 	 * Attempt to create session
 	 * @param username
@@ -33,19 +87,17 @@ public class Server extends Thread {
 	 */
 	public FieldParams login(String username, String password) throws Exception {
 		FieldParamsFactory factory = FieldParamsFactory.getFactory();
-		FieldParams request = new FieldParams();
+		FieldParams query = new FieldParams();
 		Resultset resultset;
 		Session session;
 		FieldParams response;
 		
 		// set request
-		request.put("route", "USER");
-		request.put("transtype", "LOGIN");
-		request.put("username", username);
-		request.put("password", password);
+		query.put(User.USERNAME, username);
+		query.put(User.PASSWORD, password);
 		
 		// Make request
-		resultset = router.handleRequest(request);
+		resultset = router.handleRequest(new Request(0, 0, "USER", "LOGIN", query, null));
 		
 		// If user not found
 		if (resultset.size() == 0)
@@ -57,42 +109,44 @@ public class Server extends Thread {
 		
 		// Prepare response
 		response = factory.getFieldParams((User)resultset.get(0));
-		response.put("sessionid", Integer.toString(session.hashCode()));
+		response.put(User.SESSIONID, Integer.toString(session.hashCode()));
 		
 		// start session
 		session.start();
 		return response;
 	}
 	
-	public void pushRequest(FieldParams requestParams) throws RequestException {
+	public void pushRequest(Request request) throws RequestException {
 		Integer sessionid;
 		Session session;
 		
-		if (requestParams.get("sessionid") == null)
-			throw new RequestException(requestParams, 0, "SessionID required!");
+		if (request.getSessionId() < 1)
+			throw new RequestException(request, "SessionID required!");
 		
-		sessionid = Integer.parseInt(requestParams.get("sessionid"));
+		if (!sessions.containsKey(sessionid = request.getSessionId()))
+			throw new RequestException(request, "Invalid SessionID!");
 		
-		if (!sessions.containsKey(sessionid))
-			throw new RequestException(requestParams, 0, "Invalid SessionID!");
-		
+		// Get session
 		session = sessions.get(sessionid);
 		requests.put(sessionid, session);
-		session.setRequestParams(requestParams);
+		
+		// Append session checkpoint data to request (determines what retype of requests we can make
+		request.setCheckpoint(session.getCheckpoint());
+		
+		// Set session request
+		session.setRequestParams(request);
 	}
 
-	public Resultset getResponse(FieldParams requestParams) throws RequestException {
+	public Resultset getResponse(Request request) throws RequestException {
 		Resultset response = null;
 		Integer sessionid;
 		Session session;
 		
-		if (requestParams.get("sessionid") == null)
-			throw new RequestException(requestParams, 0, "SessionID required!");
+		if (request.getSessionId() < 1)
+			throw new RequestException(request, "SessionID required!");
 		
-		sessionid = Integer.parseInt(requestParams.get("sessionid"));
-		
-		if (!requests.containsKey(sessionid))
-			throw new RequestException(requestParams, 0, "Invalid SessionID!");
+		if (!requests.containsKey(sessionid = request.getSessionId()))
+			throw new RequestException(request, "Invalid SessionID!");
 		
 		// Check request on session
 		session = requests.get(sessionid);
@@ -106,5 +160,46 @@ public class Server extends Thread {
 		} 
 		
 		return response;
+	}
+	
+	@Override
+	public void finalize() {
+		for (Session session : sessions.values()) {
+			session.kill();
+		}
+	}
+	
+	///
+	//	PRIVATE METHODS 
+	///
+	
+	private void initBoss() {
+		FieldParams query = new FieldParams();
+		List<BusinessObject> bigboss = null;
+		Request request;
+
+		// Attempt to load existing data 
+		database.setup(null);
+		
+		// Set query params
+		query.put(User.ID, "0");
+		query.put(User.USERNAME, "big.boss");
+		
+		// Build request to attempt to find Boss
+		request = new Request(0, 0, "USER", "GETUSER", query, null);
+		request.setCheckpoint(Checkpoint.ADMIN);
+		
+		try {
+			// If account not found then create
+			if (router.handleRequest(request).size() == 0) {
+				bigboss = new ArrayList<>();
+				bigboss.add(new Admin(0, "big.boss", "master"));
+			}
+		} catch (RequestException e) {
+			// TODO log
+		}
+		
+		// Perform database initialization
+		database.setup(bigboss);
 	}
 }

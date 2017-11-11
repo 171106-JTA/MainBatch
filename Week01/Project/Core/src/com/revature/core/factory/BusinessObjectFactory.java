@@ -1,6 +1,7 @@
 package com.revature.core.factory;
 
 import com.revature.businessobject.BusinessObject;
+import com.revature.core.BusinessClass;
 import com.revature.core.FieldParams;
 import com.revature.core.factory.builder.AccountBuilder;
 import com.revature.core.factory.builder.BusinessObjectBuilder;
@@ -43,11 +44,11 @@ public class BusinessObjectFactory {
 	 */
 	public BusinessObject getBusinessObject(String name, FieldParams args) {
 		switch (name.toLowerCase()) {
-			case "user":
+			case BusinessClass.USER:
 				return userBuilder.getBusinessObject(args);
-			case "userinfo":
+			case BusinessClass.USERINFO:
 				return userInfoBuilder.getBusinessObject(args);
-			case "account":
+			case BusinessClass.ACCOUNT:
 				return accountBuilder.getBusinessObject(args);
 			default:
 				return null;

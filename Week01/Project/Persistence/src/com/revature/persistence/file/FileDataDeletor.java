@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.revature.businessobject.BusinessObject;
+import com.revature.core.BusinessClass;
 import com.revature.core.FieldParams;
 
 public abstract class FileDataDeletor extends FileDataInserter {
@@ -13,15 +14,15 @@ public abstract class FileDataDeletor extends FileDataInserter {
 		String clazz = businessObject.getClass().getSimpleName();
 		
 		switch (clazz.toLowerCase()) {
-			case "user":
-			case "admin":
-			case "customer":
+			case BusinessClass.USER:
+			case BusinessClass.ADMIN:
+			case BusinessClass.CUSTOMER:
 				return removeUser(fieldParamsFactory.getFieldParams(businessObject));
-			case "userinfo": 
+			case BusinessClass.USERINFO:
 				return removeUserInfo(fieldParamsFactory.getFieldParams(businessObject));
-			case "account": 
-			case "checking":
-			case "credit":
+			case BusinessClass.ACCOUNT:
+			case BusinessClass.CREDIT:
+			case BusinessClass.CHECKING:
 				return removeAccount(fieldParamsFactory.getFieldParams(businessObject));
 			default:
 				return -1;
@@ -31,11 +32,11 @@ public abstract class FileDataDeletor extends FileDataInserter {
 	@Override
 	public int delete(String name, FieldParams cnds) {
 		switch (name.toLowerCase()) {
-			case "user":
+			case BusinessClass.USER:
 				return removeUser(cnds);
-			case "userinfo": 
+			case BusinessClass.USERINFO:
 				return removeUserInfo(cnds);
-			case "account": 
+			case BusinessClass.ACCOUNT:
 				return removeAccount(cnds);
 			default:
 				return -1;

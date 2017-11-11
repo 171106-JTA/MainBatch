@@ -25,17 +25,17 @@ public class FieldParamsUserInfoComparator implements Comparator<Object> {
 			// Set result value 
 			result = 0;
 			
-			if (fieldParams.containsKey("userid")) 
-				result = fieldParams.get("userid").equals(Long.toString(info.getUserId())) ? 0 : -1;
+			if (fieldParams.containsKey(UserInfo.USERID)) 
+				result = fieldParams.get(UserInfo.USERID).equals(Long.toString(info.getUserId())) ? 0 : -1;
 			
-			if (result != -1 && fieldParams.containsKey("email")) 
-				result = fieldParams.get("email").equals(info.getEmail()) ? 0 : -1;
+			if (result != -1 && fieldParams.containsKey(UserInfo.EMAIL)) 
+				result = fieldParams.get(UserInfo.EMAIL).equals(info.getEmail()) ? 0 : -1;
 			
-			if (result != -1 && fieldParams.containsKey("phonenumber")) 
-				result = fieldParams.get("phonenumber").equals(info.getPhonenumber()) ? 0 : -1;
+			if (result != -1 && fieldParams.containsKey(UserInfo.PHONENUMBER)) 
+				result = fieldParams.get(UserInfo.PHONENUMBER).equals(info.getPhonenumber()) ? 0 : -1;
 			
-			if (result != -1 && fieldParams.containsKey("address")) 
-				result = fieldParams.get("address").equals(info.getAddress()) ? 0 : -1;
+			if (result != -1 && fieldParams.containsKey(UserInfo.ADDRESS)) 
+				result = fieldParams.get(UserInfo.ADDRESS).equals(info.getAddress()) ? 0 : -1;
 		}
 		
 		return result;

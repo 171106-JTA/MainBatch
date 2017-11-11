@@ -24,23 +24,23 @@ public class FieldParamsCreditComparator implements Comparator<Object>{
 			// Set result value 
 			result = 0;
 			
-			if (fieldParams.containsKey("userid")) 
-				result = fieldParams.get("userid").equals(Long.toString(account.getUserId())) ? 0 : -1;
+			if (fieldParams.containsKey(Credit.USERID)) 
+				result = fieldParams.get(Credit.USERID).equals(Long.toString(account.getUserId())) ? 0 : -1;
 			
-			if (fieldParams.containsKey("number")) 
-				result = fieldParams.get("number").equals(Long.toString(account.getNumber())) ? 0 : -1;
+			if (fieldParams.containsKey(Credit.NUMBER)) 
+				result = fieldParams.get(Credit.NUMBER).equals(Long.toString(account.getNumber())) ? 0 : -1;
 			
-			if (result != -1 && fieldParams.containsKey("total")) 
-				result = fieldParams.get("total").equals(Float.toString(account.getTotal())) ? 0 : -1;
+			if (result != -1 && fieldParams.containsKey(Credit.TOTAL)) 
+				result = fieldParams.get(Credit.TOTAL).equals(Float.toString(account.getTotal())) ? 0 : -1;
 			
-			if (result != -1 && fieldParams.containsKey("interest")) 
-				result = fieldParams.get("interest").equals(Float.toString(account.getInterest())) ? 0 : -1;
+			if (result != -1 && fieldParams.containsKey(Credit.INTEREST)) 
+				result = fieldParams.get(Credit.INTEREST).equals(Float.toString(account.getInterest())) ? 0 : -1;
 			
-			if (result != -1 && fieldParams.containsKey("creditlimit")) 
-				result = fieldParams.get("creditlimit").equals(Float.toString(account.getCreditLimit())) ? 0 : -1;
+			if (result != -1 && fieldParams.containsKey(Credit.CREDITLIMIT)) 
+				result = fieldParams.get(Credit.CREDITLIMIT).equals(Float.toString(account.getCreditLimit())) ? 0 : -1;
 			
-			if (result != -1 && fieldParams.containsKey("type")) 
-				result = fieldParams.get("type").equals(Integer.toString(account.getType().ordinal())) ? 0 : -1;
+			if (result != -1 && fieldParams.containsKey(Credit.TYPE)) 
+				result = fieldParams.get(Credit.TYPE).equals(Integer.toString(account.getType().ordinal())) ? 0 : -1;
 		}
 		
 		return result;

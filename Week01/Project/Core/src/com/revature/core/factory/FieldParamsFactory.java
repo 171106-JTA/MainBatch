@@ -6,6 +6,7 @@ import com.revature.businessobject.info.account.Checking;
 import com.revature.businessobject.info.account.Credit;
 import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.User;
+import com.revature.core.BusinessClass;
 import com.revature.core.FieldParams;
 
 /**
@@ -27,15 +28,15 @@ public class FieldParamsFactory {
 		String clazz = businessObject.getClass().getSimpleName();
 		
 		switch (clazz.toLowerCase()) {
-			case "user":
-			case "admin":
-			case "customer":
+			case BusinessClass.USER:
+			case BusinessClass.ADMIN:
+			case BusinessClass.CUSTOMER:
 				return convertUserToFieldParams((User)businessObject);
-			case "userinfo":
+			case BusinessClass.USERINFO:
 				return convertUserInfoToFieldParams((UserInfo)businessObject);
-			case "account":
-			case "checking":
-			case "credit":
+			case BusinessClass.ACCOUNT:
+			case BusinessClass.CHECKING:
+			case BusinessClass.CREDIT:
 				return convertAccountToFieldParams((Account)businessObject);
 			default:
 				return null;
@@ -55,10 +56,10 @@ public class FieldParamsFactory {
 		FieldParams params = new FieldParams();
 		
 		// Set field param data 
-		params.put("id", Long.toString(user.getId()));
-		params.put("username", user.getUsername());
-		params.put("password", user.getPassword());
-		params.put("role", Integer.toString(user.getRole().ordinal()));
+		params.put(User.ID, Long.toString(user.getId()));
+		params.put(User.USERNAME, user.getUsername());
+		params.put(User.PASSWORD, user.getPassword());
+		params.put(User.CHECKPOINT, Integer.toString(user.getCheckpoint().ordinal()));
 		
 		return params;
 	}
@@ -72,10 +73,10 @@ public class FieldParamsFactory {
 		FieldParams params = new FieldParams();
 		
 		// Set field param data 
-		params.put("userid", Long.toString(userInfo.getUserId()));
-		params.put("email", userInfo.getEmail());
-		params.put("address", userInfo.getAddress());
-		params.put("phonenumber", userInfo.getPhonenumber());
+		params.put(UserInfo.USERID, Long.toString(userInfo.getUserId()));
+		params.put(UserInfo.EMAIL, userInfo.getEmail());
+		params.put(UserInfo.ADDRESS, userInfo.getAddress());
+		params.put(UserInfo.PHONENUMBER, userInfo.getPhonenumber());
 		
 		return params;
 	}
@@ -106,10 +107,10 @@ public class FieldParamsFactory {
 		FieldParams params = new FieldParams();
 		
 		// Set field param data 
-		params.put("userid", Long.toString(checking.getUserId()));
-		params.put("number", Long.toString(checking.getNumber()));
-		params.put("total", Float.toString(checking.getTotal()));
-		params.put("type", Integer.toString(checking.getType().ordinal()));
+		params.put(Checking.USERID, Long.toString(checking.getUserId()));
+		params.put(Checking.NUMBER, Long.toString(checking.getNumber()));
+		params.put(Checking.TOTAL, Float.toString(checking.getTotal()));
+		params.put(Checking.TYPE, Integer.toString(checking.getType().ordinal()));
 		
 		return params;
 	}
@@ -123,12 +124,12 @@ public class FieldParamsFactory {
 		FieldParams params = new FieldParams();
 		
 		// Set field param data 
-		params.put("userid", Long.toString(credit.getUserId()));
-		params.put("number", Long.toString(credit.getNumber()));
-		params.put("total", Float.toString(credit.getTotal()));
-		params.put("interest", Float.toString(credit.getInterest()));
-		params.put("creditlimit", Float.toString(credit.getCreditLimit()));
-		params.put("type", Integer.toString(credit.getType().ordinal()));
+		params.put(Credit.USERID, Long.toString(credit.getUserId()));
+		params.put(Credit.NUMBER, Long.toString(credit.getNumber()));
+		params.put(Credit.TOTAL, Float.toString(credit.getTotal()));
+		params.put(Credit.INTEREST, Float.toString(credit.getInterest()));
+		params.put(Credit.CREDITLIMIT, Float.toString(credit.getCreditLimit()));
+		params.put(Credit.TYPE, Integer.toString(credit.getType().ordinal()));
 		
 		return params;
 	}

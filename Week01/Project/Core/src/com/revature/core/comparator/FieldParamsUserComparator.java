@@ -25,17 +25,17 @@ public class FieldParamsUserComparator implements Comparator<Object> {
 			// Set result value 
 			result = 0;
 			
-			if (fieldParams.containsKey("id")) 
-				result = fieldParams.get("id").equals(Long.toString(user.getId())) ? 0 : -1;
+			if (fieldParams.containsKey(User.ID)) 
+				result = fieldParams.get(User.ID).equals(Long.toString(user.getId())) ? 0 : -1;
 			
-			if (result != -1 && fieldParams.containsKey("username")) 
-				result = fieldParams.get("username").equals(user.getUsername()) ? 0 : -1;
+			if (result != -1 && fieldParams.containsKey(User.USERNAME)) 
+				result = fieldParams.get(User.USERNAME).equals(user.getUsername()) ? 0 : -1;
 			
-			if (result != -1 && fieldParams.containsKey("password")) 
-				result = fieldParams.get("password").equals(user.getPassword()) ? 0 : -1;
+			if (result != -1 && fieldParams.containsKey(User.PASSWORD)) 
+				result = fieldParams.get(User.PASSWORD).equals(user.getPassword()) ? 0 : -1;
 			
-			if (result != -1 && fieldParams.containsKey("role")) 
-				result = fieldParams.get("role").equals(Integer.toString(user.getRole().ordinal())) ? 0 : -1;
+			if (result != -1 && fieldParams.containsKey(User.CHECKPOINT)) 
+				result = fieldParams.get(User.CHECKPOINT).equals(Integer.toString(user.getCheckpoint().ordinal())) ? 0 : -1;
 		}
 		
 		return result;

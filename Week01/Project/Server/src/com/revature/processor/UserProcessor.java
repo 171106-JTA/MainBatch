@@ -1,13 +1,12 @@
 package com.revature.processor;
 
-import javax.management.modelmbean.RequiredModelMBean;
-
-import com.revature.core.FieldParams;
+import com.revature.businessobject.user.Checkpoint;
+import com.revature.businessobject.user.User;
+import com.revature.core.Request;
 import com.revature.core.Resultset;
 import com.revature.core.exception.RequestException;
-import com.revature.core.request.Request;
 import com.revature.processor.handler.UserRequestHandler;
-import com.revature.server.Server;
+import com.revature.server.session.require.Require;
 
 /**
  * For Basic data queries 
@@ -18,38 +17,49 @@ public class UserProcessor implements Processorable {
 	private static UserRequestHandler URH = new UserRequestHandler();
 	
 	@Override
-	public Resultset process(FieldParams requestParams) throws RequestException {
-		Resultset resultset = null;
+	public Resultset process(Request request) throws RequestException {
+		Resultset res = null;
 		
-		switch (requestParams.get("transtype").toUpperCase()) {
+		switch (request.getTranstype()) {
 			case "LOGIN":
-				Request.require(new String[]{"username","password"}, requestParams);
-				resultset = URH.login(requestParams);
+				Require.requireAllQuery(new String[]{ User.USERNAME, User.PASSWORD }, request);
+				res = URH.login(request);
+				break;
+			case "CREATEUSER":
+				Require.require(new Checkpoint[] { Checkpoint.ADMIN }, request);
 				break;
 			case "GETUSER":
+				Require.require(new Checkpoint[] { Checkpoint.ADMIN }, request);
+				res = URH.getUser(request);
 				break;
 			case "SETUSER":
+				Require.require(new Checkpoint[] { Checkpoint.ADMIN },  request);
 				break;
 			case "GETUSERINFO":
+				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
 				break;
 			case "SETUSERINFO":
+				Require.require(new Checkpoint[] { Checkpoint.ADMIN },  request);
 				break;
 			case "GETACCOUNT":
-				break;
-			case "SETACCOUNT":
+				Require.require(new Checkpoint[] { Checkpoint.ADMIN },  request);
 				break;
 			case "GETCHECKINGACCOUNT":
+				Require.require(new Checkpoint[] { Checkpoint.ADMIN },  request);
 				break;
 			case "SETCHECKINGACCOUNT":
+				Require.require(new Checkpoint[] { Checkpoint.ADMIN },  request);
 				break;
 			case "GETCEDITACCOUNT":
+				Require.require(new Checkpoint[] { Checkpoint.ADMIN },  request);
 				break;
 			case "SETCREDITACCOUNT":
+				Require.require(new Checkpoint[] { Checkpoint.ADMIN },  request);
 				break;
 			default:
-				throw new RequestException(requestParams, Long.parseLong(requestParams.get("userid")), "Transtype=[\'" + requestParams.get("transtype").toUpperCase() + "\'] is unknown!");
+				throw new RequestException(request, "Transtype=[\'" + request.getTranstype() + "\'] is unknown!");
 		}
 		
-		return resultset;
+		return res;
 	}
 }

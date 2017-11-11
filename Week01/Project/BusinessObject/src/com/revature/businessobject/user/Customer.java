@@ -12,6 +12,6 @@ public class Customer extends User {
 	 * @param password account password
 	 */
 	public Customer(long id, String username, String password) {
-		super(id, username, password, UserRole.CUSTOMER);
+		super(id, username, password, Checkpoint.CUSTOMER);
 	}
 }
