@@ -7,7 +7,7 @@ import java.util.Scanner;
 import java.util.function.Supplier;
 
 public class InputUtils {
-    private static String DIVIDER = "______________________________________________________________________";
+    private static final String DIVIDER = "______________________________________________________________________";
 
     public static void printPrompt(String fieldName) {
         System.out.printf("enter %s: ", fieldName);
@@ -42,16 +42,28 @@ public class InputUtils {
 
     /**
      * Hides input as user enters it. useful to inputting passwords
-     * Note: does not work inside
+     * Note: does not work in IDE consoles
      *
      * @param fieldName
      * @return
      */
+    /*
     public static String readMasked(String fieldName) {
         printPrompt(fieldName);
         Console console = System.console();
         char[] masked = console.readPassword();
         return new String(masked);
+    }
+    */
+
+    /**
+     * does not hide input; here to be run in ides
+     *
+     * @param fieldName
+     * @return
+     */
+    public static String readMasked(String fieldName) {
+        return readLine(fieldName);
     }
 
 

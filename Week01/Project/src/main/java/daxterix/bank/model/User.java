@@ -2,7 +2,7 @@ package daxterix.bank.model;
 
 import java.io.Serializable;
 
-public abstract class User implements Serializable{
+public abstract class User extends Model {
     private static final long serialVersionUID = -2872564267620672334L;
 
     private String username;
@@ -11,6 +11,14 @@ public abstract class User implements Serializable{
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 
     public String getUsername() {
