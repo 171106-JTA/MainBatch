@@ -2,11 +2,14 @@ package com.revature.app;
 
 import java.util.Scanner;
 
+import com.revature.businessobject.BusinessObject;
+import com.revature.businessobject.info.account.Account;
+import com.revature.businessobject.info.account.Checking;
+import com.revature.businessobject.info.account.Credit;
+import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.User;
 import com.revature.core.FieldParams;
-import com.revature.core.Request;
 import com.revature.core.Resultset;
-import com.revature.core.exception.RequestException;
 
 public class Menu {
 	private static Scanner in = new Scanner(System.in);
@@ -53,36 +56,58 @@ public class Menu {
 	}
 	
 	public static void printUserInfoData(FieldParams data) {
-		Request request = new Request(data, "USER", "GETUSERINFO", null, null);
-		FieldParams params = new FieldParams();
-		Resultset res;
+		Resultset res = MyBank.getUserInfo(data);
+		UserInfo info;
 		
-		// Set query params
-		params.put(User.ID, data.get(User.ID));
-		request.setQuery(params);
-		
-		try {
-			MyBank.server.pushRequest(request);
-			
-			while ((res = MyBank.server.getResponse(request)) == null) {
-				try {
-				Thread.sleep(50);
-				} catch (InterruptedException e) {
-					
-				}
-			}
-			
-		} catch (RequestException e) {
-			// TODO log
+		if (res.size() == 0) {
+			System.out.println("\t\tError: User has not supplied any personal");
+			System.out.println("\t\t       information (Account Corrupted)!");
 		}
-		
-		System.out.println("");
-		
+		else {
+			info = (UserInfo) res.get(0);
+			System.out.println("\tEmail: " + info.getEmail());
+			System.out.println("\tAddress: " + info.getAddress());
+			System.out.println("\tPhonenumber: " + info.getPhonenumber());
+		}
 	}
 	
 	public static void printAccountData(FieldParams data) {
-		System.out.println("");
+		Resultset res = MyBank.getAccount(data);
 		
+		if (res.size() == 0)
+			System.out.println("\tNo accounts found.");
+		else {
+			for (BusinessObject item : res) {
+				Account acct = (Account)item;
+				
+				switch (acct.getType()) {
+					case CHECKING:
+						printCheckingAccount((Checking)acct);
+						break;
+					case CREDIT:
+						printCreditAccount((Credit)acct);
+						break;
+				}
+				
+			}
+		}
 	}
 	
+	/// 
+	//	PRIVATE METHODS 
+	///
+	
+	private static void printCheckingAccount(Checking checking) {
+		System.out.println("\tAccount Type: Checking");
+		System.out.println("\tAccount Number: " + checking.getNumber());
+		System.out.println("\tTotal: $" + checking.getTotal());
+	}
+	
+	private static void printCreditAccount(Credit credit) {
+		System.out.println("\tAccount Type: Credit");
+		System.out.println("\tAccount Number: " + credit.getNumber());
+		System.out.println("\tMonthly Interest: " + credit.getInterest() + "%");
+		System.out.println("\tCredit Limit: $" + credit.getCreditLimit());
+		System.out.println("\tTotal: $" + credit.getTotal());
+	}
 }

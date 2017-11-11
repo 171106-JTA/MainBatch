@@ -1,17 +1,18 @@
 package com.revature.app;
-import java.util.Scanner;
-
 import com.revature.app.view.AdminView;
 import com.revature.app.view.CustomerView;
+import com.revature.businessobject.info.account.Account;
+import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.Checkpoint;
 import com.revature.businessobject.user.User;
 import com.revature.core.FieldParams;
 import com.revature.core.Request;
 import com.revature.core.Resultset;
+import com.revature.core.exception.RequestException;
 import com.revature.server.Server;
 
 public class MyBank {
-	public static Server server = new Server();
+	private static Server server = new Server();
 	public static FieldParams data;
 	
 	public static void main(String[] args) {
@@ -52,6 +53,8 @@ public class MyBank {
 			}
 		}
 		
+		System.out.println("Goodbye!!!");
+		
 		// Tell server to stop when app complete
 		server.kill();
 	}
@@ -69,6 +72,11 @@ public class MyBank {
 		}
 	}
 	
+	///
+	//	COMM Methods 
+	///
+	
+	
 	public static void login() {
 		String username = Menu.getInput("Username:>");
 		String password = Menu.getInput("Password:>");
@@ -80,5 +88,48 @@ public class MyBank {
 			data = null;
 		}
 	}
+
+	public static Resultset send(Request request) {
+		Resultset res = null;
+		
+		try {
+			MyBank.server.pushRequest(request);
+			
+			while ((res = MyBank.server.getResponse(request)) == null) {
+				try {
+					Thread.sleep(50);
+				} catch (InterruptedException e) {
+					// TODO log
+				}
+			}
+			
+		} catch (RequestException e) {
+			// TODO log
+		}
+		
+		return res;
+	}
 	
+	public static Resultset getUserInfo(FieldParams data) {
+		FieldParams params = new FieldParams();
+
+		// Set query params
+		params.put(UserInfo.USERID, data.get(User.ID));
+		
+		return MyBank.send(new Request(data, "USER", "GETUSERINFO", params, null));
+	}
+	
+	
+	public static Resultset getAccount(FieldParams data) {
+		FieldParams params = new FieldParams();
+
+		// Set query params
+		params.put(Account.USERID, data.get(User.ID));
+		
+		// If account number specified 
+		if (data.get(Account.NUMBER) != null)
+			params.put(Account.NUMBER, data.get(Account.NUMBER));
+		
+		return MyBank.send(new Request(data, "USER", "GETACCOUNT", params, null));
+	}
 }

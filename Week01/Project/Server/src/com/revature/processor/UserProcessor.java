@@ -26,35 +26,39 @@ public class UserProcessor implements Processorable {
 				res = URH.login(request);
 				break;
 			case "CREATEUSER":
-				Require.require(new Checkpoint[] { Checkpoint.ADMIN }, request);
+				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER }, request);
+				res = URH.createUser(request);
 				break;
 			case "GETUSER":
-				Require.require(new Checkpoint[] { Checkpoint.ADMIN }, request);
+				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER }, request);
 				res = URH.getUser(request);
 				break;
 			case "SETUSER":
-				Require.require(new Checkpoint[] { Checkpoint.ADMIN },  request);
+				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
+				res = URH.setUser(request);
 				break;
 			case "GETUSERINFO":
 				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
+				res = URH.getUserInfo(request);
 				break;
 			case "SETUSERINFO":
-				Require.require(new Checkpoint[] { Checkpoint.ADMIN },  request);
+				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
 				break;
 			case "GETACCOUNT":
-				Require.require(new Checkpoint[] { Checkpoint.ADMIN },  request);
+				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
+				res = URH.getAccount(request);
 				break;
 			case "GETCHECKINGACCOUNT":
-				Require.require(new Checkpoint[] { Checkpoint.ADMIN },  request);
+				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
 				break;
 			case "SETCHECKINGACCOUNT":
-				Require.require(new Checkpoint[] { Checkpoint.ADMIN },  request);
+				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
 				break;
 			case "GETCEDITACCOUNT":
-				Require.require(new Checkpoint[] { Checkpoint.ADMIN },  request);
+				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER},  request);
 				break;
 			case "SETCREDITACCOUNT":
-				Require.require(new Checkpoint[] { Checkpoint.ADMIN },  request);
+				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
 				break;
 			default:
 				throw new RequestException(request, "Transtype=[\'" + request.getTranstype() + "\'] is unknown!");

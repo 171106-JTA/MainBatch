@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.revature.businessobject.BusinessObject;
+import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.Admin;
 import com.revature.businessobject.user.Checkpoint;
 import com.revature.businessobject.user.User;
@@ -194,6 +195,7 @@ public class Server extends Thread {
 			if (router.handleRequest(request).size() == 0) {
 				bigboss = new ArrayList<>();
 				bigboss.add(new Admin(0, "big.boss", "master"));
+				bigboss.add(new UserInfo(0, "big.boss@mybank.com", "34123 Mybank St., 14356 Pluto", "1234567890"));
 			}
 		} catch (RequestException e) {
 			// TODO log

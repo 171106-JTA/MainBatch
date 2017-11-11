@@ -6,12 +6,16 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.Checkpoint;
 import com.revature.core.FieldParams;
 import com.revature.core.Request;
 import com.revature.core.exception.RequestException;
 
 public final class Require {
+	public static void requireSelf(Request request) throws RequestException {
+		requireQuery(new String[] { UserInfo.USERID }, new String[] { Long.toString(request.getUserId()) }, request);
+	}
 	
 	public static void requireAllQuery(String[] params, Request request) throws RequestException {
 		validateAll(params, request.getQuery(), request);
