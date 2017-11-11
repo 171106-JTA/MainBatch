@@ -12,7 +12,12 @@ public class UserInterface {
 	public UserInterface() {
 		
 	}
-	//TODO Fix exception when inputting letter in parseInt
+	
+	/**
+	 * For reading string inputs. 
+	 * 
+	 * @return Inputed user string
+	 */
 	protected static String readInput() {
 		String result;
 		
@@ -22,6 +27,12 @@ public class UserInterface {
 		return result;
 	}
 	
+	/**
+	 * For reading integer inputs. Checks to make sure that options requiring integers only
+	 * receive integer inputs
+	 * 
+	 * @return
+	 */
 	protected static int readNumberInput() {
 		int i = -1;
 		
@@ -30,16 +41,30 @@ public class UserInterface {
 		try {
 			i = Integer.parseInt(scan.nextLine());
 		}catch (NumberFormatException ne){
-			System.out.println("Input invalid.");
+			//System.out.println("Input invalid.");
 		}
 		return i;
 	}
 	
+	/**
+	 * Closes the scanner and serializes the user HashMap. Used when the user logs out
+	 * 
+	 * @param users HashMap to be serialized
+	 */
 	protected static void cleanUp(HashMap<String, User> users) {
 		scan.close();
 		ProcessData.serialize(users);
 	}	
 	
+	/**
+	 * Login screen for users. It checks for matching usernames and passwords
+	 * before opening an account. It also checks the status of the account before opening.
+	 * If the account is banned or not approved, the user cannot access their account.
+	 * 
+	 * @param users HashMap of users to check for correct usernames and passwords
+	 * 
+	 * @return User object to be loaded into other screens
+	 */
 	public static User loginScreen(HashMap<String, User> users) {
 		String user;
 		User u;
@@ -58,7 +83,13 @@ public class UserInterface {
 					return u;
 				}
 				else {
-					System.out.println("Contact Administrators");
+					System.out.println("Contact Administrators. ");
+					if(!u.isApproved() && !u.isBanned()) {
+						System.out.println("Account pending approval.");
+					}
+					else if(u.isBanned()) {
+						System.out.println("Account has been banned.");
+					}
 					return null;
 				}
 			}

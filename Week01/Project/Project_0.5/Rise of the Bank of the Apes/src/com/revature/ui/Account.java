@@ -6,6 +6,11 @@ import com.revature.users.User;
 
 public class Account extends UserInterface{
 	
+	/**
+	 * Displays account screen for regular users. Transaction options include: withdrawal and deposits
+	 * 
+	 * @param users HashMap<String, User> used to gather user information for transactions
+	 */
 	public static void Screen(HashMap<String, User> users) {
 		User u = UserInterface.loginScreen(users);
 		

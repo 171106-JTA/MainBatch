@@ -4,6 +4,11 @@ import com.revature.users.User;
 
 public class Deposit {
 	
+	/**
+	 * Displays deposit screen for regular users. Provides checks for correct inputs.
+	 * 
+	 * @param user User object to set deposit amount into
+	 */
 	public static void Screen(User user) {
 		System.out.println("Depositing");
 		System.out.print("Please enter amount to be deposited: ");

@@ -10,12 +10,18 @@ import com.revature.ui.Splash;
 import com.revature.users.User;
 
 public class BankOfTheApes {
+	/* This class is mean to be a singleton 
+	 * It is the central bank, so there should not be anymore than one instance of this class
+	 */
 	private HashMap<String, User> users;
 	static int instanceCount = 0;
 	private static BankOfTheApes bota;
 	
 	private BankOfTheApes() {
 		this.users = ProcessData.unserialize();
+		/*
+		 * Creation of a default admin
+		 */
 		if(users.get("a!joe") == null) {
 			User admin = new User("a!joe", "d");
 			admin.setAccess_level(2);
@@ -30,6 +36,11 @@ public class BankOfTheApes {
 		return users;
 	}
 
+	/**
+	 * Allows the creation of a singleton BankOfTheApes object. 
+	 *  
+	 * @return BankOfTheApes object needed to perform banking operations
+	 */
 	public static BankOfTheApes getBank() {
 		if(bota == null) {
 			bota = new BankOfTheApes();
@@ -37,12 +48,23 @@ public class BankOfTheApes {
 		return bota;
 	}
 	
+	/**
+	 * Initializes the banking process for users
+	 * A splash screen is displayed to greet users and provide login choices.
+	 * 
+	 */
 	public void setUp() {
 		int option = Splash.Screen();
 		displayOperationScreen(option);
 		
 	}
 	
+	/**
+	 * Takes user input and displays a different screen according to that input.
+	 * 
+	 * @param option - Integer input used to select the requested screen
+	 * 
+	 */
 	public void displayOperationScreen(int option) {
 		
 		switch(option) {

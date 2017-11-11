@@ -6,15 +6,21 @@ import com.revature.users.User;
 
 public class Admin extends UserInterface{
 	
-	public static int Screen(HashMap<String, User> users) {
+	/**
+	 * Displays operations screen for administrators. Actions include: banning users, 
+	 * approving users, promoting users to admin, and showing all users
+	 * 
+	 * @param users HashMap of users used to gather access, approval, and banned statuses of users
+	 */
+	public static void Screen(HashMap<String, User> users) {
 		User u = UserInterface.loginScreen(users);
 		
 		if(u == null) {
-			return 0;
+			return;
 		}
 		if(u.getAccess_level() != 2) {
 			System.out.println("Wrong Menu");
-			return 0;
+			return;
 		}
 		
 		System.out.println("Welcome Admin " + u.getName());
@@ -49,6 +55,5 @@ public class Admin extends UserInterface{
 					System.out.println("Invalid input. Please try again");
 			}
 		}
-		return 0;
 	}
 }

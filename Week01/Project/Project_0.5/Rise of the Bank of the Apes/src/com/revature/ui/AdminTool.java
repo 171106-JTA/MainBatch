@@ -6,6 +6,11 @@ import com.revature.users.User;
 
 public class AdminTool {
 	
+	/**
+	 * Displays information of users, such as usernames, approval status, ban status, and access level
+	 * 
+	 * @param users HashMap of users to loop through
+	 */
 	public static void showAllUser(HashMap<String, User> users) {
 		
 		System.out.println("User : Approval Status : Ban Status : Access Level");
@@ -14,6 +19,11 @@ public class AdminTool {
 		}
 	}
 	
+	/**
+	 * Menu used by administrators to approve or disprove a user
+	 * 
+	 * @param users HashMap of users for quick look-ups
+	 */
 	public static void approveUser(HashMap<String, User> users) {
 		System.out.println("Approval Screen");
 		String input = "";
@@ -24,6 +34,7 @@ public class AdminTool {
 		
 		if(u == null) {
 			System.out.println("User not found.");
+			return;
 		}
 		
 		if(u.getAccess_level() == 2) {
@@ -31,7 +42,7 @@ public class AdminTool {
 			return;
 		}
 		
-		System.out.print("To approve, enter a; To disprove, enter d --->");
+		System.out.print("To approve, enter a; To disprove, enter d --> ");
 		input = UserInterface.readInput();
 		switch(input) {
 			case "a":
@@ -39,9 +50,17 @@ public class AdminTool {
 				break;
 			case "d":
 				u.setApproved(false);
+				break;
+			default:
+				System.out.println("Incorrect input.");
 		}
 	}
 	
+	/**
+	 * Menu used by administrators to ban or unban a user
+	 * 
+	 * @param users HashMap of users for quick look-ups
+	 */
 	public static void banUser(HashMap<String, User> users) {
 		System.out.println("Ban Screen");
 		String input = "";
@@ -52,13 +71,14 @@ public class AdminTool {
 		u = users.get(input);
 		if(u == null) {
 			System.out.println("User not found.");
+			return;
 		}
 		if(u.getAccess_level() == 2) {
 			System.out.println("You cannot ban another admin");
 			return;
 		}
 		
-		System.out.print("To ban, enter b; To unban, enter u --->");
+		System.out.print("To ban, enter b; To unban, enter u --> ");
 		input = UserInterface.readInput();
 		switch(input) {
 			case "b":
@@ -66,9 +86,17 @@ public class AdminTool {
 				break;
 			case "u":
 				u.setBanned(false);
+				break;
+			default:
+				System.out.println("Incorrect Input.");
 		}
 	}
 	
+	/**
+	 * Menu for administrator used to promote another user to administrator status
+	 * 
+	 * @param users HashMap of users for quick look-ups
+	 */
 	public static void promoteUser(HashMap<String, User> users) {
 		System.out.println("Promote Screen");
 		String input = "";
@@ -80,6 +108,7 @@ public class AdminTool {
 		
 		if(u == null) {
 			System.out.println("User not found.");
+			return;
 		}
 		
 		if(u.getAccess_level() == 2) {

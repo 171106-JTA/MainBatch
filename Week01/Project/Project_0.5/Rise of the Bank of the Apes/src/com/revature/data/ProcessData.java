@@ -14,6 +14,12 @@ public class ProcessData {
 	public static ObjectOutputStream oos;
 	public static ObjectInputStream ois;
 	
+	/**
+	 * Serializes the users HashMap for later use. Writes to a file called user.ser.
+	 * Utilizes ObjectOutputStream() and FileOutputStream() to achieved encryption.
+	 * 
+	 * @param users HashMap<String, User> of all bank customers and admins
+	 */
 	public static void serialize(HashMap<String, User> users) {
 		try {
 			oos = new ObjectOutputStream(new FileOutputStream("user.ser"));
@@ -24,12 +30,19 @@ public class ProcessData {
 		}
 	}
 	
+	/**
+	 * Decrypts the user.ser files and restores it back into a HashMap of users.
+	 * Utilizes ObjectInputStream() and FileInputStream() to complete decryption.
+	 * 
+	 * @return HashMap<String, User> of users
+	 */
+	@SuppressWarnings("unchecked")
 	public static HashMap<String, User> unserialize() {
 		HashMap<String, User> hm = null;
 		
 		try {
 			ois = new ObjectInputStream(new FileInputStream("user.ser"));
-			hm = (HashMap) ois.readObject();
+			hm = (HashMap<String, User>) ois.readObject();
 			System.out.println(hm.keySet());
 			
 		}catch(IOException | ClassNotFoundException e) {
