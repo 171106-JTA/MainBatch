@@ -12,7 +12,7 @@ public class Info extends BusinessObject{
 	/**
 	 * User id (PRIMARY KEY)
 	 */
-	private transient long userId;
+	private long userId;
 
 	/**
 	 * Initialization of basic user information

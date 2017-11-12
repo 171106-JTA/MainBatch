@@ -1,5 +1,6 @@
 package com.revature.app;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 import com.revature.businessobject.BusinessObject;
@@ -22,7 +23,7 @@ public class Menu {
 		// get input
 		return in.nextLine().trim();
 	}
-	
+
 	///
 	//	WRITES TO CONSOLE
 	///

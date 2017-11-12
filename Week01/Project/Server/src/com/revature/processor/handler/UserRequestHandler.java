@@ -107,7 +107,7 @@ public final class UserRequestHandler {
 		FieldParams trans = request.getTransaction();
 		
 		// If user  account Ensure they are updating their account only 
-		if (request.getCheckpoint() == Checkpoint.CUSTOMER) {
+		if (request.getCheckpoint() != Checkpoint.ADMIN) {
 			Require.requireSelf(request);
 			
 			// Users are not allowed to update checkpoints 
@@ -133,14 +133,14 @@ public final class UserRequestHandler {
 		conditions.put(User.ID, Long.toString(request.getUserId()));
 		
 		// User account must exist before it can be created 
-		Require.requireExists(BusinessClass.USER, conditions, request);;
+		Require.requireExists(BusinessClass.USER, conditions, request);
 		
 		return new Resultset(Server.database.insert(BusinessClass.USERINFO, request.getTransaction()));
 	}
 	
 	public Resultset getUserInfo(Request request) throws RequestException { 
 		// For NON-ADMINS only personal account information should be accessible 
-		if (request.getCheckpoint() != Checkpoint.CUSTOMER) 
+		if (request.getCheckpoint() != Checkpoint.ADMIN) 
 			Require.requireSelf(request);
 		
 		return Server.database.select(BusinessClass.USERINFO, request.getQuery());
@@ -149,7 +149,7 @@ public final class UserRequestHandler {
 	
 	public Resultset getAccount(Request request) throws RequestException {
 		// For NON-ADMINS only personal account information should be accessible 
-		if (request.getCheckpoint() == Checkpoint.CUSTOMER) 
+		if (request.getCheckpoint() != Checkpoint.ADMIN) 
 			Require.requireSelf(request);
 				
 		return Server.database.select(BusinessClass.ACCOUNT, request.getQuery());

@@ -111,6 +111,7 @@ public class FieldParamsFactory {
 		params.put(Checking.NUMBER, Long.toString(checking.getNumber()));
 		params.put(Checking.TOTAL, Float.toString(checking.getTotal()));
 		params.put(Checking.TYPE, Integer.toString(checking.getType().ordinal()));
+		params.put(Checking.STATUS, Integer.toString(checking.getStatus().ordinal()));
 		
 		return params;
 	}
@@ -130,6 +131,7 @@ public class FieldParamsFactory {
 		params.put(Credit.INTEREST, Float.toString(credit.getInterest()));
 		params.put(Credit.CREDITLIMIT, Float.toString(credit.getCreditLimit()));
 		params.put(Credit.TYPE, Integer.toString(credit.getType().ordinal()));
+		params.put(Checking.STATUS, Integer.toString(credit.getStatus().ordinal()));
 		
 		return params;
 	}
