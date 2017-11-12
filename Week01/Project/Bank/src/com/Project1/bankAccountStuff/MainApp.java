@@ -31,7 +31,8 @@ public class MainApp {
 	 * Add a Username field to the User class. Propogate this change through all relevant 
 	 * functions in Main
 	 * For login() function, allow user to enter 'q' or something to go back
-	 * Disable 'q' as a valid passoword
+	 * Disable 'q' as a valid password
+	 * Convert if-else chains to switch statements (To practice working with switch statements)
 	 */
 	
 	public static void main(String[] args) {		
@@ -43,9 +44,12 @@ public class MainApp {
 		try {
 			mp.readDatabase(mp.databaseFile);
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
+			//To Do: Expand exception handling?  
 			e1.printStackTrace();
 		} //To Do: Any finally statement?
+		
+		//Print at the start of the program
+		System.out.println("Welcome");
 		
 		//Loop over the Main Menu
 		while(!exit) {
@@ -70,8 +74,6 @@ public class MainApp {
 						System.out.println("FATAL ERROR #1: Should NEVER See This!!!!");
 						System.exit(1);
 					}
-					
-					
 				} else {
 					System.out.println("NOT Logged In");
 				}
@@ -153,7 +155,7 @@ public class MainApp {
 			this.db = (HashMap<String,User>)ois.readObject();
 			System.out.println("The Database!!!!: " + this.db);
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			//To Do: Fill in 
 			e.printStackTrace();
 		} finally {
 			//Close input stream
@@ -168,7 +170,6 @@ public class MainApp {
 	 * @return Contains user's choice from the initial menu
 	 */
 	private String mainMenu() {
-		System.out.println("Welcome");
 		System.out.println("_______________________________");
 		System.out.println("1) Login");
 		System.out.println("2) Create New Account");
@@ -277,8 +278,10 @@ public class MainApp {
 	 * Get user's response to menus
 	 * @return Returns user's choice
 	 */
-	private int getUserResponse() {
-		return 0;
+	private String getUserInput(String message) {
+		System.out.println(message);
+		Scanner aScanner = new Scanner(System.in);
+		return aScanner.nextLine();
 	}
 	
 	/**
