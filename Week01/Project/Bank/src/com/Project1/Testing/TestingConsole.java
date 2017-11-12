@@ -14,7 +14,6 @@ public class TestingConsole {
 		System.out.println("Enter a string: ");
 		String s = in.nextLine();
 		System.out.println(s);
-
 	}
 
 }
