@@ -866,6 +866,9 @@ public class Driver {
 
 	}
 	
+	/**
+	 * Client menu
+	 */
 	private void displayClientMenu() {
 		System.out.println("=======================================");
 		System.out.println("Client Menu");
@@ -877,10 +880,16 @@ public class Driver {
 		System.out.print("Choice: ");
 	}
 	
+	/**
+	 * Print the account balance for the current user
+	 */
 	private void displayAccountBalance() {
 		System.out.println("Current Balance: " + currentUser.getAccountAmount());
 	}
 	
+	/**
+	 * Get and deposit an amount from the user
+	 */
 	private void deposit() {
 		System.out.println("Enter amount to deposit: ");
 		String temp = getUserInput();
@@ -895,7 +904,10 @@ public class Driver {
 			System.out.println("Not a valid number");
 		}
 	}
-
+	
+	/**
+	 * Get and withdraw an amount from the user
+	 */
 	private void withdraw() {
 		System.out.println("Enter amount to withdraw: ");
 		String temp = getUserInput();
@@ -917,7 +929,11 @@ public class Driver {
 			System.out.println("Not a valid number");
 		}
 	}
-
+	
+	/**
+	 * Saves the database to a file at the end of the application
+	 * @throws IOException	Thrown when the ObjectOutputStream could not be closed
+	 */
 	public void saveDb() throws IOException {
 		// To Do: Don't pass in database! use this.db to access!!!!!
 		try {
