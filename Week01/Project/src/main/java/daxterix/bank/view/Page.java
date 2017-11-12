@@ -1,18 +1,35 @@
 package daxterix.bank.view;
 
 public abstract class Page {
-    protected abstract Page _run();
     private static final String DIVIDER = "______________________________________________________________________";
 
+    /**
+     * Defines the page's  interaction with the user, and what page it leads
+     * to be run next depending on user's interaction
+     *
+     * @return - the next page to be _run()
+     */
+    protected abstract Page _run();
+
+    /**
+     * Runs the given page to completion.
+     * Each page is a link in a chain, after running, each page returns the next page to be run,
+     * This continues until the page being run returns null, marking an exit to the application
+     */
     public void run() {
         Page page = this;
         do {
-            printPageTitle(page);
+            page.printTitle();
             page = page._run();
         }
         while(page != null);
     }
 
+    /**
+     * get title of page as determined by implementing class
+     *
+     * @return
+     */
     public abstract String getTitle();
 
 
@@ -20,15 +37,23 @@ public abstract class Page {
         System.out.println(DIVIDER);
     }
 
-    public static void printPageTitle(Page p) {
+    /**
+     * print the title
+     */
+    public void printTitle() {
         System.out.print("\n\n");
         printDivider();
-        System.out.println(p.getTitle());
+        System.out.println(getTitle());
         printDivider();
         System.out.println();
     }
 
-    public static boolean checkQuit() {
+    /**
+     * obtain user input on whether to quit
+     *
+     * @return - true if user indicates intent to quit; false otherwise
+     */
+    public boolean checkQuit() {
        String cmd = InputUtils.readLine("'quit' to quit or anything else to try-again");
        switch(cmd) {
             case "q":
@@ -41,6 +66,13 @@ public abstract class Page {
        }
     }
 
+    /**
+     * given a set of available operations (cmds), and their corresponding
+     * codes (which triggers said operations), prints then in formatted columns
+     *
+     * @param cmds -  available operations
+     * @param cmdCodes - triggering commands
+     */
     public void printCommands(String[] cmds, String[] cmdCodes) {
         System.out.println("You can do one of the following:");
 

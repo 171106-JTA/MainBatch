@@ -1,8 +1,8 @@
 package daxterix.bank.view;
 
 import daxterix.bank.model.Customer;
-import daxterix.bank.presistence.CustomerDAO;
-import daxterix.bank.presistence.PersistUtils;
+import daxterix.bank.dao.CustomerDAO;
+import daxterix.bank.dao.DAOUtils;
 
 public class LoginCustomerPage extends Page{
     @Override
@@ -13,7 +13,7 @@ public class LoginCustomerPage extends Page{
             String username = InputUtils.readLine("username");
             String password = InputUtils.readMasked("password");
 
-            CustomerDAO dao = PersistUtils.getUnlockedCustomerDao();
+            CustomerDAO dao = DAOUtils.getUnlockedCustomerDao();
             customer = dao.readById(username);
             if (customer == null)
                 System.out.println("Error: User does not exist. Please try again");

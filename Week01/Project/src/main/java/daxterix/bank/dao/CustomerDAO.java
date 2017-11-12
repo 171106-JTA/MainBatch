@@ -1,4 +1,4 @@
-package daxterix.bank.presistence;
+package daxterix.bank.dao;
 
 import daxterix.bank.model.Customer;
 

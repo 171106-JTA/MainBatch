@@ -1,10 +1,10 @@
 package daxterix.bank.view;
 
+import daxterix.bank.dao.DAOUtils;
 import daxterix.bank.model.*;
-import daxterix.bank.presistence.AdminDAO;
-import daxterix.bank.presistence.CustomerDAO;
-import daxterix.bank.presistence.PersistUtils;
-import daxterix.bank.presistence.RequestDAO;
+import daxterix.bank.dao.AdminDAO;
+import daxterix.bank.dao.CustomerDAO;
+import daxterix.bank.dao.RequestDAO;
 import static daxterix.bank.view.AdminPage.CommandEvalResult.*;
 
 import java.util.List;
@@ -78,7 +78,7 @@ public class AdminPage extends Page {
      * @return
      */
     boolean printPendingRequests() {
-        RequestDAO dao = PersistUtils.getRequestDao();
+        RequestDAO dao = DAOUtils.getRequestDao();
         List<UserRequest> requests =  dao.readAll();
         if (requests == null)
             return false;
@@ -130,7 +130,7 @@ public class AdminPage extends Page {
     }
 
     CommandEvalResult printLockedCustomers() {
-        CustomerDAO lockedCustomerDAO = PersistUtils.getLockedCustomerDao();
+        CustomerDAO lockedCustomerDAO = DAOUtils.getLockedCustomerDao();
         List<Customer> lockedCustomers = lockedCustomerDAO.readAll();
         if (lockedCustomers == null)
             return DATABASE_ERROR;
@@ -143,13 +143,13 @@ public class AdminPage extends Page {
     }
 
     private CommandEvalResult lockAccount(String second) {
-        CustomerDAO unlockedDao = PersistUtils.getUnlockedCustomerDao();
+        CustomerDAO unlockedDao = DAOUtils.getUnlockedCustomerDao();
 
         Customer customer = unlockedDao.readById(second);
         if (customer == null)
             return NO_SUCH_UNLOCKED_USER;
 
-        CustomerDAO lockedDao = PersistUtils.getLockedCustomerDao();
+        CustomerDAO lockedDao = DAOUtils.getLockedCustomerDao();
         if (!(lockedDao.save(customer) && unlockedDao.deleteById(customer.getUsername())))
             return DATABASE_ERROR;
 
@@ -157,13 +157,13 @@ public class AdminPage extends Page {
     }
 
     private CommandEvalResult unlockAccount(String second) {
-        CustomerDAO lockedDao = PersistUtils.getLockedCustomerDao();
+        CustomerDAO lockedDao = DAOUtils.getLockedCustomerDao();
 
         Customer customer = lockedDao.readById(second);
         if (customer == null)
             return NO_SUCH_LOCKED_USER;
 
-        CustomerDAO unlockedDao = PersistUtils.getUnlockedCustomerDao();
+        CustomerDAO unlockedDao = DAOUtils.getUnlockedCustomerDao();
         if (!(unlockedDao.save(customer) && lockedDao.deleteById(customer.getUsername())))
             return DATABASE_ERROR;
 
@@ -181,8 +181,8 @@ public class AdminPage extends Page {
      * @return
      */
     CommandEvalResult approveCreateRequest (String requestId) {
-        RequestDAO requestDao = PersistUtils.getRequestDao();
-        CustomerDAO customerDao = PersistUtils.getUnlockedCustomerDao();
+        RequestDAO requestDao = DAOUtils.getRequestDao();
+        CustomerDAO customerDao = DAOUtils.getUnlockedCustomerDao();
 
         CreationRequest req = (CreationRequest) requestDao.readById(requestId);
         if (req == null)
@@ -206,8 +206,8 @@ public class AdminPage extends Page {
      * @return
      */
     CommandEvalResult approvePromoteRequest (String requestId) {
-        RequestDAO requestDao = PersistUtils.getRequestDao();
-        AdminDAO adminDao = PersistUtils.getAdminDao();
+        RequestDAO requestDao = DAOUtils.getRequestDao();
+        AdminDAO adminDao = DAOUtils.getAdminDao();
 
         UserRequest req = requestDao.readById(requestId);
         if (req == null)
@@ -231,7 +231,7 @@ public class AdminPage extends Page {
      * @return
      */
     CommandEvalResult dropRequest(String requestId) {
-        RequestDAO requestDao = PersistUtils.getRequestDao();
+        RequestDAO requestDao = DAOUtils.getRequestDao();
         if (!requestDao.doesExist(requestId))
             return REQUEST_DNE;
         if (!requestDao.deleteById(requestId))

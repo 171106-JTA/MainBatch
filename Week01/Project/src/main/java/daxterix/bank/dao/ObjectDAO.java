@@ -1,14 +1,23 @@
-package daxterix.bank.presistence;
-
-import daxterix.bank.model.Model;
+package daxterix.bank.dao;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ObjectDAO <T extends Model> {
+public abstract class ObjectDAO <T extends Serializable> {
     String saveDir;
 
+    /**
+     * Abstraction of Object persistence using object Streams
+     * supports basic CRUD operations
+     *
+     * Implementing class has to provide method to extract an id
+     * String given an object instance
+     *
+     * Object type being managed has to implement the Serializable interface
+     *
+     * @param saveDir
+     */
     public ObjectDAO(String saveDir) {
         this.saveDir = saveDir;
     }
@@ -81,10 +90,10 @@ public abstract class ObjectDAO <T extends Model> {
     }
 
     public String saveLoc(String username) {
-        return PersistUtils.combinePaths(saveDir, username);
+        return DAOUtils.combinePaths(saveDir, username);
     }
 
     public boolean doesExist(String id) {
-        return PersistUtils.resourceExists(saveLoc(id));
+        return DAOUtils.resourceExists(saveLoc(id));
     }
 }

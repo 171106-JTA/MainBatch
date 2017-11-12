@@ -1,14 +1,14 @@
-package daxterix.bank.presistence;
+package daxterix.bank.dao;
 
-import daxterix.bank.model.Model;
+import java.io.Serializable;
 
-public abstract class SerialIDObjectDAO<T extends Model> extends ObjectDAO<T> {
+public abstract class SerialIDObjectDAO<T extends Serializable> extends ObjectDAO<T> {
     String highestIdPath;
     static final String saveDirToHighestIdPath = "highestId\\highestId";
 
     public SerialIDObjectDAO(String saveDir) {
         super(saveDir);
-        highestIdPath = PersistUtils.combinePaths(saveDir, saveDirToHighestIdPath);
+        highestIdPath = DAOUtils.combinePaths(saveDir, saveDirToHighestIdPath);
     }
 
     public abstract void setId(T obj, String newId);
@@ -16,7 +16,7 @@ public abstract class SerialIDObjectDAO<T extends Model> extends ObjectDAO<T> {
     public long getNextId(T o) {
 
         long ret;
-        if (!PersistUtils.resourceExists(highestIdPath))
+        if (!DAOUtils.resourceExists(highestIdPath))
             ret = 0;
 
         else {

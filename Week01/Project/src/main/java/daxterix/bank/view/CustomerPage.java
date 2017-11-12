@@ -2,9 +2,9 @@ package daxterix.bank.view;
 
 import daxterix.bank.model.Customer;
 import daxterix.bank.model.PromotionRequest;
-import daxterix.bank.presistence.CustomerDAO;
-import daxterix.bank.presistence.PersistUtils;
-import daxterix.bank.presistence.RequestDAO;
+import daxterix.bank.dao.CustomerDAO;
+import daxterix.bank.dao.DAOUtils;
+import daxterix.bank.dao.RequestDAO;
 
 import java.util.Scanner;
 
@@ -13,6 +13,12 @@ import static daxterix.bank.view.CustomerPage.CommandEvalResult.*;
 public class CustomerPage extends Page {
     private Customer customer;
 
+    /**
+     * Once logged in allows customer make deposits and withdrawals, as well as transfer
+     * funds to other accounts
+     *
+     * @param customer
+     */
     public CustomerPage(Customer customer) {
         this.customer = customer;
     }
@@ -26,6 +32,11 @@ public class CustomerPage extends Page {
         SUCCESS
     }
 
+    /**
+     * see Page._run()
+     *
+     * @return
+     */
     @Override
     protected Page _run() {
         printAccountInfo();
@@ -78,7 +89,7 @@ public class CustomerPage extends Page {
 
     boolean requestPromotion() {
         PromotionRequest req = new PromotionRequest(customer);
-        RequestDAO dao = PersistUtils.getRequestDao();
+        RequestDAO dao = DAOUtils.getRequestDao();
         return dao.save(req);
     }
 
@@ -110,7 +121,7 @@ public class CustomerPage extends Page {
     CommandEvalResult withdraw(double amt) {
         if (!customer.withdraw(amt))
             return INSUFFICIENT_FUNDS;
-        CustomerDAO customerDao = PersistUtils.getUnlockedCustomerDao();
+        CustomerDAO customerDao = DAOUtils.getUnlockedCustomerDao();
         if (!customerDao.update(customer))
             return DATABASE_ERROR;
 
@@ -120,13 +131,19 @@ public class CustomerPage extends Page {
     CommandEvalResult deposit(double amt) {
         customer.deposit(amt);
 
-        CustomerDAO customerDao = PersistUtils.getUnlockedCustomerDao();
+        CustomerDAO customerDao = DAOUtils.getUnlockedCustomerDao();
         if (!customerDao.update(customer))
             return DATABASE_ERROR;
 
         return SUCCESS;
     }
 
+    /**
+     * Transfer given amount to given user
+     *
+     * @param amtDest
+     * @return - returns SUCCESS if transfer was completed successfully
+     */
     CommandEvalResult transfer(String amtDest) {
         Scanner s = new Scanner(amtDest);
 
@@ -139,7 +156,7 @@ public class CustomerPage extends Page {
 
         String destUsername = s.next();
 
-        CustomerDAO customerDao = PersistUtils.getUnlockedCustomerDao();
+        CustomerDAO customerDao = DAOUtils.getUnlockedCustomerDao();
         if (!customerDao.doesExist(destUsername))
             return RECIPIENT_DNE;
 
@@ -160,7 +177,8 @@ public class CustomerPage extends Page {
     }
 
     /**
-     * checks that money amt argument is indeed a number, and is > 0
+     * checks that the given String is indeed a number, and is > 0
+     *
      * @param amt
      * @return
      */
@@ -174,6 +192,10 @@ public class CustomerPage extends Page {
         }
     }
 
+    /**
+     * see Page.getTitle()
+     * @return
+     */
     @Override
     public String getTitle() {
         return String.format("Welcome %s", customer.getUsername());

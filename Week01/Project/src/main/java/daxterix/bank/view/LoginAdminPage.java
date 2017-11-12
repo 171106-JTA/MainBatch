@@ -1,8 +1,8 @@
 package daxterix.bank.view;
 
 import daxterix.bank.model.Admin;
-import daxterix.bank.presistence.AdminDAO;
-import daxterix.bank.presistence.PersistUtils;
+import daxterix.bank.dao.AdminDAO;
+import daxterix.bank.dao.DAOUtils;
 
 public class LoginAdminPage extends Page {
 
@@ -14,7 +14,7 @@ public class LoginAdminPage extends Page {
             String username = InputUtils.readLine("username");
             String password = InputUtils.readMasked("password");
 
-            AdminDAO dao = PersistUtils.getAdminDao();
+            AdminDAO dao = DAOUtils.getAdminDao();
             admin = dao.readById(username);
             if (admin == null)
                 System.out.println("Error: Admin does not exist. Please try again");

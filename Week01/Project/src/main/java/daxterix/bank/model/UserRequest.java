@@ -1,8 +1,9 @@
 package daxterix.bank.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class UserRequest extends Model {
+public abstract class UserRequest implements Serializable {
     private static final long serialVersionUID = -2431727016053886785L;
 
     protected LocalDateTime time;
@@ -24,7 +25,7 @@ public class UserRequest extends Model {
     }
 
     /**
-     * set the id of the request. To be used by PersistUtils
+     * set the id of the request. To be used by DAOUtils
      * @param id
      */
     public void setId(long id) {
