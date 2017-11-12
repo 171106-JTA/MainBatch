@@ -447,10 +447,17 @@ public class Driver {
 	// Admin Functionality
 	////////////////////////////////////////////////////////
 	/**
-	 * Lock the given client's account
+	 * Unlock the given client's account
 	 * 
 	 * @param clientUsername
-	 *            Username of client account to lock
+	 *            Username of the client account to unlock
+	 */
+	public void unlockClientAccount(String clientUsername) {
+		
+	}
+	
+	/**
+	 * Lock a client's account
 	 */
 	public void lockClientAccount() {
 		boolean loop = true;
@@ -476,19 +483,9 @@ public class Driver {
 		}
 
 	}
-
-	/**
-	 * Unlock the given client's account
-	 * 
-	 * @param clientUsername
-	 *            Username of the client account to unlock
-	 */
-	public void unlockClientAccount(String clientUsername) {
-		
-	}
 	
 	/**
-	 * Display unlocked accounts to be locked
+	 * Display unlocked accounts (i.e. accounts that can be locked)
 	 */
 	private void displayUnlockedAccounts() {
 		System.out.println("SSN's for currently unlocked accounts");
@@ -503,7 +500,7 @@ public class Driver {
 
 	/**
 	 * Fetch unlocked accounts from the internal database
-	 * @return List containing ID's of currently unlocked accounts
+	 * @return Returns a list containing ID's of currently unlocked accounts
 	 */
 	private List<String> getUnlockedAccounts() {
 		// Loop through db and search for unlocked user accounts
@@ -520,6 +517,10 @@ public class Driver {
 		return unlockedUserAccounts;
 	}
 	
+	/**
+	 * Get and validate the Admin's choice of client to lock. Lock the client's account
+	 * @return Returns TRUE if the admins choses a valid user and False otherwise
+	 */
 	private boolean getAndLockAccount() {
 		boolean validUser = false;
 		String input = getUserInput();
@@ -572,11 +573,10 @@ public class Driver {
 		}
 	}
 
-	// To Do: Change 'sub-functions' to private
 	/**
 	 * Display accounts that need approving
 	 */
-	public void displayAccountsNeedingApproval() {
+	private void displayAccountsNeedingApproval() {
 		System.out.println("SSNs for accounts needing approval");
 
 		List<String> approvalPendingAccounts = getApprovalPendingAccounts();
@@ -587,14 +587,13 @@ public class Driver {
 		System.out.println("Enter Account To Approve: ");
 	}
 
-	// To Do: Change to private
 	/**
 	 * Fetch the accounts that need approving from the internal database
 	 * 
 	 * @return Returns a list of strings containing the user accounts that need
 	 *         approving
 	 */
-	public List<String> getApprovalPendingAccounts() {
+	private List<String> getApprovalPendingAccounts() {
 		// Loop through db and search for accounts needing approval
 		// To Do: Find a better way to do this than O(n)
 		List<String> ssnNeedingApproval = new ArrayList<String>();
@@ -614,7 +613,7 @@ public class Driver {
 	 * @return Returns TRUE if the admin's input is valid and FALSE if the input is
 	 *         invalid
 	 */
-	public boolean getAndApproveAccount() {
+	private boolean getAndApproveAccount() {
 		boolean validUser = false;
 		String input = getUserInput();
 		User user = this.db.get(input);
