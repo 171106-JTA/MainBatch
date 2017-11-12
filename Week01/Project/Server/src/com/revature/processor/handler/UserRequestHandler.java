@@ -238,25 +238,11 @@ public final class UserRequestHandler {
 	}
 	
 	public Resultset setAccountStatus(Request request) {
-		return null;
+		FieldParams transact = new FieldParams();
+		
+		// Ensure we are only updating account status 
+		transact.put(Account.STATUS, request.getTransaction().get(Account.STATUS));
+		
+		return new Resultset(Server.database.update(BusinessClass.ACCOUNT, request.getQuery(), transact));
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
