@@ -397,6 +397,7 @@ public class Driver {
 			}
 
 			if (loop) {
+				// To Do: Refactor these functions to extrapolate common functionality
 				// If user chose a valid option,
 				if (userInput.equals("1")) {
 					System.out.println("Option 1");
@@ -409,7 +410,7 @@ public class Driver {
 					unlockClientAccount();
 				} else if (userInput.equals("4")) {
 					System.out.println("Option 4");
-					// promoteClientToAdmin();
+					promoteClientToAdmin();
 				} else if (userInput.equals("5")) {
 					System.out.println("Logging Out");
 					loop = false;
@@ -446,6 +447,7 @@ public class Driver {
 	////////////////////////////////////////////////////////
 	// Admin Functionality
 	////////////////////////////////////////////////////////
+
 	/**
 	 * Unlock the given client's account
 	 * 
@@ -711,7 +713,75 @@ public class Driver {
 	 * Allows admins to promote clients to admin status
 	 */
 	public void promoteClientToAdmin() {
+		boolean loop = true;
+		int loopCounter = 0;
+		final int maxLoopIteration = 5;
 
+		// Input validation loop.
+		// The Admin is limited to 'maxLoopIteration' tries before being sent
+		// back to the previous menu
+		while (loop && loopCounter < maxLoopIteration) {
+			displayClients();
+			loop = !getAndPromoteClient(); // loop while the user input is invalid
+
+			// Count number of incorrect inputs
+			if (loop) {
+				loopCounter += 1;
+			}
+		}
+
+		// Print appropriate message, if incorrect input limit is reached
+		if (loopCounter == maxLoopIteration) {
+			System.out.println("Too many invalid tries");
+		}
+	}
+
+	private void displayClients() {
+		System.out.println("SSNs for accounts needing approval");
+
+		List<String> approvalPendingAccounts = getClients();
+		for (String item : approvalPendingAccounts) {
+			System.out.println(item);
+		}
+		System.out.println("\n");
+		System.out.println("Enter Account To Approve: ");
+	}
+
+	private List<String> getClients() {
+		// Loop through db and search for all clients
+		// To Do: Find a better way to do this than O(n)
+		List<String> ssnClients = new ArrayList<String>();
+		for (String key : this.db.keySet()) {
+			if (this.db.get(key).getPermissions() == permission_client) {
+				ssnClients.add(key);
+			}
+		}
+
+		return ssnClients;
+	}
+	
+	private boolean getAndPromoteClient() {
+		boolean validUser = false;
+		String input = getUserInput();
+		User user = this.db.get(input);
+
+		// Check if designated user exists and is a client.
+		// Note: nested if-statements for error message purposes
+		// (i.e. allows for unique error message based on situation)
+		if (user != null) {
+			if (user.getPermissions() == permission_client) {
+				user.setPermissions(permission_admin);
+				this.db.put(user.getSsn(), user);
+				validUser = true;
+				System.out.println("Account Promoted to Admin!");
+			} else {
+				System.out.println("Account: " + user.getSsn() + " is already an admin");
+			}
+		} else {
+			System.out.println("User is not in the database");
+		}
+
+		return validUser;
 	}
 
 	////////////////////////////////////////////////////////
