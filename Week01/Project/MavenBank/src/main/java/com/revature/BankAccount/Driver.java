@@ -376,6 +376,7 @@ public class Driver {
 		List<String> validOptions = Arrays.asList(options);
 
 		while (loop) {
+			//Get input from Admin
 			boolean validInput = false;
 			int loopLimitCounter = 0;
 			final int loopLimit = 5;
@@ -449,10 +450,7 @@ public class Driver {
 	////////////////////////////////////////////////////////
 
 	/**
-	 * Unlock the given client's account
-	 * 
-	 * @param clientUsername
-	 *            Username of the client account to unlock
+	 * Functionality for admins to unlock client accounts
 	 */
 	public void unlockClientAccount() {
 		boolean loop = true;
@@ -478,6 +476,9 @@ public class Driver {
 		}
 	}
 
+	/**
+	 * Display all currently locked accounts (i.e. the accounts able to be unlocked) 
+	 */
 	private void displayLockedAccounts() {
 		System.out.println("SSN's for currently locked accounts");
 
@@ -488,7 +489,11 @@ public class Driver {
 		System.out.println("\n");
 		System.out.println("Enter Account To Lock: ");
 	}
-
+	
+	/**
+	 * Get all locked accounts from the internal database
+	 * @return Returns a list containing the SSNs of all locked client accounts
+	 */
 	private List<String> getLockedAccounts() {
 		// Loop through db and search for unlocked user accounts
 		// To Do: Find a better way to do this than O(n)
@@ -502,7 +507,11 @@ public class Driver {
 
 		return lockedUserAccounts;
 	}
-
+	
+	/**
+	 * Get an account SSN from the admin, validate the input, and unlock the specified account
+	 * @return Returns TRUE is the SSN was valid and FALSE if not
+	 */
 	private boolean getAndUnlockAccount() {
 		boolean validUser = false;
 		String input = getUserInput();
@@ -528,7 +537,7 @@ public class Driver {
 	}
 
 	/**
-	 * Lock a client's account
+	 * Functionality for admins to lock a client accounts
 	 */
 	public void lockClientAccount() {
 		boolean loop = true;
@@ -735,7 +744,10 @@ public class Driver {
 			System.out.println("Too many invalid tries");
 		}
 	}
-
+	
+	/**
+	 * Display all clients in the databae (i.e. all entries in the database that are client and not admin)
+	 */
 	private void displayClients() {
 		System.out.println("SSNs for accounts needing approval");
 
@@ -746,7 +758,11 @@ public class Driver {
 		System.out.println("\n");
 		System.out.println("Enter Account To Approve: ");
 	}
-
+	
+	/**
+	 * Fetch all clients in the database
+	 * @return Returns a list containing the SSNs of all clients in the database
+	 */
 	private List<String> getClients() {
 		// Loop through db and search for all clients
 		// To Do: Find a better way to do this than O(n)
@@ -760,6 +776,11 @@ public class Driver {
 		return ssnClients;
 	}
 	
+	/**
+	 * Get a SSN from the admin, validate the input, and promote that client to an admin
+	 * @return Returns TRUE if the specified user is a client and FALSE if specified user is invalid 
+	 * (that is, does not exist in the database, or already an admin)
+	 */
 	private boolean getAndPromoteClient() {
 		boolean validUser = false;
 		String input = getUserInput();
@@ -794,7 +815,7 @@ public class Driver {
 	 *            Amount to be deposited into Client's account
 	 */
 	public void deposit(double depositAmount) {
-
+		
 	}
 
 	/**
