@@ -1,5 +1,7 @@
 package com.revature.processor;
 
+import com.revature.businessobject.info.Info;
+import com.revature.businessobject.info.account.Account;
 import com.revature.businessobject.info.account.AccountType;
 import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.Checkpoint;
@@ -78,15 +80,17 @@ public class UserProcessor implements Processorable {
 				break;
 			case "GETCHECKINGACCOUNT":
 				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
+				res = URH.getAccount(request, AccountType.CHECKING);
 				break;
 			case "GETCEDITACCOUNT":
 				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER},  request);
+				res = URH.getAccount(request, AccountType.CREDIT);
 				break;
-			case "SETCHECKINGACCOUNT":
-				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
-				break;
-			case "SETCREDITACCOUNT":
-				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
+			case "SETACCOUNTSTATUS":
+				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN },  request);
+				Require.requireQuery(new String[] { Info.USERID }, request);
+				Require.requireTransaction(new String[] { Account.STATUS }, request);
+				res = URH.setAccountStatus(request);
 				break;
 			default:
 				throw new RequestException(request, "Transtype=[\'" + request.getTranstype() + "\'] is unknown!");

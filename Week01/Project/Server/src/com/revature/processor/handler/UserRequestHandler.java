@@ -224,9 +224,22 @@ public final class UserRequestHandler {
 	}
 	
 	
+	public Resultset getAccount(Request request, String type) throws RequestException {
+		FieldParams query = request.getQuery();
+		
+		// For NON-ADMINS only personal account information should be accessible 
+		if (request.getCheckpoint() != Checkpoint.ADMIN) 
+			Require.requireSelfQuery(request);
+				
+		// Set type of account we are looking for 
+		query.put(Account.TYPE, type);
 	
+		return Server.database.select(BusinessClass.ACCOUNT, query);
+	}
 	
-	
+	public Resultset setAccountStatus(Request request) {
+		return null;
+	}
 	
 	
 	
