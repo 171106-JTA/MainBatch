@@ -37,7 +37,7 @@ public class Driver {
 	 * through all relevant functions in Main. For login() function, allow user to
 	 * enter 'q' or something to go back. Disable 'q' as a valid password. Convert
 	 * if-else chains to switch statements (To practice working with switch
-	 * statements).
+	 * statements). Clean up consol output with clear-console statements
 	 */
 
 	public static void main(String[] args) {
@@ -108,6 +108,28 @@ public class Driver {
 				int accountAmount = 0;
 				User default_user_1 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
 						accountAmount);
+				
+				firstName = "Evan";
+				lastName = "West";
+				middleInitial = "A";
+				ssn = "01";
+				password = "01";
+				permissions = 0;
+				status = 0;
+				accountAmount = 0;
+				User default_user_1_b = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+						accountAmount);
+				
+				firstName = "Evan";
+				lastName = "West";
+				middleInitial = "A";
+				ssn = "02";
+				password = "02";
+				permissions = 0;
+				status = 0;
+				accountAmount = 0;
+				User default_user_1_c = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+						accountAmount);
 
 				firstName = "A";
 				lastName = "A";
@@ -146,6 +168,8 @@ public class Driver {
 				mp.db.put(default_user_2.getSsn(), default_user_2);
 				mp.db.put(default_user_3.getSsn(), default_user_3);
 				mp.db.put(default_user_4.getSsn(), default_user_4);
+				mp.db.put(default_user_1_b.getSsn(), default_user_1_b);
+				mp.db.put(default_user_1_c.getSsn(), default_user_1_c);
 
 				// Print database. For coding purposes
 				System.out.println("The Database!!!!: ");
@@ -213,7 +237,9 @@ public class Driver {
 	 * @return Contains user's choice from the initial menu
 	 */
 	private String mainMenu() {
-		System.out.println("_______________________________");
+		System.out.println("=======================================");
+		System.out.println("Main Menu");
+		System.out.println("=======================================");
 		System.out.println("1) Login");
 		System.out.println("2) Create New Account");
 		System.out.println("3) Exit");
@@ -345,23 +371,34 @@ public class Driver {
 	private void adminMenu() {
 		boolean loop = true;
 
-		String[] options = new String[] { "1", "2", "3", "4" };
+		String[] options = new String[] { "1", "2", "3", "4", "5"};
 		List<String> validOptions = Arrays.asList(options);
 
 		while (loop) {
-			displayAdminMenu();
-			String userInput = getUserInput();
-			System.out.println("userInput: " + userInput);
-			System.out.println("want: " + "1");
-			System.out.println("Test Result: " + userInput.equals("1"));
-			// loop = validateInput(userInput, validOptions);
+			boolean validInput = false;
+			int loopLimitCounter = 0; 
+			final int loopLimit = 5;
+			String userInput = null;
+			while(!validInput) {
+				displayAdminMenu();
+				userInput = getUserInput();
+				validInput = validOptions.contains(userInput);
+				if(!validInput) {
+					if(loopLimitCounter < loopLimit)
+					{
+						System.out.println("Not an option");
+						loopLimitCounter += 1; 
+					}
+					else {
+						System.out.println("Too many invalid optoins");
+						loop = false; //End the Administator's menu loop
+						validInput = true; //End the validation loop
+					}
+				}
+			}
 			
-			System.out.println(validOptions);
-			System.out.println(validOptions.contains(userInput));
-			loop = !validOptions.contains(userInput);
-			System.out.println("Loop: " + loop);
-			// If user chose a valid option,
-			if (!loop) {
+			if(loop) {
+				// If user chose a valid option,
 				if (userInput.equals("1")) {
 					System.out.println("Option 1");
 					approveClientAccount();
@@ -374,30 +411,28 @@ public class Driver {
 				} else if (userInput.equals("4")) {
 					System.out.println("Option 4");
 					// promoteClientToAdmin();
+				} else if (userInput.equals("5")){
+					System.out.println("Logging Out");
+					loop = false;
 				} else {
+				
 					System.out.println("FATAL ERROR!!!! Should not see this. IN adminMenu()");
 				}
-				// Otherwise, print error message, and allow next iteration of loop
-			} else {
-				System.out.println("Not and option");
 			}
 		}
-
 	}
 
 	private void displayAdminMenu() {
-		System.out.println("_______________________________");
+		System.out.println("=======================================");
 		System.out.println("Administrator Menu");
+		System.out.println("=======================================");
 		System.out.println("1) Approve Client Accounts");
 		System.out.println("2) Lock Client Accounts");
 		System.out.println("3) Unlock Client Accounts");
 		System.out.println("4) Promote Clients to Administrators");
+		System.out.println("5) Logout");
 		System.out.print("Choice: ");
 	}
-
-	// private boolean validateInput(String userInput, List<String> validOptions) {
-	// return validOptions.contains(userInput);
-	// }
 
 	/**
 	 * Display menu for Client's, get Clien'ts choice, and validate Client's choice
