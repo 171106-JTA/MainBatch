@@ -42,6 +42,7 @@ public class FilePersistenceTest {
 	static String customerPassword;
 	static long checkingId;
 	static long creditId;
+	
 	@BeforeClass
 	public static void setupBeforeClass() {
 		manager = FileDataManager.getManager();
@@ -565,5 +566,4 @@ public class FilePersistenceTest {
 		assertNotNull("Should have resultset from query", resultset = manager.select(BusinessClass.ACCOUNT, null));
 		assertTrue("Should have 0 records", resultset.size() == 0);
 	}
-	
 }
