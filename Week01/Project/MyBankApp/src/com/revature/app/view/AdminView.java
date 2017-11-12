@@ -235,7 +235,7 @@ public class AdminView implements View {
 	}
 	
 	private void printOptions() {
-		Menu.println("What would like to due: ");
+		Menu.println("What would like to do: ");
 		Menu.println("\t- 0 - manage pending users");
 		Menu.println("\t- 1 - manage pending accounts");
 		Menu.println("\t- 2 - manage existing users");

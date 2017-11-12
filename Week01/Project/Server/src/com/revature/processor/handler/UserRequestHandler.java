@@ -112,10 +112,14 @@ public final class UserRequestHandler {
 	 * Allows everything except user id to be updated 
 	 * @param request
 	 * @return
+	 * @throws RequestException
 	 */
 	public Resultset setUser(Request request) throws RequestException {
 		FieldParams query = request.getQuery();
 		FieldParams trans = request.getTransaction();
+		
+		// Ensure that update is unique
+		Require.requireUnique(BusinessClass.USER, trans, request);
 		
 		// If user account Ensure they are updating their account only 
 		if (request.getCheckpoint() != Checkpoint.ADMIN) {
