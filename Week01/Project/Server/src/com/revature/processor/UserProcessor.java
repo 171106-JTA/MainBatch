@@ -1,5 +1,6 @@
 package com.revature.processor;
 
+import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.Checkpoint;
 import com.revature.businessobject.user.User;
 import com.revature.core.Request;
@@ -26,9 +27,11 @@ public class UserProcessor implements Processorable {
 				res = URH.login(request);
 				break;
 			case "CREATEUSER":
-				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER }, request);
+				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.NONE }, request);
 				Require.requireAllTransaction(new String[] { User.USERNAME,  User.PASSWORD }, request);
 				res = URH.createUser(request);
+				break;
+			case "DELETEUSER":
 				break;
 			case "GETUSER":
 				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER }, request);
@@ -37,6 +40,11 @@ public class UserProcessor implements Processorable {
 			case "SETUSER":
 				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
 				res = URH.setUser(request);
+				break;
+			case "CREATEUSERINFO":
+				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.PENDING, Checkpoint.NONE }, request);
+				Require.requireAllTransaction(new String[] { UserInfo.USERID, UserInfo.PHONENUMBER, UserInfo.EMAIL, UserInfo.ADDRESS }, request);
+				res = URH.createUserInfo(request);
 				break;
 			case "GETUSERINFO":
 				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
@@ -48,6 +56,8 @@ public class UserProcessor implements Processorable {
 			case "GETACCOUNT":
 				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
 				res = URH.getAccount(request);
+				break;
+			case "DELETEACCOUNT":
 				break;
 			case "GETCHECKINGACCOUNT":
 				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);

@@ -26,6 +26,15 @@ public class Menu {
 	//	WRITES TO CONSOLE
 	///
 	
+	public static synchronized void print(String message) {
+		System.out.print(message);
+	}
+	
+	
+	public static synchronized void println(String message) {
+		System.out.println(message);
+	}
+	
 	public static void printMenu() {
 		System.out.println("===============================================================");
 		System.out.println("====================== WELCOME TO MYBANK ======================");
@@ -37,6 +46,16 @@ public class Menu {
 		System.out.println("=   - login - signing for existing users                      =");
 		System.out.println("=                                                             =");
 		System.out.println("=   - exit - to quit the application                          =");
+		System.out.println("=                                                             =");
+		System.out.println("===============================================================");
+	}
+	
+	public static void printCreateUserMenu() {
+		System.out.println("=====================   Welcome New User  =====================");
+		System.out.println("=                                                             =");
+		System.out.println("=                      Please Fill in the                     =");
+		System.out.println("=                   required information below                =");
+		System.out.println("=                            please.                          =");
 		System.out.println("=                                                             =");
 		System.out.println("===============================================================");
 	}

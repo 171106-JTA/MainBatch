@@ -158,6 +158,9 @@ public class Server extends Thread {
 			
 			// remove from cached requests
 			requests.remove(sessionid);
+			
+			if (session.hasError())
+				throw session.getException();
 		} 
 		
 		return response;
@@ -196,6 +199,7 @@ public class Server extends Thread {
 				bigboss = new ArrayList<>();
 				bigboss.add(new Admin(0, "big.boss", "master"));
 				bigboss.add(new UserInfo(0, "big.boss@mybank.com", "34123 Mybank St., 14356 Pluto", "1234567890"));
+				bigboss.add(new User(1, "guest", "guest", Checkpoint.NONE));
 			}
 		} catch (RequestException e) {
 			// TODO log

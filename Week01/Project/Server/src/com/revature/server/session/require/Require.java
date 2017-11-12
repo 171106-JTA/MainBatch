@@ -73,6 +73,11 @@ public final class Require {
 			throw new RequestException(request, "Data with values specified already exist!");
 	}
 	
+	public static void requireExists(String table, FieldParams query, Request request) throws RequestException {
+		if (Server.database.select(table, query).size() == 0)
+			throw new RequestException(request, "Data with values specified does not exist!");
+	}
+	
 	///
 	//	PRIVATE METHODS 
 	///
@@ -121,16 +126,20 @@ public final class Require {
 		List<String> errors = new ArrayList<>();
 		String value;
 		
-		// Check if request has required parameters 
-		for (String param : params) {
-			if (!requestParams.containsKey(param)) {
-				errors.add(param);
-			} else {
-				if ((value = requestParams.get(param)) != null || value.length() == 0)
-					errors.add(param + " <cannot be null or empty!>");
+		// Request parameters are REQUIRED
+		if (requestParams == null) 
+			errors.addAll(Arrays.asList(params));
+		else {
+			// Check if request has required parameters 
+			for (String param : params) {
+				if (!requestParams.containsKey(param)) {
+					errors.add(param);
+				} else {
+					if ((value = requestParams.get(param)) == null || value.length() == 0)
+						errors.add(param + " <cannot be null or empty!>");
+				}
 			}
 		}
-		
 		return errors;
 	}
 	
@@ -141,22 +150,27 @@ public final class Require {
 		String param;
 		String value;
 		
-		// Server should not run if required parameters not properly entered.
-		assert params.length == values.length;
-		
-		itParams = Arrays.asList(params).iterator();
-		itValues = Arrays.asList(params).iterator();
-		
-		// Check if request has required parameters 
-		for (;itParams.hasNext();) {
-			param = itParams.next();
-			value = itValues.next();
+		// Request parameters are REQUIRED
+		if (requestParams == null) 
+			errors.addAll(Arrays.asList(params));
+		else {
+			// Server should not run if required parameters not properly entered.
+			assert params.length == values.length;
 			
-			// Check if parameter not missing
-			if (requestParams.containsKey(param)) {
-				// Check if value valid 
-				if (!value.equals(requestParams.get(param))) 
-					errors.add(param);
+			itParams = Arrays.asList(params).iterator();
+			itValues = Arrays.asList(values).iterator();
+			
+			// Check if request has required parameters 
+			for (;itParams.hasNext();) {
+				param = itParams.next();
+				value = itValues.next();
+				
+				// Check if parameter not missing
+				if (requestParams.containsKey(param)) {
+					// Check if value valid 
+					if (!value.equals(requestParams.get(param))) 
+						errors.add(param);
+				}
 			}
 		}
 		

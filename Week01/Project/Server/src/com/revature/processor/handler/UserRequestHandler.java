@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.revature.businessobject.BusinessObject;
+import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.Checkpoint;
 import com.revature.businessobject.user.User;
 import com.revature.core.BusinessClass;
@@ -27,8 +28,11 @@ public final class UserRequestHandler {
 		
 		if (res.size() > 0) {
 			User user = (User) res.get(0);
-			Require.require(new String[] { User.CHECKPOINT, User.CHECKPOINT },
-						    new String[] { Integer.toString(Checkpoint.CUSTOMER.ordinal()), Integer.toString(Checkpoint.ADMIN.ordinal()) }, 
+			Require.require(new String[] { User.CHECKPOINT, User.CHECKPOINT, User.CHECKPOINT, User.CHECKPOINT },
+						    new String[] { Integer.toString(Checkpoint.CUSTOMER.ordinal()), 
+						    			   Integer.toString(Checkpoint.ADMIN.ordinal()),
+						    			   Integer.toString(Checkpoint.PENDING.ordinal()),
+						    			   Integer.toString(Checkpoint.NONE.ordinal())}, 
 						    GenericHelper.fieldParamsFactory.getFieldParams(user), request);
 		}
 		
@@ -53,7 +57,7 @@ public final class UserRequestHandler {
 		transact.put(User.ID, user != null ? Long.toString(((User)user).getId() + 1) : "0");
 		
 		// If non-admin then set account to pending 
-		if (request.getCheckpoint() == Checkpoint.CUSTOMER) 
+		if (request.getCheckpoint() != Checkpoint.ADMIN) 
 			transact.put(User.CHECKPOINT, Integer.toString(Checkpoint.PENDING.ordinal()));
 		
 		// Insert user 
@@ -94,6 +98,21 @@ public final class UserRequestHandler {
 		Server.database.update(BusinessClass.USER, query, trans);
 		
 		return new Resultset(Server.database.update(BusinessClass.USER, query, trans));
+	}
+	
+	public Resultset createUserInfo(Request request) throws RequestException {
+		FieldParams conditions = new FieldParams();
+		
+		// UserInfo record must not exist 
+		Require.requireUnique(BusinessClass.USERINFO, request.getTransaction(), request);
+		
+		// Set condition params
+		conditions.put(User.ID, request.getTransaction().get(UserInfo.USERID));
+		
+		// User account must exist before it can be created 
+		Require.requireExists(BusinessClass.USER, conditions, request);;
+		
+		return new Resultset(Server.database.insert(BusinessClass.USERINFO, request.getTransaction()));
 	}
 	
 	public Resultset getUserInfo(Request request) throws RequestException { 

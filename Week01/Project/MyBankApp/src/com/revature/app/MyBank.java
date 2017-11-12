@@ -30,6 +30,7 @@ public class MyBank {
 			// Handle possible inputs by user 
 			switch (input.toLowerCase()) {
 				case "new":
+					createAccount();
 					break;
 				case "login":
 					login();
@@ -37,7 +38,7 @@ public class MyBank {
 				case "exit":
 					break;
 				default:
-					System.out.println(input + " is unknown input!");
+					Menu.println(input + " is unknown input!");
 			}
 			
 			// Data is non-null value on successful login
@@ -53,7 +54,7 @@ public class MyBank {
 			}
 		}
 		
-		System.out.println("Goodbye!!!");
+		Menu.println("Goodbye!!!");
 		
 		// Tell server to stop when app complete
 		server.kill();
@@ -68,24 +69,82 @@ public class MyBank {
 				new CustomerView().run();
 				break;
 			default:
-				System.out.println("Unknown user role");
+				Menu.println("Unknown user role");
 		}
 	}
 	
 	public static void login() {
-		String username = Menu.getInput("Username:>");
-		String password = Menu.getInput("Password:>");
-		
-		try {	
-			data = server.login(username, password);
-		} catch (Exception e) {
-			System.out.println("error:>" + e.getMessage());
-			data = null;
-		}
+		signin(Menu.getInput("Username:>"), Menu.getInput("Password:>"));
 	}
 	
 	public static void createAccount() {
+		FieldParams params = new FieldParams();
+		Resultset res;
+		String username;
+		String password;
+		String email;
+		String address;
+		String phonenumber;
 		
+		Menu.printCreateUserMenu();
+		username = Menu.getInput("Usename: ");
+		password = Menu.getInput("Password: ");
+		email = Menu.getInput("Email: ");
+		address = Menu.getInput("Address: ");
+		phonenumber = Menu.getInput("Phonenumber: ");
+		
+		// Sign in as guest
+		signin("guest", "guest");
+		
+		if (data != null) {
+			// Set new user params
+			params.put(User.SESSIONID, data.get(User.SESSIONID));
+			params.put(User.USERNAME, username);
+			params.put(User.PASSWORD, password);
+			
+			Menu.print("\n\tAttempting to create account...");
+			
+			// Request to create new account
+			if ((res = send(new Request(data, "USER", "CREATEUSER", null, params))).getRecordsModified() == 0) {
+				synchronized(MyBank.class) {
+					Menu.println("fail!\n");
+					Menu.println("error:>" + res.getException().getMessage() + "\n");	
+				}
+			} else {
+				Menu.println("done\n\tAttempting to create user info...");
+				
+				// Close guest account
+				server.kill(Integer.parseInt(data.get(User.SESSIONID)));
+				
+				// login in account
+				signin(username, password);
+				
+				// Set userinfo data
+				params.clear();
+				params.put(UserInfo.USERID, data.get(User.ID));
+				params.put(User.SESSIONID, data.get(User.SESSIONID));
+				params.put(UserInfo.EMAIL, email);
+				params.put(UserInfo.ADDRESS, address);
+				params.put(UserInfo.PHONENUMBER, phonenumber);
+				
+				// Did we fail to create user information?
+				if ((res = send(new Request(data, "USER", "CREATEUSERINFO", null, params))).getRecordsModified() == 0) {
+					Menu.println("fail!");
+					Menu.println("\nerror:>" + res.getException().getMessage() + "\n");
+				}
+				else {
+					Menu.println("done");
+					Menu.println("Account now waiting for approval!");
+					Menu.println("Thank you!");
+				}
+			}
+			
+			// Close session
+			server.kill(Integer.parseInt(data.get(User.SESSIONID)));
+			data = null;
+		} else {
+			Menu.println("Failed to create account!");
+		}
 	}
 	
 	///
@@ -107,7 +166,7 @@ public class MyBank {
 			}
 			
 		} catch (RequestException e) {
-			// TODO log
+			res = new Resultset(e);
 		}
 		
 		return res;
@@ -135,4 +194,18 @@ public class MyBank {
 		
 		return MyBank.send(new Request(data, "USER", "GETACCOUNT", params, null));
 	}
+	
+	///
+	//	PRIVATE METHODS 
+	///
+	
+	private static void signin(String username, String password) {
+		try {	
+			data = server.login(username, password);
+		} catch (Exception e) {
+			Menu.println("error:>" + e.getMessage());
+			data = null;
+		}
+	}
+	
 }

@@ -14,8 +14,8 @@ public class Request {
 	
 	public Request(FieldParams loginResponse, String route, String transtype, FieldParams query, FieldParams transaction) {
 		super();
-		this.sessionId = loginResponse.get(User.SESSIONID) == null ? 0 : Integer.parseInt(loginResponse.get("sessionid"));
-		this.userId = loginResponse.get(User.ID) == null ? 0 : Long.parseLong(loginResponse.get("id"));
+		this.sessionId = loginResponse.get(User.SESSIONID) == null ? 0 : Integer.parseInt(loginResponse.get(User.SESSIONID));
+		this.userId = loginResponse.get(User.ID) == null ? 0 : Long.parseLong(loginResponse.get(User.ID));
 		this.route = route.toUpperCase();
 		this.transtype = transtype.toUpperCase();
 		this.query = query;

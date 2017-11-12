@@ -25,6 +25,10 @@ public class UserBuilder implements BusinessObjectBuilder {
 			case CUSTOMER:
 				object = new Customer(Long.parseLong(args.get(User.ID)), args.get(User.USERNAME), args.get(User.PASSWORD));
 				break;
+			case NONE:
+			case PENDING:
+				object = new User(Long.parseLong(args.get(User.ID)), args.get(User.USERNAME), args.get(User.PASSWORD), Checkpoint.PENDING);
+				break;
 		}
 		
 		return object;
