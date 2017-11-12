@@ -4,7 +4,10 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 public abstract class ObjectDAO <T extends Serializable> {
+    final Logger logger = Logger.getLogger(getClass());
     String saveDir;
 
     /**
@@ -37,7 +40,9 @@ public abstract class ObjectDAO <T extends Serializable> {
      * @return - true if id is valid and object is successfully loaded
      */
     public T readById(String id) {
-        return (T) readObject(saveLoc(id));
+        T res = (T) readObject(saveLoc(id));
+        logger.debug(String.format("fetched object %s from %s", id, getClass()));
+        return res;
     }
 
     /**
@@ -50,13 +55,16 @@ public abstract class ObjectDAO <T extends Serializable> {
         File saveDirFile = new File(saveDir);
         File[] files = saveDirFile.listFiles();
 
-        if (files == null)
+        if (files == null) {
+            logger.debug(String.format("failed to fetch all objects from %s", getClass()));
             return res;
+        }
 
         for (File file : files) {
             if (file.isFile())
                 res.add((T) readObject(file.getAbsolutePath()));
         }
+        logger.debug(String.format("fetched all objects from %s", getClass()));
         return res;
     }
 
@@ -68,10 +76,12 @@ public abstract class ObjectDAO <T extends Serializable> {
      */
     public Object readObject(String saveLoc) {
         try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(saveLoc))) {
-            return ois.readObject();
+            Object res = ois.readObject();
+            logger.debug(String.format("fetched object from %s at path %s", getClass(), saveLoc));
+            return res;
         }
         catch (IOException | ClassNotFoundException e) {
-            //e.printStackTrace();
+            logger.debug(String.format("failed to fetch object from %s with exception %s", getClass(), e));
             return null;
         }
     }
@@ -84,11 +94,13 @@ public abstract class ObjectDAO <T extends Serializable> {
      */
     public boolean save(T model) {
         String id = getId(model);
+
+        logger.debug(String.format("attempting to save object %s from %s", getId(model), getClass()));
         return saveObject(model, saveLoc(id));
     }
 
     /**
-     * save object to given filepath
+     * save object to given filepath, creates the required directories if they do not exist
      *
      * @param obj
      * @param saveLoc
@@ -100,10 +112,11 @@ public abstract class ObjectDAO <T extends Serializable> {
 
         try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(saveLocFile))) {
             oos.writeObject(obj);
+            logger.debug(String.format("saved object from %s at path %s", getClass(), saveLoc));
             return true;
         }
         catch (IOException e) {
-            e.printStackTrace();
+            logger.debug(String.format("failed to save object from %s at path %s with exception %s", getClass(), saveLoc, e));
             return false;
         }
     }
@@ -115,8 +128,11 @@ public abstract class ObjectDAO <T extends Serializable> {
      * @return
      */
     public boolean update(T obj) {
-        if (!doesExist(getId(obj)))
+        if (!doesExist(getId(obj))) {
+            logger.debug(String.format("invalid attempt to update nonexistent object %s from %s", getId(obj), getClass()));
             return false;
+        }
+        logger.debug(String.format("attempting to update object %s from %s", getId(obj), getClass()));
         return save(obj);
     }
 
@@ -128,7 +144,12 @@ public abstract class ObjectDAO <T extends Serializable> {
      */
     public boolean deleteById(String id) {
         String fileLoc = saveLoc(id);
-        return (new File(fileLoc)).delete();
+        boolean res = deleteFile(fileLoc);
+        if (res)
+            logger.debug(String.format("deleted object %s from %s", id, getClass()));
+        else
+            logger.debug(String.format("failed to delete object %s from %s at path %s", id, getClass(), fileLoc));
+        return res;
     }
 
     /**
@@ -138,7 +159,7 @@ public abstract class ObjectDAO <T extends Serializable> {
      * @return
      */
     public String saveLoc(String id) {
-        return DAOUtils.combinePaths(saveDir, id);
+        return combinePaths(saveDir, id);
     }
 
     /**
@@ -148,6 +169,47 @@ public abstract class ObjectDAO <T extends Serializable> {
      * @return
      */
     public boolean doesExist(String id) {
-        return DAOUtils.resourceExists(saveLoc(id));
+        return resourceExists(saveLoc(id));
+    }
+
+    /**
+     * check if a file path exists
+     *
+     * @param resourcePath
+     * @return
+     */
+    public static boolean resourceExists(String resourcePath) {
+        return (new File(resourcePath)).exists();
+    }
+
+    /**
+     * see name
+     *
+     * @return
+     */
+    public boolean dropDatabase() {
+        return deleteFile(saveDir);
+    }
+
+    /**
+     * delete a file, useful for deleting records, and the database as well
+     *
+     * @param path
+     * @return
+     */
+    public static boolean deleteFile(String path) {
+        return (new File(path)).delete();
+    }
+
+    /**
+     * combine two file paths
+     *
+     * @param p1
+     * @param p2
+     * @return
+     */
+    public static String combinePaths(String p1, String p2) {
+        File file = new File(p1, p2);
+        return file.getAbsolutePath();
     }
 }

@@ -1,6 +1,8 @@
 package daxterix.bank.model;
 
-public class CreationRequest extends UserRequest{
+import java.time.format.DateTimeFormatter;
+
+public class CreationRequest extends UserRequest {
     private static final long serialVersionUID = 6043802262589664464L;
 
     /**
@@ -16,6 +18,7 @@ public class CreationRequest extends UserRequest{
 
     @Override
     public String toString() {
-        return String.format("(id %d) Creation request filed by %s on %s", id, requester.getUsername(), time);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss MM/dd/yyyy");
+        return String.format("(id %d) Creation request filed by %s on %s", id, requester.getUsername(), time.format(formatter));
     }
 }

@@ -3,11 +3,11 @@ package daxterix.bank.dao;
 import java.io.*;
 
 public class DAOUtils {
-    public static String appPersistHome = "Desktop\\userInfo";
-    public static String unlockedCustomerPath = "Desktop\\userInfo\\customer\\unlocked";
-    public static String lockedCustomerPath = "Desktop\\userInfo\\customer\\locked";
-    public static String adminPath = "Desktop\\userInfo\\admin";
-    public static String requestPath = "Desktop\\userInfo\\request";
+    static String appPersistHome = "Desktop\\userInfo";
+    static String unlockedCustomerPath = "Desktop\\userInfo\\customer\\unlocked";
+    static String lockedCustomerPath = "Desktop\\userInfo\\customer\\locked";
+    static String adminPath = "Desktop\\userInfo\\admin";
+    static String requestPath = "Desktop\\userInfo\\request";
 
 
     // this static block serves to initialize save file paths which is tied to user.home,
@@ -61,27 +61,5 @@ public class DAOUtils {
      */
     public static RequestDAO getRequestDao() {
         return new RequestDAO(requestPath);
-    }
-
-    /**
-     * check if a file path exists
-     *
-     * @param resourcePath
-     * @return
-     */
-    public static boolean resourceExists(String resourcePath) {
-        return (new File(resourcePath)).exists();
-    }
-
-    /**
-     * combine two file paths
-     *
-     * @param p1
-     * @param p2
-     * @return
-     */
-    public static String combinePaths(String p1, String p2) {
-        File file = new File(p1, p2);
-        return file.getAbsolutePath();
     }
 }
