@@ -884,26 +884,38 @@ public class Driver {
 	private void deposit() {
 		System.out.println("Enter amount to deposit: ");
 		String temp = getUserInput();
-		
-		double amount = Double.parseDouble(temp);
-		
-		amount += currentUser.getAccountAmount();
-		currentUser.setAccountAmount(amount);
-		
-		this.db.put(currentUser.getSsn(), currentUser);
+		try {
+			double amount = Double.parseDouble(temp);
+			
+			amount += currentUser.getAccountAmount();
+			currentUser.setAccountAmount(amount);
+			
+			this.db.put(currentUser.getSsn(), currentUser);
+		} catch (NumberFormatException ne) {
+			System.out.println("Not a valid number");
+		}
 	}
 
-	
 	private void withdraw() {
 		System.out.println("Enter amount to withdraw: ");
 		String temp = getUserInput();
 		
-		double amount = Double.parseDouble(temp);
-		
-		amount = currentUser.getAccountAmount() - amount;
-		currentUser.setAccountAmount(amount);
-		
-		this.db.put(currentUser.getSsn(), currentUser);
+		try {
+			double amount = Double.parseDouble(temp);
+			double curAccount = currentUser.getAccountAmount();
+			
+			//Check if the withdraw amount is valid
+			if(curAccount - amount > 0) {
+				amount = curAccount - amount;
+				currentUser.setAccountAmount(amount);
+				this.db.put(currentUser.getSsn(), currentUser);
+			}
+			else {
+				System.out.println("Not enough in your account to withraw $" + amount);
+			}
+		} catch (NumberFormatException ne) {
+			System.out.println("Not a valid number");
+		}
 	}
 
 	public void saveDb() throws IOException {
