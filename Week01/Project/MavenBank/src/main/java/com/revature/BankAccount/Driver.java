@@ -471,8 +471,21 @@ public class Driver {
 	 *            Username of client account to approve
 	 */
 	public void approveClientAccount() {
-		displayAccountsNeedingApproval();
-//		getAndApproveClientAccount();
+		boolean loop = true;
+		int loopCounter = 0; 
+		final int maxLoopIteration = 5;
+		while(loop && loopCounter < maxLoopIteration) {
+			displayAccountsNeedingApproval();
+			loop = !getAndApproveAccount(); //loop while the user input is invalid
+			
+			if(loop)
+			{
+				loopCounter += 1;
+			}
+		}
+		if(loopCounter == maxLoopIteration) {
+			System.out.println("Too many invalid tries");
+		}
 	}
 
 	public void displayAccountsNeedingApproval() {
@@ -498,9 +511,31 @@ public class Driver {
 		
 		return ssnNeedingApproval;
 	}
-
-	public void getAndApproveClientAccount() {
-
+	
+	public boolean getAndApproveAccount() {
+		boolean validUser = false;
+		String input = getUserInput();
+		User user = this.db.get(input);
+		
+		//Check if designated user exists and actually needs to be approved. 
+		//Note: nested if-statements for error message purposes
+		//(i.e. allows for unique error message based on situation)
+		if(user != null) {
+			if(user.getStatus() == status_approvalPending) 
+			{
+				user.setStatus(status_active);
+				this.db.put(user.getSsn(), user);
+				validUser = true;
+				System.out.println("Account Approved!");
+			} else {
+				System.out.println("Account: " + user.getSsn() + 
+						" does not need to be approved");
+			}
+		} else {
+			System.out.println("User is not in the database");
+		}
+		
+		return validUser;
 	}
 
 	/**
