@@ -61,125 +61,7 @@ public class Driver {
 			String userChoice = mp.mainMenu();
 			// To Do: Refactor the control statements to a separate function
 			// (i.e. No control statements in main
-			if (userChoice.equals("1")) {
-				boolean loggedIn = mp.login();
-
-				// If successfully logged in, check the user's status
-				if (loggedIn) {
-					// Check status of user
-					int status = mp.currentUser.getStatus();
-					if (status == status_approvalPending) {
-						System.out.println("Account Approval Pending");
-					} else if (status == status_locked) {
-						System.out.println("Account Locked");
-						// If login was successful, call either the User or Admin menu, depending on
-						// permission level
-					} else if (status == status_active) {
-						System.out.println("Successfully Logged In!");
-						int permissions = mp.currentUser.getPermissions();
-						if (permissions == permission_client) {
-							System.out.println("Client Permission");
-							mp.clientMenu();
-						} else if (permissions == permission_admin) {
-							System.out.println("Admin Permision");
-							mp.adminMenu();
-						}
-					} else {
-						// To Do: Put throw statement here with custom error message
-						System.out.println("FATAL ERROR #1: Should NEVER See This!!!!");
-						System.exit(1);
-					}
-				} else {
-					System.out.println("NOT Logged In");
-				}
-			} else if (userChoice.equals("2")) {
-				mp.createNewClientAccount();
-			} else if (userChoice.equals("3")) {
-				System.out.println("Closing Program");
-				exit = true;
-			} else if (userChoice.equals("42")) { // Testing user creation
-				String firstName = "Evan";
-				String lastName = "West";
-				String middleInitial = "A";
-				String ssn = "0";
-				String password = "0";
-				int permissions = 0;
-				int status = 0;
-				int accountAmount = 0;
-				User default_user_1 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-						accountAmount);
-
-				firstName = "Evan";
-				lastName = "West";
-				middleInitial = "A";
-				ssn = "01";
-				password = "01";
-				permissions = 0;
-				status = 0;
-				accountAmount = 0;
-				User default_user_1_b = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-						accountAmount);
-
-				firstName = "Evan";
-				lastName = "West";
-				middleInitial = "A";
-				ssn = "02";
-				password = "02";
-				permissions = 0;
-				status = 0;
-				accountAmount = 0;
-				User default_user_1_c = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-						accountAmount);
-
-				firstName = "A";
-				lastName = "A";
-				middleInitial = "A";
-				ssn = "1";
-				password = "1";
-				permissions = 0;
-				status = 1;
-				accountAmount = 0;
-				User default_user_2 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-						accountAmount);
-
-				firstName = "B";
-				lastName = "B";
-				middleInitial = "B";
-				ssn = "2";
-				password = "2";
-				permissions = 0;
-				status = 2;
-				accountAmount = 0;
-				User default_user_3 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-						accountAmount);
-
-				firstName = "Admin";
-				lastName = "Admin";
-				middleInitial = "A";
-				ssn = "001";
-				password = "001";
-				permissions = 1;
-				status = 1;
-				accountAmount = 0;
-				User default_user_4 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-						accountAmount);
-
-				mp.db.put(default_user_1.getSsn(), default_user_1);
-				mp.db.put(default_user_2.getSsn(), default_user_2);
-				mp.db.put(default_user_3.getSsn(), default_user_3);
-				mp.db.put(default_user_4.getSsn(), default_user_4);
-				mp.db.put(default_user_1_b.getSsn(), default_user_1_b);
-				mp.db.put(default_user_1_c.getSsn(), default_user_1_c);
-
-				// Print database. For coding purposes
-				System.out.println("The Database!!!!: ");
-				for (String key : mp.db.keySet()) {
-					System.out.println(mp.db.get(key));
-				}
-			} else {
-				// Add counter and exit after 5 incorrect attempts
-				System.out.println("Not an option");
-			}
+			exit = mp.controlLogic(userChoice);			
 		}
 
 		// Save the database to the 'database.txt' file. Erase whatever is in the file
@@ -192,6 +74,132 @@ public class Driver {
 			e.printStackTrace();
 			// To Do: Return message with catch statement???
 		} // To Do: Any finally statement?
+	}
+
+	public boolean controlLogic(String userChoice) {
+		boolean exit = false;
+		
+		if (userChoice.equals("1")) {
+			boolean loggedIn = login();
+
+			// If successfully logged in, check the user's status
+			if (loggedIn) {
+				// Check status of user
+				int status = currentUser.getStatus();
+				if (status == status_approvalPending) {
+					System.out.println("Account Approval Pending");
+				} else if (status == status_locked) {
+					System.out.println("Account Locked");
+					// If login was successful, call either the User or Admin menu, depending on
+					// permission level
+				} else if (status == status_active) {
+					System.out.println("Successfully Logged In!");
+					int permissions = currentUser.getPermissions();
+					if (permissions == permission_client) {
+						System.out.println("Client Permission");
+						clientMenu();
+					} else if (permissions == permission_admin) {
+						System.out.println("Admin Permision");
+						adminMenu();
+					}
+				} else {
+					// To Do: Put throw statement here with custom error message
+					System.out.println("FATAL ERROR #1: Should NEVER See This!!!!");
+					System.exit(1);
+				}
+			} else {
+				System.out.println("NOT Logged In");
+			}
+		} else if (userChoice.equals("2")) {
+			createNewClientAccount();
+		} else if (userChoice.equals("3")) {
+			System.out.println("Closing Program");
+			exit = true;
+		} else if (userChoice.equals("42")) { // Testing user creation
+			String firstName = "Evan";
+			String lastName = "West";
+			String middleInitial = "A";
+			String ssn = "0";
+			String password = "0";
+			int permissions = 0;
+			int status = 0;
+			int accountAmount = 0;
+			User default_user_1 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+					accountAmount);
+
+			firstName = "Evan";
+			lastName = "West";
+			middleInitial = "A";
+			ssn = "01";
+			password = "01";
+			permissions = 0;
+			status = 0;
+			accountAmount = 0;
+			User default_user_1_b = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+					accountAmount);
+
+			firstName = "Evan";
+			lastName = "West";
+			middleInitial = "A";
+			ssn = "02";
+			password = "02";
+			permissions = 0;
+			status = 0;
+			accountAmount = 0;
+			User default_user_1_c = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+					accountAmount);
+
+			firstName = "A";
+			lastName = "A";
+			middleInitial = "A";
+			ssn = "1";
+			password = "1";
+			permissions = 0;
+			status = 1;
+			accountAmount = 0;
+			User default_user_2 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+					accountAmount);
+
+			firstName = "B";
+			lastName = "B";
+			middleInitial = "B";
+			ssn = "2";
+			password = "2";
+			permissions = 0;
+			status = 2;
+			accountAmount = 0;
+			User default_user_3 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+					accountAmount);
+
+			firstName = "Admin";
+			lastName = "Admin";
+			middleInitial = "A";
+			ssn = "001";
+			password = "001";
+			permissions = 1;
+			status = 1;
+			accountAmount = 0;
+			User default_user_4 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+					accountAmount);
+
+			db.put(default_user_1.getSsn(), default_user_1);
+			db.put(default_user_2.getSsn(), default_user_2);
+			db.put(default_user_3.getSsn(), default_user_3);
+			db.put(default_user_4.getSsn(), default_user_4);
+			db.put(default_user_1_b.getSsn(), default_user_1_b);
+			db.put(default_user_1_c.getSsn(), default_user_1_c);
+
+			// Print database. For coding purposes
+			System.out.println("The Database!!!!: ");
+			for (String key : db.keySet()) {
+				System.out.println(db.get(key));
+			}
+		} else {
+			// Add counter and exit after 5 incorrect attempts
+			System.out.println("Not an option");
+		}
+		
+		return exit;
 	}
 
 	/**
@@ -357,14 +365,14 @@ public class Driver {
 		return aScanner.nextLine().toString();
 	}
 
-//	/**
-//	 * Display login menu, get user's choice, and validate user's choice
-//	 * 
-//	 * @return Returns user's choice
-//	 */
-//	private int loginMenu() {
-//		return 0;
-//	}
+	// /**
+	// * Display login menu, get user's choice, and validate user's choice
+	// *
+	// * @return Returns user's choice
+	// */
+	// private int loginMenu() {
+	// return 0;
+	// }
 
 	/**
 	 * Display menu for Admins, get the Admin's choice, and validate the Admin's
@@ -438,8 +446,6 @@ public class Driver {
 		System.out.println("5) Logout");
 		System.out.print("Choice: ");
 	}
-
-	
 
 	////////////////////////////////////////////////////////
 	// Admin Functionality
@@ -818,7 +824,7 @@ public class Driver {
 	private void clientMenu() {
 		boolean loop = true;
 
-		String[] options = new String[] { "1", "2", "3", "4"};
+		String[] options = new String[] { "1", "2", "3", "4" };
 		List<String> validOptions = Arrays.asList(options);
 
 		while (loop) {
@@ -865,7 +871,7 @@ public class Driver {
 		}
 
 	}
-	
+
 	/**
 	 * Client menu
 	 */
@@ -879,14 +885,14 @@ public class Driver {
 		System.out.println("4) Logout");
 		System.out.print("Choice: ");
 	}
-	
+
 	/**
 	 * Print the account balance for the current user
 	 */
 	private void displayAccountBalance() {
 		System.out.println("Current Balance: " + currentUser.getAccountAmount());
 	}
-	
+
 	/**
 	 * Get and deposit an amount from the user
 	 */
@@ -895,44 +901,45 @@ public class Driver {
 		String temp = getUserInput();
 		try {
 			double amount = Double.parseDouble(temp);
-			
+
 			amount += currentUser.getAccountAmount();
 			currentUser.setAccountAmount(amount);
-			
+
 			this.db.put(currentUser.getSsn(), currentUser);
 		} catch (NumberFormatException ne) {
 			System.out.println("Not a valid number");
 		}
 	}
-	
+
 	/**
 	 * Get and withdraw an amount from the user
 	 */
 	private void withdraw() {
 		System.out.println("Enter amount to withdraw: ");
 		String temp = getUserInput();
-		
+
 		try {
 			double amount = Double.parseDouble(temp);
 			double curAccount = currentUser.getAccountAmount();
-			
-			//Check if the withdraw amount is valid
-			if(curAccount - amount > 0) {
+
+			// Check if the withdraw amount is valid
+			if (curAccount - amount > 0) {
 				amount = curAccount - amount;
 				currentUser.setAccountAmount(amount);
 				this.db.put(currentUser.getSsn(), currentUser);
-			}
-			else {
+			} else {
 				System.out.println("Not enough in your account to withraw $" + amount);
 			}
 		} catch (NumberFormatException ne) {
 			System.out.println("Not a valid number");
 		}
 	}
-	
+
 	/**
 	 * Saves the database to a file at the end of the application
-	 * @throws IOException	Thrown when the ObjectOutputStream could not be closed
+	 * 
+	 * @throws IOException
+	 *             Thrown when the ObjectOutputStream could not be closed
 	 */
 	public void saveDb() throws IOException {
 		// To Do: Don't pass in database! use this.db to access!!!!!
