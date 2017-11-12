@@ -1,7 +1,8 @@
 package com.peterson.bowsercastle;
 
 /**
- * Enum class holding 4 possible roles for a member of Bowser Castle along with said role's salary.
+ * Enum class holding 4 possible roles for a member of Bowser Castle along with said role's level.
+ * A role's level only matters when attacking the king.
  * @author Alex Peterson
  */
 public enum Role {

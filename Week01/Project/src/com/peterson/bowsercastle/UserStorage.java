@@ -1,0 +1,78 @@
+package com.peterson.bowsercastle;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
+import org.apache.log4j.Logger;
+
+/**
+ * A class used for logging messages and serialization.
+ * @author Alex
+ */
+public class UserStorage {
+	private Logger logger;
+
+	public UserStorage() {
+		logger = Logger.getLogger(BowserCastle.class);
+	}
+
+	/**
+	 * Deserialize all of our user objects and put them in our arraylist data structure.
+	 * @param <T>
+	 * @throws IOException 
+	 */
+	@SuppressWarnings("unchecked")
+	public Queue<User> grabUsers(final String filename) throws IOException {
+		Queue<User> users = new PriorityQueue<User>(new UserComparator());
+		
+		FileInputStream fis = null;
+		ObjectInputStream ois = null;
+		try {
+			fis = new FileInputStream(filename);
+			if (fis.available() != 0) {//this is a new file, create King Bowser
+				ois = new ObjectInputStream(fis);
+				users.addAll((Queue<User>) ois.readObject()); //store all of our users in our arraylist
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			if (fis != null) fis.close();
+			if (ois != null) ois.close();
+		}
+
+		return users;
+	}
+	
+	/**
+	 * Upon exiting the program, serialize our queue of users.
+	 * @param <T>
+	 * @throws IOException 
+	 */
+	public void serializeUsers(String filename, Queue<User> list) throws IOException {
+		ObjectOutputStream oos = null;
+		FileOutputStream fls = null;
+		try {
+			fls = new FileOutputStream(filename);
+			oos = new ObjectOutputStream(fls);
+			oos.writeObject(list); //serialize our queue of users
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (fls != null) fls.close(); //close our input and output streams
+			if (oos != null) oos.close();
+		}
+	}
+
+	/**
+	 * Send a message to the log
+	 * @param message to be logged
+	 */ 
+	public void log(final String message) {
+		logger.info(message);
+	}
+}

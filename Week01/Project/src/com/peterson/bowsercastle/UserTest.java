@@ -35,10 +35,10 @@ public class UserTest {
 		
 		user1.setCoins(coins);
 		user1.setRole(role);
-		user1.setStars(stars);
+		user1.setLevel(stars);
 		
 		assertEquals(coins, user1.getCoins());
-		assertEquals(stars, user1.getStars());
+		assertEquals(stars, user1.getLevel());
 		assertEquals(role, user1.getRole());
 	}
 	

@@ -6,8 +6,9 @@ package com.peterson.bowsercastle;
  */
 public class User implements java.io.Serializable {
 	private static final long serialVersionUID = 8191660665486147873L;
+	private static final int START_LEVEL = 10;
 	private String name;
-	private int hashedPassword, coins, stars;
+	private int hashedPassword, coins, level;
 	private Role role;
 	
 	/**
@@ -20,6 +21,7 @@ public class User implements java.io.Serializable {
 		this.name = name;
 		this.hashedPassword = hashedPassword;
 		this.role = role;
+		level = START_LEVEL;
 	}
 	
 	/**
@@ -62,21 +64,22 @@ public class User implements java.io.Serializable {
 	 * Set a new role for the user.
 	 * @param role, new role for the user
 	 */
-	public void setRole(Role role) {
+	public void setRole(final Role role) {
 		this.role = role;
 	}
 	
 	/**
 	 * @return how many stars the user has
 	 */
-	public int getStars() {
-		return stars;
+	public int getLevel() {
+		return level;
 	}
 	
-	public void setStars(int stars) {
-		this.stars = stars;
+	public void setLevel(final int level) {
+		this.level = level;
 	}
 
+	/**@return how many levels the user will gain.*/
 	public int levelUp() {
 		return role.getValue();
 	}
@@ -89,7 +92,7 @@ public class User implements java.io.Serializable {
 		result = prime * result + hashedPassword;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
-		result = prime * result + stars;
+		result = prime * result + level;
 		return result;
 	}
 
@@ -113,9 +116,19 @@ public class User implements java.io.Serializable {
 			return false;
 		if (role != other.role)
 			return false;
-		if (stars != other.stars)
+		if (level != other.level)
 			return false;
 		return true;
+	}
+
+	/**
+	 * To string method
+	 * @return string version of object
+	 */
+	@Override
+	public String toString() {
+		return "User [name=" + name + ", hashedPassword=" + hashedPassword + ", coins=" + coins + ", stars=" + level
+				+ ", role=" + role + "]";
 	}
 	
 	

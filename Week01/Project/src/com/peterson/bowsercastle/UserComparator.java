@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 /**
  * Comparator class used to sort our PriorityQueue by order of role.
+ * King -> Admin -> Member -> Unverified -> Locked
  * @author Alex
  */
 public class UserComparator implements Comparator<User>, java.io.Serializable {

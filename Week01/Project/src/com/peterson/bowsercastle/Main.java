@@ -10,8 +10,8 @@ public final class Main {
 		//this class cannot be instantiated
 	}
 
-	public static void main(String[] args) {
-		final BowserCastle bowserCastle = new BowserCastle();
-		bowserCastle.enterCastle();
+	public static void main(final String[] args) {
+		final BowserCastle bc = new BowserCastle();
+		bc.enterCastle();
 	}
 }
