@@ -1,3 +1,6 @@
+# To run application  
+Please use **MyBankApp** solution  
+  
 ## Mini Project Bank Application Requirements  
 Must:  
  - Be a console application  
@@ -54,9 +57,6 @@ Must:
   - **Core**  
   - **Server**  
   - **Persistence**  
-  
-# To run application  
-Please use **MyBankApp** solution
 
 
 
