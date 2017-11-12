@@ -70,14 +70,15 @@ public final class UserRequestHandler {
 		
 		// If admin then allowed to remove other accounts 
 		if (request.getCheckpoint() == Checkpoint.ADMIN) {
-			FieldParams transact = request.getTransaction();
-			userid = transact.get(User.ID);
+			FieldParams query = request.getQuery();
+			userid = query.get(User.ID);
 		} else {
 			userid = Long.toString(request.getUserId());
 		}
 		
 		// set parameters needed to remove user data
 		userdata.put(Info.USERID, userid);
+		userdata.put(User.ID, userid);
 		
 		// Remove all records associated with this id
 		total = Server.database.delete(BusinessClass.USERINFO, userdata);
@@ -92,7 +93,10 @@ public final class UserRequestHandler {
 	 * @param request conditions users must have to be in resultset
 	 * @return 0 to n records
 	 */
-	public Resultset getUser(Request request) {
+	public Resultset getUser(Request request) throws RequestException {
+		if (request.getCheckpoint() != Checkpoint.ADMIN)
+			Require.requireSelf(request);
+		
 		return Server.database.select(BusinessClass.USER, request.getQuery());
 	}
 	
@@ -118,8 +122,6 @@ public final class UserRequestHandler {
 		trans.remove(User.ID);
 		
 		// Perform update
-		Server.database.update(BusinessClass.USER, query, trans);
-		
 		return new Resultset(Server.database.update(BusinessClass.USER, query, trans));
 	}
 	

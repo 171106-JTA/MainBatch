@@ -30,6 +30,8 @@ public class AdminView implements View {
 		Menu.printViewMenu();
 		
 		while (!input.toLowerCase().equals("logout")) {
+			printUserCount();
+			printAccountCount();
 			printWorkLoad();
 			printOptions();
 			input = Menu.getInput(name + ":>");
@@ -77,7 +79,19 @@ public class AdminView implements View {
 					params = factory.getFieldParams(pendingUsers.get(index));
 					params.put(User.SESSIONID, MyBank.data.get(User.SESSIONID));
 					Menu.printUser(params);
+					printPendingActionOptions();
+					input = Menu.getInput(name + ":>");
 					
+					switch (input) {
+						case "0": 
+							activateUser((User)pendingUsers.get(index));
+							break;
+						case "1":
+							deleteUser((User)pendingUsers.get(index));
+							break;
+						default:
+							Menu.println("Invalid selection!");		
+					}
 					
 				}else {
 					Menu.println("Invalid selection!");
@@ -96,13 +110,59 @@ public class AdminView implements View {
 	}
 	
 	
+	///
+	//	USER MANIPULATION CONTROLS 
+	///
 	
+	private void deleteUser(User user) {
+		Resultset res;
+		
+		// Send request
+		res = MyBank.send(new Request(MyBank.data, "USER", "DELETEUSER", factory.getFieldParams(user), null));
+		
+		if (res.size() == 1)
+			Menu.println("Account deleted");
+		else {
+			Menu.print(res.getException().getMessage());
+		}
+	}
 	
+	private void activateUser(User user) {
+		updateUserCheckpoint(user, Checkpoint.CUSTOMER);
+	}
+
+	private void blockUser(User user) {
+		updateUserCheckpoint(user, Checkpoint.BLOCKED);
+	}
+	
+	private void updateUserCheckpoint(User user, Checkpoint checkpoint) {
+		FieldParams trans;
+		Resultset res;
+		
+		// Set request params
+		trans = factory.getFieldParams(user);
+		trans.put(User.CHECKPOINT, Integer.toString(checkpoint.ordinal()));
+	
+		// Send request
+		res = MyBank.send(new Request(MyBank.data, "USER", "SETUSER", factory.getFieldParams(user), trans));
+		
+		if (res.size() == 1)
+			Menu.println("Account updated");
+		else {
+			Menu.print(res.getException().getMessage());
+		}
+	}
 	
 	
 	///
 	//	PRINT METHODS 
 	///
+	
+	private void printPendingActionOptions() {
+		Menu.println("What would you like to do?");
+		Menu.println("\t- 0 - ACTIVATE");
+		Menu.println("\t- 1 - DELETE");
+	}
 	
 	private void printPendingUsers() {
 		Iterator<BusinessObject> it = pendingUsers.iterator();
@@ -155,11 +215,21 @@ public class AdminView implements View {
 	}
 
 	private void printUserCount() {
-		
+		FieldParams params = new FieldParams();
+	
+		params.put(User.CHECKPOINT, Integer.toString(Checkpoint.ADMIN.ordinal()));
+		allUsers = MyBank.send(new Request(MyBank.data, "USER", "GETUSER", params, null));
+		params.put(User.CHECKPOINT, Integer.toString(Checkpoint.CUSTOMER.ordinal()));
+		allUsers.addAll(MyBank.send(new Request(MyBank.data, "USER", "GETUSER", params, null)));
+		Menu.println("We have " + allUsers.size() + " users!");
 	}
 	
 	private void printAccountCount() {
-		
+		FieldParams params = new FieldParams();
+
+		params.put(Account.STATUS, Integer.toString(AccountStatus.ACTIVE.ordinal()));
+		allAccounts = MyBank.send(new Request(MyBank.data, "USER", "GETACCOUNT", params, null));
+		Menu.println("We have " + allAccounts.size() + " accounts!");;
 	}
 	
 	
