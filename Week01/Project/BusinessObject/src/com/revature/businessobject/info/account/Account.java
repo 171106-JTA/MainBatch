@@ -5,10 +5,12 @@ import com.revature.businessobject.info.Info;
 public class Account extends Info {
 	public static final String NUMBER = "number";
 	public static final String TYPE = "type";
+	public static final String STATUS = "status";
 	
 	private long number;
 	private AccountType type;
-
+	private AccountStatus status;
+	
 	/**
 	 * Initialize basic account data 
 	 * @param userId user unique identifier (primary key)
@@ -16,10 +18,11 @@ public class Account extends Info {
 	 * @param type what kind of account is it
 	 * @see AccountType 
 	 */
-	public Account(long userId, long number, AccountType type) {
+	public Account(long userId, long number, AccountType type, AccountStatus status) {
 		super(userId);
 		this.number = number;
 		this.type = type;
+		this.status = status;
 	}
 
 	public long getNumber() {
@@ -30,6 +33,10 @@ public class Account extends Info {
 		return type;
 	}
 
+	public AccountStatus getStatus() {
+		return status;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -51,6 +58,8 @@ public class Account extends Info {
 		if (number != other.number)
 			return false;
 		if (type != other.type)
+			return false;
+		if (status != other.status)
 			return false;
 		return true;
 	}

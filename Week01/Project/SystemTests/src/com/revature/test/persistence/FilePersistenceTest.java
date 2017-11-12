@@ -12,6 +12,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.revature.businessobject.info.account.Account;
+import com.revature.businessobject.info.account.AccountStatus;
 import com.revature.businessobject.info.account.Checking;
 import com.revature.businessobject.info.account.Credit;
 import com.revature.businessobject.info.user.UserInfo;
@@ -64,8 +65,8 @@ public class FilePersistenceTest {
 		admin = new Admin(adminId, adminUsername, adminPassword);
 		customer = new Customer(customerId, customerUsername, customerPassword);
 		adminInfo = new UserInfo(adminId, "abc@xyz.com", "My Street and stuff", "1234567890");
-		customerCheckingAcct = new Checking(customerId, checkingId, 100.0f);
-		customerCreditAcct = new Credit(customerId, creditId, 345.0f, 10.5f, 1500.0f);
+		customerCheckingAcct = new Checking(customerId, checkingId, 100.0f, AccountStatus.ACTIVE);
+		customerCreditAcct = new Credit(customerId, creditId, 345.0f, 10.5f, 1500.0f, AccountStatus.ACTIVE);
 		FilePersistence.setDirectory(System.getProperty("user.dir") + "\\data\\");
 	}
 
@@ -367,7 +368,7 @@ public class FilePersistenceTest {
 	
 	@Test
 	public void shouldBeAbleToUpdateExistingCheckingAccountRecordWithBusinessObject() {
-		Account data = new Checking(customerId, checkingId, 20.0f);
+		Account data = new Checking(customerId, checkingId, 20.0f, AccountStatus.ACTIVE);
 		FieldParams cnds = new FieldParams();
 		Resultset resultset;
 		
@@ -385,7 +386,7 @@ public class FilePersistenceTest {
 	
 	@Test
 	public void shouldBeAbleToUpdateExistingCheckingAccountWithFieldParams() {
-		Account data = new Checking(customerId, checkingId, 1.0f);
+		Account data = new Checking(customerId, checkingId, 1.0f, AccountStatus.ACTIVE);
 		FieldParams cnds = new FieldParams();
 		FieldParams params = new FieldParams();
 		Resultset resultset;
@@ -437,7 +438,7 @@ public class FilePersistenceTest {
 		
 		// Set data
 		manager.insert(customerCheckingAcct);
-		manager.insert(new Checking(41181, 512423, 1.0f));
+		manager.insert(new Checking(41181, 512423, 1.0f, AccountStatus.ACTIVE));
 		
 		// Perform test
 		assertEquals("Should exist a total of 2 checking records", 2, manager.select(BusinessClass.ACCOUNT, null).size());
@@ -488,7 +489,7 @@ public class FilePersistenceTest {
 	
 	@Test
 	public void shouldBeAbleToUpdateExistingCreditAccountRecordWithBusinessObject() {
-		Account data = new Credit(customerId, creditId, 20.0f, 100.0f, 1500.0f);
+		Account data = new Credit(customerId, creditId, 20.0f, 100.0f, 1500.0f, AccountStatus.ACTIVE);
 		FieldParams cnds = new FieldParams();
 		Resultset resultset;
 		
@@ -506,7 +507,7 @@ public class FilePersistenceTest {
 	
 	@Test
 	public void shouldBeAbleToUpdateExistingCreditAccountWithFieldParams() {
-		Account data = new Credit(customerId, creditId, 1.0f, customerCreditAcct.getInterest(), customerCreditAcct.getCreditLimit());
+		Account data = new Credit(customerId, creditId, 1.0f, customerCreditAcct.getInterest(), customerCreditAcct.getCreditLimit(), AccountStatus.ACTIVE);
 		FieldParams cnds = new FieldParams();
 		FieldParams params = new FieldParams();
 		Resultset resultset;
@@ -558,7 +559,7 @@ public class FilePersistenceTest {
 		
 		// Set data
 		manager.insert(customerCreditAcct);
-		manager.insert(new Credit(41181, 512423, 1.0f, 10.0f, 1500.0f));
+		manager.insert(new Credit(41181, 512423, 1.0f, 10.0f, 1500.0f, AccountStatus.ACTIVE));
 		
 		// Perform test
 		assertEquals("Should exist a total of 2 credit acct records", 2, manager.select(BusinessClass.ACCOUNT, null).size());

@@ -66,10 +66,11 @@ public class MyBank {
 				new AdminView().run();
 				break;
 			case CUSTOMER:
+			case PENDING:
 				new CustomerView().run();
 				break;
 			default:
-				Menu.println("Unknown user role");
+				Menu.println("=== Unknown user account type ===");
 		}
 	}
 	
@@ -106,10 +107,8 @@ public class MyBank {
 			
 			// Request to create new account
 			if ((res = send(new Request(data, "USER", "CREATEUSER", null, params))).getRecordsModified() == 0) {
-				synchronized(MyBank.class) {
-					Menu.println("fail!\n");
-					Menu.println("error:>" + res.getException().getMessage() + "\n");	
-				}
+				Menu.println("fail!\n");
+				Menu.println("error:>" + res.getException().getMessage() + "\n");	
 			} else {
 				Menu.println("done\n\tAttempting to create user info...");
 				

@@ -1,10 +1,13 @@
 package com.revature.app.view;
 
+import com.revature.app.Menu;
+import com.revature.app.MyBank;
+
 public class CustomerView implements View {
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		Menu.printUser(MyBank.data);
 
 	}
 

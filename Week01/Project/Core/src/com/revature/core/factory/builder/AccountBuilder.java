@@ -2,6 +2,7 @@ package com.revature.core.factory.builder;
 
 import com.revature.businessobject.BusinessObject;
 import com.revature.businessobject.info.account.Account;
+import com.revature.businessobject.info.account.AccountStatus;
 import com.revature.businessobject.info.account.AccountType;
 import com.revature.businessobject.info.account.Checking;
 import com.revature.businessobject.info.account.Credit;
@@ -15,18 +16,22 @@ public class AccountBuilder implements BusinessObjectBuilder {
 		BusinessObject object = null;
 		
 		if (isValid(args)) {
+			AccountStatus status = AccountStatus.values()[Integer.parseInt(args.get(Checking.STATUS))];
+			
 			switch (AccountType.values()[Integer.parseInt(args.get(Account.TYPE))]) {
 				case CHECKING:
 					object =  new Checking(Long.parseLong(args.get(Checking.USERID)), 
 										Long.parseLong(args.get(Checking.NUMBER)),
-										Float.parseFloat(args.get(Checking.TOTAL)));
+										Float.parseFloat(args.get(Checking.TOTAL)),
+										status);
 					break;
 				case CREDIT:
 					object =  new Credit(Long.parseLong(args.get(Credit.USERID)),
 									  Long.parseLong(args.get(Credit.NUMBER)),
 									  Float.parseFloat(args.get(Credit.TOTAL)),
 									  Float.parseFloat(args.get(Credit.INTEREST)),
-									  Float.parseFloat(args.get(Credit.CREDITLIMIT)));
+									  Float.parseFloat(args.get(Credit.CREDITLIMIT)),
+									  status);
 					break;
 			}
 		}

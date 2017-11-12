@@ -5,8 +5,8 @@ public class Checking extends Account {
 	
 	private float total;
 	
-	public Checking(long userId, long number, float total) {
-		super(userId, number, AccountType.CHECKING);
+	public Checking(long userId, long number, float total, AccountStatus status) {
+		super(userId, number, AccountType.CHECKING, status);
 		this.total = total;
 	}
 	

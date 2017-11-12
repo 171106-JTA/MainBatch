@@ -32,6 +32,8 @@ public class UserProcessor implements Processorable {
 				res = URH.createUser(request);
 				break;
 			case "DELETEUSER":
+				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER, Checkpoint.PENDING, Checkpoint.NONE }, request);
+				Require.requireAllTransaction(new String[] { User.USERNAME,  User.PASSWORD }, request);
 				break;
 			case "GETUSER":
 				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER }, request);
@@ -47,7 +49,7 @@ public class UserProcessor implements Processorable {
 				res = URH.createUserInfo(request);
 				break;
 			case "GETUSERINFO":
-				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
+				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER, Checkpoint.PENDING },  request);
 				res = URH.getUserInfo(request);
 				break;
 			case "SETUSERINFO":

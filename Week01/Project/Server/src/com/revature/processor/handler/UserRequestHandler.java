@@ -1,10 +1,9 @@
 package com.revature.processor.handler;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.revature.businessobject.BusinessObject;
-import com.revature.businessobject.info.user.UserInfo;
+import com.revature.businessobject.info.Info;
 import com.revature.businessobject.user.Checkpoint;
 import com.revature.businessobject.user.User;
 import com.revature.core.BusinessClass;
@@ -64,6 +63,30 @@ public final class UserRequestHandler {
 		return new Resultset(Server.database.insert(BusinessClass.USER, request.getTransaction()));
 	}
 	
+	public Resultset deleteUser(Request request) {
+		FieldParams userdata = new FieldParams();
+		String userid;
+		int total;
+		
+		// If admin then allowed to remove other accounts 
+		if (request.getCheckpoint() == Checkpoint.ADMIN) {
+			FieldParams transact = request.getTransaction();
+			userid = transact.get(User.ID);
+		} else {
+			userid = Long.toString(request.getUserId());
+		}
+		
+		// set parameters needed to remove user data
+		userdata.put(Info.USERID, userid);
+		
+		// Remove all records associated with this id
+		total = Server.database.delete(BusinessClass.USERINFO, userdata);
+		total += Server.database.delete(BusinessClass.ACCOUNT, userdata);
+		total += Server.database.delete(BusinessClass.USER, userdata);
+		
+		return new Resultset(total);
+	}
+	
 	/**
 	 * Performs query of User records 
 	 * @param request conditions users must have to be in resultset
@@ -107,7 +130,7 @@ public final class UserRequestHandler {
 		Require.requireUnique(BusinessClass.USERINFO, request.getTransaction(), request);
 		
 		// Set condition params
-		conditions.put(User.ID, request.getTransaction().get(UserInfo.USERID));
+		conditions.put(User.ID, Long.toString(request.getUserId()));
 		
 		// User account must exist before it can be created 
 		Require.requireExists(BusinessClass.USER, conditions, request);;
@@ -117,7 +140,7 @@ public final class UserRequestHandler {
 	
 	public Resultset getUserInfo(Request request) throws RequestException { 
 		// For NON-ADMINS only personal account information should be accessible 
-		if (request.getCheckpoint() == Checkpoint.CUSTOMER) 
+		if (request.getCheckpoint() != Checkpoint.CUSTOMER) 
 			Require.requireSelf(request);
 		
 		return Server.database.select(BusinessClass.USERINFO, request.getQuery());
