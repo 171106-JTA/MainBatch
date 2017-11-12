@@ -79,7 +79,7 @@ public class Driver {
 						int permissions = mp.currentUser.getPermissions();
 						if (permissions == permission_client) {
 							System.out.println("Client Permission");
-							// mp.clientMenu();
+							mp.clientMenu();
 						} else if (permissions == permission_admin) {
 							System.out.println("Admin Permision");
 							mp.adminMenu();
@@ -352,18 +352,19 @@ public class Driver {
 	 * @return Returns user's choice
 	 */
 	private String getUserInput() {
+		@SuppressWarnings("resource")
 		Scanner aScanner = new Scanner(System.in);
 		return aScanner.nextLine().toString();
 	}
 
-	/**
-	 * Display login menu, get user's choice, and validate user's choice
-	 * 
-	 * @return Returns user's choice
-	 */
-	private int loginMenu() {
-		return 0;
-	}
+//	/**
+//	 * Display login menu, get user's choice, and validate user's choice
+//	 * 
+//	 * @return Returns user's choice
+//	 */
+//	private int loginMenu() {
+//		return 0;
+//	}
 
 	/**
 	 * Display menu for Admins, get the Admin's choice, and validate the Admin's
@@ -376,7 +377,7 @@ public class Driver {
 		List<String> validOptions = Arrays.asList(options);
 
 		while (loop) {
-			//Get input from Admin
+			// Get input from Admin
 			boolean validInput = false;
 			int loopLimitCounter = 0;
 			final int loopLimit = 5;
@@ -438,12 +439,7 @@ public class Driver {
 		System.out.print("Choice: ");
 	}
 
-	/**
-	 * Display menu for Client's, get Clien'ts choice, and validate Client's choice
-	 */
-	private void clientMenu() {
-
-	}
+	
 
 	////////////////////////////////////////////////////////
 	// Admin Functionality
@@ -477,7 +473,7 @@ public class Driver {
 	}
 
 	/**
-	 * Display all currently locked accounts (i.e. the accounts able to be unlocked) 
+	 * Display all currently locked accounts (i.e. the accounts able to be unlocked)
 	 */
 	private void displayLockedAccounts() {
 		System.out.println("SSN's for currently locked accounts");
@@ -489,9 +485,10 @@ public class Driver {
 		System.out.println("\n");
 		System.out.println("Enter Account To Lock: ");
 	}
-	
+
 	/**
 	 * Get all locked accounts from the internal database
+	 * 
 	 * @return Returns a list containing the SSNs of all locked client accounts
 	 */
 	private List<String> getLockedAccounts() {
@@ -507,9 +504,11 @@ public class Driver {
 
 		return lockedUserAccounts;
 	}
-	
+
 	/**
-	 * Get an account SSN from the admin, validate the input, and unlock the specified account
+	 * Get an account SSN from the admin, validate the input, and unlock the
+	 * specified account
+	 * 
 	 * @return Returns TRUE is the SSN was valid and FALSE if not
 	 */
 	private boolean getAndUnlockAccount() {
@@ -744,9 +743,10 @@ public class Driver {
 			System.out.println("Too many invalid tries");
 		}
 	}
-	
+
 	/**
-	 * Display all clients in the databae (i.e. all entries in the database that are client and not admin)
+	 * Display all clients in the databae (i.e. all entries in the database that are
+	 * client and not admin)
 	 */
 	private void displayClients() {
 		System.out.println("SSNs for accounts needing approval");
@@ -758,9 +758,10 @@ public class Driver {
 		System.out.println("\n");
 		System.out.println("Enter Account To Approve: ");
 	}
-	
+
 	/**
 	 * Fetch all clients in the database
+	 * 
 	 * @return Returns a list containing the SSNs of all clients in the database
 	 */
 	private List<String> getClients() {
@@ -775,11 +776,14 @@ public class Driver {
 
 		return ssnClients;
 	}
-	
+
 	/**
-	 * Get a SSN from the admin, validate the input, and promote that client to an admin
-	 * @return Returns TRUE if the specified user is a client and FALSE if specified user is invalid 
-	 * (that is, does not exist in the database, or already an admin)
+	 * Get a SSN from the admin, validate the input, and promote that client to an
+	 * admin
+	 * 
+	 * @return Returns TRUE if the specified user is a client and FALSE if specified
+	 *         user is invalid (that is, does not exist in the database, or already
+	 *         an admin)
 	 */
 	private boolean getAndPromoteClient() {
 		boolean validUser = false;
@@ -809,23 +813,97 @@ public class Driver {
 	// Client Functionality
 	////////////////////////////////////////////////////////
 	/**
-	 * Add given amount to the Client's account
-	 * 
-	 * @param depositAmount
-	 *            Amount to be deposited into Client's account
+	 * Display menu for Client's, get Clien'ts choice, and validate Client's choice
 	 */
-	public void deposit(double depositAmount) {
+	private void clientMenu() {
+		boolean loop = true;
+
+		String[] options = new String[] { "1", "2", "3", "4"};
+		List<String> validOptions = Arrays.asList(options);
+
+		while (loop) {
+			// Get input from Client
+			boolean validInput = false;
+			int loopLimitCounter = 0;
+			final int loopLimit = 5;
+			String userInput = null;
+			while (!validInput) {
+				displayClientMenu();
+				userInput = getUserInput();
+				validInput = validOptions.contains(userInput);
+				if (!validInput) {
+					if (loopLimitCounter < loopLimit) {
+						System.out.println("Not an option");
+						loopLimitCounter += 1;
+					} else {
+						System.out.println("Too many invalid optoins");
+						loop = false; // End the Administator's menu loop
+						validInput = true; // End the validation loop
+					}
+				}
+			}
+
+			if (loop) {
+				// To Do: Refactor these functions to extrapolate common functionality
+				// If user chose a valid option,
+				if (userInput.equals("1")) {
+					System.out.println("Option 1");
+					displayAccountBalance();
+				} else if (userInput.equals("2")) {
+					System.out.println("Option 2");
+					deposit();
+				} else if (userInput.equals("3")) {
+					System.out.println("Option 3");
+					withdraw();
+				} else if (userInput.equals("4")) {
+					System.out.println("Logging Out");
+					loop = false;
+				} else {
+					System.out.println("FATAL ERROR!!!! Should not see this. IN adminMenu()");
+				}
+			}
+		}
+
+	}
+	
+	private void displayClientMenu() {
+		System.out.println("=======================================");
+		System.out.println("Client Menu");
+		System.out.println("=======================================");
+		System.out.println("1) Print Account Balance");
+		System.out.println("2) Deposit");
+		System.out.println("3) Withdraw");
+		System.out.println("4) Logout");
+		System.out.print("Choice: ");
+	}
+	
+	private void displayAccountBalance() {
+		System.out.println("Current Balance: " + currentUser.getAccountAmount());
+	}
+	
+	private void deposit() {
+		System.out.println("Enter amount to deposit: ");
+		String temp = getUserInput();
 		
+		double amount = Double.parseDouble(temp);
+		
+		amount += currentUser.getAccountAmount();
+		currentUser.setAccountAmount(amount);
+		
+		this.db.put(currentUser.getSsn(), currentUser);
 	}
 
-	/**
-	 * Subtract given amount from the Client's account
-	 * 
-	 * @param withdrawAmount
-	 *            Amount to be withdrawn from Clien'ts account
-	 */
-	public void withdraw(double withdrawAmount) {
-
+	
+	private void withdraw() {
+		System.out.println("Enter amount to withdraw: ");
+		String temp = getUserInput();
+		
+		double amount = Double.parseDouble(temp);
+		
+		amount = currentUser.getAccountAmount() - amount;
+		currentUser.setAccountAmount(amount);
+		
+		this.db.put(currentUser.getSsn(), currentUser);
 	}
 
 	public void saveDb() throws IOException {
