@@ -1,5 +1,8 @@
 # To run application  
 Please use **MyBankApp** solution  
+Server automatically generates admin account:  
+- Username: big.boss  
+- Password: master  
   
 ## Mini Project Bank Application Requirements  
 Must:  
