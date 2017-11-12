@@ -36,7 +36,8 @@ Must:
 - Server - Defines application Business Logic Layer  
 - Persistance - Defines system data layer (defines how data is stored/accessed/updated/removed)  
 - SystemTests - Defines all JUnit tests  
-  
+- MyBankApp - Front-end application used for managing accounts
+
 ## Project Internal Dependency  
 - BusinessObjects (**None**)  
 - Core  
@@ -54,7 +55,8 @@ Must:
   - **Server**  
   - **Persistence**  
   
-
+# To run application  
+Please use **MyBankApp** solution
 
 
 
