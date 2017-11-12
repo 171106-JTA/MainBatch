@@ -382,7 +382,13 @@ public class Driver {
 	}
 	
 	private void displayAdminMenu() {
-		
+		System.out.println("_______________________________");
+		System.out.println("Administrator Menu");
+		System.out.println("1) Approve Client Accounts");
+		System.out.println("2) Lock Client Accounts");
+		System.out.println("3) Unlock Client Accounts");
+		System.out.println("4) Promote Clients to Administrators");
+		System.out.print("Choice: ");
 	}
 	
 //	private boolean validateInput(String userInput, List<String> validOptions) {		
