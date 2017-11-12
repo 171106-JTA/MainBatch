@@ -108,7 +108,7 @@ public class Driver {
 				int accountAmount = 0;
 				User default_user_1 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
 						accountAmount);
-				
+
 				firstName = "Evan";
 				lastName = "West";
 				middleInitial = "A";
@@ -119,7 +119,7 @@ public class Driver {
 				accountAmount = 0;
 				User default_user_1_b = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
 						accountAmount);
-				
+
 				firstName = "Evan";
 				lastName = "West";
 				middleInitial = "A";
@@ -366,56 +366,55 @@ public class Driver {
 	}
 
 	/**
-	 * Display menu for Admins, get the Admin's choice, and validate the Admin's choice
+	 * Display menu for Admins, get the Admin's choice, and validate the Admin's
+	 * choice
 	 */
 	private void adminMenu() {
 		boolean loop = true;
 
-		String[] options = new String[] { "1", "2", "3", "4", "5"};
+		String[] options = new String[] { "1", "2", "3", "4", "5" };
 		List<String> validOptions = Arrays.asList(options);
 
 		while (loop) {
 			boolean validInput = false;
-			int loopLimitCounter = 0; 
+			int loopLimitCounter = 0;
 			final int loopLimit = 5;
 			String userInput = null;
-			while(!validInput) {
+			while (!validInput) {
 				displayAdminMenu();
 				userInput = getUserInput();
 				validInput = validOptions.contains(userInput);
-				if(!validInput) {
-					if(loopLimitCounter < loopLimit)
-					{
+				if (!validInput) {
+					if (loopLimitCounter < loopLimit) {
 						System.out.println("Not an option");
-						loopLimitCounter += 1; 
-					}
-					else {
+						loopLimitCounter += 1;
+					} else {
 						System.out.println("Too many invalid optoins");
-						loop = false; //End the Administator's menu loop
-						validInput = true; //End the validation loop
+						loop = false; // End the Administator's menu loop
+						validInput = true; // End the validation loop
 					}
 				}
 			}
-			
-			if(loop) {
+
+			if (loop) {
 				// If user chose a valid option,
 				if (userInput.equals("1")) {
 					System.out.println("Option 1");
 					approveClientAccount();
 				} else if (userInput.equals("2")) {
 					System.out.println("Option 2");
-					// lockClientAccount();
+					lockClientAccount();
 				} else if (userInput.equals("3")) {
 					System.out.println("Option 3");
 					// unlockClientAccount();
 				} else if (userInput.equals("4")) {
 					System.out.println("Option 4");
 					// promoteClientToAdmin();
-				} else if (userInput.equals("5")){
+				} else if (userInput.equals("5")) {
 					System.out.println("Logging Out");
 					loop = false;
 				} else {
-				
+
 					System.out.println("FATAL ERROR!!!! Should not see this. IN adminMenu()");
 				}
 			}
@@ -453,7 +452,28 @@ public class Driver {
 	 * @param clientUsername
 	 *            Username of client account to lock
 	 */
-	public void lockClientAccount(String clientUsername) {
+	public void lockClientAccount() {
+		boolean loop = true;
+		int loopCounter = 0;
+		final int maxLoopIteration = 5;
+
+		// Input validation loop.
+		// The Admin is limited to 'maxLoopIteration' tries before being sent
+		// back to the previous menu
+		while (loop && loopCounter < maxLoopIteration) {
+			displayUnlockedAccounts();
+			loop = !getAndLockAccount(); // loop while the user input is invalid
+
+			// Count number of incorrect inputs
+			if (loop) {
+				loopCounter += 1;
+			}
+		}
+
+		// Print appropriate message, if incorrect input limit is reached
+		if (loopCounter == maxLoopIteration) {
+			System.out.println("Too many invalid tries");
+		}
 
 	}
 
@@ -464,7 +484,65 @@ public class Driver {
 	 *            Username of the client account to unlock
 	 */
 	public void unlockClientAccount(String clientUsername) {
+		
+	}
+	
+	/**
+	 * Display unlocked accounts to be locked
+	 */
+	private void displayUnlockedAccounts() {
+		System.out.println("SSN's for currently unlocked accounts");
 
+		List<String> unlockedUserAccounts = getUnlockedAccounts();
+		for (String item : unlockedUserAccounts) {
+			System.out.println(item);
+		}
+		System.out.println("\n");
+		System.out.println("Enter Account To Lock: ");
+	}
+
+	/**
+	 * Fetch unlocked accounts from the internal database
+	 * @return List containing ID's of currently unlocked accounts
+	 */
+	private List<String> getUnlockedAccounts() {
+		// Loop through db and search for unlocked user accounts
+		// To Do: Find a better way to do this than O(n)
+		List<String> unlockedUserAccounts = new ArrayList<String>();
+		for (String key : this.db.keySet()) {
+			User user = this.db.get(key);
+			if (user.getStatus() == status_active && 
+					user.getPermissions() == permission_client) {
+				unlockedUserAccounts.add(key);
+			}
+		}
+
+		return unlockedUserAccounts;
+	}
+	
+	private boolean getAndLockAccount() {
+		boolean validUser = false;
+		String input = getUserInput();
+		User user = this.db.get(input);
+
+		// Check if designated user exists and actually is currently unlocked.
+		// Note: nested if-statements for error message purposes
+		// (i.e. allows for unique error message based on situation)
+		if (user != null) {
+			if (user.getStatus() == status_active && 
+					user.getPermissions() == permission_client) {
+				user.setStatus(status_locked);
+				this.db.put(user.getSsn(), user);
+				validUser = true;
+				System.out.println("Account Locked!");
+			} else {
+				System.out.println("Account: " + user.getSsn() + " cannot be locked");
+			}
+		} else {
+			System.out.println("User is not in the database");
+		}
+
+		return validUser;
 	}
 
 	/**
@@ -472,46 +550,49 @@ public class Driver {
 	 */
 	public void approveClientAccount() {
 		boolean loop = true;
-		int loopCounter = 0; 
+		int loopCounter = 0;
 		final int maxLoopIteration = 5;
-		
-		//Input validation loop. 
-		//The Admin is limited to 'maxLoopIteration' tries before being sent
-		//back to the previous menu
-		while(loop && loopCounter < maxLoopIteration) {
+
+		// Input validation loop.
+		// The Admin is limited to 'maxLoopIteration' tries before being sent
+		// back to the previous menu
+		while (loop && loopCounter < maxLoopIteration) {
 			displayAccountsNeedingApproval();
-			loop = !getAndApproveAccount(); //loop while the user input is invalid
-			
-			//Count number of incorrect inputs
-			if(loop)
-			{
+			loop = !getAndApproveAccount(); // loop while the user input is invalid
+
+			// Count number of incorrect inputs
+			if (loop) {
 				loopCounter += 1;
 			}
 		}
-		
-		//Print appropriate message, if incorrect input limit is reached
-		if(loopCounter == maxLoopIteration) {
+
+		// Print appropriate message, if incorrect input limit is reached
+		if (loopCounter == maxLoopIteration) {
 			System.out.println("Too many invalid tries");
 		}
 	}
-	
+
+	// To Do: Change 'sub-functions' to private
 	/**
 	 * Display accounts that need approving
 	 */
 	public void displayAccountsNeedingApproval() {
 		System.out.println("SSNs for accounts needing approval");
-		
-	    List <String> approvalPendingAccounts = getApprovalPendingAccounts();
-		for(String item : approvalPendingAccounts) {
+
+		List<String> approvalPendingAccounts = getApprovalPendingAccounts();
+		for (String item : approvalPendingAccounts) {
 			System.out.println(item);
 		}
-	    System.out.println("\n");
+		System.out.println("\n");
 		System.out.println("Enter Account To Approve: ");
 	}
-	
+
+	// To Do: Change to private
 	/**
 	 * Fetch the accounts that need approving from the internal database
-	 * @return Returns a list of strings containing the user accounts that need approving
+	 * 
+	 * @return Returns a list of strings containing the user accounts that need
+	 *         approving
 	 */
 	public List<String> getApprovalPendingAccounts() {
 		// Loop through db and search for accounts needing approval
@@ -522,38 +603,38 @@ public class Driver {
 				ssnNeedingApproval.add(key);
 			}
 		}
-		
+
 		return ssnNeedingApproval;
 	}
-	
+
 	/**
-	 * Allow the admin to specify which account to approve
-	 * Validate the admin's input
-	 * @return Returns TRUE if the admin's input is valid and FALSE if the input is invalid
+	 * Allow the admin to specify which account to approve Validate the admin's
+	 * input
+	 * 
+	 * @return Returns TRUE if the admin's input is valid and FALSE if the input is
+	 *         invalid
 	 */
 	public boolean getAndApproveAccount() {
 		boolean validUser = false;
 		String input = getUserInput();
 		User user = this.db.get(input);
-		
-		//Check if designated user exists and actually needs to be approved. 
-		//Note: nested if-statements for error message purposes
-		//(i.e. allows for unique error message based on situation)
-		if(user != null) {
-			if(user.getStatus() == status_approvalPending) 
-			{
+
+		// Check if designated user exists and actually needs to be approved.
+		// Note: nested if-statements for error message purposes
+		// (i.e. allows for unique error message based on situation)
+		if (user != null) {
+			if (user.getStatus() == status_approvalPending) {
 				user.setStatus(status_active);
 				this.db.put(user.getSsn(), user);
 				validUser = true;
 				System.out.println("Account Approved!");
 			} else {
-				System.out.println("Account: " + user.getSsn() + 
-						" does not need to be approved");
+				System.out.println("Account: " + user.getSsn() + " does not need to be approved");
 			}
 		} else {
 			System.out.println("User is not in the database");
 		}
-		
+
 		return validUser;
 	}
 
