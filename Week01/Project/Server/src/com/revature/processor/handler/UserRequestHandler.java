@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import com.revature.businessobject.BusinessObject;
 import com.revature.businessobject.info.Info;
+import com.revature.businessobject.info.account.AccountType;
 import com.revature.businessobject.user.Checkpoint;
 import com.revature.businessobject.user.User;
 import com.revature.core.BusinessClass;
@@ -27,12 +28,8 @@ public final class UserRequestHandler {
 		
 		if (res.size() > 0) {
 			User user = (User) res.get(0);
-			Require.require(new String[] { User.CHECKPOINT, User.CHECKPOINT, User.CHECKPOINT, User.CHECKPOINT },
-						    new String[] { Integer.toString(Checkpoint.CUSTOMER.ordinal()), 
-						    			   Integer.toString(Checkpoint.ADMIN.ordinal()),
-						    			   Integer.toString(Checkpoint.PENDING.ordinal()),
-						    			   Integer.toString(Checkpoint.NONE.ordinal())}, 
-						    GenericHelper.fieldParamsFactory.getFieldParams(user), request);
+			Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER, 
+					Checkpoint.PENDING, Checkpoint.NONE }, user.getCheckpoint(), request);
 		}
 		
 		return res;
@@ -188,6 +185,13 @@ public final class UserRequestHandler {
 	///
 	//	ACCOUNT
 	///
+	
+	public Resultset createAccount(Request request, AccountType type) throws RequestException {
+		return null;
+	}
+	
+	
+	
 	
 	public Resultset getAccount(Request request) throws RequestException {
 		// For NON-ADMINS only personal account information should be accessible 

@@ -60,6 +60,32 @@ public final class Require {
 		validate(params, values, data, request);
 	}
 	
+	public static void require(String[] params, Request request) throws RequestException {
+		requireQuery(params, request);
+		requireTransaction(params, request);
+	}
+	
+	public static void require(String[] params, String[] values, Request request) throws RequestException {
+		requireQuery(params, values, request);
+		requireTransaction(params, values, request);
+	}
+	
+	public static void require(Checkpoint[] checkpoints, Request request) throws RequestException {
+		int index = Collections.indexOfSubList(Arrays.asList(checkpoints), Arrays.asList(new Checkpoint[] {request.getCheckpoint()}));
+		
+		// If we did not find checkpoint
+		if (index < 0) 
+			throw new RequestException(request, "You do not have to required permissions to perform this action");
+	}
+	
+	public static void require(Checkpoint[] checkpoints, Checkpoint checkpoint, Request request) throws RequestException {
+		int index = Collections.indexOfSubList(Arrays.asList(checkpoints), Arrays.asList(new Checkpoint[] { checkpoint }));
+		
+		// If we did not find checkpoint
+		if (index < 0) 
+			throw new RequestException(request, "You do not have to required permissions to perform this action");
+	}
+	
 	public static void requireAll(String[] params, Request request) throws RequestException {
 		requireAllQuery(params, request);
 		requireAllTransaction(params, request);
@@ -67,16 +93,6 @@ public final class Require {
 	
 	public static void requireAll(String[] params, String[] values, FieldParams data, Request request) throws RequestException {
 		validateAll(params, values, data, request);
-	}
-	
-	public static void require(Checkpoint[] checkpoints, Request request) throws RequestException {
-		int index = Collections.indexOfSubList(Arrays.asList(checkpoints), Arrays.asList(new Checkpoint[] {request.getCheckpoint()}));
-		
-		// If we did not find checkpoint
-		if (index < 0) {
-			String message = "Request requires at least one of the following checkpoints=" + Arrays.asList(checkpoints);
-			throw new RequestException(request, message);
-		}
 	}
 	
 	public static void requireUnique(String table, FieldParams query, Request request) throws RequestException {

@@ -108,9 +108,9 @@ public class MyBank {
 			// Request to create new account
 			if ((res = send(new Request(data, "USER", "CREATEUSER", null, params))).getRecordsModified() == 0) {
 				Menu.println("fail!\n");
-				Menu.println("error:>" + res.getException().getMessage() + "\n");	
+				Menu.println("\t\terror:>" + res.getException().getMessage() + "\n");	
 			} else {
-				Menu.println("done\n\tAttempting to create user info...");
+				Menu.print("done\n\tAttempting to create user info...");
 				
 				// Close guest account
 				server.kill(Integer.parseInt(data.get(User.SESSIONID)));
@@ -129,7 +129,16 @@ public class MyBank {
 				// Did we fail to create user information?
 				if ((res = send(new Request(data, "USER", "CREATEUSERINFO", null, params))).getRecordsModified() == 0) {
 					Menu.println("fail!");
-					Menu.println("\nerror:>" + res.getException().getMessage() + "\n");
+					Menu.println("\n\t\terror:>" + res.getException().getMessage() + "\n");
+					Menu.println("\tAttempting rollback...");
+					params.clear();
+					params.put(User.ID, data.get(User.ID));
+					
+					if ((res = send(new Request(data, "USER", "DELETEUSER", null, params))).getRecordsModified() == 0) {
+						Menu.println("fail!");
+						Menu.println("\tPlease wait for assistance");
+						Menu.println("\n\t\terror:>" + res.getException().getMessage() + "\n");
+					}
 				}
 				else {
 					Menu.println("done");

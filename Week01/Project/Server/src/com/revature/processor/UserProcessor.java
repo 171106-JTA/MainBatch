@@ -1,5 +1,6 @@
 package com.revature.processor;
 
+import com.revature.businessobject.info.account.AccountType;
 import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.Checkpoint;
 import com.revature.businessobject.user.User;
@@ -60,8 +61,12 @@ public class UserProcessor implements Processorable {
 				res = URH.setUserInfo(request);
 				break;
 			case "CREATECHECKINGACCOUNT":
+				Require.require(new Checkpoint[] { Checkpoint.CUSTOMER },  request);
+				res = URH.createAccount(request, AccountType.CHECKING);
 				break;
 			case "CREATECREDITACCOUNT":
+				Require.require(new Checkpoint[] { Checkpoint.CUSTOMER },  request);
+				res = URH.createAccount(request, AccountType.CREDIT);
 				break;
 			case "DELETEACCOUNT":
 				break;

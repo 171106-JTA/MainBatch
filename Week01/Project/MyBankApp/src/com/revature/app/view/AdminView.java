@@ -79,7 +79,7 @@ public class AdminView implements View {
 					// Set params to view account information
 					params = factory.getFieldParams(list.get(index));
 					params.put(User.SESSIONID, MyBank.data.get(User.SESSIONID));
-					Menu.printUser(params);
+					Menu.printAccountData(params);
 					printUserActionOptions();
 					input = Menu.getInput(name + ":>");
 					
@@ -129,7 +129,7 @@ public class AdminView implements View {
 					// Set params to view user information
 					params = factory.getFieldParams(list.get(index));
 					params.put(User.SESSIONID, MyBank.data.get(User.SESSIONID));
-					Menu.printAccountData(params);
+					Menu.printUser(params);
 					printUserActionOptions();
 					input = Menu.getInput(name + ":>");
 					
@@ -281,6 +281,8 @@ public class AdminView implements View {
 		params.put(User.CHECKPOINT, Integer.toString(Checkpoint.ADMIN.ordinal()));
 		allUsers = MyBank.send(new Request(MyBank.data, "USER", "GETUSER", params, null));
 		params.put(User.CHECKPOINT, Integer.toString(Checkpoint.CUSTOMER.ordinal()));
+		allUsers.addAll(MyBank.send(new Request(MyBank.data, "USER", "GETUSER", params, null)));
+		params.put(User.CHECKPOINT, Integer.toString(Checkpoint.BLOCKED.ordinal()));
 		allUsers.addAll(MyBank.send(new Request(MyBank.data, "USER", "GETUSER", params, null)));
 		Menu.println("We have " + allUsers.size() + " users!");
 	}
