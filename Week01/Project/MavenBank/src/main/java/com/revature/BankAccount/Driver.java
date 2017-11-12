@@ -366,7 +366,7 @@ public class Driver {
 	}
 
 	/**
-	 * Display menu for Admins, get Admin's choice, and validate admin's choice
+	 * Display menu for Admins, get the Admin's choice, and validate the Admin's choice
 	 */
 	private void adminMenu() {
 		boolean loop = true;
@@ -422,6 +422,9 @@ public class Driver {
 		}
 	}
 
+	/**
+	 * Display the actions for Admins
+	 */
 	private void displayAdminMenu() {
 		System.out.println("=======================================");
 		System.out.println("Administrator Menu");
@@ -465,29 +468,36 @@ public class Driver {
 	}
 
 	/**
-	 * Approve the given client's account
-	 * 
-	 * @param clientUsername
-	 *            Username of client account to approve
+	 * Get user id from Admin and approve the given client's account
 	 */
 	public void approveClientAccount() {
 		boolean loop = true;
 		int loopCounter = 0; 
 		final int maxLoopIteration = 5;
+		
+		//Input validation loop. 
+		//The Admin is limited to 'maxLoopIteration' tries before being sent
+		//back to the previous menu
 		while(loop && loopCounter < maxLoopIteration) {
 			displayAccountsNeedingApproval();
 			loop = !getAndApproveAccount(); //loop while the user input is invalid
 			
+			//Count number of incorrect inputs
 			if(loop)
 			{
 				loopCounter += 1;
 			}
 		}
+		
+		//Print appropriate message, if incorrect input limit is reached
 		if(loopCounter == maxLoopIteration) {
 			System.out.println("Too many invalid tries");
 		}
 	}
-
+	
+	/**
+	 * Display accounts that need approving
+	 */
 	public void displayAccountsNeedingApproval() {
 		System.out.println("SSNs for accounts needing approval");
 		
@@ -498,7 +508,11 @@ public class Driver {
 	    System.out.println("\n");
 		System.out.println("Enter Account To Approve: ");
 	}
-
+	
+	/**
+	 * Fetch the accounts that need approving from the internal database
+	 * @return Returns a list of strings containing the user accounts that need approving
+	 */
 	public List<String> getApprovalPendingAccounts() {
 		// Loop through db and search for accounts needing approval
 		// To Do: Find a better way to do this than O(n)
@@ -512,6 +526,11 @@ public class Driver {
 		return ssnNeedingApproval;
 	}
 	
+	/**
+	 * Allow the admin to specify which account to approve
+	 * Validate the admin's input
+	 * @return Returns TRUE if the admin's input is valid and FALSE if the input is invalid
+	 */
 	public boolean getAndApproveAccount() {
 		boolean validUser = false;
 		String input = getUserInput();
