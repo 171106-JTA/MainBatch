@@ -23,6 +23,10 @@ public abstract class ObjectDAO <T extends Model> {
         List<T> res = new ArrayList<>();
         File saveDirFile = new File(saveDir);
         File[] files = saveDirFile.listFiles();
+
+        if (files == null)
+            return res;
+
         for (File file : files) {
             if (file.isFile())
                 res.add((T) readObject(file.getAbsolutePath()));
@@ -57,6 +61,18 @@ public abstract class ObjectDAO <T extends Model> {
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * Update an object based on id. Assumes id is never changed
+     *
+     * @param obj
+     * @return
+     */
+    public boolean update(T obj) {
+        if (!doesExist(getId(obj)))
+            return false;
+        return save(obj);
     }
 
     public boolean deleteById(String id) {

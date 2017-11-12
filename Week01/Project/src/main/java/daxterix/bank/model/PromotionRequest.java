@@ -6,4 +6,9 @@ public class PromotionRequest extends UserRequest {
     public PromotionRequest(User user) {
         super(user);
     }
+
+    @Override
+    public String toString() {
+        return String.format("(id %d) Promotion request filed by %s on %s", id, requester.getUsername(), time);
+    }
 }

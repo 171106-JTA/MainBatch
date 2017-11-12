@@ -7,12 +7,23 @@ public class Customer extends User {
 
     public Customer(String username, String password) {
         super(username, password);
+        balance = 0;
+    }
+
+    public boolean withdraw(double amt) {
+        if (amt > balance)
+            return false;
+        balance -= amt;
+        return true;
     }
 
     public void deposit(double amt) {
+        balance += amt;
     }
 
-    public void withdraw(double amt) {
+    public double getBalance() {
+        return balance;
     }
+
 
 }

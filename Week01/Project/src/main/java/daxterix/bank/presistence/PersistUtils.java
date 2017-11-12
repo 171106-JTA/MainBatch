@@ -4,7 +4,8 @@ import java.io.*;
 
 public class PersistUtils {
     public static String appPersistHome = "Desktop\\userInfo";
-    public static String customerPath = "Desktop\\userInfo\\customer";
+    public static String unlockedCustomerPath = "Desktop\\userInfo\\customer\\unlocked";
+    public static String lockedCustomerPath = "Desktop\\userInfo\\customer\\locked";
     public static String adminPath = "Desktop\\userInfo\\admin";
     public static String requestPath = "Desktop\\userInfo\\request";
 
@@ -14,7 +15,8 @@ public class PersistUtils {
     static {
         String sysHomeDir = System.getProperty("user.home");
         adminPath = (new File(sysHomeDir, adminPath)).getAbsolutePath();
-        customerPath = (new File(sysHomeDir, customerPath)).getAbsolutePath();
+        unlockedCustomerPath = (new File(sysHomeDir, unlockedCustomerPath)).getAbsolutePath();
+        lockedCustomerPath = (new File(sysHomeDir, lockedCustomerPath)).getAbsolutePath();
         requestPath = (new File(sysHomeDir, requestPath)).getAbsolutePath();
         appPersistHome = (new File(sysHomeDir, appPersistHome)).getAbsolutePath();
 
@@ -29,8 +31,12 @@ public class PersistUtils {
         return new AdminDAO(adminPath);
     }
 
-    public static CustomerDAO getCustomerDao() {
-        return new CustomerDAO(customerPath);
+    public static CustomerDAO getUnlockedCustomerDao() {
+        return new CustomerDAO(unlockedCustomerPath);
+    }
+
+    public static CustomerDAO getLockedCustomerDao() {
+        return new CustomerDAO(lockedCustomerPath);
     }
 
     public static RequestDAO getRequestDao() {
@@ -45,5 +51,4 @@ public class PersistUtils {
         File file = new File(p1, p2);
         return file.getAbsolutePath();
     }
-
 }
