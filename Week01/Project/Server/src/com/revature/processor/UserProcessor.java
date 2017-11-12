@@ -69,6 +69,8 @@ public class UserProcessor implements Processorable {
 				res = URH.createAccount(request, AccountType.CREDIT);
 				break;
 			case "DELETEACCOUNT":
+				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
+				res = URH.deleteAccount(request);
 				break;
 			case "GETACCOUNT":
 				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);

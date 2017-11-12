@@ -198,7 +198,7 @@ public final class UserRequestHandler {
 		number = largest == null ? "0" : Long.toString(((Account)largest).getNumber() + 1);
 		
 		// Set account details
-		transact.put(Info.USERID, Long.toString(request.getUserId())));
+		transact.put(Info.USERID, Long.toString(request.getUserId()));
 		transact.put(Account.TYPE, type);
 		transact.put(Account.STATUS, AccountStatus.PENDING);
 		transact.put(Account.NUMBER, number);
@@ -207,7 +207,11 @@ public final class UserRequestHandler {
 	}
 	
 	public Resultset deleteAccount(Request request) throws RequestException {
-		return null;
+		// If non-admin account, then we should be deleting own account ONLY
+		if (request.getCheckpoint() != Checkpoint.ADMIN)
+			Require.requireSelfQuery(request);
+			
+		return new Resultset(Server.database.delete(BusinessClass.ACCOUNT, request.getQuery()));
 	}
 	
 	
