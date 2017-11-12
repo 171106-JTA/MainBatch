@@ -7,6 +7,8 @@ import com.revature.businessobject.info.Info;
 import com.revature.businessobject.info.account.Account;
 import com.revature.businessobject.info.account.AccountStatus;
 import com.revature.businessobject.info.account.AccountType;
+import com.revature.businessobject.info.account.Checking;
+import com.revature.businessobject.info.account.Credit;
 import com.revature.businessobject.user.Checkpoint;
 import com.revature.businessobject.user.User;
 import com.revature.core.BusinessClass;
@@ -59,7 +61,7 @@ public final class UserRequestHandler {
 		transact.put(User.ID, user != null ? Long.toString(((User)user).getId() + 1) : "0");
 		
 		// If non-admin then set account to pending 
-		if (request.getCheckpoint() != Checkpoint.ADMIN) 
+		if (!request.getCheckpoint().equals(Checkpoint.ADMIN)) 
 			transact.put(User.CHECKPOINT, Checkpoint.PENDING);
 		
 		// Insert user 
@@ -77,7 +79,7 @@ public final class UserRequestHandler {
 		int total;
 		
 		// If admin then allowed to remove other accounts 
-		if (request.getCheckpoint() == Checkpoint.ADMIN) {
+		if (request.getCheckpoint().equals(Checkpoint.ADMIN)) {
 			FieldParams query = request.getQuery();
 			userid = query.get(User.ID);
 		} else {
@@ -102,7 +104,7 @@ public final class UserRequestHandler {
 	 * @return 0 to n records
 	 */
 	public Resultset getUser(Request request) throws RequestException {
-		if (request.getCheckpoint() != Checkpoint.ADMIN)
+		if (!request.getCheckpoint().equals(Checkpoint.ADMIN))
 			Require.requireSelfQuery(request);
 		
 		return Server.database.select(BusinessClass.USER, request.getQuery());
@@ -131,7 +133,7 @@ public final class UserRequestHandler {
 		}
 		
 		// If user account Ensure they are updating their account only 
-		if (request.getCheckpoint() != Checkpoint.ADMIN) {
+		if (!request.getCheckpoint().equals(Checkpoint.ADMIN)) {
 			Require.requireSelfQuery(request);
 			
 			// Users are not allowed to update checkpoints 
@@ -178,7 +180,7 @@ public final class UserRequestHandler {
 	 */
 	public Resultset getUserInfo(Request request) throws RequestException { 
 		// For NON-ADMINS only personal account information should be accessible 
-		if (request.getCheckpoint() != Checkpoint.ADMIN) 
+		if (!request.getCheckpoint().equals(Checkpoint.ADMIN)) 
 			Require.requireSelfQuery(request);
 		
 		return Server.database.select(BusinessClass.USERINFO, request.getQuery());
@@ -189,7 +191,7 @@ public final class UserRequestHandler {
 		FieldParams query = request.getQuery();
 		
 		// For NON-ADMINS only personal account information should be accessible 
-		if (request.getCheckpoint() != Checkpoint.ADMIN) {
+		if (!request.getCheckpoint().equals(Checkpoint.ADMIN)) {
 			Require.requireSelfQuery(request);
 			
 			// auto-set to find self
@@ -207,8 +209,8 @@ public final class UserRequestHandler {
 	//	ACCOUNT
 	///
 	
-	public Resultset createAccount(Request request, String type) {
-		FieldParams transact = request.getTransaction();
+	public Resultset createAccount(Request request, String type) throws RequestException {
+		FieldParams transact = new FieldParams();
 		BusinessObject largest;
 		String number;
 		
@@ -221,13 +223,27 @@ public final class UserRequestHandler {
 		transact.put(Account.TYPE, type);
 		transact.put(Account.STATUS, AccountStatus.PENDING);
 		transact.put(Account.NUMBER, number);
+
+		switch (type) {
+			case AccountType.CHECKING:
+				transact.put(Checking.TOTAL, Float.toString(0.0f));
+				break;
+			case AccountType.CREDIT:
+				transact.put(Credit.TOTAL, Float.toString(0.0f));
+				transact.put(Credit.INTEREST, Float.toString(0.0f));
+				transact.put(Credit.CREDITLIMIT, Float.toString(0.0f));
+				break;
+			default:
+				throw new RequestException(request, "Unknown account type=[\'" + type + "\']!");	
+		}
+		
 		
 		return new Resultset(Server.database.insert(BusinessClass.ACCOUNT, transact));
 	}
 	
 	public Resultset deleteAccount(Request request) throws RequestException {
 		// If non-admin account, then we should be deleting own account ONLY
-		if (request.getCheckpoint() != Checkpoint.ADMIN)
+		if (!request.getCheckpoint().equals(Checkpoint.ADMIN))
 			Require.requireSelfQuery(request);
 			
 		return new Resultset(Server.database.delete(BusinessClass.ACCOUNT, request.getQuery()));
@@ -236,7 +252,7 @@ public final class UserRequestHandler {
 	
 	public Resultset getAccount(Request request) throws RequestException {
 		// For NON-ADMINS only personal account information should be accessible 
-		if (request.getCheckpoint() != Checkpoint.ADMIN) 
+		if (!request.getCheckpoint().equals(Checkpoint.ADMIN)) 
 			Require.requireSelfQuery(request);
 				
 		return Server.database.select(BusinessClass.ACCOUNT, request.getQuery());
@@ -247,7 +263,7 @@ public final class UserRequestHandler {
 		FieldParams query = request.getQuery();
 		
 		// For NON-ADMINS only personal account information should be accessible 
-		if (request.getCheckpoint() != Checkpoint.ADMIN) 
+		if (!request.getCheckpoint().equals(Checkpoint.ADMIN)) 
 			Require.requireSelfQuery(request);
 				
 		// Set type of account we are looking for 

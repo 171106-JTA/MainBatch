@@ -83,7 +83,7 @@ public class CustomerView implements View {
 		if ((res = MyBank.send(request)).getRecordsModified() == 0) {
 			Menu.println("fail");
 			if (res.getException() != null)
-				Menu.println("\t\terror:>" + res.getException().getMessage());
+				Menu.println("\t\terror:>" + res.getException().getMessage() + "\n");
 		} else {
 			Menu.println("done\n");
 			this.name = username;
@@ -108,7 +108,7 @@ public class CustomerView implements View {
 		if ((res = MyBank.send(request)).getRecordsModified() == 0) {
 			Menu.println("fail");
 			if (res.getException() != null)
-				Menu.println("\t\terror:>" + res.getException().getMessage());
+				Menu.println("\t\terror:>" + res.getException().getMessage() + "\n");
 		} else {
 			Menu.println("done\n");
 			MyBank.data.put(User.PASSWORD, password);
@@ -136,14 +136,28 @@ public class CustomerView implements View {
 		if ((res = MyBank.send(request)).getRecordsModified() == 0) {
 			Menu.println("fail");
 			if (res.getException() != null)
-				Menu.println("\t\terror:>" + res.getException().getMessage());
+				Menu.println("\t\terror:>" + res.getException().getMessage() + "\n");
 		} else {
 			Menu.println("done\n");
 		}
 	}
 	
 	private void createCheckingAccount() {
-		// stub
+		Request request;
+		Resultset res;
+		
+		// Create request
+		request = new Request(MyBank.data, "USER", "CREATECHECKINGACCOUNT", null, null);
+		
+		Menu.print("\tAttempting to create a checking account...");
+		
+		if ((res = MyBank.send(request)).getRecordsModified() == 0) {
+			Menu.println("fail");
+			if (res.getException() != null)
+				Menu.println("\t\terror:>" + res.getException().getMessage() + "\n");
+		} else {
+			Menu.println("done\n");
+		}
 	}
 	
 	private void manageAccount() {

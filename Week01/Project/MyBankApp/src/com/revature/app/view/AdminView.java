@@ -5,6 +5,7 @@ import java.util.Iterator;
 import com.revature.app.Menu;
 import com.revature.app.MyBank;
 import com.revature.businessobject.BusinessObject;
+import com.revature.businessobject.info.Info;
 import com.revature.businessobject.info.account.Account;
 import com.revature.businessobject.info.account.AccountStatus;
 import com.revature.businessobject.user.Checkpoint;
@@ -62,56 +63,6 @@ public class AdminView implements View {
 	//	PRIVATE METHODS 
 	///
 	
-	private void manageAccount(Resultset list) {
-		if (list.size() > 0) {
-			FieldParams params;
-			String input;
-			int index; 
-			
-			Menu.println("Select one of the following accounts: ");
-			printList(list);
-			input = Menu.getInput(name + ":>");
-			
-			try {
-				index = Integer.parseInt(input);
-				
-				if (index > -1 && index < list.size()) {
-					// Set params to view account information
-					params = factory.getFieldParams(list.get(index));
-					params.put(User.SESSIONID, MyBank.data.get(User.SESSIONID));
-					Menu.printAccountData(params);
-					printUserActionOptions();
-					input = Menu.getInput(name + ":>");
-					
-					switch (input) {
-						case "0": 
-							updateUserCheckpoint((User)list.get(index), Checkpoint.CUSTOMER);
-							break;
-						case "1":
-							updateUserCheckpoint((User)list.get(index), Checkpoint.ADMIN);
-							break;
-						case "2":
-							updateUserCheckpoint((User)list.get(index), Checkpoint.BLOCKED);
-							break;
-						case "3":
-							deleteUser((User)list.get(index));
-							break;
-						case "4":
-							break;
-						default:
-							Menu.println("Invalid selection!");		
-					}
-					
-				}else {
-					Menu.println("Invalid selection!");
-				}
-			} catch (Exception e) {
-			}	
-		} else {
-			Menu.println("You do not have any users");;
-		}
-	}
-	
 	private void manageUser(Resultset list) {
 		if (list.size() > 0) {
 			FieldParams params;
@@ -162,46 +113,145 @@ public class AdminView implements View {
 		}
 	}
 	
+	private void manageAccount(Resultset list) {
+		if (list.size() > 0) {
+			FieldParams params;
+			String input;
+			int index; 
+			
+			Menu.println("Select one of the following accounts: ");
+			printList(list);
+			input = Menu.getInput(name + ":>");
+			
+			try {
+				index = Integer.parseInt(input);
+				
+				if (index > -1 && index < list.size()) {
+					// Set params to view account information
+					params = factory.getFieldParams(list.get(index));
+					params.put(User.SESSIONID, MyBank.data.get(User.SESSIONID));
+					params.put(User.ID, params.get(Info.USERID));
+					Menu.printAccountData(params);
+					printAccountActionOptions();
+					input = Menu.getInput(name + ":>");
+					
+					switch (input) {
+						case "0": 
+							updateAccountStatus((Account)list.get(index), AccountStatus.ACTIVE);
+							break;
+						case "1":
+							updateAccountStatus((Account)list.get(index), AccountStatus.BLOCKED);
+							break;
+						case "2":
+							deleteAccount((Account)list.get(index));
+							break;
+						case "3":
+							break;
+						default:
+							Menu.println("Invalid selection!");		
+					}
+					
+				}else {
+					Menu.println("Invalid selection!");
+				}
+			} catch (Exception e) {
+			}	
+		} else {
+			Menu.println("You do not have any users");;
+		}
+	}
+	
+	
 
 	///
 	//	USER MANIPULATION CONTROLS 
 	///
 	
-	private void deleteUser(User user) {
-		Resultset res;
-		
-		// Send request
-		res = MyBank.send(new Request(MyBank.data, "USER", "DELETEUSER", factory.getFieldParams(user), null));
-		
-		if (res.size() == 1)
-			Menu.println("Account deleted");
-		else {
-			Menu.print(res.getException().getMessage());
-		}
-	}
-
-	
 	private void updateUserCheckpoint(User user, String checkpoint) {
 		FieldParams trans;
+		Request request;
 		Resultset res;
 		
 		// Set request params
 		trans = factory.getFieldParams(user);
 		trans.put(User.CHECKPOINT, checkpoint);
 	
-		// Send request
-		res = MyBank.send(new Request(MyBank.data, "USER", "SETUSER", factory.getFieldParams(user), trans));
+		// Create request
+		request = new Request(MyBank.data, "USER", "SETUSER", factory.getFieldParams(user), trans);
 		
-		if (res.size() == 1)
-			Menu.println("Account updated");
-		else {
-			Menu.print(res.getException().getMessage());
+		Menu.print("\tAttempting to update user checkpoint...");
+		
+		if ((res = MyBank.send(request)).getRecordsModified() == 0) {
+			Menu.println("fail");
+			if (res.getException() != null)
+				Menu.println("\t\terror:>" + res.getException().getMessage() + "\n");
+		} else {
+			Menu.println("done\n");
 		}
 	}
 	
-	
-	private void updateAccount(Account account) {
+	private void deleteUser(User user) {
+		Request request;
+		Resultset res;
 		
+		// Create request
+		request = new Request(MyBank.data, "USER", "DELETEUSER", factory.getFieldParams(user), null);
+		
+		Menu.print("\tAttempting to delete user...");
+		
+		if ((res = MyBank.send(request)).getRecordsModified() == 0) {
+			Menu.println("fail");
+			if (res.getException() != null)
+				Menu.println("\t\terror:>" + res.getException().getMessage() + "\n");
+		} else {
+			Menu.println("done\n");
+		}
+	}
+	
+	private void updateAccountStatus(Account account, String status) {
+		FieldParams params = new FieldParams();
+		FieldParams transact = new FieldParams();
+		Request request;
+		Resultset res;
+		
+		// Set params
+		params.put(Info.USERID, Long.toString(account.getUserId()));
+		transact.put(Account.STATUS, status);
+		
+		// Create request
+		request = new Request(MyBank.data, "USER", "SETACCOUNTSTATUS", params, transact);
+
+		Menu.print("\tAttempting to update account status...");
+		
+		if ((res = MyBank.send(request)).getRecordsModified() == 0) {
+			Menu.println("fail");
+			if (res.getException() != null)
+				Menu.println("\t\terror:>" + res.getException().getMessage() + "\n");
+		} else {
+			Menu.println("done\n");
+		}
+	}
+	
+	private void deleteAccount(Account account) {
+		FieldParams params = new FieldParams();
+		Request request;
+		Resultset res;
+		
+		// Set params
+		params.put(Info.USERID, Long.toString(account.getUserId()));
+		
+		// Create request
+		request = new Request(MyBank.data, "USER", "DELETEACCOUNT", params, null);
+
+		Menu.print("\tAttempting to delete account...");
+		
+		if ((res = MyBank.send(request)).getRecordsModified() == 0) {
+			Menu.println("fail");
+			if (res.getException() != null)
+				Menu.println("\t\terror:>" + res.getException().getMessage() + "\n");
+		} else {
+			Menu.println("done\n");
+		}
 	}
 	
 	///
@@ -217,13 +267,12 @@ public class AdminView implements View {
 		Menu.println("\t- 4 - CANCEL");
 	}
 	
-	private void printAccountOptions() {
+	private void printAccountActionOptions() {
 		Menu.println("What would you like to do?");
 		Menu.println("\t- 0 - SET AS ACTIVE");
 		Menu.println("\t- 1 - SET AS BLOCKED");
-		Menu.println("\t- 2 - MANAGE");
-		Menu.println("\t- 3 - DELETE");
-		Menu.println("\t- 4 - CANCEL");
+		Menu.println("\t- 2 - DELETE");
+		Menu.println("\t- 3 - CANCEL");
 	}
 	
 	private void printList(Resultset list) {

@@ -139,16 +139,22 @@ public class Menu {
 	///
 	
 	private static void printCheckingAccount(Checking checking) {
+		println("===============================================================");
 		println("\tAccount Type: Checking");
+		println("\tAccount status: " + checking.getStatus().toUpperCase());
 		println("\tAccount Number: " + checking.getNumber());
 		println("\tTotal: $" + checking.getTotal());
+		println("===============================================================");
 	}
 	
 	private static void printCreditAccount(Credit credit) {
+		println("===============================================================");
 		println("\tAccount Type: Credit");
+		println("\tAccount status: " + credit.getStatus().toUpperCase());
 		println("\tAccount Number: " + credit.getNumber());
 		println("\tMonthly Interest: " + credit.getInterest() + "%");
 		println("\tCredit Limit: $" + credit.getCreditLimit());
 		println("\tTotal: $" + credit.getTotal());
+		println("===============================================================");
 	}
 }

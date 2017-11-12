@@ -2,6 +2,7 @@ package com.revature.core.comparator;
 
 import java.util.Comparator;
 
+import com.revature.businessobject.info.account.Checking;
 import com.revature.businessobject.info.account.Credit;
 import com.revature.core.FieldParams;
 
@@ -41,6 +42,9 @@ public class FieldParamsCreditComparator implements Comparator<Object>{
 			
 			if (result == 0 && fieldParams.containsKey(Credit.TYPE)) 
 				result = fieldParams.get(Credit.TYPE).compareTo(account.getType());
+			
+			if (result == 0 && fieldParams.containsKey(Credit.STATUS)) 
+				result = fieldParams.get(Credit.STATUS).compareTo(account.getStatus());
 		}
 		
 		return result;
