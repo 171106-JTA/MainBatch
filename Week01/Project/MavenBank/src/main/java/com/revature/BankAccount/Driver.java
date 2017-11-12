@@ -406,7 +406,7 @@ public class Driver {
 					lockClientAccount();
 				} else if (userInput.equals("3")) {
 					System.out.println("Option 3");
-					// unlockClientAccount();
+					unlockClientAccount();
 				} else if (userInput.equals("4")) {
 					System.out.println("Option 4");
 					// promoteClientToAdmin();
@@ -452,10 +452,79 @@ public class Driver {
 	 * @param clientUsername
 	 *            Username of the client account to unlock
 	 */
-	public void unlockClientAccount(String clientUsername) {
-		
+	public void unlockClientAccount() {
+		boolean loop = true;
+		int loopCounter = 0;
+		final int maxLoopIteration = 5;
+
+		// Input validation loop.
+		// The Admin is limited to 'maxLoopIteration' tries before being sent
+		// back to the previous menu
+		while (loop && loopCounter < maxLoopIteration) {
+			displayLockedAccounts();
+			loop = !getAndUnlockAccount(); // loop while the user input is invalid
+
+			// Count number of incorrect inputs
+			if (loop) {
+				loopCounter += 1;
+			}
+		}
+
+		// Print appropriate message, if incorrect input limit is reached
+		if (loopCounter == maxLoopIteration) {
+			System.out.println("Too many invalid tries");
+		}
 	}
-	
+
+	private void displayLockedAccounts() {
+		System.out.println("SSN's for currently locked accounts");
+
+		List<String> lockedUserAccounts = getLockedAccounts();
+		for (String item : lockedUserAccounts) {
+			System.out.println(item);
+		}
+		System.out.println("\n");
+		System.out.println("Enter Account To Lock: ");
+	}
+
+	private List<String> getLockedAccounts() {
+		// Loop through db and search for unlocked user accounts
+		// To Do: Find a better way to do this than O(n)
+		List<String> lockedUserAccounts = new ArrayList<String>();
+		for (String key : this.db.keySet()) {
+			User user = this.db.get(key);
+			if (user.getStatus() == status_locked && user.getPermissions() == permission_client) {
+				lockedUserAccounts.add(key);
+			}
+		}
+
+		return lockedUserAccounts;
+	}
+
+	private boolean getAndUnlockAccount() {
+		boolean validUser = false;
+		String input = getUserInput();
+		User user = this.db.get(input);
+
+		// Check if designated user exists and actually is currently locked.
+		// Note: nested if-statements for error message purposes
+		// (i.e. allows for unique error message based on situation)
+		if (user != null) {
+			if (user.getStatus() == status_locked && user.getPermissions() == permission_client) {
+				user.setStatus(status_active);
+				this.db.put(user.getSsn(), user);
+				validUser = true;
+				System.out.println("Account Unlocked!");
+			} else {
+				System.out.println("Account: " + user.getSsn() + " cannot be unlocked");
+			}
+		} else {
+			System.out.println("User is not in the database");
+		}
+
+		return validUser;
+	}
+
 	/**
 	 * Lock a client's account
 	 */
@@ -483,7 +552,7 @@ public class Driver {
 		}
 
 	}
-	
+
 	/**
 	 * Display unlocked accounts (i.e. accounts that can be locked)
 	 */
@@ -500,6 +569,7 @@ public class Driver {
 
 	/**
 	 * Fetch unlocked accounts from the internal database
+	 * 
 	 * @return Returns a list containing ID's of currently unlocked accounts
 	 */
 	private List<String> getUnlockedAccounts() {
@@ -508,17 +578,18 @@ public class Driver {
 		List<String> unlockedUserAccounts = new ArrayList<String>();
 		for (String key : this.db.keySet()) {
 			User user = this.db.get(key);
-			if (user.getStatus() == status_active && 
-					user.getPermissions() == permission_client) {
+			if (user.getStatus() == status_active && user.getPermissions() == permission_client) {
 				unlockedUserAccounts.add(key);
 			}
 		}
 
 		return unlockedUserAccounts;
 	}
-	
+
 	/**
-	 * Get and validate the Admin's choice of client to lock. Lock the client's account
+	 * Get and validate the Admin's choice of client to lock. Lock the client's
+	 * account
+	 * 
 	 * @return Returns TRUE if the admins choses a valid user and False otherwise
 	 */
 	private boolean getAndLockAccount() {
@@ -530,8 +601,7 @@ public class Driver {
 		// Note: nested if-statements for error message purposes
 		// (i.e. allows for unique error message based on situation)
 		if (user != null) {
-			if (user.getStatus() == status_active && 
-					user.getPermissions() == permission_client) {
+			if (user.getStatus() == status_active && user.getPermissions() == permission_client) {
 				user.setStatus(status_locked);
 				this.db.put(user.getSsn(), user);
 				validUser = true;
