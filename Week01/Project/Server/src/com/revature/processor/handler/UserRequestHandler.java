@@ -117,9 +117,18 @@ public final class UserRequestHandler {
 	public Resultset setUser(Request request) throws RequestException {
 		FieldParams query = request.getQuery();
 		FieldParams trans = request.getTransaction();
+		FieldParams verify;
 		
-		// Ensure that update is unique
-		Require.requireUnique(BusinessClass.USER, trans, request);
+		// If User name neing updated 
+		if (trans.get(User.USERNAME) != null) {
+			verify = new FieldParams();
+			
+			// get data to validate
+			verify.put(User.USERNAME, trans.get(User.USERNAME));
+			
+			// Ensure that update is unique
+			Require.requireUnique(BusinessClass.USER, verify, request);
+		}
 		
 		// If user account Ensure they are updating their account only 
 		if (request.getCheckpoint() != Checkpoint.ADMIN) {

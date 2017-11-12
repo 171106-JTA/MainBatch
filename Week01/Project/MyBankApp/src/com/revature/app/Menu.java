@@ -64,7 +64,7 @@ public class Menu {
 	
 	public static void printViewMenu() {
 		println("===============================================================");
-		println("= To leave application, type \'logout\'                       =");
+		println("= To leave application, type \'logout\'                        =");
 		println("===============================================================");
 	}
 	

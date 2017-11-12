@@ -15,12 +15,12 @@ import com.revature.core.Resultset;
 import com.revature.core.factory.FieldParamsFactory;
 
 public class AdminView implements View {
+	private FieldParamsFactory factory = FieldParamsFactory.getFactory();
+	private String name = MyBank.data.get(User.USERNAME);
 	private Resultset allUsers;
 	private Resultset allAccounts;
 	private Resultset pendingUsers;
 	private Resultset pendingAccounts;
-	private String name = MyBank.data.get(User.USERNAME);
-	private FieldParamsFactory factory = FieldParamsFactory.getFactory();
 	
 	@Override
 	public void run() {

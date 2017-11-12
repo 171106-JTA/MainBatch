@@ -2,45 +2,58 @@ package com.revature.app.view;
 
 import com.revature.app.Menu;
 import com.revature.app.MyBank;
+import com.revature.businessobject.user.Checkpoint;
 import com.revature.businessobject.user.User;
+import com.revature.core.FieldParams;
+import com.revature.core.Request;
+import com.revature.core.Resultset;
+import com.revature.core.factory.FieldParamsFactory;
 
 public class CustomerView implements View {
+	private FieldParamsFactory factory = FieldParamsFactory.getFactory();
 	private String name = MyBank.data.get(User.USERNAME);
 	
 	@Override
 	public void run() {
 		String input = "";
 		
+		// Show basic account information
 		Menu.printUser(MyBank.data);
-		Menu.printViewMenu();
 		
-		while (!input.toLowerCase().equals("logout")) {
-			printOptions();
-			input = Menu.getInput(name + ":>");
+		if (!MyBank.data.get(User.CHECKPOINT).equals(Checkpoint.CUSTOMER))
+			Menu.println("Account is waiting for approval, goodbye");
+		else {
+			// Print active user menu
+			Menu.printViewMenu();
 			
-			switch (input) {
-				case "0":
-					updateUserName();
-					break;
-				case "1":
-					updatePassword();
-					break;
-				case "2":
-					updateContactInfo();
-					break;
-				case "3":
-					createCheckingAccount();
-					break;
-				case "4":
-					manageAccount();
-					break;
-				case "5":
-					deleteAccount();
-					break;
-				case "logout":
-					break;
-				default:
-					Menu.println(input + " is an unknown selection!");;
+			while (!input.toLowerCase().equals("logout")) {
+				printOptions();
+				input = Menu.getInput(name + ":>");
+				
+				switch (input) {
+					case "0":
+						updateUserName();
+						break;
+					case "1":
+						updatePassword();
+						break;
+					case "2":
+						updateContactInfo();
+						break;
+					case "3":
+						createCheckingAccount();
+						break;
+					case "4":
+						manageAccount();
+						break;
+					case "5":
+						deleteAccount();
+						break;
+					case "logout":
+						break;
+					default:
+						Menu.println(input + " is an unknown selection!");;
+				}
 			}
 		}
 	}
@@ -49,16 +62,61 @@ public class CustomerView implements View {
 	//	PRIVATE METHODS 
 	///
 	
+	private void loadUser() {
+		
+	}
+	
 	private void updateUserName() {
-		// stub
+		FieldParams transact = new FieldParams(); 
+		String username = Menu.getInput("New Username:>");
+		Request request;
+		Resultset res;
+		
+		// Set data to update
+		transact.put(User.USERNAME, username);
+		
+		// Create request
+		request = new Request(MyBank.data, "USER", "SETUSER", MyBank.data, transact);
+		
+		Menu.print("\tAttempting to change username...");
+		
+		if ((res = MyBank.send(request)).getRecordsModified() == 0) {
+			Menu.println("fail");
+			if (res.getException() != null)
+				Menu.println("\t\terror:>" + res.getException().getMessage());
+		} else {
+			Menu.println("done\n");
+			this.name = username;
+			MyBank.data.put(User.USERNAME, username);
+		}
 	}
 	
 	private void updatePassword() {
-		// stub
+		FieldParams transact = new FieldParams(); 
+		String password = Menu.getInput("New Password:>");
+		Request request;
+		Resultset res;
+		
+		// Set data to update
+		transact.put(User.PASSWORD, password);
+		
+		// Create request
+		request = new Request(MyBank.data, "USER", "SETUSER", MyBank.data, transact);
+		
+		Menu.print("\tAttempting to change password...");
+		
+		if ((res = MyBank.send(request)).getRecordsModified() == 0) {
+			Menu.println("fail");
+			if (res.getException() != null)
+				Menu.println("\t\terror:>" + res.getException().getMessage());
+		} else {
+			Menu.println("done\n");
+			MyBank.data.put(User.PASSWORD, password);
+		}
 	}
 	
-	private void updateContactInfo() 
-	// stub
+	private void updateContactInfo() {
+		// stub
 	}
 	
 	private void createCheckingAccount() {
