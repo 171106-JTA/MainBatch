@@ -11,7 +11,7 @@ public class FieldParamsCreditComparator implements Comparator<Object>{
 	 * @param right instance of Credit
 	 * @see FieldParams
 	 * @see Credit
-	 * @return 0 if match successful else -1
+	 * @return 0 if match successful else non-zero
 	 */
 	@Override
 	public int compare(Object left, Object right) {
@@ -25,22 +25,22 @@ public class FieldParamsCreditComparator implements Comparator<Object>{
 			result = 0;
 			
 			if (fieldParams.containsKey(Credit.USERID)) 
-				result = fieldParams.get(Credit.USERID).equals(Long.toString(account.getUserId())) ? 0 : -1;
+				result = fieldParams.get(Credit.USERID).compareTo(Long.toString(account.getUserId()));
 			
-			if (fieldParams.containsKey(Credit.NUMBER)) 
-				result = fieldParams.get(Credit.NUMBER).equals(Long.toString(account.getNumber())) ? 0 : -1;
+			if (result == 0 && fieldParams.containsKey(Credit.NUMBER)) 
+				result = fieldParams.get(Credit.NUMBER).compareTo(Long.toString(account.getNumber()));
 			
-			if (result != -1 && fieldParams.containsKey(Credit.TOTAL)) 
-				result = fieldParams.get(Credit.TOTAL).equals(Float.toString(account.getTotal())) ? 0 : -1;
+			if (result == 0 && fieldParams.containsKey(Credit.TOTAL)) 
+				result = fieldParams.get(Credit.TOTAL).compareTo(Float.toString(account.getTotal()));
 			
-			if (result != -1 && fieldParams.containsKey(Credit.INTEREST)) 
-				result = fieldParams.get(Credit.INTEREST).equals(Float.toString(account.getInterest())) ? 0 : -1;
+			if (result == 0 && fieldParams.containsKey(Credit.INTEREST)) 
+				result = fieldParams.get(Credit.INTEREST).compareTo(Float.toString(account.getInterest()));
 			
-			if (result != -1 && fieldParams.containsKey(Credit.CREDITLIMIT)) 
-				result = fieldParams.get(Credit.CREDITLIMIT).equals(Float.toString(account.getCreditLimit())) ? 0 : -1;
+			if (result == 0 && fieldParams.containsKey(Credit.CREDITLIMIT)) 
+				result = fieldParams.get(Credit.CREDITLIMIT).compareTo(Float.toString(account.getCreditLimit()));
 			
-			if (result != -1 && fieldParams.containsKey(Credit.TYPE)) 
-				result = fieldParams.get(Credit.TYPE).equals(Integer.toString(account.getType().ordinal())) ? 0 : -1;
+			if (result == 0 && fieldParams.containsKey(Credit.TYPE)) 
+				result = fieldParams.get(Credit.TYPE).compareTo(Integer.toString(account.getType().ordinal()));
 		}
 		
 		return result;

@@ -12,7 +12,7 @@ public class FieldParamsUserInfoComparator implements Comparator<Object> {
 	 * @param right instance of User
 	 * @see FieldParams
 	 * @see UserInfo
-	 * @return 0 if match successful else -1
+	 * @return 0 if match successful else non-zero
 	 */
 	@Override
 	public int compare(Object left, Object right) {
@@ -26,16 +26,16 @@ public class FieldParamsUserInfoComparator implements Comparator<Object> {
 			result = 0;
 			
 			if (fieldParams.containsKey(UserInfo.USERID)) 
-				result = fieldParams.get(UserInfo.USERID).equals(Long.toString(info.getUserId())) ? 0 : -1;
+				result = fieldParams.get(UserInfo.USERID).compareTo(Long.toString(info.getUserId()));
 			
-			if (result != -1 && fieldParams.containsKey(UserInfo.EMAIL)) 
-				result = fieldParams.get(UserInfo.EMAIL).equals(info.getEmail()) ? 0 : -1;
+			if (result == 0 && fieldParams.containsKey(UserInfo.EMAIL)) 
+				result = fieldParams.get(UserInfo.EMAIL).compareTo(info.getEmail());
 			
-			if (result != -1 && fieldParams.containsKey(UserInfo.PHONENUMBER)) 
-				result = fieldParams.get(UserInfo.PHONENUMBER).equals(info.getPhonenumber()) ? 0 : -1;
+			if (result == 0 && fieldParams.containsKey(UserInfo.PHONENUMBER)) 
+				result = fieldParams.get(UserInfo.PHONENUMBER).compareTo(info.getPhonenumber());
 			
-			if (result != -1 && fieldParams.containsKey(UserInfo.ADDRESS)) 
-				result = fieldParams.get(UserInfo.ADDRESS).equals(info.getAddress()) ? 0 : -1;
+			if (result == 0 && fieldParams.containsKey(UserInfo.ADDRESS)) 
+				result = fieldParams.get(UserInfo.ADDRESS).compareTo(info.getAddress());
 		}
 		
 		return result;

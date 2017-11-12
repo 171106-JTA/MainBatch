@@ -11,6 +11,9 @@ public enum Checkpoint {
 	// Does not have access to system
 	BLOCKED,
 	
+	// User account requesting to be created 
+	PENDING, 
+	
 	// ADMIN has access to all accounts
 	ADMIN,
 	

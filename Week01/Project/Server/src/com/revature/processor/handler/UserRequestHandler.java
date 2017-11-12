@@ -26,6 +26,8 @@ public final class UserRequestHandler {
 	 * @return
 	 */
 	public Resultset createUser(Request request) {
+		
+		
 		return new Resultset(Server.database.insert(BusinessClass.USER, request.getTransaction()));
 	}
 	

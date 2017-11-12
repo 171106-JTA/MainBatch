@@ -16,7 +16,7 @@ public class FieldParamsAccountComparator implements Comparator<Object>{
 	 * @see FieldParams
 	 * @see Checking
 	 * @see Credit
-	 * @return 0 if match successful else -1
+	 * @return 0 if match successful else non-zero
 	 */
 	@Override
 	public int compare(Object left, Object right) {

@@ -12,7 +12,7 @@ public class FieldParamsCheckingComparator implements Comparator<Object> {
 	 * @param right instance of Checking
 	 * @see FieldParams
 	 * @see Checking
-	 * @return 0 if match successful else -1
+	 * @return 0 if match successful else non-zero
 	 */
 	@Override
 	public int compare(Object left, Object right) {
@@ -26,16 +26,16 @@ public class FieldParamsCheckingComparator implements Comparator<Object> {
 			result = 0;
 			
 			if (fieldParams.containsKey(Checking.USERID)) 
-				result = fieldParams.get(Checking.USERID).equals(Long.toString(account.getUserId())) ? 0 : -1;
+				result = fieldParams.get(Checking.USERID).compareTo(Long.toString(account.getUserId()));
 			
-			if (fieldParams.containsKey(Checking.NUMBER)) 
-				result = fieldParams.get(Checking.NUMBER).equals(Long.toString(account.getNumber())) ? 0 : -1;
+			if (result == 0 && fieldParams.containsKey(Checking.NUMBER)) 
+				result = fieldParams.get(Checking.NUMBER).compareTo(Long.toString(account.getNumber()));
 			
-			if (result != -1 && fieldParams.containsKey(Checking.TOTAL)) 
-				result = fieldParams.get(Checking.TOTAL).equals(Float.toString(account.getTotal())) ? 0 : -1;
+			if (result == 0 && fieldParams.containsKey(Checking.TOTAL)) 
+				result = fieldParams.get(Checking.TOTAL).compareTo(Float.toString(account.getTotal()));
 			
-			if (result != -1 && fieldParams.containsKey(Checking.TYPE)) 
-				result = fieldParams.get(Checking.TYPE).equals(Integer.toString(account.getType().ordinal())) ? 0 : -1;
+			if (result == 0 && fieldParams.containsKey(Checking.TYPE)) 
+				result = fieldParams.get(Checking.TYPE).compareTo(Integer.toString(account.getType().ordinal()));
 		}
 		
 		return result;

@@ -12,7 +12,7 @@ public class FieldParamsUserComparator implements Comparator<Object> {
 	 * @param right instance of User
 	 * @see FieldParams
 	 * @see User
-	 * @return 0 if match successful else -1
+	 * @return 0 if match successful else non-zero
 	 */
 	@Override
 	public int compare(Object left, Object right) {
@@ -26,16 +26,16 @@ public class FieldParamsUserComparator implements Comparator<Object> {
 			result = 0;
 			
 			if (fieldParams.containsKey(User.ID)) 
-				result = fieldParams.get(User.ID).equals(Long.toString(user.getId())) ? 0 : -1;
+				result = fieldParams.get(User.ID).compareTo(Long.toString(user.getId()));
 			
-			if (result != -1 && fieldParams.containsKey(User.USERNAME)) 
-				result = fieldParams.get(User.USERNAME).equals(user.getUsername()) ? 0 : -1;
+			if (result == 0 && fieldParams.containsKey(User.USERNAME)) 
+				result = fieldParams.get(User.USERNAME).compareTo(user.getUsername());
 			
-			if (result != -1 && fieldParams.containsKey(User.PASSWORD)) 
-				result = fieldParams.get(User.PASSWORD).equals(user.getPassword()) ? 0 : -1;
+			if (result == 0 && fieldParams.containsKey(User.PASSWORD)) 
+				result = fieldParams.get(User.PASSWORD).compareTo(user.getPassword());
 			
-			if (result != -1 && fieldParams.containsKey(User.CHECKPOINT)) 
-				result = fieldParams.get(User.CHECKPOINT).equals(Integer.toString(user.getCheckpoint().ordinal())) ? 0 : -1;
+			if (result == 0 && fieldParams.containsKey(User.CHECKPOINT)) 
+				result = fieldParams.get(User.CHECKPOINT).compareTo(Integer.toString(user.getCheckpoint().ordinal()));
 		}
 		
 		return result;
