@@ -2,6 +2,7 @@ package com.revature.app.view;
 
 import com.revature.app.Menu;
 import com.revature.app.MyBank;
+import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.Checkpoint;
 import com.revature.businessobject.user.User;
 import com.revature.core.FieldParams;
@@ -49,6 +50,9 @@ public class CustomerView implements View {
 					case "5":
 						deleteAccount();
 						break;
+					case "6":
+						Menu.printUser(MyBank.data);
+						break;
 					case "logout":
 						break;
 					default:
@@ -61,10 +65,6 @@ public class CustomerView implements View {
 	///
 	//	PRIVATE METHODS 
 	///
-	
-	private void loadUser() {
-		
-	}
 	
 	private void updateUserName() {
 		FieldParams transact = new FieldParams(); 
@@ -116,7 +116,30 @@ public class CustomerView implements View {
 	}
 	
 	private void updateContactInfo() {
-		// stub
+		FieldParams transact = new FieldParams();
+		String email = Menu.getInput("New Email:>");
+		String address = Menu.getInput("New Address:>");
+		String phonenumber = Menu.getInput("New Phonenumber:>");
+		Request request;
+		Resultset res;
+		
+		// Prepare request
+		transact.put(UserInfo.EMAIL, email);
+		transact.put(UserInfo.ADDRESS, address);
+		transact.put(UserInfo.PHONENUMBER, phonenumber);
+		
+		// Create request
+		request = new Request(MyBank.data, "USER", "SETUSERINFO", MyBank.data, transact);
+		
+		Menu.print("\tAttempting to change contact info...");
+		
+		if ((res = MyBank.send(request)).getRecordsModified() == 0) {
+			Menu.println("fail");
+			if (res.getException() != null)
+				Menu.println("\t\terror:>" + res.getException().getMessage());
+		} else {
+			Menu.println("done\n");
+		}
 	}
 	
 	private void createCheckingAccount() {
@@ -143,5 +166,6 @@ public class CustomerView implements View {
 		Menu.println("\t- 3 - create checking account");
 		Menu.println("\t- 4 - manage account");
 		Menu.println("\t- 5 - delete account");
+		Menu.println("\t- 6 - view self");
 	}
 }

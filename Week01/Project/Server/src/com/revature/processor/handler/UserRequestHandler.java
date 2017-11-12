@@ -186,15 +186,21 @@ public final class UserRequestHandler {
 	
 	public Resultset setUserInfo(Request request) throws RequestException {
 		FieldParams transact = request.getTransaction();
+		FieldParams query = request.getQuery();
 		
 		// For NON-ADMINS only personal account information should be accessible 
-		if (request.getCheckpoint() != Checkpoint.ADMIN) 
+		if (request.getCheckpoint() != Checkpoint.ADMIN) {
 			Require.requireSelfQuery(request);
+			
+			// auto-set to find self
+			query = new FieldParams();
+			query.put(Info.USERID, Long.toString(request.getUserId()));
+		}
 		
 		// We are not allowed to change the userid
 		transact.remove(Info.USERID);
 		
-		return new Resultset(Server.database.update(BusinessClass.USERINFO, request.getQuery(), transact));
+		return new Resultset(Server.database.update(BusinessClass.USERINFO, query, transact));
 	}
 	
 	///
