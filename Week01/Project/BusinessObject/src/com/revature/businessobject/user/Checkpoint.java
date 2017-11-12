@@ -4,19 +4,19 @@ package com.revature.businessobject.user;
  * Defines user privileges 
  * @author Antony Lulciuc
  */
-public enum Checkpoint {
+public class Checkpoint {
 	// User has no privileges 
-	NONE,
+	public static final String NONE = "none";
 	
 	// Does not have access to system
-	BLOCKED,
+	public static final String BLOCKED = "blocked";
 	
 	// User account requesting to be created 
-	PENDING, 
+	public static final String PENDING = "pending";
 	
 	// ADMIN has access to all accounts
-	ADMIN,
+	public static final String ADMIN = "admin";
 	
 	// CUSTOMER has access only to their account
-	CUSTOMER
+	public static final String CUSTOMER = "customer";
 }

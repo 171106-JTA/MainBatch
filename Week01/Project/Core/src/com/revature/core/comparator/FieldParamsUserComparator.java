@@ -35,7 +35,7 @@ public class FieldParamsUserComparator implements Comparator<Object> {
 				result = fieldParams.get(User.PASSWORD).compareTo(user.getPassword());
 			
 			if (result == 0 && fieldParams.containsKey(User.CHECKPOINT)) 
-				result = fieldParams.get(User.CHECKPOINT).compareTo(Integer.toString(user.getCheckpoint().ordinal()));
+				result = fieldParams.get(User.CHECKPOINT).compareTo(user.getCheckpoint());
 		}
 		
 		return result;

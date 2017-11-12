@@ -18,10 +18,26 @@ import com.revature.server.Server;
 public final class Require {
 	public static void requireSelf(Request request) throws RequestException {
 		String id = Long.toString(request.getUserId());
+
+		// query ID must apply to self
+		requireQuery(new String[] { Info.USERID, User.ID }, new String[] { id, id }, request);
 		
-		// If has query then ID must apply to self
-		if (request.getQuery() != null)
-			requireQuery(new String[] { Info.USERID, User.ID }, new String[] { id, id }, request);
+		// transaction ID must apply to self
+		requireQuery(new String[] { Info.USERID, User.ID }, new String[] { id, id }, request);
+	}
+	
+	public static void requireSelfQuery(Request request) throws RequestException {
+		String id = Long.toString(request.getUserId());
+		
+		// query ID must apply to self
+		requireQuery(new String[] { Info.USERID, User.ID }, new String[] { id, id }, request);
+	}
+	
+	public static void requireSelfTransaction(Request request) throws RequestException {
+		String id = Long.toString(request.getUserId());
+		
+		// transaction ID must apply to self
+		requireQuery(new String[] { Info.USERID, User.ID }, new String[] { id, id }, request);
 	}
 	
 	public static void requireAllQuery(String[] params, Request request) throws RequestException {
@@ -70,16 +86,16 @@ public final class Require {
 		requireTransaction(params, values, request);
 	}
 	
-	public static void require(Checkpoint[] checkpoints, Request request) throws RequestException {
-		int index = Collections.indexOfSubList(Arrays.asList(checkpoints), Arrays.asList(new Checkpoint[] {request.getCheckpoint()}));
+	public static void requireCheckpoint(String[] checkpoints, Request request) throws RequestException {
+		int index = Collections.indexOfSubList(Arrays.asList(checkpoints), Arrays.asList(new String[] {request.getCheckpoint()}));
 		
 		// If we did not find checkpoint
 		if (index < 0) 
 			throw new RequestException(request, "You do not have to required permissions to perform this action");
 	}
 	
-	public static void require(Checkpoint[] checkpoints, Checkpoint checkpoint, Request request) throws RequestException {
-		int index = Collections.indexOfSubList(Arrays.asList(checkpoints), Arrays.asList(new Checkpoint[] { checkpoint }));
+	public static void requireCheckpoint(String[] checkpoints, String checkpoint, Request request) throws RequestException {
+		int index = Collections.indexOfSubList(Arrays.asList(checkpoints), Arrays.asList(new String[] { checkpoint }));
 		
 		// If we did not find checkpoint
 		if (index < 0) 

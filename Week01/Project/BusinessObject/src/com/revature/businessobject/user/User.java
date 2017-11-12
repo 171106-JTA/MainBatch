@@ -37,7 +37,7 @@ public class User extends BusinessObject implements Comparable<User> {
 	/**
 	 * Value represents account privileges 
 	 */
-	private Checkpoint checkpoint;
+	private String checkpoint;
 	
 	/**
 	 * Initializes user with specified id
@@ -46,12 +46,12 @@ public class User extends BusinessObject implements Comparable<User> {
 	 * @param password account password
 	 * @param role user account privileges 
 	 */
-	public User(long id, String username, String password, Checkpoint role) {
+	public User(long id, String username, String password, String checkpoint) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.password = password;
-		this.checkpoint = role;
+		this.checkpoint = checkpoint;
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class User extends BusinessObject implements Comparable<User> {
 	 * Value represents user privileges (what they do and do not have access to).
 	 * @return user account status
 	 */
-	public Checkpoint getCheckpoint() {
+	public String getCheckpoint() {
 		return checkpoint;
 	}
 
@@ -134,7 +134,7 @@ public class User extends BusinessObject implements Comparable<User> {
 		if ((result = Long.compare(id, user.getId())) == 0)
 			if ((result = username.compareTo(user.getUsername())) == 0)
 				if ((result = password.compareTo(user.getPassword())) == 0)
-					return Integer.compare(checkpoint.ordinal(), user.getCheckpoint().ordinal());
+					return checkpoint.compareTo(user.getCheckpoint());
 		
 		return result;
 	}

@@ -6,7 +6,7 @@ import com.revature.businessobject.user.User;
 public class Request {
 	private int sessionId;
 	private long userId;
-	private Checkpoint checkpoint;
+	private String checkpoint;
 	private String route;
 	private String transtype;
 	private FieldParams query;
@@ -43,11 +43,11 @@ public class Request {
 		return userId;
 	}
 
-	public Checkpoint getCheckpoint() {
+	public String getCheckpoint() {
 		return checkpoint;
 	}
 
-	public void setCheckpoint(Checkpoint checkpoint) {
+	public void setCheckpoint(String checkpoint) {
 		this.checkpoint = checkpoint;
 	}
 

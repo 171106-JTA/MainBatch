@@ -1,10 +1,10 @@
 package com.revature.app;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 import com.revature.businessobject.BusinessObject;
 import com.revature.businessobject.info.account.Account;
+import com.revature.businessobject.info.account.AccountType;
 import com.revature.businessobject.info.account.Checking;
 import com.revature.businessobject.info.account.Credit;
 import com.revature.businessobject.info.user.UserInfo;
@@ -82,12 +82,12 @@ public class Menu {
 		println("\tPassword: **************");
 		print("\tStatus: ");
 		
-		switch (Checkpoint.values()[Integer.parseInt(data.get(User.CHECKPOINT))]) {
-			case ADMIN:
-			case CUSTOMER:
+		switch (data.get(User.CHECKPOINT)) {
+			case Checkpoint.ADMIN:
+			case Checkpoint.CUSTOMER:
 				println("ACTIVE");
 				break;
-			case PENDING:
+			case Checkpoint.PENDING:
 				println("PENDING");
 				break;
 			default:
@@ -122,10 +122,10 @@ public class Menu {
 				Account acct = (Account)item;
 				
 				switch (acct.getType()) {
-					case CHECKING:
+					case AccountType.CHECKING:
 						printCheckingAccount((Checking)acct);
 						break;
-					case CREDIT:
+					case AccountType.CREDIT:
 						printCreditAccount((Credit)acct);
 						break;
 				}

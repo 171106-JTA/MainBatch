@@ -28,63 +28,63 @@ public class UserProcessor implements Processorable {
 				res = URH.login(request);
 				break;
 			case "CREATEUSER":
-				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.NONE }, request);
+				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.NONE }, request);
 				Require.requireAllTransaction(new String[] { User.USERNAME,  User.PASSWORD }, request);
 				res = URH.createUser(request);
 				break;
 			case "DELETEUSER":
-				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER, Checkpoint.PENDING, Checkpoint.NONE }, request);
+				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER, Checkpoint.PENDING, Checkpoint.NONE }, request);
 				Require.requireAllQuery(new String[] { User.USERNAME,  User.PASSWORD }, request);
 				res = URH.deleteUser(request);
 				break;
 			case "GETUSER":
-				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER }, request);
+				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER }, request);
 				res = URH.getUser(request);
 				break;
 			case "SETUSER":
-				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
+				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
 				Require.requireAll(new String[] { User.USERNAME, User.PASSWORD }, request);
 				res = URH.setUser(request);
 				break;
 			case "CREATEUSERINFO":
-				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.PENDING, Checkpoint.NONE }, request);
+				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.PENDING, Checkpoint.NONE }, request);
 				Require.requireAllTransaction(new String[] { UserInfo.USERID, UserInfo.PHONENUMBER, UserInfo.EMAIL, UserInfo.ADDRESS }, request);
 				res = URH.createUserInfo(request);
 				break;
 			case "GETUSERINFO":
-				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER, Checkpoint.PENDING },  request);
+				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER, Checkpoint.PENDING },  request);
 				res = URH.getUserInfo(request);
 				break;
 			case "SETUSERINFO":
-				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
+				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
 				Require.requireQuery(new String[] { UserInfo.USERID, UserInfo.ADDRESS, UserInfo.EMAIL, UserInfo.PHONENUMBER },  request);
 				res = URH.setUserInfo(request);
 				break;
 			case "CREATECHECKINGACCOUNT":
-				Require.require(new Checkpoint[] { Checkpoint.CUSTOMER },  request);
+				Require.requireCheckpoint(new String[] { Checkpoint.CUSTOMER },  request);
 				res = URH.createAccount(request, AccountType.CHECKING);
 				break;
 			case "CREATECREDITACCOUNT":
-				Require.require(new Checkpoint[] { Checkpoint.CUSTOMER },  request);
+				Require.requireCheckpoint(new String[] { Checkpoint.CUSTOMER },  request);
 				res = URH.createAccount(request, AccountType.CREDIT);
 				break;
 			case "DELETEACCOUNT":
 				break;
 			case "GETACCOUNT":
-				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
+				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
 				res = URH.getAccount(request);
 				break;
 			case "GETCHECKINGACCOUNT":
-				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
+				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
 				break;
 			case "GETCEDITACCOUNT":
-				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER},  request);
+				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER},  request);
 				break;
 			case "SETCHECKINGACCOUNT":
-				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
+				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
 				break;
 			case "SETCREDITACCOUNT":
-				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
+				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
 				break;
 			default:
 				throw new RequestException(request, "Transtype=[\'" + request.getTranstype() + "\'] is unknown!");

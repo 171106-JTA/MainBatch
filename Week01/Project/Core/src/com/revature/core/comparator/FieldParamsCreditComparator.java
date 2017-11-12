@@ -40,7 +40,7 @@ public class FieldParamsCreditComparator implements Comparator<Object>{
 				result = fieldParams.get(Credit.CREDITLIMIT).compareTo(Float.toString(account.getCreditLimit()));
 			
 			if (result == 0 && fieldParams.containsKey(Credit.TYPE)) 
-				result = fieldParams.get(Credit.TYPE).compareTo(Integer.toString(account.getType().ordinal()));
+				result = fieldParams.get(Credit.TYPE).compareTo(account.getType());
 		}
 		
 		return result;

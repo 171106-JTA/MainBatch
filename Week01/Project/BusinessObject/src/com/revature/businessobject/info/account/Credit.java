@@ -17,7 +17,7 @@ public class Credit extends Account {
 	 * @param interest 
 	 * @param creditLimit
 	 */
-	public Credit(long userId, long number, float total, float interest, float creditLimit, AccountStatus status) {
+	public Credit(long userId, long number, float total, float interest, float creditLimit, String status) {
 		super(userId, number, AccountType.CREDIT, status);
 		this.total = total;
 		this.interest = interest;

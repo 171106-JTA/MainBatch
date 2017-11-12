@@ -44,7 +44,7 @@ public class FieldParamsAccountComparator implements Comparator<Object>{
 					result = fieldParams.get(Account.NUMBER).compareTo(Long.toString(account.getNumber()));
 				
 				if (result == 0 && fieldParams.containsKey(Account.TYPE)) 
-					result = fieldParams.get(Account.TYPE).compareTo(Integer.toString(account.getType().ordinal()));
+					result = fieldParams.get(Account.TYPE).compareTo(account.getType());
 			}
 		}
 		

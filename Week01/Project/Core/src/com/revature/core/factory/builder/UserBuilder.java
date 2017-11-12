@@ -18,18 +18,18 @@ public class UserBuilder implements BusinessObjectBuilder {
 			return null;
 
 		// Create instance based on user role
-		switch (Checkpoint.values()[Integer.parseInt(args.get(User.CHECKPOINT))]){
-			case ADMIN:
+		switch (args.get(User.CHECKPOINT)) {
+			case Checkpoint.ADMIN:
 				object = new Admin(Long.parseLong(args.get(User.ID)), args.get(User.USERNAME), args.get(User.PASSWORD));
 				break;
-			case CUSTOMER:
+			case Checkpoint.CUSTOMER:
 				object = new Customer(Long.parseLong(args.get(User.ID)), args.get(User.USERNAME), args.get(User.PASSWORD));
 				break;
-			case NONE:
-			case PENDING:
+			case Checkpoint.NONE:
+			case Checkpoint.PENDING:
 				object = new User(Long.parseLong(args.get(User.ID)), args.get(User.USERNAME), args.get(User.PASSWORD), Checkpoint.PENDING);
 				break;
-			case BLOCKED:
+			case Checkpoint.BLOCKED:
 				object = new User(Long.parseLong(args.get(User.ID)), args.get(User.USERNAME), args.get(User.PASSWORD), Checkpoint.BLOCKED);
 				break;
 		}

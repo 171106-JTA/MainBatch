@@ -2,6 +2,7 @@ package com.revature.core.factory;
 
 import com.revature.businessobject.BusinessObject;
 import com.revature.businessobject.info.account.Account;
+import com.revature.businessobject.info.account.AccountType;
 import com.revature.businessobject.info.account.Checking;
 import com.revature.businessobject.info.account.Credit;
 import com.revature.businessobject.info.user.UserInfo;
@@ -59,7 +60,7 @@ public class FieldParamsFactory {
 		params.put(User.ID, Long.toString(user.getId()));
 		params.put(User.USERNAME, user.getUsername());
 		params.put(User.PASSWORD, user.getPassword());
-		params.put(User.CHECKPOINT, Integer.toString(user.getCheckpoint().ordinal()));
+		params.put(User.CHECKPOINT, user.getCheckpoint());
 		
 		return params;
 	}
@@ -89,9 +90,9 @@ public class FieldParamsFactory {
 	private FieldParams convertAccountToFieldParams(Account acct) {
 		// Convert based on type
 		switch (acct.getType()) {
-			case CHECKING:
+			case AccountType.CHECKING:
 				return convertCheckingToFieldParams((Checking)acct);
-			case CREDIT:
+			case AccountType.CREDIT:
 				return convertCreditToFieldParams((Credit)acct);
 			default:
 				return null;
@@ -110,8 +111,8 @@ public class FieldParamsFactory {
 		params.put(Checking.USERID, Long.toString(checking.getUserId()));
 		params.put(Checking.NUMBER, Long.toString(checking.getNumber()));
 		params.put(Checking.TOTAL, Float.toString(checking.getTotal()));
-		params.put(Checking.TYPE, Integer.toString(checking.getType().ordinal()));
-		params.put(Checking.STATUS, Integer.toString(checking.getStatus().ordinal()));
+		params.put(Checking.TYPE, checking.getType());
+		params.put(Checking.STATUS, checking.getStatus());
 		
 		return params;
 	}
@@ -130,8 +131,8 @@ public class FieldParamsFactory {
 		params.put(Credit.TOTAL, Float.toString(credit.getTotal()));
 		params.put(Credit.INTEREST, Float.toString(credit.getInterest()));
 		params.put(Credit.CREDITLIMIT, Float.toString(credit.getCreditLimit()));
-		params.put(Credit.TYPE, Integer.toString(credit.getType().ordinal()));
-		params.put(Checking.STATUS, Integer.toString(credit.getStatus().ordinal()));
+		params.put(Credit.TYPE, credit.getType());
+		params.put(Checking.STATUS, credit.getStatus());
 		
 		return params;
 	}

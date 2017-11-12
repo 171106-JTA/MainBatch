@@ -24,7 +24,7 @@ public final class Session extends Thread {
 		this.runThread = true;
 	}
 	
-	public boolean hasCheckpoint(Checkpoint checkpoint) {
+	public boolean hasCheckpoint(String checkpoint) {
 		return user == null ? false : user.getCheckpoint() == checkpoint;
 	}
 	
@@ -61,7 +61,7 @@ public final class Session extends Thread {
 		runThread = false;
 	}
 	
-	public Checkpoint getCheckpoint() {
+	public String getCheckpoint() {
 		return user.getCheckpoint();
 	}
 	

@@ -61,12 +61,12 @@ public class MyBank {
 	}
 	
 	public static void start() {
-		switch (Checkpoint.values()[Integer.parseInt(data.get(User.CHECKPOINT))]) {
-			case ADMIN:
+		switch (data.get(User.CHECKPOINT)) {
+			case Checkpoint.ADMIN:
 				new AdminView().run();
 				break;
-			case CUSTOMER:
-			case PENDING:
+			case Checkpoint.CUSTOMER:
+			case Checkpoint.PENDING:
 				new CustomerView().run();
 				break;
 			default:

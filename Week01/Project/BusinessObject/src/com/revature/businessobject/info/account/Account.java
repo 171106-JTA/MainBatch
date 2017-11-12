@@ -8,8 +8,8 @@ public class Account extends Info {
 	public static final String STATUS = "status";
 	
 	private long number;
-	private AccountType type;
-	private AccountStatus status;
+	private String type;
+	private String status;
 	
 	/**
 	 * Initialize basic account data 
@@ -18,7 +18,7 @@ public class Account extends Info {
 	 * @param type what kind of account is it
 	 * @see AccountType 
 	 */
-	public Account(long userId, long number, AccountType type, AccountStatus status) {
+	public Account(long userId, long number, String type, String status) {
 		super(userId);
 		this.number = number;
 		this.type = type;
@@ -29,11 +29,11 @@ public class Account extends Info {
 		return number;
 	}
 
-	public AccountType getType() {
+	public String getType() {
 		return type;
 	}
 
-	public AccountStatus getStatus() {
+	public String getStatus() {
 		return status;
 	}
 	

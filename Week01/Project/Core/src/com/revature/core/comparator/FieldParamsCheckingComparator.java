@@ -35,7 +35,7 @@ public class FieldParamsCheckingComparator implements Comparator<Object> {
 				result = fieldParams.get(Checking.TOTAL).compareTo(Float.toString(account.getTotal()));
 			
 			if (result == 0 && fieldParams.containsKey(Checking.TYPE)) 
-				result = fieldParams.get(Checking.TYPE).compareTo(Integer.toString(account.getType().ordinal()));
+				result = fieldParams.get(Checking.TYPE).compareTo(account.getType());
 		}
 		
 		return result;

@@ -181,13 +181,13 @@ public class AdminView implements View {
 	}
 
 	
-	private void updateUserCheckpoint(User user, Checkpoint checkpoint) {
+	private void updateUserCheckpoint(User user, String checkpoint) {
 		FieldParams trans;
 		Resultset res;
 		
 		// Set request params
 		trans = factory.getFieldParams(user);
-		trans.put(User.CHECKPOINT, Integer.toString(checkpoint.ordinal()));
+		trans.put(User.CHECKPOINT, checkpoint);
 	
 		// Send request
 		res = MyBank.send(new Request(MyBank.data, "USER", "SETUSER", factory.getFieldParams(user), trans));
@@ -253,7 +253,7 @@ public class AdminView implements View {
 		FieldParams params = new FieldParams();
 		
 		// Set params to pull pending user records
-		params.put(User.CHECKPOINT, Integer.toString(Checkpoint.PENDING.ordinal()));
+		params.put(User.CHECKPOINT, Checkpoint.PENDING);
 		
 		// Get pending users
 		pendingUsers = MyBank.send(new Request(MyBank.data, "USER", "GETUSER", params, null));
@@ -266,7 +266,7 @@ public class AdminView implements View {
 		FieldParams params = new FieldParams();
 		
 		// Set params to pull pending user records
-		params.put(Account.STATUS, Integer.toString(AccountStatus.PENDING.ordinal()));
+		params.put(Account.STATUS, AccountStatus.PENDING);
 		
 		// Get pending users
 		pendingAccounts = MyBank.send(new Request(MyBank.data, "USER", "GETACCOUNT", params, null));
@@ -278,11 +278,11 @@ public class AdminView implements View {
 	private void printUserCount() {
 		FieldParams params = new FieldParams();
 	
-		params.put(User.CHECKPOINT, Integer.toString(Checkpoint.ADMIN.ordinal()));
+		params.put(User.CHECKPOINT, Checkpoint.ADMIN);
 		allUsers = MyBank.send(new Request(MyBank.data, "USER", "GETUSER", params, null));
-		params.put(User.CHECKPOINT, Integer.toString(Checkpoint.CUSTOMER.ordinal()));
+		params.put(User.CHECKPOINT, Checkpoint.CUSTOMER);
 		allUsers.addAll(MyBank.send(new Request(MyBank.data, "USER", "GETUSER", params, null)));
-		params.put(User.CHECKPOINT, Integer.toString(Checkpoint.BLOCKED.ordinal()));
+		params.put(User.CHECKPOINT, Checkpoint.BLOCKED);
 		allUsers.addAll(MyBank.send(new Request(MyBank.data, "USER", "GETUSER", params, null)));
 		Menu.println("We have " + allUsers.size() + " users!");
 	}
@@ -290,8 +290,10 @@ public class AdminView implements View {
 	private void printAccountCount() {
 		FieldParams params = new FieldParams();
 
-		params.put(Account.STATUS, Integer.toString(AccountStatus.ACTIVE.ordinal()));
+		params.put(Account.STATUS, AccountStatus.ACTIVE);
 		allAccounts = MyBank.send(new Request(MyBank.data, "USER", "GETACCOUNT", params, null));
+		params.put(Account.STATUS, AccountStatus.BLOCKED);
+		allAccounts.addAll(MyBank.send(new Request(MyBank.data, "USER", "GETACCOUNT", params, null)));
 		Menu.println("We have " + allAccounts.size() + " accounts!");;
 	}
 	

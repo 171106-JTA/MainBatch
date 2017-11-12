@@ -16,22 +16,20 @@ public class AccountBuilder implements BusinessObjectBuilder {
 		BusinessObject object = null;
 		
 		if (isValid(args)) {
-			AccountStatus status = AccountStatus.values()[Integer.parseInt(args.get(Checking.STATUS))];
-			
-			switch (AccountType.values()[Integer.parseInt(args.get(Account.TYPE))]) {
-				case CHECKING:
+			switch (args.get(Account.TYPE)) {
+				case AccountType.CHECKING:
 					object =  new Checking(Long.parseLong(args.get(Checking.USERID)), 
 										Long.parseLong(args.get(Checking.NUMBER)),
 										Float.parseFloat(args.get(Checking.TOTAL)),
-										status);
+										args.get(Checking.STATUS));
 					break;
-				case CREDIT:
+				case AccountType.CREDIT:
 					object =  new Credit(Long.parseLong(args.get(Credit.USERID)),
 									  Long.parseLong(args.get(Credit.NUMBER)),
 									  Float.parseFloat(args.get(Credit.TOTAL)),
 									  Float.parseFloat(args.get(Credit.INTEREST)),
 									  Float.parseFloat(args.get(Credit.CREDITLIMIT)),
-									  status);
+									  args.get(Checking.STATUS));
 					break;
 			}
 		}
