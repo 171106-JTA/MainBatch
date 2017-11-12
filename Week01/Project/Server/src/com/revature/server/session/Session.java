@@ -1,6 +1,9 @@
 package com.revature.server.session;
 
 import com.revature.businessobject.user.User;
+
+import org.apache.log4j.Logger;
+
 import com.revature.businessobject.user.Checkpoint;
 import com.revature.core.FieldParams;
 import com.revature.core.Request;
@@ -9,6 +12,7 @@ import com.revature.core.exception.RequestException;
 import com.revature.server.Server;
 
 public final class Session extends Thread {
+	private static Logger logger = Logger.getLogger(Session.class);
 	private User user;
 	private Request request;
 	private Resultset response;
@@ -33,13 +37,17 @@ public final class Session extends Thread {
 		while (runThread) {
 			if (!this.ready && this.request != null) {
 				try {
+					logger.debug("processing " + request.toString() + " for " + this.toString());
+					
 					// Set what user has access to
 					request.setCheckpoint(user.getCheckpoint());
 					
 					// Make request 
 					response = Server.router.handleRequest(request);
+					logger.debug(this.toString() + " completed request");
 				} catch (RequestException e) {
 					// Cache exception and set error flag to true
+					logger.warn(this.toString() + " failed, message:>" + e.toString());
 					exception = e;
 					error = true;
 				} finally {
@@ -94,4 +102,11 @@ public final class Session extends Thread {
 			this.ready = false;
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "Session [sessionid=" + this.hashCode() + ", user=" + user + "]";
+	}
+	
+	
 }

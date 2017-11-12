@@ -157,7 +157,7 @@ public class AdminView implements View {
 			} catch (Exception e) {
 			}	
 		} else {
-			Menu.println("You do not have any users");;
+			Menu.println("You do not have any accounts");
 		}
 	}
 	

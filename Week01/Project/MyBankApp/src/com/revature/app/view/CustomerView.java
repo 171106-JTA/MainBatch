@@ -1,7 +1,15 @@
 package com.revature.app.view;
 
+import java.util.Iterator;
+
 import com.revature.app.Menu;
 import com.revature.app.MyBank;
+import com.revature.businessobject.BusinessObject;
+import com.revature.businessobject.info.Info;
+import com.revature.businessobject.info.account.Account;
+import com.revature.businessobject.info.account.Checking;
+import com.revature.businessobject.info.account.Status;
+import com.revature.businessobject.info.account.Transaction;
 import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.Checkpoint;
 import com.revature.businessobject.user.User;
@@ -13,6 +21,7 @@ import com.revature.core.factory.FieldParamsFactory;
 public class CustomerView implements View {
 	private FieldParamsFactory factory = FieldParamsFactory.getFactory();
 	private String name = MyBank.data.get(User.USERNAME);
+	private Resultset accounts;
 	
 	@Override
 	public void run() {
@@ -28,6 +37,7 @@ public class CustomerView implements View {
 			Menu.printViewMenu();
 			
 			while (!input.toLowerCase().equals("logout")) {
+				loadUserAccounts();
 				printOptions();
 				input = Menu.getInput(name + ":>");
 				
@@ -48,9 +58,6 @@ public class CustomerView implements View {
 						manageAccount();
 						break;
 					case "5":
-						deleteAccount();
-						break;
-					case "6":
 						Menu.printUser(MyBank.data);
 						break;
 					case "logout":
@@ -161,11 +168,138 @@ public class CustomerView implements View {
 	}
 	
 	private void manageAccount() {
-		// stub
+		if (accounts.size() > 0) {
+			FieldParams params;
+			String input;
+			int index;
+			
+			// Display account info 
+			Menu.println("Select account please:");
+			printAccounts();
+			input = Menu.getInput(name + ":>");
+			
+			try {
+				index = Integer.parseInt(input);
+				
+				if (index > -1 && index < accounts.size()) {
+					// Set params to view user information
+					params = factory.getFieldParams(accounts.get(index));
+					params.put(User.SESSIONID, MyBank.data.get(User.SESSIONID));
+					Menu.printCheckingAccount((Checking)accounts.get(index));
+					printAccountOptions();
+					input = Menu.getInput(name + ":>");
+					
+					// Process selection 
+					switch (input) {
+						case "0": 
+							addFunds((Account)accounts.get(index));
+							break;
+						case "1":
+							removeFunds((Account)accounts.get(index));
+							break;
+						case "2":
+							deleteAccount((Account)accounts.get(index));
+							break;
+						default:
+							Menu.println("Invalid selection!");		
+					}
+				}else {
+					Menu.println("Invalid selection!");
+				}
+			} catch (Exception e) {
+			}	
+		}else {
+			Menu.println("You do not have any accounts");;
+		}
 	}
 	
-	private void deleteAccount() {
-		// stub
+	private void addFunds(Account account) {
+		if (!account.getStatus().equals(Status.ACTIVE))
+			Menu.println("Account needs to be activated first!");
+		else { 
+			FieldParams query = factory.getFieldParams(account);
+			FieldParams transact = new FieldParams();
+			String amount = Menu.getInput("Please enter total amount you wish to add:>");
+			Request request;
+			Resultset res;
+			
+			// set amount we wish to add to account
+			transact.put(Transaction.AMOUNT, amount);
+			
+			// Create request
+			request = new Request(MyBank.data, "BANKING", "CHECKINGADDFUNDS", query, transact);
+			
+			Menu.print("\tAttempting to add funds to account...");
+			
+			if ((res = MyBank.send(request)).getRecordsModified() == 0) {
+				Menu.println("fail");
+				if (res.getException() != null)
+					Menu.println("\t\terror:>" + res.getException().getMessage() + "\n");
+			} else {
+				Menu.println("done\n");
+			}
+		}
+	}
+	
+	private void removeFunds(Account account) {
+		if (!account.getStatus().equals(Status.ACTIVE))
+			Menu.println("Account needs to be activated first!");
+		else { 
+			FieldParams query = factory.getFieldParams(account);
+			FieldParams transact = new FieldParams();
+			String amount = Menu.getInput("Please enter total amount you wish to remove:>");
+			Request request;
+			Resultset res;
+			
+			// set amount we wish to add to account
+			transact.put(Transaction.AMOUNT, amount);
+			
+			// Create request
+			request = new Request(MyBank.data, "BANKING", "CHECKINGREMOVEFUNDS", query, transact);
+			
+			Menu.print("\tAttempting to remove funds from account...");
+			
+			if ((res = MyBank.send(request)).getRecordsModified() == 0) {
+				Menu.println("fail");
+				if (res.getException() != null)
+					Menu.println("\t\terror:>" + res.getException().getMessage() + "\n");
+			} else {
+				Menu.println("done\n");
+			}
+		}
+	}
+	
+	private void deleteAccount(Account account) {
+		FieldParams query = factory.getFieldParams(account);
+		Request request;
+		Resultset res;
+		
+		// Create request
+		request = new Request(MyBank.data, "USER", "DELETEACCOUNT", query, null);
+					
+		Menu.print("\tAttempting to delete account...");
+					
+		if ((res = MyBank.send(request)).getRecordsModified() == 0) {
+			Menu.println("fail");
+			if (res.getException() != null)
+				Menu.println("\t\terror:>" + res.getException().getMessage() + "\n");
+			} else {
+				Menu.println("done\n");
+		}
+	}
+	
+	
+	
+	private void loadUserAccounts() {
+		FieldParams params = new FieldParams();
+		Request request;
+		
+		// set query params
+		params.put(Info.USERID, MyBank.data.get(User.ID));
+		
+		// create request
+		request = new Request(MyBank.data, "USER", "GETACCOUNT", params, null);
+		accounts = MyBank.send(request);
 	}
 	
 	///
@@ -179,7 +313,23 @@ public class CustomerView implements View {
 		Menu.println("\t- 2 - update contact info");
 		Menu.println("\t- 3 - create checking account");
 		Menu.println("\t- 4 - manage account");
-		Menu.println("\t- 5 - delete account");
-		Menu.println("\t- 6 - view self");
+		Menu.println("\t- 5 - view self");
 	}
+	
+	private void printAccountOptions() {
+		Menu.println("What would like to do: ");
+		Menu.println("\t- 0 - ADD FUNDS");
+		Menu.println("\t- 1 - REMOVE FUNDS");
+		Menu.println("\t- 1 - DELETE ACCOUNT");
+		Menu.println("\t- 2 - CANCEL");
+	}
+	
+	private void printAccounts() {
+		Iterator<BusinessObject> it = accounts.iterator();
+		
+		for (int i = 0; it.hasNext(); i++) {
+			Menu.println("\t- " + i + " - " + it.next());
+		}
+	}
+	
 }

@@ -2,6 +2,7 @@ package com.revature.processor.handler;
 
 import com.revature.businessobject.info.Info;
 import com.revature.businessobject.info.account.Checking;
+import com.revature.businessobject.info.account.Status;
 import com.revature.businessobject.info.account.Transaction;
 import com.revature.core.BusinessClass;
 import com.revature.core.FieldParams;
@@ -37,8 +38,11 @@ public final class BankingRequestHandler {
 			if ((data = Server.database.select(BusinessClass.ACCOUNT, query)).size() == 0)
 					throw new RequestException(request, "Account not found!");
 			
+			// Ensure account is active
+			if (!(account = (Checking)data.get(0)).getStatus().equals(Status.ACTIVE))
+				throw new RequestException(request, "Account must be activated before use!");		
+			
 			// Perform calculation
-			account = (Checking)data.get(0);
 			amount += account.getTotal();
 			
 			// Update account total
@@ -75,9 +79,12 @@ public final class BankingRequestHandler {
 			if ((data = Server.database.select(BusinessClass.ACCOUNT, query)).size() == 0)
 					throw new RequestException(request, "Account not found!");
 			
+			// Ensure account is active
+			if (!(account = (Checking)data.get(0)).getStatus().equals(Status.ACTIVE))
+				throw new RequestException(request, "Account must be activated before use!");
+			
 			// Perform calculation
-			account = (Checking)data.get(0);
-			amount -= account.getTotal();
+			amount = account.getTotal() - amount;
 			
 			// Prevent account overdraw
 			if (amount < 0.0f)

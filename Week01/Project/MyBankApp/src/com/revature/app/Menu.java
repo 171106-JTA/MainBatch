@@ -134,11 +134,7 @@ public class Menu {
 		}
 	}
 	
-	/// 
-	//	PRIVATE METHODS 
-	///
-	
-	private static void printCheckingAccount(Checking checking) {
+	public static void printCheckingAccount(Checking checking) {
 		println("===============================================================");
 		println("\tAccount Type: Checking");
 		println("\tAccount status: " + checking.getStatus().toUpperCase());
@@ -147,7 +143,7 @@ public class Menu {
 		println("===============================================================");
 	}
 	
-	private static void printCreditAccount(Credit credit) {
+	public static void printCreditAccount(Credit credit) {
 		println("===============================================================");
 		println("\tAccount Type: Credit");
 		println("\tAccount status: " + credit.getStatus().toUpperCase());
