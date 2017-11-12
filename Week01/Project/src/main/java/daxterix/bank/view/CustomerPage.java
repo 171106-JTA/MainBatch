@@ -11,18 +11,9 @@ import java.util.Scanner;
 import static daxterix.bank.view.CustomerPage.CommandEvalResult.*;
 
 public class CustomerPage extends Page {
-    private Customer customer;
-
     /**
-     * Once logged in allows customer make deposits and withdrawals, as well as transfer
-     * funds to other accounts
-     *
-     * @param customer
+     * denotes the result of evaluating a user's command
      */
-    public CustomerPage(Customer customer) {
-        this.customer = customer;
-    }
-
     enum CommandEvalResult {
         INVALID_SYNTAX,
         INVALID_AMOUNT,
@@ -30,6 +21,18 @@ public class CustomerPage extends Page {
         RECIPIENT_DNE,
         DATABASE_ERROR,
         SUCCESS
+    }
+
+    private Customer customer;
+
+    /**
+     * Once logged in allows customer make deposits and withdrawals, as well as transfer
+     * funds to other accounts. Customers can also request promotion to an Admin account
+     *
+     * @param customer
+     */
+    public CustomerPage(Customer customer) {
+        this.customer = customer;
     }
 
     /**
@@ -40,17 +43,20 @@ public class CustomerPage extends Page {
     @Override
     protected Page _run() {
         printAccountInfo();
-        String[] cmds = {"Make a deposit", "Make a withdrawal", "Transfer funds", "View instructions", "Logout"};
-        String[] codes = {"deposit [amount]", "withdraw [amount]", "transfer [amount] [recipient]", "help", "logout"};
+        String[] cmds = {"Make a deposit", "Make a withdrawal", "Transfer funds", "Request promotion", "View instructions", "Logout"};
+        String[] codes = {"deposit [amount]", "withdraw [amount]", "transfer [amount] [recipient]", "promote", "help", "logout"};
         printCommands(cmds, codes);
 
         while (true) {
             String cmd = InputUtils.readLine("command");
 
             switch (cmd) {
-                case "request promotion":
-                case "rp":
-                    requestPromotion();
+                case "promote":
+                    if (!requestPromotion())
+                        System.out.println("Error creating request. Please try again.");
+                    else
+                        System.out.println("Request filed!");
+                    break;
                 case "logout":
                 case "exit":
                 case "quit":
@@ -83,16 +89,30 @@ public class CustomerPage extends Page {
         }
     }
 
+    /**
+     * print the customer's account information; the balance in this case
+     */
     void printAccountInfo() {
         System.out.printf("Account Balance: %s\n\n\n", customer.getBalance());
     }
 
+    /**
+     * files a promotion request for the customer
+     *
+     * @return
+     */
     boolean requestPromotion() {
         PromotionRequest req = new PromotionRequest(customer);
         RequestDAO dao = DAOUtils.getRequestDao();
         return dao.save(req);
     }
 
+    /**
+     * parse and evaluate user's commands dealing with customer's funds
+     *
+     * @param cmd
+     * @return - SUCCESS if command is valid and is successfully executed
+     */
     CommandEvalResult evalMoneyCommand(String cmd) {
         Scanner s = new Scanner(cmd);
 
@@ -118,6 +138,12 @@ public class CustomerPage extends Page {
         }
     }
 
+    /**
+     * withdraw given amount from customer's account
+     *
+     * @param amt
+     * @return - SUCCESS if deposit is successful
+     */
     CommandEvalResult withdraw(double amt) {
         if (!customer.withdraw(amt))
             return INSUFFICIENT_FUNDS;
@@ -128,6 +154,12 @@ public class CustomerPage extends Page {
         return SUCCESS;
     }
 
+    /**
+     * deposit given amount to customer's account
+     *
+     * @param amt
+     * @return - SUCCESS if deposit is successful
+     */
     CommandEvalResult deposit(double amt) {
         customer.deposit(amt);
 

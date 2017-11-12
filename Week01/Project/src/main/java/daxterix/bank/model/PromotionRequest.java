@@ -3,6 +3,11 @@ package daxterix.bank.model;
 public class PromotionRequest extends UserRequest {
     private static final long serialVersionUID = 395311135212641805L;
 
+    /**
+     * represents a customer's request to be promoted to admin
+     *
+     * @param user
+     */
     public PromotionRequest(User user) {
         super(user);
     }

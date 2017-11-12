@@ -5,6 +5,10 @@ import daxterix.bank.dao.CustomerDAO;
 import daxterix.bank.dao.DAOUtils;
 
 public class LoginCustomerPage extends Page{
+    /**
+     * see Page._run()
+     * @return
+     */
     @Override
     public Page _run() {
         Customer customer;

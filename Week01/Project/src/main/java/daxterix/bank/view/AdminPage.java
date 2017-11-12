@@ -13,10 +13,19 @@ import java.util.Scanner;
 public class AdminPage extends Page {
     private Admin admin;
 
+    /**
+     * interacts with Admin users to mange Customers and their requests
+     *
+     * @param admin
+     */
     public AdminPage(Admin admin) {
         this.admin = admin;
     }
 
+    /**
+     * Helpful for error handling, denotes the result of an attempt to
+     * execute user's command
+     */
     enum CommandEvalResult {
         SUCCESS,
         INVALID_SYNTAX,
@@ -26,6 +35,11 @@ public class AdminPage extends Page {
         NO_SUCH_LOCKED_USER,
     }
 
+    /**
+     * see Page._run()
+     *
+     * @return
+     */
     @Override
     protected Page _run() {
         String[] cmds = {"View instructions", "Show pending requests", "Grant a creation request", "Grant a promotion request", "Drop a request", "Show locked customers", "Lock an account", "Unlock an account", "logout"};
@@ -129,6 +143,10 @@ public class AdminPage extends Page {
         }
     }
 
+    /**
+     * view all customers that have been locked
+     * @return
+     */
     CommandEvalResult printLockedCustomers() {
         CustomerDAO lockedCustomerDAO = DAOUtils.getLockedCustomerDao();
         List<Customer> lockedCustomers = lockedCustomerDAO.readAll();
@@ -142,6 +160,11 @@ public class AdminPage extends Page {
         return SUCCESS;
     }
 
+    /**
+     * lock the given user account
+     * @param second
+     * @return - returns SUCCESS if everything goes well
+     */
     private CommandEvalResult lockAccount(String second) {
         CustomerDAO unlockedDao = DAOUtils.getUnlockedCustomerDao();
 
@@ -156,6 +179,12 @@ public class AdminPage extends Page {
         return SUCCESS;
     }
 
+    /**
+     * Unlock a previously locked account, does not work otherwise
+     *
+     * @param second
+     * @return
+     */
     private CommandEvalResult unlockAccount(String second) {
         CustomerDAO lockedDao = DAOUtils.getLockedCustomerDao();
 
@@ -184,9 +213,12 @@ public class AdminPage extends Page {
         RequestDAO requestDao = DAOUtils.getRequestDao();
         CustomerDAO customerDao = DAOUtils.getUnlockedCustomerDao();
 
-        CreationRequest req = (CreationRequest) requestDao.readById(requestId);
+        UserRequest req = requestDao.readById(requestId);
         if (req == null)
             return REQUEST_DNE;
+
+        if (!(req instanceof CreationRequest))
+            return INVALID_SYNTAX;
 
         Customer customer = (Customer)req.getRequester();
         if (requestDao.deleteById(requestId) && customerDao.save(customer))
@@ -239,6 +271,11 @@ public class AdminPage extends Page {
         return SUCCESS;
     }
 
+    /**
+     * get page title
+     *
+     * @return
+     */
     @Override
     public String getTitle() {
         return "You Have the Power!";

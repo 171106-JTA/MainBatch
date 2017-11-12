@@ -6,6 +6,11 @@ import daxterix.bank.model.Customer;
 import daxterix.bank.dao.RequestDAO;
 
 public class RegisterCustomerPage extends Page {
+    /**
+     * see Page._run()
+     *
+     * @return
+     */
     @Override
     protected Page _run() {
         String username = InputUtils.readLine("username");

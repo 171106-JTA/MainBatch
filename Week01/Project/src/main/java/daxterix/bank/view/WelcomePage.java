@@ -4,6 +4,7 @@ public class WelcomePage extends Page{
 
     /**
      * see Page._run()
+     * user to app, giving them options to register or login as customers or login as admins
      *
      * @return
      */
@@ -36,7 +37,7 @@ public class WelcomePage extends Page{
     }
 
     /**
-     * see Page._run()
+     * get the title of the page. see Page.getTitle
      *
      * @return
      */

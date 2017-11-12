@@ -6,6 +6,12 @@ import daxterix.bank.dao.DAOUtils;
 
 public class LoginAdminPage extends Page {
 
+    /**
+     * authenticates user as customer, leads to a CustomerPage on successful
+     * authentication
+     *
+     * @return
+     */
     @Override
     public Page _run() {
         Admin admin;
@@ -28,6 +34,11 @@ public class LoginAdminPage extends Page {
         }
     }
 
+    /**
+     * see Page.getTitle()
+     *
+     * @return
+     */
     @Override
     public String getTitle() {
         return "Enter Your Admin Login Credentials Below";

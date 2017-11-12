@@ -4,17 +4,35 @@ import java.util.Scanner;
 import java.util.function.Supplier;
 
 public class InputUtils {
+    /**
+     * as title suggests
+     *
+     * @param fieldName
+     */
     public static void printPrompt(String fieldName) {
         System.out.printf("enter %s: ", fieldName);
     }
 
 
+    /**
+     * read a line of input from user
+     *
+     * @param filedName
+     * @return
+     */
     public static String readLine(String filedName) {
         printPrompt(filedName);
         Scanner in = new Scanner(System.in);
         return in.nextLine().trim();
     }
 
+    /**
+     * read an integer from user
+     *
+     * @param fieldName
+     * @return
+     * @throws InvalidInputException
+     */
     public static int getInt(String fieldName) throws InvalidInputException {
         try {
             return Integer.parseInt(readLine(fieldName));
@@ -24,6 +42,12 @@ public class InputUtils {
         }
     }
 
+    /**
+     * get user input until user inputs a valid integer
+     *
+     * @param fieldName
+     * @return
+     */
     public static int readValidInt(String fieldName) {
         while(true) {
             try {
@@ -63,6 +87,9 @@ public class InputUtils {
 
 
     /**
+     * gets user input and confirms it. i.e. reads it twice and verifies
+     * that the input is the same both times
+     *
      * @return
      */
     public static <T> T readAndConfirm(Supplier<T> inputSupply) {

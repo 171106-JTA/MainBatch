@@ -10,16 +10,32 @@ public abstract class UserRequest implements Serializable {
     protected User requester;
     protected long id;
 
+    /**
+     * Stores information about a request, such as a promotion
+     * request or an account creation request
+     *
+     * @param user
+     */
     public UserRequest(User user) {
         super();
         requester = user;
         time = LocalDateTime.now();
     }
 
+    /**
+     * get time of request creation
+     *
+     * @return
+     */
     public LocalDateTime getTime() {
         return time;
     }
 
+    /**
+     * get User that filed the request
+     *
+     * @return
+     */
     public User getRequester() {
         return requester;
     }
