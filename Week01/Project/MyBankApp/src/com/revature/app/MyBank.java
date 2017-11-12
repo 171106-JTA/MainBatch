@@ -72,11 +72,6 @@ public class MyBank {
 		}
 	}
 	
-	///
-	//	COMM Methods 
-	///
-	
-	
 	public static void login() {
 		String username = Menu.getInput("Username:>");
 		String password = Menu.getInput("Password:>");
@@ -88,6 +83,14 @@ public class MyBank {
 			data = null;
 		}
 	}
+	
+	public static void createAccount() {
+		
+	}
+	
+	///
+	//	COMM Methods 
+	///
 
 	public static Resultset send(Request request) {
 		Resultset res = null;

@@ -1,5 +1,9 @@
 package com.revature.processor.handler;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import com.revature.businessobject.BusinessObject;
 import com.revature.businessobject.user.Checkpoint;
 import com.revature.businessobject.user.User;
 import com.revature.core.BusinessClass;
@@ -7,17 +11,28 @@ import com.revature.core.FieldParams;
 import com.revature.core.Request;
 import com.revature.core.Resultset;
 import com.revature.core.exception.RequestException;
+import com.revature.processor.handler.helper.GenericHelper;
 import com.revature.server.Server;
 import com.revature.server.session.require.Require;
 
 public final class UserRequestHandler {
+	
 	/**
 	 * Performs select query on database for user with specified username and password
 	 * @param request request with username and password
 	 * @return User BusinessObject if found else empty resultset 
 	 */
-	public Resultset login(Request request) {
-		return Server.database.select("User", request.getQuery());
+	public Resultset login(Request request) throws RequestException {
+		Resultset res = Server.database.select(BusinessClass.USER, request.getQuery());
+		
+		if (res.size() > 0) {
+			User user = (User) res.get(0);
+			Require.require(new String[] { User.CHECKPOINT, User.CHECKPOINT },
+						    new String[] { Integer.toString(Checkpoint.CUSTOMER.ordinal()), Integer.toString(Checkpoint.ADMIN.ordinal()) }, 
+						    GenericHelper.fieldParamsFactory.getFieldParams(user), request);
+		}
+		
+		return res;
 	}
 	
 	/**
@@ -25,9 +40,23 @@ public final class UserRequestHandler {
 	 * @param request
 	 * @return
 	 */
-	public Resultset createUser(Request request) {
+	public Resultset createUser(Request request) throws RequestException {
+		BusinessObject user = GenericHelper.getLargest(BusinessClass.USER, Arrays.asList(new String[] { User.ID }));
+		FieldParams transact = request.getTransaction();
+		FieldParams verify = new FieldParams();
 		
+		// Ensure data does not already exist in the database 
+		verify.put(User.USERNAME, transact.get(User.USERNAME));
+		Require.requireUnique(BusinessClass.USER, verify, request);
 		
+		// Update User id
+		transact.put(User.ID, user != null ? Long.toString(((User)user).getId() + 1) : "0");
+		
+		// If non-admin then set account to pending 
+		if (request.getCheckpoint() == Checkpoint.CUSTOMER) 
+			transact.put(User.CHECKPOINT, Integer.toString(Checkpoint.PENDING.ordinal()));
+		
+		// Insert user 
 		return new Resultset(Server.database.insert(BusinessClass.USER, request.getTransaction()));
 	}
 	

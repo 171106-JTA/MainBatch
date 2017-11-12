@@ -11,8 +11,8 @@ import com.revature.core.factory.FieldParamsFactory;
 import com.revature.server.Server;
 
 public final class GenericHelper {
-	private static FPBOComparatorFactory fieldParamsBusnissObjectComparatorFactory = FPBOComparatorFactory.getFactory();
-	private static FieldParamsFactory fieldParamsFactory = FieldParamsFactory.getFactory();
+	public static FPBOComparatorFactory fieldParamsBusnissObjectComparatorFactory = FPBOComparatorFactory.getFactory();
+	public static FieldParamsFactory fieldParamsFactory = FieldParamsFactory.getFactory();
 	
 	/**
 	 * Searches all records for desired table
