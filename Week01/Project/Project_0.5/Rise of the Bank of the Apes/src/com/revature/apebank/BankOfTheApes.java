@@ -16,9 +16,10 @@ public class BankOfTheApes {
 	private HashMap<String, User> users;
 	static int instanceCount = 0;
 	private static BankOfTheApes bota;
+	public static final String fileName = "user.ser";
 	
 	private BankOfTheApes() {
-		this.users = ProcessData.unserialize();
+		this.users = ProcessData.unserialize(fileName);
 		/*
 		 * Creation of a default admininstrator
 		 */

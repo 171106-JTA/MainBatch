@@ -3,13 +3,13 @@ package com.revature.users;
 import java.io.Serializable;
 
 public class User implements Serializable{
-	//access_levels: 2 - admin; 1 - mod; 0 - user
+	//access_levels: 2 - administrator; 1 - moderator; 0 - regular user
 	private int access_level;
 	private double balance;
-	private boolean approved;
+	private boolean approved; //field for approval status of account
 	private String name;
 	private String password;
-	private boolean banned;
+	private boolean banned; //field for locking an account
 	
 	public User(String name, String password) {
 		this.name = name;

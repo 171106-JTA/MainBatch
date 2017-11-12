@@ -3,6 +3,7 @@ package com.revature.ui;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import com.revature.apebank.BankOfTheApes;
 import com.revature.data.Logging;
 import com.revature.data.ProcessData;
 import com.revature.users.User;
@@ -33,7 +34,7 @@ public class UserInterface {
 	 * For reading integer inputs. Checks to make sure that options requiring integers only
 	 * receive integer inputs
 	 * 
-	 * @return
+	 * @return the user's input; if the input is not an integer, -1 is returned
 	 */
 	protected static int readNumberInput() {
 		int i = -1;
@@ -43,7 +44,7 @@ public class UserInterface {
 		try {
 			i = Integer.parseInt(scan.nextLine());
 		}catch (NumberFormatException ne){
-			//System.out.println("Input invalid.");
+			
 		}
 		return i;
 	}
@@ -55,7 +56,7 @@ public class UserInterface {
 	 */
 	protected static void cleanUp(HashMap<String, User> users) {
 		scan.close();
-		ProcessData.serialize(users);
+		ProcessData.serialize(users, BankOfTheApes.fileName);
 	}	
 	
 	/**
@@ -97,7 +98,7 @@ public class UserInterface {
 				}
 			}
 		}
-		System.out.println("Sorry. Incorrect Username or password.");
+		System.out.println("Sorry. Incorrect login credentials.");
 		return null;
 	}
 	

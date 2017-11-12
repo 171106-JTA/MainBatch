@@ -20,9 +20,9 @@ public class ProcessData {
 	 * 
 	 * @param users HashMap<String, User> of all bank customers and admins
 	 */
-	public static void serialize(HashMap<String, User> users) {
+	public static void serialize(HashMap<String, User> users, String fileName) {
 		try {
-			oos = new ObjectOutputStream(new FileOutputStream("user.ser"));
+			oos = new ObjectOutputStream(new FileOutputStream(fileName));
 			oos.writeObject(users);
 			
 		}catch(IOException e) {
@@ -37,13 +37,12 @@ public class ProcessData {
 	 * @return HashMap<String, User> of users
 	 */
 	@SuppressWarnings("unchecked")
-	public static HashMap<String, User> unserialize() {
+	public static HashMap<String, User> unserialize(String fileName) {
 		HashMap<String, User> hm = null;
 		
 		try {
-			ois = new ObjectInputStream(new FileInputStream("user.ser"));
+			ois = new ObjectInputStream(new FileInputStream(fileName));
 			hm = (HashMap<String, User>) ois.readObject();
-			System.out.println(hm.keySet());
 			
 		}catch(IOException | ClassNotFoundException e) {
 			return new HashMap<String, User>();

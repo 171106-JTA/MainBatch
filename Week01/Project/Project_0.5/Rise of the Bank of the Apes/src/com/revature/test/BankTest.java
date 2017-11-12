@@ -1,6 +1,7 @@
 package com.revature.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.HashMap;
 
@@ -12,6 +13,8 @@ import org.junit.Test;
 
 import com.revature.apebank.BankOfTheApes;
 import com.revature.data.ProcessData;
+import com.revature.ui.UserInterface;
+import com.revature.users.User;
 
 public class BankTest {
 	BankOfTheApes bota;
@@ -34,8 +37,53 @@ public class BankTest {
 	}
 
 	@Test
-	public void testUnserialize() {
-		assert(ProcessData.unserialize() instanceof HashMap);
-		assertEquals(ProcessData.unserialize().get("a!joe").getName(), bota.getUsers().get("a!joe").getName());
+	public void testSerialization() {
+		String fileName = "test.ser";
+		User a = new User("a", "a");
+		HashMap<String, User> hm = new HashMap<>();
+		hm.put("a", new User("a", "a"));
+		ProcessData.serialize(hm, fileName);
+		
+		assert(ProcessData.unserialize(fileName) instanceof HashMap);
+		assertNotNull(ProcessData.unserialize(fileName));
+		assertEquals(ProcessData.unserialize(fileName).get("a").getName(), a.getName());
+	}
+	
+	@Test
+	public void testLoginIncorrect() {
+		User a = new User("a", "a");
+		HashMap<String, User> hm = new HashMap<>();
+		hm.put("a", new User("a", "a"));
+		
+		System.out.println("===Incorrect Input===\n");
+		/*
+		 * Test result of incorrect inputs;
+		 * Null should be returned
+		 */
+		assertEquals(UserInterface.loginScreen(hm), null);
+	}
+	
+	@Test
+	public void testLoginCorrect() {
+		User a = new User("a", "a");
+		a.setApproved(true);
+		HashMap<String, User> hm = new HashMap<>();
+		hm.put("a", a);
+		
+		System.out.println("\n===Correct Input===\n");
+		/*
+		 * Test result of correct inputs;
+		 * User a should be returned
+		 */
+		assertEquals(UserInterface.loginScreen(hm), a);
+	}
+	
+	@Test
+	public void testInputInteger() {
+		/*
+		 * Test result of incorrect inputs
+		 * -1 should be returned
+		 */
+		assertsEquals()
 	}
 }
