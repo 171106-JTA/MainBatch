@@ -23,7 +23,8 @@ public class Withdraw {
 			double currAmount = prevAmount - amount;
 			if(currAmount >= 0) {
 				user.setBalance(currAmount);
-				System.out.println("$" + currAmount + " has been withdrawn.");
+				System.out.println(currAmount + " Banana(s) has been withdrawn.");
+				UserInterface.startLogging(user.getName() + " has withdrawn " + currAmount + " Banana(s)");
 				break;
 			}
 			System.out.println("Invalid input. Please try again.");

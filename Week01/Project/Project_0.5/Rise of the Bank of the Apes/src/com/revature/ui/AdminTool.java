@@ -47,9 +47,11 @@ public class AdminTool {
 		switch(input) {
 			case "a":
 				u.setApproved(true);
+				UserInterface.startLogging("Admin has approved user " + u.getName());
 				break;
 			case "d":
 				u.setApproved(false);
+				UserInterface.startLogging("Admin has disproved user " + u.getName());
 				break;
 			default:
 				System.out.println("Incorrect input.");
@@ -83,9 +85,11 @@ public class AdminTool {
 		switch(input) {
 			case "b":
 				u.setBanned(true);
+				UserInterface.startLogging("Admin has banned user " + u.getName());
 				break;
 			case "u":
 				u.setBanned(false);
+				UserInterface.startLogging("Admin has unbanned user " + u.getName());
 				break;
 			default:
 				System.out.println("Incorrect Input.");
@@ -118,5 +122,6 @@ public class AdminTool {
 		
 		u.setAccess_level(2);
 		System.out.println(u.getName() + " has been promoted to admin");
+		UserInterface.startLogging("Admin has promoted user " + u.getName() + " to administrator");
 	}
 }

@@ -21,5 +21,6 @@ public class Deposit {
 		double prevAmount = user.getBalance();
 		double currAmount = prevAmount + amount;
 		user.setBalance(currAmount);
+		UserInterface.startLogging(user.getName() + " has deposited " + currAmount + " Banana(s)");
 	}
 }

@@ -3,11 +3,13 @@ package com.revature.ui;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import com.revature.data.Logging;
 import com.revature.data.ProcessData;
 import com.revature.users.User;
 
 public class UserInterface {
 	private static Scanner scan;
+	private static Logging log;
 	
 	public UserInterface() {
 		
@@ -80,6 +82,7 @@ public class UserInterface {
 			savedPassword = u.getPassword();
 			if(password.equals(savedPassword)) {
 				if(!u.isBanned() && u.isApproved()) {
+					log = Logging.getLogging();
 					return u;
 				}
 				else {
@@ -98,4 +101,7 @@ public class UserInterface {
 		return null;
 	}
 	
+	protected static void startLogging(String message) {
+		log.startLogging(message);
+	}
 }

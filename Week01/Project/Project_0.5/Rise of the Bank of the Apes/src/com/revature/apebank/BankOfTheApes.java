@@ -20,7 +20,7 @@ public class BankOfTheApes {
 	private BankOfTheApes() {
 		this.users = ProcessData.unserialize();
 		/*
-		 * Creation of a default admin
+		 * Creation of a default admininstrator
 		 */
 		if(users.get("a!joe") == null) {
 			User admin = new User("a!joe", "d");
@@ -31,7 +31,6 @@ public class BankOfTheApes {
 		instanceCount++;
 	}
 	
-		
 	public HashMap<String, User> getUsers() {
 		return users;
 	}
