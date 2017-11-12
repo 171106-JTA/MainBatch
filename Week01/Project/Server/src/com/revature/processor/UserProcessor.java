@@ -42,6 +42,7 @@ public class UserProcessor implements Processorable {
 				break;
 			case "SETUSER":
 				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
+				Require.requireAll(new String[] { User.USERNAME, User.PASSWORD }, request);
 				res = URH.setUser(request);
 				break;
 			case "CREATEUSERINFO":
@@ -55,21 +56,27 @@ public class UserProcessor implements Processorable {
 				break;
 			case "SETUSERINFO":
 				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
+				Require.requireQuery(new String[] { UserInfo.USERID, UserInfo.ADDRESS, UserInfo.EMAIL, UserInfo.PHONENUMBER },  request);
+				res = URH.setUserInfo(request);
+				break;
+			case "CREATECHECKINGACCOUNT":
+				break;
+			case "CREATECREDITACCOUNT":
+				break;
+			case "DELETEACCOUNT":
 				break;
 			case "GETACCOUNT":
 				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
 				res = URH.getAccount(request);
 				break;
-			case "DELETEACCOUNT":
-				break;
 			case "GETCHECKINGACCOUNT":
-				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
-				break;
-			case "SETCHECKINGACCOUNT":
 				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
 				break;
 			case "GETCEDITACCOUNT":
 				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER},  request);
+				break;
+			case "SETCHECKINGACCOUNT":
+				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
 				break;
 			case "SETCREDITACCOUNT":
 				Require.require(new Checkpoint[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);

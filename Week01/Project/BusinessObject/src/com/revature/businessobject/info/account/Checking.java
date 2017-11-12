@@ -35,4 +35,11 @@ public class Checking extends Account {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Checking [total=" + total + ", " + super.toString() + "]";
+	}
+	
+	
 }

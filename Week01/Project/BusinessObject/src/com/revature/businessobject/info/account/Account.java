@@ -63,4 +63,13 @@ public class Account extends Info {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Account [number=" + number + ", type=" + type + ", status="
+				+ status + ", " + super.toString() + "]";
+	}
+	
+	
+	
 }

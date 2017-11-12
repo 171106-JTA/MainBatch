@@ -38,10 +38,14 @@ public final class UserRequestHandler {
 		return res;
 	}
 	
+	///
+	//	USER
+	///
+	
 	/**
 	 * Creates new user accounts 
-	 * @param request
-	 * @return
+	 * @param request account information
+	 * @return modified record count should equal 1
 	 */
 	public Resultset createUser(Request request) throws RequestException {
 		BusinessObject user = GenericHelper.getLargest(BusinessClass.USER, Arrays.asList(new String[] { User.ID }));
@@ -63,6 +67,11 @@ public final class UserRequestHandler {
 		return new Resultset(Server.database.insert(BusinessClass.USER, request.getTransaction()));
 	}
 	
+	/**
+	 * Deletes user and all data associated with them
+	 * @param request 
+	 * @return total number of records removed 
+	 */
 	public Resultset deleteUser(Request request) {
 		FieldParams userdata = new FieldParams();
 		String userid;
@@ -100,7 +109,6 @@ public final class UserRequestHandler {
 		return Server.database.select(BusinessClass.USER, request.getQuery());
 	}
 	
-	
 	/**
 	 * Allows everything except user id to be updated 
 	 * @param request
@@ -110,7 +118,7 @@ public final class UserRequestHandler {
 		FieldParams query = request.getQuery();
 		FieldParams trans = request.getTransaction();
 		
-		// If user  account Ensure they are updating their account only 
+		// If user account Ensure they are updating their account only 
 		if (request.getCheckpoint() != Checkpoint.ADMIN) {
 			Require.requireSelf(request);
 			
@@ -125,6 +133,16 @@ public final class UserRequestHandler {
 		return new Resultset(Server.database.update(BusinessClass.USER, query, trans));
 	}
 	
+	///
+	//	USERINFO
+	///
+	
+	/**
+	 * Generates UserInfo record
+	 * @param request
+	 * @return modified record count should equal 1
+	 * @throws RequestException
+	 */
 	public Resultset createUserInfo(Request request) throws RequestException {
 		FieldParams conditions = new FieldParams();
 		
@@ -140,6 +158,12 @@ public final class UserRequestHandler {
 		return new Resultset(Server.database.insert(BusinessClass.USERINFO, request.getTransaction()));
 	}
 	
+	/**
+	 * Acquires UserInfo records
+	 * @param request
+	 * @return modified record count should equal 1 for non-admin and 0 to many for Admin
+	 * @throws RequestException
+	 */
 	public Resultset getUserInfo(Request request) throws RequestException { 
 		// For NON-ADMINS only personal account information should be accessible 
 		if (request.getCheckpoint() != Checkpoint.ADMIN) 
@@ -148,6 +172,22 @@ public final class UserRequestHandler {
 		return Server.database.select(BusinessClass.USERINFO, request.getQuery());
 	}
 	
+	public Resultset setUserInfo(Request request) throws RequestException {
+		FieldParams transact = request.getTransaction();
+		
+		// For NON-ADMINS only personal account information should be accessible 
+		if (request.getCheckpoint() != Checkpoint.ADMIN) 
+			Require.requireSelf(request);
+		
+		// We are not allowed to change the userid
+		transact.remove(Info.USERID);
+		
+		return new Resultset(Server.database.update(BusinessClass.USERINFO, request.getQuery(), transact));
+	}
+	
+	///
+	//	ACCOUNT
+	///
 	
 	public Resultset getAccount(Request request) throws RequestException {
 		// For NON-ADMINS only personal account information should be accessible 

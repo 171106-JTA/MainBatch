@@ -38,13 +38,16 @@ public class AdminView implements View {
 			
 			switch (input) {
 				case "0":
-					managePendingAccount();
+					manageUser(pendingUsers);
 					break;
 				case "1":
+					manageAccount(pendingAccounts);
 					break;
 				case "2":
+					manageUser(allUsers);
 					break;
 				case "3":
+					manageAccount(allAccounts);
 					break;
 				case "logout":
 					break;
@@ -59,35 +62,41 @@ public class AdminView implements View {
 	//	PRIVATE METHODS 
 	///
 	
-	private void managePendingAccount() {
-		if (pendingUsers.size() > 0) {
-			FieldParams params = new FieldParams();
+	private void manageAccount(Resultset list) {
+		if (list.size() > 0) {
+			FieldParams params;
 			String input;
-			int index;
+			int index; 
 			
-			Menu.println("Select one of the following users: ");
-			printPendingUsers();
+			Menu.println("Select one of the following accounts: ");
+			printList(list);
 			input = Menu.getInput(name + ":>");
-		
+			
 			try {
 				index = Integer.parseInt(input);
 				
-				if (index > -1 && index < pendingUsers.size()) {
-					
-					
-					// Set params to view user information
-					params = factory.getFieldParams(pendingUsers.get(index));
+				if (index > -1 && index < list.size()) {
+					// Set params to view account information
+					params = factory.getFieldParams(list.get(index));
 					params.put(User.SESSIONID, MyBank.data.get(User.SESSIONID));
 					Menu.printUser(params);
-					printPendingActionOptions();
+					printUserActionOptions();
 					input = Menu.getInput(name + ":>");
 					
 					switch (input) {
 						case "0": 
-							activateUser((User)pendingUsers.get(index));
+							updateUserCheckpoint((User)list.get(index), Checkpoint.CUSTOMER);
 							break;
 						case "1":
-							deleteUser((User)pendingUsers.get(index));
+							updateUserCheckpoint((User)list.get(index), Checkpoint.ADMIN);
+							break;
+						case "2":
+							updateUserCheckpoint((User)list.get(index), Checkpoint.BLOCKED);
+							break;
+						case "3":
+							deleteUser((User)list.get(index));
+							break;
+						case "4":
 							break;
 						default:
 							Menu.println("Invalid selection!");		
@@ -96,20 +105,64 @@ public class AdminView implements View {
 				}else {
 					Menu.println("Invalid selection!");
 				}
-				
-				
-				
 			} catch (Exception e) {
-				
-			}			
+			}	
 		} else {
-			Menu.println("You do not have any pending users");
+			Menu.println("You do not have any users");;
 		}
-		
-		Menu.println("");
 	}
 	
+	private void manageUser(Resultset list) {
+		if (list.size() > 0) {
+			FieldParams params;
+			String input;
+			int index; 
+			
+			Menu.println("Select one of the following users: ");
+			printList(list);
+			input = Menu.getInput(name + ":>");
+			
+			try {
+				index = Integer.parseInt(input);
+				
+				if (index > -1 && index < list.size()) {
+					// Set params to view user information
+					params = factory.getFieldParams(list.get(index));
+					params.put(User.SESSIONID, MyBank.data.get(User.SESSIONID));
+					Menu.printAccountData(params);
+					printUserActionOptions();
+					input = Menu.getInput(name + ":>");
+					
+					// Process selection 
+					switch (input) {
+						case "0": 
+							updateUserCheckpoint((User)list.get(index), Checkpoint.CUSTOMER);
+							break;
+						case "1":
+							updateUserCheckpoint((User)list.get(index), Checkpoint.ADMIN);
+							break;
+						case "2":
+							updateUserCheckpoint((User)list.get(index), Checkpoint.BLOCKED);
+							break;
+						case "3":
+							deleteUser((User)list.get(index));
+							break;
+						case "4":
+							break;
+						default:
+							Menu.println("Invalid selection!");		
+					}
+				}else {
+					Menu.println("Invalid selection!");
+				}
+			} catch (Exception e) {
+			}	
+		} else {
+			Menu.println("You do not have any users");;
+		}
+	}
 	
+
 	///
 	//	USER MANIPULATION CONTROLS 
 	///
@@ -126,14 +179,7 @@ public class AdminView implements View {
 			Menu.print(res.getException().getMessage());
 		}
 	}
-	
-	private void activateUser(User user) {
-		updateUserCheckpoint(user, Checkpoint.CUSTOMER);
-	}
 
-	private void blockUser(User user) {
-		updateUserCheckpoint(user, Checkpoint.BLOCKED);
-	}
 	
 	private void updateUserCheckpoint(User user, Checkpoint checkpoint) {
 		FieldParams trans;
@@ -154,18 +200,34 @@ public class AdminView implements View {
 	}
 	
 	
+	private void updateAccount(Account account) {
+		
+	}
+	
 	///
 	//	PRINT METHODS 
 	///
 	
-	private void printPendingActionOptions() {
+	private void printUserActionOptions() {
 		Menu.println("What would you like to do?");
-		Menu.println("\t- 0 - ACTIVATE");
-		Menu.println("\t- 1 - DELETE");
+		Menu.println("\t- 0 - SET AS CUSTOMER");
+		Menu.println("\t- 1 - SET AS ADMIN");
+		Menu.println("\t- 2 - SET AS BLOCKED");
+		Menu.println("\t- 3 - DELETE");
+		Menu.println("\t- 4 - CANCEL");
 	}
 	
-	private void printPendingUsers() {
-		Iterator<BusinessObject> it = pendingUsers.iterator();
+	private void printAccountOptions() {
+		Menu.println("What would you like to do?");
+		Menu.println("\t- 0 - SET AS ACTIVE");
+		Menu.println("\t- 1 - SET AS BLOCKED");
+		Menu.println("\t- 2 - MANAGE");
+		Menu.println("\t- 3 - DELETE");
+		Menu.println("\t- 4 - CANCEL");
+	}
+	
+	private void printList(Resultset list) {
+		Iterator<BusinessObject> it = list.iterator();
 		
 		for (int i = 0; it.hasNext(); i++) {
 			Menu.println("\t- " + i + " - " + it.next());
@@ -179,7 +241,6 @@ public class AdminView implements View {
 		Menu.println("\t- 2 - manage existing users");
 		Menu.println("\t- 3 - manage existing accounts");
 	}
-	
 	
 	private void printWorkLoad() {
 		Menu.println(MyBank.data.get(User.USERNAME) + " you have:");

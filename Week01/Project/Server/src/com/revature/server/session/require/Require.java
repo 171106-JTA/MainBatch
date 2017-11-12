@@ -6,8 +6,10 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import com.revature.businessobject.info.Info;
 import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.Checkpoint;
+import com.revature.businessobject.user.User;
 import com.revature.core.FieldParams;
 import com.revature.core.Request;
 import com.revature.core.exception.RequestException;
@@ -15,7 +17,11 @@ import com.revature.server.Server;
 
 public final class Require {
 	public static void requireSelf(Request request) throws RequestException {
-		requireQuery(new String[] { UserInfo.USERID }, new String[] { Long.toString(request.getUserId()) }, request);
+		String id = Long.toString(request.getUserId());
+		
+		// If has query then ID must apply to self
+		if (request.getQuery() != null)
+			requireQuery(new String[] { Info.USERID, User.ID }, new String[] { id, id }, request);
 	}
 	
 	public static void requireAllQuery(String[] params, Request request) throws RequestException {
@@ -52,6 +58,11 @@ public final class Require {
 	
 	public static void require(String[] params, String[] values, FieldParams data, Request request) throws RequestException {
 		validate(params, values, data, request);
+	}
+	
+	public static void requireAll(String[] params, Request request) throws RequestException {
+		requireAllQuery(params, request);
+		requireAllTransaction(params, request);
 	}
 	
 	public static void requireAll(String[] params, String[] values, FieldParams data, Request request) throws RequestException {

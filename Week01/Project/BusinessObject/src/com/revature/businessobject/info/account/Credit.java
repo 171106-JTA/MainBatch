@@ -80,4 +80,12 @@ public class Credit extends Account {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Credit [total=" + total + ", interest=" + interest
+				+ ", creditLimit=" + creditLimit + ", "+ super.toString() + "]";
+	}
+	
+	
 }
