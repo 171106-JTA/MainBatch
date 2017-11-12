@@ -5,7 +5,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 //import com.Project1.bankAccountStuff.User;
@@ -19,6 +21,8 @@ public class Driver {
 	private static final int status_approvalPending = 0;
 	private static final int status_active = 1;
 	private static final int status_locked = 2;
+	private static final int permission_client = 0;
+	private static final int permission_admin = 1;
 	// Used the tutorials listed below for the ObjectInputStream and
 	// ObjectOutputStream
 	// http://www.studytonight.com/java/serialization-and-deserialization.php
@@ -37,7 +41,7 @@ public class Driver {
 
 	public static void main(String[] args) {
 		Driver mp = new Driver();
-		mp.db = new HashMap<>();
+		mp.db = new HashMap<String, User>();
 		boolean exit = false;
 
 		// Read database from the file
@@ -61,13 +65,24 @@ public class Driver {
 
 				// If successfully logged in, check the user's status
 				if (loggedIn) {
+					// Check status of user
 					int status = mp.currentUser.getStatus();
 					if (status == status_approvalPending) {
 						System.out.println("Account Approval Pending");
 					} else if (status == status_locked) {
 						System.out.println("Account Locked");
+						// If login was successful, call either the User or Admin menu, depending on
+						// permission level
 					} else if (status == status_active) {
 						System.out.println("Successfully Logged In!");
+						int permissions = mp.currentUser.getPermissions();
+						if (permissions == permission_client) {
+							System.out.println("Client Permission");
+//							mp.clientMenu();
+						} else if (permissions == permission_admin) {
+							System.out.println("Admin Permision");
+							mp.adminMenu();
+						}
 					} else {
 						// To Do: Put throw statement here with custom error message
 						System.out.println("FATAL ERROR #1: Should NEVER See This!!!!");
@@ -114,12 +129,28 @@ public class Driver {
 				accountAmount = 0;
 				User default_user_3 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
 						accountAmount);
+				
+				firstName = "Admin";
+				lastName = "Admin";
+				middleInitial = "A";
+				ssn = "001";
+				password = "001";
+				permissions = 1;
+				status = 1;
+				accountAmount = 0;
+				User default_user_4 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+						accountAmount);
 
 				mp.db.put(default_user_1.getSsn(), default_user_1);
 				mp.db.put(default_user_2.getSsn(), default_user_2);
 				mp.db.put(default_user_3.getSsn(), default_user_3);
+				mp.db.put(default_user_4.getSsn(), default_user_4);
 
-				System.out.println(mp.db);
+				//Print database. For coding purposes
+				System.out.println("The Database!!!!: ");
+				for(String key : mp.db.keySet()) {
+					System.out.println(mp.db.get(key));
+				}
 			} else {
 				// Add counter and exit after 5 incorrect attempts
 				System.out.println("Not an option");
@@ -158,7 +189,12 @@ public class Driver {
 			 * https://stackoverflow.com/questions/262367/type-safety-unchecked-cast
 			 */
 			this.db = (HashMap<String, User>) ois.readObject();
-			System.out.println("The Database!!!!: " + this.db);
+			
+			//Print database. For coding purposes
+			System.out.println("The Database!!!!: ");
+			for(String key : db.keySet()) {
+				System.out.println(this.db.get(key));
+			}
 		} catch (ClassNotFoundException e) {
 			// To Do: Fill in
 			e.printStackTrace();
@@ -276,7 +312,11 @@ public class Driver {
 		// To Do: Run the object serialization through a ?hash function?
 		this.db.put(newUser.getSsn(), newUser);
 
-		System.out.println(db);
+		//Print database. For coding purposes
+		System.out.println("The Database!!!!: ");
+		for(String key : db.keySet()) {
+			System.out.println(this.db.get(key));
+		}
 	}
 
 	/**
@@ -284,8 +324,7 @@ public class Driver {
 	 * 
 	 * @return Returns user's choice
 	 */
-	private String getUserInput(String message) {
-		System.out.println(message);
+	private String getUserInput() {
 		Scanner aScanner = new Scanner(System.in);
 		return aScanner.nextLine();
 	}
@@ -295,21 +334,65 @@ public class Driver {
 	 * 
 	 * @return Returns user's choice
 	 */
-	private int LoginMenu() {
+	private int loginMenu() {
 		return 0;
 	}
 
 	/**
 	 * Display menu for Admins, get Admin's choice, and validate admin's choice
 	 */
-	private void AdminMenu() {
+	private void adminMenu() {
+		boolean loop = true;
+		
+		String [] options = new String[] {"1", "2", "3", "4"};
+		List<String> validOptions = Arrays.asList(options);
+		
+		while (loop) {
+			displayAdminMenu();
+			String userInput = getUserInput();
+//			loop = validateInput(userInput, validOptions);
+			loop = validOptions.contains(userInput);
+			
+			//If user chose a valid option, 
+			if(!loop) {
+				if(userInput.equals("1")) {
+					System.out.println("Option 1");
+//					approveClientAccount();
+				} else if(userInput.equals("2")) {
+					System.out.println("Option 2");
+//					lockClientAccount();
+				} else if (userInput.equals("3")) {
+					System.out.println("Option 3");
+//					unlockClientAccount();
+				} else if (userInput.equals("4")) {
+					System.out.println("Option 4");
+//					promoteClientToAdmin();
+				} else {
+					System.out.println("FATAL ERROR!!!! Should not see this. IN adminMenu()");
+				}
+			//Otherwise, print error message, and allow next iteration of loop
+			} else {
+				System.out.println("Not and option");
+			}
+		}
+		
+		
+		
 
 	}
+	
+	private void displayAdminMenu() {
+		
+	}
+	
+//	private boolean validateInput(String userInput, List<String> validOptions) {		
+//		return validOptions.contains(userInput);
+//	}
 
 	/**
 	 * Display menu for Client's, get Clien'ts choice, and validate Client's choice
 	 */
-	private void ClientMenu() {
+	private void clientMenu() {
 
 	}
 
