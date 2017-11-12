@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -33,10 +34,10 @@ public class Driver {
 
 	/*
 	 * To Do's: Add a Username field to the User class. Propogate this change
-	 * through all relevant functions in Main For login() function, allow user to
-	 * enter 'q' or something to go back Disable 'q' as a valid password Convert
+	 * through all relevant functions in Main. For login() function, allow user to
+	 * enter 'q' or something to go back. Disable 'q' as a valid password. Convert
 	 * if-else chains to switch statements (To practice working with switch
-	 * statements)
+	 * statements).
 	 */
 
 	public static void main(String[] args) {
@@ -78,7 +79,7 @@ public class Driver {
 						int permissions = mp.currentUser.getPermissions();
 						if (permissions == permission_client) {
 							System.out.println("Client Permission");
-//							mp.clientMenu();
+							// mp.clientMenu();
 						} else if (permissions == permission_admin) {
 							System.out.println("Admin Permision");
 							mp.adminMenu();
@@ -129,7 +130,7 @@ public class Driver {
 				accountAmount = 0;
 				User default_user_3 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
 						accountAmount);
-				
+
 				firstName = "Admin";
 				lastName = "Admin";
 				middleInitial = "A";
@@ -146,9 +147,9 @@ public class Driver {
 				mp.db.put(default_user_3.getSsn(), default_user_3);
 				mp.db.put(default_user_4.getSsn(), default_user_4);
 
-				//Print database. For coding purposes
+				// Print database. For coding purposes
 				System.out.println("The Database!!!!: ");
-				for(String key : mp.db.keySet()) {
+				for (String key : mp.db.keySet()) {
 					System.out.println(mp.db.get(key));
 				}
 			} else {
@@ -189,10 +190,10 @@ public class Driver {
 			 * https://stackoverflow.com/questions/262367/type-safety-unchecked-cast
 			 */
 			this.db = (HashMap<String, User>) ois.readObject();
-			
-			//Print database. For coding purposes
+
+			// Print database. For coding purposes
 			System.out.println("The Database!!!!: ");
-			for(String key : db.keySet()) {
+			for (String key : db.keySet()) {
 				System.out.println(this.db.get(key));
 			}
 		} catch (ClassNotFoundException e) {
@@ -312,9 +313,9 @@ public class Driver {
 		// To Do: Run the object serialization through a ?hash function?
 		this.db.put(newUser.getSsn(), newUser);
 
-		//Print database. For coding purposes
+		// Print database. For coding purposes
 		System.out.println("The Database!!!!: ");
-		for(String key : db.keySet()) {
+		for (String key : db.keySet()) {
 			System.out.println(this.db.get(key));
 		}
 	}
@@ -326,7 +327,7 @@ public class Driver {
 	 */
 	private String getUserInput() {
 		Scanner aScanner = new Scanner(System.in);
-		return aScanner.nextLine();
+		return aScanner.nextLine().toString();
 	}
 
 	/**
@@ -343,44 +344,47 @@ public class Driver {
 	 */
 	private void adminMenu() {
 		boolean loop = true;
-		
-		String [] options = new String[] {"1", "2", "3", "4"};
+
+		String[] options = new String[] { "1", "2", "3", "4" };
 		List<String> validOptions = Arrays.asList(options);
-		
+
 		while (loop) {
 			displayAdminMenu();
 			String userInput = getUserInput();
-//			loop = validateInput(userInput, validOptions);
-			loop = validOptions.contains(userInput);
+			System.out.println("userInput: " + userInput);
+			System.out.println("want: " + "1");
+			System.out.println("Test Result: " + userInput.equals("1"));
+			// loop = validateInput(userInput, validOptions);
 			
-			//If user chose a valid option, 
-			if(!loop) {
-				if(userInput.equals("1")) {
+			System.out.println(validOptions);
+			System.out.println(validOptions.contains(userInput));
+			loop = !validOptions.contains(userInput);
+			System.out.println("Loop: " + loop);
+			// If user chose a valid option,
+			if (!loop) {
+				if (userInput.equals("1")) {
 					System.out.println("Option 1");
-//					approveClientAccount();
-				} else if(userInput.equals("2")) {
+					approveClientAccount();
+				} else if (userInput.equals("2")) {
 					System.out.println("Option 2");
-//					lockClientAccount();
+					// lockClientAccount();
 				} else if (userInput.equals("3")) {
 					System.out.println("Option 3");
-//					unlockClientAccount();
+					// unlockClientAccount();
 				} else if (userInput.equals("4")) {
 					System.out.println("Option 4");
-//					promoteClientToAdmin();
+					// promoteClientToAdmin();
 				} else {
 					System.out.println("FATAL ERROR!!!! Should not see this. IN adminMenu()");
 				}
-			//Otherwise, print error message, and allow next iteration of loop
+				// Otherwise, print error message, and allow next iteration of loop
 			} else {
 				System.out.println("Not and option");
 			}
 		}
-		
-		
-		
 
 	}
-	
+
 	private void displayAdminMenu() {
 		System.out.println("_______________________________");
 		System.out.println("Administrator Menu");
@@ -390,10 +394,10 @@ public class Driver {
 		System.out.println("4) Promote Clients to Administrators");
 		System.out.print("Choice: ");
 	}
-	
-//	private boolean validateInput(String userInput, List<String> validOptions) {		
-//		return validOptions.contains(userInput);
-//	}
+
+	// private boolean validateInput(String userInput, List<String> validOptions) {
+	// return validOptions.contains(userInput);
+	// }
 
 	/**
 	 * Display menu for Client's, get Clien'ts choice, and validate Client's choice
@@ -431,7 +435,36 @@ public class Driver {
 	 * @param clientUsername
 	 *            Username of client account to approve
 	 */
-	public void approveClientAccount(String clientUsername) {
+	public void approveClientAccount() {
+		displayAccountsNeedingApproval();
+//		getAndApproveClientAccount();
+	}
+
+	public void displayAccountsNeedingApproval() {
+		System.out.println("SSNs for accounts needing approval");
+		
+	    List <String> approvalPendingAccounts = getApprovalPendingAccounts();
+		for(String item : approvalPendingAccounts) {
+			System.out.println(item);
+		}
+	    System.out.println("\n");
+		System.out.println("Enter Account To Approve: ");
+	}
+
+	public List<String> getApprovalPendingAccounts() {
+		// Loop through db and search for accounts needing approval
+		// To Do: Find a better way to do this than O(n)
+		List<String> ssnNeedingApproval = new ArrayList<String>();
+		for (String key : this.db.keySet()) {
+			if (this.db.get(key).getStatus() == status_approvalPending) {
+				ssnNeedingApproval.add(key);
+			}
+		}
+		
+		return ssnNeedingApproval;
+	}
+
+	public void getAndApproveClientAccount() {
 
 	}
 
