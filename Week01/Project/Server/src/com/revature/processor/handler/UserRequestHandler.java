@@ -5,6 +5,7 @@ import java.util.Arrays;
 import com.revature.businessobject.BusinessObject;
 import com.revature.businessobject.info.Info;
 import com.revature.businessobject.info.account.Account;
+import com.revature.businessobject.info.account.AccountStatus;
 import com.revature.businessobject.info.account.AccountType;
 import com.revature.businessobject.user.Checkpoint;
 import com.revature.businessobject.user.User;
@@ -187,20 +188,27 @@ public final class UserRequestHandler {
 	//	ACCOUNT
 	///
 	
-	public Resultset createAccount(Request request, String type) throws RequestException {
+	public Resultset createAccount(Request request, String type) {
 		FieldParams transact = request.getTransaction();
+		BusinessObject largest;
+		String number;
 		
-		// We should only make accounts pertained to our own account
-		Require.requireSelfQuery(request);
+		// Get account number 
+		largest = GenericHelper.getLargest(BusinessClass.ACCOUNT, Arrays.asList(new String[] { Account.NUMBER }));
+		number = largest == null ? "0" : Long.toString(((Account)largest).getNumber() + 1);
 		
 		// Set account details
+		transact.put(Info.USERID, Long.toString(request.getUserId())));
 		transact.put(Account.TYPE, type);
-		//transact.put(Account.STATUS, Integer.toSt))
+		transact.put(Account.STATUS, AccountStatus.PENDING);
+		transact.put(Account.NUMBER, number);
 		
-		return null;
+		return new Resultset(Server.database.insert(BusinessClass.ACCOUNT, transact));
 	}
 	
-	
+	public Resultset deleteAccount(Request request) throws RequestException {
+		return null;
+	}
 	
 	
 	public Resultset getAccount(Request request) throws RequestException {
