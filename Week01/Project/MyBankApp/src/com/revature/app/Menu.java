@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import com.revature.businessobject.BusinessObject;
 import com.revature.businessobject.info.account.Account;
-import com.revature.businessobject.info.account.AccountType;
+import com.revature.businessobject.info.account.Type;
 import com.revature.businessobject.info.account.Checking;
 import com.revature.businessobject.info.account.Credit;
 import com.revature.businessobject.info.user.UserInfo;
@@ -122,10 +122,10 @@ public class Menu {
 				Account acct = (Account)item;
 				
 				switch (acct.getType()) {
-					case AccountType.CHECKING:
+					case Type.CHECKING:
 						printCheckingAccount((Checking)acct);
 						break;
-					case AccountType.CREDIT:
+					case Type.CREDIT:
 						printCreditAccount((Credit)acct);
 						break;
 				}

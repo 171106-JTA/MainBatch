@@ -2,7 +2,7 @@ package com.revature.processor;
 
 import com.revature.businessobject.info.Info;
 import com.revature.businessobject.info.account.Account;
-import com.revature.businessobject.info.account.AccountType;
+import com.revature.businessobject.info.account.Type;
 import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.Checkpoint;
 import com.revature.businessobject.user.User;
@@ -65,11 +65,11 @@ public class UserProcessor implements Processorable {
 				break;
 			case "CREATECHECKINGACCOUNT":
 				Require.requireCheckpoint(new String[] { Checkpoint.CUSTOMER },  request);
-				res = URH.createAccount(request, AccountType.CHECKING);
+				res = URH.createAccount(request, Type.CHECKING);
 				break;
 			case "CREATECREDITACCOUNT":
 				Require.requireCheckpoint(new String[] { Checkpoint.CUSTOMER },  request);
-				res = URH.createAccount(request, AccountType.CREDIT);
+				res = URH.createAccount(request, Type.CREDIT);
 				break;
 			case "DELETEACCOUNT":
 				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
@@ -81,11 +81,11 @@ public class UserProcessor implements Processorable {
 				break;
 			case "GETCHECKINGACCOUNT":
 				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
-				res = URH.getAccount(request, AccountType.CHECKING);
+				res = URH.getAccount(request, Type.CHECKING);
 				break;
 			case "GETCEDITACCOUNT":
 				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER},  request);
-				res = URH.getAccount(request, AccountType.CREDIT);
+				res = URH.getAccount(request, Type.CREDIT);
 				break;
 			case "SETACCOUNTSTATUS":
 				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN },  request);
@@ -94,7 +94,7 @@ public class UserProcessor implements Processorable {
 				res = URH.setAccountStatus(request);
 				break;
 			default:
-				throw new RequestException(request, "Transtype=[\'" + request.getTranstype() + "\'] is unknown!");
+				throw new RequestException(request, "Transtype=[\'" + request.getRoute() + "."+ request.getTranstype() + "\'] is unknown!");
 		}
 		
 		return res;

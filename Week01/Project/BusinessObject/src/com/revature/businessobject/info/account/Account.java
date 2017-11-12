@@ -16,7 +16,7 @@ public class Account extends Info {
 	 * @param userId user unique identifier (primary key)
 	 * @param number account number 
 	 * @param type what kind of account is it
-	 * @see AccountType 
+	 * @see Type 
 	 */
 	public Account(long userId, long number, String type, String status) {
 		super(userId);

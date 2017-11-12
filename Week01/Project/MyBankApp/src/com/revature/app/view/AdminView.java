@@ -7,7 +7,7 @@ import com.revature.app.MyBank;
 import com.revature.businessobject.BusinessObject;
 import com.revature.businessobject.info.Info;
 import com.revature.businessobject.info.account.Account;
-import com.revature.businessobject.info.account.AccountStatus;
+import com.revature.businessobject.info.account.Status;
 import com.revature.businessobject.user.Checkpoint;
 import com.revature.businessobject.user.User;
 import com.revature.core.FieldParams;
@@ -137,10 +137,10 @@ public class AdminView implements View {
 					
 					switch (input) {
 						case "0": 
-							updateAccountStatus((Account)list.get(index), AccountStatus.ACTIVE);
+							updateAccountStatus((Account)list.get(index), Status.ACTIVE);
 							break;
 						case "1":
-							updateAccountStatus((Account)list.get(index), AccountStatus.BLOCKED);
+							updateAccountStatus((Account)list.get(index), Status.BLOCKED);
 							break;
 						case "2":
 							deleteAccount((Account)list.get(index));
@@ -315,7 +315,7 @@ public class AdminView implements View {
 		FieldParams params = new FieldParams();
 		
 		// Set params to pull pending user records
-		params.put(Account.STATUS, AccountStatus.PENDING);
+		params.put(Account.STATUS, Status.PENDING);
 		
 		// Get pending users
 		pendingAccounts = MyBank.send(new Request(MyBank.data, "USER", "GETACCOUNT", params, null));
@@ -339,9 +339,9 @@ public class AdminView implements View {
 	private void printAccountCount() {
 		FieldParams params = new FieldParams();
 
-		params.put(Account.STATUS, AccountStatus.ACTIVE);
+		params.put(Account.STATUS, Status.ACTIVE);
 		allAccounts = MyBank.send(new Request(MyBank.data, "USER", "GETACCOUNT", params, null));
-		params.put(Account.STATUS, AccountStatus.BLOCKED);
+		params.put(Account.STATUS, Status.BLOCKED);
 		allAccounts.addAll(MyBank.send(new Request(MyBank.data, "USER", "GETACCOUNT", params, null)));
 		Menu.println("We have " + allAccounts.size() + " accounts!");;
 	}

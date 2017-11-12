@@ -2,7 +2,7 @@ package com.revature.core.factory;
 
 import com.revature.businessobject.BusinessObject;
 import com.revature.businessobject.info.account.Account;
-import com.revature.businessobject.info.account.AccountType;
+import com.revature.businessobject.info.account.Type;
 import com.revature.businessobject.info.account.Checking;
 import com.revature.businessobject.info.account.Credit;
 import com.revature.businessobject.info.user.UserInfo;
@@ -90,9 +90,9 @@ public class FieldParamsFactory {
 	private FieldParams convertAccountToFieldParams(Account acct) {
 		// Convert based on type
 		switch (acct.getType()) {
-			case AccountType.CHECKING:
+			case Type.CHECKING:
 				return convertCheckingToFieldParams((Checking)acct);
-			case AccountType.CREDIT:
+			case Type.CREDIT:
 				return convertCreditToFieldParams((Credit)acct);
 			default:
 				return null;

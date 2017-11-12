@@ -5,8 +5,8 @@ import java.util.Arrays;
 import com.revature.businessobject.BusinessObject;
 import com.revature.businessobject.info.Info;
 import com.revature.businessobject.info.account.Account;
-import com.revature.businessobject.info.account.AccountStatus;
-import com.revature.businessobject.info.account.AccountType;
+import com.revature.businessobject.info.account.Status;
+import com.revature.businessobject.info.account.Type;
 import com.revature.businessobject.info.account.Checking;
 import com.revature.businessobject.info.account.Credit;
 import com.revature.businessobject.user.Checkpoint;
@@ -221,14 +221,14 @@ public final class UserRequestHandler {
 		// Set account details
 		transact.put(Info.USERID, Long.toString(request.getUserId()));
 		transact.put(Account.TYPE, type);
-		transact.put(Account.STATUS, AccountStatus.PENDING);
+		transact.put(Account.STATUS, Status.PENDING);
 		transact.put(Account.NUMBER, number);
 
 		switch (type) {
-			case AccountType.CHECKING:
+			case Type.CHECKING:
 				transact.put(Checking.TOTAL, Float.toString(0.0f));
 				break;
-			case AccountType.CREDIT:
+			case Type.CREDIT:
 				transact.put(Credit.TOTAL, Float.toString(0.0f));
 				transact.put(Credit.INTEREST, Float.toString(0.0f));
 				transact.put(Credit.CREDITLIMIT, Float.toString(0.0f));
