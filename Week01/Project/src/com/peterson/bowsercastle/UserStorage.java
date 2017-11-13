@@ -5,7 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.PriorityQueue;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Queue;
 
 import org.apache.log4j.Logger;
@@ -27,8 +28,8 @@ public class UserStorage {
 	 * @throws IOException 
 	 */
 	@SuppressWarnings("unchecked")
-	public Queue<User> grabUsers(final String filename) throws IOException {
-		Queue<User> users = new PriorityQueue<User>(new UserComparator());
+	public List<User> grabUsers(final String filename) throws IOException {
+		List<User> users = new ArrayList<User>();
 		
 		FileInputStream fis = null;
 		ObjectInputStream ois = null;
@@ -36,7 +37,7 @@ public class UserStorage {
 			fis = new FileInputStream(filename);
 			if (fis.available() != 0) {//this is a new file, create King Bowser
 				ois = new ObjectInputStream(fis);
-				users.addAll((Queue<User>) ois.readObject()); //store all of our users in our arraylist
+				users.addAll((ArrayList<User>) ois.readObject()); //store all of our users in our arraylist
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -53,13 +54,13 @@ public class UserStorage {
 	 * @param <T>
 	 * @throws IOException 
 	 */
-	public void serializeUsers(String filename, Queue<User> list) throws IOException {
+	public void serializeUsers(String filename, List<User> allUsers) throws IOException {
 		ObjectOutputStream oos = null;
 		FileOutputStream fls = null;
 		try {
 			fls = new FileOutputStream(filename);
 			oos = new ObjectOutputStream(fls);
-			oos.writeObject(list); //serialize our queue of users
+			oos.writeObject(allUsers); //serialize our queue of users
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {

@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.Queue;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
@@ -24,7 +22,7 @@ public class BowserCastle {
 	private static final String USERS_TXT = "Users.txt"; //text file with user data
 
 	/**Collection used to store our users in order of role (King, Admin, Member, Unverified)*/
-	private Queue<User> pQUsers = new PriorityQueue<User>(new UserComparator()); 
+	private List<User> allUsers = new ArrayList<User>();
 
 	private Random random;
 	private Scanner scanner;
@@ -34,25 +32,27 @@ public class BowserCastle {
 	
 	/**This class will handle transactions.*/
 	private Vault vault;
+	private UserComparator userSort;
 
 	/**
 	 * A user has entered the castle.
 	 */
 	public void enterCastle() {
+		userSort = new UserComparator();
 		vault = new Vault(); //object used for transactions as well as loan storage
 		random = new Random();
 		scanner = new Scanner(System.in);
 		userStorage = new UserStorage(); //used to serialize user data as well as for logging info
 
 		try {
-			pQUsers = userStorage.grabUsers(USERS_TXT); //deserialize all of our users
+			allUsers = userStorage.grabUsers(USERS_TXT); //deserialize all of our users
 
-			if (pQUsers.isEmpty()) //there are no users on file, create king Bowser
+			if (allUsers.isEmpty()) //there are no users on file, create king Bowser
 				createAccount("Bowser", BOWSER_PW, Role.KING);
 
 			welcome(); //greet the user and display options
 
-			userStorage.serializeUsers(USERS_TXT, pQUsers);  //upon exiting save everything
+			userStorage.serializeUsers(USERS_TXT, allUsers);  //upon exiting save everything
 			vault.serializeLoans();
 			vault.serializeWaitingLoans(); //save all loans data
 		} catch (IOException e) {
@@ -68,7 +68,8 @@ public class BowserCastle {
 
 		boolean exit = false;
 		String choice;
-		System.out.println("Welcome to " + pQUsers.peek().getName() + "'s castle."); //welcome them to the king's castle
+		allUsers.sort(userSort);
+		System.out.println("Welcome to " + allUsers.get(0).getName() + "'s castle."); //welcome them to the king's castle
 		do {
 			System.out.println("What would you like to do?" +
 					"\n(0) Create an account," +
@@ -131,7 +132,7 @@ public class BowserCastle {
 			} else {
 				action(user, choice);
 
-				if (!pQUsers.contains(user)) //user died to bowser
+				if (!allUsers.contains(user)) //user died to bowser
 					return;
 			}
 		} while (loggedIn);
@@ -145,12 +146,13 @@ public class BowserCastle {
 		System.out.println("====================================\n" +
 				"(Access = " + user.getRole() + ") What would you like to do?");
 
+		allUsers.sort(userSort);
 		/*Display options depending on the user's role.*/
 		if (user.getRole() == Role.ADMIN) {
 			System.out.println("(0) Deposit coins." +
 					"\n(1) Withdraw coins. You have " + user.getCoins() + " coins." +
 					"\n(2) Level up and earn " + user.levelUp() + " levels. You are level " + user.getLevel() + "." +
-					"\n(3) Attempt to kill King " + pQUsers.peek().getName() +
+					"\n(3) Attempt to kill King " + allUsers.get(0).getName() +
 					"\n(4) Verify a new member." +
 					"\n(5) Promote a member to admin" +
 					"\n(6) View all members on file" +
@@ -162,7 +164,7 @@ public class BowserCastle {
 			System.out.println("(0) Deposit coins." +
 					"\n(1) Withdraw coins. You have " + user.getCoins() + " coins." +
 					"\n(2) Level up and earn " + user.levelUp() + " levels. You are level " + user.getLevel() + "." + 
-					"\n(3) Attempt to kill King " + pQUsers.peek().getName() +
+					"\n(3) Attempt to kill King " + allUsers.get(0).getName() +
 					"\n(4) Apply for a loan." +
 					"\n(x) Log Out.");
 		} else if (user.getRole() == Role.KING) {
@@ -217,7 +219,7 @@ public class BowserCastle {
 			levelUp(member);
 			break;
 		case "3": // kill bowser
-			if (member != pQUsers.peek()) killKing(member);
+			if (member != allUsers.get(0)) killKing(member);
 			else System.out.println("You are king.");
 			break;
 		case "4"://apply  for loan
@@ -276,7 +278,7 @@ public class BowserCastle {
 			levelUp(admin);
 			break;
 		case "3": // kill bowser
-			if (admin != pQUsers.peek()) killKing(admin);
+			if (admin != allUsers.get(0)) killKing(admin);
 			else System.out.println("You are king and cannot kill yourself.");
 			break;
 		case "4": //verify a new member
@@ -389,6 +391,7 @@ public class BowserCastle {
 			break;
 		case "6": //lock an account
 			lockUnlockAccount();
+			break;
 		case "7":
 			viewLoans();
 			break;
@@ -530,7 +533,7 @@ public class BowserCastle {
 	private void displayAllUsers() {
 		System.out.println("\n=============Members==============" +
 				"\nName      Role      Balance");
-		for (User user : pQUsers) { //display each user in order of Role (King, admin, member, non-member)
+		for (User user : allUsers) { //display each user in order of Role (King, admin, member, non-member)
 			System.out.println(user.getName() + " | " + "(" + user.getRole() + ") |" + " Balance: " + user.getCoins() + " coins");
 		}
 		System.out.println("==================================\n");
@@ -542,7 +545,7 @@ public class BowserCastle {
 	private void promoteAccount() {
 		final List<User> members = new ArrayList<>();
 
-		for (User user : pQUsers)
+		for (User user : allUsers)
 			if (user.getRole() == Role.MEMBER)
 				members.add(user);
 
@@ -581,7 +584,7 @@ public class BowserCastle {
 	private void verifyAccount() {
 		final List<User> usersToPromoteOrVerify = new ArrayList<>();
 
-		for (User user : pQUsers) 
+		for (User user : allUsers) 
 			if (user.getRole() == Role.UNVERIFIED) //grab all unverified users
 				usersToPromoteOrVerify.add(user);
 
@@ -620,7 +623,7 @@ public class BowserCastle {
 	 * @return the user object, or null if there is none
 	 */
 	private User grabUser(final String name) {
-		for (User user : pQUsers) {
+		for (User user : allUsers) {
 			if (user.getName().toUpperCase().equals(name.toUpperCase())) {
 				return user;
 			}
@@ -678,7 +681,7 @@ public class BowserCastle {
 	 * @param role of new user
 	 */
 	private void createAccount(String name, String password, Role role) {
-		pQUsers.add(new User(name, password.hashCode(), role)); //add our new user to our queue
+		allUsers.add(new User(name, password.hashCode(), role)); //add our new user to our queue
 		userStorage.log(name + " has just created an account with Bowser's Castle\n");
 	}
 
@@ -687,7 +690,7 @@ public class BowserCastle {
 	 * @param user attempting to kill the king
 	 */
 	private void killKing(User user) {
-		double chance = (double) user.getLevel() / (double) pQUsers.peek().getLevel();
+		double chance = (double) user.getLevel() / (double) allUsers.get(0).getLevel();
 		chance *= 100;
 		System.out.println("Are you sure you want to kill bowser? You only have a " + chance + "% to succeed. (Y/N)");
 
@@ -711,17 +714,19 @@ public class BowserCastle {
 		double attack = random.nextInt() % 100;
 		if (attack < chance) {  //user won
 			System.out.println("You have defeated bowser and are now king!");
+			allUsers.sort(userSort);
+			userStorage.log(user.getName() + " has killed king " + allUsers.get(0).getName() + " and is now King.");
+			allUsers.remove(0); //remove bowser
 			user.setRole(Role.KING);
-			userStorage.log(user.getName() + " has killed king " + pQUsers.peek().getName() + " and is now King.");
-			pQUsers.poll(); //remove bowser
+			allUsers.sort(userSort);
 		} else { //delete the user from the PriorityQueue
 			List<User> temp = new ArrayList<User>();
-			for (User tempUser : pQUsers) //add all members to our temp data structure except the dead user
+			for (User tempUser : allUsers) //add all members to our temp data structure except the dead user
 				if (tempUser != user) 
 					temp.add(tempUser);
 
-			pQUsers.clear();
-			pQUsers.addAll(temp);
+			allUsers.clear();
+			allUsers.addAll(temp);
 			System.out.println("You are dead and your account has been deleted.");
 			userStorage.log(user.getName() + " died to bowser");
 		}
@@ -734,7 +739,7 @@ public class BowserCastle {
 
 		/*Find all users that are members or are locked.*/
 		final List<User> members = new ArrayList<>();
-		for (User user : pQUsers) {
+		for (User user : allUsers) {
 			if (user.getRole() == Role.MEMBER || user.getRole() == Role.LOCKED) 
 				members.add(user);
 		}

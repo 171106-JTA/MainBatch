@@ -41,8 +41,8 @@ public class UserStorageTest {
 	@Test
 	public void testSerialization() {
 		
-		Queue<User> list1 = new LinkedList<>();
-		Queue<User> list2 = new LinkedList<>();
+		List<User> list1 = new LinkedList<>();
+		List<User> list2 = new LinkedList<>();
 		list1.add(new User("bob", 123, Role.MEMBER));
 		list1.add(new User("alex", 456, Role.UNVERIFIED));
 		
