@@ -11,20 +11,31 @@ import com.revature.core.BusinessClass;
 import com.revature.core.FieldParams;
 
 /**
- * Ued to generate FieldParams from BusinessObject Instances 
+ * Used to generate FieldParams from BusinessObject Instances 
  * @author Antony Lulciuc
  */
 public class FieldParamsFactory {
 	private static FieldParamsFactory factory;
 	
+	/**
+	 * Is singleton
+	 */
 	private FieldParamsFactory() {
 		// do nothing
 	}
 	
+	/**
+	 * @return self
+	 */
 	public static FieldParamsFactory getFactory() {
 		return factory == null ? factory = new FieldParamsFactory() : factory;
 	}
 	
+	/**
+	 * Creates FieldParams Object Instances from BusinessObjects
+	 * @param businessObject- what to convert to FieldParams Instance 
+	 * @return FielParams representation of BusinessObject if conversion defined else null
+	 */
 	public FieldParams getFieldParams(BusinessObject businessObject) {
 		String clazz = businessObject.getClass().getSimpleName();
 		
@@ -136,18 +147,4 @@ public class FieldParamsFactory {
 		
 		return params;
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

@@ -1,5 +1,9 @@
 package com.revature.core;
 
+/**
+ * Defines all classes which extend BusinessObject
+ * @author Antony Lulciuc
+ */
 public final class BusinessClass {
 	public static final String BUSINESSOBJECT = "businessobject";
 	public static final String INFO = "info";

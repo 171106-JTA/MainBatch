@@ -9,8 +9,9 @@ import com.revature.core.factory.builder.UserBuilder;
 import com.revature.core.factory.builder.UserInfoBuilder;
 
 /**
- * 
+ * Used to generate BusinessObjects from FieldParams
  * @author Antony Lulciuc
+ * @see FieldParams
  */
 public class BusinessObjectFactory {
 	private static BusinessObjectFactory factory;

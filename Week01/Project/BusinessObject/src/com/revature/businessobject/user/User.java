@@ -18,7 +18,6 @@ public class User extends BusinessObject implements Comparable<User> {
 	public static final String PASSWORD = "password";
 	public static final String CHECKPOINT = "checkpoint";
 	
-	
 	/**
 	 * Unique identifier used to pull user data 
 	 */

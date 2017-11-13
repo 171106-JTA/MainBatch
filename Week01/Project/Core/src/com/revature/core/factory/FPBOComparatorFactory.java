@@ -12,18 +12,24 @@ import com.revature.core.comparator.*;
 public final class FPBOComparatorFactory {
 	private static FPBOComparatorFactory factory;
 	
+	/**
+	 * Is singleton
+	 */
 	private FPBOComparatorFactory() {
 		// do nothing
 	}
 	
+	/**
+	 * @return self
+	 */
 	public static FPBOComparatorFactory getFactory() {
 		return factory == null ? factory = new FPBOComparatorFactory() : factory;
 	}
 	
 	/**
-	 * 
+	 * Initializes comparator for FieldParams to BusinessObject comparisons
 	 * @param name business object single class name
-	 * @return
+	 * @return Comparator for desired business object else null is comparator not defined
 	 */
 	public Comparator<Object> getComparator(String name) {
 		switch (name.toLowerCase()) {

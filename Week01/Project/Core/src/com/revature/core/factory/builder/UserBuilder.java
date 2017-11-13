@@ -7,8 +7,17 @@ import com.revature.businessobject.user.User;
 import com.revature.businessobject.user.Checkpoint;
 import com.revature.core.FieldParams;
 
+/**
+ * Initializes Objects of type User 
+ * @author Antony Lulciuc
+ */
 public class UserBuilder implements BusinessObjectBuilder {
 
+	/**
+	 * Creates User instance 
+	 * @param args used to instantiate instance 
+	 * @return new User on success else null
+	 */
 	@SuppressWarnings("incomplete-switch")
 	@Override
 	public BusinessObject getBusinessObject(FieldParams args) {
@@ -37,6 +46,11 @@ public class UserBuilder implements BusinessObjectBuilder {
 		return object;
 	}
 
+	/**
+	 * Used to ensure all arguments needed to instantiate object
+	 * @param args what to check
+	 * @return true is arguments for class to create are valid else false
+	 */
 	@Override
 	public boolean isValid(FieldParams args) {
 		return args != null && args.get(User.CHECKPOINT) != null && args.get(User.ID) != null;

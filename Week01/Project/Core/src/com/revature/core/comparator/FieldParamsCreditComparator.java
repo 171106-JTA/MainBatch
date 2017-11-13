@@ -6,6 +6,11 @@ import com.revature.businessobject.info.account.Checking;
 import com.revature.businessobject.info.account.Credit;
 import com.revature.core.FieldParams;
 
+/**
+ * Used to compare credit account against field data
+ * @author Antony Lulciuc
+ * @see FieldParamsAccountComparator
+ */
 public class FieldParamsCreditComparator implements Comparator<Object>{
 	/**
 	 * @param left instance of FieldParams
@@ -25,12 +30,7 @@ public class FieldParamsCreditComparator implements Comparator<Object>{
 			// Set result value 
 			result = 0;
 			
-			if (fieldParams.containsKey(Credit.USERID)) 
-				result = fieldParams.get(Credit.USERID).compareTo(Long.toString(account.getUserId()));
-			
-			if (result == 0 && fieldParams.containsKey(Credit.NUMBER)) 
-				result = fieldParams.get(Credit.NUMBER).compareTo(Long.toString(account.getNumber()));
-			
+			// Perform tests
 			if (result == 0 && fieldParams.containsKey(Credit.TOTAL)) 
 				result = fieldParams.get(Credit.TOTAL).compareTo(Float.toString(account.getTotal()));
 			
@@ -39,12 +39,6 @@ public class FieldParamsCreditComparator implements Comparator<Object>{
 			
 			if (result == 0 && fieldParams.containsKey(Credit.CREDITLIMIT)) 
 				result = fieldParams.get(Credit.CREDITLIMIT).compareTo(Float.toString(account.getCreditLimit()));
-			
-			if (result == 0 && fieldParams.containsKey(Credit.TYPE)) 
-				result = fieldParams.get(Credit.TYPE).compareTo(account.getType());
-			
-			if (result == 0 && fieldParams.containsKey(Credit.STATUS)) 
-				result = fieldParams.get(Credit.STATUS).compareTo(account.getStatus());
 		}
 		
 		return result;

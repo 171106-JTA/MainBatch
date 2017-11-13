@@ -5,6 +5,10 @@ import java.util.Comparator;
 import com.revature.businessobject.user.User;
 import com.revature.core.FieldParams;
 
+/**
+ * Used to compare users against field data
+ * @author Antony Lulciuc
+ */
 public class FieldParamsUserComparator implements Comparator<Object> {
 
 	/**
@@ -25,6 +29,7 @@ public class FieldParamsUserComparator implements Comparator<Object> {
 			// Set result value 
 			result = 0;
 			
+			// Perform tests
 			if (fieldParams.containsKey(User.ID)) 
 				result = fieldParams.get(User.ID).compareTo(Long.toString(user.getId()));
 			
