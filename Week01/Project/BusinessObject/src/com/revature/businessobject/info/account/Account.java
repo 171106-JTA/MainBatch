@@ -13,7 +13,7 @@ public class Account extends Info {
 	
 	/**
 	 * Initialize basic account data 
-	 * @param userId user unique identifier (primary key)
+	 * @param userId user unique identifier (foreign key)
 	 * @param number account number 
 	 * @param type what kind of account is it
 	 * @see Type 
@@ -25,14 +25,25 @@ public class Account extends Info {
 		this.status = status;
 	}
 
+	/**
+	 * @return account number 
+	 */
 	public long getNumber() {
 		return number;
 	}
 
+	/**
+	 * @see Type
+	 * @return type of account
+	 */
 	public String getType() {
 		return type;
 	}
 
+	/**
+	 * @see Status
+	 * @return is the account active/pending/blocked?
+	 */
 	public String getStatus() {
 		return status;
 	}
@@ -69,7 +80,4 @@ public class Account extends Info {
 		return "Account [number=" + number + ", type=" + type + ", status="
 				+ status + ", " + super.toString() + "]";
 	}
-	
-	
-	
 }

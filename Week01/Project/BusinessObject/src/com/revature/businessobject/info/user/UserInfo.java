@@ -2,6 +2,11 @@ package com.revature.businessobject.info.user;
 
 import com.revature.businessobject.info.Info;
 
+/**
+ * User contact information
+ * @author Antony Lulciuc
+ *
+ */
 public class UserInfo extends Info {
 	public static final String EMAIL = "email";
 	public static final String ADDRESS = "address";

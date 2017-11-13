@@ -1,15 +1,31 @@
 package com.revature.businessobject.info.account;
 
+/**
+ * Allows user to deposit and withdraw funds from bank 
+ * with this type of account
+ * @author Antony Lulciuc
+ */
 public class Checking extends Account {
 	public static final String TOTAL = "total";
 	
+	// Total amount of funds checking account has available 
 	private float total;
 	
+	/**
+	 * Initialize checking account instance 
+	 * @param userId (FORIEGN KEY)
+	 * @param number (primary key)
+	 * @param total 
+	 * @param status
+	 */
 	public Checking(long userId, long number, float total, String status) {
 		super(userId, number, Type.CHECKING, status);
 		this.total = total;
 	}
 	
+	/**
+	 * @return available funds for account
+	 */
 	public float getTotal() {
 		return total;
 	}

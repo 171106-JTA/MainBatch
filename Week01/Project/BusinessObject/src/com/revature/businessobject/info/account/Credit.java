@@ -1,5 +1,10 @@
 package com.revature.businessobject.info.account;
 
+/**
+ * 
+ * @author Antony Lulciuc
+ *
+ */
 public class Credit extends Account {
 	public static final String TOTAL = "total";
 	public static final String INTEREST = "insterest";
@@ -11,7 +16,7 @@ public class Credit extends Account {
 	
 	/**
 	 * Initializes Credit account
-	 * @param userId unique identifier (primary key)
+	 * @param userId unique identifier (foreign key)
 	 * @param number account
 	 * @param total amount owed 
 	 * @param interest 
@@ -24,29 +29,47 @@ public class Credit extends Account {
 		this.creditLimit = creditLimit;
 	}
 
+	/**
+	 * @return remaining balance owed to account
+	 */
 	public float getTotal() {
 		return total;
 	}
 
+	/**
+	 * Assigns total amount of owed to this account
+	 * @param total - amount still owed to bank
+	 */
 	public void setTotal(float total) {
 		this.total = total;
 	}
 
-
+	/**
+	 * @return Total interest applied to account every month
+	 */
 	public float getInterest() {
 		return interest;
 	}
 
+	/**
+	 * Assigns monthly interest
+	 * @param interest applied eevery month
+	 */
 	public void setInterest(float interest) {
 		this.interest = interest;
 	}
 
-
+	/**
+	 * @return total amount user is allowed to borrow from bank on account
+	 */
 	public float getCreditLimit() {
 		return creditLimit;
 	}
 
-
+	/**
+	 * Set maximum amount user is allowed to borrow on account
+	 * @param creditLimit - amount user is allowed to spend using this account
+	 */
 	public void setCreditLimit(float creditLimit) {
 		this.creditLimit = creditLimit;
 	}

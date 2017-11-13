@@ -10,7 +10,7 @@ public class Info extends BusinessObject{
 	public static final String USERID = "userid";
 	
 	/**
-	 * User id (PRIMARY KEY)
+	 * User id (FORIEGN KEY)
 	 */
 	private long userId;
 
@@ -56,6 +56,4 @@ public class Info extends BusinessObject{
 	public String toString() {
 		return "Info [userId=" + userId + "]";
 	}
-	
-	
 }
