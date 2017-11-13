@@ -37,7 +37,8 @@ public class Driver {
 	 * through all relevant functions in Main. For login() function, allow user to
 	 * enter 'q' or something to go back. Disable 'q' as a valid password. Convert
 	 * if-else chains to switch statements (To practice working with switch
-	 * statements). Clean up consol output with clear-console statements
+	 * statements). Clean up console output with clear-console statements. Refactor database 
+	 * setup in the unit tests to abstrace the databae setup
 	 */
 
 	public static void main(String[] args) {
@@ -642,7 +643,8 @@ public class Driver {
 		// back to the previous menu
 		while (loop && loopCounter < maxLoopIteration) {
 			displayUnlockedAccounts();
-			loop = !getAndLockAccount(); // loop while the user input is invalid
+			String input = getUserInput(); //Get Admins choice of account to lock
+			loop = !getAndLockAccount(input); // loop while the user input is invalid
 
 			// Count number of incorrect inputs
 			if (loop) {
@@ -696,9 +698,9 @@ public class Driver {
 	 * 
 	 * @return Returns TRUE if the admins choses a valid user and False otherwise
 	 */
-	private boolean getAndLockAccount() {
+	public boolean getAndLockAccount(String input) {
 		boolean validUser = false;
-		String input = getUserInput();
+		
 		User user = this.db.get(input);
 
 		// Check if designated user exists and actually is currently unlocked.
