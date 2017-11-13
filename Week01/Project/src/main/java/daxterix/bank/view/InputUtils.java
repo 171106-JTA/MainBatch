@@ -1,5 +1,6 @@
 package daxterix.bank.view;
 
+import java.io.Console;
 import java.util.Scanner;
 import java.util.function.Supplier;
 
@@ -66,14 +67,12 @@ public class InputUtils {
      * @param fieldName
      * @return
      */
-    /*
     public static String readMasked(String fieldName) {
         printPrompt(fieldName);
         Console console = System.console();
         char[] masked = console.readPassword();
         return new String(masked);
     }
-    */
 
     /**
      * does not hide input; here to be run in ides
@@ -81,7 +80,7 @@ public class InputUtils {
      * @param fieldName
      * @return
      */
-    public static String readMasked(String fieldName) {
+    public static String readMaskedNot(String fieldName) {
         return readLine(fieldName);
     }
 

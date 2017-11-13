@@ -2,7 +2,6 @@ package daxterix.bank.view;
 
 public abstract class Page {
     private static final String DIVIDER = "______________________________________________________________________";
-
     /**
      * Defines the page's  interaction with the user, and what page it leads
      * to be run next depending on user's interaction

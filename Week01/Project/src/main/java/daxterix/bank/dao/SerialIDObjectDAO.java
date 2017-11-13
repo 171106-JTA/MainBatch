@@ -32,7 +32,6 @@ public abstract class SerialIDObjectDAO<T extends Serializable> extends ObjectDA
      * value that will be returned) from a designated file, then increments this
      * value and stores it back in the file, ready for the next id request.
      *
-     * @param o
      * @return
      */
     public long getNextId() {
