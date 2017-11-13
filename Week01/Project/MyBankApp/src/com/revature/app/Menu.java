@@ -124,6 +124,9 @@ public class Menu {
 			case Checkpoint.PENDING:
 				println("PENDING");
 				break;
+			case Checkpoint.BLOCKED:
+				println("BLOCKED");
+				break;
 			default:
 				println("UNKNOWN");
 		}
