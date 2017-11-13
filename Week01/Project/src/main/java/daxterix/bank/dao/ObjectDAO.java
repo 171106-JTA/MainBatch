@@ -88,16 +88,20 @@ public abstract class ObjectDAO <T extends Serializable> {
 
     /**
      * persist an instance of the model to the file system.
+     * returns false if an instance with the same id already exists (use
+     * 'update' to update an existing record.
      *
-     * important: saved file does not have an extension
-     * (this enables an extra safety check when deleting/emptying database/save directory)
+     *
+     * important: saved file does not have an extension (this
+     * allows an extra safety check when deleting/emptying database/save directory)
      *
      * @param model
      * @return
      */
     public boolean save(T model) {
         String id = getId(model);
-
+        if (doesExist(getId(model)))
+            return false;
         logger.debug(String.format("attempting to save object %s from %s", getId(model), getClass()));
         return saveObject(model, saveLoc(id));
     }
