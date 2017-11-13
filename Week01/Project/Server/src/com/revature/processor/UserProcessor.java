@@ -15,11 +15,16 @@ import com.revature.server.session.require.Require;
 /**
  * For Basic data queries 
  * @author Antony Lulciuc
- *
  */
 public class UserProcessor implements Processorable {
 	private static UserRequestHandler URH = new UserRequestHandler();
 	
+	/**
+	 * Process user request 
+	 * @param request - what to process
+	 * @return request of execution
+	 * @throws RequestException
+	 */
 	@Override
 	public Resultset process(Request request) throws RequestException {
 		Resultset res = null;

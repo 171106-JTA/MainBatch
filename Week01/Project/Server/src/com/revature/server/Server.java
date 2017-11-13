@@ -21,6 +21,10 @@ import com.revature.route.RequestRouter;
 import com.revature.route.Routeable;
 import com.revature.server.session.Session;
 
+/**
+ * Used to listen and handle client requests 
+ * @author Antony Lulciuc
+ */
 public class Server extends Thread {
 	public static Routeable router = new RequestRouter();
 	public static Persistenceable database = FileDataManager.getManager();
@@ -34,6 +38,7 @@ public class Server extends Thread {
 	// Flag used to exit server thread
 	private boolean runThread = true;
 	
+
 	public Server() {
 		super();
 		initBoss();
@@ -54,6 +59,9 @@ public class Server extends Thread {
 		initBoss();
 	}
 	
+	/**
+	 * TODO listen for clients over the network
+	 */
 	@Override
 	public void run() {
 		while (runThread) {
@@ -64,11 +72,17 @@ public class Server extends Thread {
 		}
 	}
 
-	
+	/**
+	 * Used to exit thread
+	 */
 	public void kill() {
 		runThread = false;
 	}
 	
+	/**
+	 * Used to stop session
+	 * @param sessionId - id of session to kill
+	 */
 	public void kill(int sessionId) {
 		Session session = sessions.get(sessionId);
 		
@@ -81,9 +95,9 @@ public class Server extends Thread {
 	
 	/**
 	 * Attempt to create session
-	 * @param username
-	 * @param password
-	 * @return session id
+	 * @param username - account name
+	 * @param password - password associated with account
+	 * @return session id if account found 
 	 * @throws Exception
 	 */
 	public FieldParams login(String username, String password) throws Exception {
@@ -117,6 +131,11 @@ public class Server extends Thread {
 		return response;
 	}
 	
+	/**
+	 * Notifies session request as been made 
+	 * @param request - what to process from client
+	 * @throws RequestException
+	 */
 	public void pushRequest(Request request) throws RequestException {
 		Integer sessionid;
 		Session session;
@@ -138,6 +157,12 @@ public class Server extends Thread {
 		session.setRequestParams(request);
 	}
 
+	/**
+	 * Checks to see if request is complete
+	 * @param request - contains user/session information 
+	 * @return result of request if ready else null
+	 * @throws RequestException
+	 */
 	public Resultset getResponse(Request request) throws RequestException {
 		Resultset response = null;
 		Integer sessionid;
@@ -166,6 +191,9 @@ public class Server extends Thread {
 		return response;
 	}
 	
+	/**
+	 * Stop all sessions if server is shutting down
+	 */
 	@Override
 	public void finalize() {
 		for (Session session : sessions.values()) {
@@ -177,6 +205,9 @@ public class Server extends Thread {
 	//	PRIVATE METHODS 
 	///
 	
+	/**
+	 * Initialize default user TODO remove method and store process locally 
+	 */
 	private void initBoss() {
 		FieldParams query = new FieldParams();
 		List<BusinessObject> bigboss = null;

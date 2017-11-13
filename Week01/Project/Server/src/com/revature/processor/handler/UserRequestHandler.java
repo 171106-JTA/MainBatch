@@ -20,6 +20,10 @@ import com.revature.processor.handler.helper.GenericHelper;
 import com.revature.server.Server;
 import com.revature.server.session.require.Require;
 
+/**
+ * Defines user account management process operations 
+ * @author Antony Lulciuc
+ */
 public final class UserRequestHandler {
 	
 	/**
@@ -30,6 +34,7 @@ public final class UserRequestHandler {
 	public Resultset login(Request request) throws RequestException {
 		Resultset res = Server.database.select(BusinessClass.USER, request.getQuery());
 		
+		// If user found then validate checkpoint 
 		if (res.size() > 0) {
 			User user = (User) res.get(0);
 			Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER, 
@@ -70,7 +75,7 @@ public final class UserRequestHandler {
 	
 	/**
 	 * Deletes user and all data associated with them
-	 * @param request 
+	 * @param request - must define query for admin accounts 
 	 * @return total number of records removed 
 	 */
 	public Resultset deleteUser(Request request) {
@@ -101,7 +106,7 @@ public final class UserRequestHandler {
 	/**
 	 * Performs query of User records 
 	 * @param request conditions users must have to be in resultset
-	 * @return 0 to n records
+	 * @return 0 to n user records
 	 */
 	public Resultset getUser(Request request) throws RequestException {
 		if (!request.getCheckpoint().equals(Checkpoint.ADMIN))
@@ -112,8 +117,8 @@ public final class UserRequestHandler {
 	
 	/**
 	 * Allows everything except user id to be updated 
-	 * @param request
-	 * @return
+	 * @param request - query and transaction must be defined 
+	 * @return total number of records modified 
 	 * @throws RequestException
 	 */
 	public Resultset setUser(Request request) throws RequestException {
@@ -153,7 +158,7 @@ public final class UserRequestHandler {
 	
 	/**
 	 * Generates UserInfo record
-	 * @param request
+	 * @param request - transaction must be defined 
 	 * @return modified record count should equal 1
 	 * @throws RequestException
 	 */
@@ -174,8 +179,8 @@ public final class UserRequestHandler {
 	
 	/**
 	 * Acquires UserInfo records
-	 * @param request
-	 * @return modified record count should equal 1 for non-admin and 0 to many for Admin
+	 * @param request - query must be defined 
+	 * @return 0 to n userinfo records
 	 * @throws RequestException
 	 */
 	public Resultset getUserInfo(Request request) throws RequestException { 
@@ -186,6 +191,12 @@ public final class UserRequestHandler {
 		return Server.database.select(BusinessClass.USERINFO, request.getQuery());
 	}
 	
+	/**
+	 * Updates user info (contact data) 
+	 * @param request - query and transaction must be defined
+	 * @return number of required updated
+	 * @throws RequestException
+	 */
 	public Resultset setUserInfo(Request request) throws RequestException {
 		FieldParams transact = request.getTransaction();
 		FieldParams query = request.getQuery();
@@ -209,6 +220,13 @@ public final class UserRequestHandler {
 	//	ACCOUNT
 	///
 	
+	/**
+	 * Creates new account (sets status to PENDING [ALWAYS]) using user id on session as foreign key.
+	 * @param request - transaction must be defined 
+	 * @param type
+	 * @return number of records created, should be 1 on success else 0
+	 * @throws RequestException
+	 */
 	public Resultset createAccount(Request request, String type) throws RequestException {
 		FieldParams transact = new FieldParams();
 		BusinessObject largest;
@@ -241,6 +259,12 @@ public final class UserRequestHandler {
 		return new Resultset(Server.database.insert(BusinessClass.ACCOUNT, transact));
 	}
 	
+	/**
+	 * Removes specified account records from system
+	 * @param request - must have query defined 
+	 * @return number of records deleted
+	 * @throws RequestException
+	 */
 	public Resultset deleteAccount(Request request) throws RequestException {
 		// If non-admin account, then we should be deleting own account ONLY
 		if (!request.getCheckpoint().equals(Checkpoint.ADMIN))
@@ -249,7 +273,12 @@ public final class UserRequestHandler {
 		return new Resultset(Server.database.delete(BusinessClass.ACCOUNT, request.getQuery()));
 	}
 	
-	
+	/**
+	 * Performs query to database for user Accounts 
+	 * @param request - query must be defined 
+	 * @return 0 to n account records
+	 * @throws RequestException
+	 */
 	public Resultset getAccount(Request request) throws RequestException {
 		// For NON-ADMINS only personal account information should be accessible 
 		if (!request.getCheckpoint().equals(Checkpoint.ADMIN)) 
@@ -258,7 +287,14 @@ public final class UserRequestHandler {
 		return Server.database.select(BusinessClass.ACCOUNT, request.getQuery());
 	}
 	
-	
+	/**
+	 * Performs query to database for user Accounts 
+	 * @param request - must define query
+	 * @param type  - type of account to search for
+	 * @return 0 to n account records
+	 * @see Type
+	 * @throws RequestException
+	 */
 	public Resultset getAccount(Request request, String type) throws RequestException {
 		FieldParams query = request.getQuery();
 		
@@ -272,6 +308,11 @@ public final class UserRequestHandler {
 		return Server.database.select(BusinessClass.ACCOUNT, query);
 	}
 	
+	/**
+	 * Updates account status
+	 * @param request - must define query and transaction
+	 * @return number of records modified, should be 1 else 0
+	 */
 	public Resultset setAccountStatus(Request request) {
 		FieldParams transact = new FieldParams();
 		

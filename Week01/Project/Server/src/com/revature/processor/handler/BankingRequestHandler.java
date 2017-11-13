@@ -12,7 +12,17 @@ import com.revature.core.StringFormater;
 import com.revature.core.exception.RequestException;
 import com.revature.server.Server;
 
+/**
+ * Defines banking process operations 
+ * @author Antony Lulciuc
+ */
 public final class BankingRequestHandler {
+	/**
+	 * Attempts to add funds to account
+	 * @param request - must define query and transaction
+	 * @return resultset with modified record count of 1 on success
+	 * @throws RequestException
+	 */
 	public Resultset checkingAddFunds(Request request) throws RequestException {
 		FieldParams transact = request.getTransaction();
 		FieldParams query = request.getQuery();
@@ -53,7 +63,12 @@ public final class BankingRequestHandler {
 		}
 	}
 
-	
+	/**
+	 * Attempts to remove funds to account
+	 * @param request - must define query and transaction
+	 * @return resultset with modified record count of 1 on success
+	 * @throws RequestException
+	 */
 	public Resultset checkingRemoveFunds(Request request) throws RequestException {
 		FieldParams transact = request.getTransaction();
 		FieldParams query = request.getQuery();

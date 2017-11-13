@@ -10,12 +10,18 @@ import com.revature.processor.handler.BankingRequestHandler;
 import com.revature.server.session.require.Require;
 
 /**
- * Perform complex calculations
+ * Perform complex calculations for accounts 
  * @author Antony Lulciuc
  */
 public class BankingProcessor implements Processorable {
 	private static BankingRequestHandler BRH = new BankingRequestHandler();
 	
+	/**
+	 * Processes user request 
+	 * @param request - what to process
+	 * @return request of execution
+	 * @throws RequestException
+	 */
 	public Resultset process(Request request) throws RequestException {
 		Resultset res = null;
 		
@@ -37,7 +43,6 @@ public class BankingProcessor implements Processorable {
 			default:
 				throw new RequestException(request, "Transtype=[\'" + request.getRoute() + "." + request.getTranstype() + "\'] is unknown!");
 		}
-		
 		
 		return res;
 	}

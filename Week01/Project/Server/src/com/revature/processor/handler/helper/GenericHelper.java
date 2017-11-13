@@ -10,6 +10,10 @@ import com.revature.core.factory.FPBOComparatorFactory;
 import com.revature.core.factory.FieldParamsFactory;
 import com.revature.server.Server;
 
+/**
+ * Operations used to aid Processor Handlers 
+ * @author Antony Lulciuc
+ */
 public final class GenericHelper {
 	public static FPBOComparatorFactory fieldParamsBusnissObjectComparatorFactory = FPBOComparatorFactory.getFactory();
 	public static FieldParamsFactory fieldParamsFactory = FieldParamsFactory.getFactory();
