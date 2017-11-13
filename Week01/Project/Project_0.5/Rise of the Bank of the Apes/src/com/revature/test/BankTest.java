@@ -14,6 +14,7 @@ import org.junit.Test;
 import com.revature.apebank.BankOfTheApes;
 import com.revature.data.Logging;
 import com.revature.data.ProcessData;
+import com.revature.ui.ApplyLoan;
 import com.revature.ui.Deposit;
 import com.revature.ui.UserInterface;
 import com.revature.ui.Withdraw;
@@ -120,5 +121,31 @@ public class BankTest {
 		 * result should be 27
 		 */
 		assertEquals(27.0, a.getBalance(), 0D);
+	}
+	
+	@Test
+	public void testRepayLoan() {
+		//Test repaying loans
+		User a = new User("a", "a");
+		a.setBalance(50);
+		a.getLoan().setAmount(40);
+		a.getLoan().setApproval(true);
+		ApplyLoan.Screen(a);
+		/*
+		 * Loan amount is 40
+		 * User has 50 in account
+		 * The account should have 10 after repayment
+		 */
+		assertEquals(10.0, a.getBalance(), 0D);
+	}
+	
+	@Test
+	public void testApplyLoan() {
+		User a = new User("a", "a");
+		ApplyLoan.Screen(a);
+		/*
+		 * user input for loan amount is 5
+		 */
+		assertEquals(5.0, a.getLoan().getAmount(), 0D);
 	}
 }

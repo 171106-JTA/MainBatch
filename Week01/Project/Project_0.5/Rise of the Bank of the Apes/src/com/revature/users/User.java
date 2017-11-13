@@ -10,12 +10,18 @@ public class User implements Serializable{
 	private String name;
 	private String password;
 	private boolean banned; //field for locking an account
+	private Loan loan;
 	
 	public User(String name, String password) {
 		this.name = name;
 		this.password = password;
 		this.approved = false;
 		this.banned = false;
+		this.loan = new Loan(0.0);
+	}
+	
+	public Loan getLoan() {
+		return loan;
 	}
 
 	public int getAccess_level() {

@@ -27,12 +27,13 @@ public class Admin extends UserInterface{
 		
 		System.out.println("Welcome Admin " + u.getName());
 		int option = 0;
-		while(option != 5) {
+		while(option != 6) {
 			System.out.println("1. Show all users");
 			System.out.println("2. Approve user");
 			System.out.println("3. Ban user");
 			System.out.println("4. Promote user");
-			System.out.println("5. Log out");
+			System.out.println("5. Approve Loan");
+			System.out.println("6. Log out");
 			System.out.print("Enter option: ");
 			option = UserInterface.readIntInput();
 			
@@ -50,6 +51,9 @@ public class Admin extends UserInterface{
 					AdminTool.promoteUser(users, u.getAccess_level());
 					break;
 				case 5:
+					AdminTool.approveLoan(users);
+					break;
+				case 6:
 					System.out.println("Thank you for the hard work!");
 					UserInterface.cleanUp(users);
 					break;
