@@ -121,6 +121,34 @@ public class DriverTest {
 		//Test that the user was actually inserted into the database
 		assertTrue(newUser.equals(insertedUser));
 	}
+	
+	@Test
+	public void testGetAndUnlockAccount() {
+		try {
+			dr.readDatabase("basic_database_1.txt");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		//Not a user in the database
+		String user_1 = "Not A User"; 
+		boolean result_1 = dr.getAndUnlockAccount(user_1);
+		assertFalse(result_1);
+		
+		//A user that needs to be unlocked
+		String user_2 = "C";
+		boolean result_2 = dr.getAndUnlockAccount(user_2);
+		assertTrue(result_2);
+		
+		int newStatus_2 = dr.getDb().get(user_2).getStatus();
+		assertEquals(newStatus_2, 1);
+		
+		//A user that does not need to be unlocked
+		String user_3 = "Z";
+		boolean result_3 = dr.getAndUnlockAccount(user_3);
+		assertFalse(result_3);		
+	}
+	
 	//Setup local database
 //	public HashMap<String,User> sampleDatabase1() {
 //		String firstName = "A";
