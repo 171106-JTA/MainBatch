@@ -11,12 +11,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.log4j.Logger;
+
+import d3.revature.logging.LoggingExample;
+
 //import com.Project1.bankAccountStuff.User;
 
 public class Driver {
 	private static final String databaseFile = "database.txt"; // File containing database
 	private HashMap<String, User> db;
 	private User currentUser;
+	
+	final static Logger logger = Logger.getLogger(Driver.class);
 
 	// Status values for user accounts
 	private static final int status_approvalPending = 0;
@@ -45,23 +51,24 @@ public class Driver {
 		Driver mp = new Driver();
 		mp.db = new HashMap<String, User>();
 		boolean exit = false;
-
+		
+		logger.trace("Application Start");
+		
 		// Read database from the file
 		try {
+			logger.trace("Reading Database");
 			mp.readDatabase(mp.databaseFile);
 		} catch (IOException e1) {
-			// To Do: Expand exception handling?
+			logger.error("Error trying to close the ObjectInputStream while reading the database.", e1);
 			e1.printStackTrace();
 		} // To Do: Any finally statement?
 
 		// Print at the start of the program
 		System.out.println("Welcome");
 
-		// Loop over the Main Menu
+		// Loop over the Main Menu, until user decides to stop
 		while (!exit) {
 			String userChoice = mp.mainMenu();
-			// To Do: Refactor the control statements to a separate function
-			// (i.e. No control statements in main
 			exit = mp.controlLogic(userChoice);
 		}
 
@@ -70,8 +77,10 @@ public class Driver {
 		// To Do: Might be able to abstract this try/catch statement with the one at
 		// readDatabase() call
 		try {
+			logger.trace("Ending Applicatin. Saving Database to file");
 			mp.saveDb();
 		} catch (IOException e) {
+			logger.error("Error while closing ObjectOutputStream when saving database", e);
 			e.printStackTrace();
 			// To Do: Return message with catch statement???
 		} // To Do: Any finally statement?
@@ -85,31 +94,36 @@ public class Driver {
 
 			// If successfully logged in, check the user's status
 			if (loggedIn) {
-				// Check status of user
+				//Only advance if status = 'status_active'
 				int status = currentUser.getStatus();
 				if (status == status_approvalPending) {
 					System.out.println("Account Approval Pending");
+					logger.trace("User's account is not approved");
 				} else if (status == status_locked) {
 					System.out.println("Account Locked");
-					// If login was successful, call either the User or Admin menu, depending on
-					// permission level
+					logger.trace("User's account is locked");
+				// If login was successful, call either the User or Admin menu, depending on
+				// permission level
 				} else if (status == status_active) {
-
 					System.out.println("Successfully Logged In!");
 					int permissions = currentUser.getPermissions();
 					if (permissions == permission_client) {
+						logger.trace("User is logged in as a Client");
 						System.out.println("Client Permission");
 						clientMenu();
 					} else if (permissions == permission_admin) {
+						logger.trace("User is logged in as an Admin");
 						System.out.println("Admin Permision");
 						adminMenu();
 					}
 				} else {
 					// To Do: Put throw statement here with custom error message
-					System.out.println("FATAL ERROR #1: Should NEVER See This!!!!");
+					System.out.println("FATAL ERROR: Should NEVER See This!!!!");
+					logger.error("FATAL ERROR: Should NEVER See This!!!!");
 					System.exit(1);
 				}
 			} else {
+				logger.trace("User is not logged in");
 				System.out.println("NOT Logged In");
 			}
 		} else if (userChoice.equals("2")) {
@@ -118,8 +132,9 @@ public class Driver {
 			System.out.println("Closing Program");
 			exit = true;
 		} else if (userChoice.equals("42")) { // Testing user creation
+			default_database();
 			// sample_database_1();
-			sample_database_2();
+			//sample_database_2();
 
 			// Print database. For coding purposes
 			System.out.println("The Database!!!!: ");
@@ -147,6 +162,83 @@ public class Driver {
 				accountAmount);
 
 		db.put(default_user_1.getSsn(), default_user_1);
+		
+		
+//		firstName = "A";
+//		lastName = "A";
+//		middleInitial = "A";
+//		ssn = "A";
+//		password = "A";
+//		permissions = 1;
+//		status = 1;
+//		accountAmount = 0;
+//		User default_user_A = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+//				accountAmount);
+//
+//		firstName = "Z";
+//		lastName = "Z";
+//		middleInitial = "Z";
+//		ssn = "Z";
+//		password = "Z";
+//		permissions = 0;
+//		status = 1;
+//		accountAmount = 0;
+//		User default_user_Z = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+//				accountAmount);
+//
+//		firstName = "B";
+//		lastName = "B";
+//		middleInitial = "B";
+//		ssn = "B";
+//		password = "B";
+//		permissions = 0;
+//		status = 0;
+//		accountAmount = 0;
+//		User default_user_B = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+//				accountAmount);
+//		
+//		String stuff = "C"; 
+//		firstName = stuff;
+//		lastName = stuff;
+//		middleInitial = stuff;
+//		ssn = stuff;
+//		password = stuff;
+//		permissions = 0;
+//		status = 2;
+//		accountAmount = 0;
+//		User default_user_C = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+//				accountAmount);
+//		
+//		stuff = "D"; 
+//		firstName = stuff;
+//		lastName = stuff;
+//		middleInitial = stuff;
+//		ssn = stuff;
+//		password = stuff;
+//		permissions = 1;
+//		status = 0;
+//		accountAmount = 0;
+//		User default_user_D = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+//				accountAmount);
+//		
+//		stuff = "E"; 
+//		firstName = stuff;
+//		lastName = stuff;
+//		middleInitial = stuff;
+//		ssn = stuff;
+//		password = stuff;
+//		permissions = 1;
+//		status = 2;
+//		accountAmount = 0;
+//		User default_user_E = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+//				accountAmount);
+//
+//		db.put(default_user_A.getSsn(), default_user_A);
+//		db.put(default_user_Z.getSsn(), default_user_Z);
+//		db.put(default_user_B.getSsn(), default_user_B);
+//		db.put(default_user_C.getSsn(), default_user_C);
+//		db.put(default_user_D.getSsn(), default_user_D);
+//		db.put(default_user_E.getSsn(), default_user_E);
 	}
 
 	public void sample_database_1() {
@@ -311,23 +403,24 @@ public class Driver {
 	 *             Throws this exception if input stream cannot be closed (in
 	 *             finally statement)
 	 */
+	@SuppressWarnings("unchecked")
 	public void readDatabase(String fileName) throws IOException {
 		try {
 			// Read in File
-			ois = new ObjectInputStream(new FileInputStream(databaseFile));
+			ois = new ObjectInputStream(new FileInputStream(fileName));
 
 			/*
 			 * To Do: There is a warning generated here because casting the 'Object'
 			 * returned from readObject to a HashMap. See the link below for a possible fix
 			 * https://stackoverflow.com/questions/262367/type-safety-unchecked-cast
 			 */
-			this.db = (HashMap<String, User>) ois.readObject();
+			db = (HashMap<String, User>) ois.readObject();
 
 			// Print database. For coding purposes
-			System.out.println("The Database!!!!: ");
-			for (String key : db.keySet()) {
-				System.out.println(this.db.get(key));
-			}
+//			System.out.println("The Database!!!!: ");
+//			for (String key : db.keySet()) {
+//				System.out.println(this.db.get(key));
+//			}
 		} catch (ClassNotFoundException e) {
 			// To Do: Fill in
 			e.printStackTrace();
@@ -355,7 +448,7 @@ public class Driver {
 
 		String userInput = getUserInput();
 		// Build input validation later
-
+		logger.trace("Main Menu: user choice = " + userInput);
 		return userInput;
 		// StringTokenizer st = new StringTokenizer(s);
 	}
@@ -369,7 +462,6 @@ public class Driver {
 		String ssn = loginInstructions_username();
 		String password = loginInstructions_password();
 		return loginLogic(ssn, password);
-
 	}
 
 	private String loginInstructions_username() {
@@ -396,9 +488,11 @@ public class Driver {
 				// This case is handled in the controlLogic() function
 				loggedIn = true;
 			} else {
+				logger.trace("incorrect password");
 				System.out.println("Incorrect password");
 			}
 		} else {
+			logger.trace("No user by the given id");
 			System.out.println("No user by that name\n\n");
 		}
 
@@ -451,12 +545,12 @@ public class Driver {
 		// db as a key
 		// To Do: Run the object serialization through a ?hash function?
 		this.db.put(newUser.getSsn(), newUser);
-
+		logger.trace("Adding new user to database");
 		// Print database. For coding purposes
-		System.out.println("The Database!!!!: ");
-		for (String key : db.keySet()) {
-			System.out.println(this.db.get(key));
-		}
+//		System.out.println("The Database!!!!: ");
+//		for (String key : db.keySet()) {
+//			System.out.println(this.db.get(key));
+//		}
 	}
 
 	/**
@@ -470,11 +564,16 @@ public class Driver {
 		return aScanner.nextLine().toString();
 	}
 
+	
+	////////////////////////////////////////////////////////
+	// Admin Functionality
+	////////////////////////////////////////////////////////
 	/**
 	 * Display menu for Admins, get the Admin's choice, and validate the Admin's
 	 * choice
 	 */
 	private void adminMenu() {
+		logger.trace("Diplaying admin menu");
 		boolean loop = true;
 
 		String[] options = new String[] { "1", "2", "3", "4", "5" };
@@ -489,12 +588,15 @@ public class Driver {
 			while (!validInput) {
 				displayAdminMenu();
 				userInput = getUserInput();
+				logger.trace("user input: " + userInput);
 				validInput = validOptions.contains(userInput);
 				if (!validInput) {
 					if (loopLimitCounter < loopLimit) {
+						logger.trace("Incorrect Input");
 						System.out.println("Not an option");
 						loopLimitCounter += 1;
 					} else {
+						logger.trace("Too many invalid inputs for the Admin Menu");
 						System.out.println("Too many invalid optoins");
 						loop = false; // End the Administator's menu loop
 						validInput = true; // End the validation loop
@@ -523,7 +625,7 @@ public class Driver {
 	}
 
 	/**
-	 * Display the actions for Admins
+	 * Display the possible actions for Admins
 	 */
 	private void displayAdminMenu() {
 		System.out.println("=======================================");
@@ -537,9 +639,6 @@ public class Driver {
 		System.out.print("Choice: ");
 	}
 
-	////////////////////////////////////////////////////////
-	// Admin Functionality
-	////////////////////////////////////////////////////////
 	/**
 	 * Functionality for admins to unlock client accounts
 	 */
@@ -620,10 +719,13 @@ public class Driver {
 				this.db.put(user.getSsn(), user);
 				validUser = true;
 				System.out.println("Account Unlocked!");
+				logger.trace("Unlocking account for user: " + user.getSsn());
 			} else {
+				logger.trace("Account: " + user.getSsn() + " cannot be unlocked");
 				System.out.println("Account: " + user.getSsn() + " cannot be unlocked");
 			}
 		} else {
+			logger.trace("Account: " + input + " is not in the database");
 			System.out.println("User is not in the database");
 		}
 
@@ -712,10 +814,13 @@ public class Driver {
 				this.db.put(user.getSsn(), user);
 				validUser = true;
 				System.out.println("Account Locked!");
+				logger.trace("Locking account of user: " + user.getSsn());
 			} else {
+				logger.trace("Account: " + user.getSsn() + " cannot be locked");
 				System.out.println("Account: " + user.getSsn() + " cannot be locked");
 			}
 		} else {
+			logger.trace("Account: " + input + " is not in the database");
 			System.out.println("User is not in the database");
 		}
 
@@ -803,10 +908,13 @@ public class Driver {
 				this.db.put(user.getSsn(), user);
 				validUser = true;
 				System.out.println("Account Approved!");
+				logger.trace("Approving account for user: " + user.getSsn());
 			} else {
+				logger.trace("Account: " + user.getSsn() + " cannot be approved");
 				System.out.println("Account: " + user.getSsn() + " does not need to be approved");
 			}
 		} else {
+			logger.trace("Account: " + input + " is not in the database");
 			System.out.println("User is not in the database");
 		}
 
@@ -826,7 +934,8 @@ public class Driver {
 		// back to the previous menu
 		while (loop && loopCounter < maxLoopIteration) {
 			displayClients();
-			loop = !getAndPromoteClient(); // loop while the user input is invalid
+			String input = getUserInput();
+			loop = !getAndPromoteClient(input); // loop while the user input is invalid
 
 			// Count number of incorrect inputs
 			if (loop) {
@@ -881,9 +990,8 @@ public class Driver {
 	 *         user is invalid (that is, does not exist in the database, or already
 	 *         an admin)
 	 */
-	private boolean getAndPromoteClient() {
+	private boolean getAndPromoteClient(String input) {
 		boolean validUser = false;
-		String input = getUserInput();
 		User user = this.db.get(input);
 
 		// Check if designated user exists and is a client.
@@ -892,13 +1000,17 @@ public class Driver {
 		if (user != null) {
 			if (user.getPermissions() == permission_client) {
 				user.setPermissions(permission_admin);
+				user.setStatus(status_active);
 				this.db.put(user.getSsn(), user);
 				validUser = true;
 				System.out.println("Account Promoted to Admin!");
+				logger.trace("Promoting user: " + user.getSsn() + " to Admin");
 			} else {
+				logger.trace("Account: " + user.getSsn() + " is already an admin");
 				System.out.println("Account: " + user.getSsn() + " is already an admin");
 			}
 		} else {
+			logger.trace("Account: " + input + " is not in the database");
 			System.out.println("User is not in the database");
 		}
 
@@ -912,6 +1024,7 @@ public class Driver {
 	 * Display menu for Client's, get Clien'ts choice, and validate Client's choice
 	 */
 	private void clientMenu() {
+		logger.trace("Diplaying client menu");
 		boolean loop = true;
 
 		String[] options = new String[] { "1", "2", "3", "4" };
@@ -926,12 +1039,15 @@ public class Driver {
 			while (!validInput) {
 				displayClientMenu();
 				userInput = getUserInput();
+				logger.trace("user input: " + userInput);
 				validInput = validOptions.contains(userInput);
 				if (!validInput) {
 					if (loopLimitCounter < loopLimit) {
+						logger.trace("Incorrect Input");
 						System.out.println("Not an option");
 						loopLimitCounter += 1;
 					} else {
+						logger.trace("Too many invalid options");
 						System.out.println("Too many invalid optoins");
 						loop = false; // End the Administator's menu loop
 						validInput = true; // End the validation loop
@@ -955,6 +1071,7 @@ public class Driver {
 					System.out.println("Logging Out");
 					loop = false;
 				} else {
+					logger.error("FATAL ERROR!!!! Should not see this. IN adminMenu()");
 					System.out.println("FATAL ERROR!!!! Should not see this. IN adminMenu()");
 				}
 			}
@@ -987,18 +1104,26 @@ public class Driver {
 	 * Get and deposit an amount from the user
 	 */
 	private void deposit() {
-		System.out.println("Enter amount to deposit: ");
-		String temp = getUserInput();
+		String temp = depositInstructions();
 		try {
 			double amount = Double.parseDouble(temp);
 
-			amount += currentUser.getAccountAmount();
-			currentUser.setAccountAmount(amount);
-
-			this.db.put(currentUser.getSsn(), currentUser);
+			setAmount(amount);
 		} catch (NumberFormatException ne) {
 			System.out.println("Not a valid number");
 		}
+	}
+	
+	private String depositInstructions() {
+		System.out.println("Enter amount to deposit: ");
+		return(getUserInput());
+	}
+	
+	public void setAmount(double amount) {
+		amount += currentUser.getAccountAmount();
+		currentUser.setAccountAmount(amount);
+
+		this.db.put(currentUser.getSsn(), currentUser);
 	}
 
 	/**
@@ -1046,12 +1171,27 @@ public class Driver {
 			}
 		}
 	}
-
+	
+	////////////////////////////////////////////////////////
+	//Functions for Unit Testing
+	////////////////////////////////////////////////////////
 	public HashMap<String, User> getDb() {
 		return this.db;
 	}
 
 	public void addUserToDb(User user) {
 		db.put(user.getSsn(), user);
+	}
+	
+	public void setDb(HashMap<String,User> newDb) {
+		db = newDb;
+	}
+	
+	public void setCurrentUser(User user) {
+		currentUser = user;
+	}
+	
+	public User getCurrentUser() {
+		return currentUser;
 	}
 }
