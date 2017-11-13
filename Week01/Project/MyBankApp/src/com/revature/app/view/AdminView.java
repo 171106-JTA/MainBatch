@@ -16,6 +16,10 @@ import com.revature.core.Resultset;
 import com.revature.core.factory.FieldParamsFactory;
 import com.revature.route.Routes;
 
+/**
+ * Displays application used by admins for managing accounts 
+ * @author Antony Lulciuc
+ */
 public class AdminView implements View {
 	private FieldParamsFactory factory = FieldParamsFactory.getFactory();
 	private String name = MyBank.data.get(User.USERNAME);
@@ -24,6 +28,9 @@ public class AdminView implements View {
 	private Resultset pendingUsers;
 	private Resultset pendingAccounts;
 	
+	/**
+	 * Main view process for admins 
+	 */
 	@Override
 	public void run() {
 		String input = "";
@@ -59,11 +66,14 @@ public class AdminView implements View {
 		}		
 	}
 	
-	
 	///
 	//	PRIVATE METHODS 
 	///
 	
+	/**
+	 * Allows admins to manage user accounts
+	 * @param list - accounts available 
+	 */
 	private void manageUser(Resultset list) {
 		if (list.size() > 0) {
 			FieldParams params;
@@ -114,6 +124,10 @@ public class AdminView implements View {
 		}
 	}
 	
+	/**
+	 * Allows admins to manage accounts 
+	 * @param list - accounts available
+	 */
 	private void manageAccount(Resultset list) {
 		if (list.size() > 0) {
 			FieldParams params;
@@ -161,13 +175,16 @@ public class AdminView implements View {
 			Menu.println("You do not have any accounts");
 		}
 	}
-	
-	
 
 	///
 	//	USER MANIPULATION CONTROLS 
 	///
 	
+	/**
+	 * Updates user checkpoint
+	 * @param user - who to update
+	 * @param checkpoint new user checkpoint
+	 */
 	private void updateUserCheckpoint(User user, String checkpoint) {
 		FieldParams trans = new FieldParams();
 		Request request;
@@ -190,6 +207,10 @@ public class AdminView implements View {
 		}
 	}
 	
+	/**
+	 * Removes userfrom system
+	 * @param user - who to delete
+	 */
 	private void deleteUser(User user) {
 		Request request;
 		Resultset res;
@@ -208,6 +229,12 @@ public class AdminView implements View {
 		}
 	}
 	
+	/**
+	 * Updates account status 
+	 * @param account - account to update
+	 * @param status - new status
+	 * @see Status
+	 */
 	private void updateAccountStatus(Account account, String status) {
 		FieldParams params = new FieldParams();
 		FieldParams transact = new FieldParams();
@@ -232,6 +259,10 @@ public class AdminView implements View {
 		}
 	}
 	
+	/**
+	 * Removes account from system
+	 * @param account - account to remove 
+	 */
 	private void deleteAccount(Account account) {
 		FieldParams params = new FieldParams();
 		Request request;
@@ -258,6 +289,9 @@ public class AdminView implements View {
 	//	PRINT METHODS 
 	///
 	
+	/**
+	 * Prints main actions to set user checkpoints 
+	 */
 	private void printUserActionOptions() {
 		Menu.println("What would you like to do?");
 		Menu.println("\t- 0 - SET AS CUSTOMER");
@@ -267,6 +301,9 @@ public class AdminView implements View {
 		Menu.println("\t- 4 - CANCEL");
 	}
 	
+	/**
+	 * Prints main actions to set account statuses 
+	 */
 	private void printAccountActionOptions() {
 		Menu.println("What would you like to do?");
 		Menu.println("\t- 0 - SET AS ACTIVE");
@@ -275,6 +312,10 @@ public class AdminView implements View {
 		Menu.println("\t- 3 - CANCEL");
 	}
 	
+	/**
+	 * Prints list
+	 * @param list - list to print 
+	 */
 	private void printList(Resultset list) {
 		Iterator<BusinessObject> it = list.iterator();
 		
@@ -283,6 +324,9 @@ public class AdminView implements View {
 		}
 	}
 	
+	/**
+	 * Prints main admin options available to them
+	 */
 	private void printOptions() {
 		Menu.println("What would like to do: ");
 		Menu.println("\t- 0 - manage pending users");
@@ -291,6 +335,9 @@ public class AdminView implements View {
 		Menu.println("\t- 3 - manage existing accounts");
 	}
 	
+	/**
+	 * Prints number pending users/accounts 
+	 */
 	private void printWorkLoad() {
 		Menu.println(MyBank.data.get(User.USERNAME) + " you have:");
 		printPendingUserCount();
@@ -298,6 +345,9 @@ public class AdminView implements View {
 		Menu.println(" remaining to be processed." );
 	}
 	
+	/**
+	 * Prints number of pending users 
+	 */
 	private void printPendingUserCount() {
 		FieldParams params = new FieldParams();
 		
@@ -311,6 +361,9 @@ public class AdminView implements View {
 		Menu.println("\t-> " + pendingUsers.size() + " pending users.");
 	}
 	
+	/**
+	 * prints number of pending accounts 
+	 */
 	private void printPendingAccountCount() {
 		FieldParams params = new FieldParams();
 		
@@ -324,6 +377,10 @@ public class AdminView implements View {
 		Menu.println("\t-> " + pendingAccounts.size() + " pending accounts.");
 	}
 
+	/**
+	 * Prints total number of users in system
+	 * Also caches users returned to be used in application
+	 */
 	private void printUserCount() {
 		FieldParams params = new FieldParams();
 	
@@ -336,6 +393,10 @@ public class AdminView implements View {
 		Menu.println("We have " + allUsers.size() + " users!");
 	}
 	
+	/**
+	 * Prints total number of accounts in system 
+	 * Also caches accounts returned to be used in application
+	 */
 	private void printAccountCount() {
 		FieldParams params = new FieldParams();
 
@@ -345,16 +406,4 @@ public class AdminView implements View {
 		allAccounts.addAll(MyBank.send(new Request(MyBank.data, Routes.USER, "GETACCOUNT", params, null)));
 		Menu.println("We have " + allAccounts.size() + " accounts!");;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

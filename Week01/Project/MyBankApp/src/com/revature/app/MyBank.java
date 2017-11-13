@@ -12,10 +12,18 @@ import com.revature.core.exception.RequestException;
 import com.revature.route.Routes;
 import com.revature.server.Server;
 
+/**
+ * Front-end part of application
+ * @author Antony Lulciuc
+ */
 public class MyBank {
 	private static Server server = new Server();
 	public static FieldParams data;
 	
+	/**
+	 * Main application
+	 * @param args - ignored
+	 */
 	public static void main(String[] args) {
 		String input = "";
 
@@ -61,6 +69,9 @@ public class MyBank {
 		server.kill();
 	}
 	
+	/**
+	 * Starts application view for user
+	 */
 	public static void start() {
 		switch (data.get(User.CHECKPOINT)) {
 			case Checkpoint.ADMIN:
@@ -75,10 +86,16 @@ public class MyBank {
 		}
 	}
 	
+	/**
+	 * Attempts to login and create session for user
+	 */
 	public static void login() {
 		signin(Menu.getInput("Username:>"), Menu.getInput("Password:>"));
 	}
 	
+	/**
+	 * Attempts to create new User account
+	 */
 	public static void createAccount() {
 		FieldParams params = new FieldParams();
 		Resultset res;
@@ -167,6 +184,11 @@ public class MyBank {
 	//	COMM Methods 
 	///
 
+	/**
+	 * Sends request to server
+	 * @param request - what client wants to process
+	 * @return result of request
+	 */
 	public static Resultset send(Request request) {
 		Resultset res = null;
 		
@@ -188,6 +210,11 @@ public class MyBank {
 		return res;
 	}
 	
+	/**
+	 * Acquires user info 
+	 * @param data - login info
+	 * @return User Info (contact data)
+	 */
 	public static Resultset getUserInfo(FieldParams data) {
 		FieldParams params = new FieldParams();
 
@@ -197,7 +224,11 @@ public class MyBank {
 		return MyBank.send(new Request(data, Routes.USER, "GETUSERINFO", params, null));
 	}
 	
-	
+	/**
+	 * Acquires user account data 
+	 * @param data - login info
+	 * @return Accounts tied to user
+	 */
 	public static Resultset getAccount(FieldParams data) {
 		FieldParams params = new FieldParams();
 
@@ -215,6 +246,11 @@ public class MyBank {
 	//	PRIVATE METHODS 
 	///
 	
+	/**
+	 * Performs actual signin to account 
+	 * @param username - associated with user
+	 * @param password - needed to access account 
+	 */
 	private static void signin(String username, String password) {
 		try {	
 			data = server.login(username, password);

@@ -13,9 +13,19 @@ import com.revature.businessobject.user.User;
 import com.revature.core.FieldParams;
 import com.revature.core.Resultset;
 
+/**
+ * Assortment of content which can be written to the console
+ * @author Antony Lulciuc
+ *
+ */
 public class Menu {
 	private static Scanner in = new Scanner(System.in);
 	
+	/**
+	 * Acquire input from user
+	 * @param prefix - note before input
+	 * @return user input
+	 */
 	public static String getInput(String prefix) {
 		// Print content before input
 		System.out.print(prefix);
@@ -28,15 +38,25 @@ public class Menu {
 	//	WRITES TO CONSOLE
 	///
 	
+	/**
+	 * Prints message to console
+	 * @param message
+	 */
 	public static synchronized void print(String message) {
 		System.out.print(message);
 	}
 	
-	
+	/**
+	 * Prints message to console and newline
+	 * @param message
+	 */
 	public static synchronized void println(String message) {
 		System.out.println(message);
 	}
 	
+	/**
+	 * Prints message main menu
+	 */
 	public static void printMenu() {
 		println("===============================================================");
 		println("====================== WELCOME TO MYBANK ======================");
@@ -52,6 +72,9 @@ public class Menu {
 		println("===============================================================");
 	}
 	
+	/**
+	 * Prints create user menu
+	 */
 	public static void printCreateUserMenu() {
 		println("=====================   Welcome New User  =====================");
 		println("=                                                             =");
@@ -62,12 +85,19 @@ public class Menu {
 		println("===============================================================");
 	}
 	
+	/**
+	 * Prints active user menu logout header notification
+	 */
 	public static void printViewMenu() {
 		println("===============================================================");
 		println("= To leave application, type \'logout\'                        =");
 		println("===============================================================");
 	}
 	
+	/**
+	 * Prints all user data 
+	 * @param data - login info
+	 */
 	public static void printUser(FieldParams data) {
 		println("======================= User Information =====================");
 		printUserData(data);
@@ -76,6 +106,10 @@ public class Menu {
 		println("===============================================================");
 	}
 	
+	/**
+	 * Prints basic user data
+	 * @param data - login info
+	 */
 	public static void printUserData(FieldParams data) {
 		String username = data.get(User.USERNAME);
 		println("\tUser name: " + username);
@@ -96,6 +130,10 @@ public class Menu {
 		
 	}
 	
+	/**
+	 * Prints user info (contact data)
+	 * @param data - login info
+	 */
 	public static void printUserInfoData(FieldParams data) {
 		Resultset res = MyBank.getUserInfo(data);
 		UserInfo info;
@@ -112,6 +150,10 @@ public class Menu {
 		}
 	}
 	
+	/**
+	 * Prints user accounts 
+	 * @param data - login data
+	 */
 	public static void printAccountData(FieldParams data) {
 		Resultset res = MyBank.getAccount(data);
 		
@@ -134,6 +176,10 @@ public class Menu {
 		}
 	}
 	
+	/**
+	 * Prints checking account
+	 * @param checking - checking account instance 
+	 */
 	public static void printCheckingAccount(Checking checking) {
 		println("===============================================================");
 		println("\tAccount Type: Checking");
@@ -143,6 +189,10 @@ public class Menu {
 		println("===============================================================");
 	}
 	
+	/**
+	 * Prints credit account
+	 * @param credit - credit account instance 
+	 */
 	public static void printCreditAccount(Credit credit) {
 		println("===============================================================");
 		println("\tAccount Type: Credit");

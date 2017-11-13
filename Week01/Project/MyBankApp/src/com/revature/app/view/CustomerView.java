@@ -19,11 +19,18 @@ import com.revature.core.Resultset;
 import com.revature.core.factory.FieldParamsFactory;
 import com.revature.route.Routes;
 
+/**
+ * View accessible to Customers only 
+ * @author Antony Lulciuc
+ */
 public class CustomerView implements View {
 	private FieldParamsFactory factory = FieldParamsFactory.getFactory();
 	private String name = MyBank.data.get(User.USERNAME);
 	private Resultset accounts;
 	
+	/**
+	 * Basic banking simulator 
+	 */
 	@Override
 	public void run() {
 		String input = "";
@@ -74,6 +81,9 @@ public class CustomerView implements View {
 	//	PRIVATE METHODS 
 	///
 	
+	/**
+	 * Updates users username
+	 */
 	private void updateUserName() {
 		FieldParams transact = new FieldParams(); 
 		String username = Menu.getInput("New Username:>");
@@ -99,6 +109,9 @@ public class CustomerView implements View {
 		}
 	}
 	
+	/**
+	 * Updates users password
+	 */
 	private void updatePassword() {
 		FieldParams transact = new FieldParams(); 
 		String password = Menu.getInput("New Password:>");
@@ -123,6 +136,9 @@ public class CustomerView implements View {
 		}
 	}
 	
+	/**
+	 * Updates user contact info (user info)
+	 */
 	private void updateContactInfo() {
 		FieldParams transact = new FieldParams();
 		String email = Menu.getInput("New Email:>");
@@ -150,6 +166,9 @@ public class CustomerView implements View {
 		}
 	}
 	
+	/**
+	 * Creates new account for user (which needs to be procesed by admin)
+	 */
 	private void createCheckingAccount() {
 		Request request;
 		Resultset res;
@@ -168,6 +187,9 @@ public class CustomerView implements View {
 		}
 	}
 	
+	/**
+	 * Allows user to perform actions to account 
+	 */
 	private void manageAccount() {
 		if (accounts.size() > 0) {
 			FieldParams params;
@@ -214,6 +236,10 @@ public class CustomerView implements View {
 		}
 	}
 	
+	/**
+	 * Adds funds to user account
+	 * @param account - where to place funds 
+	 */
 	private void addFunds(Account account) {
 		if (!account.getStatus().equals(Status.ACTIVE))
 			Menu.println("Account needs to be activated first!");
@@ -242,6 +268,10 @@ public class CustomerView implements View {
 		}
 	}
 	
+	/**
+	 * Allows user to remove funds from account
+	 * @param account - where to take funds from
+	 */
 	private void removeFunds(Account account) {
 		if (!account.getStatus().equals(Status.ACTIVE))
 			Menu.println("Account needs to be activated first!");
@@ -270,6 +300,10 @@ public class CustomerView implements View {
 		}
 	}
 	
+	/**
+	 * Allows user to delete account
+	 * @param account - account to delete 
+	 */
 	private void deleteAccount(Account account) {
 		FieldParams query = factory.getFieldParams(account);
 		Request request;
@@ -289,8 +323,9 @@ public class CustomerView implements View {
 		}
 	}
 	
-	
-	
+	/**
+	 * Loads all accounts associated with user 
+	 */
 	private void loadUserAccounts() {
 		FieldParams params = new FieldParams();
 		Request request;
@@ -307,6 +342,9 @@ public class CustomerView implements View {
 	//	PRINT METHODS 
 	///
 	
+	/**
+	 * Prints main customer option menu
+	 */
 	private void printOptions() {
 		Menu.println("What would like to do: ");
 		Menu.println("\t- 0 - update user name ");
@@ -317,6 +355,9 @@ public class CustomerView implements View {
 		Menu.println("\t- 5 - view self");
 	}
 	
+	/**
+	 * Prints customer account options 
+	 */
 	private void printAccountOptions() {
 		Menu.println("What would like to do: ");
 		Menu.println("\t- 0 - ADD FUNDS");
@@ -325,6 +366,9 @@ public class CustomerView implements View {
 		Menu.println("\t- 2 - CANCEL");
 	}
 	
+	/**
+	 * Displays account data in list fashion
+	 */
 	private void printAccounts() {
 		Iterator<BusinessObject> it = accounts.iterator();
 		
