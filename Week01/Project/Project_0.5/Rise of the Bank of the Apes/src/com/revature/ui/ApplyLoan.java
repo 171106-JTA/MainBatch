@@ -20,12 +20,18 @@ public class ApplyLoan extends UserInterface {
 				applyLoan(user);
 				break;
 			case 3:
+				repayLoan(user);
 				break;
 			default:
 				System.out.println("Invalid Input.");
 		}
 	}
 	
+	/**
+	 * Shows the loan amount and status
+	 * 
+	 * @param u the user
+	 */
 	private static void showLoan(User u) {
 		if(u.getLoan().getAmount() == 0) {
 			System.out.println("No loans in system.");
@@ -35,6 +41,12 @@ public class ApplyLoan extends UserInterface {
 		}
 	}
 	
+	/**
+	 * Takes the user input for loan and creates the request.
+	 * Loan is then logged
+	 * 
+	 * @param u the user applying for a loan
+	 */
 	private static void applyLoan(User u) {
 		if(u.getLoan().getAmount() != 0) {
 			System.out.println("Loan already in system");
@@ -45,5 +57,25 @@ public class ApplyLoan extends UserInterface {
 		u.getLoan().setAmount(d);
 		System.out.println("Loan Request of " + d + " has been received.");
 		UserInterface.startLogging(u.getName() + " has applied for a loan of " + d);
+	}
+	
+	/**
+	 * The method automatically deducts the loan amount for the user account when enough money is present.
+	 * Otherwise the repayment is rejected
+	 * 
+	 * @param u The user, who will have their money deducted
+	 */
+	private static void repayLoan(User u) {
+		double currAmount = u.getBalance();
+		double loanAmount = u.getLoan().getAmount();
+		double afterAmount = 0;
+		if(loanAmount > currAmount) {
+			System.out.println("Not enough money in Account. Cannot repay loan.");
+			return;
+		}
+		afterAmount = currAmount - loanAmount;
+		u.setBalance(afterAmount);
+		//Resets the loan back to 0
+		u.getLoan().setAmount(0);
 	}
 }

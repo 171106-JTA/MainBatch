@@ -20,6 +20,49 @@ public class AdminTool {
 	}
 	
 	/**
+	 * Administrator only approval screen. 
+	 * Admin finds the loanee through console input and approves/rejects their loan
+	 * Shows the admin the loan amount first
+	 * 
+	 * @param users Used to quickly find the loanee for approval
+	 */
+	public static void approveLoan(HashMap<String, User> users) {
+		String input = "";
+		User u;
+		System.out.print("Enter user name of loanee: ");
+		input = UserInterface.readInput();
+		u = users.get(input);
+		
+		if(u == null) {
+			System.out.println("User not found.");
+			return;
+		}
+		
+		if(u.getLoan().getAmount() == 0) {
+			System.out.println("User has no loans to approve.");
+			return;
+		}
+		
+		System.out.println("Loan of " + u.getLoan().getAmount());
+		System.out.print("To approve, enter a; To reject, r --> ");
+		input = UserInterface.readInput();
+		switch(input) {
+			//When approved, loan amount is added to account
+			case "a":
+				u.getLoan().setApproval(true);
+				u.setBalance(u.getLoan().getAmount());
+				UserInterface.startLogging("Loan of " + u.getLoan().getAmount()+ " for " + u.getName() + " has been approved");
+				break;
+			//When rejected, loan amount returns to 0
+			case "r":
+				UserInterface.startLogging("Loan of " + u.getLoan().getAmount()+ " for " + u.getName() + " has been rejected");
+				u.getLoan().setAmount(0);
+				break;
+			default:
+				System.out.println("Incorrect Input.");
+		}
+	}
+	/**
 	 * Menu used by administrators to approve or disapprove a user
 	 * 
 	 * @param users HashMap of users for quick look-ups
@@ -174,4 +217,5 @@ public class AdminTool {
 		//Log promotion
 		UserInterface.startLogging("Moderator has promoted user " + u.getName() + " to moderator.");
 	}
+	
 }
