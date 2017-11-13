@@ -15,8 +15,7 @@ public class User implements Serializable {
 	/**
 	 * SSN for client. This is the unique identifier
 	 */
-//	private int[] ssn = new int[9];
-	private String ssn;
+	private String username;
 	
 	/**
 	 * First name of client
@@ -62,25 +61,23 @@ public class User implements Serializable {
 	 * @param name 		username for new account
 	 * @param password 	password for new account
 	 */
-	//to do: Convert ssn to a 9 digit integer array
-	//to do: Convert middleInitial to char
-	User(String firstName, String lastName, String middleInitial, String ssn, String password) {
+	User(String firstName, String lastName, String middleInitial, String username, String password) {
 		this.firstName = firstName; 
 		this.lastName = lastName;
 		this.middleInitial = middleInitial;
-		this.ssn = ssn; //Deep copy or shallow copy??? Check this!!!
+		this.username = username; //Deep copy or shallow copy??? Check this!!!
 		this.password = password;
 		this.permissions = 0; //Initialize new accounts to Client level permissions
 		this.status = 0; //Initialize new accounts to require approval
 		this.accountAmount = 0; //Initialize new account amounts to 0
 	}
 	
-	User(String firstName, String lastName, String middleInitial, String ssn, String password, 
+	User(String firstName, String lastName, String middleInitial, String username, String password, 
 			int permissions, int status, int accountAmount) {
 		this.firstName = firstName; 
 		this.lastName = lastName;
 		this.middleInitial = middleInitial;
-		this.ssn = ssn; //Deep copy or shallow copy??? Check this!!!
+		this.username = username; //Deep copy or shallow copy??? Check this!!!
 		this.password = password;
 		this.permissions = permissions; //Initialize new accounts to Client level permissions
 		this.status = status; //Initialize new accounts to require approval
@@ -91,7 +88,7 @@ public class User implements Serializable {
 		this.firstName = user.getFirstName(); 
 		this.lastName = user.getLastName();
 		this.middleInitial = user.getMiddleInitial();
-		this.ssn = user.getSsn(); //Deep copy or shallow copy??? Check this!!!
+		this.username = user.getUsername(); //Deep copy or shallow copy??? Check this!!!
 		this.password = user.getPassword();
 		this.permissions = user.getPermissions(); //Initialize new accounts to Client level permissions
 		this.status = user.getStatus(); //Initialize new accounts to require approval
@@ -182,19 +179,19 @@ public class User implements Serializable {
 	}
 	
 	/**
-	 * Fetch the Social Security Number for the user
+	 * Fetch the username for the user
 	 * @return Returns the Social Security Number for the user
 	 */
-	public String getSsn() {
-		return ssn;
+	public String getUsername() {
+		return username;
 	}
 	
 	/**
-	 * Set the Social Security Number for the user
-	 * @param ssn 		A String containing the social security number for the user
+	 * Set the username for the user
+	 * @param username 		A String containing the social security number for the user
 	 */
-	public void setSsn(String ssn) {
-		this.ssn = ssn;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 	/**
@@ -231,11 +228,7 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-//		return "User [ssn=" + Arrays.toString(ssn) + ", firstName=" + firstName + ", lastName=" + lastName
-//				+ ", middleInitial=" + middleInitial + ", password=" + password + ", permissions=" + permissions
-//				+ ", status=" + status + ", accountAmount=" + accountAmount + "]";
-		//ssn is a string for now. Will eventually convert this to a 9-digit number
-		return "User [ssn=" + ssn + ", firstName=" + firstName + ", lastName=" + lastName
+		return "User [username=" + username + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", middleInitial=" + middleInitial + ", password=" + password + ", permissions=" + permissions
 				+ ", status=" + status + ", accountAmount=" + accountAmount + "]";
 	}	 

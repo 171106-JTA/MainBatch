@@ -153,245 +153,15 @@ public class Driver {
 		String firstName = "Evan";
 		String lastName = "West";
 		String middleInitial = "A";
-		String ssn = "evanwest";
+		String username = "evanwest";
 		String password = "password";
 		int permissions = 1;
 		int status = 1;
 		int accountAmount = 0;
-		User default_user_1 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+		User default_user_1 = new User(firstName, lastName, middleInitial, username, password, permissions, status,
 				accountAmount);
 
-		db.put(default_user_1.getSsn(), default_user_1);
-		
-		
-//		firstName = "A";
-//		lastName = "A";
-//		middleInitial = "A";
-//		ssn = "A";
-//		password = "A";
-//		permissions = 1;
-//		status = 1;
-//		accountAmount = 0;
-//		User default_user_A = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-//				accountAmount);
-//
-//		firstName = "Z";
-//		lastName = "Z";
-//		middleInitial = "Z";
-//		ssn = "Z";
-//		password = "Z";
-//		permissions = 0;
-//		status = 1;
-//		accountAmount = 0;
-//		User default_user_Z = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-//				accountAmount);
-//
-//		firstName = "B";
-//		lastName = "B";
-//		middleInitial = "B";
-//		ssn = "B";
-//		password = "B";
-//		permissions = 0;
-//		status = 0;
-//		accountAmount = 0;
-//		User default_user_B = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-//				accountAmount);
-//		
-//		String stuff = "C"; 
-//		firstName = stuff;
-//		lastName = stuff;
-//		middleInitial = stuff;
-//		ssn = stuff;
-//		password = stuff;
-//		permissions = 0;
-//		status = 2;
-//		accountAmount = 0;
-//		User default_user_C = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-//				accountAmount);
-//		
-//		stuff = "D"; 
-//		firstName = stuff;
-//		lastName = stuff;
-//		middleInitial = stuff;
-//		ssn = stuff;
-//		password = stuff;
-//		permissions = 1;
-//		status = 0;
-//		accountAmount = 0;
-//		User default_user_D = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-//				accountAmount);
-//		
-//		stuff = "E"; 
-//		firstName = stuff;
-//		lastName = stuff;
-//		middleInitial = stuff;
-//		ssn = stuff;
-//		password = stuff;
-//		permissions = 1;
-//		status = 2;
-//		accountAmount = 0;
-//		User default_user_E = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-//				accountAmount);
-//
-//		db.put(default_user_A.getSsn(), default_user_A);
-//		db.put(default_user_Z.getSsn(), default_user_Z);
-//		db.put(default_user_B.getSsn(), default_user_B);
-//		db.put(default_user_C.getSsn(), default_user_C);
-//		db.put(default_user_D.getSsn(), default_user_D);
-//		db.put(default_user_E.getSsn(), default_user_E);
-	}
-
-	public void sample_database_1() {
-		String firstName = "Evan";
-		String lastName = "West";
-		String middleInitial = "A";
-		String ssn = "0";
-		String password = "0";
-		int permissions = 0;
-		int status = 0;
-		int accountAmount = 0;
-		User default_user_1 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-				accountAmount);
-
-		firstName = "Evan";
-		lastName = "West";
-		middleInitial = "A";
-		ssn = "01";
-		password = "01";
-		permissions = 0;
-		status = 0;
-		accountAmount = 0;
-		User default_user_1_b = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-				accountAmount);
-
-		firstName = "Evan";
-		lastName = "West";
-		middleInitial = "A";
-		ssn = "02";
-		password = "02";
-		permissions = 0;
-		status = 0;
-		accountAmount = 0;
-		User default_user_1_c = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-				accountAmount);
-
-		firstName = "A";
-		lastName = "A";
-		middleInitial = "A";
-		ssn = "1";
-		password = "1";
-		permissions = 0;
-		status = 1;
-		accountAmount = 0;
-		User default_user_2 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-				accountAmount);
-
-		firstName = "B";
-		lastName = "B";
-		middleInitial = "B";
-		ssn = "2";
-		password = "2";
-		permissions = 0;
-		status = 2;
-		accountAmount = 0;
-		User default_user_3 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-				accountAmount);
-
-		firstName = "Admin";
-		lastName = "Admin";
-		middleInitial = "A";
-		ssn = "001";
-		password = "001";
-		permissions = 1;
-		status = 1;
-		accountAmount = 0;
-		User default_user_4 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-				accountAmount);
-
-		db.put(default_user_1.getSsn(), default_user_1);
-		db.put(default_user_2.getSsn(), default_user_2);
-		db.put(default_user_3.getSsn(), default_user_3);
-		db.put(default_user_4.getSsn(), default_user_4);
-		db.put(default_user_1_b.getSsn(), default_user_1_b);
-		db.put(default_user_1_c.getSsn(), default_user_1_c);
-	}
-
-	public void sample_database_2() {
-		String firstName = "A";
-		String lastName = "A";
-		String middleInitial = "A";
-		String ssn = "A";
-		String password = "A";
-		int permissions = 1;
-		int status = 1;
-		int accountAmount = 0;
-		User default_user_A = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-				accountAmount);
-
-		firstName = "Z";
-		lastName = "Z";
-		middleInitial = "Z";
-		ssn = "Z";
-		password = "Z";
-		permissions = 0;
-		status = 1;
-		accountAmount = 0;
-		User default_user_Z = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-				accountAmount);
-
-		firstName = "B";
-		lastName = "B";
-		middleInitial = "B";
-		ssn = "B";
-		password = "B";
-		permissions = 0;
-		status = 0;
-		accountAmount = 0;
-		User default_user_B = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-				accountAmount);
-		
-		String stuff = "C"; 
-		firstName = stuff;
-		lastName = stuff;
-		middleInitial = stuff;
-		ssn = stuff;
-		password = stuff;
-		permissions = 0;
-		status = 2;
-		accountAmount = 0;
-		User default_user_C = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-				accountAmount);
-		
-		stuff = "D"; 
-		firstName = stuff;
-		lastName = stuff;
-		middleInitial = stuff;
-		ssn = stuff;
-		password = stuff;
-		permissions = 1;
-		status = 0;
-		accountAmount = 0;
-		User default_user_D = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-				accountAmount);
-		
-		stuff = "E"; 
-		firstName = stuff;
-		lastName = stuff;
-		middleInitial = stuff;
-		ssn = stuff;
-		password = stuff;
-		permissions = 1;
-		status = 2;
-		accountAmount = 0;
-		User default_user_E = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-				accountAmount);
-
-		db.put(default_user_A.getSsn(), default_user_A);
-		db.put(default_user_Z.getSsn(), default_user_Z);
-		db.put(default_user_B.getSsn(), default_user_B);
-		db.put(default_user_C.getSsn(), default_user_C);
-		db.put(default_user_D.getSsn(), default_user_D);
-		db.put(default_user_E.getSsn(), default_user_E);
+		db.put(default_user_1.getUsername(), default_user_1);
 	}
 
 	/**
@@ -459,13 +229,13 @@ public class Driver {
 	 * @return True - successful login. False - Too many login attempts, end program
 	 */
 	private boolean login() {
-		String ssn = loginInstructions_username();
+		String username = loginInstructions_username();
 		String password = loginInstructions_password();
-		return loginLogic(ssn, password);
+		return loginLogic(username, password);
 	}
 
 	private String loginInstructions_username() {
-		System.out.println("Social Security Number: "); // re-enter password at some point
+		System.out.println("Username: "); // re-enter password at some point
 		return getUserInput();
 	}
 
@@ -474,13 +244,13 @@ public class Driver {
 		return getUserInput();
 	}
 
-	public boolean loginLogic(String ssn, String password) {
+	public boolean loginLogic(String username, String password) {
 		boolean loggedIn = false;
 
-		if (this.db.containsKey(ssn)) {
-			if (password.equals(this.db.get(ssn).getPassword())) {
+		if (this.db.containsKey(username)) {
+			if (password.equals(this.db.get(username).getPassword())) {
 				// Fetch the current user's information from the database
-				this.currentUser = new User(this.db.get(ssn));
+				this.currentUser = new User(this.db.get(username));
 
 				// Signal that the user is logged in
 				// Note: Do this, even though a user with status = 0 or 2 is not technically
@@ -515,9 +285,7 @@ public class Driver {
 		Scanner aScanner = new Scanner(System.in);
 
 		// Variables to hold user's input
-		// to do: Convert ssn to 9 digits, eventually
-		// to do: Convert middleInitial to char
-		String firstName, lastName, middleInitial, password, ssn;
+		String firstName, lastName, middleInitial, password, username;
 
 		System.out.println("First Name: ");
 		firstName = aScanner.nextLine();
@@ -528,29 +296,28 @@ public class Driver {
 		System.out.println("Middle Initial: ");
 		middleInitial = aScanner.nextLine();
 
-		System.out.println("Social Security Number: "); // re-enter password at some point
-		ssn = aScanner.nextLine();
+		System.out.println("Username: "); // re-enter password at some point
+		username = aScanner.nextLine();
 
 		System.out.println("Password: "); // re-entered password at some point
 		password = aScanner.nextLine();
 
-		User newUser = new User(firstName, lastName, middleInitial, ssn, password);
+		User newUser = new User(firstName, lastName, middleInitial, username, password);
 
 		return newUser;
 	}
 
 	public void addNewClientToDatabase(User newUser) {
 		// To Do: Duplicate check. And test case for this duplicate check
-		// To Do: Run the ssn key through a Hash function so that it's not stored in the
 		// db as a key
 		// To Do: Run the object serialization through a ?hash function?
-		this.db.put(newUser.getSsn(), newUser);
-		logger.trace("Adding new user to database");
-		// Print database. For coding purposes
-//		System.out.println("The Database!!!!: ");
-//		for (String key : db.keySet()) {
-//			System.out.println(this.db.get(key));
-//		}
+		
+		if(db.containsKey(newUser.getUsername())) {
+			System.out.println("User already exists");
+		} else {
+			logger.trace("Adding new user to database");
+			db.put(newUser.getUsername(), newUser);
+		}
 	}
 
 	/**
@@ -716,13 +483,13 @@ public class Driver {
 		if (user != null) {
 			if (user.getStatus() == status_locked && user.getPermissions() == permission_client) {
 				user.setStatus(status_active);
-				this.db.put(user.getSsn(), user);
+				this.db.put(user.getUsername(), user);
 				validUser = true;
 				System.out.println("Account Unlocked!");
-				logger.trace("Unlocking account for user: " + user.getSsn());
+				logger.trace("Unlocking account for user: " + user.getUsername());
 			} else {
-				logger.trace("Account: " + user.getSsn() + " cannot be unlocked");
-				System.out.println("Account: " + user.getSsn() + " cannot be unlocked");
+				logger.trace("Account: " + user.getUsername() + " cannot be unlocked");
+				System.out.println("Account: " + user.getUsername() + " cannot be unlocked");
 			}
 		} else {
 			logger.trace("Account: " + input + " is not in the database");
@@ -811,13 +578,13 @@ public class Driver {
 		if (user != null) {
 			if (user.getStatus() == status_active && user.getPermissions() == permission_client) {
 				user.setStatus(status_locked);
-				this.db.put(user.getSsn(), user);
+				this.db.put(user.getUsername(), user);
 				validUser = true;
 				System.out.println("Account Locked!");
-				logger.trace("Locking account of user: " + user.getSsn());
+				logger.trace("Locking account of user: " + user.getUsername());
 			} else {
-				logger.trace("Account: " + user.getSsn() + " cannot be locked");
-				System.out.println("Account: " + user.getSsn() + " cannot be locked");
+				logger.trace("Account: " + user.getUsername() + " cannot be locked");
+				System.out.println("Account: " + user.getUsername() + " cannot be locked");
 			}
 		} else {
 			logger.trace("Account: " + input + " is not in the database");
@@ -878,14 +645,14 @@ public class Driver {
 	private List<String> getApprovalPendingAccounts() {
 		// Loop through db and search for accounts needing approval
 		// To Do: Find a better way to do this than O(n)
-		List<String> ssnNeedingApproval = new ArrayList<String>();
+		List<String> accountNeedingApproval = new ArrayList<String>();
 		for (String key : this.db.keySet()) {
 			if (this.db.get(key).getStatus() == status_approvalPending) {
-				ssnNeedingApproval.add(key);
+				accountNeedingApproval.add(key);
 			}
 		}
 
-		return ssnNeedingApproval;
+		return accountNeedingApproval;
 	}
 
 	/**
@@ -905,13 +672,13 @@ public class Driver {
 		if (user != null) {
 			if (user.getStatus() == status_approvalPending) {
 				user.setStatus(status_active);
-				this.db.put(user.getSsn(), user);
+				this.db.put(user.getUsername(), user);
 				validUser = true;
 				System.out.println("Account Approved!");
-				logger.trace("Approving account for user: " + user.getSsn());
+				logger.trace("Approving account for user: " + user.getUsername());
 			} else {
-				logger.trace("Account: " + user.getSsn() + " cannot be approved");
-				System.out.println("Account: " + user.getSsn() + " does not need to be approved");
+				logger.trace("Account: " + user.getUsername() + " cannot be approved");
+				System.out.println("Account: " + user.getUsername() + " does not need to be approved");
 			}
 		} else {
 			logger.trace("Account: " + input + " is not in the database");
@@ -972,14 +739,14 @@ public class Driver {
 	private List<String> getClients() {
 		// Loop through db and search for all clients
 		// To Do: Find a better way to do this than O(n)
-		List<String> ssnClients = new ArrayList<String>();
+		List<String> accountClients = new ArrayList<String>();
 		for (String key : this.db.keySet()) {
 			if (this.db.get(key).getPermissions() == permission_client) {
-				ssnClients.add(key);
+				accountClients.add(key);
 			}
 		}
 
-		return ssnClients;
+		return accountClients;
 	}
 
 	/**
@@ -1001,13 +768,13 @@ public class Driver {
 			if (user.getPermissions() == permission_client) {
 				user.setPermissions(permission_admin);
 				user.setStatus(status_active);
-				this.db.put(user.getSsn(), user);
+				this.db.put(user.getUsername(), user);
 				validUser = true;
 				System.out.println("Account Promoted to Admin!");
-				logger.trace("Promoting user: " + user.getSsn() + " to Admin");
+				logger.trace("Promoting user: " + user.getUsername() + " to Admin");
 			} else {
-				logger.trace("Account: " + user.getSsn() + " is already an admin");
-				System.out.println("Account: " + user.getSsn() + " is already an admin");
+				logger.trace("Account: " + user.getUsername() + " is already an admin");
+				System.out.println("Account: " + user.getUsername() + " is already an admin");
 			}
 		} else {
 			logger.trace("Account: " + input + " is not in the database");
@@ -1123,7 +890,7 @@ public class Driver {
 		amount += currentUser.getAccountAmount();
 		currentUser.setAccountAmount(amount);
 
-		this.db.put(currentUser.getSsn(), currentUser);
+		this.db.put(currentUser.getUsername(), currentUser);
 	}
 
 	/**
@@ -1141,7 +908,7 @@ public class Driver {
 			if (curAccount - amount > 0) {
 				amount = curAccount - amount;
 				currentUser.setAccountAmount(amount);
-				this.db.put(currentUser.getSsn(), currentUser);
+				this.db.put(currentUser.getUsername(), currentUser);
 			} else {
 				System.out.println("Not enough in your account to withraw $" + amount);
 			}
@@ -1180,7 +947,7 @@ public class Driver {
 	}
 
 	public void addUserToDb(User user) {
-		db.put(user.getSsn(), user);
+		db.put(user.getUsername(), user);
 	}
 	
 	public void setDb(HashMap<String,User> newDb) {

@@ -113,20 +113,24 @@ public class DriverTest {
 			e.printStackTrace();
 		}
 		
-		String firstName = "D";
-		String lastName = "D";
-		String middleInitial = "D";
-		String ssn = "D";
-		String password = "D";
+		String firstName = "Y";
+		String lastName = "Y";
+		String middleInitial = "Y";
+		String ssn = "Y";
+		String password = "Y";
 		int permissions = 0;
 		int status = 0;
 		int accountAmount = 0;
 		User newUser = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
 				accountAmount);
 		
-		dr.addNewClientToDatabase(newUser);		
-		User insertedUser = dr.getDb().get(newUser.getSsn());
+		dr.addNewClientToDatabase(newUser);	
+		System.out.println(newUser.getUsername());
+		User insertedUser = dr.getDb().get(newUser.getUsername());
 		
+		System.out.println(dr.getDb());
+		System.out.println("new user: " + newUser);
+		System.out.println("inserted user: " + insertedUser);
 		//Test that the user was actually inserted into the database
 		assertTrue(newUser.equals(insertedUser));
 	}
@@ -275,7 +279,7 @@ public class DriverTest {
 		User myUser = dr.getDb().get("Z");
 		System.out.println("My User: " + myUser);
 		dr.setCurrentUser(myUser);
-		System.out.println(dr.getCurrentUser().getSsn());
+		System.out.println(dr.getCurrentUser().getUsername());
 		
 		double amount = 50.0;
 		dr.setAmount(amount);
@@ -355,12 +359,12 @@ public class DriverTest {
 				accountAmount);
 		
 		HashMap<String, User> db = new HashMap<String,User>();
-		db.put(default_user_A.getSsn(), default_user_A);
-		db.put(default_user_Z.getSsn(), default_user_Z);
-		db.put(default_user_B.getSsn(), default_user_B);
-		db.put(default_user_C.getSsn(), default_user_C);
-		db.put(default_user_D.getSsn(), default_user_D);
-		db.put(default_user_E.getSsn(), default_user_E);
+		db.put(default_user_A.getUsername(), default_user_A);
+		db.put(default_user_Z.getUsername(), default_user_Z);
+		db.put(default_user_B.getUsername(), default_user_B);
+		db.put(default_user_C.getUsername(), default_user_C);
+		db.put(default_user_D.getUsername(), default_user_D);
+		db.put(default_user_E.getUsername(), default_user_E);
 		
 		return db;
 	}
