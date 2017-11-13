@@ -1,0 +1,10 @@
+package com.revature.exception;
+
+import com.revature.model.Constants;
+
+public class OutstandingLoanException extends BankingException {
+
+	public OutstandingLoanException() {
+		super(Constants.ERR_DUPLICATE_LOAN);
+	}
+}

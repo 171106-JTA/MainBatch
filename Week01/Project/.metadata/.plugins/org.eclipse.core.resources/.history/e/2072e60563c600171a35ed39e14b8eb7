@@ -1,0 +1,15 @@
+package com.revature.exception;
+
+import com.revature.model.Constants;
+
+public class InvalidLoginException extends LoginException {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8271977479158360618L;
+
+	public InvalidLoginException(String user, String pass) {
+		super(Constants.ERR_USER + user + ": " + pass);
+	}
+}

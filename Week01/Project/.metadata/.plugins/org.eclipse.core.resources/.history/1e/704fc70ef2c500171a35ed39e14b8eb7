@@ -1,0 +1,14 @@
+package com.revature.model;
+
+public class Loan {
+	private double amount;
+	private int uid;
+	private static int id = 0;
+	
+	public Loan() {
+		synchronized(Loan.class) {
+			uid = id;
+			id++;
+		}
+	}
+}

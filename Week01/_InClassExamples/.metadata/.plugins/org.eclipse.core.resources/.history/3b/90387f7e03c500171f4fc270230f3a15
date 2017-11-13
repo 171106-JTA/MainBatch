@@ -1,0 +1,7 @@
+package com.revature.model;
+
+public interface Singleton {
+	
+	public static Singleton getInstance();
+
+}

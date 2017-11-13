@@ -1,0 +1,84 @@
+package com.revature.model.account;
+
+import java.util.*;
+
+import com.revature.exception.AccountOverdraftException;
+import com.revature.model.*;
+
+public abstract class UserAccount extends Account {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4924824758721672232L;
+	protected int limit;
+	protected double interest;
+	private double balance;
+	private Date date;
+	private Map<Integer, Transaction> transactions;
+	private int status;
+	
+	public UserAccount() {
+		super();
+		date = new Date();
+		status = Constants.ACCT_STAT_GOOD;
+	}
+
+	protected void setPermissions() {
+		super.permissions = Constants.READ;
+	}
+
+	public int getLimit() {
+		return limit;
+	}
+	
+	protected void setLimit(int limit) {
+		this.limit = limit;
+	}
+
+	public double getInterest() {
+		return interest;
+	}
+	
+	protected void setInterest(double interest) {
+		this.interest = interest;
+	}
+
+	public double getBalance() {
+		return balance;
+	}
+	
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public synchronized boolean processTransaction(double amount, String message, boolean override) throws AccountOverdraftException {
+		Transaction t;
+		if (balance - amount < 0)
+			if (!override) {
+				throw new AccountOverdraftException();
+			}
+		t = new Transaction(amount, message);
+		synchronized (transactions) {
+			transactions.put(t.getUid(), t);
+		}
+
+		return true;
+	}
+
+	public synchronized void cancelTransaction(int id) {
+		Model m = Model.getInstance();
+		m.queryRequests(Constants.PROT_ADD, id);
+	}
+
+	public int getStatus() {
+		return status;
+	}
+	
+	public void setStatus(int status) {
+		this.status = status;
+	}
+}

@@ -1,0 +1,10 @@
+package com.revature.exception;
+
+import com.revature.model.Constants;
+
+public class InvalidLoginException extends Exception {
+
+	public InvalidLoginException() {
+		super(Constants.ERR_USER);
+	}
+}

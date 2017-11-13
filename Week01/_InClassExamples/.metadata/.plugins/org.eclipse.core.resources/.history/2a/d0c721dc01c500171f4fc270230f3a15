@@ -1,0 +1,128 @@
+package com.revature.view;
+
+import java.io.IOException;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
+import com.revature.exception.InvalidInputException;
+import com.revature.exception.InvalidLoginException;
+import com.revature.exception.LockedAccountException;
+import com.revature.exception.LoginException;
+import com.revature.exception.PendingAccountException;
+import com.revature.exception.QuitException;
+import com.revature.exception.RejectedAccountException;
+import com.revature.exception.UsernameInSessionException;
+import com.revature.model.Constants;
+import com.revature.model.Model;
+
+public class Console {
+	private static Model m = Model.getInstance();
+	private static Scanner scan = new Scanner(System.in);
+
+	public Console() {
+		super();
+		try {
+			while (true)
+				startup();
+		} catch (QuitException e) {
+			try {
+				m.serialize();
+			} catch (ClassNotFoundException | IOException e1) {
+				System.err.println(e1.getMessage());
+				if (Constants.DEBUG)
+					e1.printStackTrace();
+			}
+		} catch (NoSuchElementException e) {
+			System.err.println(e.getMessage());
+			if (Constants.DEBUG)
+				e.printStackTrace();
+		}
+	}
+	}
+	
+	private static void startup() throws QuitException {
+		int select = -1;
+		while (true) {
+
+			printPage(Constants.PAGE1);
+			try {
+				switch ((select = scan.nextInt())) {
+				case 0:
+					login(false);
+					break;
+				case 1:
+					login(true);
+					break;
+				case 2:
+					// register();
+					break;
+				case 3:
+					throw new QuitException();
+				default:
+					throw new InvalidInputException(select, Constants.PAGE1.length);
+				}
+			} catch (LoginException e) {
+				System.err.println(e.getMessage());
+				if (Constants.DEBUG)
+					e.printStackTrace();
+			}
+		}
+	}
+
+	private static void login(boolean admin) throws LoginException, QuitException {
+		boolean login = false;
+		int select = -1;
+		String user = null, pass;
+		scan.nextLine();
+		while (!login) {
+			System.out.println(Constants.USER_REQ);
+			user = scan.nextLine();
+			System.out.println(Constants.PASS_REQ);
+			pass = scan.nextLine();
+			if (checkAuth(user, pass, admin))
+				login = attemptLogin(user, admin);
+		}
+		if(admin)
+			new AdminSession();
+		else
+			new UserSession();
+		
+		m.endSession(user);
+		throw new QuitException();
+
+	}
+
+	private static boolean checkAuth(String user, String pass, boolean admin) throws InvalidLoginException {
+		if (m.checkAuth(user, pass, admin))
+			return true;
+		throw new InvalidLoginException(user, pass);
+	}
+
+	private static boolean attemptLogin(String user, boolean admin) throws LoginException {
+		int code;
+
+		if (!admin) {
+			code = m.getUserStatus(user);
+			switch (code) {
+			case Constants.ACCT_STAT_LOCKED:
+				throw new LockedAccountException(user);
+			case Constants.ACCT_STAT_PENDING:
+				throw new PendingAccountException(user);
+			case Constants.ACCT_STAT_REJECTED:
+				throw new RejectedAccountException(user);
+			case Constants.ACCT_STAT_GOOD:
+				break;
+			}
+		}
+
+		if (!m.beginSession(user))
+			throw new UsernameInSessionException(user);
+		return true;
+	}
+
+	private static void printPage(String[] options) {
+		for (int i = 0; i < options.length; i++) {
+			System.out.println(i + ": " + options[i]);
+		}
+	}
+}

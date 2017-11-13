@@ -1,0 +1,10 @@
+package com.revature.exception;
+
+public class LogoutException extends RuntimeException {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2628788685550598732L;
+
+}

@@ -1,0 +1,18 @@
+package com.revature.model.account;
+
+public class RootUserAccount extends UserAccount {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5010253964414527401L;
+
+	@Override
+	public void setArgs(Object... args) {
+		setUser((String) args[1]);
+		setPass((String) args[2]);
+		setBalance((double) args[3]);
+		setInterest((double) args[4]);
+		setLimit((int) args[5]);
+	}
+}

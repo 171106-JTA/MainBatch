@@ -1,0 +1,19 @@
+package com.revature.model.account;
+
+public class BasicUserAccount extends AdultUserAccount {
+
+	public BasicUserAccount() {
+		super();
+	}
+	
+	public BasicUserAccount(String user, String pass) {
+		super(user, pass);
+	}
+
+	@Override
+	public void setArgs(Object... args) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

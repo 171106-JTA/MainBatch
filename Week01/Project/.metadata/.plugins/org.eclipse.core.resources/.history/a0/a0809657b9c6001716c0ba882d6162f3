@@ -1,0 +1,71 @@
+package com.revature.view;
+
+import java.io.PrintStream;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+
+import com.revature.model.Properties;
+
+public class Console {
+	private static Console console;
+	private static Logger log = Logger.getLogger(Console.class);
+
+	private Console() {
+		super();
+	}
+
+	public static Console getInstance() {
+		if (console == null)
+			console = new Console();
+		return console;
+	}
+
+	public static void printPage(String[] options) {
+		for (int i = 0; i < options.length; i++) {
+			System.out.println(i + ": " + options[i]);
+		}
+	}
+
+	public static void print(Object o, int priority) {
+		System.out.println(o);
+		switch(priority) {
+		case 1:
+			log.trace(o);
+		case 2:
+			log.debug(o);
+		case 3:
+			log.trace(o);
+		case 4:
+			log.trace(o);
+		case 5:
+			log.trace(o);
+		case 6:
+			log.trace(o);
+		}
+	}
+
+	public static void print(PrintStream ps, Exception e) {
+		ps.println(e.getMessage());
+		if (Properties.DEBUG)
+			e.printStackTrace();
+	}
+
+	public static void printFinances(double balance, double interest, int limit) {
+		System.out.println(Properties.BALANCE_STR + balance);
+		System.out.println(Properties.CRED_LIM_STR + limit);
+		System.out.println(Properties.CRED_INT_STR + interest);
+	}
+
+	public static <K, V> void printMap(Map<K, V> map) {
+		if (map == null || map.isEmpty()) {
+			System.out.println("empty");
+			return;
+		}
+
+		for (K key : map.keySet()) {
+			System.out.println(key + ": " + map.get(key));
+		}
+	}
+
+}

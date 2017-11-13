@@ -1,0 +1,16 @@
+package com.revature.exception;
+
+import com.revature.model.Constants;
+
+public class AccountOverdraftException extends RuntimeException {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6157819630195973773L;
+	
+	public AccountOverdraftException() {
+		super(Constants.ERR_ACCT_OVERDRAFT + "\n" +
+				Constants.ERR_ACCT_OVERDRAFT_PENALTY);
+	}
+}

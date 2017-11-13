@@ -1,0 +1,36 @@
+package com.revature.model.account;
+
+import com.revature.model.Constants;
+
+public final class AdminAccount extends Account {
+	public AdminAccount(int age) {
+		super(age);
+		// TODO Auto-generated constructor stub
+	}
+
+	private UserAccount associatedAccount;
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3809627223907285013L;
+	
+	protected void setPermissions() {
+		super.permissions = Constants.WRITE;
+	}
+	
+	public UserAccount getAssociatedAccount() {
+		return associatedAccount;
+	}
+	
+	public void setAssociatedAccount(UserAccount associatedAccount) {
+		this.associatedAccount = associatedAccount;
+	}
+
+	@Override
+	public String toString() {
+		return "AdminAccount [associatedAccount=" + associatedAccount + "]";
+	}
+	
+	
+}

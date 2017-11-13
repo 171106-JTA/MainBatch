@@ -1,0 +1,15 @@
+0:  User Login
+1:  Admin Login
+2:  Create account
+3:  Quit
+Username: 
+Password: 
+Age: 
+Social Security Number: 
+0:  User Login
+1:  Admin Login
+2:  Create account
+3:  Quit
+Encrypting(AES 128-bit/CBC/PKCS5Padding)...
+Serializing...
+Quitting...

@@ -1,0 +1,22 @@
+package com.revature.model.request;
+
+public class CancelRequest extends Request {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3467060181142274105L;
+	private int transId;
+
+	public CancelRequest(String user) {
+		super(user);
+	}
+	
+	public void setTransId(int transId) {
+		this.transId = transId;
+	}
+
+	public int getTransId() {
+		return transId;
+	}
+}

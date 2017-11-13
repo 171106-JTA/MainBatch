@@ -1,0 +1,11 @@
+package com.revature.model.request;
+
+public class AccountRequest extends Request {
+
+	@Override
+	public void setArgs(Object... args) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -1,0 +1,13 @@
+package com.revature.model;
+
+public class Transaction {
+	private double amount;
+	static int id = 0;
+	
+	public Transaction(double amount) {
+		this.amount = amount;
+		synchronized(this) {
+			id++;
+		}
+	}
+}

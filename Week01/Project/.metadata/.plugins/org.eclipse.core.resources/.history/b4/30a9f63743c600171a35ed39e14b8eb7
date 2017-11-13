@@ -1,0 +1,14 @@
+package com.revature.model.account;
+
+public abstract class AdultUserAccount extends UserAccount {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3486958955145209273L;
+
+	public AdultUserAccount(int limit, double interest, int penalty) {
+		super(limit, interest, penalty);
+	}
+	
+}

@@ -1,0 +1,10 @@
+package com.revature.exception;
+
+public class RestrictedAdminException extends BankingException {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1058396532106181961L;
+
+}

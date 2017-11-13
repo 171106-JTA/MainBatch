@@ -1,0 +1,7 @@
+package com.revature.control;
+
+public abstract class Session {
+	
+	
+
+}

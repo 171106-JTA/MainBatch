@@ -1,0 +1,10 @@
+package com.revature.throwable;
+
+public class DeserializationError extends FatalError {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 191744150748167382L;
+
+}

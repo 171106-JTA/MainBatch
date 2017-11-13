@@ -1,0 +1,16 @@
+package com.revature.exception;
+
+import com.revature.model.Constants;
+
+public class RejectedAccountException extends Exception {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3105793979253085620L;
+	
+	public RejectedAccountException() {
+		super(Constants.ACCT_REJECTED + "\n" + Constants.ADMIN_PHONE);
+	}
+
+}

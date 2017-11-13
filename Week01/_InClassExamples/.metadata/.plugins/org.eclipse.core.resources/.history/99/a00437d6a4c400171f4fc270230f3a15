@@ -1,0 +1,9 @@
+package com.revature.model.account;
+
+public class AdminAccount extends Account {
+
+	public AdminAccount(String user, String pass) {
+		super(user, pass);
+	}
+
+}

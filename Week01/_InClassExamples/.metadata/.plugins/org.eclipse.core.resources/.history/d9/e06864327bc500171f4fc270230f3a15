@@ -1,0 +1,9 @@
+package com.revature.model.account;
+
+public class MinorUserAccount extends UserAccount {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7563722009182178006L;
+}

@@ -1,0 +1,13 @@
+package com.revature.exception;
+
+import com.revature.model.Properties;
+import com.revature.throwable.BankingException;
+
+public class EmptySetException extends BankingException {
+
+	public EmptySetException() {
+		super(Properties.EMPTY_LIST);
+	}
+
+	
+}

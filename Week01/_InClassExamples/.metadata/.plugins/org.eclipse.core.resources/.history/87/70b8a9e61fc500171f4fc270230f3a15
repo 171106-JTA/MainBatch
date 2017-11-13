@@ -1,0 +1,25 @@
+package com.revature.model.account;
+
+public class SeniorUserAccount extends AdultUserAccount {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8157795139108118928L;
+
+	public SeniorUserAccount() {
+		super();
+	}
+	
+	public SeniorUserAccount(String user, String pass) {
+		super(user, pass);
+	}
+
+	@Override
+	public void setArgs(Object... args) {
+		setUser((String) args[0]);
+		setPass((String) args[1]);
+		setBalance((double) args[2]);		
+	}
+
+}

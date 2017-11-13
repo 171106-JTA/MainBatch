@@ -1,0 +1,16 @@
+package com.revature.exception;
+
+import com.revature.model.Properties;
+
+public class RestrictedAdminException extends BankingException {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1058396532106181961L;
+
+	public RestrictedAdminException(String message) {
+		super(Properties.ERR_RESTRICTED + message);
+		// TODO Auto-generated constructor stub
+	}
+}

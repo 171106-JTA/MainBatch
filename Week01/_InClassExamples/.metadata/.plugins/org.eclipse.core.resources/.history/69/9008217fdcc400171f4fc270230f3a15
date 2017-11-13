@@ -1,0 +1,14 @@
+package com.revature.exception;
+
+public abstract class BankingException extends RuntimeException {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2239522949531913550L;
+
+	public BankingException(String message) {
+		super(message);
+	}
+
+}

@@ -1,0 +1,4 @@
+
+public class StringComp implements Comparator<T>{
+
+}

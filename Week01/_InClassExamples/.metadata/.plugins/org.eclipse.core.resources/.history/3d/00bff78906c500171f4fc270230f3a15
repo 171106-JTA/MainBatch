@@ -1,0 +1,9 @@
+package com.revature.view;
+
+public abstract class Session {
+	
+	private Session() {
+		super();
+	}
+
+}

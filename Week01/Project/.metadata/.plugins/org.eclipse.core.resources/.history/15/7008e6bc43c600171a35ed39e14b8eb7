@@ -1,0 +1,26 @@
+package com.revature.model.account;
+
+import java.util.Date;
+import java.util.Map;
+
+import com.revature.model.Loan;
+import com.revature.model.Transaction;
+
+public abstract class AdultUserAccount extends UserAccount {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3486958955145209273L;
+
+	public AdultUserAccount(int limit, double interest, int penalty) {
+		super(limit, interest, penalty);
+	}
+
+	public AdultUserAccount(String user, String pass, int age, double balance, double interest, int limit,
+			Map<Integer, Loan> loans, int penalty, Date start, int status, Date date,
+			Map<Integer, Transaction> transactions, int uid, UserAccount from) {
+		super(user, pass, age, balance, interest, limit, loans, penalty, start, status, date, transactions, uid, from)
+	}
+	
+}

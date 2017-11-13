@@ -1,0 +1,9 @@
+package com.revature.model.account;
+
+public class PremiumUserAccount extends AdultUserAccount {
+
+	public PremiumUserAccount(String user, String pass) {
+		super(user, pass);
+	}
+
+}

@@ -1,0 +1,263 @@
+package com.revature.control;
+
+import java.io.IOException;
+import java.text.NumberFormat;
+import java.util.*;
+
+import com.revature.exception.*;
+import com.revature.model.*;
+import com.revature.view.Console;
+
+public class BankingDriver {
+//	private static String user = null;
+//	private static int id;
+	private static Model m = Model.getInstance();
+	private static Console console = Console.getInstance();
+	private static Scanner scan = new Scanner(System.in);
+
+	private static void startup() throws QuitException {
+		int select = -1;
+		while (true) {
+
+			Console.printPage(Constants.PAGE1);
+			try {
+				switch ((select = scan.nextInt())) {
+				case 0:
+					login(false);
+					break;
+				case 1:
+					login(true);
+					break;
+				case 2:
+					register();
+					break;
+				case 3:
+					throw new QuitException();
+				default:
+					throw new InvalidInputException(select, Constants.PAGE1.length);
+				}
+			} catch (LoginException e) {
+				System.err.println(e.getMessage());
+				if (Constants.DEBUG)
+					e.printStackTrace();
+			} catch (LogoutException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+
+	private static void login(boolean admin) throws LoginException, LogoutException, QuitException {
+		boolean login = false;
+		String user, pass;
+		scan.nextLine();
+		System.out.println(Constants.USER_REQ);
+		user = scan.nextLine();
+		System.out.println(Constants.PASS_REQ);
+		pass = scan.nextLine();
+		if (checkAuth(user, pass, admin))
+			login = attemptLogin(user, admin);		
+
+		if(login)
+			
+		while (login) {
+			try {
+				if (admin)
+					adminSession();
+				else
+					userSession();
+			} catch (NoSuchElementException e) {
+				System.err.println(e.getMessage());
+				if (Constants.DEBUG)
+					e.printStackTrace();
+			}
+		}
+	}
+
+	private static void register() {
+		boolean reg = false;
+		String pass;
+		System.out.println(Constants.USER_REQ);
+		user = scan.nextLine();
+		System.out.println(Constants.PASS_REQ);
+		pass = scan.nextLine();
+		if(attemptRegistration(user, pass))
+			throw new PendingAccountException(user);
+	}
+	
+	private static boolean checkAuth(String user, String pass, boolean admin) throws InvalidLoginException {
+		if (m.checkAuth(user, pass, admin))
+			return true;
+		throw new InvalidLoginException(user, pass);
+	}
+
+	private static boolean attemptLogin(String user, boolean admin) throws LoginException {
+		int code;
+
+		if (!admin) {
+			code = m.getUserStatus(user);
+			switch (code) {
+			case Constants.ACCT_STAT_LOCKED:
+				throw new LockedAccountException(user);
+			case Constants.ACCT_STAT_PENDING:
+				throw new PendingAccountException(user);
+			case Constants.ACCT_STAT_REJECTED:
+				throw new RejectedAccountException(user);
+			case Constants.ACCT_STAT_GOOD:
+				break;
+			}
+		}
+
+		if (!m.beginSession(user))
+			throw new UsernameInSessionException(user);
+		return true;
+	}
+
+	private static boolean attemptRegistration(String user, String pass) {
+		try {
+		if(m.attemptRegistration(user, pass))
+			return true;
+		} catch (RegistrationException e) {
+			System.err.println(e.getMessage());
+			if(Constants.DEBUG)
+				e.printStackTrace();
+		}
+		return false;
+	}
+
+	private static void userSession() throws QuitException, LogoutException {
+		while (true) {
+			System.out.println(Constants.QUERY_STR);
+			Console.printPage(Constants.PAGE2_ADMIN);
+			switch (scan.nextInt()) {
+			case 0:
+				lockUsers();
+				break;
+			case 1:
+				unlockUsers();
+				break;
+			case 3:
+				viewReqs();
+				break;
+			case 4:
+				promoteUsers();
+				break;
+			case 5:
+				closeUsers();
+				break;
+			case 6:
+				logout();
+				break;
+			case 7:
+				throw new QuitException();
+			}
+		}
+	}
+
+	private static void adminSession() throws QuitException, LogoutException {
+		while (true) {
+			System.out.println(Constants.QUERY_STR);
+			Console.printPage(Constants.PAGE2_ADMIN);
+			switch (scan.nextInt()) {
+			case 0:
+				lockUsers();
+				break;
+			case 1:
+				unlockUsers();
+				break;
+			case 3:
+				viewReqs();
+				break;
+			case 4:
+				promoteUsers();
+				break;
+			case 5:
+				closeUsers();
+				break;
+			case 6:
+				logout();
+				break;
+			case 7:
+				throw new QuitException();
+			}
+		}
+	}
+
+	private static void logout() throws NoSuchElementException, LogoutException {
+		String in;
+		System.out.println(Constants.CONFIRM_LOGOUT);
+		in = scan.nextLine();
+		if (in.length() == 0)
+			throw new NoSuchElementException();
+		switch (in.charAt(0)) {
+		case 'y':
+			m.endSession(user);
+			throw new LogoutException();
+		case 'n':
+			return;
+		default:
+			throw new NoSuchElementException();
+		}
+	}
+
+	private static void closeUser() throws NoSuchElementException, LogoutException {
+		String in;
+		System.out.println(Constants.CONFIRM_CLOSE);
+		in = scan.nextLine();
+		if (in.length() == 0)
+			throw new NoSuchElementException();
+		switch (in.charAt(0)) {
+		case 'y':
+			m.endSession(user);
+			m.queryUsers(Constants.PROT_REMOVE, user);
+			throw new LogoutException();
+		case 'n':
+			return;
+		default:
+			throw new NoSuchElementException();
+		}
+	}
+
+	private static void closeUsers() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private static void promoteUsers() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private static void viewReqs() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private static void unlockUsers() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private static void lockUsers() {
+		// TODO Auto-generated method stub
+
+	}
+	
+	public static void main(String[] args) {
+		try {
+			while (true)
+				startup();
+		} catch (QuitException e) {
+			try {
+				m.serialize();
+			} catch (ClassNotFoundException | IOException e1) {
+				System.err.println(e1.getMessage());
+				if (Constants.DEBUG)
+					e1.printStackTrace();
+			}
+		} catch (NoSuchElementException e) {
+			System.err.println(e.getMessage());
+			if (Constants.DEBUG)
+				e.printStackTrace();
+		}
+	}
+}

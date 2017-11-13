@@ -1,0 +1,13 @@
+package com.revature.model.account;
+
+public class PremiumUserAccount extends AdultUserAccount {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7424634860222954416L;
+
+	public PremiumUserAccount() {
+		super();
+	}
+}
