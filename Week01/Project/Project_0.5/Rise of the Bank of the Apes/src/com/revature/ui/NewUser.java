@@ -16,7 +16,11 @@ public class NewUser extends UserInterface{
 		String user;
 		String password;
 		
+		/* Loop helps prevent duplicate usernames
+		 * user must enter unique username to continue
+		 */
 		while(true) {
+			//Asks for username
 			System.out.print("Username: ");
 			user = UserInterface.readInput();
 			if(users.containsKey(user)) {
@@ -26,6 +30,7 @@ public class NewUser extends UserInterface{
 				break;
 			}
 		}
+		//Asks for password
 		System.out.print("Password: ");
 		password = UserInterface.readInput();
 		users.put(user, new User(user, password));

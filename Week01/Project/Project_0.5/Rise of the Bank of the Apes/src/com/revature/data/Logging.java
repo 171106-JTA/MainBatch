@@ -3,6 +3,7 @@ package com.revature.data;
 import org.apache.log4j.Logger;
 
 public class Logging {
+	//Only one logger is needed, so a singleton was implemented
 	
 	final static Logger logger = Logger.getLogger(Logging.class);
 	static int instanceCount = 0;

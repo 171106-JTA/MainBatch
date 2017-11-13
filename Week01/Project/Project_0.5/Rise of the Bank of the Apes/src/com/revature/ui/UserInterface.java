@@ -74,23 +74,30 @@ public class UserInterface {
 		String password;
 		String savedPassword;
 		
+		//Asks for username
 		System.out.print("Username: ");
 		user = UserInterface.readInput();
+		//Checks for username in "database"
 		if(users.containsKey(user)) {
+			//Asks for password
 			System.out.print("Password: ");
 			password = UserInterface.readInput();
 			u = users.get(user);
 			savedPassword = u.getPassword();
+			//Checks for password correctness
 			if(password.equals(savedPassword)) {
+				//Checks user for approval/locked status
 				if(!u.isBanned() && u.isApproved()) {
 					log = Logging.getLogging();
 					return u;
 				}
 				else {
 					System.out.println("Contact Administrators. ");
+					//Approval status issue
 					if(!u.isApproved() && !u.isBanned()) {
 						System.out.println("Account pending approval.");
 					}
+					//Locked status issue
 					else if(u.isBanned()) {
 						System.out.println("Account has been banned.");
 					}
@@ -102,6 +109,11 @@ public class UserInterface {
 		return null;
 	}
 	
+	/**
+	 * Begins the logging process
+	 * 
+	 * @param message String to be logged
+	 */
 	protected static void startLogging(String message) {
 		log.startLogging(message);
 	}

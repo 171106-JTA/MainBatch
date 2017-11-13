@@ -18,6 +18,8 @@ public class Admin extends UserInterface{
 		if(u == null) {
 			return;
 		}
+		//Checks to see if the user has the right access_level;
+		//They get kicked out if the user is not authorized
 		if(u.getAccess_level() != 2) {
 			System.out.println("Wrong Menu");
 			return;

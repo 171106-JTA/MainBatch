@@ -77,13 +77,4 @@ public class BankTest {
 		 */
 		assertEquals(UserInterface.loginScreen(hm), a);
 	}
-	
-	@Test
-	public void testInputInteger() {
-		/*
-		 * Test result of incorrect inputs
-		 * -1 should be returned
-		 */
-		assertsEquals()
-	}
 }

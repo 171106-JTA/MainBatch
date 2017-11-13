@@ -10,7 +10,7 @@ import com.revature.ui.Splash;
 import com.revature.users.User;
 
 public class BankOfTheApes {
-	/* This class is mean to be a singleton 
+	/* This class is meant to be a singleton 
 	 * It is the central bank, so there should not be anymore than one instance of this class
 	 */
 	private HashMap<String, User> users;

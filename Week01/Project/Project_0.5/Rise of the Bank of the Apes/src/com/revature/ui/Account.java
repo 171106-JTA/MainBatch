@@ -21,6 +21,7 @@ public class Account extends UserInterface{
 		System.out.println("Welcome Back!");
 		int option = 0;
 		while(option != 3) {
+			System.out.println();
 			System.out.println("You Have " + u.getBalance() + " Bananas");
 			System.out.println("1. Withdraw");
 			System.out.println("2. Deposit");
