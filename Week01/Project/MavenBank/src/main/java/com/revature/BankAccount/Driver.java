@@ -232,7 +232,7 @@ public class Driver {
 		int permissions = 1;
 		int status = 1;
 		int accountAmount = 0;
-		User default_user_1 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+		User default_user_A = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
 				accountAmount);
 
 		firstName = "Z";
@@ -243,7 +243,7 @@ public class Driver {
 		permissions = 0;
 		status = 1;
 		accountAmount = 0;
-		User default_user_2 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+		User default_user_Z = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
 				accountAmount);
 
 		firstName = "B";
@@ -254,12 +254,51 @@ public class Driver {
 		permissions = 0;
 		status = 0;
 		accountAmount = 0;
-		User default_user_3 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+		User default_user_B = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+				accountAmount);
+		
+		String stuff = "C"; 
+		firstName = stuff;
+		lastName = stuff;
+		middleInitial = stuff;
+		ssn = stuff;
+		password = stuff;
+		permissions = 0;
+		status = 2;
+		accountAmount = 0;
+		User default_user_C = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+				accountAmount);
+		
+		stuff = "D"; 
+		firstName = stuff;
+		lastName = stuff;
+		middleInitial = stuff;
+		ssn = stuff;
+		password = stuff;
+		permissions = 1;
+		status = 0;
+		accountAmount = 0;
+		User default_user_D = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+				accountAmount);
+		
+		stuff = "E"; 
+		firstName = stuff;
+		lastName = stuff;
+		middleInitial = stuff;
+		ssn = stuff;
+		password = stuff;
+		permissions = 1;
+		status = 2;
+		accountAmount = 0;
+		User default_user_E = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
 				accountAmount);
 
-		db.put(default_user_1.getSsn(), default_user_1);
-		db.put(default_user_2.getSsn(), default_user_2);
-		db.put(default_user_3.getSsn(), default_user_3);
+		db.put(default_user_A.getSsn(), default_user_A);
+		db.put(default_user_Z.getSsn(), default_user_Z);
+		db.put(default_user_B.getSsn(), default_user_B);
+		db.put(default_user_C.getSsn(), default_user_C);
+		db.put(default_user_D.getSsn(), default_user_D);
+		db.put(default_user_E.getSsn(), default_user_E);
 	}
 
 	/**
@@ -500,7 +539,6 @@ public class Driver {
 	////////////////////////////////////////////////////////
 	// Admin Functionality
 	////////////////////////////////////////////////////////
-
 	/**
 	 * Functionality for admins to unlock client accounts
 	 */
@@ -514,7 +552,8 @@ public class Driver {
 		// back to the previous menu
 		while (loop && loopCounter < maxLoopIteration) {
 			displayLockedAccounts();
-			loop = !getAndUnlockAccount(); // loop while the user input is invalid
+			String input = getUserInput(); //Get admin's input for account to unlock
+			loop = !getAndUnlockAccount(input); // loop while the user input is invalid
 
 			// Count number of incorrect inputs
 			if (loop) {
@@ -567,9 +606,8 @@ public class Driver {
 	 * 
 	 * @return Returns TRUE is the SSN was valid and FALSE if not
 	 */
-	private boolean getAndUnlockAccount() {
+	public boolean getAndUnlockAccount(String input) {
 		boolean validUser = false;
-		String input = getUserInput();
 		User user = this.db.get(input);
 
 		// Check if designated user exists and actually is currently locked.
