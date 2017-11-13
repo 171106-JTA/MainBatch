@@ -735,7 +735,8 @@ public class Driver {
 		// back to the previous menu
 		while (loop && loopCounter < maxLoopIteration) {
 			displayAccountsNeedingApproval();
-			loop = !getAndApproveAccount(); // loop while the user input is invalid
+			String input = getUserInput();
+			loop = !getAndApproveAccount(input); // loop while the user input is invalid
 
 			// Count number of incorrect inputs
 			if (loop) {
@@ -789,9 +790,8 @@ public class Driver {
 	 * @return Returns TRUE if the admin's input is valid and FALSE if the input is
 	 *         invalid
 	 */
-	private boolean getAndApproveAccount() {
+	public boolean getAndApproveAccount(String input) {
 		boolean validUser = false;
-		String input = getUserInput();
 		User user = this.db.get(input);
 
 		// Check if designated user exists and actually needs to be approved.
