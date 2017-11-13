@@ -5,8 +5,10 @@ import java.util.HashMap;
 import com.revature.data.ProcessData;
 import com.revature.ui.Account;
 import com.revature.ui.Admin;
+import com.revature.ui.Moderator;
 import com.revature.ui.NewUser;
 import com.revature.ui.Splash;
+import com.revature.ui.UserInterface;
 import com.revature.users.User;
 
 public class BankOfTheApes {
@@ -66,6 +68,7 @@ public class BankOfTheApes {
 	 * 
 	 */
 	public void displayOperationScreen(int option) {
+		User u = null;
 		
 		switch(option) {
 			case 1:
@@ -75,7 +78,14 @@ public class BankOfTheApes {
 				NewUser.Screen(users);
 				break;
 			case 3:
-				Admin.Screen(users);
+				if((u = UserInterface.loginScreen(users)) != null) {
+					if(u.getAccess_level() == 1) {
+						Moderator.Screen(users, u);
+					}
+					else{
+						Admin.Screen(users, u);
+					}
+				}
 				break;
 			default:
 				System.out.println("Option not available. Please try again.");

@@ -39,7 +39,7 @@ public class AdminTool {
 		
 		//Prevent administrators from approving each other
 		if(u.getAccess_level() == 2) {
-			System.out.println("You cannot approve another administrator.");
+			System.out.println("You cannot approve an administrator.");
 			return;
 		}
 		
@@ -49,12 +49,12 @@ public class AdminTool {
 			case "a":
 				u.setApproved(true);
 				//Log admin approval
-				UserInterface.startLogging("Admin has approved user " + u.getName());
+				UserInterface.startLogging("Management has approved user " + u.getName());
 				break;
 			case "d":
 				u.setApproved(false);
 				//Log admin disapproval
-				UserInterface.startLogging("Admin has disapproved user " + u.getName());
+				UserInterface.startLogging("Management has disapproved user " + u.getName());
 				break;
 			default:
 				System.out.println("Incorrect input.");
@@ -108,9 +108,10 @@ public class AdminTool {
 	 * 
 	 * @param users HashMap of users for quick look-ups
 	 */
-	public static void promoteUser(HashMap<String, User> users) {
+	public static void promoteUser(HashMap<String, User> users, int access_level) {
 		System.out.println("Promote Screen");
 		String input = "";
+		int intInput = 0;
 		User u;
 		
 		System.out.print("Enter username: ");
@@ -122,15 +123,55 @@ public class AdminTool {
 			return;
 		}
 		
-		//Prevents administrators from promoting each other
+		//Prevents administrators from pro/demoting each other
 		if(u.getAccess_level() == 2) {
-			System.out.println("You cannot promote another administrator.");
+			System.out.println("You cannot change access level of another administrator.");
 			return;
 		}
 		
-		u.setAccess_level(2);
-		System.out.println(u.getName() + " has been promoted to administrator.");
+		//Give administrators total freedom in promoting and demoting others
+		if(access_level == 2) {
+			System.out.print("Please enter promotion/demotion level: ");
+			intInput = UserInterface.readIntInput();
+			if(intInput < 0) {
+				System.out.println("Invalid input. Please try again.");
+				return;
+			}
+			
+			if(intInput == 0) {
+				u.setAccess_level(0);
+				System.out.println(u.getName() + " will become a regular user.");
+				//Log demotion
+				UserInterface.startLogging("Admin has demoted user " + u.getName() + " to user.");
+			}
+			else if(intInput == 1) {
+				u.setAccess_level(1);
+				//Restore account to go health
+				u.setApproved(true);
+				u.setBanned(false);
+				System.out.println(u.getName() + " will become a Moderator.");
+				//Log promotion
+				UserInterface.startLogging("Admin has promoted user " + u.getName() + " to moderator.");
+			}
+			else {
+				u.setAccess_level(2);
+				//Restore account to go health
+				u.setApproved(true);
+				u.setBanned(false);
+				System.out.println(u.getName() + " has been promoted to administrator.");
+				//Log promotion
+				UserInterface.startLogging("Admin has promoted user " + u.getName() + " to administrator.");
+			}
+			return;
+		}
+		
+		//Moderators can only promote and the max promotion is moderator
+		u.setAccess_level(1);
+		//Restore account to go health
+		u.setApproved(true);
+		u.setBanned(false);
+		System.out.println(u.getName() + " will become a Moderator.");
 		//Log promotion
-		UserInterface.startLogging("Admin has promoted user " + u.getName() + " to administrator.");
+		UserInterface.startLogging("Moderator has promoted user " + u.getName() + " to moderator.");
 	}
 }
