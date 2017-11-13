@@ -1,0 +1,12 @@
+package com.revature.model.request;
+
+import java.io.Serializable;
+
+public class Request implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3113170732871070117L;
+
+}

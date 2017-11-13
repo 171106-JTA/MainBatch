@@ -1,0 +1,8 @@
+package com.revature.throwable;
+
+public class FatalError extends Throwable {
+	
+	public FatalError() {
+		super();
+	}
+}

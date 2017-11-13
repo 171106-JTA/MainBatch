@@ -1,0 +1,16 @@
+package com.revature.exception;
+
+import com.revature.model.Constants;
+
+public class LockedAccountException extends LoginException {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1417690986722248262L;
+	
+	public LockedAccountException(String user) {
+		super(user + ": " + Constants.ACCT_LOCKED + "\n" + Constants.ADMIN_PHONE);
+	}
+
+}

@@ -1,0 +1,4 @@
+package com.revature.exception;
+
+public class QuitException extends RuntimeException {
+}

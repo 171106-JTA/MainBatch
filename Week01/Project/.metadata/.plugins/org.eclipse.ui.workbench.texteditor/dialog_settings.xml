@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="false" key="isRegEx"/>
+		<item value="privil" key="selection"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="incremental"/>
+		<item value="true" key="wrap"/>
+		<item value="false" key="wholeword"/>
+		<list key="findhistory">
+			<item value="privil"/>
+			<item value="priv"/>
+			<item value="setOUt"/>
+			<item value="requestSet"/>
+			<item value="request"/>
+			<item value="requestSet.p"/>
+			<item value="requestSet.a"/>
+			<item value="sendReq"/>
+			<item value=".equals"/>
+			<item value="equals"/>
+			<item value="PROT_CONVER"/>
+			<item value="convertUser"/>
+			<item value="converUser"/>
+			<item value="converUs"/>
+			<item value="setOu"/>
+		</list>
+		<list key="replacehistory">
+			<item value="/tests/verifySerializationTest"/>
+			<item value="&quot;/tests/verifySerializationTest"/>
+			<item value="&quot;/tests/verifySerializationTest.in&quot;;"/>
+			<item value="(String)"/>
+			<item value="String token"/>
+			<item value="getUser"/>
+			<item value="getUser()"/>
+			<item value="(user)"/>
+			<item value=" user,"/>
+			<item value="user"/>
+			<item value="null"/>
+			<item value="String user"/>
+			<item value="&lt;String"/>
+			<item value="&lt;Integer"/>
+			<item value="Level.OFF_INT"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="290" key="DIALOG_WIDTH"/>
+		<item value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont" key="DIALOG_FONT_NAME"/>
+		<item value="409" key="DIALOG_HEIGHT"/>
+		<item value="688" key="DIALOG_X_ORIGIN"/>
+		<item value="79" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>

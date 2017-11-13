@@ -1,0 +1,11 @@
+package com.revature.exception;
+
+public class DebtException extends BankingException {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5457760132775518455L;
+	
+	public DebtExcaption
+}

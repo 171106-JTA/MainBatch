@@ -1,0 +1,15 @@
+package com.revature.model.account;
+
+public class RootUserAccount extends UserAccount {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5010253964414527401L;
+	
+	public RootUserAccount(int limit, double interest, int penalty) {
+		super(limit, interest, penalty);
+		// TODO Auto-generated constructor stub
+	}
+
+}

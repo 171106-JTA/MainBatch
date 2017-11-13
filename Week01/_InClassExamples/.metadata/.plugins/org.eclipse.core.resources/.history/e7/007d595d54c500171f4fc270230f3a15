@@ -1,0 +1,16 @@
+package com.revature.model.request;
+
+import java.io.Serializable;
+
+import com.revature.interfaces.Reflectionable;
+
+public abstract class Request implements Serializable, Reflectionable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3113170732871070117L;
+
+	public abstract void setArgs(Object...args);
+
+}

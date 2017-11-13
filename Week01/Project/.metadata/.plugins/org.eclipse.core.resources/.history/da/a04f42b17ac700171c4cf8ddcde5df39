@@ -1,0 +1,20 @@
+package com.revature.model.request;
+
+public class AccountRequest extends Request {
+
+	public AccountRequest(int id) {
+		super(id);
+	}
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3546105513954424163L;
+
+	@Override
+	public String toString() {
+		return "AccountRequest [uid=" + getUid() + ", user=" + getUser() + "]";
+	}
+
+	
+}

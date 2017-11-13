@@ -1,0 +1,11 @@
+package com.revature.exception;
+
+import com.revature.model.Properties;
+
+public class NoLineError extends Throwable{
+	
+	public NoLineError() {
+		super(Properties.ERR_NO_LINE);
+	}
+
+}

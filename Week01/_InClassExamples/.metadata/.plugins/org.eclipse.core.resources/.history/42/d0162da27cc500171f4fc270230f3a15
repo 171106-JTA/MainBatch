@@ -1,0 +1,18 @@
+package com.revature.model.account;
+
+import com.revature.model.Constants;
+
+public class SeniorUserAccount extends AdultUserAccount {
+	private static double interest = Constants.SENIOR_INT_RATE;
+	private static int limit = Constants.SENIOR_CRED_LIMIT;
+	private static int penalty = Constants.SENIOR_USER_PENALTY;
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8157795139108118928L;
+
+	public SeniorUserAccount() {
+		super(limit, interest, penalty);
+	}
+}

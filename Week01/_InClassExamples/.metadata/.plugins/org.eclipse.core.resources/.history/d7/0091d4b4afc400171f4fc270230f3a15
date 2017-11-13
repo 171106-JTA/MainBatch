@@ -1,0 +1,10 @@
+package com.revature.model;
+
+public class Transaction {
+	private double amount;
+	static int id;
+	
+	public Transaction(double amount) {
+		this.amount = amount;
+	}
+}

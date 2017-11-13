@@ -1,0 +1,30 @@
+package com.revature.model.account;
+
+import com.revature.model.Constants;
+
+public class AdminAccount extends Account {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3809627223907285013L;
+
+	public AdminAccount() {
+		super();
+	}
+	
+	public AdminAccount(String user, String pass) {
+		super(user, pass);
+	}
+	
+	protected void setPermissions() {
+		super.permissions = Constants.WRITE;
+	}
+
+	@Override
+	public void setArgs(Object... args) {
+		setUser((String) args[0]);
+		setPass((String) args[1]);
+		setBalance((double) args[2]);
+	}
+}

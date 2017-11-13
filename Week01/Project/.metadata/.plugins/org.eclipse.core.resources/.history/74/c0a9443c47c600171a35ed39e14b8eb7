@@ -1,0 +1,35 @@
+package com.revature.model.account;
+
+import com.revature.model.Constants;
+
+public final class PremiumUserAccount extends AdultUserAccount {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7424634860222954416L;
+	private static double interest = Constants.PREMIUM_INT_RATE;
+	private static int limit = Constants.PREMIUM_CRED_LIMIT;
+	private static int penalty = Constants.PREMIUM_USER_PENALTY;
+
+	public PremiumUserAccount() {
+		super(limit, interest, penalty);
+	}
+	
+	public PremiumUserAccount(UserAccount from) {
+		super(from.getUser(), from.getPass(), from.getAge(), 
+				from.getBalance(), from.getInterest(), from.getLimit(), from.getLoans(),
+				from.getPenalty(), from.getStart(), from.getStatus(), 
+				from.getTransactions(), from.getUid());
+		if(from.getInterest() > Constants.PREMIUM_INT_RATE)
+			setInterest(Constants.PREMIUM_INT_RATE);
+		}
+
+	@Override
+	public String toString() {
+		return "PremiumUserAccount [limit=" + limit + ", penalty=" + penalty + ", status=" + status + ", interest="
+				+ interest + ", permissions=" + permissions + "]";
+	}
+	
+	
+}

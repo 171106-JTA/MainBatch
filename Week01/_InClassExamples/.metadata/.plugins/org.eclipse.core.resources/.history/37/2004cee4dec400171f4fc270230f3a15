@@ -1,0 +1,156 @@
+package com.revature.model;
+
+public class Constants {
+	
+	// "page" options
+//	public static final int PAGE1 = 3;
+//	public static final int PAGE2_USER = 4;
+//	public static final int PAGE2_ADMIN = 7;
+//	public static final int PAGE3_READ = 3;
+//	public static final int PAGE3_WRITE = 3;
+	
+	//Debug mode
+	public static final boolean DEBUG = true;
+
+	// basic interface strings
+	public static final String LOGIN_REQ = " Login";
+	public static final String REG_REQ = " Create account";
+	public static final String QUIT_REQ = " Quit";
+	public static final String CREATE_USER_QUERY = "Create username: ";
+	public static final String CREATE_PASS_QUERY = " Create password: ";
+	public static final String FILENAME = "model.ser";
+
+	public static final String USER_REQ = "Username: ";
+	public static final String PASS_REQ = "Password: ";
+	public static final String QUERY_STR = "What would you like to do?";
+	public static final String LOGOFF_REQ = " Logoff";
+	public static final String CANCEL_STR = "(press [ESC] to cancel)";
+
+	// user strings
+	public static final String ACCT_PENDING = "Account activation is pending permission from an admin";
+	public static final String ACCT_LOCKED = "This account is locked. Please contact administrator and try again";
+	public static final String ACCT_REJECTED = "Account request has been rejected. Please contact administrator and try again";
+	public static final String ADMIN_PHONE = "202-555-0190";
+
+	public static final String BALANCE_STR = "Current balance: ";
+	public static final String AVAILABLE_CREDIT_STR = "Available credit: ";
+	public static final String OUTSTANDING_CREDIT_STR = "Outstanding credit: ";
+	public static final String INT_RATE = "Interest Rate: ";
+	public static final String LOAN_REQ = " Request a loan";
+	public static final String LOAN_QUERY_STR = "Enter amount: ";
+	public static final String LOAN_CONFIRM_STR = "Confirm amount(y/n)? ";
+	public static final String CREATE_REQ = " Create a minor account";
+	public static final String CLOSE_MINOR_REQ = " Close a minor account";
+	public static final String UPGRADE_MINOR_REQ = " Upgrade a minor account";
+
+	// admin strings
+	public static final String LOCK_REQ = " Lock user account(s)";
+	public static final String LOCK_STR = "Unlocked account(s): ";
+	public static final String LOCK_QUERY_STR = "Enter account(s) to lock: ";
+
+	public static final String UNLOCK_REQ = " Unlock user account(s)";
+	public static final String UNLOCK_STR = "Locked account(s):";
+	public static final String UNLOCK_QUERY_STR = "Enter account(s) to unlock: ";
+
+	public static final String VIEW_REQ = " View outstanding request(s)";
+
+	public static final String VIEW_ROLLBACK_REQ = " View transaction rollback request(s)";
+	public static final String ROLLBACK_STR = "Transaction rollback request(s): ";
+	public static final String ACCEPT_ROLLBACK_STR = " Accept request(s)";
+	public static final String ACCEPT_ROLLBACK_QUERY_STR = "Enter request(s) to accept: ";
+	public static final String REJECT_ROLLBACK_STR = " Reject request(s)";
+	public static final String REJECT_ROLLBACK_QUERY_STR = "Enter request(s) to reject: ";
+
+	public static final String VIEW_ACCT_REQ = " View account activation request(s)";
+	public static final String ACCT_STR = "Account activation request(s): ";
+	public static final String ACCEPT_ACCT_STR = " Activate account(s)";
+	public static final String ACCEPT_ACCT_QUERY_STR = "Enter account(s) to activate: ";
+	public static final String REJECT_ACCT_STR = " Reject account(s)";
+	public static final String REJECT_ACCT_QUERY_STR = "Enter account(s) to reject: ";
+
+	public static final String VIEW_LOAN_REQ = " View loan request(s)";
+	public static final String LOAN_STR = "Loan request(s): ";
+	public static final String ACCEPT_LOAN_STR = " Accept loan(s)";
+	public static final String ACCEPT_LOAN_QUERY_STR = "Enter loan(s) to accept: ";
+	public static final String REJECT_LOAN_STR = " Reject loan(s)";
+	public static final String REJECT_LOAN_QUERY_STR = "Enter loan(s) to reject: ";
+
+	
+	public static final String RESTORE_REQ = " Remove user(s) from reject list";
+	public static final String VIEW_RESTORE_STR = "Rejected account(s): ";
+	public static final String RESTORE_QUERY_STR = "Enter account(s) to remove: ";
+
+	public static final String PROMOTE_REQ = " Promote user(s) to admin";
+	public static final String VIEW_PROMOTE_STR = "Available account(s) to promote: ";
+	public static final String PROMOTE_QUERY_STR = "Enter account(s) to promote: ";
+
+	public static final String CLOSE_REQ = " Close user(s) account";
+	public static final String VIEW_CLOSE_STR = "Available account(s) to close: ";
+	public static final String CLOSE_QUERY_STR = "Enter account(s) to close: ";
+	
+	// page lists
+	public static final String[] PAGE1 = { LOGIN_REQ, REG_REQ, QUIT_REQ };
+	public static final String[] PAGE2_USER = {LOAN_REQ, CREATE_REQ, UPGRADE_MINOR_REQ, CLOSE_MINOR_REQ };
+	public static final String[] PAGE2_ADMIN = {};
+	public static final String[] PAGE3_REQS = {};
+	public static final String[] PAGE4_LOANS = {};
+	public static final String[] PAGE4_ACCTS = {};
+	public static final String[] PAGE4_ROLLBACKS = {};
+	public static final String[] PAGE3_LOCK = {};
+	public static final String[] PAGE3_RESTORE = {};
+	public static final String[] PAGE3_PROM = {};
+	public static final String[] PAGE3_CLOSE = {};
+	
+	
+	
+
+	// empty list
+	public static final String EMPTY_LIST = "Empty";
+
+	// ints
+	public static final int SENIOR_CRED_LIMIT = 5000;
+	public static final int BASIC_CRED_LIMIT = 3000;
+	public static final int PREMIUM_CRED_LIMIT = 10000;
+	public static final int MINOR_CRED_LIMIT = 500;
+	public static final int MINOR_MAX_AGE = 18;
+	public static final int MINOR_MIN_AGE = 0;
+	public static final int SENIOR_MIN_AGE = 65;
+	
+	public static final int PROT_GET = 0;
+	public static final int PROT_ADD = 1;
+	public static final int PROT_REMOVE = 2;
+	
+	public static final int ACCT_STAT_GOOD = 0;
+	public static final int ACCT_STAT_PENDING = 1;
+	public static final int ACCT_STAT_LOCKED = 2;
+	public static final int ACCT_STAT_REJECTED = 3;
+
+	// doubles
+	public static final double SENIOR_INT_RATE = 1.5;
+	public static final double BASIC_INT_RATE_BELOW10 = 3.5;
+	public static final double BASIC_INT_RATE_BELOW20 = 2.5;
+	public static final double BASIC_INT_RATE_BELOW30 = 1.5;
+	public static final double PREMIUM_INT_RATE = 1.0;
+	public static final double MINOR_INT_RATE = 0.0;
+
+	// option strings
+	public static final String OPTION_STR = "[y] yes [n] no [Y] yes to all [N] no to all";
+	public static final String CONFIRM_LOGOUT = "Confirm logout? (y/n)";
+	
+	// permisssions
+	public static final char READ = 'r';
+	public static final char WRITE = 'w';
+
+	// error strings
+	public static final String ERR_USER = "Invalid username: ";
+	public static final String ERR_USER_NA = "Username already used: ";
+	public static final String ERR_USER_ONLINE = "User alread logged on: ";
+	public static final String ERR_PASS = "Invalid password: ";
+	public static final String ERR_LOAN_DNE = "Loan does not exist: ";
+	public static final String ERR_LOAN_ACCEPTED = "Loan already accepted: ";
+	public static final String ERR_ACCT_DNE = "Account does not exist: ";
+	public static final String ERR_ACCT_ACCEPTED = "Account already activated: ";
+	public static final String ERR_ACCT_OVERDRAFT = "Insufficient funds for request: ";
+	public static final String ERR_ACCT_OVERDRAFT_PENALTY = "Overdraft penalty: ";
+
+}

@@ -1,0 +1,15 @@
+package com.revature.exception;
+
+import com.revature.model.Properties;
+
+public class InvalidUsernameException extends RegistrationException {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8304416650431845997L;
+
+	public InvalidUsernameException(String user) {
+		super(Properties.ERR_USER + ": " + user + "\n" + Properties.USER_CREDENTIALS);
+	}
+}

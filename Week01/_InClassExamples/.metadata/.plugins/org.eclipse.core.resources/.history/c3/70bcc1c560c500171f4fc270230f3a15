@@ -1,0 +1,14 @@
+package com.revature.exception;
+
+import com.revature.model.Constants;
+
+public class InvalidPasswordException extends Exception {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8986922400538922750L;
+	public InvalidPasswordException(String pass) {
+		super(Constants.ERR_USER + ": " + user + "\n" + Constants.USER_CREDENTIALS);
+	}
+}

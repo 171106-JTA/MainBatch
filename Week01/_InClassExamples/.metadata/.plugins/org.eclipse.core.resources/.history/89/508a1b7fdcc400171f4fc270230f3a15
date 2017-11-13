@@ -1,0 +1,15 @@
+package com.revature.exception;
+
+import com.revature.model.Constants;
+
+public class PendingAccountException extends BankingException {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1953815963890862337L;
+
+	public PendingAccountException(String user) {
+		super(user + ": " + Constants.ACCT_PENDING);
+	}
+}

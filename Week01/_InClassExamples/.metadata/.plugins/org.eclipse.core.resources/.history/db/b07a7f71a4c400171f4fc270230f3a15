@@ -1,0 +1,11 @@
+package com.revature.model.account;
+
+public abstract class Account {
+	private String user, pass;
+	private char permissions;
+	
+	public Account(String user, String pass) {
+		this.user = user;
+		this.pass = pass;
+	}
+}

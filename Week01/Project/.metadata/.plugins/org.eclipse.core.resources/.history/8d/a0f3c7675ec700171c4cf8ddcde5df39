@@ -1,0 +1,14 @@
+package com.revature.throwable;
+
+public abstract class BadRequestException extends RuntimeException {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5633050745676595536L;
+
+	public BadRequestException(String string) {
+		// TODO Auto-generated constructor stub
+	}
+	
+}

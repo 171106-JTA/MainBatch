@@ -1,0 +1,15 @@
+package com.revature.exception;
+
+import com.revature.model.Constants;
+
+public class DuplicateAdminException extends RuntimeException {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1962228375834981167L;
+
+	public DuplicateAdminException(String name) {
+		super(Constants.ERR_ADMIN_DUP + name);
+	}
+}

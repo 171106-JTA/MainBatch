@@ -1,0 +1,13 @@
+package com.revature.exception;
+
+public class CancelException extends RuntimeException {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1140728398161728977L;
+
+	public CancelException() {
+		super();
+	}
+}

@@ -1,0 +1,27 @@
+1510073666038	Delete element
+1510073672633	Delete element
+1510074019869	Rename package 'com.revature.control'
+1510074026731	Rename package 'com.revature.model'
+1510074093339	Rename package 'a'
+1510074110517	Rename package 'b'
+1510075499187	Delete element
+1510075569268	Delete element
+1510075703941	Rename package 'control'
+1510087608726	Rename type 'BankingApp'
+1510121455038	Delete element
+1510148463237	Rename method 'queryList'
+1510148934167	Infer generic type arguments
+1510155125628	Infer generic type arguments
+1510173729655	Delete element
+1510176038347	Move compilation unit
+1510176327266	Rename type 'UsernameInUseException'
+1510179539473	Rename field 'ACCT_STAT_NEW'
+1510183696423	Rename type 'BankingException'
+1510196269993	Infer generic type arguments
+1510196287627	Infer generic type arguments
+1510199159963	Move compilation units
+1510200341160	Delete element
+1510201410860	Delete element
+1510201753346	Delete elements
+1510234301693	Move compilation unit
+1510234558729	Delete element

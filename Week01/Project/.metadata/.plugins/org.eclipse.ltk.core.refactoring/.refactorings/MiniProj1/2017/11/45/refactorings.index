@@ -1,0 +1,36 @@
+1510284757817	Rename method 'setTransaction'
+1510289307125	Delete element
+1510295099992	Delete element
+1510295313876	Rename field 'LOAN_QUERY_STR'
+1510305426702	Move compilation unit
+1510305570210	Rename field 'ERR_DUPLICATE_LOAN'
+1510347700003	Rename field 'DEBT_CRED_LIMIT_PENALTY'
+1510347791705	Rename field 'daysInDebt'
+1510347804249	Rename field 'millisInDebt'
+1510348811857	Rename field 'DEBT_PENALTY_DAYS'
+1510351427999	Rename type 'Constants'
+1510388716368	Delete element
+1510391037813	Delete element
+1510391957200	Delete element
+1510392898611	Delete elements
+1510393046703	Delete element
+1510393073551	Rename source folder 'src'
+1510393102263	Move packages
+1510393109158	Delete element
+1510393207131	Move file
+1510393213074	Delete element
+1510393557633	Move packages
+1510393565445	Delete element
+1510393583593	Move source folder
+1510393603772	Move source folder
+1510393747871	Rename resource 'properties.txt'
+1510393847520	Move file
+1510393852800	Move file
+1510393997414	Delete element
+1510394473550	Delete elements
+1510394478329	Delete element
+1510394564536	Delete element
+1510394977944	Delete element
+1510395034578	Delete element
+1510395038552	Delete element
+1510427976400	Rename package 'com.revature.exception'

@@ -1,0 +1,9 @@
+import java.util.Scanner;
+
+public class CodeTester {
+	public static void main(String[] args) {
+		String in;
+		Scanner scan = new Scanner("read this string");
+		in = (in = scan.nextLine()).replaceAll("[0-9]", "");
+	}
+}

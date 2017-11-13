@@ -1,0 +1,15 @@
+package com.revature.exception;
+
+import com.revature.model.Constants;
+
+public class NoSuchRequestException extends BadRequestException {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8204079812450771958L;
+
+	public NoSuchRequestException(int id) {
+		super(Constants.ERR_REQ_DNE + id);
+	}
+}

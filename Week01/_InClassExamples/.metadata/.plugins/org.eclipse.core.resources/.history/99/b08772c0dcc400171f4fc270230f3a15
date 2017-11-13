@@ -1,0 +1,10 @@
+package com.revature.exception;
+
+public abstract class RegistrationException extends BankingException {
+
+	public RegistrationException(String message) {
+		super(message);
+		
+	}
+
+}

@@ -1,0 +1,5 @@
+package com.revature.model.account;
+
+public class SeniorUserAccount extends UserAccount {
+
+}
