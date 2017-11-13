@@ -28,6 +28,24 @@ public class InputUtils {
     }
 
     /**
+     * read a line of input from user
+     *
+     * @param filedName
+     * @return
+     */
+    public static String readNonEmptyLine(String filedName) {
+        String line = "";
+        while(line.isEmpty()) {
+            printPrompt(filedName);
+            Scanner in = new Scanner(System.in);
+            line = in.nextLine().trim();
+            if (line.isEmpty())
+                System.out.println("input cannot be empty");
+        }
+        return line;
+    }
+
+    /**
      * read an integer from user
      *
      * @param fieldName

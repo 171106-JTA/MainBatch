@@ -13,7 +13,7 @@ public class RegisterCustomerPage extends Page {
      */
     @Override
     protected Page _run() {
-        String username = InputUtils.readLine("username");
+        String username = InputUtils.readNonEmptyLine("username");
         String password = InputUtils.readAndConfirm(()-> InputUtils.readMasked("password"));
         System.out.printf("user %s created\n", username);
 
