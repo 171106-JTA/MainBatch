@@ -20,7 +20,7 @@ public class Logging {
 		return log;
 	}
 	
-	public void startLogging(String message) {
+	public void start(String message) {
 		logger.info(message);
 	}
 }

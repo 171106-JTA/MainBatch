@@ -51,6 +51,38 @@ public class UserInterface {
 	}
 	
 	/**
+	 * Read user input for currency inputs. A double is used as the storage datatype.
+	 * 
+	 * @return -1.0 for invalid inputs (i.e. letters), otherwise it is the user input
+	 * it also returns -1.0 when too many digits after the decimal place is added
+	 */
+	protected static double readDouble() {
+		double d = -1.0;
+		
+		scan = new Scanner(System.in);
+		String val = null;
+		String afterDecimal = null;
+		
+		//Try-catch for user input of letters
+		try {
+			val = scan.nextLine();
+			d = Double.valueOf(val);
+		}catch(NumberFormatException ne) {
+			
+		}
+		
+		//try-catch for inputs with decimals
+		try {
+			afterDecimal = val.split("\\.")[1];
+			if(afterDecimal.length() > 2) {
+				return -1;
+			}
+		}catch(IndexOutOfBoundsException e) {
+			//may throw an index out of bound exception when user inputs value with decimal pts
+		}
+		return d;
+	}
+	/**
 	 * Closes the scanner and serializes the user HashMap. Used when the user logs out
 	 * 
 	 * @param users HashMap to be serialized
@@ -116,6 +148,10 @@ public class UserInterface {
 	 * @param message String to be logged
 	 */
 	protected static void startLogging(String message) {
-		log.startLogging(message);
+		//Needed to accommodate Junit
+		if(log == null) {
+			log = Logging.getLogging();
+		}
+		log.start(message);
 	}
 }

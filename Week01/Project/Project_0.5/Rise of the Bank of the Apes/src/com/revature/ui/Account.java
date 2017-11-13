@@ -1,5 +1,6 @@
 package com.revature.ui;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 
 import com.revature.users.User;
@@ -13,6 +14,7 @@ public class Account extends UserInterface{
 	 */
 	public static void Screen(HashMap<String, User> users) {
 		User u = UserInterface.loginScreen(users);
+		DecimalFormat df = new DecimalFormat("#0.00");
 		
 		if(u == null) {
 			return;
@@ -22,7 +24,7 @@ public class Account extends UserInterface{
 		int option = 0;
 		while(option != 3) {
 			System.out.println();
-			System.out.println("You Have " + u.getBalance() + " Bananas");
+			System.out.println("You Have " + df.format(u.getBalance()) + " Bananas");
 			System.out.println("1. Withdraw");
 			System.out.println("2. Deposit");
 			System.out.println("3. Log Out");

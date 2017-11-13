@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class User implements Serializable{
 	//access_levels: 2 - administrator; 1 - moderator; 0 - regular user
 	private int access_level;
-	private int balance;
+	private double balance;
 	private boolean approved; //field for approval status of account
 	private String name;
 	private String password;
@@ -34,11 +34,11 @@ public class User implements Serializable{
 		this.banned = banned;
 	}
 
-	public int getBalance() {
+	public double getBalance() {
 		return balance;
 	}
 
-	public void setBalance(int balance) {
+	public void setBalance(double balance) {
 		this.balance = balance;
 	}
 

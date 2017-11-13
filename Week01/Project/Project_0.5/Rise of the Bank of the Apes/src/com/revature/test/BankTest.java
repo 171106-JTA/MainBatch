@@ -21,6 +21,7 @@ import com.revature.users.User;
 
 public class BankTest {
 	BankOfTheApes bota;
+	Logging l;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -33,6 +34,7 @@ public class BankTest {
 	@Before
 	public void setUp() throws Exception {
 		bota = BankOfTheApes.getBank();
+		l = Logging.getLogging();
 	}
 
 	@After
@@ -103,19 +105,20 @@ public class BankTest {
 		 * account balance = 0
 		 * result should be 5
 		 */
-		assertEquals(a.getBalance(), 5);
+		assertEquals(5.0, a.getBalance(), 0D);
 	}
 	
 	@Test
 	public void testWithdraw() {
+		//Test withdrawing money
 		User a = new User("a", "a");
 		a.setBalance(50);
 		Withdraw.Screen(a);
 		/*
 		 * User input = 23
 		 * account balance = 50
-		 * result should be 17
+		 * result should be 27
 		 */
-		assertEquals(a.getBalance(), 17);
+		assertEquals(27.0, a.getBalance(), 0D);
 	}
 }
