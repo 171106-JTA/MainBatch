@@ -34,7 +34,7 @@ public class Admin extends UserInterface{
 			System.out.println("4. Promote user");
 			System.out.println("5. Log out");
 			System.out.print("Enter option: ");
-			option = UserInterface.readNumberInput();
+			option = UserInterface.readIntInput();
 			
 			switch(option) {
 				case 1:

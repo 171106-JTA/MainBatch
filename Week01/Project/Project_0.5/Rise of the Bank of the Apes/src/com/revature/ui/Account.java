@@ -27,7 +27,7 @@ public class Account extends UserInterface{
 			System.out.println("2. Deposit");
 			System.out.println("3. Log Out");
 			System.out.print("Enter Option: ");
-			option = UserInterface.readNumberInput();
+			option = UserInterface.readIntInput();
 			
 			
 			if(option == 1) {

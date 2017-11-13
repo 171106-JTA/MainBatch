@@ -18,7 +18,7 @@ public class Splash extends UserInterface {
 		
 		System.out.print("Please Enter Number: ");
 		
-		return UserInterface.readNumberInput();
+		return UserInterface.readIntInput();
 	}
 	
 }

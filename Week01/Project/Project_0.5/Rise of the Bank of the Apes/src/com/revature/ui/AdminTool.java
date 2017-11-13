@@ -39,7 +39,7 @@ public class AdminTool {
 		
 		//Prevent administrators from approving each other
 		if(u.getAccess_level() == 2) {
-			System.out.println("You cannot approve another admin");
+			System.out.println("You cannot approve another administrator.");
 			return;
 		}
 		
@@ -81,7 +81,7 @@ public class AdminTool {
 		
 		//Prevent administrators from banning each other
 		if(u.getAccess_level() == 2) {
-			System.out.println("You cannot ban another admin");
+			System.out.println("You cannot ban another administrator.");
 			return;
 		}
 		
@@ -124,13 +124,13 @@ public class AdminTool {
 		
 		//Prevents administrators from promoting each other
 		if(u.getAccess_level() == 2) {
-			System.out.println("You cannot promote another admin");
+			System.out.println("You cannot promote another administrator.");
 			return;
 		}
 		
 		u.setAccess_level(2);
-		System.out.println(u.getName() + " has been promoted to admin");
+		System.out.println(u.getName() + " has been promoted to administrator.");
 		//Log promotion
-		UserInterface.startLogging("Admin has promoted user " + u.getName() + " to administrator");
+		UserInterface.startLogging("Admin has promoted user " + u.getName() + " to administrator.");
 	}
 }

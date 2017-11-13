@@ -13,7 +13,7 @@ public class Withdraw {
 	public static void Screen(User user) {
 		System.out.println("Withdrawing");
 			System.out.print("Please enter withdrawal amount: ");
-			int amount = UserInterface.readNumberInput();
+			int amount = UserInterface.readIntInput();
 			//Checks to see if the user entered a negative number or letter
 			if(amount < 0) {
 				System.out.println("Invalid input. Please try again.");

@@ -36,11 +36,12 @@ public class UserInterface {
 	 * 
 	 * @return the user's input; if the input is not an integer, -1 is returned
 	 */
-	protected static int readNumberInput() {
+	protected static int readIntInput() {
 		int i = -1;
 		
 		scan = new Scanner(System.in);
 		
+		//Try-catch for user input of letters
 		try {
 			i = Integer.parseInt(scan.nextLine());
 		}catch (NumberFormatException ne){

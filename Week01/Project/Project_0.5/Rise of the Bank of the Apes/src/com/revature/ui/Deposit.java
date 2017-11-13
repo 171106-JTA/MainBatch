@@ -12,7 +12,7 @@ public class Deposit {
 	public static void Screen(User user) {
 		System.out.println("Depositing");
 		System.out.print("Please enter amount to be deposited: ");
-		int amount = UserInterface.readNumberInput();
+		int amount = UserInterface.readIntInput();
 		//Prevent users from inputting letters or negative numbers instead
 		if(amount < 0) {
 			System.out.println("Invalid input. Please try again.");
