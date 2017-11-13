@@ -35,8 +35,6 @@ public class DriverTest {
 //	}
 	@Test 
 	public void testReadDatabase() {
-		
-		
 		try {
 			String filename = "src/test/resorces/basic_database_1.txt";
 //			System.out.println("filename: " + filename);
@@ -81,7 +79,7 @@ public class DriverTest {
 		System.out.println("Result2: " + result_2);
 		assertTrue(result_2);
 		
-		//Note: even thought B.status = 0, still expect login=true. 
+		//Note: even though B.status = 0, still expect login=true. 
 		//      Will need to fix the login in controlLogin(), eventually
 		String ssn_3 = "B";
 		String password_3 = "B";
@@ -186,6 +184,37 @@ public class DriverTest {
 		assertEquals(newStatus_4, 2);
 	}
 	
+	@Test
+	public void testGetAndApproveAccount() {
+		try {
+			dr.readDatabase("basic_database_1.txt");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		//Not a user in the database
+		String user_1 = "Not A User"; 
+		boolean result_1 = dr.getAndApproveAccount(user_1);
+		assertFalse(result_1);
+		
+		//A user whose account active (i.e. already approved)
+		String user_2 = "Z";
+		boolean result_2 = dr.getAndApproveAccount(user_2);
+		assertFalse(result_2);
+		
+		//A user that is locked (i.e. aproved, but locked)
+		String user_3 = "C";
+		boolean result_3 = dr.getAndApproveAccount(user_3);
+		assertFalse(result_3);	
+		
+		//A user that can be approved
+		String user_4 = "B";
+		boolean result_4 = dr.getAndApproveAccount(user_4);
+		assertTrue(result_4);	
+		//Check that the status was actually changed
+		int newStatus_4 = dr.getDb().get(user_4).getStatus();
+		assertEquals(newStatus_4, 1);
+	}
 	//Setup local database
 //	public HashMap<String,User> sampleDatabase1() {
 //		String firstName = "A";
