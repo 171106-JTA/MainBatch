@@ -7,8 +7,16 @@ import com.revature.businessobject.BusinessObject;
 import com.revature.core.BusinessClass;
 import com.revature.core.FieldParams;
 
+/**
+ * Handles delete requests 
+ * @author Antony Lulciuc
+ */
 public abstract class FileDataDeletor extends FileDataInserter {
-
+	/**
+	 * Removes record from system
+	 * @param businessObject instance representation of record to be removed
+	 * @return if less than or equal to then 0 failed else 1 and was successful
+	 */
 	@Override
 	public int delete(BusinessObject businessObject) {
 		String clazz = businessObject.getClass().getSimpleName();
@@ -29,6 +37,12 @@ public abstract class FileDataDeletor extends FileDataInserter {
 		}
 	}
 
+	/**
+	 * Removes records from system
+	 * @param name data structure to remove
+	 * @param cnds conditions record must have to be deleted
+	 * @return if less than or equal to 0 then failed, else how many records were removed 
+	 */
 	@Override
 	public int delete(String name, FieldParams cnds) {
 		switch (name.toLowerCase()) {

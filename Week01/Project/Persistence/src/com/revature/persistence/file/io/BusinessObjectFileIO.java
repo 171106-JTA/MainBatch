@@ -13,6 +13,10 @@ import org.apache.log4j.Logger;
 import com.revature.businessobject.BusinessObject;
 import com.revature.businessobject.user.*;
 
+/**
+ * Performs read/write operations for BusinessObjects 
+ * @author Antony Lulciuc
+ */
 public class BusinessObjectFileIO {
 	// Get class logger 
 	private static Logger logger = Logger.getLogger(BusinessObjectFileIO.class);

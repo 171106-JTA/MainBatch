@@ -10,8 +10,11 @@ import com.revature.businessobject.user.User;
 import com.revature.core.BusinessClass;
 import com.revature.core.FieldParams;
 
+/**
+ * Handles record update requests 
+ * @author Antony Lulciuc
+ */
 public class FileDataUpdator extends FileDataDeletor {
-	
 	/**
 	 * Updates existing record
 	 * @param businessObject must have unique identifier to update record

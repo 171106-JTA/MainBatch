@@ -7,8 +7,17 @@ import com.revature.businessobject.user.User;
 import com.revature.core.BusinessClass;
 import com.revature.core.FieldParams;
 
+/**
+ * Handles insert requests 
+ * @author Antony Lulciuc
+ */
 public abstract class FileDataInserter extends FileDataQuery {
 
+	/**
+	 * Creates new record from business object
+	 * @param businessObject new record
+	 * @return if less than or equal to then 0 failed else 1 and was successful
+	 */
 	@Override
 	public int insert(BusinessObject businessObject) {
 		String clazz = businessObject.getClass().getSimpleName();
@@ -29,6 +38,12 @@ public abstract class FileDataInserter extends FileDataQuery {
 		}
 	}
 
+	/**
+	 * Creates new record from values supplied
+	 * @param name data structure representing record
+	 * @param values assigned to record
+	 * @return if less than or equal to then 0 failed else 1 and was successful
+	 */
 	@Override
 	public int insert(String name, FieldParams values) {
 		switch (name.toLowerCase()) {

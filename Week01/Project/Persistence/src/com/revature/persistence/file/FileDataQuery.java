@@ -15,8 +15,18 @@ import com.revature.core.comparator.FieldParamsAccountComparator;
 import com.revature.core.comparator.FieldParamsUserComparator;
 import com.revature.core.comparator.FieldParamsUserInfoComparator;
 
+/**
+ * Handles simple queries to database (file system)
+ * @author Antony Lulciuc
+ */
 public abstract class FileDataQuery extends FilePersistence {
 
+	/**
+	 * Acquires BusinessObject which meets the conditions supplied by the second parameter
+	 * @param name data structure we wish to perform query on
+	 * @param cnds values data must have in-order to be returned 
+	 * @return list of all records which pass query conditions 
+	 */
 	@Override
 	public Resultset select(String name, FieldParams cnds) {
 		// Log request
@@ -112,7 +122,6 @@ public abstract class FileDataQuery extends FilePersistence {
 	///
 	//	PRIVATE METHODS 
 	///
-	
 	
 	/**
 	 * Attempts to locate user data with FieldParams

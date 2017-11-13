@@ -21,7 +21,7 @@ import com.revature.persistence.Persistenceable;
 import com.revature.persistence.file.io.BusinessObjectFileIO;
 
 /**
- * 
+ * Contains all fields needed to process requests to database (file system)
  * @author Antony Lulciuc
  */
 public abstract class FilePersistence implements Persistenceable {
@@ -53,6 +53,10 @@ public abstract class FilePersistence implements Persistenceable {
 	// Initialization flag
 	private static boolean initialized = false;
 	
+	/**
+	 * Used to initialize system
+	 * @param data - list of BusinessObjects if null attempts to load data from memory
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void setup(Object data) {
@@ -76,7 +80,6 @@ public abstract class FilePersistence implements Persistenceable {
 		}
 	}
 	
-	
 	/**
 	 * @return path where system files are stored
 	 */
@@ -95,6 +98,9 @@ public abstract class FilePersistence implements Persistenceable {
 		load();
 	}
 	
+	/**
+	 * Performs data reboot, discards cached data and loads back to memory
+	 */
 	public static void load() {
 		Object[] data;
 		
@@ -123,6 +129,9 @@ public abstract class FilePersistence implements Persistenceable {
 		}
 	}
 	
+	/**
+	 * Destorys all data (EVERYTHING)
+	 */
 	public static void deleteData() {
 		// clear data
 		clean();

@@ -11,6 +11,10 @@ import com.revature.core.Resultset;
  * @author Antony Lulciuc
  */
 public interface Persistenceable {
+	/**
+	 * Used to initialize system
+	 * @param data - content needed to start system
+	 */
 	void setup(Object data);
 	
 	/**

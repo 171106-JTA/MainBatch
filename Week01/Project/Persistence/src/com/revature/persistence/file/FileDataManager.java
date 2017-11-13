@@ -6,6 +6,9 @@ package com.revature.persistence.file;
 public final class FileDataManager extends FileDataUpdator {
 	private static FileDataManager manager;
 	
+	/**
+	 * Is singleton
+	 */
 	private FileDataManager() {
 		// do nothing
 	}
