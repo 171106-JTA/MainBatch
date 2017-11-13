@@ -14,6 +14,7 @@ import com.revature.core.FieldParams;
 import com.revature.core.Request;
 import com.revature.core.Resultset;
 import com.revature.core.factory.FieldParamsFactory;
+import com.revature.route.Routes;
 
 public class AdminView implements View {
 	private FieldParamsFactory factory = FieldParamsFactory.getFactory();
@@ -168,16 +169,15 @@ public class AdminView implements View {
 	///
 	
 	private void updateUserCheckpoint(User user, String checkpoint) {
-		FieldParams trans;
+		FieldParams trans = new FieldParams();
 		Request request;
 		Resultset res;
 		
 		// Set request params
-		trans = factory.getFieldParams(user);
 		trans.put(User.CHECKPOINT, checkpoint);
 	
 		// Create request
-		request = new Request(MyBank.data, "USER", "SETUSER", factory.getFieldParams(user), trans);
+		request = new Request(MyBank.data, Routes.USER, "SETUSER", factory.getFieldParams(user), trans);
 		
 		Menu.print("\tAttempting to update user checkpoint...");
 		
@@ -195,7 +195,7 @@ public class AdminView implements View {
 		Resultset res;
 		
 		// Create request
-		request = new Request(MyBank.data, "USER", "DELETEUSER", factory.getFieldParams(user), null);
+		request = new Request(MyBank.data, Routes.USER, "DELETEUSER", factory.getFieldParams(user), null);
 		
 		Menu.print("\tAttempting to delete user...");
 		
@@ -219,7 +219,7 @@ public class AdminView implements View {
 		transact.put(Account.STATUS, status);
 		
 		// Create request
-		request = new Request(MyBank.data, "USER", "SETACCOUNTSTATUS", params, transact);
+		request = new Request(MyBank.data, Routes.USER, "SETACCOUNTSTATUS", params, transact);
 
 		Menu.print("\tAttempting to update account status...");
 		
@@ -241,7 +241,7 @@ public class AdminView implements View {
 		params.put(Info.USERID, Long.toString(account.getUserId()));
 		
 		// Create request
-		request = new Request(MyBank.data, "USER", "DELETEACCOUNT", params, null);
+		request = new Request(MyBank.data, Routes.USER, "DELETEACCOUNT", params, null);
 
 		Menu.print("\tAttempting to delete account...");
 		
@@ -305,7 +305,7 @@ public class AdminView implements View {
 		params.put(User.CHECKPOINT, Checkpoint.PENDING);
 		
 		// Get pending users
-		pendingUsers = MyBank.send(new Request(MyBank.data, "USER", "GETUSER", params, null));
+		pendingUsers = MyBank.send(new Request(MyBank.data, Routes.USER, "GETUSER", params, null));
 		
 		// Print message
 		Menu.println("\t-> " + pendingUsers.size() + " pending users.");
@@ -318,7 +318,7 @@ public class AdminView implements View {
 		params.put(Account.STATUS, Status.PENDING);
 		
 		// Get pending users
-		pendingAccounts = MyBank.send(new Request(MyBank.data, "USER", "GETACCOUNT", params, null));
+		pendingAccounts = MyBank.send(new Request(MyBank.data, Routes.USER, "GETACCOUNT", params, null));
 		
 		// Print message
 		Menu.println("\t-> " + pendingAccounts.size() + " pending accounts.");
@@ -328,11 +328,11 @@ public class AdminView implements View {
 		FieldParams params = new FieldParams();
 	
 		params.put(User.CHECKPOINT, Checkpoint.ADMIN);
-		allUsers = MyBank.send(new Request(MyBank.data, "USER", "GETUSER", params, null));
+		allUsers = MyBank.send(new Request(MyBank.data, Routes.USER, "GETUSER", params, null));
 		params.put(User.CHECKPOINT, Checkpoint.CUSTOMER);
-		allUsers.addAll(MyBank.send(new Request(MyBank.data, "USER", "GETUSER", params, null)));
+		allUsers.addAll(MyBank.send(new Request(MyBank.data, Routes.USER, "GETUSER", params, null)));
 		params.put(User.CHECKPOINT, Checkpoint.BLOCKED);
-		allUsers.addAll(MyBank.send(new Request(MyBank.data, "USER", "GETUSER", params, null)));
+		allUsers.addAll(MyBank.send(new Request(MyBank.data, Routes.USER, "GETUSER", params, null)));
 		Menu.println("We have " + allUsers.size() + " users!");
 	}
 	
@@ -340,9 +340,9 @@ public class AdminView implements View {
 		FieldParams params = new FieldParams();
 
 		params.put(Account.STATUS, Status.ACTIVE);
-		allAccounts = MyBank.send(new Request(MyBank.data, "USER", "GETACCOUNT", params, null));
+		allAccounts = MyBank.send(new Request(MyBank.data, Routes.USER, "GETACCOUNT", params, null));
 		params.put(Account.STATUS, Status.BLOCKED);
-		allAccounts.addAll(MyBank.send(new Request(MyBank.data, "USER", "GETACCOUNT", params, null)));
+		allAccounts.addAll(MyBank.send(new Request(MyBank.data, Routes.USER, "GETACCOUNT", params, null)));
 		Menu.println("We have " + allAccounts.size() + " accounts!");;
 	}
 	

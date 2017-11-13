@@ -120,7 +120,7 @@ public final class Require {
 	 * @throws RequestException
 	 */
 	public static void requireQuery(String[] params, String[] values, Request request) throws RequestException {
-		validateAll(params, values, request.getQuery(), request);
+		validate(params, values, request.getQuery(), request);
 	}
 	
 	/**

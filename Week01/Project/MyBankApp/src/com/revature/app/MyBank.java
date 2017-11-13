@@ -9,6 +9,7 @@ import com.revature.core.FieldParams;
 import com.revature.core.Request;
 import com.revature.core.Resultset;
 import com.revature.core.exception.RequestException;
+import com.revature.route.Routes;
 import com.revature.server.Server;
 
 public class MyBank {
@@ -106,7 +107,7 @@ public class MyBank {
 			Menu.print("\n\tAttempting to create account...");
 			
 			// Request to create new account
-			if ((res = send(new Request(data, "USER", "CREATEUSER", null, params))).getRecordsModified() == 0) {
+			if ((res = send(new Request(data, Routes.USER, "CREATEUSER", null, params))).getRecordsModified() == 0) {
 				Menu.println("fail!\n");
 				Menu.println("\t\terror:>" + res.getException().getMessage() + "\n");	
 			} else {
@@ -127,18 +128,25 @@ public class MyBank {
 				params.put(UserInfo.PHONENUMBER, phonenumber);
 				
 				// Did we fail to create user information?
-				if ((res = send(new Request(data, "USER", "CREATEUSERINFO", null, params))).getRecordsModified() == 0) {
+				if ((res = send(new Request(data, Routes.USER, "CREATEUSERINFO", null, params))).getRecordsModified() == 0) {
 					Menu.println("fail!");
 					Menu.println("\n\t\terror:>" + res.getException().getMessage() + "\n");
-					Menu.println("\tAttempting rollback...");
+					Menu.print("\tAttempting rollback...");
 					params.clear();
 					params.put(User.ID, data.get(User.ID));
+					params.put(User.USERNAME, data.get(User.USERNAME));
+					params.put(User.PASSWORD, data.get(User.PASSWORD));
 					
-					if ((res = send(new Request(data, "USER", "DELETEUSER", null, params))).getRecordsModified() == 0) {
+					if ((res = send(new Request(data, Routes.USER, "DELETEUSER", params, null))).getRecordsModified() == 0) {
 						Menu.println("fail!");
 						Menu.println("\tPlease wait for assistance");
 						Menu.println("\n\t\terror:>" + res.getException().getMessage() + "\n");
 					}
+					else {
+						Menu.println("done");
+					}
+					
+					Menu.println("\tPlease try again.");
 				}
 				else {
 					Menu.println("done");
@@ -186,7 +194,7 @@ public class MyBank {
 		// Set query params
 		params.put(UserInfo.USERID, data.get(User.ID));
 		
-		return MyBank.send(new Request(data, "USER", "GETUSERINFO", params, null));
+		return MyBank.send(new Request(data, Routes.USER, "GETUSERINFO", params, null));
 	}
 	
 	
@@ -200,7 +208,7 @@ public class MyBank {
 		if (data.get(Account.NUMBER) != null)
 			params.put(Account.NUMBER, data.get(Account.NUMBER));
 		
-		return MyBank.send(new Request(data, "USER", "GETACCOUNT", params, null));
+		return MyBank.send(new Request(data, Routes.USER, "GETACCOUNT", params, null));
 	}
 	
 	///

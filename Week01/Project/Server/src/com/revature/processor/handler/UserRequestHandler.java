@@ -126,7 +126,7 @@ public final class UserRequestHandler {
 		FieldParams trans = request.getTransaction();
 		FieldParams verify;
 		
-		// If User name neing updated 
+		// If User name being updated 
 		if (trans.get(User.USERNAME) != null) {
 			verify = new FieldParams();
 			

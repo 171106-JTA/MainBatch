@@ -5,6 +5,6 @@ package com.revature.route;
  * @author Antony Lulciuc
  */
 public final class Routes {
-	public static final String BANKING = "banking";
-	public static final String USER = "user";
+	public static final String BANKING = "BANKING";
+	public static final String USER = "USER";
 }

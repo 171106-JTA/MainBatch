@@ -17,6 +17,7 @@ import com.revature.core.FieldParams;
 import com.revature.core.Request;
 import com.revature.core.Resultset;
 import com.revature.core.factory.FieldParamsFactory;
+import com.revature.route.Routes;
 
 public class CustomerView implements View {
 	private FieldParamsFactory factory = FieldParamsFactory.getFactory();
@@ -83,7 +84,7 @@ public class CustomerView implements View {
 		transact.put(User.USERNAME, username);
 		
 		// Create request
-		request = new Request(MyBank.data, "USER", "SETUSER", MyBank.data, transact);
+		request = new Request(MyBank.data, Routes.USER, "SETUSER", MyBank.data, transact);
 		
 		Menu.print("\tAttempting to change username...");
 		
@@ -108,7 +109,7 @@ public class CustomerView implements View {
 		transact.put(User.PASSWORD, password);
 		
 		// Create request
-		request = new Request(MyBank.data, "USER", "SETUSER", MyBank.data, transact);
+		request = new Request(MyBank.data, Routes.USER, "SETUSER", MyBank.data, transact);
 		
 		Menu.print("\tAttempting to change password...");
 		
@@ -136,7 +137,7 @@ public class CustomerView implements View {
 		transact.put(UserInfo.PHONENUMBER, phonenumber);
 		
 		// Create request
-		request = new Request(MyBank.data, "USER", "SETUSERINFO", MyBank.data, transact);
+		request = new Request(MyBank.data, Routes.USER, "SETUSERINFO", MyBank.data, transact);
 		
 		Menu.print("\tAttempting to change contact info...");
 		
@@ -154,7 +155,7 @@ public class CustomerView implements View {
 		Resultset res;
 		
 		// Create request
-		request = new Request(MyBank.data, "USER", "CREATECHECKINGACCOUNT", null, null);
+		request = new Request(MyBank.data, Routes.USER, "CREATECHECKINGACCOUNT", null, null);
 		
 		Menu.print("\tAttempting to create a checking account...");
 		
@@ -227,7 +228,7 @@ public class CustomerView implements View {
 			transact.put(Transaction.AMOUNT, amount);
 			
 			// Create request
-			request = new Request(MyBank.data, "BANKING", "CHECKINGADDFUNDS", query, transact);
+			request = new Request(MyBank.data, Routes.BANKING, "CHECKINGADDFUNDS", query, transact);
 			
 			Menu.print("\tAttempting to add funds to account...");
 			
@@ -255,7 +256,7 @@ public class CustomerView implements View {
 			transact.put(Transaction.AMOUNT, amount);
 			
 			// Create request
-			request = new Request(MyBank.data, "BANKING", "CHECKINGREMOVEFUNDS", query, transact);
+			request = new Request(MyBank.data, Routes.BANKING, "CHECKINGREMOVEFUNDS", query, transact);
 			
 			Menu.print("\tAttempting to remove funds from account...");
 			
@@ -275,7 +276,7 @@ public class CustomerView implements View {
 		Resultset res;
 		
 		// Create request
-		request = new Request(MyBank.data, "USER", "DELETEACCOUNT", query, null);
+		request = new Request(MyBank.data, Routes.USER, "DELETEACCOUNT", query, null);
 					
 		Menu.print("\tAttempting to delete account...");
 					
@@ -298,7 +299,7 @@ public class CustomerView implements View {
 		params.put(Info.USERID, MyBank.data.get(User.ID));
 		
 		// create request
-		request = new Request(MyBank.data, "USER", "GETACCOUNT", params, null);
+		request = new Request(MyBank.data, Routes.USER, "GETACCOUNT", params, null);
 		accounts = MyBank.send(request);
 	}
 	

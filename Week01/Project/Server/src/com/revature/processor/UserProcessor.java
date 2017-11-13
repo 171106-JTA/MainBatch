@@ -51,7 +51,7 @@ public class UserProcessor implements Processorable {
 			case "SETUSER":
 				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
 				Require.requireAllQuery(new String[] { User.USERNAME, User.PASSWORD }, request);
-				Require.requireTransaction(new String[] { User.USERNAME, User.PASSWORD }, request);
+				Require.requireTransaction(new String[] { User.USERNAME, User.PASSWORD, User.CHECKPOINT }, request);
 				res = URH.setUser(request);
 				break;
 			case "CREATEUSERINFO":
