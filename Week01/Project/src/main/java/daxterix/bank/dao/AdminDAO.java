@@ -23,4 +23,5 @@ public class AdminDAO extends ObjectDAO<Admin> {
     public String getId(Admin admin) {
         return admin.getUsername();
     }
+
 }

@@ -5,8 +5,8 @@ import java.io.Serializable;
 public abstract class User implements Serializable {
     private static final long serialVersionUID = -2872564267620672334L;
 
-    private String username;
-    private String password;
+    protected String username;
+    protected String password;
 
     /**
      * models an account that can log into the application,
@@ -32,6 +32,17 @@ public abstract class User implements Serializable {
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this)
+            return true;
+        if (!(obj instanceof User))
+            return false;
+
+        User user = (User) obj;
+        return username.equals(user.username) && password.equals(user.password);
     }
 
     public String getUsername() {

@@ -15,7 +15,7 @@ public abstract class SerialIDObjectDAO<T extends Serializable> extends ObjectDA
      */
     public SerialIDObjectDAO(String saveDir) {
         super(saveDir);
-        highestIdPath = DAOUtils.combinePaths(saveDir, saveDirToHighestIdPath);
+        highestIdPath = combinePaths(saveDir, saveDirToHighestIdPath);
     }
 
     /**
@@ -38,7 +38,7 @@ public abstract class SerialIDObjectDAO<T extends Serializable> extends ObjectDA
     public long getNextId(T o) {
 
         long ret;
-        if (!DAOUtils.resourceExists(highestIdPath))
+        if (!resourceExists(highestIdPath))
             ret = 0;
 
         else {
@@ -68,5 +68,16 @@ public abstract class SerialIDObjectDAO<T extends Serializable> extends ObjectDA
         long nextId = getNextId(model);
         setId(model, "" + nextId);
         return super.save(model);
+    }
+
+    /**
+     * does the same ops as ObjectDAO.dropDatabae, but also deletes highest id file
+     *
+     * @return
+     */
+    @Override
+    public boolean dropDatabase() {
+        boolean retval = super.dropDatabase();
+        return retval && deleteRecord(highestIdPath);
     }
 }

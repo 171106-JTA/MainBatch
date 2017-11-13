@@ -51,4 +51,15 @@ public abstract class UserRequest implements Serializable {
     public long getId() {
         return id;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this)
+            return true;
+
+        if (!(obj instanceof UserRequest))
+            return false;
+        UserRequest req = (UserRequest) obj;
+        return time.equals(req.time);
+    }
 }

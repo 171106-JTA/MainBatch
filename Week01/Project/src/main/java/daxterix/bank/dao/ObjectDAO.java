@@ -69,7 +69,7 @@ public abstract class ObjectDAO <T extends Serializable> {
     }
 
     /**
-     * read an from a given file path
+     * read a saved object from given file path
      *
      * @param saveLoc
      * @return
@@ -87,7 +87,10 @@ public abstract class ObjectDAO <T extends Serializable> {
     }
 
     /**
-     * persist an instance of the model to the file system
+     * persist an instance of the model to the file system.
+     *
+     * important: saved file does not have an extension
+     * (this enables an extra safety check when deleting/emptying database/save directory)
      *
      * @param model
      * @return
@@ -144,7 +147,7 @@ public abstract class ObjectDAO <T extends Serializable> {
      */
     public boolean deleteById(String id) {
         String fileLoc = saveLoc(id);
-        boolean res = deleteFile(fileLoc);
+        boolean res = deleteRecord(fileLoc);
         if (res)
             logger.debug(String.format("deleted object %s from %s", id, getClass()));
         else
@@ -188,17 +191,24 @@ public abstract class ObjectDAO <T extends Serializable> {
      * @return
      */
     public boolean dropDatabase() {
-        return deleteFile(saveDir);
+        File pathFile = new File(saveDir);
+        boolean retVal = true;
+
+        try {
+            for (File f : pathFile.listFiles()) {
+                boolean hasNoExtension = (f.getName().lastIndexOf('.') == -1);    // just a safeguard
+                if (f.isFile() && hasNoExtension)
+                    retVal &= f.delete();
+            }
+            return retVal;
+        }
+        catch(NullPointerException e) {
+            return false;
+        }
     }
 
-    /**
-     * delete a file, useful for deleting records, and the database as well
-     *
-     * @param path
-     * @return
-     */
-    public static boolean deleteFile(String path) {
-        return (new File(path)).delete();
+    public boolean deleteRecord(String saveLoc) {
+        return (new File(saveLoc)).delete();
     }
 
     /**
