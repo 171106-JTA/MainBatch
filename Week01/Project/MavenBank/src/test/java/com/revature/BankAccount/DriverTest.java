@@ -135,18 +135,55 @@ public class DriverTest {
 		boolean result_1 = dr.getAndUnlockAccount(user_1);
 		assertFalse(result_1);
 		
-		//A user that needs to be unlocked
-		String user_2 = "C";
-		boolean result_2 = dr.getAndUnlockAccount(user_2);
-		assertTrue(result_2);
+		//A user whose account is not approved
+		String user_2 = "B";
+		boolean result_2 = dr.getAndLockAccount(user_2);
+		assertFalse(result_2);
 		
-		int newStatus_2 = dr.getDb().get(user_2).getStatus();
-		assertEquals(newStatus_2, 1);
-		
-		//A user that does not need to be unlocked
+		//A user that is already unlocked
 		String user_3 = "Z";
 		boolean result_3 = dr.getAndUnlockAccount(user_3);
-		assertFalse(result_3);		
+		assertFalse(result_3);	
+		
+		//A user that needs to be unlocked
+		String user_4 = "C";
+		boolean result_4 = dr.getAndUnlockAccount(user_4);
+		assertTrue(result_4);
+		//Check that the status was actually changed
+		int newStatus_4 = dr.getDb().get(user_4).getStatus();
+		assertEquals(newStatus_4, 1);
+	}
+	
+	@Test
+	public void testGetAndLockAccount() {
+		try {
+			dr.readDatabase("basic_database_1.txt");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		//Not a user in the database
+		String user_1 = "Not A User"; 
+		boolean result_1 = dr.getAndLockAccount(user_1);
+		assertFalse(result_1);
+		
+		//A user whose account is not approved
+		String user_2 = "B";
+		boolean result_2 = dr.getAndLockAccount(user_2);
+		assertFalse(result_2);
+		
+		//A user that is already locked
+		String user_3 = "C";
+		boolean result_3 = dr.getAndLockAccount(user_3);
+		assertFalse(result_3);	
+		
+		//A user that can be locked
+		String user_4 = "Z";
+		boolean result_4 = dr.getAndLockAccount(user_4);
+		assertTrue(result_4);	
+		//Check that the status was actually changed
+		int newStatus_4 = dr.getDb().get(user_4).getStatus();
+		assertEquals(newStatus_4, 2);
 	}
 	
 	//Setup local database
