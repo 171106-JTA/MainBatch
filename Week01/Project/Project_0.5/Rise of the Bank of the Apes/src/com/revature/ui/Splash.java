@@ -14,7 +14,7 @@ public class Splash extends UserInterface {
 		System.out.println("Please Select one of the following:");
 		System.out.println("1. Login for existing user");
 		System.out.println("2. Create new user account");
-		System.out.println("3. Administrator Login");
+		System.out.println("3. Management Login");
 		
 		System.out.print("Please Enter Number: ");
 		
