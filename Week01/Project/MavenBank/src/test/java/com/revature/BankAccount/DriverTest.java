@@ -13,6 +13,8 @@ import org.junit.Test;
 public class DriverTest {
 	Driver dr = new Driver();
 	
+//	String filename = "database.txt";
+	String filename = "basic_database_1.txt";
 //	@BeforeClass
 //	public static void setUpBeforeClass() throws Exception {
 //	}
@@ -35,15 +37,24 @@ public class DriverTest {
 //	}
 	@Test 
 	public void testReadDatabase() {
-		try {
-			String filename = "src/test/resorces/basic_database_1.txt";
+//		try {
+//			String filename = "src/test/resorces/basic_database_1.txt";
 //			System.out.println("filename: " + filename);
-			dr.readDatabase(filename);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+//			dr.readDatabase(filename);
+//			System.out.println("The Database: " + dr.getDb());
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		
-		assertNotNull(dr.getDb());
+		HashMap<String,User> sampleDb = sampleDatabase1();
+		dr.setDb(sampleDb);
+		
+		
+		String user1 = "evanwest"; 
+		User user = dr.getDb().get(user1);
+		System.out.println("Hello___USER!!!" + user);
+		
+//		assertNotNull(user);
 //		HashMap<String, User> local_db = sampleDatabase1();
 		
 //		System.out.println("Local DB");
@@ -62,7 +73,7 @@ public class DriverTest {
 	@Test
 	public void testLoginLogic() {
 		try {
-			dr.readDatabase("basic_database_1.txt");
+			dr.readDatabase(filename);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -97,7 +108,7 @@ public class DriverTest {
 	@Test
 	public void testAddNewClientToDatabase() {
 		try {
-			dr.readDatabase("basic_database_1.txt");
+			dr.readDatabase(filename);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -123,7 +134,7 @@ public class DriverTest {
 	@Test
 	public void testGetAndUnlockAccount() {
 		try {
-			dr.readDatabase("basic_database_1.txt");
+			dr.readDatabase(filename);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -155,7 +166,7 @@ public class DriverTest {
 	@Test
 	public void testGetAndLockAccount() {
 		try {
-			dr.readDatabase("basic_database_1.txt");
+			dr.readDatabase(filename);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -187,7 +198,7 @@ public class DriverTest {
 	@Test
 	public void testGetAndApproveAccount() {
 		try {
-			dr.readDatabase("basic_database_1.txt");
+			dr.readDatabase(filename);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -215,47 +226,143 @@ public class DriverTest {
 		int newStatus_4 = dr.getDb().get(user_4).getStatus();
 		assertEquals(newStatus_4, 1);
 	}
+	
+	@Test
+	public void testGetAndPromoteClient() {
+		try {
+			dr.readDatabase(filename);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		//Not a user in the database
+		String user_1 = "Not A User"; 
+		boolean result_1 = dr.getAndApproveAccount(user_1);
+		assertFalse(result_1);
+		
+		//An active client account
+		String user_2 = "Z";
+		boolean result_2 = dr.getAndApproveAccount(user_2);
+		assertFalse(result_2);
+		
+		//A locked client account
+		String user_3 = "C";
+		boolean result_3 = dr.getAndApproveAccount(user_3);
+		assertFalse(result_3);
+		
+		//A client account awaiting approval
+		String user_4 = "B";
+		boolean result_4 = dr.getAndApproveAccount(user_4);
+		assertTrue(result_4);	
+		//Check that the status was actually changed
+		int newStatus_4 = dr.getDb().get(user_4).getStatus();
+		assertEquals(newStatus_4, 1);
+		
+		//An Admin Account
+		String user_5 = "A";
+		boolean result_5 = dr.getAndApproveAccount(user_5);
+		assertFalse(result_5);	
+		
+	}
+	
+	@Test
+	public void testSetAmount() {
+		try {
+			dr.readDatabase(filename);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		User myUser = dr.getDb().get("Z");
+		System.out.println("My User: " + myUser);
+		dr.setCurrentUser(myUser);
+		System.out.println(dr.getCurrentUser().getSsn());
+		
+		double amount = 50.0;
+		dr.setAmount(amount);
+		double stored_amount = dr.getDb().get("Z").getAccountAmount();
+		assertTrue(stored_amount == amount);
+	}
+	
 	//Setup local database
-//	public HashMap<String,User> sampleDatabase1() {
-//		String firstName = "A";
-//		String lastName = "A";
-//		String middleInitial = "A";
-//		String ssn = "A";
-//		String password = "A";
-//		int permissions = 0;
-//		int status = 0;
-//		int accountAmount = 0;
-//		User default_user_1 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-//				accountAmount);
-//		
-//		firstName = "Z";
-//		lastName = "Z";
-//		middleInitial = "Z";
-//		ssn = "Z";
-//		password = "Z";
-//		permissions = 0;
-//		status = 0;
-//		accountAmount = 0;
-//		User default_user_2 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-//				accountAmount);
-//
-//		firstName = "B";
-//		lastName = "B";
-//		middleInitial = "B";
-//		ssn = "B";
-//		password = "B";
-//		permissions = 0;
-//		status = 0;
-//		accountAmount = 0;
-//		User default_user_3 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-//				accountAmount);
-//		
-//		HashMap<String, User> db = new HashMap<String, User>();
-//		db.put(default_user_1.getSsn(), default_user_1);
-//		db.put(default_user_2.getSsn(), default_user_2);
-//		db.put(default_user_3.getSsn(), default_user_3);
-//		
-//		return db;
-//	}
+	public HashMap<String,User> sampleDatabase1() {
+		String firstName = "A";
+		String lastName = "A";
+		String middleInitial = "A";
+		String ssn = "A";
+		String password = "A";
+		int permissions = 1;
+		int status = 1;
+		int accountAmount = 0;
+		User default_user_A = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+				accountAmount);
+
+		firstName = "Z";
+		lastName = "Z";
+		middleInitial = "Z";
+		ssn = "Z";
+		password = "Z";
+		permissions = 0;
+		status = 1;
+		accountAmount = 0;
+		User default_user_Z = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+				accountAmount);
+
+		firstName = "B";
+		lastName = "B";
+		middleInitial = "B";
+		ssn = "B";
+		password = "B";
+		permissions = 0;
+		status = 0;
+		accountAmount = 0;
+		User default_user_B = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+				accountAmount);
+		
+		String stuff = "C"; 
+		firstName = stuff;
+		lastName = stuff;
+		middleInitial = stuff;
+		ssn = stuff;
+		password = stuff;
+		permissions = 0;
+		status = 2;
+		accountAmount = 0;
+		User default_user_C = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+				accountAmount);
+		
+		stuff = "D"; 
+		firstName = stuff;
+		lastName = stuff;
+		middleInitial = stuff;
+		ssn = stuff;
+		password = stuff;
+		permissions = 1;
+		status = 0;
+		accountAmount = 0;
+		User default_user_D = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+				accountAmount);
+		
+		stuff = "E"; 
+		firstName = stuff;
+		lastName = stuff;
+		middleInitial = stuff;
+		ssn = stuff;
+		password = stuff;
+		permissions = 1;
+		status = 2;
+		accountAmount = 0;
+		User default_user_E = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+				accountAmount);
+		
+		HashMap<String, User> db = new HashMap<String,User>();
+		db.put(default_user_A.getSsn(), default_user_A);
+		db.put(default_user_Z.getSsn(), default_user_Z);
+		db.put(default_user_B.getSsn(), default_user_B);
+		db.put(default_user_C.getSsn(), default_user_C);
+		db.put(default_user_D.getSsn(), default_user_D);
+		db.put(default_user_E.getSsn(), default_user_E);
+		
+		return db;
+	}
 
 }
