@@ -9,23 +9,24 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import static daxterix.bank.TestUtils.assertMatchingContents;
 import static org.junit.Assert.*;
 
 public class ObjectDAOTest {
 
-    static final String adminPath = (new File(System.getProperty("user.home"),"Desktop\\testUserInfo\\admin")).getAbsolutePath();
+    static final String adminSaveDir = (new File(System.getProperty("user.home"),"Desktop\\testUserInfo\\admin")).getAbsolutePath();
 
     AdminDAO adminDao;
 
 
     @Before
     public void setUp() throws Exception {
-        adminDao = new AdminDAO(adminPath);
+        adminDao = new AdminDAO(adminSaveDir);
     }
 
     @After
     public void tearDown() throws Exception {
-        assertTrue(adminDao.dropDatabase());
+        adminDao.dropDatabase();
         adminDao = null;
     }
 
@@ -85,11 +86,12 @@ public class ObjectDAOTest {
 
         List<Admin> allSaved = adminDao.readAll();
         assertEquals(2, allSaved.size());
+        assertFalse(allSaved.contains(orig));
         assertTrue(allSaved.contains(modified));
         assertTrue(allSaved.contains(neverModified));
     }
 
-        @Test
+    @Test
     public void updateNonExistent() throws Exception {
         // here to make sure other records are not affected
         Admin neverModified = new Admin("p", "p");
@@ -154,11 +156,5 @@ public class ObjectDAOTest {
         assertFalse(adminDao.deleteById("nonExistentID"));
         List<Admin> fetchedAgain = adminDao.readAll();
         assertMatchingContents(ref, fetchedAgain);
-    }
-
-    public void assertMatchingContents(List<Admin> a, List<Admin> b) {
-        assertEquals(a.size(), b.size());
-        for (Admin f: b)
-            assertTrue(a.contains(f));
     }
 }

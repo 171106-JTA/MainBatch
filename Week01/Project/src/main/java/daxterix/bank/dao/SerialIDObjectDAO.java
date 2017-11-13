@@ -35,12 +35,11 @@ public abstract class SerialIDObjectDAO<T extends Serializable> extends ObjectDA
      * @param o
      * @return
      */
-    public long getNextId(T o) {
+    public long getNextId() {
 
         long ret;
         if (!resourceExists(highestIdPath))
             ret = 0;
-
         else {
             String highestRead = (String) readObject(highestIdPath);
             if (highestRead == null)
@@ -65,7 +64,7 @@ public abstract class SerialIDObjectDAO<T extends Serializable> extends ObjectDA
      */
     @Override
     public boolean save(T model) {
-        long nextId = getNextId(model);
+        long nextId = getNextId();
         setId(model, "" + nextId);
         return super.save(model);
     }

@@ -60,6 +60,6 @@ public abstract class UserRequest implements Serializable {
         if (!(obj instanceof UserRequest))
             return false;
         UserRequest req = (UserRequest) obj;
-        return time.equals(req.time);
+        return time.equals(req.time) && requester.equals(req.requester) && id == req.id;
     }
 }

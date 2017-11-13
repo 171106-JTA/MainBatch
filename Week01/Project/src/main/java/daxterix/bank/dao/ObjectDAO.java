@@ -127,16 +127,17 @@ public abstract class ObjectDAO <T extends Serializable> {
     /**
      * Update an object based on id. Assumes id is never changed
      *
-     * @param obj
+     * @param model
      * @return
      */
-    public boolean update(T obj) {
-        if (!doesExist(getId(obj))) {
-            logger.debug(String.format("invalid attempt to update nonexistent object %s from %s", getId(obj), getClass()));
+    public boolean update(T model) {
+        if (!doesExist(getId(model))) {
+            logger.debug(String.format("invalid attempt to update nonexistent object %s from %s", getId(model), getClass()));
             return false;
         }
-        logger.debug(String.format("attempting to update object %s from %s", getId(obj), getClass()));
-        return save(obj);
+        logger.debug(String.format("attempting to update object %s from %s", getId(model), getClass()));
+        // return save(obj);    // can't use this, or update will create new id for ObjectSerialIDObjectDAO
+        return saveObject(model, saveLoc(getId(model)));
     }
 
     /**
