@@ -31,8 +31,9 @@ public class Banking {
 		
 		//3. Prompt the user to identify himself or create an account
 		int menuChoice = 0;
-		Customer connectedCustomer = null;		
-		String response = null, wantToQuit = "N";
+		Customer connectedCustomer = null;	
+		Account connectedAccount =null;
+		String response = null, wantToQuit = "N", account = null;
 		String acctNumber;
 		double transactAmount;
 		
@@ -45,7 +46,7 @@ public class Banking {
 			case "Y":
 				//Customer responded Yes, so he can create a customer account
 				if (new Banking().newCustomer())
-					System.out.println("New customer created!");
+					System.out.println("Account created. Please wait for validation!");
 				else
 					response = null;
 				break;
@@ -67,17 +68,21 @@ public class Banking {
 		 * 	Call the displayUserMenu to display the menu
 		 */
 		if (connectedCustomer != null) {
+			/*Logs the connection of the user*/
+			new MyLogger().logTransactions(new Date() + " - " + connectedCustomer.getName());
+			
 			connectedCustomer.toString();
 			for(Account acct : new Banking().baseAccounts) {
 				if (acct.getCustomerID() == connectedCustomer.getId()) {
+					connectedAccount = acct;
 					System.out.println(acct.toString());
 					for(Transaction transact : new Banking().baseTransactions)
 						if (transact.getAccountNber().equals(acct.getAccountNber())){
 							System.out.println(transact.toString());
 				}	} 	}
-				
+							
 			menuChoice = new Banking().displayUserMenu(connectedCustomer.getRoleID());
-			System.out.println("You chose " + menuChoice);
+
 			do {
 				switch(menuChoice) {
 				case 1:
@@ -86,7 +91,7 @@ public class Banking {
 						System.out.println("You don't have this permission!");
 					else {
 						System.out.println("Account number to activate: ");
-						String account = reader.nextLine();
+						account = reader.nextLine();
 						for(Account acct : new Banking().baseAccounts) {
 							if (acct.getAccountNber().equals(account))
 								new Banking().activateAccounts(acct);
@@ -100,6 +105,10 @@ public class Banking {
 					transactAmount = reader.nextDouble();
 					
 					new Banking().withdraw(acctNumber, transactAmount);
+					connectedAccount.setBalance(connectedAccount.getBalance() - transactAmount);
+					/*Logs the withdrawal*/
+					new MyLogger().logTransactions(new Date() + "\tWithdrawal\t" + connectedCustomer.getName() + "\t" + transactAmount);
+
 					break;
 				case 3:
 					//Deposit
@@ -108,19 +117,28 @@ public class Banking {
 					System.out.println("Transaction amount: ");
 					transactAmount = reader.nextDouble();
 					
+					
 					new Banking().deposit(acctNumber, transactAmount);
+					connectedAccount.setBalance(connectedAccount.getBalance() + transactAmount);
+
+					/*Logs the deposit*/
+					new MyLogger().logTransactions(new Date() + "\tDeposit\t" + connectedCustomer.getName() + "\t" + transactAmount);
 					break;
 				case 4:
 					//Promote
 					if (connectedCustomer.getRoleID() == 1)
 						System.out.println("You don't have this permission!");
 					else {
-					System.out.println("Account to promote: ");
-					String account = reader.nextLine();
-					for(Account acct : new Banking().baseAccounts) {
-						if (acct.getAccountNber().equals(account))
-							new Banking().promoteUser(acct);}
+							
+						System.out.println("Account to promote: ");
+						account = reader.nextLine();
+						for(Account acct : new Banking().baseAccounts) {
+							if (acct.getAccountNber().equals(account))
+								new Banking().promoteUser(acct);}
+					
 					}
+					/*Logs the promotion*/
+					new MyLogger().logTransactions(new Date() + "\t" + account + "\t promoted by" + connectedCustomer.getName());
 					break;
 				default:
 					menuChoice = 0;
@@ -142,10 +160,10 @@ public class Banking {
 		switch (roleID) {
 		case 0: 
 			System.out.println("\nYou are an Admin \n "
-					+ "1 Accounts Management\n "
+					+ "1 Activate account\n "
 					+ "2 Withdrawal\n "
 					+ "3 Deposit\n "
-					+ "4 Quit\n "
+					+ "4 Promote Customer\n "
 					+ "Choice?:");
 			val = reader.nextInt();
 			break;			
@@ -153,7 +171,6 @@ public class Banking {
 			System.out.println("\nWelcome valued customer \n "
 					+ "2 Withdrawal\n "
 					+ "3 Deposit\n "
-					+ "4 Quit\n "
 					+ "Choice?:");
 			val =  reader.nextInt();
 			break;			
@@ -249,7 +266,7 @@ public class Banking {
 	}
 	
 	public void deposit(String accountNber, double amount) {
-		//Updates the deposits list			
+		//Updates the deposits list		
 		baseTransactions.add(new Transaction(new Date(), "Deposit", amount, accountNber)); 
 		//Serializes and reload the file
 		new MyDisplays<Transaction>().serialize(baseTransactions, "transaction.ser");		
@@ -257,6 +274,7 @@ public class Banking {
 	
 	public void withdraw(String accountNber, double amount) {
 		//Updates the deposits list			
+		baseTransactions.add(new Transaction(new Date(), "Deposit", (-1 * amount), accountNber)); 
 		baseTransactions.add(new Transaction(new Date(), "Deposit", (-1 * amount), accountNber)); 
 		//Serializes and reload the file
 		new MyDisplays<Transaction>().serialize(baseTransactions, "transaction.ser");			

@@ -28,6 +28,7 @@ public class Account implements Serializable{
 	private int accTypeID;
 	private boolean isActive = true;	//Turns to false when the account is closed or the loan paid off.
 	private int customerID;
+	private double balance = 0.0;		//Will eventually disappear since it can be computed.
 
 	//Constructor
 	public Account(String accountNber, Date creationDate, int accTypeID, boolean isActive, int customerID) {
@@ -68,13 +69,22 @@ public class Account implements Serializable{
 		return customerID;
 	}
 	
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+
+	
 	public void promote() {
 		this.setAccTypeID(0);
 	}
 	
 	@Override
 	public String toString() {
-		return "Account details \n---------------\nAccount #:\t" + accountNber + 
+		return "Account details \n---------------\nAccount #:\t" + accountNber + "\nBalance:\t" + balance +
 				"\nCreation Date:\t" + new MyDisplays<>().formatDate(creationDate, "MM/dd/yyyy") + 
 				"\nAccount TypeID:\t" + accTypeID  + "\nActive:\t" + isActive + "\ncustomerID:\t" + customerID;
 	}

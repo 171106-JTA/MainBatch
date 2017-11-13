@@ -25,7 +25,7 @@ public class Initialization {
 		ArrayList<Transaction> transactList = new ArrayList<>();
 		
 		
-		customerList.add(new Customer("Mahamadou TRAORE", "Reston VA", "mt@ht", 
+/*		customerList.add(new Customer("Mahamadou TRAORE", "Reston VA", "mt@ht", 
 		"5133588855", "000000000", new MyDisplays<>().reverseFormatDate("01/01/2017"), 
 		new MyDisplays<>().reverseFormatDate("01/01/2017"), "UserTM", "password", 1, true));
 		new MyDisplays<Customer>().serialize(customerList, "customers.ser");
@@ -36,7 +36,7 @@ public class Initialization {
 		transactList.add(new Transaction(new Date(), "Withdrawal", -500.0, "ACCTTM"));
 		new MyDisplays<Transaction>().serialize(transactList, "transactions.ser");
 
-	
+	*/
 		System.out.println(new MyDisplays<Customer>().readObject("customers.ser"));
 
 		System.out.println(new MyDisplays<Account>().readObject("accounts.ser"));
