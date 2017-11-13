@@ -61,7 +61,7 @@ public class Driver {
 			String userChoice = mp.mainMenu();
 			// To Do: Refactor the control statements to a separate function
 			// (i.e. No control statements in main
-			exit = mp.controlLogic(userChoice);			
+			exit = mp.controlLogic(userChoice);
 		}
 
 		// Save the database to the 'database.txt' file. Erase whatever is in the file
@@ -78,7 +78,7 @@ public class Driver {
 
 	public boolean controlLogic(String userChoice) {
 		boolean exit = false;
-		
+
 		if (userChoice.equals("1")) {
 			boolean loggedIn = login();
 
@@ -93,6 +93,7 @@ public class Driver {
 					// If login was successful, call either the User or Admin menu, depending on
 					// permission level
 				} else if (status == status_active) {
+
 					System.out.println("Successfully Logged In!");
 					int permissions = currentUser.getPermissions();
 					if (permissions == permission_client) {
@@ -116,78 +117,8 @@ public class Driver {
 			System.out.println("Closing Program");
 			exit = true;
 		} else if (userChoice.equals("42")) { // Testing user creation
-			String firstName = "Evan";
-			String lastName = "West";
-			String middleInitial = "A";
-			String ssn = "0";
-			String password = "0";
-			int permissions = 0;
-			int status = 0;
-			int accountAmount = 0;
-			User default_user_1 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-					accountAmount);
-
-			firstName = "Evan";
-			lastName = "West";
-			middleInitial = "A";
-			ssn = "01";
-			password = "01";
-			permissions = 0;
-			status = 0;
-			accountAmount = 0;
-			User default_user_1_b = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-					accountAmount);
-
-			firstName = "Evan";
-			lastName = "West";
-			middleInitial = "A";
-			ssn = "02";
-			password = "02";
-			permissions = 0;
-			status = 0;
-			accountAmount = 0;
-			User default_user_1_c = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-					accountAmount);
-
-			firstName = "A";
-			lastName = "A";
-			middleInitial = "A";
-			ssn = "1";
-			password = "1";
-			permissions = 0;
-			status = 1;
-			accountAmount = 0;
-			User default_user_2 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-					accountAmount);
-
-			firstName = "B";
-			lastName = "B";
-			middleInitial = "B";
-			ssn = "2";
-			password = "2";
-			permissions = 0;
-			status = 2;
-			accountAmount = 0;
-			User default_user_3 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-					accountAmount);
-
-			firstName = "Admin";
-			lastName = "Admin";
-			middleInitial = "A";
-			ssn = "001";
-			password = "001";
-			permissions = 1;
-			status = 1;
-			accountAmount = 0;
-			User default_user_4 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
-					accountAmount);
-
-			db.put(default_user_1.getSsn(), default_user_1);
-			db.put(default_user_2.getSsn(), default_user_2);
-			db.put(default_user_3.getSsn(), default_user_3);
-			db.put(default_user_4.getSsn(), default_user_4);
-			db.put(default_user_1_b.getSsn(), default_user_1_b);
-			db.put(default_user_1_c.getSsn(), default_user_1_c);
+			// sample_database_1();
+			sample_database_2();
 
 			// Print database. For coding purposes
 			System.out.println("The Database!!!!: ");
@@ -198,8 +129,137 @@ public class Driver {
 			// Add counter and exit after 5 incorrect attempts
 			System.out.println("Not an option");
 		}
-		
+
 		return exit;
+	}
+
+	public void default_database() {
+		String firstName = "Evan";
+		String lastName = "West";
+		String middleInitial = "A";
+		String ssn = "evanwest";
+		String password = "password";
+		int permissions = 1;
+		int status = 1;
+		int accountAmount = 0;
+		User default_user_1 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+				accountAmount);
+
+		db.put(default_user_1.getSsn(), default_user_1);
+	}
+
+	public void sample_database_1() {
+		String firstName = "Evan";
+		String lastName = "West";
+		String middleInitial = "A";
+		String ssn = "0";
+		String password = "0";
+		int permissions = 0;
+		int status = 0;
+		int accountAmount = 0;
+		User default_user_1 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+				accountAmount);
+
+		firstName = "Evan";
+		lastName = "West";
+		middleInitial = "A";
+		ssn = "01";
+		password = "01";
+		permissions = 0;
+		status = 0;
+		accountAmount = 0;
+		User default_user_1_b = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+				accountAmount);
+
+		firstName = "Evan";
+		lastName = "West";
+		middleInitial = "A";
+		ssn = "02";
+		password = "02";
+		permissions = 0;
+		status = 0;
+		accountAmount = 0;
+		User default_user_1_c = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+				accountAmount);
+
+		firstName = "A";
+		lastName = "A";
+		middleInitial = "A";
+		ssn = "1";
+		password = "1";
+		permissions = 0;
+		status = 1;
+		accountAmount = 0;
+		User default_user_2 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+				accountAmount);
+
+		firstName = "B";
+		lastName = "B";
+		middleInitial = "B";
+		ssn = "2";
+		password = "2";
+		permissions = 0;
+		status = 2;
+		accountAmount = 0;
+		User default_user_3 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+				accountAmount);
+
+		firstName = "Admin";
+		lastName = "Admin";
+		middleInitial = "A";
+		ssn = "001";
+		password = "001";
+		permissions = 1;
+		status = 1;
+		accountAmount = 0;
+		User default_user_4 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+				accountAmount);
+
+		db.put(default_user_1.getSsn(), default_user_1);
+		db.put(default_user_2.getSsn(), default_user_2);
+		db.put(default_user_3.getSsn(), default_user_3);
+		db.put(default_user_4.getSsn(), default_user_4);
+		db.put(default_user_1_b.getSsn(), default_user_1_b);
+		db.put(default_user_1_c.getSsn(), default_user_1_c);
+	}
+
+	public void sample_database_2() {
+		String firstName = "A";
+		String lastName = "A";
+		String middleInitial = "A";
+		String ssn = "A";
+		String password = "A";
+		int permissions = 1;
+		int status = 1;
+		int accountAmount = 0;
+		User default_user_1 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+				accountAmount);
+
+		firstName = "Z";
+		lastName = "Z";
+		middleInitial = "Z";
+		ssn = "Z";
+		password = "Z";
+		permissions = 0;
+		status = 1;
+		accountAmount = 0;
+		User default_user_2 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+				accountAmount);
+
+		firstName = "B";
+		lastName = "B";
+		middleInitial = "B";
+		ssn = "B";
+		password = "B";
+		permissions = 0;
+		status = 0;
+		accountAmount = 0;
+		User default_user_3 = new User(firstName, lastName, middleInitial, ssn, password, permissions, status,
+				accountAmount);
+
+		db.put(default_user_1.getSsn(), default_user_1);
+		db.put(default_user_2.getSsn(), default_user_2);
+		db.put(default_user_3.getSsn(), default_user_3);
 	}
 
 	/**
@@ -211,7 +271,7 @@ public class Driver {
 	 *             Throws this exception if input stream cannot be closed (in
 	 *             finally statement)
 	 */
-	private void readDatabase(String fileName) throws IOException {
+	public void readDatabase(String fileName) throws IOException {
 		try {
 			// Read in File
 			ois = new ObjectInputStream(new FileInputStream(databaseFile));
@@ -253,8 +313,7 @@ public class Driver {
 		System.out.println("3) Exit");
 		System.out.print("Choice: ");
 
-		Scanner aScanner = new Scanner(System.in);
-		String userInput = aScanner.nextLine();
+		String userInput = getUserInput();
 		// Build input validation later
 
 		return userInput;
@@ -267,39 +326,37 @@ public class Driver {
 	 * @return True - successful login. False - Too many login attempts, end program
 	 */
 	private boolean login() {
-		Scanner aScanner = new Scanner(System.in);
-		String snn;
-		String password;
+		String ssn = loginInstructions_username();
+		String password = loginInstructions_password();
+		return loginLogic(ssn, password);
+
+	}
+
+	private String loginInstructions_username() {
+		System.out.println("Social Security Number: "); // re-enter password at some point
+		return getUserInput();
+	}
+
+	private String loginInstructions_password() {
+		System.out.println("Password: "); // re-entered password at some point
+		return getUserInput();
+	}
+
+	public boolean loginLogic(String ssn, String password) {
 		boolean loggedIn = false;
 
-		System.out.println("Social Security Number: "); // re-enter password at some point
-		String ssn = aScanner.nextLine();
-
 		if (this.db.containsKey(ssn)) {
-			boolean correctPassword = false; // Control's execution of password loop
-			final int maxPasswordLoop = 5; // Maximum number of password retries
+			if (password.equals(this.db.get(ssn).getPassword())) {
+				// Fetch the current user's information from the database
+				this.currentUser = new User(this.db.get(ssn));
 
-			// Password loop
-			for (int i = 0; i < maxPasswordLoop && !correctPassword; i++) {
-				System.out.println("Password: "); // re-entered password at some point
-				password = aScanner.nextLine();
-				if (password.equals(this.db.get(ssn).getPassword())) {
-					// Stop the loop
-					correctPassword = true;
-
-					// Signal that the user is logged in
-					loggedIn = true;
-
-					// Fetch the current user's information from the database
-					this.currentUser = new User(this.db.get(ssn));
-				} else {
-					System.out.println("Incorrect password");
-				}
-			}
-
-			// Print message is user exceeded the number of password tries
-			if (!correctPassword) {
-				System.out.println("Too many incorrect tries\n");
+				// Signal that the user is logged in
+				// Note: Do this, even though a user with status = 0 or 2 is not technically
+				// logged in
+				// This case is handled in the controlLogic() function
+				loggedIn = true;
+			} else {
+				System.out.println("Incorrect password");
 			}
 		} else {
 			System.out.println("No user by that name\n\n");
@@ -311,10 +368,16 @@ public class Driver {
 	/**
 	 * Allows user to create a new client account
 	 */
-	private void createNewClientAccount() {
+	public void createNewClientAccount() {
+		User newUser = getNewClientInfo();
+		addNewClientToDatabase(newUser);
+	}
+
+	private User getNewClientInfo() {
 		// Get username and password
 		// Check username against existing usernames
 		// If unique, add information
+		@SuppressWarnings("resource")
 		Scanner aScanner = new Scanner(System.in);
 
 		// Variables to hold user's input
@@ -339,8 +402,10 @@ public class Driver {
 
 		User newUser = new User(firstName, lastName, middleInitial, ssn, password);
 
-		System.out.println(newUser.toString());
+		return newUser;
+	}
 
+	public void addNewClientToDatabase(User newUser) {
 		// To Do: Duplicate check. And test case for this duplicate check
 		// To Do: Run the ssn key through a Hash function so that it's not stored in the
 		// db as a key
@@ -364,15 +429,6 @@ public class Driver {
 		Scanner aScanner = new Scanner(System.in);
 		return aScanner.nextLine().toString();
 	}
-
-	// /**
-	// * Display login menu, get user's choice, and validate user's choice
-	// *
-	// * @return Returns user's choice
-	// */
-	// private int loginMenu() {
-	// return 0;
-	// }
 
 	/**
 	 * Display menu for Admins, get the Admin's choice, and validate the Admin's
@@ -410,22 +466,16 @@ public class Driver {
 				// To Do: Refactor these functions to extrapolate common functionality
 				// If user chose a valid option,
 				if (userInput.equals("1")) {
-					System.out.println("Option 1");
 					approveClientAccount();
 				} else if (userInput.equals("2")) {
-					System.out.println("Option 2");
 					lockClientAccount();
 				} else if (userInput.equals("3")) {
-					System.out.println("Option 3");
 					unlockClientAccount();
 				} else if (userInput.equals("4")) {
-					System.out.println("Option 4");
 					promoteClientToAdmin();
 				} else if (userInput.equals("5")) {
-					System.out.println("Logging Out");
 					loop = false;
 				} else {
-
 					System.out.println("FATAL ERROR!!!! Should not see this. IN adminMenu()");
 				}
 			}
@@ -955,5 +1005,13 @@ public class Driver {
 				oos.close();
 			}
 		}
+	}
+
+	public HashMap<String, User> getDb() {
+		return this.db;
+	}
+
+	public void addUserToDb(User user) {
+		db.put(user.getSsn(), user);
 	}
 }
