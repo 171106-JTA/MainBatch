@@ -1,22 +1,37 @@
 package d4.revature.collections;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class ComparableVSComparator {
+public class ComparableVsComparator {
+
 	public static void main(String[] args) {
-		List<Book> books = new ArrayList<>();
-		books.add(new Book("IT", "Bobbert", 250));
-		books.add(new Book("Bilble", "Ryan Lessley", 50));
-		books.add(new Book("The return of Bobbrt", "Grantley", 416));
-		books.add(new Book("The way of Boobert", "Ryan Lessley", 3));
+		List <Book>books = new ArrayList<>();
+		
+		books.add(new Book("IT", "Bobbert", 317));
+		books.add(new Book("Bible", "Jesus", 250));
+		books.add(new Book("The Return of Bobbert", "Grantley", 416));
+		books.add(new Book("The Way of Bobbert", "Ryan Lessley", 3));
 		
 		System.out.println(books);
 		
-		//Collections.sort(books);
-		books.sort(null);
-		for(Book book : books) {
-			System.out.println(book.getName()+" pg: "+book.getPageCount());
+		for(Book book : books){
+			System.out.println(book.getName());
 		}
+		
+		books.sort(null);
+		
+		for(Book book : books){
+			System.out.println(book.getPageCount() + ": " + book.getName());
+		}
+		
+		books.sort(new BookNameComparator());
+		
+		for(Book book : books){
+			System.out.println(book.getPageCount() + ": " + book.getName());
+		}
+		
 	}
+
 }
