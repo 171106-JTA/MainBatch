@@ -65,9 +65,11 @@ another type. In Java we can typecast both primative and
 Object data types 
 Implicit typecasting: Typecasting that does not require extra 
 notation. In general, we can implicitly typecast when we downcast 
-(example: Setting a class parent reference equal to a child object)
+(example: Setting a class parent reference equal to a child object) 
+(What are examples with primitative datatypes?)
 Explicit typecasting: Typecasting that requires explicit 
 notation. Usually needed for upcasting
+(Examples with primative datatypes)
 
 =========================================================
 wrapper classes, autoboxing
@@ -80,21 +82,34 @@ and their wrapper classes.
 =========================================================
 Design patterns: Pojo, Singleton, Factory
 =========================================================
+Design Patters - Best solution to cettain kinds of problems and
+provide a common language for developers. 
+POJO - Plain Old Java Object: the normal form of a Java object
+Singleton - A Class that can have only one instance at a time
+Factory - 
+
 
 =========================================================
 String api, Reflections api
 =========================================================
 
+
 =========================================================
 StringBuffer vs StringBuilder
 =========================================================
 
+
 =========================================================
 Variable Shadowing, overloading, overriding
 =========================================================
+Variable Shadowing: creating a variable in an inside scope that 
+is used instead of an outscope variable by the same name
+Overloading: same function with multiple differeing versions
+Overriding: When the funcitonality of a method is changed. 
+i.e. A child class can override its parent's functions. 
 
 =========================================================
-Pillars of OOP: Inheritance, Abstraction, Polymorphism, Encapsulation
+Pillars of OOP: Abstraction, Encapsulation, Inheritance, Polymorphism
 =========================================================
 Abstraction 
 - Hides implementation of code
@@ -105,6 +120,7 @@ Encapsulation
 - Access 'hidden' data through access modifiers
 - Hides internal module data
 - Example: 
+- Need better definition
 Inheritance
 - The ability to inherit functionality and properties from a superclass
 - And to alter the functionality of child classes.
@@ -189,26 +205,88 @@ Garbage Collector
 varargs
 
 Multithreeading, threads in general, thread states
+multithreading: Spliting a task into multiple parts to speed up execution. 
+
+Thread states: 
+New - keyword 'new'
+Runnable - keyword 'start'
+Wait, 
+Timed-wait, 
+Blocked, 
+Terminated
 
 producer consumer problem, synchronization, deadlock/livvelock
 
 How create a thread
 
+
 File IO
+
 
 Java Docs
 
+
+=========================================================
 Junit, unit testing, junit annotations
+=========================================================
+Unit testing a way to test the smallest parts (modules) of our program
+Junit is a unit testing library for Java
+annotations: 
+@Test - defines a test base
+@Before - defines something to do before a test
+@After - defines something to do after a test
+@BeforeClass and @AfterClass - setup and tear-down for a testing class (a group of tests)
 
+=========================================================
 logging, log4j
+=========================================================
+Components: 
+Logger - actually logs the events
+Appender - determines the form the log takes (console, htlm, file, etc.)
+Layout - formats the log's data
 
+Levels: 
+trace - general message. minimal imporatance
+debug - less specific that trace, used for key events
+info - more general than trace
+warn - used for events that may result in application crash
+error - used for events that break the application
+
+=========================================================
 Collections, know heirachy, iterators, 
+=========================================================
+Sets:
+- unique items
+- automatically sorted 
+- indices stored in hashtable
 
+Lists:
+- ordered set of items
+- supports random access
+- variable length
+- Unsynchronized
+
+Queues:
+- FIFO 
+- 
+
+
+=========================================================
 comparable v comparator
+=========================================================
+Comparable - requires the compareTo() function and is used to define
+the natural odering of an object
+Comparator - requires the compare() function and provides a way to 
+sort a collection other than its natural ordering
 
 Generics
 
+=========================================================
 Maven Lifecycle, Maven, POM.xml
+Project managment tool 
+=========================================================
+compile
+test
 
 git
 
