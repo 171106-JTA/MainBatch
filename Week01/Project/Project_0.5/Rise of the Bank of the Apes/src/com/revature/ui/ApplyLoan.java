@@ -1,5 +1,6 @@
 package com.revature.ui;
 
+import com.revature.users.Loan;
 import com.revature.users.User;
 
 public class ApplyLoan extends UserInterface {
@@ -33,7 +34,7 @@ public class ApplyLoan extends UserInterface {
 	 * @param u the user
 	 */
 	private static void showLoan(User u) {
-		if(u.getLoan().getAmount() == 0) {
+		if(u.getLoan() == null) {
 			System.out.println("No loans in system.");
 		}
 		else {
@@ -48,13 +49,13 @@ public class ApplyLoan extends UserInterface {
 	 * @param u the user applying for a loan
 	 */
 	private static void applyLoan(User u) {
-		if(u.getLoan().getAmount() != 0) {
+		if(u.getLoan() != null) {
 			System.out.println("Loan already in system");
 			return;
 		}
 		System.out.print("Enter loan amount: ");
 		double d = UserInterface.readDouble();
-		u.getLoan().setAmount(d);
+		u.setLoan(new Loan(d));
 		System.out.println("Loan Request of " + d + " has been received.");
 		UserInterface.startLogging(u.getName() + " has applied for a loan of " + d);
 	}
@@ -66,16 +67,25 @@ public class ApplyLoan extends UserInterface {
 	 * @param u The user, who will have their money deducted
 	 */
 	private static void repayLoan(User u) {
-		double currAmount = u.getBalance();
-		double loanAmount = u.getLoan().getAmount();
+		double currAmount = 0;
+		double loanAmount = 0;
 		double afterAmount = 0;
+		if(u.getLoan() == null) {
+			System.out.println("No loans found.");
+			return;
+		}
+		
+		currAmount = u.getBalance();
+		loanAmount = u.getLoan().getAmount();
+		afterAmount = 0;
+		
 		if(loanAmount > currAmount) {
 			System.out.println("Not enough money in Account. Cannot repay loan.");
 			return;
 		}
 		afterAmount = currAmount - loanAmount;
 		u.setBalance(afterAmount);
-		//Resets the loan back to 0
-		u.getLoan().setAmount(0);
+		//Resets the loan back to null
+		u.setLoan(null);
 	}
 }

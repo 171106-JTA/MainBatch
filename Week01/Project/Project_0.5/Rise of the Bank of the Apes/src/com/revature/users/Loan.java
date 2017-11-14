@@ -12,9 +12,7 @@ public class Loan implements Serializable{
 	public double getAmount() {
 		return amount;
 	}
-	public void setAmount(double amount) {
-		this.amount = amount;
-	}
+	
 	public boolean isApproval() {
 		return approval;
 	}

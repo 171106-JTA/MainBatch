@@ -21,11 +21,11 @@ public class Admin extends UserInterface{
 		//Checks to see if the user has the right access_level;
 		//They get kicked out if the user is not authorized
 		if(u.getAccess_level() != 2) {
-			System.out.println("Wrong Menu");
+			System.out.println("\nWrong Menu");
 			return;
 		}
 		
-		System.out.println("Welcome Admin " + u.getName());
+		System.out.println("\nWelcome Admin " + u.getName());
 		int option = 0;
 		while(option != 6) {
 			System.out.println("1. Show all users");

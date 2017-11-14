@@ -13,7 +13,7 @@ public class AdminTool {
 	 */
 	public static void showAllUser(HashMap<String, User> users) {
 		
-		System.out.println("User : Approval Status : Ban Status : Access Level");
+		System.out.println("\nUser : Approval Status : Ban Status : Access Level");
 		for(String u: users.keySet()) {
 			System.out.println(u + " : " + users.get(u).isApproved() + " : " + users.get(u).isBanned() + " : " + users.get(u).getAccess_level());
 		}
@@ -34,7 +34,7 @@ public class AdminTool {
 		u = users.get(input);
 		
 		if(u == null) {
-			System.out.println("User not found.");
+			System.out.println("User not found.\n");
 			return;
 		}
 		
@@ -56,7 +56,7 @@ public class AdminTool {
 			//When rejected, loan amount returns to 0
 			case "r":
 				UserInterface.startLogging("Loan of " + u.getLoan().getAmount()+ " for " + u.getName() + " has been rejected");
-				u.getLoan().setAmount(0);
+				u.setLoan(null);
 				break;
 			default:
 				System.out.println("Incorrect Input.");

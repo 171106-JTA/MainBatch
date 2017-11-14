@@ -18,6 +18,7 @@ import com.revature.ui.ApplyLoan;
 import com.revature.ui.Deposit;
 import com.revature.ui.UserInterface;
 import com.revature.ui.Withdraw;
+import com.revature.users.Loan;
 import com.revature.users.User;
 
 public class BankTest {
@@ -128,7 +129,7 @@ public class BankTest {
 		//Test repaying loans
 		User a = new User("a", "a");
 		a.setBalance(50);
-		a.getLoan().setAmount(40);
+		a.setLoan(new Loan(40));
 		a.getLoan().setApproval(true);
 		ApplyLoan.Screen(a);
 		/*

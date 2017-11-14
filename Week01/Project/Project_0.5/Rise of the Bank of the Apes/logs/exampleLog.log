@@ -58,3 +58,11 @@
 2017-11-12 23:55:32 INFO  Logging:24 - a has deposited 5.0 Banana(s)
 2017-11-13 07:10:30 INFO  Logging:24 - Admin has promoted user u to moderator.
 2017-11-13 07:41:48 INFO  Logging:24 - a!joe has deposited 2.0 Banana(s)
+2017-11-14 13:27:22 INFO  Logging:24 - u has applied for a loan of 20000.0
+2017-11-14 13:28:36 INFO  Logging:24 - u has deposited 200000.0 Banana(s)
+2017-11-14 13:30:30 INFO  Logging:24 - u has applied for a loan of 10000.0
+2017-11-14 13:37:04 INFO  Logging:24 - Management has approved user u
+2017-11-14 13:41:41 INFO  Logging:24 - u has applied for a loan of 200.0
+2017-11-14 13:45:41 INFO  Logging:24 - Loan of 200.0 for u has been approved
+2017-11-14 13:48:02 INFO  Logging:24 - u has withdrawn 50.0 Banana(s)
+2017-11-14 13:48:14 INFO  Logging:24 - u has deposited 400.0 Banana(s)

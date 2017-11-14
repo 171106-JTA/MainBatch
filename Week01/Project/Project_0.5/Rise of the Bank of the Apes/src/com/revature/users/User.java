@@ -17,11 +17,14 @@ public class User implements Serializable{
 		this.password = password;
 		this.approved = false;
 		this.banned = false;
-		this.loan = new Loan(0.0);
 	}
 	
 	public Loan getLoan() {
 		return loan;
+	}
+	
+	public void setLoan(Loan loan) {
+		this.loan = loan;
 	}
 
 	public int getAccess_level() {
