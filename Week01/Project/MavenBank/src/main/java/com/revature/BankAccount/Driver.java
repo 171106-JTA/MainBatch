@@ -428,34 +428,16 @@ public class Driver {
 	 * Functionality for admins to unlock client accounts
 	 */
 	public void unlockClientAccount() {
-		boolean loop = true;
-		int loopCounter = 0;
-		final int maxLoopIteration = 5;
-
-		// Input validation loop.
-		// The Admin is limited to 'maxLoopIteration' tries before being sent
-		// back to the previous menu
 		displayLockedAccounts();
 		String input = getUserInput(); // Get admin's input for account to unlock
-		boolean inputValidation = getAndUnlockAccount(input);
-		
-		// Print appropriate message, if incorrect input was enterd
-		if (inputValidation) {
-			System.out.println("User doesn't exist");
-		}
-
-		// try {
-		// getAndUnlockAccount(input); // loop while the user input is invalid
-		// } catch(Exception e) {
-		// System.out.println("User doesn't exist");
-		// }
+		getAndUnlockAccount(input);
 	}
 
 	/**
 	 * Display all currently locked accounts (i.e. the accounts able to be unlocked)
 	 */
 	private void displayLockedAccounts() {
-		System.out.println("SSN's for currently locked accounts");
+		System.out.println("Usernames for currently locked accounts");
 
 		List<String> lockedUserAccounts = getLockedAccounts();
 		for (String item : lockedUserAccounts) {
@@ -519,37 +501,17 @@ public class Driver {
 	/**
 	 * Functionality for admins to lock a client accounts
 	 */
-	public void lockClientAccount() {
-		boolean loop = true;
-		int loopCounter = 0;
-		final int maxLoopIteration = 5;
-
-		// Input validation loop.
-		// The Admin is limited to 'maxLoopIteration' tries before being sent
-		// back to the previous menu
-		while (loop && loopCounter < maxLoopIteration) {
-			displayUnlockedAccounts();
-			String input = getUserInput(); // Get Admins choice of account to lock
-			loop = !getAndLockAccount(input); // loop while the user input is invalid
-
-			// Count number of incorrect inputs
-			if (loop) {
-				loopCounter += 1;
-			}
-		}
-
-		// Print appropriate message, if incorrect input limit is reached
-		if (loopCounter == maxLoopIteration) {
-			System.out.println("Too many invalid tries");
-		}
-
+	public void lockClientAccount() {		
+		displayUnlockedAccounts();
+		String input = getUserInput(); // Get Admins choice of account to lock
+		getAndLockAccount(input); //If account
 	}
 
 	/**
 	 * Display unlocked accounts (i.e. accounts that can be locked)
 	 */
 	private void displayUnlockedAccounts() {
-		System.out.println("SSN's for currently unlocked accounts");
+		System.out.println("Usernames for currently unlocked accounts");
 
 		List<String> unlockedUserAccounts = getUnlockedAccounts();
 		for (String item : unlockedUserAccounts) {
