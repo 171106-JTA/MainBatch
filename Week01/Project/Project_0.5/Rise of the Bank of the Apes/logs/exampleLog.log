@@ -1,0 +1,60 @@
+2017-11-12 01:41:37 INFO  Logging:23 - hi has withdrawn 2058.0 Banana(s)
+2017-11-12 01:41:50 INFO  Logging:23 - hi has withdrawn 2054.0 Banana(s)
+2017-11-12 01:41:56 INFO  Logging:23 - hi has deposited 2154.0 Banana(s)
+2017-11-12 01:42:18 INFO  Logging:23 - Admin has disproved user hih
+2017-11-12 01:43:18 INFO  Logging:23 - Admin has unbanned user hih
+2017-11-12 01:43:32 INFO  Logging:23 - Admin has disproved user hih
+2017-11-12 01:44:18 INFO  Logging:23 - Admin has approved user hih
+2017-11-12 18:35:02 INFO  Logging:23 - a!joe has deposited 4000.0 Banana(s)
+2017-11-12 18:35:07 INFO  Logging:23 - a!joe has deposited 30.0 Banana(s)
+2017-11-12 19:12:05 INFO  Logging:23 - a!joe has deposited 200 Banana(s)
+2017-11-12 19:13:03 INFO  Logging:23 - a!joe has deposited 10 Banana(s)
+2017-11-12 19:13:27 INFO  Logging:23 - a!joe has withdrawn 210 Banana(s)
+2017-11-12 19:15:57 INFO  Logging:23 - a!joe has deposited 2000 Banana(s)
+2017-11-12 20:08:12 INFO  Logging:24 - a has withdrawn 23 Banana(s)
+2017-11-12 20:08:15 INFO  Logging:24 - a has deposited 5 Banana(s)
+2017-11-12 20:10:14 INFO  Logging:24 - a has withdrawn 23 Banana(s)
+2017-11-12 20:10:16 INFO  Logging:24 - a has deposited 5 Banana(s)
+2017-11-12 20:27:27 INFO  Logging:24 - a!joe has deposited 31.12 Banana(s)
+2017-11-12 20:27:34 INFO  Logging:24 - a!joe has withdrawn 0.02 Banana(s)
+2017-11-12 20:36:33 INFO  Logging:24 - a!joe has withdrawn 2.0 Banana(s)
+2017-11-12 21:11:47 INFO  Logging:24 - a!joe has withdrawn 2.0 Banana(s)
+2017-11-12 21:12:05 INFO  Logging:24 - a!joe has deposited 90.078 Banana(s)
+2017-11-12 21:13:29 INFO  Logging:24 - a!joe has withdrawn 20.0 Banana(s)
+2017-11-12 21:14:16 INFO  Logging:24 - a!joe has withdrawn 20.129 Banana(s)
+2017-11-12 21:14:48 INFO  Logging:24 - a!joe has withdrawn 20.333 Banana(s)
+2017-11-12 21:15:37 INFO  Logging:24 - a!joe has withdrawn 20.0 Banana(s)
+2017-11-12 21:16:36 INFO  Logging:24 - a!joe has deposited 20.1 Banana(s)
+2017-11-12 21:17:35 INFO  Logging:24 - a!joe has deposited 20.134 Banana(s)
+2017-11-12 21:18:13 INFO  Logging:24 - a!joe has withdrawn 20.123 Banana(s)
+2017-11-12 21:20:56 INFO  Logging:24 - a!joe has withdrawn 20.1234 Banana(s)
+2017-11-12 21:21:58 INFO  Logging:24 - a!joe has withdrawn 20.111 Banana(s)
+2017-11-12 21:22:16 INFO  Logging:24 - a!joe has withdrawn 20.111 Banana(s)
+2017-11-12 21:22:43 INFO  Logging:24 - a!joe has withdrawn 20.134 Banana(s)
+2017-11-12 21:25:22 INFO  Logging:24 - a!joe has deposited 20.0 Banana(s)
+2017-11-12 21:25:25 INFO  Logging:24 - a!joe has deposited 2000.0 Banana(s)
+2017-11-12 21:25:41 INFO  Logging:24 - a!joe has withdrawn 2075.84 Banana(s)
+2017-11-12 21:25:46 INFO  Logging:24 - a!joe has withdrawn 1.0 Banana(s)
+2017-11-12 22:10:49 INFO  Logging:24 - a!joe has deposited 20.2 Banana(s)
+2017-11-12 22:11:39 INFO  Logging:24 - Admin has promoted user u to moderator.
+2017-11-12 22:37:25 INFO  Logging:24 - Admin has approved user u
+2017-11-12 22:38:25 INFO  Logging:24 - u has deposited 30.3 Banana(s)
+2017-11-12 22:38:30 INFO  Logging:24 - u has withdrawn 0.3 Banana(s)
+2017-11-12 23:19:57 INFO  Logging:24 - a!joe has deposited 2000.0 Banana(s)
+2017-11-12 23:20:03 INFO  Logging:24 - a!joe has applied for a loan of 200.0
+2017-11-12 23:21:36 INFO  Logging:24 - a!joe has deposited 200.0 Banana(s)
+2017-11-12 23:21:43 INFO  Logging:24 - a!joe has applied for a loan of 200.0
+2017-11-12 23:30:21 INFO  Logging:24 - Management has approved user u
+2017-11-12 23:30:35 INFO  Logging:24 - u has applied for a loan of 200.0
+2017-11-12 23:43:48 INFO  Logging:24 - u has deposited 2000.0 Banana(s)
+2017-11-12 23:51:06 INFO  Logging:24 - a has withdrawn 23.0 Banana(s)
+2017-11-12 23:51:18 INFO  Logging:24 - a has deposited 5.0 Banana(s)
+2017-11-12 23:52:03 INFO  Logging:24 - a has withdrawn 23.0 Banana(s)
+2017-11-12 23:52:18 INFO  Logging:24 - a has deposited 5.0 Banana(s)
+2017-11-12 23:53:20 INFO  Logging:24 - a has withdrawn 23.0 Banana(s)
+2017-11-12 23:53:25 INFO  Logging:24 - a has deposited 5.0 Banana(s)
+2017-11-12 23:55:21 INFO  Logging:24 - a has applied for a loan of 5.0
+2017-11-12 23:55:26 INFO  Logging:24 - a has withdrawn 23.0 Banana(s)
+2017-11-12 23:55:32 INFO  Logging:24 - a has deposited 5.0 Banana(s)
+2017-11-13 07:10:30 INFO  Logging:24 - Admin has promoted user u to moderator.
+2017-11-13 07:41:48 INFO  Logging:24 - a!joe has deposited 2.0 Banana(s)
