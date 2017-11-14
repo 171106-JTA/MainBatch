@@ -28,7 +28,7 @@ public class MyBank {
 		String input = "";
 
 		// Start Server
-		server.start();
+		new Thread(server).start();
 		
 		Menu.printMenu();
 		
@@ -197,7 +197,7 @@ public class MyBank {
 			
 			while ((res = MyBank.server.getResponse(request)) == null) {
 				try {
-					Thread.sleep(50);
+					Thread.sleep(1);
 				} catch (InterruptedException e) {
 					// TODO log
 				}

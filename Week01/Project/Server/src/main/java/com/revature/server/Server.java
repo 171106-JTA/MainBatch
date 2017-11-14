@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import com.revature.businessobject.BusinessObject;
 import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.Admin;
@@ -25,9 +27,10 @@ import com.revature.server.session.Session;
  * Used to listen and handle client requests 
  * @author Antony Lulciuc
  */
-public class Server extends Thread {
+public class Server implements Runnable {
 	public static Routeable router = new RequestRouter();
 	public static Persistenceable database = FileDataManager.getManager();
+	public static Logger logger = Logger.getLogger(Server.class);
 	
 	// Active sessions for Server
 	public Map<Integer, Session> sessions = new HashMap<>();
@@ -38,24 +41,10 @@ public class Server extends Thread {
 	// Flag used to exit server thread
 	private boolean runThread = true;
 	
-
+	/**
+	 * No args constructor - Initializes default admin user 
+	 */
 	public Server() {
-		super();
-		initBoss();
-	}
-
-	public Server(Runnable arg0, String arg1) {
-		super(arg0, arg1);
-		initBoss();
-	}
-
-	public Server(Runnable arg0) {
-		super(arg0);
-		initBoss();
-	}
-
-	public Server(String arg0) {
-		super(arg0);
 		initBoss();
 	}
 	
@@ -66,7 +55,7 @@ public class Server extends Thread {
 	public void run() {
 		while (runThread) {
 			try {
-				Thread.sleep(50);
+				Thread.sleep(1);
 			} catch (InterruptedException e) {
 			}
 		}
@@ -111,12 +100,19 @@ public class Server extends Thread {
 		query.put(User.USERNAME, username);
 		query.put(User.PASSWORD, password);
 		
+		// Log attempt
+		logger.debug("Attempting to login with " + query);
+		
 		// Make request
 		resultset = router.handleRequest(new Request(0, 0, "USER", "LOGIN", query, null));
 		
 		// If user not found
-		if (resultset.size() == 0)
+		if (resultset.size() == 0) {
+			logger.debug("Failed to login with cedentials " + query);
 			throw new Exception("Username or password invalid!");
+		} else {
+			logger.debug("Successful attempt to login with cedentials " + query);
+		}
 			
 		// Create Session
 		session = new Session((User)resultset.get(0));

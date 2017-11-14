@@ -74,7 +74,7 @@ public final class Session extends Thread {
 			}
 			
 			try {
-				Thread.sleep(100);
+				Thread.sleep(1);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

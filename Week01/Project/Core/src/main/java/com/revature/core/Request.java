@@ -146,4 +146,12 @@ public class Request {
 	public void setTransaction(FieldParams transaction) {
 		this.transaction = transaction;
 	}
+
+	@Override
+	public String toString() {
+		return "Request [sessionId=" + sessionId + ", userId=" + userId
+				+ ", checkpoint=" + checkpoint + ", route=" + route
+				+ ", transtype=" + transtype + ", query=" + query
+				+ ", transaction=" + transaction + "]";
+	}
 }
