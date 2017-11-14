@@ -17,6 +17,11 @@ import d3.revature.logging.LoggingExample;
 
 //import com.Project1.bankAccountStuff.User;
 
+/**
+ * Main class controlling application
+ * @author Evan
+ *
+ */
 public class Driver {
 	private static final String databaseFile = "database.txt"; // File containing database
 	private HashMap<String, User> db;
@@ -46,7 +51,11 @@ public class Driver {
 	 * statements). Clean up console output with clear-console statements. Refactor database 
 	 * setup in the unit tests to abstrace the databae setup
 	 */
-
+	
+	/**
+	 * Main method
+	 * @param args  User input (not used for this application)
+	 */
 	public static void main(String[] args) {
 		Driver mp = new Driver();
 		mp.db = new HashMap<String, User>();
@@ -82,10 +91,15 @@ public class Driver {
 		} catch (IOException e) {
 			logger.error("Error while closing ObjectOutputStream when saving database", e);
 			e.printStackTrace();
-			// To Do: Return message with catch statement???
+			// To D																			o: Return message with catch statement???
 		} // To Do: Any finally statement?
 	}
-
+	
+	/**
+	 * Controls execution of program after the main menu
+	 * @param userChoice	The choice of the user from the main menu
+	 * @return		Return TRUE if 
+	 */
 	public boolean controlLogic(String userChoice) {
 		boolean exit = false;
 
