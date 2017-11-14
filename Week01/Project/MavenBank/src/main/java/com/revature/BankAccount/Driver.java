@@ -13,12 +13,13 @@ import java.util.Scanner;
 
 import org.apache.log4j.Logger;
 
-import d3.revature.logging.LoggingExample;
+//import d3.revature.logging.LoggingExample;
 
 //import com.Project1.bankAccountStuff.User;
 
 /**
  * Main class controlling application
+ * 
  * @author Evan
  *
  */
@@ -26,7 +27,7 @@ public class Driver {
 	private static final String databaseFile = "database.txt"; // File containing database
 	private HashMap<String, User> db;
 	private User currentUser;
-	
+
 	final static Logger logger = Logger.getLogger(Driver.class);
 
 	// Status values for user accounts
@@ -48,21 +49,23 @@ public class Driver {
 	 * through all relevant functions in Main. For login() function, allow user to
 	 * enter 'q' or something to go back. Disable 'q' as a valid password. Convert
 	 * if-else chains to switch statements (To practice working with switch
-	 * statements). Clean up console output with clear-console statements. Refactor database 
-	 * setup in the unit tests to abstrace the databae setup
+	 * statements). Clean up console output with clear-console statements. Refactor
+	 * database setup in the unit tests to abstrace the databae setup
 	 */
-	
+
 	/**
 	 * Main method
-	 * @param args  User input (not used for this application)
+	 * 
+	 * @param args
+	 *            User input (not used for this application)
 	 */
 	public static void main(String[] args) {
 		Driver mp = new Driver();
 		mp.db = new HashMap<String, User>();
 		boolean exit = false;
-		
+
 		logger.trace("Application Start");
-		
+
 		// Read database from the file
 		try {
 			logger.trace("Reading Database");
@@ -91,14 +94,16 @@ public class Driver {
 		} catch (IOException e) {
 			logger.error("Error while closing ObjectOutputStream when saving database", e);
 			e.printStackTrace();
-			// To D																			o: Return message with catch statement???
+			// To D o: Return message with catch statement???
 		} // To Do: Any finally statement?
 	}
-	
+
 	/**
 	 * Controls execution of program after the main menu
-	 * @param userChoice	The choice of the user from the main menu
-	 * @return		Return TRUE if 
+	 * 
+	 * @param userChoice
+	 *            The choice of the user from the main menu
+	 * @return Return TRUE if
 	 */
 	public boolean controlLogic(String userChoice) {
 		boolean exit = false;
@@ -108,7 +113,7 @@ public class Driver {
 
 			// If successfully logged in, check the user's status
 			if (loggedIn) {
-				//Only advance if status = 'status_active'
+				// Only advance if status = 'status_active'
 				int status = currentUser.getStatus();
 				if (status == status_approvalPending) {
 					System.out.println("Account Approval Pending");
@@ -116,8 +121,8 @@ public class Driver {
 				} else if (status == status_locked) {
 					System.out.println("Account Locked");
 					logger.trace("User's account is locked");
-				// If login was successful, call either the User or Admin menu, depending on
-				// permission level
+					// If login was successful, call either the User or Admin menu, depending on
+					// permission level
 				} else if (status == status_active) {
 					System.out.println("Successfully Logged In!");
 					int permissions = currentUser.getPermissions();
@@ -148,7 +153,7 @@ public class Driver {
 		} else if (userChoice.equals("42")) { // Testing user creation
 			default_database();
 			// sample_database_1();
-			//sample_database_2();
+			// sample_database_2();
 
 			// Print database. For coding purposes
 			System.out.println("The Database!!!!: ");
@@ -201,10 +206,10 @@ public class Driver {
 			db = (HashMap<String, User>) ois.readObject();
 
 			// Print database. For coding purposes
-//			System.out.println("The Database!!!!: ");
-//			for (String key : db.keySet()) {
-//				System.out.println(this.db.get(key));
-//			}
+			// System.out.println("The Database!!!!: ");
+			// for (String key : db.keySet()) {
+			// System.out.println(this.db.get(key));
+			// }
 		} catch (ClassNotFoundException e) {
 			// To Do: Fill in
 			e.printStackTrace();
@@ -325,8 +330,8 @@ public class Driver {
 		// To Do: Duplicate check. And test case for this duplicate check
 		// db as a key
 		// To Do: Run the object serialization through a ?hash function?
-		
-		if(db.containsKey(newUser.getUsername())) {
+
+		if (db.containsKey(newUser.getUsername())) {
 			System.out.println("User already exists");
 		} else {
 			logger.trace("Adding new user to database");
@@ -345,7 +350,6 @@ public class Driver {
 		return aScanner.nextLine().toString();
 	}
 
-	
 	////////////////////////////////////////////////////////
 	// Admin Functionality
 	////////////////////////////////////////////////////////
@@ -431,21 +435,20 @@ public class Driver {
 		// Input validation loop.
 		// The Admin is limited to 'maxLoopIteration' tries before being sent
 		// back to the previous menu
-		while (loop && loopCounter < maxLoopIteration) {
-			displayLockedAccounts();
-			String input = getUserInput(); //Get admin's input for account to unlock
-			loop = !getAndUnlockAccount(input); // loop while the user input is invalid
-
-			// Count number of incorrect inputs
-			if (loop) {
-				loopCounter += 1;
-			}
+		displayLockedAccounts();
+		String input = getUserInput(); // Get admin's input for account to unlock
+		boolean inputValidation = getAndUnlockAccount(input);
+		
+		// Print appropriate message, if incorrect input was enterd
+		if (inputValidation) {
+			System.out.println("User doesn't exist");
 		}
 
-		// Print appropriate message, if incorrect input limit is reached
-		if (loopCounter == maxLoopIteration) {
-			System.out.println("Too many invalid tries");
-		}
+		// try {
+		// getAndUnlockAccount(input); // loop while the user input is invalid
+		// } catch(Exception e) {
+		// System.out.println("User doesn't exist");
+		// }
 	}
 
 	/**
@@ -526,7 +529,7 @@ public class Driver {
 		// back to the previous menu
 		while (loop && loopCounter < maxLoopIteration) {
 			displayUnlockedAccounts();
-			String input = getUserInput(); //Get Admins choice of account to lock
+			String input = getUserInput(); // Get Admins choice of account to lock
 			loop = !getAndLockAccount(input); // loop while the user input is invalid
 
 			// Count number of incorrect inputs
@@ -583,7 +586,7 @@ public class Driver {
 	 */
 	public boolean getAndLockAccount(String input) {
 		boolean validUser = false;
-		
+
 		User user = this.db.get(input);
 
 		// Check if designated user exists and actually is currently unlocked.
@@ -894,12 +897,12 @@ public class Driver {
 			System.out.println("Not a valid number");
 		}
 	}
-	
+
 	private String depositInstructions() {
 		System.out.println("Enter amount to deposit: ");
-		return(getUserInput());
+		return (getUserInput());
 	}
-	
+
 	public void setAmount(double amount) {
 		amount += currentUser.getAccountAmount();
 		currentUser.setAccountAmount(amount);
@@ -952,9 +955,9 @@ public class Driver {
 			}
 		}
 	}
-	
+
 	////////////////////////////////////////////////////////
-	//Functions for Unit Testing
+	// Functions for Unit Testing
 	////////////////////////////////////////////////////////
 	public HashMap<String, User> getDb() {
 		return this.db;
@@ -963,15 +966,15 @@ public class Driver {
 	public void addUserToDb(User user) {
 		db.put(user.getUsername(), user);
 	}
-	
-	public void setDb(HashMap<String,User> newDb) {
+
+	public void setDb(HashMap<String, User> newDb) {
 		db = newDb;
 	}
-	
+
 	public void setCurrentUser(User user) {
 		currentUser = user;
 	}
-	
+
 	public User getCurrentUser() {
 		return currentUser;
 	}
