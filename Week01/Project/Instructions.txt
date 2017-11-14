@@ -25,7 +25,7 @@ There must be at least 2 roles: User and Admin
  Note 1: Bank is an example. Can change this. (sub example: Starcraft resources)
  Note 2: These are minimums. Feel free to exand!
  Note 3: Prefer to have this as a Maven project. (If not Maven, then will have to import Jars manually)
- Note 4: Use Junit 4 for minproject (QC on Junit4). After that, use Junit 5
+ Note 4: Use Junit 4 for minproject (QC on Junit4).
  Note 5: Try to get as much Junit 4 exposure as possible. 1 test per method
 
  Stretch Goals (optional): 
@@ -52,7 +52,8 @@ There must be at least 2 roles: User and Admin
  Admins: create user account
  Login timer. Automatically log user's out after a given amount of time
   - Check timer at every menu change?
-  Encrypt Data files
-  Input validation
+ Encrypt Data files
+ Input validation
+ Allow admins to undo actions
 
   from Ryan: how to test consol output?
