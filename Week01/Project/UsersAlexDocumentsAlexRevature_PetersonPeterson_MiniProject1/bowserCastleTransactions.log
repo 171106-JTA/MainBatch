@@ -1,0 +1,45 @@
+2017-11-13 13:36:47 INFO  BowserCastle:76 - Bowser has just created an account with Bowser's Castle
+
+2017-11-13 13:36:58 INFO  BowserCastle:76 - alex has just created an account with Bowser's Castle
+
+2017-11-13 13:37:39 INFO  BowserCastle:76 - alex has been verified and is now a member
+2017-11-13 13:38:08 INFO  BowserCastle:76 - alex has deposited 5000 coins
+2017-11-13 13:38:27 INFO  BowserCastle:76 - alex attempted to withdraw 6000 when they only had 5000 in their account.
+2017-11-13 13:38:33 INFO  BowserCastle:76 - alex has withdrawn 300
+2017-11-13 13:38:33 INFO  BowserCastle:76 - alex has withdrawn 300
+2017-11-13 13:39:18 INFO  BowserCastle:76 - bob has just created an account with Bowser's Castle
+
+2017-11-13 13:39:40 INFO  BowserCastle:76 - bob has been verified and is now a member
+2017-11-13 13:40:02 INFO  BowserCastle:76 - bob has killed king Bowser and is now King.
+2017-11-14 13:25:32 INFO  BowserCastle:80 - Bowser has just created an account with Bowser's Castle
+
+2017-11-14 13:25:40 INFO  BowserCastle:80 - alex has just created an account with Bowser's Castle
+
+2017-11-14 13:26:25 INFO  BowserCastle:80 - Bowser has just created an account with Bowser's Castle
+
+2017-11-14 13:26:29 INFO  BowserCastle:80 - alex has just created an account with Bowser's Castle
+
+2017-11-14 13:33:03 INFO  BowserCastle:78 - ted has just created an account with Bowser's Castle
+
+2017-11-14 13:33:05 INFO  BowserCastle:78 - bob has just created an account with Bowser's Castle
+
+2017-11-14 13:33:08 INFO  BowserCastle:78 - fred has just created an account with Bowser's Castle
+
+2017-11-14 13:44:55 INFO  BowserCastle:88 - 123 has just created an account with Bowser's Castle
+
+2017-11-14 13:44:57 INFO  BowserCastle:88 - bob has just created an account with Bowser's Castle
+
+2017-11-14 13:44:59 INFO  BowserCastle:88 - ted has just created an account with Bowser's Castle
+
+2017-11-14 13:45:01 INFO  BowserCastle:88 - fred has just created an account with Bowser's Castle
+
+2017-11-14 13:45:16 INFO  BowserCastle:88 - 123 has been verified and is now a member
+2017-11-14 13:45:17 INFO  BowserCastle:88 - alex has been verified and is now a member
+2017-11-14 13:45:21 INFO  BowserCastle:88 - bob has been verified and is now a member
+2017-11-14 13:45:27 INFO  BowserCastle:88 - alex has been promoted to an admin
+2017-11-14 14:08:12 INFO  BowserCastle:88 - Bowser has just created an account with Bowser's Castle
+
+2017-11-14 14:08:19 INFO  BowserCastle:88 - alex has just created an account with Bowser's Castle
+
+2017-11-14 14:08:26 INFO  BowserCastle:88 - alex has been verified and is now a member
+2017-11-14 14:28:04 INFO  BowserCastle:88 - alex has killed king User [name=Bowser, hashedPassword=48690, coins=0, stars=1000, role=KING] and is now King.
