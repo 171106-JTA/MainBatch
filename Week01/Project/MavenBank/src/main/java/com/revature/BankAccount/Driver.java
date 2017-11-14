@@ -450,7 +450,7 @@ public class Driver {
 	/**
 	 * Get all locked accounts from the internal database
 	 * 
-	 * @return Returns a list containing the SSNs of all locked client accounts
+	 * @return Returns a list containing the usernames of all locked client accounts
 	 */
 	private List<String> getLockedAccounts() {
 		// Loop through db and search for unlocked user accounts
@@ -467,10 +467,10 @@ public class Driver {
 	}
 
 	/**
-	 * Get an account SSN from the admin, validate the input, and unlock the
+	 * Get an account username from the admin, validate the input, and unlock the
 	 * specified account
 	 * 
-	 * @return Returns TRUE is the SSN was valid and FALSE if not
+	 * @return Returns TRUE if the username was valid and FALSE if not
 	 */
 	public boolean getAndUnlockAccount(String input) {
 		boolean validUser = false;
@@ -501,10 +501,10 @@ public class Driver {
 	/**
 	 * Functionality for admins to lock a client accounts
 	 */
-	public void lockClientAccount() {		
+	public void lockClientAccount() {
 		displayUnlockedAccounts();
 		String input = getUserInput(); // Get Admins choice of account to lock
-		getAndLockAccount(input); //If account
+		getAndLockAccount(input); // If account
 	}
 
 	/**
@@ -577,35 +577,16 @@ public class Driver {
 	 * Get user id from Admin and approve the given client's account
 	 */
 	public void approveClientAccount() {
-		boolean loop = true;
-		int loopCounter = 0;
-		final int maxLoopIteration = 5;
-
-		// Input validation loop.
-		// The Admin is limited to 'maxLoopIteration' tries before being sent
-		// back to the previous menu
-		while (loop && loopCounter < maxLoopIteration) {
-			displayAccountsNeedingApproval();
-			String input = getUserInput();
-			loop = !getAndApproveAccount(input); // loop while the user input is invalid
-
-			// Count number of incorrect inputs
-			if (loop) {
-				loopCounter += 1;
-			}
-		}
-
-		// Print appropriate message, if incorrect input limit is reached
-		if (loopCounter == maxLoopIteration) {
-			System.out.println("Too many invalid tries");
-		}
+		displayAccountsNeedingApproval();
+		String input = getUserInput();
+		getAndApproveAccount(input);
 	}
 
 	/**
 	 * Display accounts that need approving
 	 */
 	private void displayAccountsNeedingApproval() {
-		System.out.println("SSNs for accounts needing approval");
+		System.out.println("Usernames for accounts needing approval");
 
 		List<String> approvalPendingAccounts = getApprovalPendingAccounts();
 		for (String item : approvalPendingAccounts) {
@@ -671,28 +652,9 @@ public class Driver {
 	 * Allows admins to promote clients to admin status
 	 */
 	public void promoteClientToAdmin() {
-		boolean loop = true;
-		int loopCounter = 0;
-		final int maxLoopIteration = 5;
-
-		// Input validation loop.
-		// The Admin is limited to 'maxLoopIteration' tries before being sent
-		// back to the previous menu
-		while (loop && loopCounter < maxLoopIteration) {
-			displayClients();
-			String input = getUserInput();
-			loop = !getAndPromoteClient(input); // loop while the user input is invalid
-
-			// Count number of incorrect inputs
-			if (loop) {
-				loopCounter += 1;
-			}
-		}
-
-		// Print appropriate message, if incorrect input limit is reached
-		if (loopCounter == maxLoopIteration) {
-			System.out.println("Too many invalid tries");
-		}
+		displayClients();
+		String input = getUserInput();
+		getAndPromoteClient(input);
 	}
 
 	/**
@@ -700,7 +662,7 @@ public class Driver {
 	 * client and not admin)
 	 */
 	private void displayClients() {
-		System.out.println("SSNs for accounts needing approval");
+		System.out.println("Usernames for accounts needing approval");
 
 		List<String> approvalPendingAccounts = getClients();
 		for (String item : approvalPendingAccounts) {
@@ -713,7 +675,8 @@ public class Driver {
 	/**
 	 * Fetch all clients in the database
 	 * 
-	 * @return Returns a list containing the SSNs of all clients in the database
+	 * @return Returns a list containing the usernames of all clients in the
+	 *         database
 	 */
 	private List<String> getClients() {
 		// Loop through db and search for all clients
@@ -729,8 +692,8 @@ public class Driver {
 	}
 
 	/**
-	 * Get a SSN from the admin, validate the input, and promote that client to an
-	 * admin
+	 * Get a username from the admin, validate the input, and promote that client to
+	 * an admin
 	 * 
 	 * @return Returns TRUE if the specified user is a client and FALSE if specified
 	 *         user is invalid (that is, does not exist in the database, or already
