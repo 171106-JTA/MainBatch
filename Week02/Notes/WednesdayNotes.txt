@@ -8,8 +8,9 @@ name 3+ aggregate functions
 
 HAVING is also the only way to apply conditions to aggregates
 
-
+=======================
 JOINS
+=======================
 provide a means to combine two or more tables into one view
 Actual Joins: (i.e. Keywords)
 Inner Join
@@ -31,4 +32,43 @@ note: outer join == full outer join
 Inner Join 
 Combines tables based on column, filtering out data that does NOT appear 
 in both tables
-(See pg 14 for examples)
+(See pg 14 of notebook for example)
+
+Left Join
+Grabs all records from the left table iand all corresponding records from the right table. If records do not exist in the right table, columns will be filled 
+with NULLs
+(Again, pg 14 for example)
+
+Right Join
+Same as left for right table. i.e. Grabs all records from the right table
+and displays both the right table and corresponding records from the left table
+if they exist. 
+
+Full Outer
+Grabs data from both tables
+
+Cross Join
+Grabs the cartesian product of 2 table. (i.e. the product of the rows...or the combination among all rows in both tables)
+The result with be (Table A row_count) * (Table B row_count)
+
+Composit Keys
+- a primary key with two different columns
+
+Normalized database
+- At most 1 column shared among tables
+
+See in class work for EQUAJOIN and THETAJOIN
+
+=======================
+Set Operations
+=======================
+Set operations aim to combine and filter the data between queries (note: DO NOT ever use the work 'table' when talking about Set Operations)
+
+Unions -> return a combination of all distict records
+Distict -> no dublicates
+
+Union All -> same as union but includes duplicates
+
+Intersect -> Filters out all records that weren't in both tables
+
+Minus
