@@ -1,0 +1,149 @@
+What are different transaction isolation levels? what do they prevent
+
+Gamification: 
+- How to you get people to use your application? 
+- Implement some sort of 'showoff' system to encourage use
+
+Presentation Tips:
+- Watch the clutter words!!!
+- Scan the room (To include everyone in the presentation)
+- Start practicing "Hiding the error". Not lying, but hiding it. Work through errors
+- Don't bring attention to what you didn't do. Focus on what you did, not what's coming next
+- Confidence and passion! Talk louder!
+- Don't talk into the board! Practice the powerpoint
+--- Goal: don't look at the board once
+- Include Introduction and Conclusion!!!
+--- No 'shock' that demo ended
+- No Scripts
+- Don't talk about features while typing. However, its okay to talk about what you're typing
+
+Personal Presentation Feedback: 
+Enthusiasm!!! (But don't talk too fast)
+
+Note: Start working on Web application! This is Week 8. Lots of people fail this week
+
+Java 8 (VS Java 7)
+New features implemeents: 
+Interfaces can have concrete method
+- via 'static' and 'default' keywords
+- Done for sake of Backwards Compatability. 
+--- i.e. How add methods to an interface and not break existing projects????
+--- static and default!
+Lambdas
+New Time and Date API
+- Question on this on the OCA! 
+- We will not be going over this
+Streams
+
+Note: OCP is 60% Streams and Lambdas, and 40% intricacies on the collections api.
+Note: OCM is the most advanced certification. Requires developing an application for 6 months
+
+try with resources: a try with paranthesis...instantiate resources (like input/output streams), so don't need to close the streams in 'finally' statements. 
+
+==========================================
+SQL 
+==========================================
+
+SQL -> Structured Query Language
+
+Provides commands for building, querying and performing transactions on a database
+Database -> A structured collection of data
+
+How to relate SQL to databases? Need a DBMS??? (maybe wrong acrynonym)
+We will be using RDBMS
+RDBMS -> Relational Database Management System
+- This is a system that aims to provide a user tools for managing a database. 
+Relationaly -> The database will have rules to be followed for Structure. 
+i.e. how tables relate and react to eachother
+
+Some SQL implementations:
+REDBMS examples
+Oracle PL\SQL -> Oracle Procedural Langauage SQL: Highest security
+Note: the hardest SQL (jerk with syntax)
+DBZ: provided by IBM
+MySQL: Oracle (maybe open source?)
+SQLServer and T\SQL (Transaction SQL): provided by microsoft
+PostGres: subjectively the best
+
+==========================================
+ORACLE (SQL language)
+==========================================
+Termonology:
+(Don't forget this!!!! will be quized!)
+SQL Sublanguages: 
+DDL -> Data Definition Language
+--- Deals with struturing of actual tables. (Not the data within)
+--- Commands: general syntax - <command> <tablename>
+		Create		- 	Create a table
+		Drop 		- 	Delete a table
+		Alter 		- 	Change table
+		Truncate 	-	Get rid of all data in the table. Empties the table
+DML -> Data Manipulation Language	
+--- Deals with CRUD for actual data
+--- INSERT -> C
+--- SELECT -> R   	grab the data from the table
+--- UPDATE -> U 	
+--- DELETE -> D
+
+CRUD side trail: 
+CRUD -> Create, Retreive/Read, Update, Delete
+
+DQL -> Data Querey Language
+--- Exists because ???
+--- SELECT
+
+DCL -> Data Control Language
+--- Deals with data access
+--- Who has control over the data
+--- GRANT
+--- REVOKE
+
+TCL -> Transaction Control Language
+--- Deals with everything relating to persisting transactions
+--- COMMIT - Saves changes. Until committed, no one can see changes
+--- ROLLBACK - Revert to previous commit or savepoint. Cannot only go back to the previous commit...no further
+--- SAVEPOINT - Any point after  the last commit that we can roll back to
+--- SETTRANSACTION - Sets transaction isolation level
+Note: Oracle only supports Serialization and Read Committed
+
+By the end of this week: Name off every sublanguage, everything that goes into a sub langauge and the commands
+
+See TechOnTheNet for oracle
+
+Database: 
+use sqldeveloper@localhost88 ??? perhaps sqldeveloper@localhost:88
+- use this for the database for project 2
+
+Work throught he SQL lab. 
+Find the Chinook_Oracle.sql file online, post on slack
+Save the sql file locally
+
+ERD -> Entity Relation Diagram
+
+
+=========================
+Constraints for ORACLE
+=========================
+There are 5 Contraints
+Primary Key
+- A unique, non-null value in a table
+Foriegn Key
+- How to make a relationship betwen two or more tables
+- A foriegn key must point to either a primary key of another table or a unique key. 
+Unique Key
+- Must be unique, but can be null
+Null/Not Null 
+- can be applied to a column to specify if Null is a valid entry or not
+Check
+- Applies a conditional to a column for the values we insert
+
+
+
+Use "Upper Snake Casing" for table....all values stored in capitals so cannot use camel casing
+
+
+===========================
+Project #2
+===========================
+Create backend database
+Create an ERD document -> Draw.io
