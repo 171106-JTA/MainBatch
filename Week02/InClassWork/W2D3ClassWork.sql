@@ -244,3 +244,206 @@ where pkmn_name  LIKE '__________'; --things with 10 letters (i.e. there are 10 
 
 select * from polkaman
 where pkmn_name  LIKE '%a__e%'; --grab all names where at some point, there is an 'a' with 2 letters after it then an 'e'
+
+
+-- JOINS
+select * from trainer A --Also aliasing
+inner join my_polkamans B
+on A.Trainer_ID = B.Trainer_id
+inner join polkaman C
+on b.pkmn_id = c.pkmn_id
+where lower(trainer_name) = 'bobbert';
+
+select a.Trainer_name as "Trainer" ,c.pkmn_name as "Polkaman" from trainer A --Also aliasing
+inner join my_polkamans B
+on A.Trainer_ID = B.Trainer_id
+inner join polkaman C
+on b.pkmn_id = c.pkmn_id
+where lower(trainer_name) = 'bobbert';
+
+/*
+Views are virtual tables. It is a custom query that can be colled on by name.
+Especially usefuil for more complex queries
+*/
+CREATE VIEW Trainer_PKMN as 
+select a.Trainer_name as "Trainer" ,c.pkmn_name as "Polkaman" from trainer A --Also aliasing
+inner join my_polkamans B
+on A.Trainer_ID = B.Trainer_id
+inner join polkaman C
+on b.pkmn_id = c.pkmn_id
+order by Trainer_Name ASC;
+
+select * from TRAINER_PKMN;
+
+
+--------More Joins!!!!---------
+
+--Cross join
+select * from polkaman
+cross join my_polkamans;
+--You can shorhand cross join:
+select * from polkaman, my_polkamans; --Implicic Cross Join
+
+--Left Join Example
+insert into polkaman
+values(23, 'TwentyThreeMon', 'Generic', 'Dragon');
+
+select * from polkaman A -- Left Table
+left join my_polkamans B -- Right Table
+on a.pkmn_id = b.pkmn_id;
+
+-- Right Join Example
+select * from polkaman A -- Left Table
+right join my_polkamans B -- Right Table
+on a.pkmn_id = b.pkmn_id;
+
+-- Inner Join Example
+select * from polkaman A -- Left Table
+inner join my_polkamans B -- Right Table
+on a.pkmn_id = b.pkmn_id;
+
+-- Full Outer Join: Details from all tables
+select * from polkaman A -- Left Table
+full join my_polkamans B -- Right Table
+on b.pkmn_id = a.pkmn_id
+full outer join trainer C
+on b.trainer_id = c.trainer_id
+full outer join moves D
+on b.move_id = d.move_id;
+
+-- Natual Joins
+/*
+Adding the NATURAL clause to any join requires the ON clause to be ommitted. 
+This is because a natural join will join automatically based on matching "Column Name" 
+and omit any duplicate column names from the final vieew
+*/
+select * from polkaman
+natural inner join my_polkamans;
+
+select a.pkmn_id as "my_pkmn_id", b.pkmn_id as "pkmn_id" from my_polkamans A
+inner join polkaman B
+on a.pkmn_id > b.pkmn_id; 
+/*
+Any time you perform a join where you do
+tableA.column = tableB.column, you are performing an EQUIJOIN
+Any joins you perform that do NOT use "=", like above, is called a THETAJOIN
+*/
+
+----Why isn't this working???? See Ryan's code?
+drop table Employee;
+create table Employee (
+    emp_id number(3),
+    emp_name varchar2(200), 
+    sup_id number(3)
+);
+
+insert into employee
+values(1, 'bobbert', 1); 
+insert into employee
+values(2, 'betty', 2);
+insert into employee
+values(3, 'Todd', 1);
+insert into employee
+values(4, 'gabriel', 2);
+
+select * from Employee A
+inner join Employee B
+on A.EMP_ID = B.SUP_ID;
+/*
+Our self join brings us a view with each supervisor, and 
+the employees that work below them. 
+Note: Self join is not an actual keyword, but a concept.
+*/
+
+
+------------Set Operations ---------------
+drop table setA;
+drop table setB;
+create table setA (
+    c1 number(3),
+    c2 varchar2(3)
+);
+
+create table setB (
+    c3 number(3),
+    c4 varchar2(3)
+);
+
+insert into setA
+values(1, 'A');
+insert into setA
+values(2, 'B');
+insert into setA
+values(3, 'C');
+insert into setA
+values(4, 'D');
+insert into setB
+values(4, 'C');
+insert into setB
+values(5, 'D');
+insert into setB
+values(6, 'E');
+insert into setB
+values(7, 'F');
+
+
+-------Union------
+--Combines both queries, filters out duplicates
+select * from setA
+union
+select * from setB;
+
+------Union All ------
+--INcluded duplicates
+select * from setA
+union all
+select * from setB;
+
+------Minus-------
+--Finlters our recors that are in both queries, from the query
+select * from setA
+minus
+select * from setB;
+
+--Intersect
+--show only records that appear in both queries
+select * from setA
+intersect
+select * from setB;
+
+/*
+Rules for set operators
+- The two queries must have matching column counts, as well as the column datatypes
+beting presented in the same order. column names do not have to match.
+It will just take the names of the left query anyway. 
+*/
+
+select pkmn_id from polkaman
+union all 
+select pkmn_id from my_polkamans;
+
+--Will not work, not the same number of columns
+--select * from polkaman
+--union 
+--select * from my_polkamans;
+
+/*
+I am selecting from trainer table. I want only trainers that own fire type polkamans.
+How can I do this without using joins? nested selects
+*/ 
+--With nested selects and 'IN' we can do it
+select * from trainer where Trainer_ID IN (
+select trainer_id from my_polkamans where pkmn_id in (
+select pkmn_id from polkaman where lower(type1)='fire' or lower(type2) = 'fire')); 
+
+
+/*
+Check Constraint
+Apply a condition that must be met for a column to accept inert.
+*/
+alter table polkaman
+add constraint check_pkmn_id Check (pkmn_id < 152);
+
+--Will break the new check constraint
+--insert into polkaman
+--values(162, 'Moo Too', 'Milk', 'dragon');
