@@ -1,0 +1,34 @@
+Always write and test a select statement before running a delete statement
+
+Be able to answer: 
+What is an aggregate function?
+name 3+ aggreagate functions
+What is a scalar function
+name 3+ aggregate functions
+
+HAVING is also the only way to apply conditions to aggregates
+
+
+JOINS
+provide a means to combine two or more tables into one view
+Actual Joins: (i.e. Keywords)
+Inner Join
+Outer Join
+Cross Joins
+Left Join
+Right Join
+
+Natural Join - a keyword that can be applied all the 'actual joins'
+- i.e. natural right join, natural left join, etc. 
+
+Conceptual Joins: 
+Self Join
+EquiJoins
+Theta Joins
+
+note: outer join == full outer join
+
+Inner Join 
+Combines tables based on column, filtering out data that does NOT appear 
+in both tables
+(See pg 14 for examples)
