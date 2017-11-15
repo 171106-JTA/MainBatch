@@ -441,31 +441,12 @@ public class Driver {
 	private void displayLockedAccounts() {
 		System.out.println("Usernames for currently locked accounts");
 
-		List<String> lockedUserAccounts = getLockedAccounts();
+		List<String> lockedUserAccounts = getAListOfUsers(status_locked, permission_client);
 		for (String item : lockedUserAccounts) {
 			System.out.println(item);
 		}
 		System.out.println("\n");
 		System.out.println("Enter Account To Lock: ");
-	}
-
-	/**
-	 * Get all locked accounts from the internal database
-	 * 
-	 * @return Returns a list containing the usernames of all locked client accounts
-	 */
-	private List<String> getLockedAccounts() {
-		// Loop through db and search for unlocked user accounts
-		// To Do: Find a better way to do this than O(n)
-		List<String> lockedUserAccounts = new ArrayList<String>();
-		for (String key : this.db.keySet()) {
-			User user = this.db.get(key);
-			if (user.getStatus() == status_locked && user.getPermissions() == permission_client) {
-				lockedUserAccounts.add(key);
-			}
-		}
-
-		return lockedUserAccounts;
 	}
 
 	/**
@@ -484,31 +465,12 @@ public class Driver {
 	private void displayUnlockedAccounts() {
 		System.out.println("Usernames for currently unlocked accounts");
 
-		List<String> unlockedUserAccounts = getUnlockedAccounts();
+		List<String> unlockedUserAccounts = getAListOfUsers(status_active, permission_client);
 		for (String item : unlockedUserAccounts) {
 			System.out.println(item);
 		}
 		System.out.println("\n");
 		System.out.println("Enter Account To Lock: ");
-	}
-
-	/**
-	 * Fetch unlocked accounts from the internal database
-	 * 
-	 * @return Returns a list containing ID's of currently unlocked accounts
-	 */
-	private List<String> getUnlockedAccounts() {
-		// Loop through db and search for unlocked user accounts
-		// To Do: Find a better way to do this than O(n)
-		List<String> unlockedUserAccounts = new ArrayList<String>();
-		for (String key : this.db.keySet()) {
-			User user = this.db.get(key);
-			if (user.getStatus() == status_active && user.getPermissions() == permission_client) {
-				unlockedUserAccounts.add(key);
-			}
-		}
-
-		return unlockedUserAccounts;
 	}
 
 	/**
@@ -527,31 +489,12 @@ public class Driver {
 	private void displayAccountsNeedingApproval() {
 		System.out.println("Usernames for accounts needing approval");
 
-		List<String> approvalPendingAccounts = getApprovalPendingAccounts();
+		List<String> approvalPendingAccounts = getAListOfUsers(status_approvalPending, permission_client);
 		for (String item : approvalPendingAccounts) {
 			System.out.println(item);
 		}
 		System.out.println("\n");
 		System.out.println("Enter Account To Approve: ");
-	}
-
-	/**
-	 * Fetch the accounts that need approving from the internal database
-	 * 
-	 * @return Returns a list of strings containing the user accounts that need
-	 *         approving
-	 */
-	private List<String> getApprovalPendingAccounts() {
-		// Loop through db and search for accounts needing approval
-		// To Do: Find a better way to do this than O(n)
-		List<String> accountNeedingApproval = new ArrayList<String>();
-		for (String key : this.db.keySet()) {
-			if (this.db.get(key).getStatus() == status_approvalPending) {
-				accountNeedingApproval.add(key);
-			}
-		}
-
-		return accountNeedingApproval;
 	}
 
 	/**
@@ -575,7 +518,7 @@ public class Driver {
 	private void displayClients() {
 		System.out.println("Usernames for accounts needing approval");
 
-		List<String> approvalPendingAccounts = getClients();
+		List<String> approvalPendingAccounts = getAListOfUsers(status_active, permission_client);
 		for (String item : approvalPendingAccounts) {
 			System.out.println(item);
 		}
@@ -584,18 +527,19 @@ public class Driver {
 	}
 
 	/**
-	 * Fetch all clients in the database
-	 * 
-	 * @return Returns a list containing the usernames of all clients in the
-	 *         database
+	 * Get a list of users from the database that meet the status and permissions requirements
+	 * @param status		Holds the status of users to fetch from the database
+	 * @param permissions	Holds the permission of the users to fetch from the database
+	 * @return				Returns a list of strings containing the usernames of all users 
+	 * 						that meet the status and permission requirements
 	 */
-	private List<String> getClients() {
-		// Loop through db and search for all clients
+	private List<String> getAListOfUsers(final int status, final int permissions) {
+		// Loop through db and search for users meetings the specified conditions
 		// To Do: Find a better way to do this than O(n)
 		List<String> accountClients = new ArrayList<String>();
 		for (String key : this.db.keySet()) {
 			User user = this.db.get(key);
-			if (user.getPermissions() == permission_client && user.getStatus() == status_active) {
+			if (user.getPermissions() == permissions && user.getStatus() == status) {
 				accountClients.add(key);
 			}
 		}
