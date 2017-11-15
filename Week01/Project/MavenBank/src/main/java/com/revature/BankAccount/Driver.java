@@ -430,7 +430,9 @@ public class Driver {
 	public void unlockClientAccount() {
 		displayLockedAccounts();
 		String input = getUserInput(); // Get admin's input for account to unlock
-		getAndUnlockAccount(input);
+//		getAndUnlockAccount(input);
+		
+		checkAndChangeStatusAndPermissions(input, status_locked, permission_client, status_active, permission_client);
 	}
 
 	/**
@@ -467,44 +469,13 @@ public class Driver {
 	}
 
 	/**
-	 * Get an account username from the admin, validate the input, and unlock the
-	 * specified account
-	 * 
-	 * @return Returns TRUE if the username was valid and FALSE if not
-	 */
-	public boolean getAndUnlockAccount(String input) {
-		boolean validUser = false;
-		User user = this.db.get(input);
-
-		// Check if designated user exists and actually is currently locked.
-		// Note: nested if-statements for error message purposes
-		// (i.e. allows for unique error message based on situation)
-		if (user != null) {
-			if (user.getStatus() == status_locked && user.getPermissions() == permission_client) {
-				user.setStatus(status_active);
-				this.db.put(user.getUsername(), user);
-				validUser = true;
-				System.out.println("Account Unlocked!");
-				logger.trace("Unlocking account for user: " + user.getUsername());
-			} else {
-				logger.trace("Account: " + user.getUsername() + " cannot be unlocked");
-				System.out.println("Account: " + user.getUsername() + " cannot be unlocked");
-			}
-		} else {
-			logger.trace("Account: " + input + " is not in the database");
-			System.out.println("User is not in the database");
-		}
-
-		return validUser;
-	}
-
-	/**
 	 * Functionality for admins to lock a client accounts
 	 */
 	public void lockClientAccount() {
 		displayUnlockedAccounts();
 		String input = getUserInput(); // Get Admins choice of account to lock
-		getAndLockAccount(input); // If account
+//		getAndLockAccount(input); // If account
+		checkAndChangeStatusAndPermissions(input, status_active, permission_client, status_locked, permission_client);
 	}
 
 	/**
@@ -541,45 +512,13 @@ public class Driver {
 	}
 
 	/**
-	 * Get and validate the Admin's choice of client to lock. Lock the client's
-	 * account
-	 * 
-	 * @return Returns TRUE if the admins choses a valid user and False otherwise
-	 */
-	public boolean getAndLockAccount(String input) {
-		boolean validUser = false;
-
-		User user = this.db.get(input);
-
-		// Check if designated user exists and actually is currently unlocked.
-		// Note: nested if-statements for error message purposes
-		// (i.e. allows for unique error message based on situation)
-		if (user != null) {
-			if (user.getStatus() == status_active && user.getPermissions() == permission_client) {
-				user.setStatus(status_locked);
-				this.db.put(user.getUsername(), user);
-				validUser = true;
-				System.out.println("Account Locked!");
-				logger.trace("Locking account of user: " + user.getUsername());
-			} else {
-				logger.trace("Account: " + user.getUsername() + " cannot be locked");
-				System.out.println("Account: " + user.getUsername() + " cannot be locked");
-			}
-		} else {
-			logger.trace("Account: " + input + " is not in the database");
-			System.out.println("User is not in the database");
-		}
-
-		return validUser;
-	}
-
-	/**
 	 * Get user id from Admin and approve the given client's account
 	 */
 	public void approveClientAccount() {
 		displayAccountsNeedingApproval();
 		String input = getUserInput();
-		getAndApproveAccount(input);
+//		getAndApproveAccount(input);
+		checkAndChangeStatusAndPermissions(input, status_approvalPending, permission_client, status_active, permission_client);
 	}
 
 	/**
@@ -616,37 +555,6 @@ public class Driver {
 	}
 
 	/**
-	 * Allow the admin to specify which account to approve Validate the admin's
-	 * input
-	 * 
-	 * @return Returns TRUE if the admin's input is valid and FALSE if the input is
-	 *         invalid
-	 */
-	public boolean getAndApproveAccount(String input) {
-		boolean validUser = false;
-		User user = this.db.get(input);
-
-		// Check if designated user exists and actually needs to be approved.
-		// Note: nested if-statements for error message purposes
-		// (i.e. allows for unique error message based on situation)
-		if (user != null) {
-			if (user.getStatus() == status_approvalPending) {
-				user.setStatus(status_active);
-				this.db.put(user.getUsername(), user);
-				validUser = true;
-				System.out.println("Account Approved!");
-				logger.trace("Approving account for user: " + user.getUsername());
-			} else {
-				logger.trace("Account: " + user.getUsername() + " cannot be approved");
-				System.out.println("Account: " + user.getUsername() + " does not need to be approved");
-			}
-		} else {
-			logger.trace("Account: " + input + " is not in the database");
-			System.out.println("User is not in the database");
-		}
-
-		return validUser;
-	}
 
 	/**
 	 * Allows admins to promote clients to admin status
@@ -654,7 +562,10 @@ public class Driver {
 	public void promoteClientToAdmin() {
 		displayClients();
 		String input = getUserInput();
-		getAndPromoteClient(input);
+//		getAndPromoteClient(input);
+		
+		//Only promote active user accounts. May want to refactor this at some point
+		checkAndChangeStatusAndPermissions(input, status_active, permission_client, status_active, permission_admin);
 	}
 
 	/**
@@ -683,47 +594,47 @@ public class Driver {
 		// To Do: Find a better way to do this than O(n)
 		List<String> accountClients = new ArrayList<String>();
 		for (String key : this.db.keySet()) {
-			if (this.db.get(key).getPermissions() == permission_client) {
+			User user = this.db.get(key);
+			if (user.getPermissions() == permission_client && user.getStatus() == status_active) {
 				accountClients.add(key);
 			}
 		}
-
 		return accountClients;
-	}
-
+	}	
+	
 	/**
-	 * Get a username from the admin, validate the input, and promote that client to
-	 * an admin
-	 * 
-	 * @return Returns TRUE if the specified user is a client and FALSE if specified
-	 *         user is invalid (that is, does not exist in the database, or already
-	 *         an admin)
+	 * Change status and permissions of a user, if existing status and permission conditions exist
+	 * @param input 				Username of account to change
+	 * @param currentStatus 		The current expected status
+	 * @param currentPermission		The current expected permission
+	 * @param newStatus				The status to be stored if the conditions are met
+	 * @param newPermission			The permission to be stored if the conditions are met
 	 */
-	private boolean getAndPromoteClient(String input) {
-		boolean validUser = false;
+	private void checkAndChangeStatusAndPermissions(String input, final int currentStatus, final int currentPermission, 
+		final int newStatus, final int newPermission) {		
 		User user = this.db.get(input);
 
-		// Check if designated user exists and is a client.
-		// Note: nested if-statements for error message purposes
-		// (i.e. allows for unique error message based on situation)
+		// Check if designated user exists and currently has the desired status and desired permission\
+		// If so, set the user's status and password to the newStatus and newPermissions
+		// Note: nested if-statements allows unique error message based on situation)
 		if (user != null) {
-			if (user.getPermissions() == permission_client) {
-				user.setPermissions(permission_admin);
-				user.setStatus(status_active);
+			if (user.getStatus() == currentStatus && user.getPermissions() == currentPermission) {
+				//Set the new status and permissions and save the changes to the database 
+				user.setStatus(newStatus);
+				user.setPermissions(newPermission);
 				this.db.put(user.getUsername(), user);
-				validUser = true;
-				System.out.println("Account Promoted to Admin!");
-				logger.trace("Promoting user: " + user.getUsername() + " to Admin");
-			} else {
-				logger.trace("Account: " + user.getUsername() + " is already an admin");
-				System.out.println("Account: " + user.getUsername() + " is already an admin");
+				
+				//Log results
+				System.out.println("Account Changed!");
+				logger.trace("Changing account of user: " + user.getUsername());
+			} else { //Account cannot be locked (either because Admin, already locked, or currently not approved)
+				logger.trace("Account: " + user.getUsername() + " cannot be changed");
+				System.out.println("Account: " + user.getUsername() + " cannot be changed");
 			}
-		} else {
+		} else { //Account does not exist 
 			logger.trace("Account: " + input + " is not in the database");
 			System.out.println("User is not in the database");
 		}
-
-		return validUser;
 	}
 
 	////////////////////////////////////////////////////////
