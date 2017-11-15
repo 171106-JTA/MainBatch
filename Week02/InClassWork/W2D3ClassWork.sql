@@ -21,6 +21,7 @@ DROP TABLE  my_polkamans CASCADE CONSTRAINTS;
 DROP TABLE Trainer;
 DROP TABLE moves; 
 DROP TABLE polkamans;
+DROP TABLE polkaman;
 /*
 CASCADE CONSTRAINTS - Optional. 
 Allows tables to be dropped in any order. 
@@ -121,3 +122,125 @@ INSERT INTO my_polkamans
 VALUES (6, 7, 271, 1, 2);
 
 SELECT * FROM MY_POLKAMANS;
+
+--Querying
+--You can also grab specific columns
+select trainer_name from trainer;
+
+/*
+You can apply conditions for specific columns to filter your data
+*/
+select * from polkamans;
+select * from polkamans WHERE pkmn_id > 3;
+--User the WHERE clause to apply conditions to the columns. 
+--You can user AND and OR  to do multiple conditions.
+select * from POLKAMANS WHERE PKMN_ID > 3 AND TYPE1 = 'fire';
+
+--UPDATE DATA EXAMPLE
+UPDATE moves
+set MOVE_TYPE =  'Aqua',
+MOVE_NAME = 'splashes' --you can do multiple updates in one transaction
+where MOVE_TYPE = 'Overpowered'; 
+
+select * from moves;
+
+
+--ALTER EXMAPLE
+ALTER TABLE polkamans
+RENAME TO polkaman;
+
+select * from polkaman;
+
+--TRUNCATE EXAMPLE
+--TRUNCATE TABLE my_polkamans; 
+--select * from my_polkamans;
+--gets rid of all data in my_polkamans
+
+--DELETE EXAMPLE
+DELETE FROM MY_POLKAMANS
+WHERE MY_PKMN_ID = 3;
+
+SELECT * FROM MY_POLKAMANS;
+
+/*
+AGGREGATE FUNCTIONS
+- An aggregate function is a function applied to a column and processes all the data
+- returning a single value back. 
+- Examples: AVG(), SUM(), MAX(), MIN(), STDDEV(), VARIANCE(), LAST(), FIRST(), COUNT()
+*/
+select MAX_HP from my_polkamans;
+select max(MAX_HP) from my_polkamans;
+select avg(MAX_HP) from MY_POLKAMANS;
+select stddev(MAX_HP) from MY_POLKAMANs;
+
+/*
+SCALAR FUNCTION
+A function that applies to each cell of a column. 
+e.g. alters the value within each cell of a column
+when in doubt, think STring manipulation functions:
+lower()
+upper()
+ABS()
+cos,sin,tan()
+ROUND()
+TRUNC()
+CONCAT()
+LENGTH()
+LTRIM() --TAKE AWAY WHITE SPACE FROM LEFT
+RTRIM() --TAKE AWAY WHITE SPACE FROM RIGHT
+TRIM() -- BOTH SIDES
+*/
+
+select upper(pkmn_name) from polkaman
+where upper(pkmn_name) = 'FIREMANDER';
+
+
+/*
+Suppose we want to find which group of owned polkamans that have the highest cumulative hp
+*/
+select * from my_polkamans;
+
+select pkmn_id, sum(MAX_HP) as "SUM"
+-- AS  is an alias, they use double quotes, and are used for convenience
+from MY_POLKAMANS
+WHERE TRAINER_ID != 1
+group by pkmn_id having sum(MAX_HP) > 300;
+--HAVING applies to groups of things while WHERE applies to all records in a table
+/*
+A common question is WHERE vs HAVING. 
+WHERE is a conditional that applies to every record individually and will apply 
+before a HAVING clause
+HAVING is a conditional that aplies to groups of records and take place after filtering
+out individual records with WHERE
+Since it works on groups of records, it is safe to say, HAVING requires the use of GROUP BY
+as well. 
+HAVING is also the only way to apply conditions to aggregate
+*/
+
+select pkmn_id from (select * from polkaman); -- Nested select example. Albeit a bad one
+--nested selects are usually between different tables
+
+/*
+IN keyword
+IN can be used to replace '=' in a conditional. 
+Serves as a convenient OR clause
+*/
+
+select * from polkaman
+where pkmn_id in (1,4, 7);
+
+select * from polkaman
+where pkmn_id between 1 and 4; --inclusive
+
+
+/*
+LIKE is used to grab results that match a regular expression.
+You must use the following wildcards
+_   - underscore means any ONE character
+%   - 0+ of any character 
+*/
+select * from polkaman
+where pkmn_name  LIKE '__________'; --things with 10 letters (i.e. there are 10 underscores)
+
+select * from polkaman
+where pkmn_name  LIKE '%a__e%'; --grab all names where at some point, there is an 'a' with 2 letters after it then an 'e'
