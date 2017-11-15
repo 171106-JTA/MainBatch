@@ -71,4 +71,61 @@ Union All -> same as union but includes duplicates
 
 Intersect -> Filters out all records that weren't in both tables
 
-Minus
+Minus -> Removes any records from the left query that appers in the right query
+
+NOT SUPPORTED BY ORACLE:
+Except -> returns all records that are exclusive to one side
+
+********************************************
+What is the difference between Intersect and InnerJoin
+InnerJoin -> the combining of two table based on a column
+Intersect -> compares two queries and compares eleemnts of records
+The datatypes in Intersect queries must match across columns...the column names do not need to match
+
+
+what is the difference between Full Outer Join and a Union All (or Union)?
+
+Note: you can always replicate the results using either joins or sets
+********************************************
+
+Generate ERD from Oracle SQL Developer
+
+
+Project 1 Part 2: 
+Generate ERD through Oracle SQL Developer
+Keep it "third form" or "Normalized"
+
+
+Joins Vs Sets
+Joins 
+take 2 tables and join on a column. i.e. the tables have a column name and datatype in common. Combines all columns together
+Sets
+Query 2 tables and get a result set. Take those 2 result sets and combine them. 
+Can only join if column count and column datatype order match. 
+
+
+Chinook ASsignment: 
+A file with script showing what we ran to complete the assignment. 
+Upload this file to the week02 folder
+
+=======================
+Normalization
+=======================
+Normalization -> levels of structure to reduce database ambiguity and redundancy
+
+Referential Integrity
+- prevents orphan records
+
+Atomic Data -> data at its lowerst detailed form
+Candidate Key -> Any column that is used to identify others
+
+Levels: 
+ONF -> Zero Normal Form. denormalized database (e.g. data warehouse is an example of a denormalized database)
+1NF -> 1st Normal Form. All data is atomic 
+2NF -> There can be NO functional dependancies on partial keys
+3NF -> No keys that are not identified by a candidate keys
+Boyce Codd Normal Form -> No overlapping candidate keys
+4NF -> Don't Care
+5NF -> Dont't Care
+6NF -> Don't Care
+:P ONly know up to the Boyce Codd Normal Form
