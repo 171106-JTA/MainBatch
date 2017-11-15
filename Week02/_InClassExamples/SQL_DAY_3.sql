@@ -237,3 +237,209 @@ You must use the following wildcards:
 select * from polkaman
 where pkmn_name LIKE '%a__e%'; --Grab all names where at some point, there is an 'a' with 2 letters after it, THEN an 'e'
 
+
+/*
+VIEWS
+-A view is a virtual table. It is encompassed of a custom query that can then be called on
+by name. Especially useful for more complex queries.
+*/
+CREATE VIEW Trainer_PKMN AS
+select * from trainer A --Also aliasing
+inner join my_polkamans B
+on A.Trainer_ID = B.Trainer_id
+inner join polkaman C
+on b.pkmn_id = c.pkmn_id
+order by Trainer_Name ASC;
+
+--Cross join
+select * from polkaman
+cross join my_polkamans;
+--You can shorthand cross join:
+select * from polkaman, my_polkamans;
+
+
+insert into polkaman
+values(23, 'TwentyThreeMon', 'Generic', 'Dragon');
+
+select * from polkaman A --LEFT TABLE
+left join my_polkamans B --RIGHT TABLE
+on a.pkmn_id = b.pkmn_id;
+
+select * from polkaman A --LEFT TABLE
+right join my_polkamans B --RIGHT TABLE
+on a.pkmn_id = b.pkmn_id;
+
+select * from polkaman A --LEFT TABLE
+full outer join my_polkamans B --RIGHT TABLE
+on B.pkmn_id = A.pkmn_id
+full outer join trainer C
+on B.trainer_id = C.trainer_id
+full outer join moves D
+on B.move_id = d.move_id;
+
+--Natural joins
+select * from polkaman
+natural inner join my_polkamans;
+/*
+Adding the 'natural' clause to any join will require you to omit the 'ON' clause.
+This is because a natural join will join automatically based on matching "column name"
+and then omit any duplicate column names from the final view.
+*/
+drop table garbageA;
+drop table garbageB;
+
+create table garbageA(
+    col1 number(2),
+    col2 number(2)
+    );
+
+create table garbageB(
+    col1 number(2),
+    col2 number(2)
+    );
+    
+INSERT INTO garbageA
+Values(1,2);
+INSERT INTO garbageA
+Values(3,5);
+INSERT INTO garbageB
+Values(1,2);
+INSERT INTO garbageB
+Values(3,5);
+
+select * from garbageA
+natural inner join garbageB;
+
+select a.pkmn_id, b.pkmn_id from my_polkamans A
+inner join polkaman B
+on a.pkmn_id > b.pkmn_id;
+/*
+Any time, you perform a join where you do:
+tableA.column = tableB.column you are performing, an EQUIJOIN
+Any joins you perform that do NOT use '=', like above, is called
+a THETAJOIN
+*/
+
+drop TABLE Employee;
+CREATE TABLE Employee (
+    emp_ID number(3),
+    emp_name varchar(200),
+    sup_id number(3)
+);
+
+INSERT INTO EMPLOYEE
+VALUES(1,'Bobbert',1);
+INSERT INTO EMPLOYEE
+VALUES(2,'Betty',2);
+INSERT INTO EMPLOYEE
+VALUES(3,'Todd',1);
+INSERT INTO EMPLOYEE
+VALUES(4,'Gabriel',2);
+
+select * from Employee A
+inner join Employee B
+on A.EMP_ID = B.SUP_ID;
+/*
+Our self join brings us a view with each supervisor, and 
+the employees that work below them.
+Note: Self join is not an actual keyword, but a conc
+*/
+
+--Set operations
+
+create table setA(
+    c1 number(3),
+    c2 varchar2(3)
+);
+
+create table setB(
+    c3 number(3),
+    c4 varchar2(3)
+);
+
+insert into SetA
+VALUES(1,'A');
+insert into SetA
+VALUES(2,'B');
+insert into SetA
+VALUES(3,'C');
+insert into SetA
+VALUES(4,'D');
+insert into SetB
+VALUES(3,'C');
+insert into SetB
+VALUES(4,'D');
+insert into SetB
+VALUES(5,'E');
+insert into SetB
+VALUES(6,'F');
+
+
+--UNION
+--Combines both queries, filters out duplicates
+select * from setA
+UNION
+select * from setB;
+
+--UNION ALL
+--Same as above, includes duplicates though
+select * from setA
+UNION ALL
+select * from setB;
+
+--MINUS
+--Filter out records that are in both queries, from the Query 
+select * from setA
+Minus
+select * from setB;
+
+--INTERSECT
+--Show only records that appear in both queries
+select * from setA
+INTERSECT
+select * from setB;
+
+/*
+Rules for set operators
+-The two queries must have matching column counts,
+as well as the column datatypes being presented in the 
+same order. column names do not have to match.
+It will just take the names of the left query anyway.
+*/
+
+select pkmn_id,pkmn_name from polkaman
+UNION ALL
+select trainer_id,trainer_name from trainer;
+
+--Will NOT WORK
+--select * from polkaman
+--union
+--select * from trainer; 
+
+
+/*
+I am selecting from trainer table. I want only trainers that own fire type polkamans.
+How can I do this without using joins.
+*/
+--With nested selects and 'IN' we can do it.
+select * from trainer where Trainer_ID IN(
+select TRAINER_ID from MY_polkamans where pkmn_id IN(
+SELECT pkmn_id from polkaman where lower(type1)='fire' OR lower(type2) = 'fire'));
+
+--Example of inner query from above
+select TRAINER_ID,pkmn_id from MY_polkamans where pkmn_id IN(
+SELECT pkmn_id from polkaman where lower(type1)='fire' OR lower(type2) = 'fire');
+
+--Example of innermost query from above
+SELECT pkmn_id from polkaman where lower(type1)='fire' OR lower(type2) = 'fire';
+
+
+
+--CHECK Contraint
+--Apply a condition that must be met for a column to accept insert.
+ALTER TABLE polkaman
+ADD CONSTRAINT check_pkmn_id Check(pkmn_id < 152);
+
+INSERT INTO polkaman
+VALUES(162,'Moo Too', 'Milk', 'Dragon');
+
