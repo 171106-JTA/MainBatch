@@ -159,7 +159,7 @@ class BankModel implements java.io.Serializable {
 
 			int creditScore = user.getCreditScore();
 
-			if (creditScore <= 500) {
+			if (creditScore <= 400) {
 
 				return false;
 
