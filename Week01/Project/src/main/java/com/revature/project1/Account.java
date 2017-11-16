@@ -50,7 +50,7 @@ public class Account {
 				}
 			
 			//––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-			
+					
 			case "deposit":
 				System.out.println("\nHow much do you want to deposit?");
 
@@ -75,7 +75,7 @@ public class Account {
 					if (enoughFunds(u, d))	dolAmt -= transfer(u, u2, d);
 				} catch (InputMismatchException e) {
 					System.out.println("Please submit transfer in proper format."); 	
-					LogUtil.log.warn("input not in proper format", e);
+//					LogUtil.log.warn("input not in proper format", e);
 					continue;
 				}
 				continue;
