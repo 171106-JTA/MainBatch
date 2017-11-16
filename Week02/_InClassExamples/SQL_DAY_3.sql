@@ -443,3 +443,4 @@ ADD CONSTRAINT check_pkmn_id Check(pkmn_id < 152);
 INSERT INTO polkaman
 VALUES(162,'Moo Too', 'Milk', 'Dragon');
 
+commit; 
