@@ -14,7 +14,7 @@ TCL
 - ROLLABACK, SAVEPOINT, COMMIT, SET_TRANSACTION
 DCL
 - GRANT
-- REVODE
+- REVOkE
 */
 
 DROP TABLE  my_polkamans CASCADE CONSTRAINTS; 
@@ -447,3 +447,5 @@ add constraint check_pkmn_id Check (pkmn_id < 152);
 --Will break the new check constraint
 --insert into polkaman
 --values(162, 'Moo Too', 'Milk', 'dragon');
+
+COMMIT COMPLETE;
