@@ -443,3 +443,49 @@ ADD CONSTRAINT check_pkmn_id Check(pkmn_id < 152);
 INSERT INTO polkaman
 VALUES(162,'Moo Too', 'Milk', 'Dragon');
 
+/
+
+/*
+IN vs EXISTS
+-Both of these commands can be used to perform conditional checks.
+-High level overview: EXISTS is garbage.
+-It is highly inefficient if the outer query is even remotely large.
+*/
+
+select * from trainer where EXISTS(
+select TRAINER_ID from MY_polkamans where EXISTS(
+SELECT pkmn_id from polkaman where lower(type1)='fire' OR lower(type2) = 'fire'));
+
+/*
+Every inner query will run once for every outer query.
+So for the above.
+trainer - 3 records
+my_polkamans - 5 records
+polkamans - 5 records
+
+So therefore, we run ~16 queries in the above example using EXISTS.
+This is why it behooves somebody to NOT use exists, if the outer query has a lot of data.
+When in doubt, just use IN
+*/
+--rownum is a valid identifier you can use in your conditionals.
+--However, it is finicky.
+select * from (select max_hp from my_polkamans
+where rownum < 4
+order by max_hp desc)
+minus
+select * from (select max_hp from my_polkamans
+where rownum < 3
+order by max_hp desc);
+
+/*
+As soon as a rownum conditional fails, it stops applying the condition to the
+remaining records.
+*/
+
+
+CREATE USER minibobbert IDENTIFIED BY p4ssw0rd;
+GRANT DBA TO minibobbert;
+
+select * from flash_cards;
+
+commit;
