@@ -114,6 +114,7 @@ END;
 /
 --------------------------------------------------------------------------------
 -------------------------------------3.2----------------------------------------
+--Return average total of all invoices
 CREATE OR REPLACE FUNCTION get_avg_invc
 RETURN NUMBER
 IS
@@ -123,12 +124,22 @@ BEGIN
 END;
 /
 
+--Return most expensive track
 CREATE OR REPLACE FUNCTION get_exp_track
-RETURN NUMBER
-IS
-    exp_track NUMBER;
+RETURN CURSOR;
+DECLARE
+    max_price NUMBER;
+    CURSOR track_cursor IS SELECT * FROM TRACK;
 BEGIN
-    SELECT max(UNITPRICE) INTO exp_track FROM TRACK;
+    max_price := max(UNITPRICE);
+    OPEN track_cursor; 
+        LOOP 
+        FETCH c_customers into c_id, c_name, c_addr; 
+        EXIT WHEN track_cursor%notfound;
+            IF 
+        END LOOP; 
+        CLOSE c_customers; 
+    SELECT * FROM TRACK WHERE UNITPRICE = max(UNITPRICE) INTO exp_track FROM TRACK;
 END;
 /
 
@@ -145,21 +156,17 @@ END;
 
 --------------------------------------------------------------------------------
 -------------------------------------3.4----------------------------------------
-/*
-CREATE TYPE emp_typ
-    IS TABLE OF NUMBER;
 
-DECLARE
-    emp_year NUMBER;
-    
-    FUNCTION get_emps_bdays
-    RETURN emp_typ
-    IS
-         emps_bdays emp_typ
-    BEGIN
-        IF EXTRACT(YEAR FROM BIRTHDATE) > 1968 INTO emps_bdays from EMPLOYEE;
-        END IF;
-*/
+CREATE OR REPLACE FUNCTION emp_bday
+RETURN SYS_REFCURSOR;
+DECLARE 
+    emp_cursor SYS_REFCURSOR;
+IS
+BEGIN
+    FETCH emp_cursor where EXTRACT(YEAR, BIRTHDATE) > 1968;
+END;
+/
+
 --------------------------------------------------------------------------------
 -------------------------------------4.1----------------------------------------
 CREATE OR REPLACE PROCEDURE get_names(cursorPARAM OUT SYS_REFCURSOR)
@@ -201,8 +208,10 @@ END;
 --------------------------------------------------------------------------------
 -------------------------------------4.3----------------------------------------
 --Return name and company of a customer
-CREATE OR REPLACE PROCEDURE get_managers(cust_id IN NUMBER, cus_fname OUT NUMBER,
-                                         cus_lname OUT NUMBER,cus_company OUT VARCHAR2)
+CREATE OR REPLACE PROCEDURE get_managers(cust_id IN NUMBER, 
+                                         cus_fname OUT NUMBER,
+                                         cus_lname OUT NUMBER,
+                                         cus_company OUT VARCHAR2)
 IS
 BEGIN
     SELECT FIRSTNAME INTO cus_fname FROM CUSTOMER WHERE CUSTOMERID = cust_id;
@@ -213,5 +222,109 @@ END;
 
 --------------------------------------------------------------------------------
 -------------------------------------5.0----------------------------------------
+--a procedure holding a transaction to delete an invoice
+CREATE OR REPLACE PROCEDURE delete_invoice(invoice_id IN NUMBER)
+IS
+BEGIN
+    DELETE FROM INVOICELINE WHERE INVOICEID = invoice_id;
+    DELETE FROM INVOICE WHERE INVOICEID = invoice_id;
+END;
+/
+
+--A transaction for inserting a new record into customer table
+CREATE OR REPLACE PROCEDURE inserts_record(customer_id IN NUMBER,
+                                           cus_firstname IN VARCHAR2,
+                                           cus_lastname IN  VARCHAR2,
+                                           cus_company IN VARCHAR2,
+                                           cus_address IN VARCHAR2,
+                                           cus_city IN VARCHAR2,
+                                           cus_state IN VARCHAR2,
+                                           cus_country IN VARCHAR2,
+                                           cus_postalcode IN VARCHAR2,
+                                           cus_phone IN VARCHAR2,
+                                           cus_fax IN VARCHAR2,
+                                           cus_email IN VARCHAR2,
+                                           cus_repid IN NUMBER)
+IS
+BEGIN
+    INSERT INTO CUSTOMER (CUSTOMERID, FIRSTNAME, LASTNAME, COMPANY,
+                          ADDRESS, CITY, STATE, COUNTRY, POSTALCODE,
+                          PHONE, FAX, EMAIL, SUPPORTREPID)
+    VALUES(customer_id, cus_firstname, cus_lastname, cus_company, cus_address,
+           cus_city, cus_state, cus_country, cus_postalcode, cus_phone,
+           cus_fax, cus_email, cus_repid);
+END;
+/
+--------------------------------------------------------------------------------
+-------------------------------------6.1----------------------------------------
+CREATE OR REPLACE TRIGGER after_insert_employee
+AFTER INSERT ON EMPLOYEE
+FOR EACH ROW
+BEGIN
+  IF :NEW.EMPLOYEEID IS NULL THEN 
+    DBMS_OUTPUT.PUT_LINE('Trigger fired for inserting a new employee');
+    END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER after_insert_album
+AFTER UPDATE ON ALBUM
+FOR EACH ROW
+BEGIN
+    IF :NEW.ALBUMID IS NULL THEN 
+    DBMS_OUTPUT.PUT_LINE('Trigger fired for updating album');
+    END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER after_delete_customer
+AFTER DELETE ON CUSTOMER
+FOR EACH ROW
+BEGIN
+    IF :NEW.CUSTOMERID IS NULL THEN 
+    DBMS_OUTPUT.PUT_LINE('Trigger fired for deleting a customer');
+    END IF;
+END;
+/
+
+--------------------------------------------------------------------------------
+-------------------------------------7.1----------------------------------------
+--Inner join
+SELECT FIRSTNAME, LASTNAME, INVOICEID FROM CUSTOMER A
+INNER JOIN INVOICE B
+ON A.CUSTOMERID = B.INVOICEID;
+
+--------------------------------------------------------------------------------
+-------------------------------------7.2----------------------------------------
+--Outer join
+SELECT A.CUSTOMERID, FIRSTNAME, LASTNAME, INVOICEID, TOTAL FROM CUSTOMER A
+FULL OUTER JOIN INVOICE B
+ON A.CUSTOMERID = B.CUSTOMERID;
+--------------------------------------------------------------------------------
+-------------------------------------7.3----------------------------------------
+--Right Join
+SELECT NAME, TITLE FROM ALBUM A
+RIGHT JOIN ARTIST B
+ON A.ARTISTID = B.ARTISTID;
+--------------------------------------------------------------------------------
+-------------------------------------7.4----------------------------------------
+--Cross join
+SELECT * FROM ARTIST
+CROSS JOIN ALBUM
+ORDER BY NAME ASC;
+--------------------------------------------------------------------------------
+-------------------------------------7.5----------------------------------------
+--Inner join
+SELECT * FROM EMPLOYEE A
+INNER JOIN EMPLOYEE B
+ON A.EMPLOYEEID = B.REPORTSTO;
+
+--------------------------------------------------------------------------------
+-------------------------------------9.0----------------------------------------
+--Create backups
+
+
+
+
 
 commit;
