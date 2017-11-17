@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.revature.beans.FlashCard;
 import com.revature.util.ConnectionUtil;
@@ -115,5 +117,113 @@ public class FlashCardDaoImpl implements FlashCardDao{
 		
 		
 		return fc;
+	}
+	
+	
+	public List<FlashCard> getAllFlashCards() {
+
+		FlashCard fc;
+		List<FlashCard> flashCards = new ArrayList<FlashCard>();
+
+		try (Connection conn = ConnectionUtil.getConnection();) {
+
+			String sql = "SELECT * FROM flash_cards";
+			Statement st = conn.createStatement();
+			ResultSet rs = st.executeQuery(sql);
+			int id;
+			String question;
+			String answer;
+
+			while (rs.next()) {
+
+				id = rs.getInt(1);
+				question = rs.getString(2);
+				answer = rs.getString(3);
+				fc = new FlashCard(question, answer);
+				fc.setId(id);
+				flashCards.add(fc);
+
+			}
+
+			st.close();
+			rs.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null; 
+		}
+
+		return flashCards;
+	}
+		
+		
+		
+	public int updateFlashCardById(FlashCard fc) {
+		
+		int id = fc.getId();
+		String answer = fc.getAnswer();
+		String question = fc.getQuestion(); 
+		int changed = 0; 
+		
+		String updateAnswer = fc.getAnswer(); 
+		String updateQuestion = fc.getQuestion(); 
+		String getAll = "SELECT * FROM flash_cards"; 
+		String sql = "UPDATE flash_cards SET FC_QUESTION= " + "'" + updateQuestion + "'" + ", " + "FC_ANSWER=" + "'" + updateAnswer + "'" + 
+				" WHERE FC_ID = " + "'" + fc.getId() + "'";
+		
+		System.out.println(sql);
+		
+		try (Connection conn = ConnectionUtil.getConnection();) {
+			
+			Statement st = conn.createStatement();
+			ResultSet rs = st.executeQuery(getAll); 
+			
+			while(rs.next()) {
+				if (rs.getInt(1) == fc.getId()) {
+					changed++; 
+				}
+			}
+			
+			rs = st.executeQuery(sql); 
+			//conn.commit();
+
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return changed; 
+	}
+		
+		
+	public int deleteFlashCardById(Integer id) {
+		
+		int changed = 0; 
+		int i = id; 
+		String getAll = "SELECT * FROM flash_cards"; 
+		String sql = "DELETE FROM flash_cards WHERE" + " FC_ID=" + "'" + id + "'"; 
+		
+		System.out.println(sql);
+		
+		try (Connection conn = ConnectionUtil.getConnection();) {
+			
+			Statement st = conn.createStatement();
+			ResultSet rs = st.executeQuery(getAll); 
+			
+			while(rs.next()) {
+				if (rs.getInt(1) == id) {
+					changed++; 
+				}
+			}
+			
+			rs = st.executeQuery(sql); 
+			//conn.commit();
+
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return changed;  
 	}
 }
