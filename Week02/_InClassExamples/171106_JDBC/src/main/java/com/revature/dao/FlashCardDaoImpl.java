@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.revature.beans.FlashCard;
 import com.revature.util.ConnectionUtil;
@@ -115,5 +117,62 @@ public class FlashCardDaoImpl implements FlashCardDao{
 		
 		
 		return fc;
+	}
+	
+	public List<FlashCard> getAllFlashCards(){
+		List<FlashCard> list = new ArrayList<FlashCard>();
+		int fc_id;
+		String fc_questions, fc_answers;
+		FlashCard fc = null;
+		try(Connection conn = ConnectionUtil.getConnection()){
+			PreparedStatement p = conn.prepareStatement("select * from flash_cards order by fc_id");
+			ResultSet r = p.executeQuery();
+			while(r.next()){
+				fc_id = r.getInt(1);
+				fc_questions = r.getString(2);
+				fc_answers = r.getString(3);
+				fc = new FlashCard(fc_questions, fc_answers);
+				fc.setId(fc_id);
+				list.add(fc);
+			}
+			close(p);
+			close(r);
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		list.sort(null);
+		return list;
+	}
+	public int updateFlashCardById(FlashCard fc){
+		int x;
+		try(Connection conn = ConnectionUtil.getConnection()){
+			PreparedStatement p = conn.prepareStatement("update flash_cards set fc_question = ?, fc_answer = ? where fc_id = ?");
+			p.setString(1, fc.getQuestion());
+			p.setString(2, fc.getAnswer());
+			p.setInt(3, fc.getId());
+			p.execute();
+			System.out.println(fc.getId() + " is updated");
+			close(p);
+			return 1;
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		System.out.println(fc.getId() + " is not updated");
+		return 0;
+		
+	}
+	public int deleteFlashCardById(Integer id){
+		try(Connection conn = ConnectionUtil.getConnection()){
+			PreparedStatement p = conn.prepareStatement("DELETE from flash_cards where fc_id = ?");
+			p.setInt(1, id);
+			p.execute();
+			System.out.println(id + " is deleted");
+			close(p);
+			return 1;
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		System.out.println(id + " is not deleted");
+		return 0;
 	}
 }
