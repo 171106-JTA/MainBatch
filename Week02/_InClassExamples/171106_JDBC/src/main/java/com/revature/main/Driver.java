@@ -18,6 +18,7 @@ public class Driver {
 		dao.createFlashCardSP(new FlashCard("StoredProcedure Example", "Success!"));
 		dao.getAllFlashCards();
 		dao.updateFlashCardById(testCard);
+		System.out.println(dao.deleteFlashCardById(1));
 /*		fc = new FlashCard("A UNIQUE FLIPPIN QUESTION2", "Are A PAIN IN MY A!2");
 		dao.createFlashCard(fc);*/
 		/*

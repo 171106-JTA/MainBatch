@@ -156,11 +156,11 @@ public class FlashCardDaoImpl implements FlashCardDao {
 			while (rs.next()) {
 				count++;
 				fc = new FlashCard(rs.getString("fc_question"), rs.getString(3));
-				
+
 			}
 			fc.setId(rs.getInt(1));
 
-		} catch (SQLException e) { 
+		} catch (SQLException e) {
 
 		} finally {
 			close(ps);
@@ -172,7 +172,24 @@ public class FlashCardDaoImpl implements FlashCardDao {
 
 	@Override
 	public int deleteFlashCardById(Integer id) {
-		// TODO Auto-generated method stub
-		return 0;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int count = 0;
+		try (Connection conn = ConnectionUtil.getConnection();) {
+			String sql = "DELETE FROM flash_cards WHERE fc_id = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				count++;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ps);
+			close(rs);
+		}
+		return count;
+
 	}
 }
