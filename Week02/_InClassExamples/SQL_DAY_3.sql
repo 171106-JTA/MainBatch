@@ -482,4 +482,10 @@ As soon as a rownum conditional fails, it stops applying the condition to the
 remaining records.
 */
 
+
+CREATE USER minibobbert IDENTIFIED BY p4ssw0rd;
+GRANT DBA TO minibobbert;
+
+select * from flash_cards;
+
 commit;
