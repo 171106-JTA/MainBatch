@@ -11,7 +11,9 @@ public class FlashCard {
 	private String Answer;
 	
 	
-	
+	public FlashCard() {
+		super();
+	}
 	public FlashCard(String question, String answer) {
 		this.question = question;
 		Answer = answer;
