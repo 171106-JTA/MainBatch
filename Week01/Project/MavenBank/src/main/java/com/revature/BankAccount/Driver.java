@@ -13,6 +13,8 @@ import java.util.Scanner;
 
 import org.apache.log4j.Logger;
 
+import com.revature.dao.UserDaoImplement;
+
 //import d3.revature.logging.LoggingExample;
 
 //import com.Project1.bankAccountStuff.User;
@@ -62,8 +64,15 @@ public class Driver {
 	public static void main(String[] args) {
 		Driver mp = new Driver();
 		mp.db = new HashMap<String, User>();
+		
+		//Basic database insert!!!!
+		UserDaoImplement dao = new UserDaoImplement();
+		String tmp = "z";
+		dao.createUser(new User(tmp, tmp, tmp, tmp, tmp, 0, 0, 0));
+		
+		
 		boolean exit = false;
-
+		
 		logger.trace("Application Start");
 
 		// Read database from the file
