@@ -1,0 +1,1078 @@
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:204 - Attempting to update account records
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:226 - Updated 1 account records
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>account with {userid=42135132}
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:153 - Attempting to remove account data
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:175 - Removed 1 account records
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>account with {userid=42135132}
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:75 - Attempting to remove user data
+2017-11-14 13:37:09 DEBUG FilePersistence:78 - Removing all users
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:97 - Removed 2 user records
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>user with null
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:75 - Attempting to remove user data
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:97 - Removed 1 user records
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:204 - Attempting to update account records
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:226 - Updated 1 account records
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>account with {userid=42135132}
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:149 - Attempting to update userinfo records
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:171 - Updated 1 userinfo records
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>userinfo with {userid=1423412}
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:114 - Attempting to remove userinfo data
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:136 - Removed 1 userinfo records
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>userinfo with {userid=1423412}
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:153 - Attempting to remove account data
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:175 - Removed 1 account records
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>account with {userid=42135132}
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>account with {userid=42135132}
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>userinfo with null
+2017-11-14 13:37:09 DEBUG FilePersistence:114 - Attempting to remove userinfo data
+2017-11-14 13:37:09 DEBUG FilePersistence:117 - Removing all userinfo
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:136 - Removed 2 userinfo records
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>userinfo with null
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:204 - Attempting to update account records
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:226 - Updated 1 account records
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>account with {userid=42135132}
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>account with null
+2017-11-14 13:37:09 DEBUG FilePersistence:153 - Attempting to remove account data
+2017-11-14 13:37:09 DEBUG FilePersistence:156 - Removing all accounts
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:175 - Removed 2 account records
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>account with null
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:95 - Attempting to update user records
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:117 - Updated 1 user records
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>user with {id=1423412}
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:75 - Attempting to remove user data
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:97 - Removed 1 user records
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:149 - Attempting to update userinfo records
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:171 - Updated 1 userinfo records
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>userinfo with {userid=1423412}
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>userinfo with {userid=1423412}
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:114 - Attempting to remove userinfo data
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:136 - Removed 1 userinfo records
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>userinfo with {userid=1423412}
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>user with {id=1423412}
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:153 - Attempting to remove account data
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:175 - Removed 1 account records
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>account with {userid=42135132}
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>account with null
+2017-11-14 13:37:09 DEBUG FilePersistence:153 - Attempting to remove account data
+2017-11-14 13:37:09 DEBUG FilePersistence:156 - Removing all accounts
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:175 - Removed 2 account records
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>account with null
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:95 - Attempting to update user records
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:117 - Updated 1 user records
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>user with {id=1423412}
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:153 - Attempting to remove account data
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:175 - Removed 1 account records
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>account with {userid=42135132}
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>account with {userid=42135132}
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:204 - Attempting to update account records
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:226 - Updated 1 account records
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>account with {userid=42135132}
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>user with null
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>user with null
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG FilePersistence:33 - select:>user with null
+2017-11-14 13:37:09 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:37:09 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:204 - Attempting to update account records
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:226 - Updated 1 account records
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>account with {userid=42135132}
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:153 - Attempting to remove account data
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:175 - Removed 1 account records
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>account with {userid=42135132}
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:75 - Attempting to remove user data
+2017-11-14 13:46:27 DEBUG FilePersistence:78 - Removing all users
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:97 - Removed 2 user records
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>user with null
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:75 - Attempting to remove user data
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:97 - Removed 1 user records
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:204 - Attempting to update account records
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:226 - Updated 1 account records
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>account with {userid=42135132}
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:149 - Attempting to update userinfo records
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:171 - Updated 1 userinfo records
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>userinfo with {userid=1423412}
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:114 - Attempting to remove userinfo data
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:136 - Removed 1 userinfo records
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>userinfo with {userid=1423412}
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:153 - Attempting to remove account data
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:175 - Removed 1 account records
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>account with {userid=42135132}
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>account with {userid=42135132}
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>userinfo with null
+2017-11-14 13:46:27 DEBUG FilePersistence:114 - Attempting to remove userinfo data
+2017-11-14 13:46:27 DEBUG FilePersistence:117 - Removing all userinfo
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:136 - Removed 2 userinfo records
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>userinfo with null
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:204 - Attempting to update account records
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:226 - Updated 1 account records
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>account with {userid=42135132}
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>account with null
+2017-11-14 13:46:27 DEBUG FilePersistence:153 - Attempting to remove account data
+2017-11-14 13:46:27 DEBUG FilePersistence:156 - Removing all accounts
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:175 - Removed 2 account records
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>account with null
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:95 - Attempting to update user records
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:117 - Updated 1 user records
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>user with {id=1423412}
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:75 - Attempting to remove user data
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:97 - Removed 1 user records
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:149 - Attempting to update userinfo records
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:171 - Updated 1 userinfo records
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>userinfo with {userid=1423412}
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>userinfo with {userid=1423412}
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:114 - Attempting to remove userinfo data
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:136 - Removed 1 userinfo records
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>userinfo with {userid=1423412}
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>user with {id=1423412}
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:153 - Attempting to remove account data
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:175 - Removed 1 account records
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>account with {userid=42135132}
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>account with null
+2017-11-14 13:46:27 DEBUG FilePersistence:153 - Attempting to remove account data
+2017-11-14 13:46:27 DEBUG FilePersistence:156 - Removing all accounts
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:175 - Removed 2 account records
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>account with null
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:95 - Attempting to update user records
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:117 - Updated 1 user records
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>user with {id=1423412}
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:153 - Attempting to remove account data
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:175 - Removed 1 account records
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>account with {userid=42135132}
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>account with {userid=42135132}
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:204 - Attempting to update account records
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:226 - Updated 1 account records
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>account with {userid=42135132}
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>user with null
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>user with null
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG FilePersistence:33 - select:>user with null
+2017-11-14 13:46:27 DEBUG FilePersistence:139 - deleting *.ser files
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
+2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser

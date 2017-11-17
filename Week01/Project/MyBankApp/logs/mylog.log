@@ -1,0 +1,157 @@
+2017-11-14 13:55:35 DEBUG BusinessObjectFileIO:55 - Opened object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user.ser
+2017-11-14 13:55:35 DEBUG BusinessObjectFileIO:90 - read data from file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user.ser
+2017-11-14 13:55:35 DEBUG BusinessObjectFileIO:90 - read data from file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user.ser
+2017-11-14 13:55:35 WARN  BusinessObjectFileIO:95 - failed to read data from file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user.ser message:>null
+2017-11-14 13:55:35 DEBUG BusinessObjectFileIO:135 - Closed object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user.ser
+2017-11-14 13:55:35 DEBUG BusinessObjectFileIO:55 - Opened object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user_info.ser
+2017-11-14 13:55:35 DEBUG BusinessObjectFileIO:90 - read data from file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user_info.ser
+2017-11-14 13:55:35 WARN  BusinessObjectFileIO:95 - failed to read data from file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user_info.ser message:>null
+2017-11-14 13:55:35 DEBUG BusinessObjectFileIO:135 - Closed object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user_info.ser
+2017-11-14 13:55:35 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\account.ser
+2017-11-14 13:55:35 DEBUG FilePersistence:33 - select:>user with {id=0, username=big.boss}
+2017-11-14 13:55:48 DEBUG Server:100 - Attempting to login with {}
+2017-11-14 13:55:48 DEBUG FilePersistence:33 - select:>user with {password=master, username=big.boss}
+2017-11-14 13:55:48 DEBUG Server:114 - Successful attempt to login with cedentials {password=master, username=big.boss}
+2017-11-14 13:55:49 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETUSERINFO, query={userid=0}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 13:55:49 DEBUG FilePersistence:33 - select:>userinfo with {userid=0}
+2017-11-14 13:55:49 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 13:55:49 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETACCOUNT, query={userid=0}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 13:55:49 DEBUG FilePersistence:33 - select:>account with {userid=0}
+2017-11-14 13:55:49 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 13:55:49 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETUSER, query={checkpoint=admin}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 13:55:49 DEBUG FilePersistence:33 - select:>user with {checkpoint=admin}
+2017-11-14 13:55:49 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 13:55:49 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETUSER, query={checkpoint=customer}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 13:55:49 DEBUG FilePersistence:33 - select:>user with {checkpoint=customer}
+2017-11-14 13:55:49 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 13:55:49 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETUSER, query={checkpoint=blocked}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 13:55:49 DEBUG FilePersistence:33 - select:>user with {checkpoint=blocked}
+2017-11-14 13:55:49 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 13:55:49 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETACCOUNT, query={status=active}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 13:55:49 DEBUG FilePersistence:33 - select:>account with {status=active}
+2017-11-14 13:55:49 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 13:55:49 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETACCOUNT, query={status=blocked}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 13:55:49 DEBUG FilePersistence:33 - select:>account with {status=blocked}
+2017-11-14 13:55:49 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 13:55:49 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETUSER, query={checkpoint=pending}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 13:55:49 DEBUG FilePersistence:33 - select:>user with {checkpoint=pending}
+2017-11-14 13:55:49 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 13:55:49 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETACCOUNT, query={status=pending}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 13:55:49 DEBUG FilePersistence:33 - select:>account with {status=pending}
+2017-11-14 13:55:49 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 13:59:24 DEBUG BusinessObjectFileIO:55 - Opened object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user.ser
+2017-11-14 13:59:24 DEBUG BusinessObjectFileIO:90 - read data from file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user.ser
+2017-11-14 13:59:24 DEBUG BusinessObjectFileIO:90 - read data from file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user.ser
+2017-11-14 13:59:24 WARN  BusinessObjectFileIO:95 - failed to read data from file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user.ser message:>null
+2017-11-14 13:59:24 DEBUG BusinessObjectFileIO:135 - Closed object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user.ser
+2017-11-14 13:59:24 DEBUG BusinessObjectFileIO:55 - Opened object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user_info.ser
+2017-11-14 13:59:24 DEBUG BusinessObjectFileIO:90 - read data from file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user_info.ser
+2017-11-14 13:59:24 WARN  BusinessObjectFileIO:95 - failed to read data from file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user_info.ser message:>null
+2017-11-14 13:59:24 DEBUG BusinessObjectFileIO:135 - Closed object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user_info.ser
+2017-11-14 13:59:24 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\account.ser
+2017-11-14 13:59:24 DEBUG FilePersistence:33 - select:>user with {id=0, username=big.boss}
+2017-11-14 13:59:33 DEBUG Server:104 - Attempting to login with {password=master, username=big.boss}
+2017-11-14 13:59:33 DEBUG FilePersistence:33 - select:>user with {password=master, username=big.boss}
+2017-11-14 13:59:33 DEBUG Server:114 - Successful attempt to login with cedentials {password=master, username=big.boss}
+2017-11-14 13:59:34 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETUSERINFO, query={userid=0}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 13:59:34 DEBUG FilePersistence:33 - select:>userinfo with {userid=0}
+2017-11-14 13:59:34 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 13:59:34 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETACCOUNT, query={userid=0}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 13:59:34 DEBUG FilePersistence:33 - select:>account with {userid=0}
+2017-11-14 13:59:34 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 13:59:34 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETUSER, query={checkpoint=admin}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 13:59:34 DEBUG FilePersistence:33 - select:>user with {checkpoint=admin}
+2017-11-14 13:59:34 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 13:59:34 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETUSER, query={checkpoint=customer}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 13:59:34 DEBUG FilePersistence:33 - select:>user with {checkpoint=customer}
+2017-11-14 13:59:34 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 13:59:34 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETUSER, query={checkpoint=blocked}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 13:59:34 DEBUG FilePersistence:33 - select:>user with {checkpoint=blocked}
+2017-11-14 13:59:34 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 13:59:34 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETACCOUNT, query={status=active}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 13:59:34 DEBUG FilePersistence:33 - select:>account with {status=active}
+2017-11-14 13:59:34 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 13:59:34 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETACCOUNT, query={status=blocked}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 13:59:34 DEBUG FilePersistence:33 - select:>account with {status=blocked}
+2017-11-14 13:59:34 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 13:59:34 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETUSER, query={checkpoint=pending}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 13:59:34 DEBUG FilePersistence:33 - select:>user with {checkpoint=pending}
+2017-11-14 13:59:34 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 13:59:34 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETACCOUNT, query={status=pending}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 13:59:34 DEBUG FilePersistence:33 - select:>account with {status=pending}
+2017-11-14 13:59:34 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 14:00:00 DEBUG BusinessObjectFileIO:55 - Opened object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user.ser
+2017-11-14 14:00:00 DEBUG BusinessObjectFileIO:90 - read data from file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user.ser
+2017-11-14 14:00:00 DEBUG BusinessObjectFileIO:90 - read data from file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user.ser
+2017-11-14 14:00:00 WARN  BusinessObjectFileIO:95 - failed to read data from file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user.ser message:>null
+2017-11-14 14:00:00 DEBUG BusinessObjectFileIO:135 - Closed object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user.ser
+2017-11-14 14:00:00 DEBUG BusinessObjectFileIO:55 - Opened object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user_info.ser
+2017-11-14 14:00:00 DEBUG BusinessObjectFileIO:90 - read data from file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user_info.ser
+2017-11-14 14:00:00 WARN  BusinessObjectFileIO:95 - failed to read data from file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user_info.ser message:>null
+2017-11-14 14:00:00 DEBUG BusinessObjectFileIO:135 - Closed object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user_info.ser
+2017-11-14 14:00:00 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\account.ser
+2017-11-14 14:00:00 DEBUG FilePersistence:33 - select:>user with {id=0, username=big.boss}
+2017-11-14 14:00:09 DEBUG Server:104 - Attempting to login with {password=master, username=big.boss}
+2017-11-14 14:00:09 DEBUG FilePersistence:33 - select:>user with {password=master, username=big.boss}
+2017-11-14 14:00:09 DEBUG Server:114 - Successful attempt to login with cedentials {password=master, username=big.boss}
+2017-11-14 14:00:09 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETUSERINFO, query={userid=0}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 14:00:09 DEBUG FilePersistence:33 - select:>userinfo with {userid=0}
+2017-11-14 14:00:09 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 14:00:09 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETACCOUNT, query={userid=0}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 14:00:09 DEBUG FilePersistence:33 - select:>account with {userid=0}
+2017-11-14 14:00:09 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 14:00:09 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETUSER, query={checkpoint=admin}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 14:00:09 DEBUG FilePersistence:33 - select:>user with {checkpoint=admin}
+2017-11-14 14:00:09 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 14:00:09 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETUSER, query={checkpoint=customer}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 14:00:09 DEBUG FilePersistence:33 - select:>user with {checkpoint=customer}
+2017-11-14 14:00:09 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 14:00:09 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETUSER, query={checkpoint=blocked}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 14:00:09 DEBUG FilePersistence:33 - select:>user with {checkpoint=blocked}
+2017-11-14 14:00:09 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 14:00:09 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETACCOUNT, query={status=active}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 14:00:09 DEBUG FilePersistence:33 - select:>account with {status=active}
+2017-11-14 14:00:09 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 14:00:09 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETACCOUNT, query={status=blocked}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 14:00:09 DEBUG FilePersistence:33 - select:>account with {status=blocked}
+2017-11-14 14:00:09 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 14:00:09 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETUSER, query={checkpoint=pending}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 14:00:09 DEBUG FilePersistence:33 - select:>user with {checkpoint=pending}
+2017-11-14 14:00:09 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 14:00:09 DEBUG Session:57 - processing Request [sessionId=340870931, userId=0, checkpoint=admin, route=USER, transtype=GETACCOUNT, query={status=pending}, transaction=null] for Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]]
+2017-11-14 14:00:09 DEBUG FilePersistence:33 - select:>account with {status=pending}
+2017-11-14 14:00:09 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=0, username=big.boss, password=master, checkpoint=admin]] completed request
+2017-11-14 14:03:37 DEBUG BusinessObjectFileIO:55 - Opened object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user.ser
+2017-11-14 14:03:37 DEBUG BusinessObjectFileIO:90 - read data from file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user.ser
+2017-11-14 14:03:37 DEBUG BusinessObjectFileIO:90 - read data from file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user.ser
+2017-11-14 14:03:37 WARN  BusinessObjectFileIO:95 - failed to read data from file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user.ser message:>null
+2017-11-14 14:03:37 DEBUG BusinessObjectFileIO:135 - Closed object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user.ser
+2017-11-14 14:03:37 DEBUG BusinessObjectFileIO:55 - Opened object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user_info.ser
+2017-11-14 14:03:37 DEBUG BusinessObjectFileIO:90 - read data from file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user_info.ser
+2017-11-14 14:03:37 WARN  BusinessObjectFileIO:95 - failed to read data from file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user_info.ser message:>null
+2017-11-14 14:03:37 DEBUG BusinessObjectFileIO:135 - Closed object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user_info.ser
+2017-11-14 14:03:37 DEBUG BusinessObjectFileIO:57 - Failed to open object read stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\account.ser
+2017-11-14 14:03:37 DEBUG FilePersistence:33 - select:>user with {id=0, username=big.boss}
+2017-11-14 14:04:38 DEBUG Server:104 - Attempting to login with {password=guest, username=guest}
+2017-11-14 14:04:38 DEBUG FilePersistence:33 - select:>user with {password=guest, username=guest}
+2017-11-14 14:04:38 DEBUG Server:114 - Successful attempt to login with cedentials {password=guest, username=guest}
+2017-11-14 14:04:38 DEBUG Session:57 - processing Request [sessionId=340870931, userId=1, checkpoint=none, route=USER, transtype=CREATEUSER, query=null, transaction={password=bob, sessionid=340870931, username=bill}] for Session [sessionid=340870931, user=User [id=1, username=guest, password=guest, checkpoint=none]]
+2017-11-14 14:04:38 DEBUG FilePersistence:33 - select:>user with null
+2017-11-14 14:04:38 DEBUG FilePersistence:33 - select:>user with {username=bill}
+2017-11-14 14:04:38 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user.ser
+2017-11-14 14:04:38 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user.ser
+2017-11-14 14:04:38 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user.ser
+2017-11-14 14:04:38 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user.ser
+2017-11-14 14:04:38 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user.ser
+2017-11-14 14:04:38 DEBUG Session:64 - Session [sessionid=340870931, user=User [id=1, username=guest, password=guest, checkpoint=none]] completed request
+2017-11-14 14:04:38 DEBUG Server:104 - Attempting to login with {password=bob, username=bill}
+2017-11-14 14:04:38 DEBUG FilePersistence:33 - select:>user with {password=bob, username=bill}
+2017-11-14 14:04:38 DEBUG Server:114 - Successful attempt to login with cedentials {password=bob, username=bill}
+2017-11-14 14:04:38 DEBUG Session:57 - processing Request [sessionId=1768305536, userId=2, checkpoint=pending, route=USER, transtype=CREATEUSERINFO, query=null, transaction={address=Billy Bob St., phonenumber=12876412, sessionid=1768305536, userid=2, email=bb@gmail.com}] for Session [sessionid=1768305536, user=User [id=2, username=bill, password=bob, checkpoint=pending]]
+2017-11-14 14:04:38 DEBUG FilePersistence:33 - select:>userinfo with {address=Billy Bob St., phonenumber=12876412, sessionid=1768305536, userid=2, email=bb@gmail.com}
+2017-11-14 14:04:38 DEBUG FilePersistence:33 - select:>user with {id=2}
+2017-11-14 14:04:38 DEBUG BusinessObjectFileIO:74 - Opened object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user_info.ser
+2017-11-14 14:04:38 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user_info.ser
+2017-11-14 14:04:38 DEBUG BusinessObjectFileIO:109 - wrote data to file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user_info.ser
+2017-11-14 14:04:38 DEBUG BusinessObjectFileIO:128 - Closed object write stream for file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\MyBankApp\data\user_info.ser
+2017-11-14 14:04:38 DEBUG Session:64 - Session [sessionid=1768305536, user=User [id=2, username=bill, password=bob, checkpoint=pending]] completed request

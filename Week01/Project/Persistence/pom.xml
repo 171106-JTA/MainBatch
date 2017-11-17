@@ -21,8 +21,14 @@
 		    <artifactId>mysql-connector-java</artifactId>
 		    <version>8.0.8-dmr</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.oracle/ojdbc6 -->
 		
-
+		<dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc7</artifactId>
+            <version>12.1.0</version>
+        </dependency>
+        
 		<dependency>
 			<groupId>Core</groupId>
 			<artifactId>Core</artifactId>
