@@ -32,30 +32,30 @@ CREATE SEQUENCE fc_seq
     --This sequence will be used to handle the ID field of our flash_cards table.
     --In order to actually utilize this sequence, we will need to utilize, ourselves,
     --a trigger.
-    
+
 --TRIGGER
 /*
     A trigger is an object that we can create that waits for actions to occur
-    on the specific table the trigger was made for.
+    on the specific *table* the trigger was made for. (don't need multiple per table)
     A trigger can be coded to react to most CRUD operations. (Excluding select)
 */
 CREATE OR REPLACE TRIGGER fc_seq_trigger --auto increment
 BEFORE INSERT ON flash_cards
 FOR EACH ROW
-BEGIN --This keyword signifies a block for a transaction. 
-    IF :new.fc_id IS NULL THEN 
-    SELECT fc_seq.nextval INTO :new.fc_id from dual;    
+BEGIN --This keyword signifies a block for a transaction (an atomic unit of work).
+    IF :new.fc_id IS NULL THEN
+    SELECT fc_seq.nextval INTO :new.fc_id from dual;
     END IF;
-END;    
+END;
 /
 
 /*
-    Select into statement
+    SELECT INTO statement
     -A select into statement will grab data and place it into a variable.
     IN PL/SQL there exist implicit objects that we can use to access data.
     These objects all are preceeded with a ':'.
-    In our example, we accessed :new, with points to the current record that is about
-    to be inserted. This let's manipulate data before it actually gets inserted.
+    In our example, we accessed :new, which points to the current record that is about
+    to be inserted. This lets us manipulate data before it actually gets inserted.
     You can compare :new to a staging platform.
     -dual is a dummy table that is always available. It's only purpose is to allow
     a developer to have proper syntax in statements where the table does not matter.
@@ -68,7 +68,7 @@ VALUES('Did my trigger work?', 'Sure hope so...');
 --Stored Procedures
 /*
     A named transaction that can be invoked when called.
-    
+
     CREATE [OR REPLACE] proc-name
     IS
         This section is where you can DECLARE variables
@@ -77,14 +77,14 @@ VALUES('Did my trigger work?', 'Sure hope so...');
     [EXCEPTION]
         You can perform exception handling here.
     END;
-    
+
     You can invoke a stored procedure in two ways:
     BEGIN
         proc-name();
     END;
-    
+
     ---OR
-    
+
     call proc-name();
 */
 
@@ -103,15 +103,15 @@ BEGIN
 END;
 /
 /*
-    Procedures cna allow us to define executions that can change the data.
+    Procedures can allow us to define executions that can change the data.
     Most actions can be taken agasint a table using procedures.
 */
 
 /*
     Things of note:
         Parameters in stored procedures are a bit unique.
-        You have use the follow keywords: IN, OUT, IN OUT. 
-        IN parameters, whatver is passed as input during the procedure call
+        You have use the follow keywords: IN, OUT, IN OUT.
+        IN parameters, whatever is passed as input during the procedure call, cannot be accessed/changed upon 2nd call
         OUT parameters, whatever is returned from the procedure.
         IN OUT parameters, a parameter that gets passed in, then changed.
 */
@@ -122,11 +122,11 @@ BEGIN
     INSERT INTO flash_cards(fc_question, fc_answer)
     VALUES(some_q, some_a);
     commit;
-END;    
+END;
 /
 
 --Call example
-call insert_fc_procedure('A procedure question!?', 'You are darn right'); 
+call insert_fc_procedure('A procedure question!?', 'You are darn right');
 
 
 CREATE OR REPLACE PROCEDURE get_answer(some_q IN VARCHAR2, my_answer OUT varchar2)
@@ -150,9 +150,9 @@ END;
 /*
     CURSORS!
     -A cursor is essentially like a pointer to a table or view.
-    -We can use them to iterate through entire queries form the database.
+    -We can use them to iterate through entire queries from the database.
     -When we want to pass entire tables or queries, we need to use cursors.
-    
+
     NOTE: PL/SQL offers a CURSOR and a SYS_REFCURSOR
     The SYS_REFCURSOR is a stronger cursor (Therefore more costly) that is allowed
     to be passed outside of the scope of the procedure it's in. A normal CURSOR must be
@@ -173,13 +173,13 @@ DECLARE
     someA varchar2(4000);
 BEGIN
     get_all_fc(fc_cursor); --Have our cursor represent the cursor for flash_cards
-    
+
     LOOP --Begin loop block
         FETCH fc_cursor INTO someID,someQ,someA; --Grab the current its pointing at.
         EXIT WHEN fc_cursor%NOTFOUND; --%NOTFOUND does not exist until there are no records left
         DBMS_OUTPUT.PUT_LINE(someID || ' ' || someQ || ' ' || someA);
     END LOOP; --End of loop block
-END;    
+END;
 
 /*
     -A function differs from a stored procedure in the following ways:
@@ -189,7 +189,7 @@ END;
     A stored procedure can NOT be called mid query.
     A stored procedure can call other stored procedures within it.
     A stored procedure can call functions.
-    
+
     A function MUST return ONE and only ONE thing.
     A function CAN use OUT parameters, but this is highly advised against.
     A function can NOT perform database operations.
@@ -218,7 +218,7 @@ DECLARE
     firstNum number;
     secondNum number;
     maxNum number;
-    
+
     FUNCTION findMax(x IN NUMBER, y IN NUMBER)
     RETURN NUMBER
     IS
@@ -229,7 +229,7 @@ DECLARE
         ELSE
             z := y;
         END IF;
-        
+
         RETURN z;
     END;
 BEGIN
@@ -249,14 +249,14 @@ IS
     fquestion flash_cards.fc_question%TYPE;
     fanswer flash_cards.fc_answer%TYPE;
 BEGIN
-    OPEN badCURSE; 
+    OPEN badCURSE;
     LOOP
         FETCH badCurse into fid, fquestion, fanswer;
         EXIT WHEN badCurse%NOTFOUND;
     END LOOP;
     CLOSE badCurse;
     fid := 1/0;
-    
+
     EXCEPTION
         WHEN invalid_cursor THEN
             dbms_output.put_line('CURSOR ERROR');
