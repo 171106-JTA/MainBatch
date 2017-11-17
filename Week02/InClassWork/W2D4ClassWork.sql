@@ -189,9 +189,135 @@ BEGIN
     GET_ALL_FC(FC_CURSOR);
     
     LOOP
-        FETCH FC_CURSOR INTO SOMEID, SOMEQ, SOMEA;
+        FETCH FC_CURSOR INTO SOMEID, SOMEQ, SOMEA; --Grab the current recods its pointing at
         EXIT WHEN FC_CURSOR%NOTFOUND; --%NOTFOUND does not exist until therer are no records left. 
         DBMS_OUTPUT.PUT_LINE(SOMEID || ' ' || SOMEQ || ' ' || SOMEA);
     END LOOP;
 END;
+
+/*
+    A function differs from a stored procedue in the following ways: 
+    A stored procedure does not have to return anything
+    A stored procedure CAN have as many IN/OUT parameters as it wants
+    A stored procedure CAN alter the database such as insert, delete, ect.
+    A stored procedure CANNOT be called mid-query
+    We can call a stored procedure from a stored procedure
+    A stored procedur can call functions
+    
+    A function MUST return one and only one thing
+    A function CAN use OUT parameters, but this is highly advised against
+    A funciton CANNOT perfomr database operations. 
+    A function CAN be called mid-query
+    a function can call other functions
+    A function cannot call a stored procedure 
+    - (because functions cannot change a database and stored procedures can)
+*/
+
+CREATE OR REPLACE FUNCTION GET_MAX_ID
+RETURN NUMBER
+IS
+    MAX_ID NUMBER; 
+BEGIN
+    SELECT MAX(FC_ID) INTO MAX_ID FROM FLASH_CARDS;
+    RETURN MAX_ID;
+END;
+/
+DECLARE
+    MAX_ID NUMBER;
+BEGIN 
+    MAX_ID := GET_MAX_ID();
+    DBMS_OUTPUT.PUT_LINE(MAX_ID);
+END;
+
+
+--EXAMPLE. MAKING FUNCTION INSIDE A DECLARATION BLOCK: A TEMPORARY FUNCTION
+DECLARE
+    FIRSTNUM NUMBER; 
+    SECONDNUM NUMBER; 
+    MAXNUM NUMBER;
+    
+    FUNCTION FINDMAX(X IN NUMBER, Y IN NUMBER)
+    RETURN NUMBER
+    IS
+        Z NUMBER;
+    BEGIN
+        IF X > Y THEN
+            Z := X;
+        ELSE
+            Z := Y;
+        END IF;
+        
+        RETURN Z;
+    END;
+BEGIN 
+    FIRSTNUM := 87; 
+    SECONDNUM := 23; 
+    MAXNUM := FINDMAX(FIRSTNUM,SECONDNUM);
+    DBMS_OUTPUT.PUT_LINE(MAXNUM);
+END;
+
+--EXCEPTOIN Example
+CREATE OR REPLACE PROCEDURE EXCEPTIONEXAMPLE
+IS
+    CURSOR BADCURSE IS
+        SELECT * FROM FLASH_CARDS;
+    FID FLASH_CARDS.FC_ID%TYPE;
+    FQUESTION FLASH_CARDS.FC_QUESTION%TYPE;
+    FANSWER FLASH_CARDS.FC_ANSWER%TYPE;
+BEGIN
+    OPEN BADCURSE;
+    LOOP
+        FETCH BADCURSE INTO FID, FQUESTION, FANSWER;
+        EXIT WHEN BADCURSE%NOTFOUND;
+    END LOOP;
+    CLOSE BADCURSE;
+    FID := 1/0;
+    
+    EXCEPTION
+        WHEN INVALID_CURSOR THEN 
+            DBMS_OUTPUT.PUT_LINE('CURSOR ERROR');
+        WHEN ZERO_DIVIDE THEN
+            DBMS_OUTPUT.PUT_LINE('DIVISION BY ZERO ERROR');
+END;
+/
+CALL EXCEPTIONEXAMPLE();
+
+
+/*
+In vs exists
+- both these commands can be used to perform conditional checks
+- high level overview: EXISTS is garbarg...highly inefficient if the outer query is even remotely large
+*/
+
+SELECT * FROM TRAINER WHERE EXISTS (
+SELECT TRAINER_ID FROM MY_POLKAMANS WHERE EXISTS (
+SELECT PKMN_ID FROM POLKAMAN WHERE LOWER(TYPE1)='fire' OR LOWER(TYPE2) = 'fire'));
+
+/*
+Every inner query will run once for every outer query
+Trainer - 3 records
+my_polamans - 5 records (approximately)
+polkmans = 5 records (approximatley)
+
+thereforce, we run ~16 queries in the above example
+This is why it behooves somebody to NOT use exists, if the outer query has a lot of data
+When in doubt, just use IN. EXISTS if almost depricated. 
+*/ 
+
+--rownum is a valid identifier you can use in your conditoinals. 
+--however, it is finicky
+SELECT * FROM (SELECT MAX_HP FROM MY_POLKAMANS 
+WHERE ROWNUM < 4
+ORDER BY MAX_HP DESC)
+UNION
+SELECT * FROM (SELECT MAX_HP FROM MY_POLKAMANS 
+WHERE ROWNUM < 3
+ORDER BY MAX_HP DESC);
+
+/*
+As soon as a rownum conditional fails, it stops applying the condition to the remaining records. 
+*/
+
+CREATE USER bobbert IDENTIFIED BY password;
+
 --COMPLETE COMMIT;
