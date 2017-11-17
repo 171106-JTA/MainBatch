@@ -1,6 +1,20 @@
 package d3.revature.wrapper;
 
 public class ShortCircuit {
+<<<<<<< HEAD
+	/*
+	 * Operators for AND & OR ARE : & and |
+	 * Technically & and | are called bitwise operators. 
+	 */
+	public static boolean returnTrue() {
+		System.out.println("return True");
+		return true;
+	}
+	public static boolean returnFalse() {
+		System.out.println("return False");
+		return false;
+	}
+=======
 
 	public static void main(String[] args) {
 		/*
@@ -42,4 +56,5 @@ public class ShortCircuit {
 		return false;
 	}
 
+>>>>>>> 908c4a08b3cf9c5cb65e60015f7c54cf564145ce
 }

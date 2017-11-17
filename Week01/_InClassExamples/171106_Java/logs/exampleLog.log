@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2017-11-08 13:59:44 TRACE LoggingExample:17 - Approaching exception.
 2017-11-08 13:59:44 INFO  LoggingExample:22 - Exception occurred: / by zero
 2017-11-08 13:59:44 TRACE LoggingExample:25 - My first log!
@@ -30,3 +31,13 @@
 2017-11-09 16:18:25 WARN  LoggingExample:28 - My first log!
 2017-11-09 16:18:25 ERROR LoggingExample:29 - My first log!
 2017-11-09 16:18:25 FATAL LoggingExample:30 - My first log!
+=======
+2017-11-08 14:05:45 TRACE LoggingExample:15 - Approaching Exception
+2017-11-08 14:05:45 INFO  LoggingExample:20 - Exception occured/ by zero
+2017-11-08 14:05:45 TRACE LoggingExample:23 - WutFace
+2017-11-08 14:05:45 DEBUG LoggingExample:24 - WutFace
+2017-11-08 14:05:45 INFO  LoggingExample:25 - WutFace
+2017-11-08 14:05:45 WARN  LoggingExample:26 - WutFace
+2017-11-08 14:05:45 ERROR LoggingExample:27 - WutFace
+2017-11-08 14:05:45 FATAL LoggingExample:28 - WutFace
+>>>>>>> fd92c749c54001d3765dfa694d8ef20b4d440c90

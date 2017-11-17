@@ -1,6 +1,10 @@
 package d3.revature.junit;
 
+<<<<<<< HEAD
+import static org.junit.Assert.*;
+=======
 import static org.junit.Assert.assertEquals;
+>>>>>>> 908c4a08b3cf9c5cb65e60015f7c54cf564145ce
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -11,15 +15,29 @@ import org.junit.Test;
 
 public class ArithmeticTest {
 	/*
+<<<<<<< HEAD
+	 *Unit testing is the most micro level of testing it encompasses testing your
+	 * app as its smallest components testing methods individually testing interfaces etc.
+	 */
+	
+=======
 	 * Unit testing is the most micro level of testing. It encompasses testing your application
 	 * at its smallest components. Testing methods individually, testing interfaces, etc.
 	 */
+>>>>>>> 908c4a08b3cf9c5cb65e60015f7c54cf564145ce
 	Arithmetic arithmetic;
 	int x = 30;
 	int y = 10;
 	
+<<<<<<< HEAD
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		
+=======
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+>>>>>>> 908c4a08b3cf9c5cb65e60015f7c54cf564145ce
 		System.out.println("BEFORE CLASS");
 	}
 
@@ -30,8 +48,13 @@ public class ArithmeticTest {
 
 	@Before
 	public void setUp() throws Exception {
+<<<<<<< HEAD
+		arithmetic = new Arithmetic();
+		System.out.println("BEFORE");
+=======
 		System.out.println("BEFORE");
 		arithmetic = new Arithmetic();
+>>>>>>> 908c4a08b3cf9c5cb65e60015f7c54cf564145ce
 	}
 
 	@After
@@ -39,6 +62,17 @@ public class ArithmeticTest {
 		System.out.println("AFTER");
 	}
 
+<<<<<<< HEAD
+
+	/*
+	 * The Assert library is used to determine the state of a test 
+	 * With it you can either fail or pass tests
+	 * 	-assertEquals -> Determine if actual result equals expected result.
+	 * 	-assertTrue -> Pass if expected boolean is true
+	 * 	-assertFalse -> Pass if exptected boolean is false
+	 * 
+	 * */
+=======
 	/*
 	 * The assert library is used to determine the state of a test.
 	 * With it you can either fail or pass tests.
@@ -53,10 +87,31 @@ public class ArithmeticTest {
 	 * provide useful rules and guidelines for an underlying method
 	 */
 	
+>>>>>>> 908c4a08b3cf9c5cb65e60015f7c54cf564145ce
 	@Ignore
 	@Test
 	public void testAddition() {
 		assertEquals(40, arithmetic.addition(x, y));
+<<<<<<< HEAD
+
+	}
+	@Test
+	public void testSubtraction() {
+		assertEquals(20, arithmetic.subtration(x, y));
+
+	}
+	@Test
+	public void testMultiplication() {
+		assertEquals("U dont need to know", 300, arithmetic.multiplication(x, y));
+
+	}
+	@Test
+	public void testDivision() {
+		assertEquals(300, arithmetic.division(x, y));
+
+	}
+	
+=======
 	}
 	
 	@Test
@@ -92,5 +147,6 @@ public class ArithmeticTest {
 	public void testTimeout(){
 		throw new ArithmeticException();
 	}
+>>>>>>> 908c4a08b3cf9c5cb65e60015f7c54cf564145ce
 
 }

@@ -1,6 +1,7 @@
 package d3.revature.designpatterns;
 
 public class Singleton {
+
 	
 	/*
 	 * A singleton is a design pattern that aims to create an object that may only ever have
