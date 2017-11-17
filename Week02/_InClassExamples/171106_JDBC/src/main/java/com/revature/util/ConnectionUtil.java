@@ -1,16 +1,35 @@
 package com.revature.util;
 
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
+import java.util.StringTokenizer;
 
 public class ConnectionUtil {
+	private static Properties prop; //Make our property reference
+	private final static String FILE_NAME = "DB.properties";
 	
 	public static Connection getConnection() throws SQLException{
-		String url = "jdbc:oracle:thin:@sandbox171106.c7gydzn7nvzj.us-east-1.rds.amazonaws.com:1521:orcl";
-		String username = "bobbert";
-		String password = "p4ssw0rd";
+		try{
+			prop = new Properties(); //Instantiate our property object
+			prop.load(new FileInputStream(FILE_NAME)); //Use a filestream to populate properties
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		
-		return DriverManager.getConnection(url,username, password);
+		//Populate properties through a file.
+/*		String url = prop.getProperty("url");
+		String username = prop.getProperty("username");
+		String password = prop.getProperty("password");
+		Class.forName(prop.getProperty("class")); //OPTIONAL, some may need to do this
+*/		
+		//Populate properties the safe way.
+		 
+		
+		String props[] = System.getenv("DBProps").split(";");
+		return DriverManager.getConnection(props[1],props[2], props[3]);
 	}
 }
