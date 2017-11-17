@@ -156,14 +156,29 @@ END;
 
 --------------------------------------------------------------------------------
 -------------------------------------3.4----------------------------------------
+CREATE OR REPLACE PROCEDURE get_all_emp(cursorPARAM OUT SYS_REFCURSOR)
+IS
+BEGIN
+    open cursorPARAM FOR
+    SELECT FIRSTNAME, LASTNAME, BIRTHDAY FROM EMPLOYEE;
+END;
+/
 
+--Create function to return all employees after 1968
 CREATE OR REPLACE FUNCTION emp_bday
 RETURN SYS_REFCURSOR;
 DECLARE 
     emp_cursor SYS_REFCURSOR;
+    emp_fname VARCHAR2;
+    emp_lname VARCHAR2;
+    emp_bday NUMBER;
 IS
 BEGIN
-    FETCH emp_cursor where EXTRACT(YEAR, BIRTHDATE) > 1968;
+    get_all_emp(emp_cursor);
+    LOOP
+        FETCH emp_cursor INTO emp_bday where EXTRACT(YEAR, BIRTHDATE) > 1968;
+        EXIT WHEN emp_cursor%NOTFOUND;
+    END LOOP;
 END;
 /
 
@@ -322,9 +337,8 @@ ON A.EMPLOYEEID = B.REPORTSTO;
 --------------------------------------------------------------------------------
 -------------------------------------9.0----------------------------------------
 --Create backups
-
-
-
+--Back up file created at:
+--C:\ORACLEXE\APP\ORACLE\FAST_RECOVERY_AREA\XE\AUTOBACKUP\2017_11_17\
 
 
 commit;
