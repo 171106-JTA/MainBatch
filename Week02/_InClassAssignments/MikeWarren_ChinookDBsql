@@ -1,0 +1,218 @@
+--2.1 SELECT queries
+--select all records from the Employee table
+SELECT * FROM Employee;
+--select all records from the Employee table where last name is 'King'
+SELECT * FROM Employee e WHERE e.lastName = 'King';
+--select all records fro the Employee table where first name is 'Andrew' and REPORTSTO is null
+SELECT * FROM Employee e WHERE e.firstName = 'Andrew' AND e.reportsTo IS NULL;
+
+--2.2 order by queries
+--select all albums in Album table and sort result set in descending order by title
+SELECT * FROM Album ORDER BY TITLE DESC;
+--select first name from Customer and sort result set in ascending order by city
+SELECT c.firstName FROM Customer c ORDER BY city ASC;
+
+--2.3 INSERT INTO queries
+--insert two new records into Genre table
+SELECT * FROM Genre;
+INSERT INTO Genre
+VALUES (26, 'Prog Metal');
+INSERT INTO Genre
+VALUES (27, 'Dubstep');
+--insert two new records into Employee table
+INSERT INTO Employee(EmployeeID, LastName, FirstName, Title, ReportsTo, BirthDate, HireDate, Address, City, State, Country, PostalCode)
+    VALUES (9, 'Warren', 'Mike', 'Software Engineer', 6, '01-APR-90', '06-NOV-17', '706 North Denny Street', 'Indianapolis', 'IN', 'United States', '46201');
+INSERT INTO Employee(EmployeeID, LastName, FirstName, Title, ReportsTo)
+    VALUES (10, 'Lessley', 'Bobbert', 'Trainer', 6);
+--insert two new records into Customer table
+INSERT INTO Customer(CustomerID, LastName, FirstName, Company, Email)
+    VALUES (60, 'Sparrow', 'Ross', 'Plunders', 'rsparrow@gmail.com');
+INSERT INTO Customer(CustomerID, LastName, FirstName, Email)
+    VALUES (61, 'Ulbright', 'Sarah', 'sulbright@yahoo.com');
+--2.4 UPDATE example
+--update Aaron Mitchell in Customer table to Robert Walter
+SELECT * FROM Customer;
+UPDATE Customer c
+SET c.FirstName = 'Robert', c.LastName = 'Walter'
+WHERE c.FirstName = 'Aaron' AND c.LastName = 'Mitchell';
+--update name of artist in the Artist table "Creedence Clearwater Revival" to "CCR"
+UPDATE Artist
+    SET NAME = 'CCR'
+    WHERE NAME = 'Creedence Clearwater Revival';
+    
+--2.5 LIKE queries
+--selecting all invoices with a billing address like "T%"
+SELECT * FROM invoice i
+    WHERE i.billingaddress LIKE 'T%';
+    
+--2.6 BETWEEN queries
+--selecting all invoices that have total between 15 and 50
+SELECT * FROM invoice
+    WHERE total BETWEEN 15 AND 50;
+--select all employees hired between 1-JUN-2003 and 1-MAR-2004
+SELECT * FROM EMPLOYEE
+    WHERE HireDate BETWEEN '1-JUN-2003' AND '1-MAR-2004';
+    
+--2.7 DELETE queries
+--Delete a record in Customer table where the name is 'Robert Walter'
+--It's pointing to an Employee, via supportRepID, so let's set that to null first
+SELECT * FROM Customer c
+    WHERE LastName = 'Walter' AND FirstName = 'Robert';
+UPDATE Customer 
+    SET SupportRepID = NULL
+    WHERE LastName = 'Walter' AND FirstName = 'Robert';
+/
+--DECLARE il_id NUMBER;
+--DECLARE i_id NUMBER;
+--DECLARE c_id NUMBER;
+
+--SELECT CustomerID INTO c_id WHERE LastName = 'Walter' AND FirstName = 'Robert';
+--SELECT InvoiceID INTO i_id WHERE CustomerID = c_id;
+DELETE FROM INVOICELINE
+    WHERE INVOICEID IN (SELECT i.InvoiceID FROM Invoice i 
+        WHERE i.CustomerID = (SELECT c.CustomerID FROM Customer c
+            WHERE c.LastName = 'Walter' AND c.FirstName = 'Robert'));
+DELETE FROM Invoice
+    WHERE CustomerID = (SELECT c.CustomerID FROM Customer c WHERE c.LastName = 'Walter' AND c.FirstName = 'Robert');
+DELETE FROM Customer
+    WHERE LastName = 'Walter' AND FirstName = 'Robert';
+--There's gotta be a much better way to do this!!
+/
+
+--3.1 System Defined Functions
+--returning the current time
+CREATE OR REPLACE FUNCTION get_current_time
+RETURN VARCHAR2
+IS
+BEGIN
+    return current_timestamp;
+END;
+/
+--what is even the point of this, when there already exists a function for it?!
+--returning the legnth of a mediatype from the mediatype table
+SELECT * FROM mediatype;
+CREATE OR REPLACE FUNCTION get_mediatype_length(name IN VARCHAR2)
+RETURN NUMBER
+IS 
+    type_length NUMBER;
+BEGIN
+    SELECT length(m.name) INTO type_length FROM MEDIATYPE m
+        WHERE m.name = name;
+    return type_length;
+END;
+/
+--3.2 System defined aggregate functions
+--creating funciton that returns average total of all invoices
+CREATE OR REPLACE FUNCTION avg_total_of_invoices
+RETURN NUMBER
+IS
+    avg_total NUMBER;
+BEGIN
+    SELECT avg(total) INTO avg_total FROM invoice;
+    return avg_total;
+END;
+/
+--returns the name of the most expensive track
+CREATE OR REPLACE FUNCTION get_most_expensive_track
+RETURN VARCHAR2
+IS
+    track_name VARCHAR2;
+BEGIN
+    SELECT name INTO track_name FROM track WHERE unitprice = (SELECT max(unitprice) FROM track);
+    return track_name;
+END;
+/
+
+--3.3 User Defined Functions
+--returning the average price of invoiceline items in the invoiceline table
+CREATE OR REPLACE FUNCTION get_avg_invoiceline_price
+RETURN NUMBER
+IS
+    avg_price NUMBER;
+BEGIN
+    SELECT avg(il.UnitPrice) INTO avg_price FROM invoiceline il;
+    return avg_price;
+END;
+/
+
+--3.4 User Defined Table Valued Functions
+--creating a function that returns all employees who are born after 1968
+CREATE OR REPLACE FUNCTION get_emps_after1968_cursor
+RETURN SYS_REFCURSOR
+IS
+    our_cursor SYS_REFCURSOR;
+BEGIN
+    OPEN our_cursor FOR
+        SELECT * FROM employee WHERE BirthDate >= '01-JAN-68';
+    return our_cursor;
+END;
+/
+
+CREATE OR REPLACE FUNCTION print_all_emps_born_after1968
+RETURN NUMBER 
+IS
+    my_cursor SYS_REFCURSOR := get_emps_after1968_cursor();
+    firstName employee.FirstName%TYPE;
+    lastName employee.LastName%TYPE;
+    title employee.Title%TYPE;
+    reportsTo employee.ReportsTo%TYPE;
+    birthDate employee.BirthDate%TYPE;
+    hireDate employee.HireDate%TYPE;
+    address employee.Address%TYPE;
+    city employee.City%TYPE;
+    state employee.State%TYPE;
+    country employee.Country%TYPE;
+    postalCode employee.PostalCode%TYPE;
+    phone employee.Phone%TYPE;
+    fax employee.Fax%TYPE;
+    email employee.EMail%TYPE;
+BEGIN
+    -- loop over the cursor to our result set
+    LOOP
+        FETCH my_cursor INTO firstName, 
+            lastName,
+            title,
+            reportsTo,
+            birthDate,
+            hireDate,
+            address,
+            city,
+            state,
+            country,
+            postalCode,
+            phone,
+            fax,
+            email;
+        EXIT WHEN my_cursor%NOTFOUND;
+        -- output all that stuff here...
+        DBMS_OUTPUT.PUT_LINE(firstName || ' ' || lastName || '|' || title);
+    END LOOP;
+    return 0;
+END;
+/
+--4.1 Basic Stored Procedure
+--Create stored procedure that selects the first and last names of all the employees.
+CREATE OR REPLACE PROCEDURE get_names_of_employees
+IS
+BEGIN
+    SELECT e.FirstName,e.LastName FROM Employee e;
+END;
+/
+--4.2 Stored Procedure Input Parameters
+--create stored procedure that updates the personal information of an employee
+--let's just do firstName,lastName,title for now because this can get *really* complicated and user-unfriendly
+CREATE OR REPLACE PROCEDURE update_employee( e_id NUMBER,
+    new_first_name IN VARCHAR2,
+    new_last_name IN VARCHAR2,
+    new_title IN VARCHAR2)
+IS
+    UPDATE Employee
+        SET FirstName = new_first_name,
+            LastName = new_last_name,
+            Title = new_title
+        WHERE EmployeeID = e_id;
+        
+BEGIN
+
+END;
+/
