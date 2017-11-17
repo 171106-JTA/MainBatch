@@ -19,6 +19,7 @@ public class Loan implements Serializable{
 	public void setApproval(boolean approval) {
 		this.approval = approval;
 	}
+	
 	@Override
 	public String toString() {
 		return "Loan [amount=" + amount + ", approval=" + approval + "]";
