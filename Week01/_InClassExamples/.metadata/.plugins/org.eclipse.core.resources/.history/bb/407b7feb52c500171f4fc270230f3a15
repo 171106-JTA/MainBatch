@@ -1,6 +1,0 @@
-package com.revature.interfaces;
-
-public interface Reflectionable {
-
-	public abstract void setArgs(Object...args);
-}

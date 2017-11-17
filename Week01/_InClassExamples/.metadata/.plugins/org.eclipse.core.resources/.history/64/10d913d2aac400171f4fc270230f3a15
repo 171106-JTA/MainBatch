@@ -1,5 +1,0 @@
-package com.revature.model.account;
-
-public class BasicUserAccount extends UserAccount {
-
-}

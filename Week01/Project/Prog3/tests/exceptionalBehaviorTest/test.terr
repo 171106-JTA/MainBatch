@@ -1,0 +1,13 @@
+Invalid username: : root User must be between 1 and 100 and contain at least: 1 letter(s), 1 number(s), and 0 special character(s) and no spaces
+Invalid username: : admin User must be between 1 and 100 and contain at least: 1 letter(s), 1 number(s), and 0 special character(s) and no spaces
+Invalid password: : pass
+Password must be between 1 and 100 and contain at least: 1 letter(s), 1 number(s), and 0 special character(s) and no spaces
+admin1: Account activation is pending permission from an admin
+user1: Account activation is pending permission from an admin
+Insufficient funds for request: 
+Overdraft penalty: 
+Cannot close aacount while in debt: 
+Can not close account with outstanding loans
+Admins cannot close admin accounts: 
+Admins cannot close admin accounts: 
+Admins cannot lock other admins: root

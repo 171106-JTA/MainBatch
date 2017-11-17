@@ -1,9 +1,0 @@
-package com.revature.model.request;
-
-public class LoanRequest extends Request {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 7357295452808985446L;
-}

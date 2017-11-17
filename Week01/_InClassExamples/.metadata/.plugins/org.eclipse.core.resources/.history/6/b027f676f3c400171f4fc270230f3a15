@@ -1,8 +1,0 @@
-package com.revature.model.account;
-
-public class MinorUserAccount extends UserAccount {
-
-	public MinorUserAccount(String user, String pass) {
-		super(user, pass);
-	}
-}

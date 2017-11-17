@@ -1,6 +1,0 @@
-package com.revature.model;
-
-public interface Reflectionable {
-
-	public abstract void setArgs(Object...args);
-}

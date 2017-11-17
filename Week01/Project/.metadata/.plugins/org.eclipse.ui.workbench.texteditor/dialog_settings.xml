@@ -2,51 +2,51 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="privil" key="selection"/>
-		<item value="false" key="casesensitive"/>
+		<item value="After" key="selection"/>
+		<item value="true" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="privil"/>
-			<item value="priv"/>
-			<item value="setOUt"/>
-			<item value="requestSet"/>
-			<item value="request"/>
-			<item value="requestSet.p"/>
-			<item value="requestSet.a"/>
-			<item value="sendReq"/>
-			<item value=".equals"/>
-			<item value="equals"/>
-			<item value="PROT_CONVER"/>
-			<item value="convertUser"/>
-			<item value="converUser"/>
-			<item value="converUs"/>
-			<item value="setOu"/>
+			<item value="AfterEach"/>
+			<item value="BeforeEach"/>
+			<item value=".html"/>
+			<item value="port"/>
+			<item value="Connection"/>
+			<item value="q"/>
+			<item value=".file"/>
+			<item value="Appender"/>
+			<item value="encrypt"/>
+			<item value="serialize()"/>
+			<item value=".nextLine()"/>
+			<item value="scan"/>
+			<item value="int inStr"/>
+			<item value="in"/>
+			<item value="br"/>
 		</list>
 		<list key="replacehistory">
-			<item value="/tests/verifySerializationTest"/>
-			<item value="&quot;/tests/verifySerializationTest"/>
-			<item value="&quot;/tests/verifySerializationTest.in&quot;;"/>
-			<item value="(String)"/>
-			<item value="String token"/>
-			<item value="getUser"/>
-			<item value="getUser()"/>
-			<item value="(user)"/>
-			<item value=" user,"/>
-			<item value="user"/>
-			<item value="null"/>
-			<item value="String user"/>
-			<item value="&lt;String"/>
-			<item value="&lt;Integer"/>
-			<item value="Level.OFF_INT"/>
+			<item value="After"/>
+			<item value="Before"/>
+			<item value=".rootHtmlAppender"/>
+			<item value=".serverFileAppender"/>
+			<item value=".rootFileAppender"/>
+			<item value=".root"/>
+			<item value=".readLine()"/>
+			<item value="br"/>
+			<item value="String inStr"/>
+			<item value="in"/>
+			<item value=".in"/>
+			<item value="inStr"/>
+			<item value=""/>
+			<item value="Model"/>
+			<item value="CodeTester"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="290" key="DIALOG_WIDTH"/>
 		<item value="1|.AppleSystemUIFont|11.0|0|COCOA|1|.AppleSystemUIFont" key="DIALOG_FONT_NAME"/>
 		<item value="409" key="DIALOG_HEIGHT"/>
-		<item value="688" key="DIALOG_X_ORIGIN"/>
-		<item value="79" key="DIALOG_Y_ORIGIN"/>
+		<item value="-17" key="DIALOG_X_ORIGIN"/>
+		<item value="28" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

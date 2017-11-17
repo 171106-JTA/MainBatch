@@ -1,9 +1,0 @@
-import java.util.Scanner;
-
-public class CodeTester {
-	public static void main(String[] args) {
-		String in;
-		Scanner scan = new Scanner("4r1e235153a6d 6321414t435hi4s 4524str43i5n5g");
-		System.out.println(in = (scan.nextLine().replaceAll("[A-Z]", "")));
-	}
-}
