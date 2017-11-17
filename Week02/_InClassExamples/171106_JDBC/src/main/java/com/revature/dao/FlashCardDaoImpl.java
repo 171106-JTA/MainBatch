@@ -134,14 +134,40 @@ public class FlashCardDaoImpl implements FlashCardDao {
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} 
+		}
 		return fcs;
 	}
-	
+
 	@Override
 	public int updateFlashCardById(FlashCard fc) {
-		// TODO Auto-generated method stub
-		return 0;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int count = 0;
+
+		try (Connection conn = ConnectionUtil.getConnection();) {
+			String sql = "UPDATE flash_cards SET fc_id = ?,fc_question = ?, fc_answer = ? WHERE fc_id = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, fc.getId());
+			ps.setString(2, fc.getQuestion());
+			ps.setString(3, fc.getAnswer());
+			ps.setInt(4, fc.getId());
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				count++;
+				fc = new FlashCard(rs.getString("fc_question"), rs.getString(3));
+				
+			}
+			fc.setId(rs.getInt(1));
+
+		} catch (SQLException e) { 
+
+		} finally {
+			close(ps);
+			close(rs);
+		}
+		System.out.println(fc);
+		return count;
 	}
 
 	@Override
