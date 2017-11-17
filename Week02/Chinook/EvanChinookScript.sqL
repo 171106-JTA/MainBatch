@@ -1,3 +1,7 @@
+/************************************************************************
+2.0 SQL QUERIES
+************************************************************************/
+
 /************************************
 2.1 SELECT
 ************************************/
@@ -49,6 +53,25 @@ SELECT * FROM EMPLOYEE
 /************************************
 2.7 DELETE
 ************************************/
---WORK ON THIS!!!
---DELETE FROM CUSTOMER 
---    WHERE UPPER(FIRSTNAME)='ROBERT' AND UPPER(LASTNAME)='WALTER';
+--Disable constraint. Research why this is bad!
+ALTER TABLE INVOICE
+    DISABLE CONSTRAINT FK_INVOICECUSTOMERID;
+DELETE FROM CUSTOMER 
+    WHERE UPPER(FIRSTNAME)='ROBERT' AND UPPER(LASTNAME)='WALTER';
+/
+/************************************************************************
+3.0 SQL FUNCTIONS
+************************************************************************/
+/************************************
+3.1 SYSETM DEFINED FUNCTIONS
+************************************/
+CREATE OR REPLACE FUNCTION CUR_TMIE
+RETURN TIME
+IS
+    THE_TIME TIME;
+BEGIN 
+    DBMS_OUTPUT.PUT_LINE(LOCALTIMESTAMP );
+    THE_TIME := LOCALTIMESTAMP;
+    RETURN THE_TIME;    
+END;
+/
