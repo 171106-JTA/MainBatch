@@ -45,7 +45,7 @@ public class CustomerPage extends Page {
         printAccountInfo();
         String[] cmds = {"Make a deposit", "Make a withdrawal", "Transfer funds", "Request promotion", "View instructions", "Logout"};
         String[] codes = {"deposit [amount]", "withdraw [amount]", "transfer [amount] [recipient]", "promote", "help", "logout"};
-        printCommands(cmds, codes);
+        OutputUtils.printCommands(cmds, codes);
 
         while (true) {
             String cmd = InputUtils.readLine("command");

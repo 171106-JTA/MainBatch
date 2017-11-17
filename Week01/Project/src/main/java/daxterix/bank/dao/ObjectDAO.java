@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+// TODO: refactor to handle error with exceptions instead of CommandCodes
 public abstract class ObjectDAO <T extends Serializable> {
     final Logger logger = Logger.getLogger(getClass());
     String saveDir;

@@ -44,13 +44,13 @@ public class AdminPage extends Page {
     protected Page _run() {
         String[] cmds = {"View instructions", "Show pending requests", "Grant a creation request", "Grant a promotion request", "Drop a request", "Show locked customers", "Lock an account", "Unlock an account", "logout"};
         String[] codes = {"help", "printreq", "create [request id]", "promote [request id]", "drop [request-id]", "printlocked", "lock [username]", "unlock [username]", "locked", "logout"};
-        printCommands(cmds, codes);
+        OutputUtils.printCommands(cmds, codes);
 
         while(true){
             String cmd = InputUtils.readLine("command");
             switch (cmd) {
                 case "help":
-                    printCommands(cmds, codes);
+                    OutputUtils.printCommands(cmds, codes);
                     break;
                 case "printlocked":
                     printLockedCustomers();

@@ -4,6 +4,9 @@ import java.io.Console;
 import java.util.Scanner;
 import java.util.function.Supplier;
 
+import daxterix.bank.view.OutputUtils;
+import daxterix.bank.view.OutputUtils.AnsiColor;
+
 public class InputUtils {
     /**
      * as title suggests
@@ -11,9 +14,8 @@ public class InputUtils {
      * @param fieldName
      */
     public static void printPrompt(String fieldName) {
-        System.out.printf("enter %s: ", fieldName);
+        OutputUtils.printfColor(AnsiColor.ANSI_YELLOW, "enter %s: ", fieldName);
     }
-
 
     /**
      * read a line of input from user
@@ -86,22 +88,14 @@ public class InputUtils {
      * @return
      */
     public static String readMasked(String fieldName) {
-        printPrompt(fieldName);
         Console console = System.console();
+        if (console == null)
+            return readLine(fieldName);
+
+        printPrompt(fieldName);
         char[] masked = console.readPassword();
         return new String(masked);
     }
-
-    /**
-     * does not hide input; here to be run in ides
-     *
-     * @param fieldName
-     * @return
-     */
-    public static String readMaskedNot(String fieldName) {
-        return readLine(fieldName);
-    }
-
 
     /**
      * gets user input and confirms it. i.e. reads it twice and verifies

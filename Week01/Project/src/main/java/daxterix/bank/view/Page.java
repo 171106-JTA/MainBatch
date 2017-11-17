@@ -1,7 +1,6 @@
 package daxterix.bank.view;
 
 public abstract class Page {
-    private static final String DIVIDER = "______________________________________________________________________";
     /**
      * Defines the page's  interaction with the user, and what page it leads
      * to be run next depending on user's interaction
@@ -18,7 +17,7 @@ public abstract class Page {
     public void run() {
         Page page = this;
         do {
-            page.printTitle();
+            OutputUtils.printTitle(page);
             page = page._run();
         }
         while(page != null);
@@ -31,21 +30,6 @@ public abstract class Page {
      */
     public abstract String getTitle();
 
-
-    private static void printDivider() {
-        System.out.println(DIVIDER);
-    }
-
-    /**
-     * print the title
-     */
-    public void printTitle() {
-        System.out.print("\n\n");
-        printDivider();
-        System.out.println(getTitle());
-        printDivider();
-        System.out.println();
-    }
 
     /**
      * obtain user input on whether to quit
@@ -63,24 +47,5 @@ public abstract class Page {
             default:
                 return false;
        }
-    }
-
-    /**
-     * given a set of available operations (cmds), and their corresponding
-     * codes (which triggers said operations), prints then in formatted columns
-     *
-     * @param cmds -  available operations
-     * @param cmdCodes - triggering commands
-     */
-    public void printCommands(String[] cmds, String[] cmdCodes) {
-        System.out.println("You can do one of the following:");
-
-        for (int i = 0; i+1 < cmds.length; i += 2) {
-            String left = String.format("(%s) %s", cmdCodes[i], cmds[i]);
-            String right = String.format("(%s) %s", cmdCodes[i+1], cmds[i+1]);
-            System.out.printf("%-50s\t%s\n", left, right);
-        }
-        System.out.println();
-        System.out.println();
     }
 }

@@ -1,0 +1,32 @@
+2017-11-08 13:59:44 TRACE LoggingExample:17 - Approaching exception.
+2017-11-08 13:59:44 INFO  LoggingExample:22 - Exception occurred: / by zero
+2017-11-08 13:59:44 TRACE LoggingExample:25 - My first log!
+2017-11-08 13:59:44 DEBUG LoggingExample:26 - My first log!
+2017-11-08 13:59:44 INFO  LoggingExample:27 - My first log!
+2017-11-08 13:59:44 WARN  LoggingExample:28 - My first log!
+2017-11-08 13:59:44 ERROR LoggingExample:29 - My first log!
+2017-11-08 13:59:44 FATAL LoggingExample:30 - My first log!
+2017-11-09 16:13:28 TRACE LoggingExample:17 - Approaching exception.
+2017-11-09 16:13:28 INFO  LoggingExample:22 - Exception occurred: / by zero
+2017-11-09 16:13:28 TRACE LoggingExample:25 - My first log!
+2017-11-09 16:13:28 DEBUG LoggingExample:26 - My first log!
+2017-11-09 16:13:28 INFO  LoggingExample:27 - My first log!
+2017-11-09 16:13:28 WARN  LoggingExample:28 - My first log!
+2017-11-09 16:13:28 ERROR LoggingExample:29 - My first log!
+2017-11-09 16:13:28 FATAL LoggingExample:30 - My first log!
+2017-11-09 16:17:42 TRACE LoggingExample:17 - Approaching exception.
+2017-11-09 16:17:42 INFO  LoggingExample:22 - Exception occurred: / by zero
+2017-11-09 16:17:42 TRACE LoggingExample:25 - My first log!
+2017-11-09 16:17:42 DEBUG LoggingExample:26 - My first log!
+2017-11-09 16:17:42 INFO  LoggingExample:27 - My first log!
+2017-11-09 16:17:42 WARN  LoggingExample:28 - My first log!
+2017-11-09 16:17:42 ERROR LoggingExample:29 - My first log!
+2017-11-09 16:17:42 FATAL LoggingExample:30 - My first log!
+2017-11-09 16:18:25 TRACE LoggingExample:17 - Approaching exception.
+2017-11-09 16:18:25 INFO  LoggingExample:22 - Exception occurred: / by zero
+2017-11-09 16:18:25 TRACE LoggingExample:25 - My first log!
+2017-11-09 16:18:25 DEBUG LoggingExample:26 - My first log!
+2017-11-09 16:18:25 INFO  LoggingExample:27 - My first log!
+2017-11-09 16:18:25 WARN  LoggingExample:28 - My first log!
+2017-11-09 16:18:25 ERROR LoggingExample:29 - My first log!
+2017-11-09 16:18:25 FATAL LoggingExample:30 - My first log!

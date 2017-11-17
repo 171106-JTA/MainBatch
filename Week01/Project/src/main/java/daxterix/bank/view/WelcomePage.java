@@ -12,7 +12,7 @@ public class WelcomePage extends Page{
     protected Page _run() {
         String[] cmds = {"Register as a customer", "Login as a Customer", "Login as an Admin", "View instructions"};
         String[] codes = {"rc", "lc", "la", "help"};
-        printCommands(cmds, codes);
+        OutputUtils.printCommands(cmds, codes);
 
         while(true){
             String cmd = InputUtils.readLine("command");
@@ -24,7 +24,7 @@ public class WelcomePage extends Page{
                 case "la":
                     return new LoginAdminPage();
                 case "help":
-                    printCommands(cmds, codes);
+                    OutputUtils.printCommands(cmds, codes);
                     break;
                 case "Quit":
                     System.out.println("Be seeing ya!");
