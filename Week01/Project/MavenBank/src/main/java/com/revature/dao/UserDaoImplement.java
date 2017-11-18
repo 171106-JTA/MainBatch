@@ -5,14 +5,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Logger;
 
 import com.revature.BankAccount.User;
 import com.revature.util.ConnectionUtil;
 import com.revature.util.ReturnStrings;
 
 public class UserDaoImplement implements UserDao {
-	public void createUser(User user) {
+	public boolean createUser(User user) {
 		CallableStatement cs = null;
+		ResultSet rs = null;
+		boolean userInserted = false;
 		
 		try(Connection conn = ConnectionUtil.getConnection()) {
 			String 	username = user.getUsername(), 
@@ -36,11 +40,14 @@ public class UserDaoImplement implements UserDao {
 			cs.setInt(7, status);
 			cs.setDouble(8, accountAmount);
 			
-			cs.executeQuery();
-			System.out.println();
+			rs = cs.executeQuery();
+			
+			userInserted = true;
 					
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//To Do: This catch statement executes if user was not inserted into the database. 
+			//		How to return the stacktrace to Driver to be logged???
+//			e.printStackTrace();
 		} finally {
 			if(cs != null) {
 				try {
@@ -50,16 +57,15 @@ public class UserDaoImplement implements UserDao {
 				}
 			}
 		}
+		return userInserted;
 	}
 	
 	public User getUser(String username, String password) {
 		User retUser = null;
 		
-		String queryResult = null;
 		PreparedStatement ps = null; 
 		ResultSet rs = null;
 		
-		int query_result = 0;
 		try(Connection conn = ConnectionUtil.getConnection()) {
 			String sql = "SELECT * FROM A_USER " +
 						"WHERE USERNAME = ? AND USER_PASSWORD = ?";
@@ -80,7 +86,6 @@ public class UserDaoImplement implements UserDao {
 				double 	accountAmount = rs.getDouble("accountAmount");
 				retUser = new User(usrname, firstname, lastname, middleinitial, 
 						passwd, permission, status, accountAmount);
-				System.out.println("retUser: " + retUser);
 			}			
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -103,4 +108,7 @@ public class UserDaoImplement implements UserDao {
 		return retUser;
 	}
 	
+//	public List<String> getUsersConditionally(final int status, final int permissions) {
+//		
+//	}
 }

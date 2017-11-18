@@ -333,15 +333,14 @@ public class Driver {
 	}
 
 	public void addNewClientToDatabase(User newUser) {
-		// To Do: Duplicate check. And test case for this duplicate check
-		// db as a key
-		// To Do: Run the object serialization through a ?hash function?
-
-		if (db.containsKey(newUser.getUsername())) {
-			System.out.println("User already exists");
-		} else {
+		boolean userInserted = dao.createUser(newUser);
+		
+		if (userInserted) {
 			logger.trace("Adding new user to database");
-			db.put(newUser.getUsername(), newUser);
+			System.out.println("Account Created! Please wait for an Administrator to approve your account.");
+		} else {
+			System.out.println("Woops! Account NOT created. User already exists or invalid input");
+			logger.trace("Account NOT created. User already exists or invalid input");
 		}
 	}
 
