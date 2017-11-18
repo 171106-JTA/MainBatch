@@ -52,7 +52,7 @@ public class UserDaoImplement implements UserDao {
 		}
 	}
 	
-	public User checkIfUserExists(String username, String password) {
+	public User getUser(String username, String password) {
 		User retUser = null;
 		
 		String queryResult = null;

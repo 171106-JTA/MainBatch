@@ -277,7 +277,7 @@ public class Driver {
 	public boolean loginLogic(String username, String password) {
 		boolean loggedIn = false;
 		
-		User user = dao.checkIfUserExists(username, password);
+		User user = dao.getUser(username, password);
 //		System.out.println("The User: " + user);
 		
 		if(user != null) {
