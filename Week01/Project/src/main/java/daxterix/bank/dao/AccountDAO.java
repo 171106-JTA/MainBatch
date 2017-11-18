@@ -12,4 +12,5 @@ public interface AccountDAO {
     int update(Account info) throws SQLException;
     int delete(long accountNumber) throws SQLException;
     int deleteForUser(String email) throws SQLException;
+    int deleteAll() throws SQLException;
 }

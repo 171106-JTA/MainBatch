@@ -118,6 +118,20 @@ public class AccountDAOImpl implements AccountDAO {
         }
     }
 
+    @Override
+    public int deleteAll() throws SQLException {
+        Statement stmt = null;
+
+        try (Connection conn = connectionManager.getConnection()) {
+            String sql = "DELETE FROM bankaccount";
+            stmt = conn.createStatement();
+            return stmt.executeUpdate(sql);
+        }
+        finally {
+            Closer.close(stmt);
+        }
+    }
+
     private Account readFromRow(ResultSet rs) throws SQLException {
         Account a = new Account();
         a.setNumber(rs.getLong("accountnumber"));

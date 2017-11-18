@@ -15,9 +15,11 @@ public interface UserDAO {
 
     int updateUser(User info) throws SQLException;
 
-    int deleteByEmail(String email) throws SQLException;
+    int delete(String email) throws SQLException;
 
     User selectForAccount(long accountNumber) throws SQLException;
 
     User selectForRequest(long requestId) throws SQLException;
+
+    int deleteAll() throws SQLException;
 }

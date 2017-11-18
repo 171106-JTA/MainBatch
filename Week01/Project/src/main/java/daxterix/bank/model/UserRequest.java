@@ -3,18 +3,21 @@ package daxterix.bank.model;
 import java.time.LocalDateTime;
 
 public class UserRequest {
-    protected long id;
+    public static final char CREATION = 0;
+    public static final char PROMOTION = 1;
+
+    protected long id = -1;
     protected String filerEmail;
     protected LocalDateTime fileDate;
     protected int type;
 
     public UserRequest() {
+        fileDate = LocalDateTime.now();
     }
 
-    public UserRequest(long id, String filerEmail, LocalDateTime fileDate, int type) {
-        this.id = id;
+    public UserRequest(String filerEmail, int type) {
         this.filerEmail = filerEmail;
-        this.fileDate = fileDate;
+        this.fileDate = LocalDateTime.now();
         this.type = type;
     }
 
@@ -56,8 +59,8 @@ public class UserRequest {
         if (!(o instanceof UserRequest)) return false;
 
         UserRequest that = (UserRequest) o;
-
-        if (id != that.id) return false;
+        // ignore ids if one id is -1 -- useful for testing
+        if (id != that.id && !(id == -1 || that.id == -1)) return false;
         if (type != that.type) return false;
         if (!filerEmail.equals(that.filerEmail)) return false;
         return fileDate.equals(that.fileDate);

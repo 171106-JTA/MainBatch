@@ -13,4 +13,5 @@ public interface RequestDAO {
     int update(UserRequest info) throws SQLException;
     int delete(long id) throws SQLException;
     int deleteForUser(String email) throws SQLException;
+    int deleteAll() throws SQLException;
 }

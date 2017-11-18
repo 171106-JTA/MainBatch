@@ -105,7 +105,7 @@ public class UserDAOImpl implements UserDAO {
         PreparedStatement stmt = null;
 
         try (Connection conn = connectionManager.getConnection()) {
-            String sql = "INSERT INTO bankuser(useremail, hashpass, isadmin, islocked) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO bankuser(useremail, passhash, isadmin, islocked) VALUES (?, ?, ?, ?)";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, user.getEmail());
             stmt.setString(2, user.getPassword());
@@ -123,12 +123,12 @@ public class UserDAOImpl implements UserDAO {
         PreparedStatement stmt = null;
 
         try (Connection conn = connectionManager.getConnection()) {
-            String sql = "UPDATE bankuser set hashpass = ?, isadmin = ?, islocked = ? WHERE useremail = ?";
+            String sql = "UPDATE bankuser set passhash = ?, isadmin = ?, islocked = ? WHERE useremail = ?";
             stmt = conn.prepareStatement(sql);
-            stmt.setString(2, info.getPassword());
-            stmt.setInt(3, info.isAdmin()? 1 : 0);
-            stmt.setInt(4, info.isLocked()? 1 : 0);
-            stmt.setString(1, info.getEmail());
+            stmt.setString(1, info.getPassword());
+            stmt.setInt(2, info.isAdmin()? 1 : 0);
+            stmt.setInt(3, info.isLocked()? 1 : 0);
+            stmt.setString(4, info.getEmail());
             return stmt.executeUpdate();
         }
         finally {
@@ -137,8 +137,33 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public int deleteByEmail(String email) {
-        return 0;
+    public int delete(String email) throws SQLException {
+        PreparedStatement stmt = null;
+
+        try (Connection conn = connectionManager.getConnection()) {
+            String sql = "DELETE FROM bankuser WHERE useremail = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, email);
+            return stmt.executeUpdate();
+        }
+        finally {
+            Closer.close(stmt);
+        }
+    }
+
+
+    @Override
+    public int deleteAll() throws SQLException {
+        Statement stmt = null;
+
+        try (Connection conn = connectionManager.getConnection()) {
+            String sql = "DELETE FROM bankuser";
+            stmt = conn.createStatement();
+            return stmt.executeUpdate(sql);
+        }
+        finally {
+            Closer.close(stmt);
+        }
     }
 
 

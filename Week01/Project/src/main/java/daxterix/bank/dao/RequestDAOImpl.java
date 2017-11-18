@@ -81,14 +81,13 @@ public class RequestDAOImpl implements RequestDAO {
         PreparedStatement stmt = null;
 
         try (Connection conn = connectionManager.getConnection()) {
-            String sql = "INSERT INTO request (requestid, fileremail, filedate, requesttype) VALUES(?,?,?,?)";
+            String sql = "INSERT INTO request (fileremail, filedate, requesttype) VALUES(?,?,?)";
             stmt = conn.prepareStatement(sql);
 
-            stmt.setLong(1, req.getId());
-            stmt.setString(2, req.getFilerEmail());
+            stmt.setString(1, req.getFilerEmail());
             Timestamp ts = java.sql.Timestamp.valueOf(req.getFileDate());
-            stmt.setTimestamp(3, ts);
-            stmt.setInt(4, req.getType());
+            stmt.setTimestamp(2, ts);
+            stmt.setInt(3, req.getType());
 
             return stmt.executeUpdate();
         }
@@ -102,7 +101,7 @@ public class RequestDAOImpl implements RequestDAO {
         PreparedStatement stmt = null;
 
         try (Connection conn = connectionManager.getConnection()) {
-            String sql = "UPDATE request SET fileremail=?, filedate=?, requesttype=?) WHERE requestid=?";
+            String sql = "UPDATE request SET fileremail=?, filedate=?, requesttype=? WHERE requestid=?";
             stmt = conn.prepareStatement(sql);
 
             stmt.setString(1, info.getFilerEmail());
@@ -150,6 +149,19 @@ public class RequestDAOImpl implements RequestDAO {
         }
     }
 
+    @Override
+    public int deleteAll() throws SQLException {
+        Statement stmt = null;
+
+        try (Connection conn = connectionManager.getConnection()) {
+            String sql = "DELETE FROM request";
+            stmt = conn.createStatement();
+            return stmt.executeUpdate(sql);
+        }
+        finally {
+            Closer.close(stmt);
+        }
+    }
 
     private UserRequest readFromRow(ResultSet rs) throws SQLException {
         UserRequest req = new UserRequest();
