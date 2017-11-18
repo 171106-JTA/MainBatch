@@ -291,26 +291,6 @@ public class Driver {
 			logger.trace("Incorrect Username or Password");
 			System.out.println("Incorrect Username or Password");
 		}
-		
-//		if (this.db.containsKey(username)) {
-//			if (password.equals(this.db.get(username).getPassword())) {
-//				// Fetch the current user's information from the database
-//				this.currentUser = new User(this.db.get(username));
-//
-//				// Signal that the user is logged in
-//				// Note: Do this, even though a user with status = 0 or 2 is not technically
-//				// logged in
-//				// This case is handled in the controlLogic() function
-//				loggedIn = true;
-//			} else {
-//				logger.trace("incorrect password");
-//				System.out.println("Incorrect password");
-//			}
-//		} else {
-//			logger.trace("No user by the given id");
-//			System.out.println("No user by that name\n\n");
-//		}
-
 		return loggedIn;
 	}
 
