@@ -1,4 +1,4 @@
-package daxterix.bank.dao;
+package daxterix.bank.dao.old;
 
 import java.io.Serializable;
 

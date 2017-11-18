@@ -1,7 +1,7 @@
 package daxterix.bank.view;
 
-import daxterix.bank.model.Admin;
-import daxterix.bank.dao.AdminDAO;
+import daxterix.bank.model.old.Admin;
+import daxterix.bank.dao.old.AdminDAO;
 import daxterix.bank.dao.DAOUtils;
 
 public class LoginAdminPage extends Page {

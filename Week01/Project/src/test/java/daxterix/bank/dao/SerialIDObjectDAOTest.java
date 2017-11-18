@@ -1,9 +1,10 @@
 package daxterix.bank.dao;
 
-import daxterix.bank.model.CreationRequest;
-import daxterix.bank.model.Customer;
-import daxterix.bank.model.PromotionRequest;
-import daxterix.bank.model.UserRequest;
+import daxterix.bank.dao.old.RequestDAO;
+import daxterix.bank.model.old.CreationRequest;
+import daxterix.bank.model.old.Customer;
+import daxterix.bank.model.old.PromotionRequest;
+import daxterix.bank.model.old.UserRequest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

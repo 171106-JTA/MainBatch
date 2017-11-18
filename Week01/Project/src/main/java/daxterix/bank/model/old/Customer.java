@@ -1,4 +1,4 @@
-package daxterix.bank.model;
+package daxterix.bank.model.old;
 
 public class Customer extends User {
     private static final long serialVersionUID = -2147706395013864771L;

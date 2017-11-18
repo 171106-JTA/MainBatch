@@ -1,7 +1,7 @@
 package daxterix.bank.view;
 
-import daxterix.bank.model.Customer;
-import daxterix.bank.dao.CustomerDAO;
+import daxterix.bank.model.old.Customer;
+import daxterix.bank.dao.old.CustomerDAO;
 import daxterix.bank.dao.DAOUtils;
 
 public class LoginCustomerPage extends Page{

@@ -1,4 +1,4 @@
-package daxterix.bank.model;
+package daxterix.bank.model.old;
 
 import java.time.format.DateTimeFormatter;
 

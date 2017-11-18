@@ -1,4 +1,4 @@
-package daxterix.bank.model;
+package daxterix.bank.model.old;
 
 public class Admin extends User {
     private static final long serialVersionUID = -8172994959930890687L;

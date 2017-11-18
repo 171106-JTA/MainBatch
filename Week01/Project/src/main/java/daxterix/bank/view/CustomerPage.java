@@ -1,10 +1,10 @@
 package daxterix.bank.view;
 
-import daxterix.bank.model.Customer;
-import daxterix.bank.model.PromotionRequest;
-import daxterix.bank.dao.CustomerDAO;
+import daxterix.bank.model.old.Customer;
+import daxterix.bank.model.old.PromotionRequest;
+import daxterix.bank.dao.old.CustomerDAO;
 import daxterix.bank.dao.DAOUtils;
-import daxterix.bank.dao.RequestDAO;
+import daxterix.bank.dao.old.RequestDAO;
 
 import java.util.Scanner;
 

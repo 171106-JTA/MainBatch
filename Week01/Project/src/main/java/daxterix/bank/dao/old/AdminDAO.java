@@ -1,6 +1,6 @@
-package daxterix.bank.dao;
+package daxterix.bank.dao.old;
 
-import daxterix.bank.model.Admin;
+import daxterix.bank.model.old.Admin;
 
 public class AdminDAO extends ObjectDAO<Admin> {
 

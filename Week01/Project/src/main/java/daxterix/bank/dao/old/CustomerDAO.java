@@ -1,6 +1,6 @@
-package daxterix.bank.dao;
+package daxterix.bank.dao.old;
 
-import daxterix.bank.model.Customer;
+import daxterix.bank.model.old.Customer;
 
 public class CustomerDAO extends ObjectDAO<Customer> {
 

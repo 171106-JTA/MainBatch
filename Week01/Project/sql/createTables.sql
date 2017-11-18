@@ -42,11 +42,11 @@ END;
 
 CREATE TABLE request (
     requestid NUMBER,
-    filedby VARCHAR2(256),
+    fileremail VARCHAR2(256),
     filedate TIMESTAMP,
     requesttype NUMBER(2),
     CONSTRAINT pk_request PRIMARY KEY(requestid),
-    CONSTRAINT fk_requestuser FOREIGN KEY (fileby) REFERENCES bankuser(useremail)
+    CONSTRAINT fk_requestuser FOREIGN KEY (fileremail) REFERENCES bankuser(useremail)
 );
 COMMIT;
 /

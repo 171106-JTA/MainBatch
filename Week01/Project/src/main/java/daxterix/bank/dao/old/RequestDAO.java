@@ -1,6 +1,6 @@
-package daxterix.bank.dao;
+package daxterix.bank.dao.old;
 
-import daxterix.bank.model.UserRequest;
+import daxterix.bank.model.old.UserRequest;
 
 public class RequestDAO extends SerialIDObjectDAO<UserRequest> {
     /**
@@ -24,7 +24,7 @@ public class RequestDAO extends SerialIDObjectDAO<UserRequest> {
     }
 
     /**
-     * sets the id of a given UserRequest. See {@Link daxterix.bank.dao.SerialIDObjectDAO#setId setId}
+     * sets the id of a given UserRequest. See {@Link daxterix.bank.dao.old.SerialIDObjectDAO#setId setId}
      *
      * @param req
      * @param newId

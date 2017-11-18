@@ -1,9 +1,9 @@
 package daxterix.bank.view;
 
 import daxterix.bank.dao.DAOUtils;
-import daxterix.bank.model.CreationRequest;
-import daxterix.bank.model.Customer;
-import daxterix.bank.dao.RequestDAO;
+import daxterix.bank.model.old.CreationRequest;
+import daxterix.bank.model.old.Customer;
+import daxterix.bank.dao.old.RequestDAO;
 
 public class RegisterCustomerPage extends Page {
     /**

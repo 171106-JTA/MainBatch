@@ -1,6 +1,7 @@
 package daxterix.bank.dao;
 
-import daxterix.bank.model.Admin;
+import daxterix.bank.dao.old.AdminDAO;
+import daxterix.bank.model.old.Admin;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

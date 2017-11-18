@@ -1,10 +1,11 @@
 package daxterix.bank.view;
 
 import daxterix.bank.dao.DAOUtils;
-import daxterix.bank.model.*;
-import daxterix.bank.dao.AdminDAO;
-import daxterix.bank.dao.CustomerDAO;
-import daxterix.bank.dao.RequestDAO;
+import daxterix.bank.dao.old.AdminDAO;
+import daxterix.bank.dao.old.CustomerDAO;
+import daxterix.bank.dao.old.RequestDAO;
+import daxterix.bank.model.old.*;
+
 import static daxterix.bank.view.AdminPage.CommandEvalResult.*;
 
 import java.util.List;
