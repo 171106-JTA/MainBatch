@@ -1,4 +1,4 @@
-package com.revature.util;
+package bowsercastle_model;
 
 import java.io.FileInputStream;
 import java.io.IOException;
