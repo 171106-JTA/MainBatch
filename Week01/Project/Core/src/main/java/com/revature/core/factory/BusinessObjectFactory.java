@@ -1,8 +1,11 @@
 package com.revature.core.factory;
 
+import java.sql.ResultSet;
+
 import com.revature.businessobject.BusinessObject;
 import com.revature.core.BusinessClass;
 import com.revature.core.FieldParams;
+import com.revature.core.Resultset;
 import com.revature.core.factory.builder.AccountBuilder;
 import com.revature.core.factory.builder.BusinessObjectBuilder;
 import com.revature.core.factory.builder.UserBuilder;
@@ -54,6 +57,11 @@ public class BusinessObjectFactory {
 			default:
 				return null;
 		}
+	}
+	
+	
+	public Resultset getResultset(String name, ResultSet res) {
+		return null;
 	}
 	
 }

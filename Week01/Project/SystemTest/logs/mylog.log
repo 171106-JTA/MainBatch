@@ -1076,3 +1076,10 @@
 2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user.ser
 2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\user_info.ser
 2017-11-14 13:46:27 DEBUG BusinessObjectFileIO:149 - removing file:>C:\Users\Luie\Desktop\work\revature\git\Batch\Week01\Project\SystemTest\data\account.ser
+2017-11-17 20:19:56 DEBUG ConnectionUtil:40 - attempting to open connection to database
+2017-11-17 20:19:56 ERROR ConnectionUtil:48 - failed to get connection to database, message:Cannot load connection class because of underlying exception: com.mysql.cj.core.exceptions.WrongArgumentException: Malformed database URL, failed to parse the main URL sections.
+2017-11-17 20:19:56 DEBUG ConnectionUtil:27 - attempting to clsoe stream
+2017-11-17 20:20:22 DEBUG ConnectionUtil:40 - attempting to open connection to database
+2017-11-17 20:20:22 DEBUG ConnectionUtil:45 - opened connection to database
+2017-11-17 20:20:22 DEBUG ConnectionUtil:27 - attempting to clsoe stream
+2017-11-17 20:20:22 DEBUG ConnectionUtil:29 - closed stream

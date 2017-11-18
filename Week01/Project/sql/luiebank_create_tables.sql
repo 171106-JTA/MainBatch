@@ -54,20 +54,12 @@ CREATE TABLE MB_USER_INFO (
     CONSTRAINT fk_user_role_id FOREIGN KEY (role_id) REFERENCES MB_CODE_LIST(id)
 );
 
-CREATE TABLE MB_RATE (
-    id NUMBER,
-    rate NUMBER (3,5) DEFAULT 0,
-    description VARCHAR2(150) NULL,
-    CONSTRAINT pk_rate_id PRIMARY KEY (id),
-    CONSTRAINT check_rate_value CHECK (rate >= 0.0)
-);
-
 CREATE TABLE MB_ACCOUNT (
     account_number VARCHAR2(32),
     user_id NUMBER,
     status_id NUMBER,
     type_id NUMBER,
-    created DATE,
+    created VARCHAR2(32),
     CONSTRAINT pk_account_number PRIMARY KEY (account_number),
     CONSTRAINT fk_account_user_id FOREIGN KEY (user_id) REFERENCES MB_USER(id),
     CONSTRAINT fk_account_status FOREIGN KEY (status_id) REFERENCES MB_CODE_LIST(id),
@@ -88,14 +80,14 @@ CREATE TABLE MB_CREDIT_ACCOUNT(
     minimal_payment_due NUMBER(32,2) DEFAULT 0,
     rate_id NUMBER,
     CONSTRAINT fk_bank_credit_number FOREIGN KEY (account_number) REFERENCES MB_ACCOUNT(account_number),
-    CONSTRAINT fk_credit_rate_id FOREIGN KEY (rate_id) REFERENCES MB_RATE(id)
+    CONSTRAINT fk_credit_rate_id FOREIGN KEY (rate_id) REFERENCES MB_CODE_LIST(id)
 );
 
 CREATE TABLE MB_SAVINGS_ACCOUNT (
     account_number VARCHAR2(32),
     rate_id NUMBER,
     CONSTRAINT fk_bank_savings_number FOREIGN KEY (account_number) REFERENCES MB_ACCOUNT(account_number),
-    CONSTRAINT fk_savings_rate_id FOREIGN KEY (rate_id) REFERENCES MB_RATE(id)
+    CONSTRAINT fk_savings_rate_id FOREIGN KEY (rate_id) REFERENCES MB_CODE_LIST(id)
 );
 
 CREATE TABLE MB_JOINT_ACCOUNT(

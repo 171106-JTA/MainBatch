@@ -18,25 +18,47 @@ END;
 /
 
 /**
+ *  Queries database for id associated with user credentials 
+ *  @param my_username - users username
+ *  @param my_password - users password
+ *  @param user_id - id found for credentials supplied 
+ */
+CREATE OR REPLACE PROCEDURE get_user_id(my_username IN MB_USER.username%TYPE, my_password IN MB_USER.PASSWORD%TYPE, user_id OUT MB_USER.id%TYPE)
+    IS
+BEGIN
+    SELECT id INTO user_id FROM MB_USER WHERE username=my_username AND password=my_password;
+END;
+/
+
+
+/**
  *  Queries database for id associated with supplied arguments 
  *  @param code
  *  @param value
  *  @param desc (optional)
  */
-CREATE OR REPLACE PROCEDURE get_code_list_id(code IN MB_CODE_LIST.code%TYPE, value IN MB_CODE_LIST.value%TYPE, description IN MB_CODE_LIST.description%TYPE,
+CREATE OR REPLACE PROCEDURE get_code_list_id(my_code IN MB_CODE_LIST.code%TYPE, my_value IN MB_CODE_LIST.value%TYPE, my_description IN MB_CODE_LIST.description%TYPE,
     code_list_id OUT MB_CODE_LIST.id%TYPE)
-    IS
+IS
+    CURSOR with_desc IS SELECT l.id FROM MB_CODE_LIST l WHERE l.code=UPPER(my_code) AND l.value = UPPER(my_value) AND l.description = UPPER(my_description);
+    CURSOR without_desc IS SELECT l.id FROM MB_CODE_LIST l WHERE l.code=UPPER(my_code) AND l.value = UPPER(my_value);
     missing_params EXCEPTION;
     PRAGMA EXCEPTION_INIT(missing_params, -20001);
 BEGIN
-    IF code IS NULL OR value IS NULL THEN
+    IF my_code IS NULL OR my_value IS NULL THEN
         RAISE_APPLICATION_ERROR(-20001, 'Missing required parameters<code or value>');
     END IF;
 
-    IF description IS NULL THEN
-        SELECT l.id INTO CODE_LIST_ID FROM MB_CODE_LIST l WHERE l.code=UPPER(code) AND l.value = UPPER(value) AND l.description = UPPER(description) AND rownum = 1;
+    IF my_description IS NULL THEN
+        DBMS_OUTPUT.PUT_LINE('no desc');
+        OPEN without_desc;
+        FETCH without_desc INTO code_list_id;
+        CLOSE without_desc;
     ELSE
-        SELECT l.id INTO CODE_LIST_ID FROM MB_CODE_LIST l WHERE l.code=UPPER(code) AND l.value = UPPER(value) AND rownum = 1;
+        DBMS_OUTPUT.PUT_LINE('desc');
+         OPEN with_desc;
+        FETCH with_desc INTO code_list_id;
+        CLOSE with_desc;
     END IF;
     
     EXCEPTION
@@ -82,6 +104,30 @@ BEGIN
 END;
 /
 
+/**
+ *  Acquires id of specified account status (see MB_CODE_LIST.code='ACCOUNT-STATUS')
+ *  @param status - desired account status
+ *  @param status_id - id of desired status
+ */
+CREATE OR REPLACE PROCEDURE get_account_status_id(status IN MB_CODE_LIST.value%TYPE, status_id OUT MB_CODE_LIST.id%TYPE)
+    IS
+BEGIN
+    get_code_list_id('ACCOUNT-STATUS', status, NULL, status_id);
+END;
+/
+
+/**
+ *  Acquires id of specified account type (see MB_CODE_LIST.code='ACCOUNT-TYPE')
+ *  @param account_type - desired account type
+ *  @param type_id - id of desired type
+ */
+CREATE OR REPLACE PROCEDURE get_account_type_id(account_type IN MB_CODE_LIST.value%TYPE, type_id OUT MB_CODE_LIST.id%TYPE)
+    IS
+BEGIN
+    get_code_list_id('ACCOUNT-TYPE', account_type, NULL, type_id);
+END;
+/
+
 /** 
  *  Creates user account
  *  @param role - user role see where code='USER-ROLE'
@@ -98,12 +144,13 @@ END;
  *  @param state - name of state of where user resides 
  *  @param city - name of city where user resides 
  */
-CREATE OR REPLACE PROCEDURE create_user (role IN MB_CODE_LIST.value%TYPE, status IN MB_CODE_LIST.value%TYPE, username IN MB_USER.USERNAME%TYPE, password IN MB_USER.PASSWORD%TYPE, 
+CREATE OR REPLACE PROCEDURE create_user (role IN MB_CODE_LIST.value%TYPE, status IN MB_CODE_LIST.value%TYPE, my_username IN MB_USER.USERNAME%TYPE, password IN MB_USER.PASSWORD%TYPE, 
                                          ssn IN MB_USER_INFO.ssn%TYPE, first_name IN MB_USER_INFO.first_name%TYPE, last_name IN MB_USER_INFO.last_name%TYPE,
                                          email IN MB_USER_INFO.email%TYPE, phone_number IN MB_USER_INFO.phone_number%TYPE, address_1 IN MB_USER_INFO.address_1%TYPE, 
                                          address_2 IN MB_USER_INFO.address_2%TYPE,  postal_code IN MB_USER_INFO.postal_code%TYPE, state IN MB_CODE_LIST.code%TYPE,
                                          city IN MB_CODE_LIST.code%TYPE)
     IS
+     CURSOR c_user_id IS (SELECT u.id FROM MB_USER u WHERE u.username = my_username);
      user_id NUMBER;
      user_role_id NUMBER;
      user_status_id NUMBER;
@@ -113,10 +160,16 @@ BEGIN
     SAVEPOINT new_user;
    
     -- create user
-    INSERT INTO MB_USER (USERNAME, PASSWORD)VALUES(username,password);
+    INSERT INTO MB_USER (USERNAME, PASSWORD)VALUES(my_username,password);
     
     -- get user data
-    SELECT id INTO user_id FROM  (SELECT u.id FROM MB_USER u WHERE u.username = username AND rownum = 1);
+    OPEN c_user_id;
+    FETCH c_user_id INTO user_id;
+    CLOSE c_user_id;
+    
+    DBMS_OUTPUT.PUT_LINE(my_username);
+    DBMS_OUTPUT.PUT_LINE(user_id);
+    
     get_user_role_id(role, user_role_id);
     get_user_status_id(status, user_status_id);
     get_city_code_group_id(state, city, user_state_city_id);
@@ -147,11 +200,66 @@ BEGIN
 END;
 /
 
-CREATE OR REPLACE PROCEDURE create_account(user_id IN MB_USER.id%TYPE)
+/**
+ *
+ */
+CREATE OR REPLACE PROCEDURE create_account(my_user_id IN MB_USER.id%TYPE, account_status IN MB_CODE_LIST.value%TYPE, account_type IN MB_CODE_LIST.value%TYPE,
+                                rate_level IN MB_CODE_LIST.value%TYPE)
 IS
+    account_id MB_ACCOUNT.account_number%TYPE;
+    creation_date VARCHAR2(32) := get_date(0);
+    pending_id NUMBER;
+    account_type_id NUMBER;
+    rate_id NUMBER;
+    CURSOR c_account_id 
+        IS SELECT account_number 
+            FROM MB_ACCOUNT 
+            WHERE user_id = my_user_id AND 
+                  status_id = pending_id AND 
+                  created = creation_date;
 BEGIN
     SAVEPOINT new_account;
     
+    -- get account meta data 
+    get_account_status_id(account_status, pending_id);
+    get_account_type_id(account_type, account_type_id);
+    
+    -- create new account 
+    INSERT INTO MB_ACCOUNT (USER_ID, STATUS_ID, TYPE_ID, CREATED)
+        VALUES(my_user_id, pending_id, account_type_id, creation_date);
+    
+    -- Get created account id
+    OPEN c_account_id;
+    FETCH c_account_id INTO account_id;
+    CLOSE c_account_id;
+    
+     DBMS_OUTPUT.PUT_LINE(account_type);
+    IF UPPER(account_type) = 'CHECKING' THEN 
+        DBMS_OUTPUT.PUT_LINE(account_id);
+       INSERT INTO MB_BANK_ACCOUNT (ACCOUNT_NUMBER, BALANCE)VALUES(account_id, 0.0);
+    ELSE 
+        IF UPPER(account_type) = 'CREDIT' THEN 
+            IF rate_level IS NULL THEN
+                -- acquire default rate 
+                get_code_list_id('CREDIT-RATE', 'NORMAL', NULL, rate_id);
+            ELSE 
+                get_code_list_id('CREDIT-RATE', rate_level, NULL, rate_id);
+            END IF;
+            
+            INSERT INTO MB_CREDIT_ACCOUNT(ACCOUNT_NUMBER, RATE_ID) VALUES(account_id, rate_id);
+        ELSE 
+            IF UPPER(account_type) = 'SAVINGS' THEN
+                 IF rate_level IS NULL THEN
+                    -- acquire default rate 
+                    get_code_list_id('SAVINGS-RATE', 'NORMAL', NULL, rate_id);
+                 ELSE 
+                    get_code_list_id('SAVINGS-RATE', rate_level, NULL, rate_id);
+                 END IF;
+                 
+                 INSERT INTO MB_SAVINGS_ACCOUNT(ACCOUNT_NUMBER, RATE_ID) VALUES(account_id, rate_id);
+            END IF;
+        END IF;
+    END IF;
     
     
     -- Save changes 
@@ -163,7 +271,7 @@ BEGIN
             DBMS_OUTPUT.PUT_LINE(SQLERRM);
             ROLLBACK TO new_account;
 END;
-
+/
 
 
 
