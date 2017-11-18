@@ -14,4 +14,6 @@ public final class BusinessClass {
 	public static final String USER = "user";
 	public static final String ADMIN = "admin";
 	public static final String CUSTOMER = "customer";
+	public static final String CODELIST = "codelist";
+	public static final String RECEIPT = "receipt";
 }
