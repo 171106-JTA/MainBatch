@@ -9,10 +9,12 @@ import com.revature.core.FieldParams;
 import com.revature.core.factory.BusinessObjectFactory;
 import com.revature.core.factory.FieldParamsFactory;
 import com.revature.persistence.Persistenceable;
+import com.revature.persistence.database.util.WhereClauseBuilder;
 
 public abstract class DatabasePersistence implements Persistenceable {
 	protected static BusinessObjectFactory businessObjectFactory = BusinessObjectFactory.getFactory();
 	protected static FieldParamsFactory fieldParamsFactory = FieldParamsFactory.getFactory();
+	protected static WhereClauseBuilder whereClauseBuilder = WhereClauseBuilder.getBuilder();
 	
 	// Logger
 	protected static Logger logger = Logger.getLogger(DatabasePersistence.class);
@@ -43,9 +45,5 @@ public abstract class DatabasePersistence implements Persistenceable {
 			default:
 				return null;
 		}
-	}
-	
-	protected boolean assemblePreparedStatement(String name, Statement PreparedStatement, FieldParams params) {
-		return false;
 	}
 }

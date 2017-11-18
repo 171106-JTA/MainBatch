@@ -33,8 +33,13 @@ public abstract class DatabaseSelect extends DatabasePersistence {
 			// Set select 
 			statement = conn.prepareStatement(sql);
 			
-			assemblePreparedStatement(name, statement, cnds);
+			// Assemble where clause 
+			whereClauseBuilder.build(name, statement, cnds);
+			
+			// execute query
 			sqlRes = statement.executeQuery();
+			
+			// Convert to BusinessObject Resultset instance 
 			res = businessObjectFactory.getResultset(name, sqlRes);
 		} catch (SQLException e) {
 			e.printStackTrace();
