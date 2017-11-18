@@ -162,15 +162,7 @@ public class Driver {
 			System.out.println("Closing Program");
 			exit = true;
 		} else if (userChoice.equals("42")) { // Testing user creation
-			default_database();
-			// sample_database_1();
-			// sample_database_2();
-
-			// Print database. For coding purposes
-			System.out.println("The Database!!!!: ");
-			for (String key : db.keySet()) {
-				System.out.println(db.get(key));
-			}
+//			default_database();
 		} else {
 			// Add counter and exit after 5 incorrect attempts
 			System.out.println("Not an option");
@@ -179,20 +171,20 @@ public class Driver {
 		return exit;
 	}
 
-	public void default_database() {
-		String firstName = "Evan";
-		String lastName = "West";
-		String middleInitial = "A";
-		String username = "evanwest";
-		String password = "password";
-		int permissions = 1;
-		int status = 1;
-		int accountAmount = 0;
-		User default_user_1 = new User(firstName, lastName, middleInitial, username, password, permissions, status,
-				accountAmount);
-
-		db.put(default_user_1.getUsername(), default_user_1);
-	}
+//	public void default_database() {
+//		String firstName = "Evan";
+//		String lastName = "West";
+//		String middleInitial = "A";
+//		String username = "evanwest";
+//		String password = "password";
+//		int permissions = 1;
+//		int status = 1;
+//		int accountAmount = 0;
+//		User default_user_1 = new User(firstName, lastName, middleInitial, username, password, permissions, status,
+//				accountAmount);
+//
+//		db.put(default_user_1.getUsername(), default_user_1);
+//	}
 
 	/**
 	 * Read serialized HashMap object from file and store in the 'db' member object.
@@ -277,7 +269,7 @@ public class Driver {
 	public boolean loginLogic(String username, String password) {
 		boolean loggedIn = false;
 		
-		User user = dao.getUser(username, password);
+		User user = dao.getUserCheckPassword(username, password);
 //		System.out.println("The User: " + user);
 		
 		if(user != null) {
@@ -539,16 +531,8 @@ public class Driver {
 	 * 						that meet the status and permission requirements
 	 */
 	private List<String> getAListOfUsers(final int status, final int permissions) {
-		// Loop through db and search for users meetings the specified conditions
-		// To Do: Find a better way to do this than O(n)
-		List<String> accountClients = new ArrayList<String>();
-		for (String key : this.db.keySet()) {
-			User user = this.db.get(key);
-			if (user.getPermissions() == permissions && user.getStatus() == status) {
-				accountClients.add(key);
-			}
-		}
-		return accountClients;
+		// Search db for users meeting the specified conditions
+		return dao.getUsersConditionally(status, permissions);
 	}	
 	
 	/**
@@ -561,29 +545,44 @@ public class Driver {
 	 */
 	private void checkAndChangeStatusAndPermissions(String input, final int currentStatus, final int currentPermission, 
 		final int newStatus, final int newPermission) {		
-		User user = this.db.get(input);
-
+		
+		boolean userAltered = dao.alterUserStatusAndPermission(input, currentStatus, 
+				currentPermission, newStatus, newPermission);
+		System.out.println("user altered: " + userAltered);
+		if(userAltered) {
+			System.out.println("Account Changed!");
+			logger.trace("Account Changed!");
+		} else {
+			logger.trace("Either incorrect input or account could not be changed");
+			System.out.println("Either incorrect input or account could not be changed");
+		}
+//		User user = dao.getUser(input);
+//	
+//		System.out.println("My User!!! : " + user);
 		// Check if designated user exists and currently has the desired status and desired permission\
 		// If so, set the user's status and password to the newStatus and newPermissions
 		// Note: nested if-statements allows unique error message based on situation)
-		if (user != null) {
-			if (user.getStatus() == currentStatus && user.getPermissions() == currentPermission) {
-				//Set the new status and permissions and save the changes to the database 
-				user.setStatus(newStatus);
-				user.setPermissions(newPermission);
-				this.db.put(user.getUsername(), user);
-				
-				//Log results
-				System.out.println("Account Changed!");
-				logger.trace("Changing account of user: " + user.getUsername());
-			} else { //Account cannot be locked (either because Admin, already locked, or currently not approved)
-				logger.trace("Account: " + user.getUsername() + " cannot be changed");
-				System.out.println("Account: " + user.getUsername() + " cannot be changed");
-			}
-		} else { //Account does not exist 
-			logger.trace("Account: " + input + " is not in the database");
-			System.out.println("User is not in the database");
-		}
+		
+//		if (user != null) {
+//			if (user.getStatus() == currentStatus && user.getPermissions() == currentPermission) {
+//				//Set the new status and permissions and save the changes to the database 
+//				user.setStatus(newStatus);
+//				user.setPermissions(newPermission);
+//				
+//				boolean userAltered = dao.alterUser(user);
+//				System.out.println("User Altered? " + userAltered);
+//				
+//				//Log results
+//				System.out.println("Account Changed!");
+//				logger.trace("Changing account of user: " + user.getUsername());
+//			} else { //Account cannot be locked (either because Admin, already locked, or currently not approved)
+//				logger.trace("Account: " + user.getUsername() + " cannot be changed");
+//				System.out.println("Account: " + user.getUsername() + " cannot be changed");
+//			}
+//		} else { //Account does not exist 
+//			logger.trace("Account: " + input + " is not in the database");
+//			System.out.println("User is not in the database");
+//		}
 	}
 
 	////////////////////////////////////////////////////////

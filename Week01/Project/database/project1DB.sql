@@ -21,6 +21,10 @@ INSERT INTO A_USER
 VALUES('C', 'C', 'C','C','C',0,1,0);
 INSERT INTO A_USER 
 VALUES('D', 'D', 'D','D','D',0,2,0);
+INSERT INTO A_USER 
+VALUES('E', 'E', 'E','E','E',0,0,0);
+INSERT INTO A_USER 
+VALUES('G', 'G', 'G','G','G',0,0,0);
 
 SELECT * FROM A_USER;
 
@@ -42,15 +46,42 @@ BEGIN
 END;
 /
 
+CREATE OR REPLACE PROCEDURE alter_user(
+    cur_username IN VARCHAR2,
+    cur_status IN NUMBER,
+    cur_permission IN NUMBER,
+    new_status IN NUMBER,
+    new_permission IN NUMBER)
+IS
+BEGIN
+    UPDATE a_user
+    SET STATUS = new_status, PERMISSION=new_permission
+    WHERE USERNAME=cur_username AND STATUS=cur_status AND PERMISSION=cur_permission; 
+END;
+
 --Testing the insert_user procedure!
 DECLARE
     TMP VARCHAR(5);
 BEGIN
-    TMP := 'C';
-    insert_user(TMP, TMP, TMP, TMP, TMP, 1, 0, 0);
+    TMP := 'Z';
+    insert_user(TMP, TMP, TMP, TMP, TMP, 0, 0, 0);
 END;
 /
-SELECT * FROM A_USER;
+--Testing the alter_user procedure!
+DECLARE
+    CUR_USRNM VARCHAR(50);
+    CUR_STATUS NUMBER;
+    CUR_PERMISSION NUMBER;
+    NEW_STATUS NUMBER;
+    NEW_PERMISSION NUMBER;
+BEGIN
+    CUR_USRNM := 'E';
+    CUR_STATUS := '0';
+    CUR_PERMISSION := '0';
+    NEW_STATUS := '2';
+    NEW_PERMISSION := '1';
+    alter_user(CUR_USRNM, CUR_STATUS, CUR_PERMISSION, NEW_STATUS, NEW_PERMISSION);
+END;
+/
 
-SELECT * FROM A_USER
-WHERE USERNAME = 'Y'; 
+SELECT * FROM A_USER;
