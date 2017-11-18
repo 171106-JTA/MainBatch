@@ -61,7 +61,7 @@ public class User implements Serializable {
 	 * @param name 		username for new account
 	 * @param password 	password for new account
 	 */
-	User(String firstName, String lastName, String middleInitial, String username, String password) {
+	public User(String firstName, String lastName, String middleInitial, String username, String password) {
 		this.firstName = firstName; 
 		this.lastName = lastName;
 		this.middleInitial = middleInitial;
@@ -72,8 +72,8 @@ public class User implements Serializable {
 		this.accountAmount = 0; //Initialize new account amounts to 0
 	}
 	
-	User(String firstName, String lastName, String middleInitial, String username, String password, 
-			int permissions, int status, int accountAmount) {
+	public User(String firstName, String lastName, String middleInitial, String username, String password, 
+			int permissions, int status, double accountAmount) {
 		this.firstName = firstName; 
 		this.lastName = lastName;
 		this.middleInitial = middleInitial;

@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.rmi.server.SocketSecurityException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -29,7 +30,8 @@ public class Driver {
 	private static final String databaseFile = "database.txt"; // File containing database
 	private HashMap<String, User> db;
 	private User currentUser;
-
+	protected UserDaoImplement dao; 
+	
 	final static Logger logger = Logger.getLogger(Driver.class);
 
 	// Status values for user accounts
@@ -66,10 +68,10 @@ public class Driver {
 		mp.db = new HashMap<String, User>();
 		
 		//Basic database insert!!!!
-		UserDaoImplement dao = new UserDaoImplement();
-		String tmp = "z";
-		dao.createUser(new User(tmp, tmp, tmp, tmp, tmp, 0, 0, 0));
-		
+		mp.dao = new UserDaoImplement();
+//		String tmp = "y";
+//		mp.dao.createUser(new User(tmp, tmp, tmp, tmp, tmp, 0, 0, 0));
+//		
 		
 		boolean exit = false;
 		
@@ -274,25 +276,40 @@ public class Driver {
 
 	public boolean loginLogic(String username, String password) {
 		boolean loggedIn = false;
+		
+		User user = dao.checkIfUserExists(username, password);
+//		System.out.println("The User: " + user);
+		
+		if(user != null) {
+			this.currentUser = user;
 
-		if (this.db.containsKey(username)) {
-			if (password.equals(this.db.get(username).getPassword())) {
-				// Fetch the current user's information from the database
-				this.currentUser = new User(this.db.get(username));
-
-				// Signal that the user is logged in
-				// Note: Do this, even though a user with status = 0 or 2 is not technically
-				// logged in
-				// This case is handled in the controlLogic() function
-				loggedIn = true;
-			} else {
-				logger.trace("incorrect password");
-				System.out.println("Incorrect password");
-			}
+			// Signal that the user is logged in
+			// Note: Do this, even though a user with status = 0 or 2 is not technically
+			// logged in. These cases are handled in the controlLogic() function
+			loggedIn = true;
 		} else {
-			logger.trace("No user by the given id");
-			System.out.println("No user by that name\n\n");
+			logger.trace("Incorrect Username or Password");
+			System.out.println("Incorrect Username or Password");
 		}
+		
+//		if (this.db.containsKey(username)) {
+//			if (password.equals(this.db.get(username).getPassword())) {
+//				// Fetch the current user's information from the database
+//				this.currentUser = new User(this.db.get(username));
+//
+//				// Signal that the user is logged in
+//				// Note: Do this, even though a user with status = 0 or 2 is not technically
+//				// logged in
+//				// This case is handled in the controlLogic() function
+//				loggedIn = true;
+//			} else {
+//				logger.trace("incorrect password");
+//				System.out.println("Incorrect password");
+//			}
+//		} else {
+//			logger.trace("No user by the given id");
+//			System.out.println("No user by that name\n\n");
+//		}
 
 		return loggedIn;
 	}

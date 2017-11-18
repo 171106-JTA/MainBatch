@@ -1,27 +1,28 @@
 DROP TABLE A_USER;
+--Create the Tables for the application
 CREATE TABLE A_USER(
     USERNAME VARCHAR2(100),
     FIRSTNAME VARCHAR2(100),
     LASTNAME VARCHAR2(100),
     MIDDLEINITIAL VARCHAR2(1),
     USER_PASSWORD VARCHAR(100),
-    STATUS NUMBER(1),
     PERMISSION NUMBER(1), 
+    STATUS NUMBER(1),
     ACCOUNTAMOUNT NUMBER(38, 2), 
     CONSTRAINT PK_a_user PRIMARY KEY(USERNAME)
 );
 /
 --Sample users, if needed
---INSERT INTO A_USER 
---VALUES('A', 'A', 'A','A','A',0,0,0);
---INSERT INTO A_USER 
---VALUES('B', 'B', 'B','B','B',0,0,0);
---INSERT INTO A_USER 
---VALUES('C', 'C', 'C','C','C',0,0,0);
---INSERT INTO A_USER 
---VALUES('D', 'D', 'D','D','D',0,0,0);
---
---SELECT * FROM A_USER;
+INSERT INTO A_USER 
+VALUES('A', 'A', 'A','A','A',0,0,0);
+INSERT INTO A_USER 
+VALUES('B', 'B', 'B','B','B',1,1,0);
+INSERT INTO A_USER 
+VALUES('C', 'C', 'C','C','C',0,1,0);
+INSERT INTO A_USER 
+VALUES('D', 'D', 'D','D','D',0,2,0);
+
+SELECT * FROM A_USER;
 
 CREATE OR REPLACE PROCEDURE insert_user(
     new_username IN VARCHAR2, 
@@ -45,8 +46,11 @@ END;
 DECLARE
     TMP VARCHAR(5);
 BEGIN
-    TMP := 'A';
-    insert_user(TMP, TMP, TMP, TMP, TMP, 0, 0, 0);
+    TMP := 'C';
+    insert_user(TMP, TMP, TMP, TMP, TMP, 1, 0, 0);
 END;
 /
 SELECT * FROM A_USER;
+
+SELECT * FROM A_USER
+WHERE USERNAME = 'Y'; 
