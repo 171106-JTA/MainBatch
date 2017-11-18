@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class UserDaoImplement implements UserDao {
 					middleInitial = user.getMiddleInitial(), password = user.getPassword();
 			int status = user.getStatus(), permission = user.getPermissions();
 			double accountAmount = user.getAccountAmount();
-			String sql = "{call insert_user(?,?,?,?,?,?,?,?)";
+			String sql = "{call insert_user(?,?,?,?,?,?,?,?)}";
 
 			// Store data in list and user a loop here
 			cs = conn.prepareCall(sql);
@@ -177,36 +178,44 @@ public class UserDaoImplement implements UserDao {
 		}
 		return username_list;
 	}
+	
+	
+	
 
-	public boolean alterUserStatusAndPermission(String username, final int currentStatus, final int currentPermission, 
+	public boolean alterUserStatusAndPermission(String username, final int currentStatus, final int currentPermission,
 			final int newStatus, final int newPermission) {
-		CallableStatement cs = null;
+		PreparedStatement ps = null;
 		ResultSet rs = null;
+		int linesAffected = -1;
 		boolean userAltered = false;
-
+		System.out.println(username + " " + currentStatus + " " + currentPermission + " " +
+			newStatus + " " + newPermission);
 		try (Connection conn = ConnectionUtil.getConnection()) {
-			String sql = "{call alter_user(?,?,?,?,?)";
-
-			// Store data in list and user a loop here
-			cs = conn.prepareCall(sql);
-			cs.setString(1, username); // Current Username
-			cs.setInt(2, currentStatus); // New Username
-			cs.setInt(3, currentPermission);
-			cs.setInt(4, newStatus);
-			cs.setInt(5, newPermission);
-			rs = cs.executeQuery();
-
-			userAltered = true;
+			String sql = "UPDATE a_user" + 
+					"    SET STATUS = ?, PERMISSION=?" + 
+					"    WHERE USERNAME=? AND STATUS=? AND PERMISSION=? ";
+			ps = conn.prepareStatement(sql);
+			
+			ps.setString(3, username); //Username to Change
+			ps.setInt(4, currentStatus); 
+			ps.setInt(5, currentPermission);
+			ps.setInt(1, newStatus);
+			ps.setInt(2, newPermission);
+			linesAffected = ps.executeUpdate();
+			if(linesAffected == 1) {
+				userAltered = true;
+			} else if (linesAffected > 1){
+				System.out.println("FATEL ERROR: Should never see this from alterUserStatusAndPermission()");
+			}
 		} catch (SQLException e) {
-			System.out.println("alterUserStatusAndPermission Exception");
-			// To Do: This catch statement executes if user was not inserted into the
-			// database.
+			System.out.println("inside exception");
+			// To Do: This catch statement executes if user record was not altered
 			// How to return the stacktrace to Driver to be logged???
 			e.printStackTrace();
 		} finally {
-			if (cs != null) {
+			if (ps != null) {
 				try {
-					cs.close();
+					ps.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -214,4 +223,48 @@ public class UserDaoImplement implements UserDao {
 		}
 		return userAltered;
 	}
+//	public boolean alterUserStatusAndPermission(String username, final int currentStatus, final int currentPermission,
+//			final int newStatus, final int newPermission) {
+//		CallableStatement cs = null;
+//		ResultSet rs = null;
+//		int linesAffected = -1;
+//		boolean userAltered = false;
+//		System.out.println(username + " " + currentStatus + " " + currentPermission + " " +
+//			newStatus + " " + newPermission);
+//		try (Connection conn = ConnectionUtil.getConnection()) {
+//			String sql = "{call alter_user(?,?,?,?,?)";
+//			cs = conn.prepareCall(sql);
+//			
+//			cs.setString(1, username); // Current Username
+//			cs.setLong(2, currentStatus); // New Username
+//			cs.setLong(3, currentPermission);
+//			cs.setLong(4, newStatus);
+//			cs.setLong(5, newPermission);
+//			System.out.println("Before execute");
+//			linesAffected = cs.executeUpdate();
+//			System.out.println("linesAffected: " + linesAffected);
+////			rs = (ResultSet) cs.getObject(1);
+////			boolean temp = (rs.next());
+////			System.out.println("REsult? " + temp);
+////			System.out.println("what is userAltered? " + userAltered);
+////			temp = (rs.first());
+////			if(userAltered) {
+////				userAltered = true;
+////			}
+//		} catch (SQLException e) {
+//			System.out.println("inside exception");
+//			// To Do: This catch statement executes if user record was not altered
+//			// How to return the stacktrace to Driver to be logged???
+//			e.printStackTrace();
+//		} finally {
+//			if (cs != null) {
+//				try {
+//					cs.close();
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		}
+//		return userAltered;
+//	}
 }
