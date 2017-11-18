@@ -5,7 +5,6 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.PriorityQueue;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
@@ -32,9 +31,6 @@ public class BowserCastle {
 
 	/**A separate class used for logging info and for serialization.*/
 	private BowserStorable bowserStorage;
-
-	/**This class will handle transactions.*/
-	private Vault vault;
 
 	/**Different UI holding available menus depending on the user.*/
 	private UI ui;
@@ -112,7 +108,7 @@ public class BowserCastle {
 
 		/*===============User has logged in successfully and can make decisions================*/
 		System.out.println("\n===================================\nWelcome " +
-				user.getName() + "(" + user.getRole() + ") " + 
+				user.getName() + " ID(" + user.getId() + ")" + "(" + user.getRole() + ") " + 
 				"You currently have " + user.getCoins() + " coins and you are level " + user.getLevel() + ".");
 		boolean loggedIn = true;
 		String choice;
@@ -206,6 +202,11 @@ public class BowserCastle {
 	 * @param member applying
 	 */
 	private void applyForLoan(User member) {
+		if (bowserStorage.getLoans().containsKey(member.getId()) ||
+				bowserStorage.getLoansWaiting().containsKey(member.getId())) {
+			System.out.println("You already have a loan on file.");
+			return;
+		}
 		System.out.println("=================================" +
 				"\nHow many coins would you like to borrow? Or hit 'X' to cancel.");
 		boolean amountAccepted = false;
@@ -227,7 +228,7 @@ public class BowserCastle {
 			}
 		} while (!amountAccepted);
 
-		vault.applyForLoan(member, loan);
+		bowserStorage.applyForLoan(member, loan);
 		System.out.println("Thank you for your application for a loan of " + loan + ". We will get back to you shortly.");
 	}
 
@@ -278,16 +279,17 @@ public class BowserCastle {
 	 * Admin can see all loans 
 	 */
 	private void viewApproveDenyLoans(User user) { 
-		final Map<String,Integer> loansWaiting = vault.getLoansWaiting(); //grab the loans waiting to be approved
-		final Map<String,Integer> loansApproved = vault.getLoans(); //grab the loans that are already approved
+		final Map<Integer,Integer> loansWaiting = bowserStorage.getLoansWaiting(); //grab the loans waiting to be approved
+		final Map<Integer,Integer> loansApproved = bowserStorage.getLoans(); //grab the loans that are already approved
 
-		final Set<String> keysOfWaitingLoans = loansWaiting.keySet();
-		final Set<String> keysOfLoans = loansApproved.keySet();
+		final Set<Integer> keysOfWaitingLoans = loansWaiting.keySet();
+		final Set<Integer> keysOfLoans = loansApproved.keySet();
 
 		//print all loans already approved
-		System.out.println("=========================\nApproved loans:");
-		for (String name : keysOfLoans) 
-			System.out.println(name + " " + loansApproved.get(name)); //print name and amount borrowed
+		System.out.println("=========================\nApproved loans:" +
+				"\nID  Name   Amount");
+		for (Integer id : keysOfLoans) 
+			System.out.println("(" + id + ") " + grabUserByID(id).getName() + " " + loansApproved.get(id)); //print name and amount borrowed
 
 		if (keysOfWaitingLoans.isEmpty()) { //exit if there are no loans to be approved
 			System.out.println("There are no loans to be approved.");
@@ -296,25 +298,32 @@ public class BowserCastle {
 
 		/*=========User selects user of loan to approve or deny.===========*/
 		User userSelected = null;
+		boolean doneSelectingUser = false;
 		do {
 			System.out.println("===========================\n"
-					+ "Loans to be approved: Select a user to approve or deny. Or hit 'X' to cancel.");
-			for (String name : keysOfWaitingLoans) 
-				System.out.println(name + " " + loansWaiting.get(name)); //print the user applying and amount
+					+ "Loans to be approved: Select a user_id to approve or deny. Or hit 'X' to cancel." +
+					"\nID  Name   Amount");
+			for (Integer id : keysOfWaitingLoans) 
+				System.out.println("(" + id + ") " + grabUserByID(id).getName() + " " + loansWaiting.get(id)); //print the user applying and amount
 
 			final String input = scanner.nextLine().toUpperCase(); //grab the input of the user
 
 			if (input.toUpperCase().equals("X")) //cancel
 				return;
 
-			userSelected = grabUser(input); //grab the user applying for the loan
-
+			try {
+				userSelected = grabUserByID(Integer.valueOf(input)); //grab the user applying for the loan
+			} catch(NumberFormatException e) {
+				System.out.println("Please enter an id.");
+			}
 			if (userSelected == null) { //there is no user with the name inputted
 				System.out.println("Select a user from the list or hit 'X' to cancel.");
 			} else if (userSelected == user) {
 				System.out.println("You cannot approve your own loan.");
+			} else {
+				doneSelectingUser = true;
 			}
-		} while (userSelected == null || userSelected == user);
+		} while (!doneSelectingUser);
 
 		/*==============Admin then approves or denies the loan==============*/
 		boolean answerPicked = false;
@@ -325,14 +334,23 @@ public class BowserCastle {
 			String input = scanner.nextLine().toUpperCase();
 
 			if (input.equals("A"))
-				vault.acceptLoan(userSelected); //accept the user's loan
+				bowserStorage.acceptLoan(userSelected); //accept the user's loan
 			else if (input.equals("D")) {
 				System.out.println(userSelected.getName() + "'s loan of " + loansWaiting.get(userSelected) + " has been denied.");
-				vault.denyLoan(userSelected); //deny the loan
+				bowserStorage.denyLoan(userSelected); //deny the loan
 			} else 
 				answerPicked = false;
 
 		} while(!answerPicked);
+	}
+
+	private User grabUserByID(int input) {
+		for (User user : bowserStorage.getUsers()) {
+			if (user.getId() == input) {
+				return user;
+			}
+		}		
+		return null; //no user exists with name
 	}
 
 	/**
@@ -380,7 +398,7 @@ public class BowserCastle {
 	 * @param user that is depositing
 	 */
 	private void depositCoins(User user) {
-		final Map<String, Integer> loan = vault.getLoans();
+		final Map<Integer, Integer> loan = bowserStorage.getLoans();
 
 		boolean payLoan = false;
 		if (loan.containsKey(user)) { //if the user has a loan on file
@@ -409,16 +427,16 @@ public class BowserCastle {
 
 			Transaction message = null;
 			if (payLoan) {
-				message = vault.payLoan(user, deposit);
+				message = bowserStorage.payLoan(user, deposit);
 			} else {
-				message = vault.depositCoins(user, deposit);
+				message = bowserStorage.depositCoins(user, deposit);
 			}
 
 			if (message == Transaction.FAIL) 
 				System.out.println("You must deposit an amount of at least zero. Or hit 'X' to cancel.");
 			else {
 				depositComplete = true;
-
+				bowserStorage.updateCoins(user); //update DB
 				System.out.println("You have submitted " + deposit +  " and now have a total of " +
 						user.getCoins() + " coins");
 				bowserStorage.log(user.getName() + " has deposited " + deposit + " coins");
@@ -431,8 +449,9 @@ public class BowserCastle {
 	 * @param user that is going to work
 	 */
 	private void levelUp(final User user) {
-		vault.levelUp(user);
+		bowserStorage.levelUp(user);
 		System.out.println("You are now level " + user.getLevel() + "!");
+		bowserStorage.updateLevel(user); //update DB
 	}
 
 	/**
@@ -453,7 +472,7 @@ public class BowserCastle {
 				continue;
 			}
 
-			final Transaction message = vault.withdrawCoins(user, withdrawCoins); //attempt to withdraw the funds
+			final Transaction message = bowserStorage.withdrawCoins(user, withdrawCoins); //attempt to withdraw the funds
 			if (message == Transaction.FAIL) {
 				System.out.println("You do not have that many coins, enter an amount up to " + user.getCoins());
 				bowserStorage.log(user.getName() + " attempted to withdraw " + withdrawCoins + " when they only had " + 
@@ -543,6 +562,7 @@ public class BowserCastle {
 
 		/*===========Promote the account=============*/
 		userSelected.setRole(Role.ADMIN);
+		bowserStorage.updateRole(userSelected); //update DB
 		System.out.println(userSelected.getName() + " is now an admin of Bowser's Castle.");
 		bowserStorage.log(userSelected.getName() + " has been promoted to an admin");
 		System.out.println("=====================================");		
@@ -584,7 +604,7 @@ public class BowserCastle {
 		userSelected.setRole(Role.MEMBER);
 		System.out.println(userSelected.getName() + " is now a verified member of Bowser's Castle.");
 		bowserStorage.log(userSelected.getName() + " has been verified and is now a member"); //log that the user has been verified
-
+		bowserStorage.updateRole(userSelected);
 		System.out.println("=====================================");		
 	}
 
@@ -681,16 +701,10 @@ public class BowserCastle {
 		if (attack < chance.doubleValue()) {  //user won
 			System.out.println("You have defeated bowser and are now king!");
 			bowserStorage.log(user.getName() + " has killed king " + getKing() + " and is now King.");
-			bowserStorage.getUsers().poll(); //remove bowser
+			bowserStorage.deleteUser(getKing());
 			user.setRole(Role.KING);
 		} else { //delete the user from the PriorityQueue
-			PriorityQueue<User> temp = new PriorityQueue<User>(new UserComparator());
-			for (User tempUser : bowserStorage.getUsers()) //add all members to our temp data structure except the dead user
-				if (tempUser != user) 
-					temp.add(tempUser);
-
-			bowserStorage.getUsers().clear();
-			bowserStorage.getUsers().addAll(temp);
+			bowserStorage.deleteUser(user);
 			System.out.println("You are dead and your account has been deleted.");
 			bowserStorage.log(user.getName() + " died to bowser");
 		}
@@ -736,9 +750,11 @@ public class BowserCastle {
 				finished = true;
 				userSelected.setRole(Role.MEMBER);
 				System.out.println(userSelected.getName() + "'s account has now been unlocked.");
+				bowserStorage.updateRole(userSelected);
 			} else if (userSelected.getRole() == Role.MEMBER){
 				finished = true;
 				userSelected.setRole(Role.LOCKED);
+				bowserStorage.updateRole(userSelected);
 				System.out.println(userSelected.getName() + "'s account has now been locked.");
 			} else {
 				System.out.println("Please enter a name from the list provided.");
