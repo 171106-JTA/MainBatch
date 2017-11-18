@@ -1,10 +1,5 @@
 package daxterix.bank.dao;
 
-import daxterix.bank.dao.old.RequestDAO;
-import daxterix.bank.model.old.CreationRequest;
-import daxterix.bank.model.old.Customer;
-import daxterix.bank.model.old.PromotionRequest;
-import daxterix.bank.model.old.UserRequest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +9,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class SerialIDObjectDAOTest {
+    /*
     static final String requestSaveDir = (new File(System.getProperty("user.home"),"Desktop\\testUserInfo\\request")).getAbsolutePath();
 
     RequestDAO requestDao;
@@ -129,5 +125,5 @@ public class SerialIDObjectDAOTest {
         assertEquals(1, fetched.size());
         assertEquals(fetched.get(0), notDeleted);
     }
-
+    */
 }

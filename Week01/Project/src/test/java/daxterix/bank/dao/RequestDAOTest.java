@@ -7,11 +7,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class RequestDAOTest {
-    UserDAO dao;
+    RequestDAO dao;
 
     @Before
     public void setUp() throws Exception {
-        dao = DAOUtils.getUserDao();
+        dao = DAOUtils.getTestRequestDao();
     }
 
     @After
@@ -22,7 +22,7 @@ public class RequestDAOTest {
 
     @Test
     public void selectNonExistent() throws Exception {
-        assertNull(dao.select("nonexistent"));
+        assertNull(dao.select(0));  // id sequences start from 1
     }
 
     @Test

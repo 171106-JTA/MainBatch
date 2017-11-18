@@ -1,7 +1,7 @@
 package daxterix.bank;
 
-import daxterix.bank.view.Page;
-import daxterix.bank.view.WelcomePage;
+import daxterix.bank.view.page.Page;
+import daxterix.bank.view.page.WelcomePage;
 
 public class App {
 

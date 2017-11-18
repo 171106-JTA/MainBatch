@@ -1,8 +1,7 @@
-package daxterix.bank.view;
+package daxterix.bank.view.page;
 
-import daxterix.bank.model.old.Admin;
-import daxterix.bank.dao.old.AdminDAO;
 import daxterix.bank.dao.DAOUtils;
+import daxterix.bank.view.InputUtils;
 
 public class LoginAdminPage extends Page {
 
@@ -14,6 +13,7 @@ public class LoginAdminPage extends Page {
      */
     @Override
     public Page _run() {
+        /*
         Admin admin;
 
         while(true) {
@@ -32,6 +32,8 @@ public class LoginAdminPage extends Page {
             if (checkQuit())
                 return new WelcomePage();
         }
+        */
+        return null;
     }
 
     /**

@@ -1,8 +1,7 @@
-package daxterix.bank.view;
+package daxterix.bank.view.page;
 
-import daxterix.bank.model.old.Customer;
-import daxterix.bank.dao.old.CustomerDAO;
 import daxterix.bank.dao.DAOUtils;
+import daxterix.bank.view.InputUtils;
 
 public class LoginCustomerPage extends Page{
     /**
@@ -11,12 +10,13 @@ public class LoginCustomerPage extends Page{
      */
     @Override
     public Page _run() {
-        Customer customer;
+        // Customer customer;
 
         while(true) {
             String username = InputUtils.readLine("username");
             String password = InputUtils.readMasked("password");
 
+            /*
             CustomerDAO dao = DAOUtils.getUnlockedCustomerDao();
             customer = dao.readById(username);
             if (customer == null)
@@ -28,6 +28,7 @@ public class LoginCustomerPage extends Page{
 
             if (checkQuit())
                 return new WelcomePage();
+            */
         }
     }
 

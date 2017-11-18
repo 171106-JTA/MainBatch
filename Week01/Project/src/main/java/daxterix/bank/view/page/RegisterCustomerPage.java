@@ -1,9 +1,7 @@
-package daxterix.bank.view;
+package daxterix.bank.view.page;
 
 import daxterix.bank.dao.DAOUtils;
-import daxterix.bank.model.old.CreationRequest;
-import daxterix.bank.model.old.Customer;
-import daxterix.bank.dao.old.RequestDAO;
+import daxterix.bank.view.InputUtils;
 
 public class RegisterCustomerPage extends Page {
     /**
@@ -17,11 +15,13 @@ public class RegisterCustomerPage extends Page {
         String password = InputUtils.readAndConfirm(()-> InputUtils.readMasked("password"));
         System.out.printf("user %s created\n", username);
 
+        /*
         RequestDAO dao = DAOUtils.getRequestDao();
         if  (dao.save(new CreationRequest(new Customer(username, password))))
             System.out.println("Success!");
         else
             System.out.println("Error: request creation failed. Please try again later.");
+        */
 
         return new WelcomePage();
     }

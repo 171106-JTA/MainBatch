@@ -1,5 +1,7 @@
 package daxterix.bank.view;
 
+import daxterix.bank.view.page.Page;
+
 import static daxterix.bank.view.OutputUtils.AnsiColor.ANSI_RESET;
 
 public class OutputUtils {

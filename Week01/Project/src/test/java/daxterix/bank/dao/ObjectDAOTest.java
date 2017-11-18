@@ -1,7 +1,5 @@
 package daxterix.bank.dao;
 
-import daxterix.bank.dao.old.AdminDAO;
-import daxterix.bank.model.old.Admin;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,6 +13,7 @@ import static org.junit.Assert.*;
 
 public class ObjectDAOTest {
 
+    /*
     static final String adminSaveDir = (new File(System.getProperty("user.home"),"Desktop\\testUserInfo\\admin")).getAbsolutePath();
 
     AdminDAO adminDao;
@@ -158,4 +157,5 @@ public class ObjectDAOTest {
         List<Admin> fetchedAgain = adminDao.readAll();
         assertMatchingContents(ref, fetchedAgain);
     }
+    */
 }

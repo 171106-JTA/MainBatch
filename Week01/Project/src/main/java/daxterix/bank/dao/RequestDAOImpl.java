@@ -7,12 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RequestDAOImpl implements RequestDAO {
+    private ConnectionManager connectionManager;
+
+    public RequestDAOImpl(ConnectionManager connectionManager) {
+        this.connectionManager = connectionManager;
+    }
+
     @Override
-    public UserRequest select(long id) {
+    public UserRequest select(long id) throws SQLException {
         ResultSet queryRes = null;
         PreparedStatement stmt = null;
 
-        try (Connection conn = DbUtils.getConnection()) {
+        try (Connection conn = connectionManager.getConnection()) {
             String sql = "SELECT * FROM request WHERE requestid = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setLong(1, id);
@@ -20,22 +26,19 @@ public class RequestDAOImpl implements RequestDAO {
             if (queryRes.next())
                 return readFromRow(queryRes);
         }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
         finally {
-            DbUtils.close(stmt);
-            DbUtils.close(queryRes);
+            Closer.close(stmt);
+            Closer.close(queryRes);
         }
         return null;
     }
 
     @Override
-    public List<UserRequest> selectForUser(String email) {
+    public List<UserRequest> selectForUser(String email) throws SQLException {
         ResultSet queryRes = null;
         PreparedStatement stmt = null;
 
-        try (Connection conn = DbUtils.getConnection()) {
+        try (Connection conn = connectionManager.getConnection()) {
             String sql = "SELECT * FROM request WHERE fileremail = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, email);
@@ -46,22 +49,18 @@ public class RequestDAOImpl implements RequestDAO {
                 requests.add(readFromRow(queryRes));
             return requests;
         }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
         finally {
-            DbUtils.close(stmt);
-            DbUtils.close(queryRes);
+            Closer.close(stmt);
+            Closer.close(queryRes);
         }
-        return null;
     }
 
     @Override
-    public List<UserRequest> selectAll() {
+    public List<UserRequest> selectAll() throws SQLException {
         ResultSet queryRes = null;
         Statement stmt = null;
 
-        try (Connection conn = DbUtils.getConnection()) {
+        try (Connection conn = connectionManager.getConnection()) {
             String sql = "SELECT * FROM request";
             stmt = conn.createStatement();
             queryRes = stmt.executeQuery(sql);
@@ -71,21 +70,17 @@ public class RequestDAOImpl implements RequestDAO {
                 requests.add(readFromRow(queryRes));
             return requests;
         }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
         finally {
-            DbUtils.close(stmt);
-            DbUtils.close(queryRes);
+            Closer.close(stmt);
+            Closer.close(queryRes);
         }
-        return null;
     }
 
     @Override
-    public int save(UserRequest req) {
+    public int save(UserRequest req) throws SQLException {
         PreparedStatement stmt = null;
 
-        try (Connection conn = DbUtils.getConnection()) {
+        try (Connection conn = connectionManager.getConnection()) {
             String sql = "INSERT INTO request (requestid, fileremail, filedate, requesttype) VALUES(?,?,?,?)";
             stmt = conn.prepareStatement(sql);
 
@@ -97,20 +92,16 @@ public class RequestDAOImpl implements RequestDAO {
 
             return stmt.executeUpdate();
         }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
         finally {
-            DbUtils.close(stmt);
+            Closer.close(stmt);
         }
-        return 0;
     }
 
     @Override
-    public int update(UserRequest info) {
+    public int update(UserRequest info) throws SQLException {
         PreparedStatement stmt = null;
 
-        try (Connection conn = DbUtils.getConnection()) {
+        try (Connection conn = connectionManager.getConnection()) {
             String sql = "UPDATE request SET fileremail=?, filedate=?, requesttype=?) WHERE requestid=?";
             stmt = conn.prepareStatement(sql);
 
@@ -122,53 +113,42 @@ public class RequestDAOImpl implements RequestDAO {
 
             return stmt.executeUpdate();
         }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
         finally {
-            DbUtils.close(stmt);
+            Closer.close(stmt);
         }
-        return 0;
     }
 
     @Override
-    public int delete(long id) {
+    public int delete(long id) throws SQLException {
         PreparedStatement stmt = null;
 
-        try (Connection conn = DbUtils.getConnection()) {
+        try (Connection conn = connectionManager.getConnection()) {
             String sql = "DELETE FROM request WHERE requestid=?";
             stmt = conn.prepareStatement(sql);
             stmt.setLong(1, id);
 
             return stmt.executeUpdate();
         }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
         finally {
-            DbUtils.close(stmt);
+            Closer.close(stmt);
         }
-        return 0;
     }
 
     @Override
-    public int deleteForUser(String email) {
+    public int deleteForUser(String email) throws SQLException {
         PreparedStatement stmt = null;
 
-        try (Connection conn = DbUtils.getConnection()) {
+        try (Connection conn = connectionManager.getConnection()) {
             String sql = "DELETE FROM request WHERE fileremail=?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, email);
 
             return stmt.executeUpdate();
         }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
         finally {
-            DbUtils.close(stmt);
+            Closer.close(stmt);
         }
-        return 0;   }
+    }
 
 
     private UserRequest readFromRow(ResultSet rs) throws SQLException {

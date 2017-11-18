@@ -1,27 +1,27 @@
-package daxterix.bank.view;
+package daxterix.bank.view.page;
 
 import daxterix.bank.dao.DAOUtils;
-import daxterix.bank.dao.old.AdminDAO;
-import daxterix.bank.dao.old.CustomerDAO;
-import daxterix.bank.dao.old.RequestDAO;
-import daxterix.bank.model.old.*;
+import daxterix.bank.view.InputUtils;
+import daxterix.bank.view.OutputUtils;
 
-import static daxterix.bank.view.AdminPage.CommandEvalResult.*;
+import static daxterix.bank.view.page.AdminPage.CommandEvalResult.*;
 
 import java.util.List;
 import java.util.Scanner;
 
 public class AdminPage extends Page {
-    private Admin admin;
+    // private Admin admin; TODO
 
     /**
      * interacts with Admin users to mange Customers and their requests
      *
      * @param admin
      */
+    /* TODO
     public AdminPage(Admin admin) {
         this.admin = admin;
     }
+    */
 
     /**
      * Helpful for error handling, denotes the result of an attempt to
@@ -93,6 +93,7 @@ public class AdminPage extends Page {
      * @return
      */
     boolean printPendingRequests() {
+        /*
         RequestDAO dao = DAOUtils.getRequestDao();
         List<UserRequest> requests =  dao.readAll();
         if (requests == null)
@@ -105,6 +106,8 @@ public class AdminPage extends Page {
             System.out.println();
         }
         return true;
+        */
+        return true;   // todo: remove
     }
 
 
@@ -149,6 +152,7 @@ public class AdminPage extends Page {
      * @return
      */
     CommandEvalResult printLockedCustomers() {
+        /*
         CustomerDAO lockedCustomerDAO = DAOUtils.getLockedCustomerDao();
         List<Customer> lockedCustomers = lockedCustomerDAO.readAll();
         if (lockedCustomers == null)
@@ -159,6 +163,8 @@ public class AdminPage extends Page {
             for (Customer c: lockedCustomers)
                 System.out.println(c.getUsername());
         return SUCCESS;
+        */
+        return SUCCESS; // TODO: remove
     }
 
     /**
@@ -167,6 +173,7 @@ public class AdminPage extends Page {
      * @return - returns SUCCESS if everything goes well
      */
     private CommandEvalResult lockAccount(String second) {
+        /*
         CustomerDAO unlockedDao = DAOUtils.getUnlockedCustomerDao();
 
         Customer customer = unlockedDao.readById(second);
@@ -178,6 +185,9 @@ public class AdminPage extends Page {
             return DATABASE_ERROR;
 
         return SUCCESS;
+        */
+
+        return SUCCESS; // todo: remove
     }
 
     /**
@@ -187,6 +197,7 @@ public class AdminPage extends Page {
      * @return
      */
     private CommandEvalResult unlockAccount(String second) {
+        /*
         CustomerDAO lockedDao = DAOUtils.getLockedCustomerDao();
 
         Customer customer = lockedDao.readById(second);
@@ -198,6 +209,8 @@ public class AdminPage extends Page {
             return DATABASE_ERROR;
 
         return SUCCESS;
+        */
+        return SUCCESS; // todo: remove
     }
 
     /**
@@ -211,6 +224,7 @@ public class AdminPage extends Page {
      * @return
      */
     CommandEvalResult approveCreateRequest (String requestId) {
+        /*
         RequestDAO requestDao = DAOUtils.getRequestDao();
         CustomerDAO customerDao = DAOUtils.getUnlockedCustomerDao();
 
@@ -226,6 +240,9 @@ public class AdminPage extends Page {
             return SUCCESS;
         else
             return DATABASE_ERROR;
+        */
+
+        return SUCCESS;  // todo: remove
     }
 
     /**
@@ -239,6 +256,7 @@ public class AdminPage extends Page {
      * @return
      */
     CommandEvalResult approvePromoteRequest (String requestId) {
+        /*
         RequestDAO requestDao = DAOUtils.getRequestDao();
         AdminDAO adminDao = DAOUtils.getAdminDao();
 
@@ -255,6 +273,9 @@ public class AdminPage extends Page {
             return SUCCESS;
         else
             return DATABASE_ERROR;
+        */
+
+        return SUCCESS; // todo: remove
     }
 
     /**
@@ -264,11 +285,14 @@ public class AdminPage extends Page {
      * @return
      */
     CommandEvalResult dropRequest(String requestId) {
+        /*
         RequestDAO requestDao = DAOUtils.getRequestDao();
         if (!requestDao.doesExist(requestId))
             return REQUEST_DNE;
         if (!requestDao.deleteById(requestId))
             return DATABASE_ERROR;
+        return SUCCESS;
+        */
         return SUCCESS;
     }
 

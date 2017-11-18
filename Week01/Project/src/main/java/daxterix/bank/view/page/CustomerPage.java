@@ -1,14 +1,12 @@
-package daxterix.bank.view;
+package daxterix.bank.view.page;
 
-import daxterix.bank.model.old.Customer;
-import daxterix.bank.model.old.PromotionRequest;
-import daxterix.bank.dao.old.CustomerDAO;
 import daxterix.bank.dao.DAOUtils;
-import daxterix.bank.dao.old.RequestDAO;
+import daxterix.bank.view.InputUtils;
+import daxterix.bank.view.OutputUtils;
 
 import java.util.Scanner;
 
-import static daxterix.bank.view.CustomerPage.CommandEvalResult.*;
+import static daxterix.bank.view.page.CustomerPage.CommandEvalResult.*;
 
 public class CustomerPage extends Page {
     /**
@@ -23,7 +21,7 @@ public class CustomerPage extends Page {
         SUCCESS
     }
 
-    private Customer customer;
+    // private Customer customer;   // todo
 
     /**
      * Once logged in allows customer make deposits and withdrawals, as well as transfer
@@ -31,9 +29,11 @@ public class CustomerPage extends Page {
      *
      * @param customer
      */
+    /*
     public CustomerPage(Customer customer) {
         this.customer = customer;
     }
+    */
 
     /**
      * see Page._run()
@@ -92,8 +92,9 @@ public class CustomerPage extends Page {
     /**
      * print the customer's account information; the balance in this case
      */
+
     void printAccountInfo() {
-        System.out.printf("Account Balance: %s\n\n\n", customer.getBalance());
+        // System.out.printf("Account Balance: %s\n\n\n", customer.getBalance()); //TODO
     }
 
     /**
@@ -102,9 +103,12 @@ public class CustomerPage extends Page {
      * @return
      */
     boolean requestPromotion() {
+        /*
         PromotionRequest req = new PromotionRequest(customer);
         RequestDAO dao = DAOUtils.getRequestDao();
         return dao.save(req);
+        */
+        return true;    // todo: remove
     }
 
     /**
@@ -145,6 +149,7 @@ public class CustomerPage extends Page {
      * @return - SUCCESS if deposit is successful
      */
     CommandEvalResult withdraw(double amt) {
+        /*
         if (!customer.withdraw(amt))
             return INSUFFICIENT_FUNDS;
         CustomerDAO customerDao = DAOUtils.getUnlockedCustomerDao();
@@ -152,6 +157,9 @@ public class CustomerPage extends Page {
             return DATABASE_ERROR;
 
         return SUCCESS;
+        */
+
+        return SUCCESS; // todo: remove
     }
 
     /**
@@ -161,6 +169,7 @@ public class CustomerPage extends Page {
      * @return - SUCCESS if deposit is successful
      */
     CommandEvalResult deposit(double amt) {
+        /*
         customer.deposit(amt);
 
         CustomerDAO customerDao = DAOUtils.getUnlockedCustomerDao();
@@ -168,6 +177,8 @@ public class CustomerPage extends Page {
             return DATABASE_ERROR;
 
         return SUCCESS;
+        */
+        return SUCCESS; // todo: remove
     }
 
     /**
@@ -177,6 +188,7 @@ public class CustomerPage extends Page {
      * @return - returns SUCCESS if transfer was completed successfully
      */
     CommandEvalResult transfer(String amtDest) {
+        /*
         Scanner s = new Scanner(amtDest);
 
         String amtStr = s.next();
@@ -206,6 +218,9 @@ public class CustomerPage extends Page {
             return DATABASE_ERROR;
 
         return SUCCESS;
+        */
+
+        return SUCCESS; // todo: remove
     }
 
     /**
@@ -230,6 +245,10 @@ public class CustomerPage extends Page {
      */
     @Override
     public String getTitle() {
+        /*
         return String.format("Welcome %s", customer.getUsername());
+        */
+
+        return "";  // todo: remove
     }
 }

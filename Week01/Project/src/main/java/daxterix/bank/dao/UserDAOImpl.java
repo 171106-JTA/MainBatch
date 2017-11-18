@@ -7,12 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
+
+    private ConnectionManager connectionManager;
+
+    public UserDAOImpl(ConnectionManager connectionManager) {
+        this.connectionManager = connectionManager;
+    }
+
+
     @Override
-    public User select(String email) {
+    public User select(String email) throws SQLException {
         ResultSet queryRes = null;
         PreparedStatement stmt = null;
 
-        try (Connection conn = DbUtils.getConnection()) {
+        try (Connection conn = connectionManager.getConnection()) {
             String sql = "SELECT * FROM bankuser WHERE useremail = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, email);
@@ -20,22 +28,19 @@ public class UserDAOImpl implements UserDAO {
             if (queryRes.next())
                 return readFromRow(queryRes);
         }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
         finally {
-            DbUtils.close(stmt);
-            DbUtils.close(queryRes);
+            Closer.close(stmt);
+            Closer.close(queryRes);
         }
         return null;
     }
 
     @Override
-    public List<User> selectAll() {
+    public List<User> selectAll() throws SQLException {
         ResultSet queryRes = null;
         Statement stmt = null;
 
-        try (Connection conn = DbUtils.getConnection()) {
+        try (Connection conn = connectionManager.getConnection()) {
             String sql = "SELECT * FROM bankuser";
             stmt = conn.createStatement();
             queryRes = stmt.executeQuery(sql);
@@ -45,22 +50,18 @@ public class UserDAOImpl implements UserDAO {
                 users.add(readFromRow(queryRes));
             return users;
         }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
         finally {
-            DbUtils.close(stmt);
-            DbUtils.close(queryRes);
+            Closer.close(stmt);
+            Closer.close(queryRes);
         }
-        return null;
     }
 
     @Override
-    public User selectForAccount(long accountNumber) {
+    public User selectForAccount(long accountNumber) throws SQLException {
         ResultSet queryRes = null;
         PreparedStatement stmt = null;
 
-        try (Connection conn = DbUtils.getConnection()) {
+        try (Connection conn = connectionManager.getConnection()) {
             String sql = "SELECT b.* FROM bankuser usr INNER JOIN bankaccount acc " +
                             "WHERE usr.useremail = acc.useremail AND acc.accountnumber = ?";
             stmt = conn.prepareStatement(sql);
@@ -69,24 +70,20 @@ public class UserDAOImpl implements UserDAO {
 
             if (queryRes.next())
                 return readFromRow(queryRes);
-            return null;
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
         }
         finally {
-            DbUtils.close(stmt);
-            DbUtils.close(queryRes);
+            Closer.close(stmt);
+            Closer.close(queryRes);
         }
         return null;
     }
 
     @Override
-    public User selectForRequest(long requestId) {
+    public User selectForRequest(long requestId) throws SQLException {
         ResultSet queryRes = null;
         PreparedStatement stmt = null;
 
-        try (Connection conn = DbUtils.getConnection()) {
+        try (Connection conn = connectionManager.getConnection()) {
             String sql = "SELECT b.* FROM bankuser usr INNER JOIN request req " +
                             "WHERE usr.useremail = req.fileremail AND req.requestid = ?";
             stmt = conn.prepareStatement(sql);
@@ -95,23 +92,19 @@ public class UserDAOImpl implements UserDAO {
 
             if (queryRes.next())
                 return readFromRow(queryRes);
-            return null;
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
         }
         finally {
-            DbUtils.close(stmt);
-            DbUtils.close(queryRes);
+            Closer.close(stmt);
+            Closer.close(queryRes);
         }
         return null;
     }
 
     @Override
-    public int save(User user) {
+    public int save(User user) throws SQLException {
         PreparedStatement stmt = null;
 
-        try (Connection conn = DbUtils.getConnection()) {
+        try (Connection conn = connectionManager.getConnection()) {
             String sql = "INSERT INTO bankuser(useremail, hashpass, isadmin, islocked) VALUES (?, ?, ?, ?)";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, user.getEmail());
@@ -120,20 +113,16 @@ public class UserDAOImpl implements UserDAO {
             stmt.setInt(4, user.isLocked()? 1 : 0);
             return stmt.executeUpdate();
         }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
         finally {
-            DbUtils.close(stmt);
+            Closer.close(stmt);
         }
-        return 0;
     }
 
     @Override
-    public int updateUser(User info) {
+    public int updateUser(User info) throws SQLException {
         PreparedStatement stmt = null;
 
-        try (Connection conn = DbUtils.getConnection()) {
+        try (Connection conn = connectionManager.getConnection()) {
             String sql = "UPDATE bankuser set hashpass = ?, isadmin = ?, islocked = ? WHERE useremail = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(2, info.getPassword());
@@ -142,13 +131,10 @@ public class UserDAOImpl implements UserDAO {
             stmt.setString(1, info.getEmail());
             return stmt.executeUpdate();
         }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
         finally {
-            DbUtils.close(stmt);
+            Closer.close(stmt);
         }
-        return 0;   }
+    }
 
     @Override
     public int deleteByEmail(String email) {
@@ -156,7 +142,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
 
-    // TODO are isLockd, and isAdmin WHAT THEY ARE SUPPOSED TO BE?
+    // TODO are isLocked, and isAdmin WHAT THEY ARE SUPPOSED TO BE?
     private User readFromRow(ResultSet rs) throws SQLException {
         User u = new User();
         u.setEmail(rs.getString("useremail"));
