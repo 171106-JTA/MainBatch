@@ -19,8 +19,8 @@ CREATE TABLE bankaccount (
     accountnumber NUMBER,
     useremail VARCHAR2(256),
     balance NUMBER,
-    CONSTRAINT fk_account PRIMARY KEY (accountnumber),
-    CONSTRAINT pk_accountuser FOREIGN KEY (useremail) REFERENCES bankuser(useremail)
+    CONSTRAINT pk_account PRIMARY KEY (accountnumber),
+    CONSTRAINT fk_accountuser FOREIGN KEY (useremail) REFERENCES bankuser(useremail) ON DELETE CASCADE
 );
 /
 
@@ -46,7 +46,7 @@ CREATE TABLE request (
     filedate TIMESTAMP,
     requesttype NUMBER(2),
     CONSTRAINT pk_request PRIMARY KEY(requestid),
-    CONSTRAINT fk_requestuser FOREIGN KEY (fileremail) REFERENCES bankuser(useremail)
+    CONSTRAINT fk_requestuser FOREIGN KEY (fileremail) REFERENCES bankuser(useremail) ON DELETE CASCADE
 );
 COMMIT;
 /
@@ -77,7 +77,7 @@ CREATE TABLE userinfo (
     zipcode NUMBER(10),
     phone VARCHAR2(12),
     CONSTRAINT pk_userinfo PRIMARY KEY (useremail),
-    CONSTRAINT fk_userinfouser FOREIGN KEY (useremail) REFERENCES bankuser(useremail)
+    CONSTRAINT fk_userinfouser FOREIGN KEY (useremail) REFERENCES bankuser(useremail) ON DELETE CASCADE
 );
 /
 
@@ -89,7 +89,7 @@ CREATE TABLE usertransaction (
     postbalance NUMBER,
     txtype NUMBER(2),
     CONSTRAINT pk_transaction PRIMARY KEY (txid),
-    CONSTRAINT fk_transactionuser FOREIGN KEY (useremail) REFERENCES bankuser(useremail)
+    CONSTRAINT fk_transactionuser FOREIGN KEY (useremail) REFERENCES bankuser(useremail) ON DELETE CASCADE
 );
 DROP SEQUENCE seq_transaction;
 CREATE SEQUENCE seq_transaction

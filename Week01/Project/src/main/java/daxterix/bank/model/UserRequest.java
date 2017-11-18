@@ -53,6 +53,12 @@ public class UserRequest {
         this.type = type;
     }
 
+    /**
+     * compare two UserRequests, overlook ids if one of them has an id of -1
+     *
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

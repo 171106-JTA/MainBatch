@@ -1,15 +1,14 @@
 package daxterix.bank.model;
 
 public class Account {
-    private long number;
+    private long number = -1;
     private String email;
     private double balance;
 
     public Account() {
     }
 
-    public Account(long number, String email, double balance) {
-        this.number = number;
+    public Account(String email, double balance) {
         this.email = email;
         this.balance = balance;
     }
@@ -38,6 +37,13 @@ public class Account {
         this.balance = balance;
     }
 
+
+    /**
+     * compare two Accounts, overlook ids if one of them has an id of -1
+     *
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -45,7 +51,7 @@ public class Account {
 
         Account account = (Account) o;
 
-        if (number != account.number) return false;
+        if (number != account.number && !(number == -1 || account.number == -1)) return false;
         if (Double.compare(account.balance, balance) != 0) return false;
         return email.equals(account.email);
     }

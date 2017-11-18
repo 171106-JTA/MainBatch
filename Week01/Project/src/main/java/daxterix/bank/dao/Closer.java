@@ -1,6 +1,6 @@
 package daxterix.bank.dao;
 
-public abstract class Closer {
+public class Closer {
     public static void close(AutoCloseable closeable) {
         try {
             if (closeable != null)

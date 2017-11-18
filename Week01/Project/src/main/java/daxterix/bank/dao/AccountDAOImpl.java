@@ -36,18 +36,40 @@ public class AccountDAOImpl implements AccountDAO {
 
     @Override
     public List<Account> selectAll() throws SQLException {
-        List<Account> cards;
+        List<Account> accts;
         Statement stmt = null;
         ResultSet rs = null;
         try(Connection conn = connectionManager.getConnection()) {
-            String sql = "SELECT * FROM flash_cards";
+            String sql = "SELECT * FROM bankaccount";
             stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
 
-            cards = new ArrayList<>();
+            accts = new ArrayList<>();
             while (rs.next())
-                cards.add(readFromRow(rs));
-            return cards;
+                accts.add(readFromRow(rs));
+            return accts;
+        }
+        finally {
+            Closer.close(stmt);
+            Closer.close(rs);
+        }
+    }
+
+    @Override
+    public List<Account> selectForUser(String email) throws SQLException {
+        List<Account> accts;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try(Connection conn = connectionManager.getConnection()) {
+            String sql = "SELECT * FROM bankaccount WHERE useremail = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, email);
+            rs = stmt.executeQuery();
+
+            accts = new ArrayList<>();
+            while (rs.next())
+                accts.add(readFromRow(rs));
+            return accts;
         }
         finally {
             Closer.close(stmt);
