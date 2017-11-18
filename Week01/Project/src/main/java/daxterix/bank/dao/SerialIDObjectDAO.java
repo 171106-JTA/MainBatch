@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public abstract class SerialIDObjectDAO<T extends Serializable> extends ObjectDAO<T> {
     String highestIdPath;
-    static final String saveDirToHighestIdPath = "highestId\\highestId";
+    static final String saveDirToHighestIdPath = "highestId/highestId";
 
     /**
      * This DAO class is for those objects without user-given IDs. It generates

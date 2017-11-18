@@ -3,11 +3,11 @@ package daxterix.bank.dao;
 import java.io.*;
 
 public class DAOUtils {
-    static String appPersistHome = "Desktop\\userInfo";
-    static String unlockedCustomerPath = "Desktop\\userInfo\\customer\\unlocked";
-    static String lockedCustomerPath = "Desktop\\userInfo\\customer\\locked";
-    static String adminPath = "Desktop\\userInfo\\admin";
-    static String requestPath = "Desktop\\userInfo\\request";
+    static String appPersistHome = "Desktop/userInfo";
+    static String unlockedCustomerPath = "Desktop/userInfo/customer/unlocked";
+    static String lockedCustomerPath = "Desktop/userInfo/customer/locked";
+    static String adminPath = "Desktop/userInfo/admin";
+    static String requestPath = "Desktop/userInfo/request";
 
 
     // this static block serves to initialize save file paths which is tied to user.home,
