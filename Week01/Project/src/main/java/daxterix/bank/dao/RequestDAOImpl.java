@@ -1,14 +1,14 @@
 package daxterix.bank.dao;
 
-import daxterix.bank.model.UserRequest2;
+import daxterix.bank.model.UserRequest;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RequestDAOImpl implements RequestDAO2 {
+public class RequestDAOImpl implements RequestDAO {
     @Override
-    public UserRequest2 select(long id) {
+    public UserRequest select(long id) {
         ResultSet queryRes = null;
         PreparedStatement stmt = null;
 
@@ -31,7 +31,7 @@ public class RequestDAOImpl implements RequestDAO2 {
     }
 
     @Override
-    public List<UserRequest2> selectForUser(String email) {
+    public List<UserRequest> selectForUser(String email) {
         ResultSet queryRes = null;
         PreparedStatement stmt = null;
 
@@ -41,7 +41,7 @@ public class RequestDAOImpl implements RequestDAO2 {
             stmt.setString(1, email);
             queryRes = stmt.executeQuery();
 
-            List<UserRequest2> requests = new ArrayList<>();
+            List<UserRequest> requests = new ArrayList<>();
             while (queryRes.next())
                 requests.add(readFromRow(queryRes));
             return requests;
@@ -57,7 +57,7 @@ public class RequestDAOImpl implements RequestDAO2 {
     }
 
     @Override
-    public List<UserRequest2> selectAll() {
+    public List<UserRequest> selectAll() {
         ResultSet queryRes = null;
         Statement stmt = null;
 
@@ -66,7 +66,7 @@ public class RequestDAOImpl implements RequestDAO2 {
             stmt = conn.createStatement();
             queryRes = stmt.executeQuery(sql);
 
-            List<UserRequest2> requests = new ArrayList<>();
+            List<UserRequest> requests = new ArrayList<>();
             while (queryRes.next())
                 requests.add(readFromRow(queryRes));
             return requests;
@@ -82,7 +82,7 @@ public class RequestDAOImpl implements RequestDAO2 {
     }
 
     @Override
-    public int save(UserRequest2 req) {
+    public int save(UserRequest req) {
         PreparedStatement stmt = null;
 
         try (Connection conn = DbUtils.getConnection()) {
@@ -107,7 +107,7 @@ public class RequestDAOImpl implements RequestDAO2 {
     }
 
     @Override
-    public int update(UserRequest2 info) {
+    public int update(UserRequest info) {
         PreparedStatement stmt = null;
 
         try (Connection conn = DbUtils.getConnection()) {
@@ -171,8 +171,8 @@ public class RequestDAOImpl implements RequestDAO2 {
         return 0;   }
 
 
-    private UserRequest2 readFromRow(ResultSet rs) throws SQLException {
-        UserRequest2 req = new UserRequest2();
+    private UserRequest readFromRow(ResultSet rs) throws SQLException {
+        UserRequest req = new UserRequest();
         java.sql.Timestamp timestamp = rs.getTimestamp("filedate");
         req.setFileDate(timestamp.toLocalDateTime());
         req.setFilerEmail(rs.getString("fileremail"));

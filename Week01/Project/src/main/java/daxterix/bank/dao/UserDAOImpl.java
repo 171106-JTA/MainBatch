@@ -1,6 +1,6 @@
 package daxterix.bank.dao;
 
-import daxterix.bank.model.User2;
+import daxterix.bank.model.User;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
     @Override
-    public User2 select(String email) {
+    public User select(String email) {
         ResultSet queryRes = null;
         PreparedStatement stmt = null;
 
@@ -31,7 +31,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public List<User2> selectAll() {
+    public List<User> selectAll() {
         ResultSet queryRes = null;
         Statement stmt = null;
 
@@ -40,7 +40,7 @@ public class UserDAOImpl implements UserDAO {
             stmt = conn.createStatement();
             queryRes = stmt.executeQuery(sql);
 
-            List<User2> users = new ArrayList<>();
+            List<User> users = new ArrayList<>();
             while (queryRes.next())
                 users.add(readFromRow(queryRes));
             return users;
@@ -56,7 +56,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User2 selectForAccount(long accountNumber) {
+    public User selectForAccount(long accountNumber) {
         ResultSet queryRes = null;
         PreparedStatement stmt = null;
 
@@ -82,7 +82,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User2 selectForRequest(long requestId) {
+    public User selectForRequest(long requestId) {
         ResultSet queryRes = null;
         PreparedStatement stmt = null;
 
@@ -108,7 +108,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public int save(User2 user) {
+    public int save(User user) {
         PreparedStatement stmt = null;
 
         try (Connection conn = DbUtils.getConnection()) {
@@ -130,7 +130,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public int updateUser(User2 info) {
+    public int updateUser(User info) {
         PreparedStatement stmt = null;
 
         try (Connection conn = DbUtils.getConnection()) {
@@ -157,8 +157,8 @@ public class UserDAOImpl implements UserDAO {
 
 
     // TODO are isLockd, and isAdmin WHAT THEY ARE SUPPOSED TO BE?
-    private User2 readFromRow(ResultSet rs) throws SQLException {
-        User2 u = new User2();
+    private User readFromRow(ResultSet rs) throws SQLException {
+        User u = new User();
         u.setEmail(rs.getString("useremail"));
         //u.setPassword(rs.getString("password"));
         u.setLocked(rs.getInt("islocked") == 1);

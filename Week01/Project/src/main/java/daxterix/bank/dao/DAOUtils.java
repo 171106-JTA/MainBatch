@@ -10,7 +10,7 @@ public class DAOUtils {
         return new UserDAOImpl();
     }
 
-    public static RequestDAO2 getRequestDao() {
+    public static RequestDAO getRequestDao() {
         return new RequestDAOImpl();
     }
 

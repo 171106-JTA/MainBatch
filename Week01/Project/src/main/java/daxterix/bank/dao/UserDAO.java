@@ -1,22 +1,22 @@
 package daxterix.bank.dao;
 
 
-import daxterix.bank.model.User2;
+import daxterix.bank.model.User;
 
 import java.util.List;
 
 public interface UserDAO {
-    User2 select(String email);
+    User select(String email);
 
-    List<User2> selectAll();
+    List<User> selectAll();
 
-    int save(User2 user);
+    int save(User user);
 
-    int updateUser(User2 info);
+    int updateUser(User info);
 
     int deleteByEmail(String email);
 
-    User2 selectForAccount(long accountNumber);
+    User selectForAccount(long accountNumber);
 
-    User2 selectForRequest(long requestId);
+    User selectForRequest(long requestId);
 }

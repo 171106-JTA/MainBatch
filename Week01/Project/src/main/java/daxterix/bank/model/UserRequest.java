@@ -2,16 +2,16 @@ package daxterix.bank.model;
 
 import java.time.LocalDateTime;
 
-public class UserRequest2 {
+public class UserRequest {
     protected long id;
     protected String filerEmail;
     protected LocalDateTime fileDate;
     protected int type;
 
-    public UserRequest2() {
+    public UserRequest() {
     }
 
-    public UserRequest2(long id, String filerEmail, LocalDateTime fileDate, int type) {
+    public UserRequest(long id, String filerEmail, LocalDateTime fileDate, int type) {
         this.id = id;
         this.filerEmail = filerEmail;
         this.fileDate = fileDate;
@@ -53,9 +53,9 @@ public class UserRequest2 {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof UserRequest2)) return false;
+        if (!(o instanceof UserRequest)) return false;
 
-        UserRequest2 that = (UserRequest2) o;
+        UserRequest that = (UserRequest) o;
 
         if (id != that.id) return false;
         if (type != that.type) return false;
@@ -74,7 +74,7 @@ public class UserRequest2 {
 
     @Override
     public String toString() {
-        return "UserRequest2{" +
+        return "UserRequest{" +
                 "id=" + id +
                 ", filerEmail='" + filerEmail + '\'' +
                 ", fileDate=" + fileDate +

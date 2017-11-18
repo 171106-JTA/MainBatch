@@ -1,13 +1,15 @@
 package bootstrap;
 
-import daxterix.bank.model.old.Admin;
-import daxterix.bank.dao.old.AdminDAO;
+import daxterix.bank.dao.UserDAO;
+import daxterix.bank.model.User;
 import daxterix.bank.dao.DAOUtils;
 
 public class CreateFirstAdmin {
     public static void main(String[] args) {
-        Admin admin = new Admin("admin", "password");
-        AdminDAO dao = DAOUtils.getAdminDao();
-        dao.save(admin);
+        User admin = new User("admin@admin.com", "password");
+        admin.setAdmin(true);
+        admin.setLocked(false);
+        UserDAO userDao = DAOUtils.getUserDao();
+        userDao.save(admin);
     }
 }

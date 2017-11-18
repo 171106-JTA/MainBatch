@@ -1,10 +1,10 @@
 package daxterix.bank.model;
 
-public class User2 {
+public class User {
     protected String email;
     protected String password;
-    protected boolean isAdmin;
-    protected boolean isLocked;
+    protected boolean isAdmin = false;
+    protected boolean isLocked = true;
 
     /**
      * models an account that can log into the application,
@@ -14,12 +14,12 @@ public class User2 {
      * @param email
      * @param password
      */
-    public User2(String email, String password) {
+    public User(String email, String password) {
         this.email = email;
         this.password = password;
     }
 
-    public User2() {}
+    public User() {}
 
     public boolean isAdmin() {
         return isAdmin;
@@ -56,14 +56,14 @@ public class User2 {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof User2)) return false;
+        if (!(o instanceof User)) return false;
 
-        User2 user2 = (User2) o;
+        User user = (User) o;
 
-        if (isAdmin != user2.isAdmin) return false;
-        if (isLocked != user2.isLocked) return false;
-        if (!email.equals(user2.email)) return false;
-        return password.equals(user2.password);
+        if (isAdmin != user.isAdmin) return false;
+        if (isLocked != user.isLocked) return false;
+        if (!email.equals(user.email)) return false;
+        return password.equals(user.password);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class User2 {
 
     @Override
     public String toString() {
-        return "User2{" +
+        return "User{" +
                 "email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", isAdmin=" + isAdmin +
