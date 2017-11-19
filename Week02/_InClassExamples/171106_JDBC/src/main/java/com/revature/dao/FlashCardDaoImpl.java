@@ -120,7 +120,7 @@ public class FlashCardDaoImpl implements FlashCardDao {
 
 		try (Connection conn = ConnectionUtil.getConnection();) {
 			String sql = "SELECT * FROM flash_cards";
-			stm t = conn.prepareStatement(sql);
+			stmt = conn.prepareStatement(sql);
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				FlashCard fc = new FlashCard();
