@@ -85,10 +85,18 @@ public class FieldParamsFactory {
 		FieldParams params = new FieldParams();
 		
 		// Set field param data 
+		params.put(UserInfo.SSN, Long.toString(userInfo.getSsn()));
 		params.put(UserInfo.USERID, Long.toString(userInfo.getUserId()));
 		params.put(UserInfo.EMAIL, userInfo.getEmail());
-		params.put(UserInfo.ADDRESS, userInfo.getAddress());
 		params.put(UserInfo.PHONENUMBER, userInfo.getPhonenumber());
+		params.put(UserInfo.ADDRESS1, userInfo.getAddress1());
+		params.put(UserInfo.ADDRESS2, userInfo.getAddress2());
+		params.put(UserInfo.FIRSTNAME, userInfo.getFirstname());
+		params.put(UserInfo.LASTNAME, userInfo.getLastname());
+		params.put(UserInfo.POSTALCODE, userInfo.getPostalcode());
+		params.put(UserInfo.STATECITYID, Long.toString(userInfo.getStateCityId()));
+		params.put(UserInfo.ROLEID, Long.toString(userInfo.getRoleId()));
+		params.put(UserInfo.STATUSID, Long.toString(userInfo.getStatusId()));
 		
 		return params;
 	}
