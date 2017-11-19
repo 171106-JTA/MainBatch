@@ -63,7 +63,16 @@ public class UserDaoImplement implements UserDao {
 		ResultSet rs = null;
 
 		try (Connection conn = ConnectionUtil.getConnection()) {
-			String sql = "SELECT * FROM A_USER " + "WHERE USERNAME = ? AND USER_PASSWORD = ?";
+			//Long SQL String for accomplishing call
+//			String sql = "SELECT ACCOUNT.USERNAME, ACCOUNT.USER_PASSWORD, ACCOUNT.STATUS, ACCOUNT.PERMISSION," + 
+//					" 1       ACCOUNT.ACCOUNTAMOUNT, USER_INFO.FIRSTNAME, USER_INFO.LASTNAME," + 
+//					"        USER_INFO.MIDDLEINITIAL" + 
+//					"        FROM ACCOUNT JOIN USER_INFO" + 
+//					"        ON ACCOUNT.USERNAME = USER_INFO.USERNAME" + 
+//					"        WHERE ACCOUNT.USERNAME=? AND ACCOUNT.USER_PASSWORD=?";
+			String sql = "SELECT * FROM ACCOUNT NATURAL JOIN USER_INFO" + 
+					"        WHERE USERNAME=? AND USER_PASSWORD=?";
+//			String sql = "SELECT * FROM A_USER " + "WHERE USERNAME = ? AND USER_PASSWORD = ?";
 			ps = conn.prepareStatement(sql);
 
 			ps.setString(1, username);
@@ -78,6 +87,7 @@ public class UserDaoImplement implements UserDao {
 				double accountAmount = rs.getDouble("accountAmount");
 				retUser = new User(usrname, firstname, lastname, middleinitial, passwd, permission, status,
 						accountAmount);
+				System.out.println(retUser);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -106,7 +116,8 @@ public class UserDaoImplement implements UserDao {
 		ResultSet rs = null;
 
 		try (Connection conn = ConnectionUtil.getConnection()) {
-			String sql = "SELECT * FROM A_USER " + "WHERE USERNAME = ?";
+			String sql = "SELECT * FROM ACCOUNT NATURAL JOIN USER_INFO" + 
+					"    WHERE USERNAME = ?";
 			ps = conn.prepareStatement(sql);
 
 			ps.setString(1, username);
@@ -148,7 +159,7 @@ public class UserDaoImplement implements UserDao {
 		ResultSet rs = null;
 
 		try (Connection conn = ConnectionUtil.getConnection()) {
-			String sql = "SELECT USERNAME FROM A_USER " + "WHERE STATUS = ? AND PERMISSION = ?";
+			String sql = "SELECT USERNAME FROM ACCOUNT " + "WHERE STATUS = ? AND PERMISSION = ?";
 			ps = conn.prepareStatement(sql);
 
 			ps.setInt(1, status);
@@ -179,7 +190,43 @@ public class UserDaoImplement implements UserDao {
 		return username_list;
 	}
 	
-	
+	public boolean alterAccountAmount(User user) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int linesAffected = -1;
+		boolean userAltered = false;
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			String sql1 = "UPDATE ACCOUNT" + 
+					"    SET ACCOUNTAMOUNT=?" + 
+					"    WHERE USERNAME=? AND USER_PASSWORD =?";
+			
+			ps = conn.prepareStatement(sql1);
+			ps.setString(2, user.getUsername()); //Username to Change
+			ps.setString(3, user.getPassword()); 
+			ps.setDouble(1, user.getAccountAmount());
+			linesAffected = ps.executeUpdate();
+			
+			if(linesAffected == 1) {
+				userAltered = true;
+			} else if (linesAffected > 1){
+				System.out.println("FATEL ERROR: Should never see this from alterUserStatusAndPermission()");
+			}
+		} catch (SQLException e) {
+			System.out.println("inside exception for alterUser()");
+			// To Do: This catch statement executes if user record was not altered
+			// How to return the stacktrace to Driver to be logged???
+			e.printStackTrace();
+		} finally {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return userAltered;
+	}
 	
 
 	public boolean alterUserStatusAndPermission(String username, final int currentStatus, final int currentPermission,
@@ -188,10 +235,8 @@ public class UserDaoImplement implements UserDao {
 		ResultSet rs = null;
 		int linesAffected = -1;
 		boolean userAltered = false;
-		System.out.println(username + " " + currentStatus + " " + currentPermission + " " +
-			newStatus + " " + newPermission);
 		try (Connection conn = ConnectionUtil.getConnection()) {
-			String sql = "UPDATE a_user" + 
+			String sql = "UPDATE ACCOUNT" + 
 					"    SET STATUS = ?, PERMISSION=?" + 
 					"    WHERE USERNAME=? AND STATUS=? AND PERMISSION=? ";
 			ps = conn.prepareStatement(sql);
@@ -223,6 +268,11 @@ public class UserDaoImplement implements UserDao {
 		}
 		return userAltered;
 	}
+	//////////////////////////////////////////////////////////////////
+	//Same function as above, but trying to call a Stored Procedure. 
+	//Still not sure why this is failing to work. 
+	//I'm keeping this commented out in the code for future use. 
+	//////////////////////////////////////////////////////////////////
 //	public boolean alterUserStatusAndPermission(String username, final int currentStatus, final int currentPermission,
 //			final int newStatus, final int newPermission) {
 //		CallableStatement cs = null;

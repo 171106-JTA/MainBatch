@@ -11,4 +11,5 @@ public interface UserDao {
 	public List<String> getUsersConditionally(final int status, final int permissions);
 	public boolean alterUserStatusAndPermission(String username, final int currentStatus, final int currentPermission, 
 			final int newStatus, final int newPermission);
+	public boolean alterAccountAmount(User user);
 }

@@ -690,8 +690,9 @@ public class Driver {
 	public void setAmount(double amount) {
 		amount += currentUser.getAccountAmount();
 		currentUser.setAccountAmount(amount);
-
-		this.db.put(currentUser.getUsername(), currentUser);
+		
+		dao.alterAccountAmount(currentUser);
+//		this.db.put(currentUser.getUsername(), currentUser);
 	}
 
 	/**
@@ -704,12 +705,12 @@ public class Driver {
 		try {
 			double amount = Double.parseDouble(temp);
 			double curAccount = currentUser.getAccountAmount();
-
 			// Check if the withdraw amount is valid
-			if (curAccount - amount > 0) {
+			if (curAccount - amount >= 0.0) {
 				amount = curAccount - amount;
 				currentUser.setAccountAmount(amount);
-				this.db.put(currentUser.getUsername(), currentUser);
+				dao.alterAccountAmount(currentUser);
+//				this.db.put(currentUser.getUsername(), currentUser);
 			} else {
 				System.out.println("Not enough in your account to withraw $" + amount);
 			}
