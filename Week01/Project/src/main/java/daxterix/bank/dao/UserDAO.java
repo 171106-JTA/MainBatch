@@ -13,7 +13,7 @@ public interface UserDAO {
 
     int save(User user) throws SQLException;
 
-    int updateUser(User info) throws SQLException;
+    int update(User info) throws SQLException;
 
     int delete(String email) throws SQLException;
 

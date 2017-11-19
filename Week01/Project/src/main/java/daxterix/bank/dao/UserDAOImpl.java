@@ -62,8 +62,8 @@ public class UserDAOImpl implements UserDAO {
         PreparedStatement stmt = null;
 
         try (Connection conn = connectionManager.getConnection()) {
-            String sql = "SELECT b.* FROM bankuser usr INNER JOIN bankaccount acc " +
-                            "WHERE usr.useremail = acc.useremail AND acc.accountnumber = ?";
+            String sql = "SELECT usr.* FROM bankuser usr INNER JOIN bankaccount acc " +
+                            "ON usr.useremail = acc.useremail AND acc.accountnumber = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setLong(1, accountNumber);
             queryRes = stmt.executeQuery();
@@ -84,8 +84,8 @@ public class UserDAOImpl implements UserDAO {
         PreparedStatement stmt = null;
 
         try (Connection conn = connectionManager.getConnection()) {
-            String sql = "SELECT b.* FROM bankuser usr INNER JOIN request req " +
-                            "WHERE usr.useremail = req.fileremail AND req.requestid = ?";
+            String sql = "SELECT usr.* FROM bankuser usr INNER JOIN request req " +
+                            "ON usr.useremail = req.fileremail AND req.requestid = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setLong(1, requestId);
             queryRes = stmt.executeQuery();
@@ -119,7 +119,7 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public int updateUser(User info) throws SQLException {
+    public int update(User info) throws SQLException {
         PreparedStatement stmt = null;
 
         try (Connection conn = connectionManager.getConnection()) {
@@ -166,12 +166,10 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
-
-    // TODO are isLocked, and isAdmin WHAT THEY ARE SUPPOSED TO BE?
     private User readFromRow(ResultSet rs) throws SQLException {
         User u = new User();
         u.setEmail(rs.getString("useremail"));
-        //u.setPassword(rs.getString("password"));
+        u.setPassword(rs.getString("passhash"));
         u.setLocked(rs.getInt("islocked") == 1);
         u.setAdmin(rs.getInt("isAdmin") == 1);
         return u;

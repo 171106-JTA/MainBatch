@@ -53,7 +53,7 @@ public class AccountDAOTest {
     }
 
     @Test
-    public void selectAll() throws Exception {
+    public void selectForUser() throws Exception {
         Account ref1 = new Account(testUser.getEmail(), 0);
         dao.save(ref1);
         Account ref2 = new Account(testUser.getEmail(), 0);
