@@ -478,6 +478,7 @@ public class BowserCastle {
 				bowserStorage.log(user.getName() + " attempted to withdraw " + withdrawCoins + " when they only had " + 
 						user.getCoins() + " in their account.");
 			} else {
+				bowserStorage.updateCoins(user);
 				bowserStorage.log(user.getName() + " has withdrawn " + withdrawCoins);
 				System.out.println("You have withdrawn " + withdrawCoins + 
 						" from your account and now have a total of " + user.getCoins());
