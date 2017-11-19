@@ -38,7 +38,7 @@ public class LoginAdminPage extends Page {
             else
                 return new AdminPage(admin);
 
-            if (checkQuit())
+            if (InputUtils.checkQuit())
                 return new WelcomePage();
         }
     }

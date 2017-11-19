@@ -35,7 +35,7 @@ public class LoginCustomerPage extends Page{
             else
                 return new CustomerPage(customer);
 
-            if (checkQuit())
+            if (InputUtils.checkQuit())
                 return new WelcomePage();
         }
     }

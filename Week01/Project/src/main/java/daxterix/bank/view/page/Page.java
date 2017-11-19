@@ -1,6 +1,5 @@
 package daxterix.bank.view.page;
 
-import daxterix.bank.view.InputUtils;
 import daxterix.bank.view.OutputUtils;
 
 public abstract class Page {
@@ -32,23 +31,4 @@ public abstract class Page {
      * @return
      */
     public abstract String getTitle();
-
-
-    /**
-     * obtain user input on whether to quit
-     *
-     * @return - true if user indicates intent to quit; false otherwise
-     */
-    public boolean checkQuit() {
-       String cmd = InputUtils.readLine("'quit' to quit or anything else to try-again");
-       switch(cmd) {
-            case "q":
-                return true;
-            case "quit":
-            case "exit":
-                return true;
-            default:
-                return false;
-       }
-    }
 }

@@ -19,12 +19,12 @@ public class RegisterCustomerPage extends Page {
      */
     @Override
     protected Page _run() {
-        String email = "";
+        String email;
         while(true) {
             email = InputUtils.readNonEmptyLine("email");
             if (userExists(email)) {
                 System.out.println("Email taken. Please choose another email.");
-                if (checkQuit())
+                if (InputUtils.checkQuit())
                     return new WelcomePage();
             }
             else

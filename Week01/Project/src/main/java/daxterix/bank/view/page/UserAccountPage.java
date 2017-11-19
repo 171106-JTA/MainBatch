@@ -1,13 +1,13 @@
 package daxterix.bank.view.page;
 
+import daxterix.bank.dao.AccountDAO;
+import daxterix.bank.dao.DAOUtils;
 import daxterix.bank.model.Account;
 import daxterix.bank.model.User;
 import daxterix.bank.view.InputUtils;
 import daxterix.bank.view.OutputUtils;
 
-import java.util.Scanner;
-
-import static daxterix.bank.view.page.UserAccountPage.CommandEvalResult.*;
+import java.sql.SQLException;
 
 /**
  *
@@ -15,32 +15,22 @@ import static daxterix.bank.view.page.UserAccountPage.CommandEvalResult.*;
  *
  */
 public class UserAccountPage extends Page {
-    User user;
-    Account account;
+    private User user;
+    private Account myAccount;
+    private AccountDAO accountDao = DAOUtils.getAccountDao();
 
-    /**
-     * denotes the result of evaluating a user's command
-     */
-    enum CommandEvalResult {
-        INVALID_SYNTAX,
-        INVALID_AMOUNT,
-        INSUFFICIENT_FUNDS,
-        RECIPIENT_DNE,
-        DATABASE_ERROR,
-        SUCCESS
-    }
 
-    public UserAccountPage(User user, Account account) {
+    public UserAccountPage(User user, Account myAccount) {
         this.user = user;
-        this.account = account;
-        assert(user.getEmail().equals(account.getEmail()));     // todo
+        this.myAccount = myAccount;
+        assert(user.getEmail().equals(myAccount.getEmail()));     // todo
     }
 
     @Override
     protected Page _run() {
 
-        String[] cmds = {"Make a deposit", "Make a withdrawal", "Transfer funds", "View instructions", "back to user home", "Logout"};
-        String[] codes = {"deposit [amount]", "withdraw [amount]", "transfer [amount] [recipient]", "help", "home", "logout"};
+        String[] cmds = {"View balance", "Make a deposit", "Make a withdrawal", "Transfer funds", "View instructions", "back to user home", "Logout"};
+        String[] codes = {"balance", "deposit <amount>", "withdraw <amount>", "transfer <amount> <account#>", "help", "home", "logout"};
         OutputUtils.printCommands(cmds, codes);
 
         while (true) {
@@ -53,62 +43,48 @@ public class UserAccountPage extends Page {
                 case "exit":
                 case "quit":
                     return new WelcomePage();
-
+                case "balance":
+                    printAccountBalance();
+                    break;
+                case "close":
+                    Page nextPage = closeAccount();
+                    if (nextPage != null)
+                        return nextPage;
+                    break;
                 default: {
-                    switch (evalMoneyCommand(cmd)) {
-                        case INVALID_SYNTAX:
-                            System.out.println("Invalid command. Enter 'help' to see possible command and their syntax.");
-                            break;
-                        case INSUFFICIENT_FUNDS:
-                            System.out.println("Insufficient funds.");
-                            break;
-                        case INVALID_AMOUNT:
-                            System.out.println("Invalid amount. Please enter a positive decimal.");
-                            break;
-                        case DATABASE_ERROR:
-                            System.out.println("Something went wrong. Please try again.");
-                            break;
-                        case RECIPIENT_DNE:
-                            System.out.println("Transfer recipient does not exist.");
-                            break;
-                        case SUCCESS:
-                            System.out.println("Success!");
-                            printAccountBalance();
-                            break;
-                    }
+                    evalTxCommand(cmd);
                 }
             }
         }
     }
 
-        /**
-     * parse and evaluate user's commands dealing with customer's funds
+    /**
+     * parse and evaluate user's commands dealing with the Account
      *
      * @param cmd
-     * @return - SUCCESS if command is valid and is successfully executed
      */
-    CommandEvalResult evalMoneyCommand(String cmd) {
-        Scanner s = new Scanner(cmd);
+    void evalTxCommand(String cmd) {
+        String[] chunks = cmd.split("\\s+");
+        if (chunks.length != 2)
+            System.out.println("Invalid command/syntax. Enter 'help' to view available commands and their syntax.");
 
-        if (!s.hasNext())
-            return INVALID_SYNTAX;
-        String first = s.next();
+        String first = chunks[0];
+        String second = chunks[1];
 
-        if (!s.hasNext())
-            return INVALID_SYNTAX;
-        String second = s.nextLine().trim();
-
-        switch(first) {
-            case "withdraw":
-                if (!checkMoneyArgument(second)) return INVALID_AMOUNT;
-                return withdraw(Double.parseDouble(second));
-            case "deposit":
-                if (!checkMoneyArgument(second)) return INVALID_AMOUNT;
-                return deposit(Double.parseDouble(second));
-            case "transfer":
-                return transfer(second);
-            default:
-                return INVALID_SYNTAX;
+        try {
+            switch (first) {
+                case "withdraw":
+                    withdraw(Double.parseDouble(second));
+                case "deposit":
+                    deposit(Double.parseDouble(second));
+                case "transfer":
+                    transfer(second);
+                default:
+                    System.out.println("Invalid command. Enter 'help' to view available commands and their syntax.");
+            }
+        }
+        catch (NumberFormatException e) {
+            System.out.println("Invalid amount. Please enter a positive number.");
         }
     }
 
@@ -116,20 +92,17 @@ public class UserAccountPage extends Page {
      * withdraw given amount from customer's account
      *
      * @param amt
-     * @return - SUCCESS if deposit is successful
      */
-    CommandEvalResult withdraw(double amt) {
-        /*
-        if (!customer.withdraw(amt))
-            return INSUFFICIENT_FUNDS;
-        CustomerDAO customerDao = DAOUtils.getUnlockedCustomerDao();
-        if (!customerDao.update(customer))
-            return DATABASE_ERROR;
-
-        return SUCCESS;
-        */
-
-        return SUCCESS; // todo: remove
+    void withdraw(double amt) {
+        try {
+            myAccount.withdraw(amt);
+            accountDao.update(myAccount);
+            System.out.println("Withdrawal successful.");
+            printAccountBalance();
+        }
+        catch (SQLException e) {
+            System.out.println("[UserAccountPage.deposit] SQL Error while depositing.");
+        }
     }
 
     /**
@@ -138,74 +111,76 @@ public class UserAccountPage extends Page {
      * @param amt
      * @return - SUCCESS if deposit is successful
      */
-    CommandEvalResult deposit(double amt) {
-        /*
-        customer.deposit(amt);
+    void deposit(double amt) {
+        try {
+            myAccount.deposit(amt);
+            accountDao.update(myAccount);
+            System.out.println("Deposit successful.");
+            printAccountBalance();
+        }
+        catch (SQLException e) {
+            System.out.println("[UserAccountPage.deposit] SQL Error while depositing.");
+        }
+    }
 
-        CustomerDAO customerDao = DAOUtils.getUnlockedCustomerDao();
-        if (!customerDao.update(customer))
-            return DATABASE_ERROR;
+     public Page closeAccount() {
+        try {
+            if (!InputUtils.confirmDecision())
+                return null;
 
-        return SUCCESS;
-        */
-        return SUCCESS; // todo: remove
+            if (myAccount.getBalance() > 0) {
+                System.out.println("Cannot close account. Please withdraw or transfer funds away then try again.");
+                return null;
+            }
+            else{
+                accountDao.delete(myAccount.getNumber());
+                System.out.println("Account closed.");
+                return new WelcomePage();
+            }
+        }
+        catch (SQLException e) {
+            System.out.println("[UserAccountPage.closeAccount] SQL Error while closing account.");
+        }
+        return null;
     }
 
     /**
      * Transfer given amount to given user
      *
      * @param amtDest
-     * @return - returns SUCCESS if transfer was completed successfully
      */
-    CommandEvalResult transfer(String amtDest) {
-        /*
-        Scanner s = new Scanner(amtDest);
+    void transfer(String amtDest) {
+        String[] chunks = amtDest.split("\\s+");
+        if (chunks.length != 2)
+            System.out.println("Invalid command/syntax. Enter 'help' to view available commands and their syntax.");
 
-        String amtStr = s.next();
-        if (!s.hasNext())
-            return INVALID_SYNTAX;
-        if (!checkMoneyArgument(amtStr))
-            return INVALID_AMOUNT;
-        double amt = Double.parseDouble(amtStr);
+        String first = chunks[0];
+        String second = chunks[1];
 
-        String destUsername = s.next();
-
-        CustomerDAO customerDao = DAOUtils.getUnlockedCustomerDao();
-        if (!customerDao.doesExist(destUsername))
-            return RECIPIENT_DNE;
-
-        Customer recipient = customerDao.readById(destUsername);
-        if (recipient == null)
-            return DATABASE_ERROR;
-
-        if (!customer.withdraw(amt))
-            return INSUFFICIENT_FUNDS;
-        if (!customerDao.update(customer))
-            return DATABASE_ERROR;
-
-        recipient.deposit(amt);
-        if (!customerDao.update(recipient))
-            return DATABASE_ERROR;
-
-        return SUCCESS;
-        */
-
-        return SUCCESS; // todo: remove
-    }
-
-    /**
-     * checks that the given String is indeed a number, and is > 0
-     *
-     * @param amt
-     * @return
-     */
-    boolean checkMoneyArgument(String amt) {
         try {
-            double amtd = Double.parseDouble(amt);
-            return amtd > 0;
+            double transferAmt = Double.parseDouble(first);
+            long destAccountNum = Long.parseLong(second);
+
+            Account destAcct = accountDao.select(destAccountNum);
+            if (destAcct == null || !destAcct.getEmail().equals(user.getEmail()))
+                System.out.println("You can only transfer funds between your accounts.\n");
+            else if (destAcct.getNumber() == myAccount.getNumber())
+                System.out.println("You are attempting to transfer between the same account account.\n");
+            else if (!myAccount.withdraw(transferAmt))
+                System.out.println("Nice try, but you can't transfer more than you own.\n");
+            else {
+                destAcct.deposit(transferAmt);
+                accountDao.update(destAcct);
+                accountDao.update(myAccount);
+                System.out.println("Transfer successful!");
+                printAccountBalance();
+            }
         }
-        catch (NumberFormatException | NullPointerException e){
-            return false;
+        catch (SQLException e) {
+            System.out.println("[UserAccountPage.transfer] SQL Error while transferring.");
+        }
+        catch (NumberFormatException e) {
+            System.out.println("Invalid transfer command syntax. Destination must be an integer, and amount can be any positive decimal.\n");
         }
     }
 
@@ -214,11 +189,11 @@ public class UserAccountPage extends Page {
      */
 
     void printAccountBalance() {
-        System.out.printf("Account Balance: %s\n\n\n", account.getBalance());
+        System.out.printf("Account Balance: %s\n\n", myAccount.getBalance());
     }
 
     @Override
     public String getTitle() {
-        return String.format("Welcome %s. Interact with your account #%d below", user.getEmail(), account.getNumber());
+        return String.format("Welcome %s. Interact with your account #%d below", user.getEmail(), myAccount.getNumber());
     }
 }

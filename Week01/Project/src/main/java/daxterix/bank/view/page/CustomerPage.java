@@ -39,7 +39,7 @@ public class CustomerPage extends Page {
     @Override
     protected Page _run() {
         String[] cmds = {"View accounts", "Open Account", "Go to account", "Request promotion", "View instructions", "Logout"};
-        String[] codes = {"accounts", "open <deposit amount>", "account <number>", "promote", "help", "logout"};
+        String[] codes = {"accounts", "open <starting amount>", "account <number>", "promote", "help", "logout"};
         OutputUtils.printCommands(cmds, codes);
 
         while (true) {
@@ -48,6 +48,12 @@ public class CustomerPage extends Page {
             switch (cmd) {
                 case "help":
                     OutputUtils.printCommands(cmds, codes);
+                    break;
+                case "close":
+                    Page welcomePage = closeUser();
+                    if (welcomePage != null)
+                        return welcomePage;
+                    break;
                 case "accounts":
                     printAccounts();
                     break;
@@ -121,6 +127,26 @@ public class CustomerPage extends Page {
         catch (SQLException e) {
             e.printStackTrace();
             System.out.println("[CustomerPage.openAccount] SQL Error opening new account.");
+        }
+        return null;
+    }
+
+    public Page closeUser() {
+        try {
+            if (!InputUtils.confirmDecision())
+                return null;
+            if (accountDao.selectForUser(customer.getEmail()).size() != 0) {
+                System.out.println("You still have open accounts. Please empty and close these accounts first.");
+                return null;
+            }
+            else{
+                userDao.delete(customer.getEmail());
+                System.out.println("User deleted.");
+                return new WelcomePage();
+            }
+        }
+        catch (SQLException e) {
+            System.out.println("[CustomerPage.closeUser] SQL Error selecting associated accounts OR deleting user.");
         }
         return null;
     }

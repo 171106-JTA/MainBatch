@@ -117,4 +117,36 @@ public class InputUtils {
         while(!firstEntry.equals(secondEntry));
         return firstEntry;
     }
+
+
+    /**
+     * obtain user input on whether to quit
+     *
+     * @return - true if user indicates intent to quit; false otherwise
+     */
+    public static boolean checkQuit() {
+       String cmd = readLine("'quit' to quit or anything else to try-again");
+       switch(cmd) {
+            case "q":
+                return true;
+            case "quit":
+            case "exit":
+                return true;
+            default:
+                return false;
+       }
+    }
+
+    /**
+     * obtain user input on whether to quit
+     *
+     * @return - true if user indicates intent to quit; false otherwise
+     */
+    public static boolean confirmDecision() {
+       System.out.println("Are you sure ('YES' to proceed, anything else to abort)?: ");
+       Scanner in = new Scanner(System.in);
+       String decision = in.nextLine().trim();
+       return (decision.equals("YES"));
+    }
+
 }
