@@ -6,10 +6,7 @@ import com.revature.businessobject.BusinessObject;
 import com.revature.core.BusinessClass;
 import com.revature.core.FieldParams;
 import com.revature.core.Resultset;
-import com.revature.core.factory.builder.AccountBuilder;
-import com.revature.core.factory.builder.BusinessObjectBuilder;
-import com.revature.core.factory.builder.UserBuilder;
-import com.revature.core.factory.builder.UserInfoBuilder;
+import com.revature.core.factory.builder.*;
 
 /**
  * Used to generate BusinessObjects from FieldParams
@@ -23,6 +20,10 @@ public class BusinessObjectFactory {
 	private static BusinessObjectBuilder userBuilder;
 	private static BusinessObjectBuilder userInfoBuilder;
 	private static BusinessObjectBuilder accountBuilder;
+	private static BusinessObjectBuilder codeListBuilder;
+	private static BusinessObjectBuilder invoiceBuilder;
+	private static BusinessObjectBuilder receiptBuilder;
+	private static BusinessObjectBuilder jointAccountBuilder;
 	
 	/**
 	 * Initializes builders
@@ -31,6 +32,10 @@ public class BusinessObjectFactory {
 		userBuilder = new UserBuilder();
 		userInfoBuilder = new UserInfoBuilder();
 		accountBuilder = new AccountBuilder();
+		codeListBuilder = new CodeListBuilder();
+		invoiceBuilder = new InvoiceBuilder();
+		receiptBuilder = new ReceiptBuilder();
+		jointAccountBuilder = new JointAccountBuilder();
 	}
 	
 	/**
@@ -55,13 +60,13 @@ public class BusinessObjectFactory {
 			case BusinessClass.ACCOUNT:
 				return accountBuilder.getBusinessObject(args);
 			case BusinessClass.CODELIST:
-				return null;
+				return codeListBuilder.getBusinessObject(args);
 			case BusinessClass.INVOICE:
-				return null;
+				return invoiceBuilder.getBusinessObject(args);
 			case BusinessClass.RECEIPT:
-				return null;
+				return receiptBuilder.getBusinessObject(args);
 			case BusinessClass.JOINTACCOUNT:
-				return null;
+				return jointAccountBuilder.getBusinessObject(args);
 			default:
 				return null;
 		}
