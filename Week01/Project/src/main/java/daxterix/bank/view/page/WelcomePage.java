@@ -46,7 +46,7 @@ public class WelcomePage extends Page{
      */
     @Override
     public String getTitle() {
-        return "Welcome to the <insert suitable bank title> Bank";
+        return "Welcome to the Nameless Bank";
     }
 
 }

@@ -147,11 +147,12 @@ public class CustomerPage extends Page {
 
 
     public void handlePromoteRequest() {
-        if (customer.isAdmin())
-            System.out.println("You are already an admin.");
-
-        UserRequest promotionReq = new UserRequest(customer.getEmail(), UserRequest.PROMOTION);
+        if (customer.isAdmin()) {
+            System.out.println("You are already an admin.\n");
+            return;
+        }
         try {
+            UserRequest promotionReq = new UserRequest(customer.getEmail(), UserRequest.PROMOTION);
             boolean requestAlreadyFiled = false;
             List<UserRequest> filedRequests = reqDao.selectForUser(customer.getEmail());
             for (UserRequest req: filedRequests)
@@ -166,7 +167,7 @@ public class CustomerPage extends Page {
             }
         }
         catch (SQLException e) {
-            System.out.println("[CustomerPage.handlePromoteRequest] SQL Error checking prior requests OR saving new request");
+            System.out.println("[CustomerPage.grantPromotionRequest] SQL Error checking prior requests OR saving new request");
         }
     }
 

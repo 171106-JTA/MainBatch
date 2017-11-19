@@ -10,7 +10,7 @@ import java.sql.SQLException;
 public class LoginAdminPage extends Page {
 
     /**
-     * authenticates user as customer, leads to a CustomerPage on successful
+     * authenticates user as an admin  leads to an AdminPage on successful
      * authentication
      *
      * @return
@@ -30,11 +30,11 @@ public class LoginAdminPage extends Page {
                 e.printStackTrace();
             }
             if (admin == null || !admin.getPassword().equals(password))
-                System.out.println("Error: Invalid credentials. Please try again.");
+                System.out.println("Invalid credentials. Please try again.");
             else if (admin.isLocked())
-                System.out.println("Error: Nice try, but your account is locked. Try again.");
+                System.out.println("Nice try, but your account is locked. Try again.");
             else if (!admin.isAdmin())
-                System.out.println("Error: Nice try, but you're not an admin. Try again.");
+                System.out.println("Nice try, but you're not an admin. Try again.");
             else
                 return new AdminPage(admin);
 

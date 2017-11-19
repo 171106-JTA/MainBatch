@@ -43,38 +43,38 @@ public class UserDAOTest {
 
     @Test
     public void saveAndselectAll() throws Exception {
-        List<User> accs = dao.selectAll();
-        assertTrue(accs.isEmpty());
+        List<User> users = dao.selectAll();
+        assertTrue(users.isEmpty());
 
         User ref1 = new User("email1", "pass1");
         dao.save(ref1);
-        accs = dao.selectAll();
-        assertEquals(1, accs.size());
-        assertTrue(accs.contains(ref1));
+        users = dao.selectAll();
+        assertEquals(1, users.size());
+        assertTrue(users.contains(ref1));
 
         User ref2 = new User("email2", "pass2");
         dao.save(ref2);
-        accs = dao.selectAll();
-        assertEquals(2, accs.size());
-        assertTrue(accs.contains(ref1));
-        assertTrue(accs.contains(ref2));
+        users = dao.selectAll();
+        assertEquals(2, users.size());
+        assertTrue(users.contains(ref1));
+        assertTrue(users.contains(ref2));
 
         User ref3 = new User("email3", "pass3");
         dao.save(ref3);
-        accs = dao.selectAll();
-        assertEquals(3, accs.size());
-        assertTrue(accs.contains(ref1));
-        assertTrue(accs.contains(ref2));
-        assertTrue(accs.contains(ref3));
+        users = dao.selectAll();
+        assertEquals(3, users.size());
+        assertTrue(users.contains(ref1));
+        assertTrue(users.contains(ref2));
+        assertTrue(users.contains(ref3));
 
         User ref4 = new User("email4", "pass4");
         dao.save(ref4);
-        accs = dao.selectAll();
-        assertEquals(4, accs.size());
-        assertTrue(accs.contains(ref1));
-        assertTrue(accs.contains(ref2));
-        assertTrue(accs.contains(ref3));
-        assertTrue(accs.contains(ref4));
+        users = dao.selectAll();
+        assertEquals(4, users.size());
+        assertTrue(users.contains(ref1));
+        assertTrue(users.contains(ref2));
+        assertTrue(users.contains(ref3));
+        assertTrue(users.contains(ref4));
     }
 
 
@@ -95,11 +95,43 @@ public class UserDAOTest {
         assertNotEquals(saved, updated);
         assertEquals(newPassword, updated.getPassword());
         assertEquals(ref, updated);
-
     }
 
     @Test
     public void delete() throws Exception {
+    }
+
+    @Test
+    public void selectByLockStatus() throws Exception {
+        List<User> users = dao.selectAll();
+        assertTrue(users.isEmpty());
+
+        User ref1 = new User("email1", "pass1");
+        ref1.setLocked(true);
+        User ref2 = new User("email2", "pass2");
+        ref2.setLocked(true);
+        User ref3 = new User("email3", "pass3");
+        ref3.setLocked(false);
+        User ref4 = new User("email4", "pass4");
+        ref4.setLocked(false);
+        dao.save(ref1);
+        dao.save(ref2);
+        dao.save(ref3);
+        dao.save(ref4);
+
+        List<User> locked = dao.selectByLockStatus(true);
+        assertEquals(2, locked.size());
+        assertTrue(locked.contains(ref1));
+        assertTrue(locked.contains(ref2));
+        assertFalse(locked.contains(ref3));
+        assertFalse(locked.contains(ref4));
+
+        List<User> unlocked = dao.selectByLockStatus(false);
+        assertEquals(2, unlocked.size());
+        assertFalse(unlocked.contains(ref1));
+        assertFalse(unlocked.contains(ref2));
+        assertTrue(unlocked.contains(ref3));
+        assertTrue(unlocked.contains(ref4));
     }
 
     @Test

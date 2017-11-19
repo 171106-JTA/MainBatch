@@ -14,8 +14,6 @@ public class LoginCustomerPage extends Page{
      */
     @Override
     public Page _run() {
-        // Customer customer;
-
         while(true) {
             String username = InputUtils.readLine("username");
             String password = InputUtils.readMasked("password");
@@ -28,22 +26,15 @@ public class LoginCustomerPage extends Page{
             catch (SQLException e) {
                 System.out.println("SQL Exception while retrieving user");
             }
-
-            if (customer == null) {
+            if (customer == null)
                 System.out.println("Error: User does not exist. Please try again");
-            }
-            else if (!customer.getPassword().equals(password)) {
+            else if (!customer.getPassword().equals(password))
                 System.out.println("Error: Invalid credentials. Please try again");
-            }
-            else if (customer.isLocked()) {
+            else if (customer.isLocked())
                 System.out.println("Error: Account is currently locked. Please wait for an admin to unlock it.");
-            }
-            else {  // TODO: should i change this?
-                if (customer.isAdmin())
-                    return new AdminPage(customer);
-                else
-                    return new CustomerPage(customer);
-            }
+            else
+                return new CustomerPage(customer);
+
             if (checkQuit())
                 return new WelcomePage();
         }

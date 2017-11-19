@@ -1,16 +1,20 @@
 package daxterix.bank.view.page;
 
 import daxterix.bank.dao.DAOUtils;
+import daxterix.bank.dao.RequestDAO;
+import daxterix.bank.dao.UserDAO;
 import daxterix.bank.model.User;
+import daxterix.bank.model.UserRequest;
 import daxterix.bank.view.InputUtils;
 import daxterix.bank.view.OutputUtils;
 
-import static daxterix.bank.view.page.AdminPage.CommandEvalResult.*;
-
+import java.sql.SQLException;
 import java.util.List;
-import java.util.Scanner;
 
 public class AdminPage extends Page {
+    UserDAO userDao = DAOUtils.getUserDao();
+    RequestDAO reqDao = DAOUtils.getRequestDao();
+
     private User admin;
 
     /**
@@ -22,18 +26,6 @@ public class AdminPage extends Page {
         this.admin = admin;
     }
 
-    /**
-     * Helpful for error handling, denotes the result of an attempt to
-     * execute user's command
-     */
-    enum CommandEvalResult {
-        SUCCESS,
-        INVALID_SYNTAX,
-        REQUEST_DNE,
-        DATABASE_ERROR,
-        NO_SUCH_UNLOCKED_USER,
-        NO_SUCH_LOCKED_USER,
-    }
 
     /**
      * see Page._run()
@@ -42,20 +34,22 @@ public class AdminPage extends Page {
      */
     @Override
     protected Page _run() {
-        String[] cmds = {"View instructions", "Show pending requests", "Grant a creation request", "Grant a promotion request", "Drop a request", "Show locked customers", "Lock an account", "Unlock an account", "logout"};
-        String[] codes = {"help", "printreq", "create <request id>", "promote <request id>", "drop <request-id>", "printlocked", "lock <username>", "unlock <username>", "locked", "logout"};
+        String[] cmds = {"View instructions", "Show pending requests", "Accept a request", "Drop a request", "Show all users", "Lock an account", "Unlock an account", "logout"};
+        String[] codes = {"help", "requests", "accept <request id>", "drop <request-id>", "users", "lock <username>", "unlock <username>", "logout"};
         OutputUtils.printCommands(cmds, codes);
 
         while(true){
             String cmd = InputUtils.readLine("command");
             switch (cmd) {
+                case "":
+                    break;
                 case "help":
                     OutputUtils.printCommands(cmds, codes);
                     break;
-                case "printlocked":
-                    printLockedCustomers();
+                case "users":
+                    printUsers();
                     break;
-                case "printreq":
+                case "requests":
                     printPendingRequests();
                     break;
                 case "quit":
@@ -63,50 +57,29 @@ public class AdminPage extends Page {
                 case "exit":
                     return new WelcomePage();
                 default:
-                    switch (evalCommand(cmd)) {
-                        case INVALID_SYNTAX:
-                            System.out.println("Invalid command. Try again.");
-                            break;
-                        case DATABASE_ERROR:
-                            System.out.println("Something went wrong. Request id may be invalid. Try again.");
-                            break;
-                        case REQUEST_DNE:
-                            System.out.println("Request with specified id does not exist. Try again.");
-                            break;
-                        case NO_SUCH_LOCKED_USER:
-                            System.out.println("Locked customer with id does not exist.");
-                            break;
-                        case NO_SUCH_UNLOCKED_USER:
-                            System.out.println("Unlocked customer with id does not exist.");
-                            break;
-                        case SUCCESS:
-                            System.out.println("Success!");
-                    }
+                    evalCommand(cmd);
             }
         }
     }
 
     /**
      * print all pending requests
-     *
-     * @return
      */
-    boolean printPendingRequests() {
-        /*
-        RequestDAO dao = DAOUtils.getRequestDao();
-        List<UserRequest> requests =  dao.readAll();
-        if (requests == null)
-            return false;
-        if (requests.isEmpty())
-            System.out.println("No pending Requests\n");
-        else {
-            for (UserRequest req : requests)
-                System.out.println(req);
-            System.out.println();
+    void printPendingRequests() {
+        try {
+            List<UserRequest> requests;
+            requests = reqDao.selectAll();
+            if (requests.isEmpty())
+                System.out.println("No pending Requests\n");
+            else {
+                for (UserRequest req : requests)
+                    System.out.println(req);
+                System.out.println();
+            }
         }
-        return true;
-        */
-        return true;   // todo: remove
+        catch (SQLException e) {
+            System.out.println("[AdminPage.printPendingRequests] SQL Error while retrieving pending requests.");
+        }
     }
 
 
@@ -117,182 +90,192 @@ public class AdminPage extends Page {
      * and dropping any Request is indicated by a command in the form: drop [request#]
      *
      * @param cmd
-     * @return
      */
-    CommandEvalResult evalCommand(String cmd) {
-        Scanner s = new Scanner(cmd);
+    void evalCommand(String cmd) {
+        String[] chunks = cmd.split("\\s+");
+        if (chunks.length != 2)
+            System.out.println("Invalid command. Enter 'help' to see available commands and their syntax.");
 
-        if (!s.hasNext())
-            return INVALID_SYNTAX;
-        String first = s.next();
+        String second = chunks[1];
 
-        if (!s.hasNext())
-            return INVALID_SYNTAX;
-        String second = s.nextLine().trim();
-
-        switch (first) {
-            case "promote":
-                return approvePromoteRequest(second);
-            case "create":
-                return approveCreateRequest(second);
+        switch (second) {
+            case "accept":
+                handleRequest(second);
             case "drop":
-                return dropRequest(second);
+                dropRequest(second);
             case "lock":
-                return lockAccount(second);
+                lockAccount(second);
             case "unlock":
-                return unlockAccount(second);
+                unlockAccount(second);
             default:
-                return INVALID_SYNTAX;
+                System.out.println("Invalid command. Enter 'help' to see available commands and their syntax.");
         }
     }
 
     /**
-     * view all customers that have been locked
-     * @return
+     * view all customers
      */
-    CommandEvalResult printLockedCustomers() {
-        /*
-        CustomerDAO lockedCustomerDAO = DAOUtils.getLockedCustomerDao();
-        List<Customer> lockedCustomers = lockedCustomerDAO.readAll();
-        if (lockedCustomers == null)
-            return DATABASE_ERROR;
-        else if (lockedCustomers.isEmpty())
-            System.out.println("No locked customers\n");
-        else
-            for (Customer c: lockedCustomers)
-                System.out.println(c.getUsername());
-        return SUCCESS;
-        */
-        return SUCCESS; // TODO: remove
+    void printUsers() {
+        try {
+            List<User> customers = userDao.selectAll();
+            if (customers.isEmpty())
+                System.out.println("No registered users\n");
+            else {
+                System.out.println("Users\n");
+                for (User u : customers)
+                    System.out.printf("\t%-30s %-10s  %-10s\n", u.getEmail(), u.isAdmin()? "Admin" : "Customer", u.isLocked()?"Locked" : "Unlocked");
+                System.out.println();
+            }
+        }
+        catch (SQLException e) {
+            System.out.println("[AdminPage.printUsers] SQL Error while fetching all users");
+        }
     }
 
     /**
      * lock the given user account
      * @param second
-     * @return - returns SUCCESS if everything goes well
      */
-    private CommandEvalResult lockAccount(String second) {
-        /*
-        CustomerDAO unlockedDao = DAOUtils.getUnlockedCustomerDao();
-
-        Customer customer = unlockedDao.readById(second);
-        if (customer == null)
-            return NO_SUCH_UNLOCKED_USER;
-
-        CustomerDAO lockedDao = DAOUtils.getLockedCustomerDao();
-        if (!(lockedDao.save(customer) && unlockedDao.deleteById(customer.getUsername())))
-            return DATABASE_ERROR;
-
-        return SUCCESS;
-        */
-
-        return SUCCESS; // todo: remove
+    void lockAccount(String second) {
+        try {
+            User toBeLocked = userDao.select(second);
+            if (toBeLocked == null)
+                System.out.println("\nUser does not exist.\n");
+            else if (toBeLocked.isAdmin())
+                System.out.println("\nI lied. You do NOT have the power to lock an Admin.\n");
+            else if (toBeLocked.isLocked())
+                System.out.println("\nUser already locked.\n");
+            else {
+                toBeLocked.setLocked(true);
+                userDao.update(toBeLocked);
+            }
+        }
+        catch (SQLException e) {
+            System.out.println("[AdminPage.lockAccount] SQL Error while retrieving user for locking OR while locking user");
+        }
     }
 
     /**
      * Unlock a previously locked account, does not work otherwise
      *
      * @param second
-     * @return
      */
-    private CommandEvalResult unlockAccount(String second) {
-        /*
-        CustomerDAO lockedDao = DAOUtils.getLockedCustomerDao();
-
-        Customer customer = lockedDao.readById(second);
-        if (customer == null)
-            return NO_SUCH_LOCKED_USER;
-
-        CustomerDAO unlockedDao = DAOUtils.getUnlockedCustomerDao();
-        if (!(unlockedDao.save(customer) && lockedDao.deleteById(customer.getUsername())))
-            return DATABASE_ERROR;
-
-        return SUCCESS;
-        */
-        return SUCCESS; // todo: remove
+    void unlockAccount(String second) {
+        try {
+            User toBeUnlocked = userDao.select(second);
+            if (toBeUnlocked == null)
+                System.out.println("\nUser does not exist.\n");
+            else if (toBeUnlocked.isAdmin())
+                System.out.println("\nI lied. You cannot lock or unlock an Admin.\n");
+            else if (!toBeUnlocked.isLocked())
+                System.out.println("\nUser is not locked.\n");
+            else {
+                toBeUnlocked.setLocked(false);
+                userDao.update(toBeUnlocked);
+            }
+        }
+        catch (SQLException e) {
+            System.out.println("[AdminPage.lockAccount] SQL Error while retrieving user for unlocking OR while unlocking user");
+        }
     }
 
     /**
+     * @param requestIdStr
+     * @return
+     */
+    void handleRequest(String requestIdStr) {
+        try {
+            long requestId = Long.parseLong(requestIdStr);
+            UserRequest req = reqDao.select(requestId);
+            if (req == null) {
+                System.out.println("Request does not exist. Press 'requests' to view pending requests and their ids.\n");
+                return;
+            }
+
+            User u = userDao.select(req.getFilerEmail());   // fileEmail is an FK meaning user must exist
+            if (req.getType() == UserRequest.CREATION)
+                if (!u.isLocked())
+                    System.out.println("User is already unlocked.");
+                else
+                    grantCreationRequest(req, u);
+            else
+                if (u.isAdmin())
+                    System.out.println("User is already an admin.");
+                else
+                    grantPromotionRequest(req, u);
+        }
+        catch (SQLException e){
+            System.out.println("[AdminPage.handleRequest] SQL Error while handling request command");
+        }
+        catch (NullPointerException | NumberFormatException e) {
+            System.out.println("Please provide a valid request id. Press 'printreq' to view pending requests and their ids\n");
+        }
+
+    }
+
+    /**
+     * TODO: USE STORED PROCEDURE
      * On granting a creation request by a customer, we create the customer,
      * and persist it to the customer 'database', then delete the now-serviced
      * request.
      *
-     * Transaction support would be nice here.
-     *
-     * @param requestId
-     * @return
+     * @param req
+     * @param u
      */
-    CommandEvalResult approveCreateRequest (String requestId) {
-        /*
-        RequestDAO requestDao = DAOUtils.getRequestDao();
-        CustomerDAO customerDao = DAOUtils.getUnlockedCustomerDao();
-
-        UserRequest req = requestDao.readById(requestId);
-        if (req == null)
-            return REQUEST_DNE;
-
-        if (!(req instanceof CreationRequest))
-            return INVALID_SYNTAX;
-
-        Customer customer = (Customer)req.getRequester();
-        if (requestDao.deleteById(requestId) && customerDao.save(customer))
-            return SUCCESS;
-        else
-            return DATABASE_ERROR;
-        */
-
-        return SUCCESS;  // todo: remove
+    void grantCreationRequest(UserRequest req, User u) {
+        try {
+            reqDao.delete(req.getId());
+            u.setLocked(false);
+            userDao.update(u);
+            System.out.println("\nUser unlocked\n");
+        }
+        catch (SQLException e) {
+            System.out.println("[AdminPage.grantCreationRequest] SQL Error while granting creation request");
+        }
     }
 
+
+
     /**
+     * TODO: USE STORED PROCEDURE
      * On approving a promotion request by a customer
      * promote the customer to admin, and add the new admin
      * to the admin 'database', then we delete the now-serviced request.
      *
-     * Transaction support would be nice here.
-     *
-     * @param requestId
-     * @return
+     * @param req
+     * @param u
      */
-    CommandEvalResult approvePromoteRequest (String requestId) {
-        /*
-        RequestDAO requestDao = DAOUtils.getRequestDao();
-        AdminDAO adminDao = DAOUtils.getAdminDao();
-
-        UserRequest req = requestDao.readById(requestId);
-        if (req == null)
-            return REQUEST_DNE;
-
-        if (!(req instanceof PromotionRequest))
-            return INVALID_SYNTAX;
-
-        Customer customer = (Customer) req.getRequester();
-        Admin promotedCustomer = new Admin(customer);
-        if ((adminDao.save(promotedCustomer) && requestDao.deleteById(requestId)))
-            return SUCCESS;
-        else
-            return DATABASE_ERROR;
-        */
-
-        return SUCCESS; // todo: remove
+    void grantPromotionRequest(UserRequest req, User u) {
+        try {
+            reqDao.delete(req.getId());
+            u.setAdmin(true);
+            userDao.update(u);
+            System.out.println("\nUser promoted to Admin\n");
+        }
+        catch (SQLException e) {
+            System.out.println("[AdminPage.grantPromotionRequest] SQL Error while granting creation request");
+        }
     }
 
     /**
      * drop a pending request, removing it from the request 'database'
      *
-     * @param requestId
+     * @param requestIdStr
      * @return
      */
-    CommandEvalResult dropRequest(String requestId) {
-        /*
-        RequestDAO requestDao = DAOUtils.getRequestDao();
-        if (!requestDao.doesExist(requestId))
-            return REQUEST_DNE;
-        if (!requestDao.deleteById(requestId))
-            return DATABASE_ERROR;
-        return SUCCESS;
-        */
-        return SUCCESS;
+    void dropRequest(String requestIdStr) {
+        try {
+            long requestId = Long.parseLong(requestIdStr);
+            UserRequest req = reqDao.select(requestId);
+            if (req == null) {
+                System.out.println("Request does not exist. Press 'requests' to view pending requests and their ids.\n");
+                return;
+            }
+            reqDao.delete(requestId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**

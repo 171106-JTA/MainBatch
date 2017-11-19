@@ -25,6 +25,16 @@ public interface UserDAO {
      */
     List<User> selectAll() throws SQLException;
 
+
+    /**
+     * returns users based on whether they are locked
+     *
+     * @param lockStatus
+     * @return
+     * @throws SQLException
+     */
+    List<User> selectByLockStatus(boolean lockStatus) throws SQLException;
+
     /**
      * persists a new user
      *

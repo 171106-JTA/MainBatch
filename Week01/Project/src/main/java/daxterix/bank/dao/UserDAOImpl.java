@@ -67,6 +67,33 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public List<User> selectByLockStatus(boolean lockStatus) throws SQLException {
+        ResultSet queryRes = null;
+        PreparedStatement stmt = null;
+
+        try (Connection conn = connectionManager.getConnection()) {
+            String sql = "SELECT usr.* FROM bankuser usr " +
+                            "WHERE usr.islocked = ?";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, lockStatus? 1 : 0);
+            queryRes = stmt.executeQuery();
+
+            List<User> users = new ArrayList<>();
+            while (queryRes.next())
+                users.add(readFromRow(queryRes));
+            return users;
+        }
+        catch (SQLException e){
+            logger.error(String.format("[%s selectByLockStatus()] Exception while selecting %s:\n%s", getClass(), lockStatus? "locked" : "unlocked", e));
+            throw e;
+        }
+        finally {
+            Closer.close(stmt);
+            Closer.close(queryRes);
+        }
+    }
+
+    @Override
     public User selectForAccount(long accountNumber) throws SQLException {
         ResultSet queryRes = null;
         PreparedStatement stmt = null;
