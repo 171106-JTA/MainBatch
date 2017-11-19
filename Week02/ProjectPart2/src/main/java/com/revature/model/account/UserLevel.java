@@ -1,4 +1,4 @@
-package model.account;
+package com.revature.model.account;
 
 public enum UserLevel {
 	BASIC, VIP, ADMIN
