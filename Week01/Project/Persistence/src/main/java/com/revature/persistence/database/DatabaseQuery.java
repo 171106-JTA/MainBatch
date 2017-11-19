@@ -11,7 +11,7 @@ import com.revature.core.FieldParams;
 import com.revature.core.Resultset;
 import com.revature.persistence.database.util.ConnectionUtil;
 
-public abstract class DatabaseSelect extends DatabasePersistence {
+public abstract class DatabaseQuery extends DatabasePersistence {
 
 	public Resultset select(String name, FieldParams cnds) {
 		List<String> clause = new ArrayList<String>();
@@ -33,7 +33,7 @@ public abstract class DatabaseSelect extends DatabasePersistence {
 			statement = conn.prepareStatement(sql);
 			
 			// Assemble where clause 
-			whereClauseBuilder.build(name, statement, cnds);
+			clauseBuilder.build(name, statement, cnds);
 			
 			// execute query
 			sqlRes = statement.executeQuery();

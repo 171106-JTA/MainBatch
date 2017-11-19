@@ -14,17 +14,17 @@ import com.revature.businessobject.user.User;
 import com.revature.core.BusinessClass;
 import com.revature.core.FieldParams;
 
-public class WhereClauseBuilder {
-	private static WhereClauseBuilder builder;
-	private static Logger logger = Logger.getLogger(WhereClauseBuilder.class);
+public class ClauseBuilder {
+	private static ClauseBuilder builder;
+	private static Logger logger = Logger.getLogger(ClauseBuilder.class);
 	
-	private WhereClauseBuilder() {
+	private ClauseBuilder() {
 		// do nothing
 	}
 	
 	
-	public static WhereClauseBuilder getBuilder() {
-		return builder == null ? builder = new WhereClauseBuilder() : builder;
+	public static ClauseBuilder getBuilder() {
+		return builder == null ? builder = new ClauseBuilder() : builder;
 	}
 
 	
