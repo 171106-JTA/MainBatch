@@ -1,7 +1,6 @@
 package com.bankoftheapes.ui;
 
-import java.util.HashMap;
-
+import com.bankoftheapes.dao.QueryUtil;
 import com.bankoftheapes.user.User;
 
 public class Admin extends UserInterface{
@@ -13,14 +12,14 @@ public class Admin extends UserInterface{
 	 * @param users HashMap of users used to gather access, approval, and banned statuses of users
 	 * @param u user object needed to check access level and name
 	 */
-	public static void Screen(HashMap<String, User> users, User u) {
+	public static void Screen(User u, QueryUtil qu) {
 		
 		if(u == null) {
 			return;
 		}
 		//Checks to see if the user has the right access_level;
 		//They get kicked out if the user is not authorized
-		if(u.getAccess_level() != 2) {
+		if(!u.getAccess_level().equals("ADM")) {
 			System.out.println("\nWrong Menu");
 			return;
 		}
@@ -39,23 +38,23 @@ public class Admin extends UserInterface{
 			
 			switch(option) {
 				case 1:
-					AdminTool.showAllUser(users);
+					AdminTool.showAllUser(qu);
 					break;
 				case 2:
-					AdminTool.approveUser(users);
+					//AdminTool.approveUser(users);
 					break;
 				case 3:
-					AdminTool.banUser(users);
+					//AdminTool.banUser(users);
 					break;
 				case 4:
-					AdminTool.promoteUser(users, u.getAccess_level());
+					//AdminTool.promoteUser(users, u.getAccess_level());
 					break;
 				case 5:
-					AdminTool.approveLoan(users);
+					//AdminTool.approveLoan(users);
 					break;
 				case 6:
 					System.out.println("Thank you for the hard work!");
-					UserInterface.cleanUp(users);
+					UserInterface.cleanUp();
 					break;
 				default:
 					System.out.println("Invalid input. Please try again");

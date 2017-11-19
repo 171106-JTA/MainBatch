@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 import com.bankoftheapes.dao.QueryUtil;
 import com.bankoftheapes.ui.Account;
+import com.bankoftheapes.ui.Admin;
+import com.bankoftheapes.ui.Moderator;
 import com.bankoftheapes.ui.NewUser;
 import com.bankoftheapes.ui.Splash;
 import com.bankoftheapes.ui.UserInterface;
@@ -63,7 +65,16 @@ public class BankOfTheApes {
 				NewUser.Screen(qu);;
 				break;
 			case 3:
-				UserInterface.loginScreen(qu);
+				u = UserInterface.loginScreen(qu);
+				if(u != null && u.getAccess_level().equals("ADM")) {
+					Admin.Screen(u, qu);
+				}
+				else if(u != null && u.getAccess_level().equals("MOD")) {
+					
+				}
+				else {
+					System.out.println("Management Not Found");
+				}
 				break;
 			default:
 				System.out.println("Option not available. Please try again.");

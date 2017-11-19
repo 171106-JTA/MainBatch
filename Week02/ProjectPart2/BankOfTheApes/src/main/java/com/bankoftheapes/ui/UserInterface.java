@@ -113,16 +113,21 @@ public class UserInterface {
 		System.out.print("Password: ");
 		password = UserInterface.readInput();
 		u = qu.getUserInfo(user);
-		if(u == null) {
-			System.out.println("Error! Incorrect Username or Password.");
-		}
-		else if(password.equals(u.getPassword())) {
+		
+		if(u != null && password.equals(u.getPassword())) {
 			System.out.println("Right");
-			return u;
+			if(u.isApproved() == 1) {
+				return u;
+			}
+			else {
+				System.out.println("Account Pending Approval");
+				return null;
+			}
 		}
 		else {
 			System.out.println("Error! Incorrect Username or Password.");
 		}
+		
 		return null;
 	}
 	

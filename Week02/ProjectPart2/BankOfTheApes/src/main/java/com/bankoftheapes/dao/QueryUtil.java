@@ -120,14 +120,11 @@ public class QueryUtil implements BankDao{
 		
 		try(Connection conn = ConnectionUtil.getConnection()){
 			String sql = "INSERT INTO Customer "
-					+ "(USERNAME, PASS, LOCKSTATUS, APPROVALSTATUS, ACCESSLEVEL) "
-					+ "VALUES (?, ?, ?, ?, ?)";
+					+ "(USERNAME, PASS) "
+					+ "VALUES (?, ?)";
 			ps  = conn.prepareStatement(sql);
 			ps.setString(1, user.getName());
 			ps.setString(2, user.getPassword());
-			ps.setInt(3, user.isBanned());
-			ps.setInt(4, user.isApproved());
-			ps.setString(5, user.getAccess_level());
 			ps.executeQuery();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -135,6 +132,27 @@ public class QueryUtil implements BankDao{
 			commitChanges();
 			close(ps);
 		}
+	}
+	
+	@Override
+	public void showAllUsers() {
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		try(Connection conn = ConnectionUtil.getConnection()){
+			String sql = "SELECT USERNAME, APPROVALSTATUS, LOCKSTATUS, ACCESSLEVEL FROM Customer";
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			while(rs.next()) {
+				System.out.println(rs.getString("USERNAME") + " : " + rs.getString("APPROVALSTATUS")
+				+ " : " + rs.getString("LOCKSTATUS") + " : " + rs.getString("ACCESSLEVEL"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+		}
+		
 	}
 	
 	private void commitChanges() {
@@ -149,6 +167,5 @@ public class QueryUtil implements BankDao{
 		}finally {
 			close(stmt);
 		}
-		
 	}
 }

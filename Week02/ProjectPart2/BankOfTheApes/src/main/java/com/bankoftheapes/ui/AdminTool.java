@@ -2,6 +2,7 @@ package com.bankoftheapes.ui;
 
 import java.util.HashMap;
 
+import com.bankoftheapes.dao.QueryUtil;
 import com.bankoftheapes.user.User;
 
 public class AdminTool {
@@ -11,12 +12,10 @@ public class AdminTool {
 	 * 
 	 * @param users HashMap of users to loop through
 	 */
-	public static void showAllUser(HashMap<String, User> users) {
+	public static void showAllUser(QueryUtil qu) {
 		
 		System.out.println("\nUser : Approval Status : Ban Status : Access Level");
-		for(String u: users.keySet()) {
-			System.out.println(u + " : " + users.get(u).isApproved() + " : " + users.get(u).isBanned() + " : " + users.get(u).getAccess_level());
-		}
+		qu.showAllUsers();
 	}
 	
 	/**

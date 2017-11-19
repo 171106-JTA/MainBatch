@@ -34,9 +34,6 @@ public class NewUser extends UserInterface{
 		System.out.print("Password: ");
 		password = UserInterface.readInput();
 		u = new User(user, password);
-		u.setAccess_level("REG");
-		u.setBanned(0);
-		u.setApproved(0);
 		qu.addNewUser(u);
 		
 		System.out.println("Have a nice day!");
