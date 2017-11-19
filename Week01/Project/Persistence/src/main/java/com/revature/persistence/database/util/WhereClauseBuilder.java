@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
+import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.User;
 import com.revature.core.BusinessClass;
 import com.revature.core.FieldParams;
@@ -61,6 +62,7 @@ public class WhereClauseBuilder {
 					case User.PASSWORD:
 						statement.setString(pos, params.get(key));
 						statement.setString(pos, params.get(key));
+						break;
 				}
 			} catch (NumberFormatException | SQLException e) {
 				logger.warn("failed to build user where clause, message=" + e.getMessage());
@@ -76,31 +78,171 @@ public class WhereClauseBuilder {
 	}
 	
 	private boolean buildUserInfoWhereClause(PreparedStatement statement, FieldParams params) {
+		int pos = 1;
+		
+		for (String key : params.keySet()) {
+			try {
+				// Attempt to assemble where clause
+				switch (key) {
+					case UserInfo.SSN:
+					case UserInfo.STATECITYID:
+					case UserInfo.STATUSID:
+					case UserInfo.ROLEID:
+						statement.setLong(pos, Long.parseLong(params.get(key)));
+						break;
+					case UserInfo.EMAIL:
+					case UserInfo.PHONENUMBER:
+					case UserInfo.FIRSTNAME:
+					case UserInfo.LASTNAME:
+					case UserInfo.ADDRESS1:
+					case UserInfo.ADDRESS2:
+					case UserInfo.POSTALCODE:
+						statement.setString(pos,  params.get(key));
+						break;
+				}
+			} catch (NumberFormatException | SQLException e) {
+				e.printStackTrace();
+				logger.warn("failed to build userinfo where clause, message=" + e.getMessage());
+				return false;
+			}
+			
+			// increment counter
+			++pos;
+		}
+		
 		return true;
 	}
 	
 	private boolean buildAccountWhereClause(PreparedStatement statement, FieldParams params) {
-		return false;
+		int pos = 1;
+		
+		for (String key : params.keySet()) {
+			try {
+				// Attempt to assemble where clause
+				switch (key) {
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				logger.warn("failed to build userinfo where clause, message=" + e.getMessage());
+				return false;
+			}
+			
+			// increment counter
+			++pos;
+		}
+		
+		return true;
 	}
 	
 	private boolean buildCheckingWhereClause(PreparedStatement statement, FieldParams params) {
-		return false;
+		int pos = 1;
+		
+		for (String key : params.keySet()) {
+			try {
+				// Attempt to assemble where clause
+				switch (key) {
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				logger.warn("failed to build userinfo where clause, message=" + e.getMessage());
+				return false;
+			}
+			
+			// increment counter
+			++pos;
+		}
+		
+		return true;
 	}
 	
 	private boolean buildCreditWhereClause(PreparedStatement statement, FieldParams params) {
-		return false;
+		int pos = 1;
+		
+		for (String key : params.keySet()) {
+			try {
+				// Attempt to assemble where clause
+				switch (key) {
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				logger.warn("failed to build userinfo where clause, message=" + e.getMessage());
+				return false;
+			}
+			
+			// increment counter
+			++pos;
+		}
+		
+		return true;
 	}
 	
 	private boolean buildSavingsWhereClause(PreparedStatement statement, FieldParams params) {
-		return false;
+		int pos = 1;
+		
+		for (String key : params.keySet()) {
+			try {
+				// Attempt to assemble where clause
+				switch (key) {
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				logger.warn("failed to build userinfo where clause, message=" + e.getMessage());
+				return false;
+			}
+			
+			// increment counter
+			++pos;
+		}
+		
+		return true;
 	}
 	
 	private boolean buildCodeListWhereClause(PreparedStatement statement, FieldParams params) {
-		return false;
+		int pos = 1;
+		
+		for (String key : params.keySet()) {
+			try {
+				// Attempt to assemble where clause
+				switch (key) {
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				logger.warn("failed to build userinfo where clause, message=" + e.getMessage());
+				return false;
+			}
+			
+			// increment counter
+			++pos;
+		}
+		
+		return true;
 	}
 	
 	private boolean buildReceiptWhereClause(PreparedStatement statment, FieldParams params) {
-		return false;
+		int pos = 1;
+		
+		for (String key : params.keySet()) {
+			try {
+				// Attempt to assemble where clause
+				switch (key) {
+					
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				logger.warn("failed to build userinfo where clause, message=" + e.getMessage());
+				return false;
+			}
+			
+			// increment counter
+			++pos;
+		}
+		
+		return true;;
 	}
 	
 	
