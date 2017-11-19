@@ -77,7 +77,7 @@ CREATE TABLE userinfo (
     zipcode NUMBER(10),
     phone VARCHAR2(12),
     CONSTRAINT pk_userinfo PRIMARY KEY (useremail),
-    CONSTRAINT fk_userinfouser FOREIGN KEY (useremail) REFERENCES bankuser(useremail) ON DELETE CASCADE
+    CONSTRAINT fk_userinfouser FOREIGN KEY (useremail) REFERENCES bankuser(useremail)
 );
 /
 

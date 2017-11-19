@@ -104,60 +104,72 @@ public class UserDAOTest {
 
     @Test
     public void selectForAccount() throws Exception {
-        User user1 = new User("email1", "pass1");
-        User user2 = new User("email2", "pass2");
-        dao.save(user1);
-        dao.save(user2);
-
-        int balance1 = 1, balance2 = 2, balance3 = 3, balance4 = 4;
-        Account acc1 = new Account(user1.getEmail(), balance1);
-        Account acc2 = new Account(user2.getEmail(), balance2);
-        Account acc3 = new Account(user2.getEmail(), balance3);
-        Account acc4 = new Account(user2.getEmail(), balance4);
-
-        List<Account> accts = Arrays.asList(acc1, acc2, acc3, acc4);
         AccountDAO accDao = DAOUtils.getTestAccountDao();
-        for (Account acc: accts)
-            accDao.save(acc);
+        try {
+            User user1 = new User("email1", "pass1");
+            User user2 = new User("email2", "pass2");
+            dao.save(user1);
+            dao.save(user2);
 
-        List<Account> savedAccts = accDao.selectAll();
-        assertEquals(accts.size(), savedAccts.size());
-        for (Account savedAcc : savedAccts) {
-            assertTrue(accts.contains(savedAcc));
-            User queriedOwner = dao.selectForAccount(savedAcc.getNumber());
-            if (savedAcc.getBalance() > balance1)
-                assertEquals(user2, queriedOwner);
-            else
-                assertEquals(user1, queriedOwner);
+            int balance1 = 1, balance2 = 2, balance3 = 3, balance4 = 4;
+            Account acc1 = new Account(user1.getEmail(), balance1);
+            Account acc2 = new Account(user2.getEmail(), balance2);
+            Account acc3 = new Account(user2.getEmail(), balance3);
+            Account acc4 = new Account(user2.getEmail(), balance4);
+
+            List<Account> accts = Arrays.asList(acc1, acc2, acc3, acc4);
+            for (Account acc : accts)
+                accDao.save(acc);
+
+            List<Account> savedAccts = accDao.selectAll();
+            assertEquals(accts.size(), savedAccts.size());
+            for (Account savedAcc : savedAccts) {
+                assertTrue(accts.contains(savedAcc));
+                User queriedOwner = dao.selectForAccount(savedAcc.getNumber());
+                if (savedAcc.getBalance() > balance1)
+                    assertEquals(user2, queriedOwner);
+                else
+                    assertEquals(user1, queriedOwner);
+            }
+        }
+        finally {
+            accDao.deleteAll();
         }
     }
 
     @Test
     public void selectForRequest() throws Exception {
-        User user1 = new User("email1", "pass1");
-        User user2 = new User("email2", "pass2");
-        dao.save(user1);
-        dao.save(user2);
-
-        UserRequest req1 = new UserRequest(user1.getEmail(), UserRequest.PROMOTION);
-        UserRequest req2 = new UserRequest(user2.getEmail(), UserRequest.CREATION);
-        UserRequest req3 = new UserRequest(user2.getEmail(), UserRequest.CREATION);
-        UserRequest req4 = new UserRequest(user2.getEmail(), UserRequest.CREATION);
-
-        List<UserRequest> reqs = Arrays.asList(req1, req2, req3, req4);
         RequestDAO reqDao = DAOUtils.getTestRequestDao();
-        for (UserRequest req: reqs)
-            reqDao.save(req);
+        try {
+            User user1 = new User("email1", "pass1");
+            User user2 = new User("email2", "pass2");
+            dao.save(user1);
+            dao.save(user2);
 
-        List<UserRequest> savedReqs = reqDao.selectAll();
-        assertEquals(reqs.size(), savedReqs.size());
-        for (UserRequest savedReq : savedReqs) {
-            assertTrue(reqs.contains(savedReq));
-            User queriedOwner = dao.selectForRequest(savedReq.getId());
-            if (savedReq.getType() == UserRequest.CREATION)
-                assertEquals(user2, queriedOwner);
-            else
-                assertEquals(user1, queriedOwner);
+            UserRequest req1 = new UserRequest(user1.getEmail(), UserRequest.PROMOTION);
+            UserRequest req2 = new UserRequest(user2.getEmail(), UserRequest.CREATION);
+            UserRequest req3 = new UserRequest(user2.getEmail(), UserRequest.CREATION);
+            UserRequest req4 = new UserRequest(user2.getEmail(), UserRequest.CREATION);
+
+            List<UserRequest> reqs = Arrays.asList(req1, req2, req3, req4);
+            for (UserRequest req : reqs)
+                reqDao.save(req);
+
+            List<UserRequest> savedReqs = reqDao.selectAll();
+            assertEquals(reqs.size(), savedReqs.size());
+            for (UserRequest savedReq : savedReqs) {
+                assertTrue(reqs.contains(savedReq));
+                User queriedOwner = dao.selectForRequest(savedReq.getId());
+                if (savedReq.getType() == UserRequest.CREATION)
+                    assertEquals(user2, queriedOwner);
+                else
+                    assertEquals(user1, queriedOwner);
+            }
+            for (UserRequest savedReq : savedReqs)
+                reqDao.delete(savedReq.getId());
+        }
+        finally {
+            reqDao.deleteAll();
         }
     }
 
