@@ -20,6 +20,8 @@ public class WelcomePage extends Page{
         while(true){
             String cmd = InputUtils.readLine("command");
             switch (cmd) {
+                case "":
+                    break;
                 case "rc":
                     return new RegisterCustomerPage();
                 case "lc":

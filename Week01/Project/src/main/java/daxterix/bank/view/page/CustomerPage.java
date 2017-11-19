@@ -86,14 +86,14 @@ public class CustomerPage extends Page {
             System.out.println();
         }
         catch (SQLException e) {
-            System.out.println("[CustomerPage.printAccounts] SQL Error while retrieving user accounts.");
+            System.out.println("[CustomerPage.printAccounts] SQL Error while retrieving user accounts.\n");
         }
     }
 
     public Page processAccountCommand(String cmd) {
         String[] chunks = cmd.split("\\s+");
         if (chunks.length != 2) {
-            System.out.println("Invalid command/syntax. Enter 'help' to view possible commands and their syntax.");
+            System.out.println("Invalid command. Enter 'help' to view possible commands and their syntax.\n");
             return null;
         }
         switch (chunks[0]) {
@@ -103,7 +103,7 @@ public class CustomerPage extends Page {
                openAccount(chunks[1]);
                break;
             default:
-                System.out.println("Invalid command/syntax. Enter 'help' to view possible commands and their syntax.");
+                System.out.println("Invalid command. Enter 'help' to view possible commands and their syntax.\n");
         }
         return null;
     }
@@ -117,7 +117,7 @@ public class CustomerPage extends Page {
             else {
                 Account newAcc = new Account(customer.getEmail(), startingDeposit);
                 accountDao.save(newAcc);
-                System.out.println("Account successfully crated!");
+                System.out.println("Account successfully crated!\n");
                 printAccounts();
             }
         }
@@ -133,20 +133,22 @@ public class CustomerPage extends Page {
 
     public Page closeUser() {
         try {
-            if (!InputUtils.confirmDecision())
+            if (!InputUtils.confirmDecision()) {
+                System.out.println("Aborted.\n");
                 return null;
+            }
             if (accountDao.selectForUser(customer.getEmail()).size() != 0) {
-                System.out.println("You still have open accounts. Please empty and close these accounts first.");
+                System.out.println("You still have open accounts. Please empty and close them first.\n");
                 return null;
             }
             else{
                 userDao.delete(customer.getEmail());
-                System.out.println("User deleted.");
+                System.out.println("User deleted.\n");
                 return new WelcomePage();
             }
         }
         catch (SQLException e) {
-            System.out.println("[CustomerPage.closeUser] SQL Error selecting associated accounts OR deleting user.");
+            System.out.println("[CustomerPage.closeUser] SQL Error selecting associated accounts OR deleting user.\n");
         }
         return null;
     }
@@ -158,15 +160,15 @@ public class CustomerPage extends Page {
             Account selectedAcc = accountDao.select(accountNum);
             // account does not exist, or does not belong to user
             if (selectedAcc == null || !selectedAcc.getEmail().equals(customer.getEmail()))
-                System.out.println("You do not have any account with the given number.");
+                System.out.println("You do not have any account with the given number.\n");
             else
                 return new UserAccountPage(customer, selectedAcc);
         }
         catch (NumberFormatException | NullPointerException e) {
-            System.out.println("Invalid Syntax. Account number must be an Integer");
+            System.out.println("Invalid Syntax. Account number must be an Integer.\n");
         }
         catch (SQLException e) {
-            System.out.println("[CustomerPage] SQL Error while fetching selected id");
+            System.out.println("[CustomerPage] SQL Error while fetching selected id.\n");
         }
         return null;
     }
@@ -186,14 +188,14 @@ public class CustomerPage extends Page {
                     requestAlreadyFiled = true;
 
             if (requestAlreadyFiled)
-                System.out.println("Promotion request previously filed. Please wait for an admin to review request.");
+                System.out.println("Promotion request previously filed. Please wait for an admin to review request.\n");
             else {
                 reqDao.save(promotionReq);
-                System.out.println("Request filed successfully!");
+                System.out.println("Request filed.\n");
             }
         }
         catch (SQLException e) {
-            System.out.println("[CustomerPage.grantPromotionRequest] SQL Error checking prior requests OR saving new request");
+            System.out.println("[CustomerPage.grantPromotionRequest] SQL Error checking prior requests OR saving new request.\n");
         }
     }
 

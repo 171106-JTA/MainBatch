@@ -23,7 +23,6 @@ public class UserAccountPage extends Page {
     public UserAccountPage(User user, Account myAccount) {
         this.user = user;
         this.myAccount = myAccount;
-        assert(user.getEmail().equals(myAccount.getEmail()));     // todo
     }
 
     @Override
@@ -37,6 +36,8 @@ public class UserAccountPage extends Page {
             String cmd = InputUtils.readLine("command");
 
             switch (cmd) {
+                case "":
+                    break;
                 case "home":
                     return new CustomerPage(user);
                 case "logout":
@@ -65,27 +66,35 @@ public class UserAccountPage extends Page {
      */
     void evalTxCommand(String cmd) {
         String[] chunks = cmd.split("\\s+");
-        if (chunks.length != 2)
-            System.out.println("Invalid command/syntax. Enter 'help' to view available commands and their syntax.");
+
+        if (chunks.length < 2 || chunks.length > 3) {
+            System.out.println("Invalid command. Enter 'help' to view available commands and their syntax.\n");
+            return;
+        }
 
         String first = chunks[0];
         String second = chunks[1];
-
-        try {
-            switch (first) {
-                case "withdraw":
-                    withdraw(Double.parseDouble(second));
-                case "deposit":
-                    deposit(Double.parseDouble(second));
-                case "transfer":
-                    transfer(second);
-                default:
-                    System.out.println("Invalid command. Enter 'help' to view available commands and their syntax.");
+        if (chunks.length == 2) {
+            try {
+                switch (first) {
+                    case "withdraw":
+                        handleWithdrawal(Double.parseDouble(second));
+                        return;
+                    case "deposit":
+                        handleDeposit(Double.parseDouble(second));
+                        return;
+                }
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Invalid amount. Please enter a positive decimal.\n");
             }
         }
-        catch (NumberFormatException e) {
-            System.out.println("Invalid amount. Please enter a positive number.");
+        else if (first.equals("transfer")){ //(chunks.length == 3)
+            String third = chunks[2];
+            handleTransfer(second, third);
+            return;
         }
+        System.out.println("Invalid command. Enter 'help' to view available commands and their syntax.\n");
     }
 
     /**
@@ -93,7 +102,7 @@ public class UserAccountPage extends Page {
      *
      * @param amt
      */
-    void withdraw(double amt) {
+    void handleWithdrawal(double amt) {
         try {
             myAccount.withdraw(amt);
             accountDao.update(myAccount);
@@ -101,7 +110,7 @@ public class UserAccountPage extends Page {
             printAccountBalance();
         }
         catch (SQLException e) {
-            System.out.println("[UserAccountPage.deposit] SQL Error while depositing.");
+            System.out.println("[UserAccountPage.deposit] SQL Error while depositing.\n");
         }
     }
 
@@ -111,7 +120,7 @@ public class UserAccountPage extends Page {
      * @param amt
      * @return - SUCCESS if deposit is successful
      */
-    void deposit(double amt) {
+    void handleDeposit(double amt) {
         try {
             myAccount.deposit(amt);
             accountDao.update(myAccount);
@@ -119,44 +128,17 @@ public class UserAccountPage extends Page {
             printAccountBalance();
         }
         catch (SQLException e) {
-            System.out.println("[UserAccountPage.deposit] SQL Error while depositing.");
+            System.out.println("[UserAccountPage.deposit] SQL Error while depositing.\n");
         }
     }
 
-     public Page closeAccount() {
-        try {
-            if (!InputUtils.confirmDecision())
-                return null;
-
-            if (myAccount.getBalance() > 0) {
-                System.out.println("Cannot close account. Please withdraw or transfer funds away then try again.");
-                return null;
-            }
-            else{
-                accountDao.delete(myAccount.getNumber());
-                System.out.println("Account closed.");
-                return new WelcomePage();
-            }
-        }
-        catch (SQLException e) {
-            System.out.println("[UserAccountPage.closeAccount] SQL Error while closing account.");
-        }
-        return null;
-    }
-
-    /**
-     * Transfer given amount to given user
+        /**
+     * Transfer given amount to given account
      *
-     * @param amtDest
+     * @param first -- represents the amount
+     * @param second -- represents the destination
      */
-    void transfer(String amtDest) {
-        String[] chunks = amtDest.split("\\s+");
-        if (chunks.length != 2)
-            System.out.println("Invalid command/syntax. Enter 'help' to view available commands and their syntax.");
-
-        String first = chunks[0];
-        String second = chunks[1];
-
+    void handleTransfer(String first, String second) {
         try {
             double transferAmt = Double.parseDouble(first);
             long destAccountNum = Long.parseLong(second);
@@ -183,6 +165,30 @@ public class UserAccountPage extends Page {
             System.out.println("Invalid transfer command syntax. Destination must be an integer, and amount can be any positive decimal.\n");
         }
     }
+
+     public Page closeAccount() {
+        try {
+            if (!InputUtils.confirmDecision()) {
+                System.out.println("Aborted.\n");
+                return null;
+            }
+
+            if (myAccount.getBalance() > 0) {
+                System.out.println("Cannot close account. Please withdraw or transfer funds away then try again.\n");
+                return null;
+            }
+            else{
+                accountDao.delete(myAccount.getNumber());
+                System.out.println("Account closed.");
+                return new CustomerPage(user);
+            }
+        }
+        catch (SQLException e) {
+            System.out.println("[UserAccountPage.closeAccount] SQL Error while closing account.\n");
+        }
+        return null;
+    }
+
 
     /**
      * print the customer's account information; the balance in this case

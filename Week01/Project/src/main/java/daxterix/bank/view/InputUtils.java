@@ -143,7 +143,7 @@ public class InputUtils {
      * @return - true if user indicates intent to quit; false otherwise
      */
     public static boolean confirmDecision() {
-       System.out.println("Are you sure ('YES' to proceed, anything else to abort)?: ");
+       System.out.print("Are you sure ('YES' to proceed, anything else to abort)?: ");
        Scanner in = new Scanner(System.in);
        String decision = in.nextLine().trim();
        return (decision.equals("YES"));
