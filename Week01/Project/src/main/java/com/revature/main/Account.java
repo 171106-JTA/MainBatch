@@ -1,4 +1,4 @@
-package com.revature.project1;
+package com.revature.main;
 
 import java.text.DecimalFormat;
 import java.util.InputMismatchException;

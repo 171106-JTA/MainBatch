@@ -1,4 +1,4 @@
-package com.revature.project1;
+package com.revature.main;
 
 /**
  * Defines and implements administrative funcitonality, e.g. account access,

@@ -1,4 +1,4 @@
-package com.revature.project1;
+package com.revature.main;
 
 import java.io.Serializable;
 
@@ -12,8 +12,10 @@ import java.io.Serializable;
  * Implements comparable so that natural sorting of list defaults to numerical
  * order by the account status flag.
  */
-public class User implements Serializable, Comparable<User> {
-	private static final long serialVersionUID = -530076356915821967L;
+//public class User implements Serializable, Comparable<User> {
+//	private static final long serialVersionUID = -530076356915821967L;
+public class User implements Comparable<User> {
+	
 	private String ID;
 	private String password;
 	private double balance;

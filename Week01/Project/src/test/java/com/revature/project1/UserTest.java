@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
 
+import com.revature.main.User;
+
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 /**
  * Tests corresponding user object is returned, based on id.
