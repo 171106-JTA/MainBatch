@@ -15,7 +15,7 @@ public class OutputUtils {
      * @param cmdCodes - triggering commands
      */
     public static void printCommands(String[] cmds, String[] cmdCodes) {
-        System.out.println("\nYou can do one of the following:\n");
+        programReply("You can do one of the following:");
 
         for (int i = 0; i+1 < cmds.length; i += 2) {
             String left = String.format("(%s) %s", cmdCodes[i], cmds[i]);
@@ -46,14 +46,14 @@ public class OutputUtils {
 
     public static enum AnsiColor {
         ANSI_RESET("\u001B[0m"),
-        ANSI_BLACK("\u001B[30m"),
-        ANSI_RED("\u001B[31m"),
-        ANSI_GREEN("\u001B[32m"),
-        ANSI_YELLOW("\u001B[33m"),
-        ANSI_BLUE("\u001B[34m"),
-        ANSI_PURPLE("\u001B[35m"),
-        ANSI_CYAN("\u001B[36m"),
-        ANSI_WHITE("\u001B[37m");
+        BLACK("\u001B[30m"),
+        RED("\u001B[31m"),
+        GREEN("\u001B[32m"),
+        YELLOW("\u001B[33m"),
+        BLUE("\u001B[34m"),
+        PURPLE("\u001B[35m"),
+        CYAN("\u001B[36m"),
+        WHITE("\u001B[37m");
 
         private AnsiColor(String color) {
             value = color;
@@ -67,7 +67,10 @@ public class OutputUtils {
     }
 
     public static void printColor(AnsiColor c, String text) {
-        System.out.println(c.getValue() + text + ANSI_RESET);
+        System.out.print(c.getValue() + text + ANSI_RESET.getValue());
+    }
+    public static void printlnColor(AnsiColor c, String text) {
+        System.out.println(c.getValue() + text + ANSI_RESET.getValue());
     }
 
     public static void printfColor(AnsiColor c, String formatString, String ...formatArgs) {
@@ -76,5 +79,11 @@ public class OutputUtils {
 
     public static void printflnColor(AnsiColor c, String formatString, String ...formatArgs) {
         System.out.printf(c.getValue() + formatString + ANSI_RESET.getValue() + "\n", formatArgs);
+    }
+
+    public static void programReply(String message) {
+        System.out.println();
+        System.out.println(message);
+        System.out.println();
     }
 }

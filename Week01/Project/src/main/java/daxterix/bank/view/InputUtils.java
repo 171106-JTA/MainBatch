@@ -4,8 +4,10 @@ import java.io.Console;
 import java.util.Scanner;
 import java.util.function.Supplier;
 
-import daxterix.bank.view.OutputUtils;
 import daxterix.bank.view.OutputUtils.AnsiColor;
+
+import static daxterix.bank.view.OutputUtils.printColor;
+import static daxterix.bank.view.OutputUtils.printlnColor;
 
 public class InputUtils {
     /**
@@ -14,7 +16,7 @@ public class InputUtils {
      * @param fieldName
      */
     public static void printPrompt(String fieldName) {
-        OutputUtils.printfColor(AnsiColor.ANSI_YELLOW, "enter %s: ", fieldName);
+        OutputUtils.printfColor(AnsiColor.YELLOW, "enter %s: ", fieldName);
     }
 
     /**
@@ -143,7 +145,7 @@ public class InputUtils {
      * @return - true if user indicates intent to quit; false otherwise
      */
     public static boolean confirmDecision() {
-       System.out.print("Are you sure ('YES' to proceed, anything else to abort)?: ");
+       printColor(AnsiColor.YELLOW, "Are you sure ('YES' to proceed, anything else to abort)?: ");
        Scanner in = new Scanner(System.in);
        String decision = in.nextLine().trim();
        return (decision.equals("YES"));

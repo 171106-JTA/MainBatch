@@ -13,6 +13,8 @@ import daxterix.bank.view.OutputUtils;
 import java.sql.SQLException;
 import java.util.List;
 
+import static daxterix.bank.view.OutputUtils.programReply;
+
 public class CustomerPage extends Page {
     private static final double MIN_STARTING_DEPOSIT = 100;
 
@@ -77,23 +79,23 @@ public class CustomerPage extends Page {
         try {
             List<Account> accts = accountDao.selectForUser(customer.getEmail());
             if (accts.isEmpty()) {
-                System.out.println("\nYou have opened no accounts.\n");
+                programReply("You have opened no accounts.");
                 return;
             }
-            System.out.println("\nYour accounts:");
+            programReply("Your accounts");
             for (Account a: accts)
                 System.out.printf("\t%d\t$%.2f\n", a.getNumber(), a.getBalance());
             System.out.println();
         }
         catch (SQLException e) {
-            System.out.println("[CustomerPage.printAccounts] SQL Error while retrieving user accounts.\n");
+            programReply("[CustomerPage.printAccounts] SQL Error while retrieving user accounts.");
         }
     }
 
     public Page processAccountCommand(String cmd) {
         String[] chunks = cmd.split("\\s+");
         if (chunks.length != 2) {
-            System.out.println("Invalid command. Enter 'help' to view possible commands and their syntax.\n");
+            programReply("Invalid command. Enter 'help' to view possible commands and their syntax.");
             return null;
         }
         switch (chunks[0]) {
@@ -103,7 +105,7 @@ public class CustomerPage extends Page {
                openAccount(chunks[1]);
                break;
             default:
-                System.out.println("Invalid command. Enter 'help' to view possible commands and their syntax.\n");
+                programReply("Invalid command. Enter 'help' to view possible commands and their syntax.");
         }
         return null;
     }
@@ -113,20 +115,20 @@ public class CustomerPage extends Page {
             double startingDeposit = Double.parseDouble(depositStr);
             double amtd = Double.parseDouble(depositStr);
             if (amtd < MIN_STARTING_DEPOSIT)
-                System.out.printf("Starting deposit must be at least %s.\n", MIN_STARTING_DEPOSIT);
+                System.out.printf("\nStarting deposit must be at least %s.\n\n", MIN_STARTING_DEPOSIT);
             else {
                 Account newAcc = new Account(customer.getEmail(), startingDeposit);
                 accountDao.save(newAcc);
-                System.out.println("Account successfully crated!\n");
+                programReply("Account successfully crated!");
                 printAccounts();
             }
         }
         catch (NumberFormatException | NullPointerException e){
-            System.out.printf("Starting deposit must be a decimal of at least %s.\n", MIN_STARTING_DEPOSIT);
+            System.out.printf("\nStarting deposit must be a decimal of at least %s.\n\n", MIN_STARTING_DEPOSIT);
         }
         catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("[CustomerPage.openAccount] SQL Error opening new account.");
+            programReply("[CustomerPage.openAccount] SQL Error opening new account.");
         }
         return null;
     }
@@ -134,21 +136,21 @@ public class CustomerPage extends Page {
     public Page closeUser() {
         try {
             if (!InputUtils.confirmDecision()) {
-                System.out.println("Aborted.\n");
+                programReply("Aborted.");
                 return null;
             }
             if (accountDao.selectForUser(customer.getEmail()).size() != 0) {
-                System.out.println("You still have open accounts. Please empty and close them first.\n");
+                programReply("You still have open accounts. Please empty and close them first.");
                 return null;
             }
             else{
                 userDao.delete(customer.getEmail());
-                System.out.println("User deleted.\n");
+                programReply("User deleted.");
                 return new WelcomePage();
             }
         }
         catch (SQLException e) {
-            System.out.println("[CustomerPage.closeUser] SQL Error selecting associated accounts OR deleting user.\n");
+            programReply("[CustomerPage.closeUser] SQL Error selecting associated accounts OR deleting user.");
         }
         return null;
     }
@@ -160,15 +162,15 @@ public class CustomerPage extends Page {
             Account selectedAcc = accountDao.select(accountNum);
             // account does not exist, or does not belong to user
             if (selectedAcc == null || !selectedAcc.getEmail().equals(customer.getEmail()))
-                System.out.println("You do not have any account with the given number.\n");
+                programReply("You do not have any account with the given number.");
             else
                 return new UserAccountPage(customer, selectedAcc);
         }
         catch (NumberFormatException | NullPointerException e) {
-            System.out.println("Invalid Syntax. Account number must be an Integer.\n");
+            programReply("Invalid Syntax. Account number must be an Integer.");
         }
         catch (SQLException e) {
-            System.out.println("[CustomerPage] SQL Error while fetching selected id.\n");
+            programReply("[CustomerPage] SQL Error while fetching selected id.");
         }
         return null;
     }
@@ -176,7 +178,7 @@ public class CustomerPage extends Page {
 
     public void handlePromoteRequest() {
         if (customer.isAdmin()) {
-            System.out.println("You are already an admin.\n");
+            programReply("You are already an admin.");
             return;
         }
         try {
@@ -188,14 +190,14 @@ public class CustomerPage extends Page {
                     requestAlreadyFiled = true;
 
             if (requestAlreadyFiled)
-                System.out.println("Promotion request previously filed. Please wait for an admin to review request.\n");
+                programReply("Promotion request previously filed. Please wait for an admin to review request.");
             else {
                 reqDao.save(promotionReq);
-                System.out.println("Request filed.\n");
+                programReply("Promotion request filed.");
             }
         }
         catch (SQLException e) {
-            System.out.println("[CustomerPage.grantPromotionRequest] SQL Error checking prior requests OR saving new request.\n");
+            programReply("[CustomerPage.grantPromotionRequest] SQL Error checking prior requests OR saving new request.");
         }
     }
 

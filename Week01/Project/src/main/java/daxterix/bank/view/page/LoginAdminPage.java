@@ -7,6 +7,8 @@ import daxterix.bank.view.InputUtils;
 
 import java.sql.SQLException;
 
+import static daxterix.bank.view.OutputUtils.programReply;
+
 public class LoginAdminPage extends Page {
 
     /**
@@ -20,21 +22,21 @@ public class LoginAdminPage extends Page {
         User admin = null;
 
         while(true) {
-            String username = InputUtils.readLine("username");
+            String email = InputUtils.readLine("email");
             String password = InputUtils.readMasked("password");
 
             UserDAO dao = DAOUtils.getUserDao();
             try {
-                admin = dao.select(username);
+                admin = dao.select(email);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
             if (admin == null || !admin.getPassword().equals(password))
-                System.out.println("Invalid credentials.");
+                programReply("Invalid credentials.");
             else if (admin.isLocked())
-                System.out.println("Nice try, but your account is locked.");
+                programReply("Nice try, but your account is locked.");
             else if (!admin.isAdmin())
-                System.out.println("Nice try, but you're not an admin.");
+                programReply("Nice try, but you're not an admin.");
             else
                 return new AdminPage(admin);
 

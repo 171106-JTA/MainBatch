@@ -9,6 +9,8 @@ import daxterix.bank.view.InputUtils;
 
 import java.sql.SQLException;
 
+import static daxterix.bank.view.OutputUtils.programReply;
+
 public class RegisterCustomerPage extends Page {
     private UserDAO userDao = DAOUtils.getUserDao();
 
@@ -23,7 +25,7 @@ public class RegisterCustomerPage extends Page {
         while(true) {
             email = InputUtils.readNonEmptyLine("email");
             if (userExists(email)) {
-                System.out.println("Email taken. Please choose another email.");
+                programReply("Email taken. Please choose another email.");
                 if (InputUtils.checkQuit())
                     return new WelcomePage();
             }
@@ -31,13 +33,13 @@ public class RegisterCustomerPage extends Page {
                 break;
         }
         String password = InputUtils.readAndConfirm(() -> InputUtils.readMasked("password"));
-        System.out.printf("user %s created\n", email);
+        System.out.printf("\nuser %s created\n\n", email);
 
         RequestDAO reqDao = DAOUtils.getRequestDao();
         try {
             userDao.save(new User(email, password));
             reqDao.save(new UserRequest(email, UserRequest.CREATION));
-            System.out.println("New master account created (locked). Please wait for an admin to unlock your new account.");
+            programReply("New master account created (locked). Please wait for an admin to unlock your new account.");
         }
         catch (SQLException e) {
             e.printStackTrace();
@@ -54,7 +56,7 @@ public class RegisterCustomerPage extends Page {
         try {
             return userDao.select(email) != null;
         } catch (SQLException e) {
-            System.out.println("SQL Exception while checking username");
+            programReply("SQL Exception while checking username");
         }
         return false;
     }

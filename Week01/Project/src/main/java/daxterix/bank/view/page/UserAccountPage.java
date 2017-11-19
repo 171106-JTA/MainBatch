@@ -9,6 +9,8 @@ import daxterix.bank.view.OutputUtils;
 
 import java.sql.SQLException;
 
+import static daxterix.bank.view.OutputUtils.programReply;
+
 /**
  *
  * view account information, and perform transaction
@@ -68,7 +70,7 @@ public class UserAccountPage extends Page {
         String[] chunks = cmd.split("\\s+");
 
         if (chunks.length < 2 || chunks.length > 3) {
-            System.out.println("Invalid command. Enter 'help' to view available commands and their syntax.\n");
+            programReply("Invalid command. Enter 'help' to view available commands and their syntax.");
             return;
         }
 
@@ -86,7 +88,7 @@ public class UserAccountPage extends Page {
                 }
             }
             catch (NumberFormatException e) {
-                System.out.println("Invalid amount. Please enter a positive decimal.\n");
+                programReply("Invalid amount. Please enter a positive decimal.");
             }
         }
         else if (first.equals("transfer")){ //(chunks.length == 3)
@@ -94,7 +96,7 @@ public class UserAccountPage extends Page {
             handleTransfer(second, third);
             return;
         }
-        System.out.println("Invalid command. Enter 'help' to view available commands and their syntax.\n");
+        programReply("Invalid command. Enter 'help' to view available commands and their syntax.");
     }
 
     /**
@@ -106,11 +108,11 @@ public class UserAccountPage extends Page {
         try {
             myAccount.withdraw(amt);
             accountDao.update(myAccount);
-            System.out.println("Withdrawal successful.");
+            programReply("Withdrawal successful.");
             printAccountBalance();
         }
         catch (SQLException e) {
-            System.out.println("[UserAccountPage.deposit] SQL Error while depositing.\n");
+            programReply("[UserAccountPage.deposit] SQL Error while depositing.");
         }
     }
 
@@ -124,11 +126,11 @@ public class UserAccountPage extends Page {
         try {
             myAccount.deposit(amt);
             accountDao.update(myAccount);
-            System.out.println("Deposit successful.");
+            programReply("Deposit successful.");
             printAccountBalance();
         }
         catch (SQLException e) {
-            System.out.println("[UserAccountPage.deposit] SQL Error while depositing.\n");
+            programReply("[UserAccountPage.deposit] SQL Error while depositing.");
         }
     }
 
@@ -145,46 +147,46 @@ public class UserAccountPage extends Page {
 
             Account destAcct = accountDao.select(destAccountNum);
             if (destAcct == null || !destAcct.getEmail().equals(user.getEmail()))
-                System.out.println("You can only transfer funds between your accounts.\n");
+                programReply("You can only transfer funds between your accounts.");
             else if (destAcct.getNumber() == myAccount.getNumber())
-                System.out.println("You are attempting to transfer between the same account account.\n");
+                programReply("You are attempting to transfer between the same account account.");
             else if (!myAccount.withdraw(transferAmt))
-                System.out.println("Nice try, but you can't transfer more than you own.\n");
+                programReply("Nice try, but you can't transfer more than you own.");
             else {
                 destAcct.deposit(transferAmt);
                 accountDao.update(destAcct);
                 accountDao.update(myAccount);
-                System.out.println("Transfer successful!");
+                programReply("Transfer successful!");
                 printAccountBalance();
             }
         }
         catch (SQLException e) {
-            System.out.println("[UserAccountPage.transfer] SQL Error while transferring.");
+            programReply("[UserAccountPage.transfer] SQL Error while transferring.");
         }
         catch (NumberFormatException e) {
-            System.out.println("Invalid transfer command syntax. Destination must be an integer, and amount can be any positive decimal.\n");
+            programReply("Invalid transfer command syntax. Destination must be an integer, and amount can be any positive decimal.");
         }
     }
 
      public Page closeAccount() {
         try {
             if (!InputUtils.confirmDecision()) {
-                System.out.println("Aborted.\n");
+                programReply("Aborted.");
                 return null;
             }
 
             if (myAccount.getBalance() > 0) {
-                System.out.println("Cannot close account. Please withdraw or transfer funds away then try again.\n");
+                programReply("Cannot close account. Please withdraw or transfer funds away then try again.");
                 return null;
             }
             else{
                 accountDao.delete(myAccount.getNumber());
-                System.out.println("Account closed.");
+                programReply("Account closed.");
                 return new CustomerPage(user);
             }
         }
         catch (SQLException e) {
-            System.out.println("[UserAccountPage.closeAccount] SQL Error while closing account.\n");
+            programReply("[UserAccountPage.closeAccount] SQL Error while closing account.");
         }
         return null;
     }
@@ -195,11 +197,11 @@ public class UserAccountPage extends Page {
      */
 
     void printAccountBalance() {
-        System.out.printf("Account Balance: %s\n\n", myAccount.getBalance());
+        System.out.printf("\nAccount Balance: %s\n\n", myAccount.getBalance());
     }
 
     @Override
     public String getTitle() {
-        return String.format("Welcome %s. Interact with your account #%d below", user.getEmail(), myAccount.getNumber());
+        return String.format("Welcome %s. Interact with your account (id %d) below", user.getEmail(), myAccount.getNumber());
     }
 }

@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class CreateFirstAdmin {
     public static void main(String[] args) {
-        User admin = new User("admin@admin.com", "password");
+        User admin = new User("admin", "admin");
         admin.setAdmin(true);
         admin.setLocked(false);
         UserDAO userDao = DAOUtils.getUserDao();

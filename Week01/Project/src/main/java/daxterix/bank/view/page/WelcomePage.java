@@ -3,6 +3,8 @@ package daxterix.bank.view.page;
 import daxterix.bank.view.InputUtils;
 import daxterix.bank.view.OutputUtils;
 
+import static daxterix.bank.view.OutputUtils.programReply;
+
 public class WelcomePage extends Page{
 
     /**
@@ -32,10 +34,10 @@ public class WelcomePage extends Page{
                     OutputUtils.printCommands(cmds, codes);
                     break;
                 case "Quit":
-                    System.out.println("Be seeing ya!");
+                    programReply("Be seeing ya!");
                     return null;
                 default:
-                    System.out.println("Invalid command. Try again.");
+                    programReply("Invalid command. Try again.");
                     break;
             }
         }

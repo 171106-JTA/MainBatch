@@ -7,6 +7,8 @@ import daxterix.bank.view.InputUtils;
 
 import java.sql.SQLException;
 
+import static daxterix.bank.view.OutputUtils.programReply;
+
 public class LoginCustomerPage extends Page{
     /**
      * see Page._run()
@@ -15,23 +17,23 @@ public class LoginCustomerPage extends Page{
     @Override
     public Page _run() {
         while(true) {
-            String username = InputUtils.readLine("username");
+            String email = InputUtils.readLine("email");
             String password = InputUtils.readMasked("password");
             UserDAO dao = DAOUtils.getUserDao();
 
             User customer = null;
             try {
-                customer = dao.select(username);
+                customer = dao.select(email);
             }
             catch (SQLException e) {
-                System.out.println("[LoginCustomerPage._run] SQL Exception while retrieving user\n");
+                programReply("[LoginCustomerPage._run] SQL Exception while retrieving user");
             }
             if (customer == null)
-                System.out.println("User does not exist. Please try again\n");
+                programReply("User does not exist. Please try again");
             else if (!customer.getPassword().equals(password))
-                System.out.println("Invalid credentials. Please try again\n");
+                programReply("Invalid credentials. Please try again");
             else if (customer.isLocked())
-                System.out.println("Account is currently locked. Please wait for an admin to unlock it.\n");
+                programReply("Account is currently locked. Please wait for an admin to unlock it.");
             else
                 return new CustomerPage(customer);
 
