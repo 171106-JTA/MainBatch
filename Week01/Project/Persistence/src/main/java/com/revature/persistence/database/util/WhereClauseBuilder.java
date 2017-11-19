@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
+import com.revature.businessobject.info.CodeList;
 import com.revature.businessobject.info.account.Account;
 import com.revature.businessobject.info.account.Checking;
 import com.revature.businessobject.info.account.Credit;
@@ -41,6 +42,8 @@ public class WhereClauseBuilder {
 				return buildCheckingWhereClause(statement, params);
 			case BusinessClass.ACCOUNT:
 				return buildAccountWhereClause(statement, params);
+			case BusinessClass.CODELIST:
+				return buildCodeListWhereClause(statement, params);
 			default:
 				return false;
 		}
@@ -201,7 +204,7 @@ public class WhereClauseBuilder {
 				}
 			} catch (NumberFormatException | SQLException e) {
 				e.printStackTrace();
-				logger.warn("failed to build userinfo where clause, message=" + e.getMessage());
+				logger.warn("failed to build credit where clause, message=" + e.getMessage());
 				return false;
 			}
 			
@@ -212,27 +215,7 @@ public class WhereClauseBuilder {
 		return true;
 	}
 	
-	private boolean buildSavingsWhereClause(PreparedStatement statement, FieldParams params) {
-		int pos = 1;
-		
-		for (String key : params.keySet()) {
-			try {
-				// Attempt to assemble where clause
-				switch (key) {
-					
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-				logger.warn("failed to build userinfo where clause, message=" + e.getMessage());
-				return false;
-			}
-			
-			// increment counter
-			++pos;
-		}
-		
-		return true;
-	}
+
 	
 	private boolean buildCodeListWhereClause(PreparedStatement statement, FieldParams params) {
 		int pos = 1;
@@ -241,9 +224,16 @@ public class WhereClauseBuilder {
 			try {
 				// Attempt to assemble where clause
 				switch (key) {
-					
+					case CodeList.ID: 
+						statement.setLong(pos, Long.parseLong(params.get(key)));
+						break;
+					case CodeList.CODE:
+					case CodeList.VALUE:
+					case CodeList.DESCRIPTION:
+						statement.setString(pos, params.get(key));
+						break;
 				}
-			} catch (SQLException e) {
+			} catch (NumberFormatException | SQLException e) {
 				e.printStackTrace();
 				logger.warn("failed to build userinfo where clause, message=" + e.getMessage());
 				return false;
@@ -256,26 +246,13 @@ public class WhereClauseBuilder {
 		return true;
 	}
 	
+	
+	private boolean buildSavingsWhereClause(PreparedStatement statement, FieldParams params) {
+		return false;
+	}	
+	
 	private boolean buildReceiptWhereClause(PreparedStatement statment, FieldParams params) {
-		int pos = 1;
-		
-		for (String key : params.keySet()) {
-			try {
-				// Attempt to assemble where clause
-				switch (key) {
-					
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-				logger.warn("failed to build userinfo where clause, message=" + e.getMessage());
-				return false;
-			}
-			
-			// increment counter
-			++pos;
-		}
-		
-		return true;;
+		return false;
 	}
 	
 	
