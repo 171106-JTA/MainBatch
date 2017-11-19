@@ -9,6 +9,7 @@ import daxterix.bank.view.InputUtils;
 import daxterix.bank.view.OutputUtils;
 
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class AdminPage extends Page {
@@ -72,13 +73,21 @@ public class AdminPage extends Page {
             if (requests.isEmpty())
                 System.out.println("No pending Requests\n");
             else {
-                for (UserRequest req : requests)
-                    System.out.println(req);
+                System.out.println("\nPending Requests");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm:ss a MM/dd/yyyy");
+                for (UserRequest req : requests) {
+                    System.out.printf(
+                            "\t(id %5s)\t%-20s\tby %-25s on %s\n",
+                            ""+req.getId(),
+                            req.getType() == UserRequest.CREATION? "Unlock Request" : "Promotion Request",
+                            req.getFilerEmail(), formatter.format(req.getFileDate())
+                    );
+                }
                 System.out.println();
             }
         }
         catch (SQLException e) {
-            System.out.println("[AdminPage.printPendingRequests] SQL Error while retrieving pending requests.");
+            System.out.println("[AdminPage.printPendingRequests] SQL Error while retrieving pending requests.\n");
         }
     }
 
@@ -93,22 +102,29 @@ public class AdminPage extends Page {
      */
     void evalCommand(String cmd) {
         String[] chunks = cmd.split("\\s+");
-        if (chunks.length != 2)
-            System.out.println("Invalid command. Enter 'help' to see available commands and their syntax.");
+        if (chunks.length != 2) {
+            System.out.println("Invalid command. Enter 'help' to see available commands and their syntax.\n");
+            return;
+        }
 
-        String second = chunks[1];
-
-        switch (second) {
+        String first = chunks[0], second = chunks[1];
+        switch (first) {
+            case "grant":
+            case "fulfill":
             case "accept":
                 handleRequest(second);
+                break;
             case "drop":
                 dropRequest(second);
+                break;
             case "lock":
                 lockAccount(second);
+                break;
             case "unlock":
                 unlockAccount(second);
+                break;
             default:
-                System.out.println("Invalid command. Enter 'help' to see available commands and their syntax.");
+                System.out.println("Invalid command. Enter 'help' to see available commands and their syntax.\n");
         }
     }
 
@@ -119,16 +135,16 @@ public class AdminPage extends Page {
         try {
             List<User> customers = userDao.selectAll();
             if (customers.isEmpty())
-                System.out.println("No registered users\n");
+                System.out.println("No registered users");
             else {
-                System.out.println("Users\n");
+                System.out.println("\nUsers");
                 for (User u : customers)
                     System.out.printf("\t%-30s %-10s  %-10s\n", u.getEmail(), u.isAdmin()? "Admin" : "Customer", u.isLocked()?"Locked" : "Unlocked");
-                System.out.println();
             }
+            System.out.println();
         }
         catch (SQLException e) {
-            System.out.println("[AdminPage.printUsers] SQL Error while fetching all users");
+            System.out.println("[AdminPage.printUsers] SQL Error while fetching all users\n");
         }
     }
 
@@ -151,7 +167,7 @@ public class AdminPage extends Page {
             }
         }
         catch (SQLException e) {
-            System.out.println("[AdminPage.lockAccount] SQL Error while retrieving user for locking OR while locking user");
+            System.out.println("[AdminPage.lockAccount] SQL Error while retrieving user for locking OR while locking user.\n");
         }
     }
 
@@ -164,18 +180,18 @@ public class AdminPage extends Page {
         try {
             User toBeUnlocked = userDao.select(second);
             if (toBeUnlocked == null)
-                System.out.println("\nUser does not exist.\n");
+                System.out.println("User does not exist.\n");
             else if (toBeUnlocked.isAdmin())
-                System.out.println("\nI lied. You cannot lock or unlock an Admin.\n");
+                System.out.println("I lied. You cannot lock or unlock an Admin.\n");
             else if (!toBeUnlocked.isLocked())
-                System.out.println("\nUser is not locked.\n");
+                System.out.println("User is not locked.\n");
             else {
                 toBeUnlocked.setLocked(false);
                 userDao.update(toBeUnlocked);
             }
         }
         catch (SQLException e) {
-            System.out.println("[AdminPage.lockAccount] SQL Error while retrieving user for unlocking OR while unlocking user");
+            System.out.println("[AdminPage.lockAccount] SQL Error while retrieving user for unlocking OR while unlocking user.\n");
         }
     }
 
@@ -195,20 +211,20 @@ public class AdminPage extends Page {
             User u = userDao.select(req.getFilerEmail());   // fileEmail is an FK meaning user must exist
             if (req.getType() == UserRequest.CREATION)
                 if (!u.isLocked())
-                    System.out.println("User is already unlocked.");
+                    System.out.println("User is already unlocked.\n");
                 else
                     grantCreationRequest(req, u);
             else
                 if (u.isAdmin())
-                    System.out.println("User is already an admin.");
+                    System.out.println("User is already an admin.\n");
                 else
                     grantPromotionRequest(req, u);
         }
         catch (SQLException e){
-            System.out.println("[AdminPage.handleRequest] SQL Error while handling request command");
+            System.out.println("[AdminPage.handleRequest] SQL Error while handling request command.\n");
         }
         catch (NullPointerException | NumberFormatException e) {
-            System.out.println("Please provide a valid request id. Press 'printreq' to view pending requests and their ids\n");
+            System.out.println("Please provide a valid request id. Press 'printreq' to view pending requests and their ids.\n");
         }
 
     }
@@ -227,10 +243,10 @@ public class AdminPage extends Page {
             reqDao.delete(req.getId());
             u.setLocked(false);
             userDao.update(u);
-            System.out.println("\nUser unlocked\n");
+            System.out.println("User unlocked\n");
         }
         catch (SQLException e) {
-            System.out.println("[AdminPage.grantCreationRequest] SQL Error while granting creation request");
+            System.out.println("[AdminPage.grantCreationRequest] SQL Error while granting creation request.\n");
         }
     }
 
@@ -250,10 +266,10 @@ public class AdminPage extends Page {
             reqDao.delete(req.getId());
             u.setAdmin(true);
             userDao.update(u);
-            System.out.println("\nUser promoted to Admin\n");
+            System.out.println("User promoted to Admin\n");
         }
         catch (SQLException e) {
-            System.out.println("[AdminPage.grantPromotionRequest] SQL Error while granting creation request");
+            System.out.println("[AdminPage.grantPromotionRequest] SQL Error while granting creation request\n");
         }
     }
 
@@ -272,8 +288,12 @@ public class AdminPage extends Page {
                 return;
             }
             reqDao.delete(requestId);
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
+        }
+        catch (NumberFormatException e) {
+            System.out.println("Invalid id. Enter 'requests' to view pending requests and their ids.\n");
         }
 
     }

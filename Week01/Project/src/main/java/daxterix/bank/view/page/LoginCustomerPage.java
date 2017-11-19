@@ -24,14 +24,14 @@ public class LoginCustomerPage extends Page{
                 customer = dao.select(username);
             }
             catch (SQLException e) {
-                System.out.println("SQL Exception while retrieving user");
+                System.out.println("SQL Exception while retrieving user\n");
             }
             if (customer == null)
-                System.out.println("Error: User does not exist. Please try again");
+                System.out.println("Error: User does not exist. Please try again\n");
             else if (!customer.getPassword().equals(password))
-                System.out.println("Error: Invalid credentials. Please try again");
+                System.out.println("Error: Invalid credentials. Please try again\n");
             else if (customer.isLocked())
-                System.out.println("Error: Account is currently locked. Please wait for an admin to unlock it.");
+                System.out.println("Error: Account is currently locked. Please wait for an admin to unlock it.\n");
             else
                 return new CustomerPage(customer);
 

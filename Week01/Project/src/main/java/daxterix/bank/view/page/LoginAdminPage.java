@@ -30,11 +30,11 @@ public class LoginAdminPage extends Page {
                 e.printStackTrace();
             }
             if (admin == null || !admin.getPassword().equals(password))
-                System.out.println("Invalid credentials. Please try again.");
+                System.out.println("Invalid credentials.");
             else if (admin.isLocked())
-                System.out.println("Nice try, but your account is locked. Try again.");
+                System.out.println("Nice try, but your account is locked.");
             else if (!admin.isAdmin())
-                System.out.println("Nice try, but you're not an admin. Try again.");
+                System.out.println("Nice try, but you're not an admin.");
             else
                 return new AdminPage(admin);
 
