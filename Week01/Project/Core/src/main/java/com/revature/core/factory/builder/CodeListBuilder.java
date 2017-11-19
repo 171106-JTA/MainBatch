@@ -1,8 +1,12 @@
 package com.revature.core.factory.builder;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import com.revature.businessobject.BusinessObject;
 import com.revature.businessobject.info.CodeList;
 import com.revature.core.FieldParams;
+import com.revature.core.Resultset;
 
 public class CodeListBuilder implements BusinessObjectBuilder {
 
@@ -23,6 +27,28 @@ public class CodeListBuilder implements BusinessObjectBuilder {
 		
 		return object;
 	}
+
+	
+	
+	@Override
+	public Resultset getBusinessObject(ResultSet args) {
+		Resultset data = new Resultset();
+		CodeList codelist;
+		
+		try {
+			while (args.next()) {
+				codelist = new CodeList(args.getLong(CodeList.ID), args.getString(CodeList.CODE), 
+						args.getString(CodeList.VALUE), args.getString(CodeList.DESCRIPTION));
+				data.add(codelist);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return data;
+	}
+
+
 
 	/**
 	 * Used to ensure all arguments needed to instantiate object
