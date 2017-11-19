@@ -33,17 +33,44 @@ public class ClauseBuilder {
 			case BusinessClass.ADMIN:
 			case BusinessClass.CUSTOMER:
 			case BusinessClass.USER:
-				return buildUserWhereClause(statement, params);
+				return buildUserWhereClause(statement, params, 1);
 			case BusinessClass.USERINFO:
-				return buildUserInfoWhereClause(statement, params);
+				return buildUserInfoWhereClause(statement, params, 1);
 			case BusinessClass.CREDIT:
-				return buildCreditWhereClause(statement, params);
+				return buildCreditWhereClause(statement, params, 1);
 			case BusinessClass.CHECKING:
-				return buildCheckingWhereClause(statement, params);
+				return buildCheckingWhereClause(statement, params, 1);
 			case BusinessClass.ACCOUNT:
-				return buildAccountWhereClause(statement, params);
+				return buildAccountWhereClause(statement, params, 1);
 			case BusinessClass.CODELIST:
-				return buildCodeListWhereClause(statement, params);
+				return buildCodeListWhereClause(statement, params, 1);
+			default:
+				return false;
+		}
+	}
+	
+	public boolean build(String name, PreparedStatement statement, FieldParams setValues, FieldParams whereClause) {
+		switch (name.toLowerCase()) {
+			case BusinessClass.ADMIN:
+			case BusinessClass.CUSTOMER:
+			case BusinessClass.USER:
+				buildUserWhereClause(statement, setValues, 1);
+				return buildUserWhereClause(statement, whereClause, setValues.size() + 1);
+			case BusinessClass.USERINFO:
+				buildUserInfoWhereClause(statement, setValues, 1);
+				return buildUserInfoWhereClause(statement, whereClause, setValues.size() + 1);
+			case BusinessClass.CREDIT:
+				buildCreditWhereClause(statement, setValues, 1);
+				return buildCreditWhereClause(statement, whereClause, setValues.size() + 1);
+			case BusinessClass.CHECKING:
+				buildCheckingWhereClause(statement, setValues, 1);
+				return buildCheckingWhereClause(statement, whereClause, setValues.size() + 1);
+			case BusinessClass.ACCOUNT:
+				buildAccountWhereClause(statement, setValues, 1);
+				return buildAccountWhereClause(statement, whereClause, setValues.size() + 1);
+			case BusinessClass.CODELIST:
+				buildCodeListWhereClause(statement, setValues, 1);
+				return buildCodeListWhereClause(statement, whereClause, setValues.size() + 1);
 			default:
 				return false;
 		}
@@ -54,9 +81,7 @@ public class ClauseBuilder {
 	///
 	
 	
-	private boolean buildUserWhereClause(PreparedStatement statement, FieldParams params) {
-		int pos = 1;
-		
+	private boolean buildUserWhereClause(PreparedStatement statement, FieldParams params, int pos) {
 		for (String key : params.keySet()) {
 			try {
 				// Attempt to assemble where clause
@@ -83,9 +108,7 @@ public class ClauseBuilder {
 		return true;
 	}
 	
-	private boolean buildUserInfoWhereClause(PreparedStatement statement, FieldParams params) {
-		int pos = 1;
-		
+	private boolean buildUserInfoWhereClause(PreparedStatement statement, FieldParams params, int pos) {
 		for (String key : params.keySet()) {
 			try {
 				// Attempt to assemble where clause
@@ -119,9 +142,7 @@ public class ClauseBuilder {
 		return true;
 	}
 	
-	private boolean buildAccountWhereClause(PreparedStatement statement, FieldParams params) {
-		int pos = 1;
-		
+	private boolean buildAccountWhereClause(PreparedStatement statement, FieldParams params, int pos) {
 		for (String key : params.keySet()) {
 			try {
 				// Attempt to assemble where clause
@@ -148,9 +169,7 @@ public class ClauseBuilder {
 		return true;
 	}
 	
-	private boolean buildCheckingWhereClause(PreparedStatement statement, FieldParams params) {
-		int pos = 1;
-		
+	private boolean buildCheckingWhereClause(PreparedStatement statement, FieldParams params, int pos) {
 		for (String key : params.keySet()) {
 			try {
 				// Attempt to assemble where clause
@@ -180,9 +199,7 @@ public class ClauseBuilder {
 		return true;
 	}
 	
-	private boolean buildCreditWhereClause(PreparedStatement statement, FieldParams params) {
-		int pos = 1;
-		
+	private boolean buildCreditWhereClause(PreparedStatement statement, FieldParams params, int pos) {
 		for (String key : params.keySet()) {
 			try {
 				// Attempt to assemble where clause
@@ -217,9 +234,7 @@ public class ClauseBuilder {
 	
 
 	
-	private boolean buildCodeListWhereClause(PreparedStatement statement, FieldParams params) {
-		int pos = 1;
-		
+	private boolean buildCodeListWhereClause(PreparedStatement statement, FieldParams params, int pos) {
 		for (String key : params.keySet()) {
 			try {
 				// Attempt to assemble where clause
@@ -247,11 +262,11 @@ public class ClauseBuilder {
 	}
 	
 	
-	private boolean buildSavingsWhereClause(PreparedStatement statement, FieldParams params) {
+	private boolean buildSavingsWhereClause(PreparedStatement statement, FieldParams params, int pos) {
 		return false;
 	}	
 	
-	private boolean buildReceiptWhereClause(PreparedStatement statment, FieldParams params) {
+	private boolean buildReceiptWhereClause(PreparedStatement statment, FieldParams params, int pos) {
 		return false;
 	}
 	
