@@ -12,7 +12,7 @@ public interface BankDao {
 	public void updateAccountAmount(BankAccount ba);
 	//public void updateLoan();
 	//public void updateAccessStatus();
-	//public void updateApproval();
+	public void updateApproval(User u);
 	//public void deleteLoan();
 	public void addNewUser(User user);
 	

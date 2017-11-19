@@ -66,13 +66,13 @@ public class AdminTool {
 	 * 
 	 * @param users HashMap of users for quick look-ups
 	 */
-	public static void approveUser(HashMap<String, User> users) {
+	public static void approveUser(QueryUtil qu) {
 		System.out.println("Approval Screen");
 		String input = "";
 		User u;
 		System.out.print("Enter user name to be approved: ");
 		input = UserInterface.readInput();
-		u = users.get(input);
+		u = qu.getUserInfo(input);
 		
 		if(u == null) {
 			System.out.println("User not found.");
@@ -80,7 +80,7 @@ public class AdminTool {
 		}
 		
 		//Prevent administrators from approving each other
-		if(u.getAccess_level() == 2) {
+		if(u.getAccess_level().equals("ADM")) {
 			System.out.println("You cannot approve an administrator.");
 			return;
 		}
@@ -89,12 +89,14 @@ public class AdminTool {
 		input = UserInterface.readInput();
 		switch(input) {
 			case "a":
-				u.setApproved(true);
+				u.setApproved(1);
+				qu.updateApproval(u);
 				//Log admin approval
 				UserInterface.startLogging("Management has approved user " + u.getName());
 				break;
 			case "d":
-				u.setApproved(false);
+				u.setApproved(0);
+				qu.updateApproval(u);
 				//Log admin disapproval
 				UserInterface.startLogging("Management has disapproved user " + u.getName());
 				break;

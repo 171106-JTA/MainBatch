@@ -41,7 +41,7 @@ public class Admin extends UserInterface{
 					AdminTool.showAllUser(qu);
 					break;
 				case 2:
-					//AdminTool.approveUser(users);
+					AdminTool.approveUser(qu);
 					break;
 				case 3:
 					//AdminTool.banUser(users);

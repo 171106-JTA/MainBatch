@@ -155,6 +155,24 @@ public class QueryUtil implements BankDao{
 		
 	}
 	
+	@Override
+	public void updateApproval(User u) {
+		CallableStatement cs = null;
+		
+		try(Connection conn = ConnectionUtil.getConnection()){
+			String sql = "{call update_approval_lock(?, ?, ?)}";
+			cs = conn.prepareCall(sql);
+			cs.setString(1, u.getName());
+			cs.setInt(2, u.isApproved());
+			cs.setInt(3, u.isBanned());
+			cs.executeQuery();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(cs);
+		}
+	}
+	
 	private void commitChanges() {
 		Statement stmt = null;
 		
