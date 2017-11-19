@@ -1,12 +1,9 @@
 package com.bankoftheapes.ui;
 
-import java.util.HashMap;
 import java.util.Scanner;
 
-import com.bankoftheapes.bank.BankOfTheApes;
 import com.bankoftheapes.dao.QueryUtil;
 import com.bankoftheapes.data.Logging;
-import com.bankoftheapes.data.ProcessData;
 import com.bankoftheapes.user.User;
 
 public class UserInterface {

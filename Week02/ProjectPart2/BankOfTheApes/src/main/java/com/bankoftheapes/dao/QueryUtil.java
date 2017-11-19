@@ -15,7 +15,6 @@ import com.bankoftheapes.user.User;
 import com.bankoftheapes.util.ConnectionUtil;;
 
 public class QueryUtil implements BankDao{
-	private Connection conn;
 	
 	@Override
 	public boolean userExists(String username) {
@@ -235,28 +234,7 @@ public class QueryUtil implements BankDao{
 			commitChanges();
 			close(ps);
 		}
-	}
-	
-	@Override
-	public void updateLoan(User user, int loanId, String status, String approvalDate) {
-		PreparedStatement ps = null;
-		
-		try(Connection conn = ConnectionUtil.getConnection()){
-			String sql = "UPDATE LOAN SET STATUS = ?, APPROVALDATE = ?" +
-						" WHERE USERNAME = ? AND LOANID = ?";
-			ps  = conn.prepareStatement(sql);
-			ps.setString(1, status);
-			ps.setString(2, approvalDate);
-			ps.setString(3, user.getName());
-			ps.setInt(4, loanId);
-			ps.executeQuery();
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-			commitChanges();
-			close(ps);
-		}
-	}		
+	}	
 	
 	private void commitChanges() {
 		Statement stmt = null;

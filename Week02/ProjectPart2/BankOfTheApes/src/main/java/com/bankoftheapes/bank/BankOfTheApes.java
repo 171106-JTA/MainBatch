@@ -70,7 +70,7 @@ public class BankOfTheApes {
 					Admin.Screen(u, qu);
 				}
 				else if(u != null && u.getAccess_level().equals("MOD")) {
-					
+					Moderator.Screen(u, qu);
 				}
 				else {
 					System.out.println("Management Not Found");

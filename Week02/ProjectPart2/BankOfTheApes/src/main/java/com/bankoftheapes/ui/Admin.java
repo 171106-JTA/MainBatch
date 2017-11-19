@@ -31,7 +31,7 @@ public class Admin extends UserInterface{
 			System.out.println("2. Approve user");
 			System.out.println("3. Ban user");
 			System.out.println("4. Promote user");
-			System.out.println("5. Pizza");
+			System.out.println("5. Approve Loan");
 			System.out.println("6. Log out");
 			System.out.print("Enter option: ");
 			option = UserInterface.readIntInput();
@@ -43,9 +43,13 @@ public class Admin extends UserInterface{
 				case 2:
 					AdminTool.approveUser(qu);
 					break;
+				case 3:
+					AdminTool.banUser(qu);
+					break;
 				case 4:
 					AdminTool.promoteUser(u.getAccess_level(), qu);
 					break;
+				case 5:
 				case 6:
 					System.out.println("Thank you for the hard work!");
 					UserInterface.cleanUp();

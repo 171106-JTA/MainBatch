@@ -17,7 +17,7 @@ public class Moderator {
 		}
 		//Checks to see if the user has the right access_level;
 		//They get kicked out if the user is not authorized
-		if(u.getAccess_level().equals("MOD")) {
+		if(!u.getAccess_level().equals("MOD")) {
 			System.out.println("Wrong Menu");
 			return;
 		}

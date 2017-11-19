@@ -3,7 +3,6 @@ package com.bankoftheapes.ui;
 import java.time.LocalDate;
 
 import com.bankoftheapes.dao.QueryUtil;
-import com.bankoftheapes.user.BankAccount;
 import com.bankoftheapes.user.Loan;
 import com.bankoftheapes.user.User;
 

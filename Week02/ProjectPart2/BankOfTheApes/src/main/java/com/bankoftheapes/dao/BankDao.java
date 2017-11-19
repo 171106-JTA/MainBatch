@@ -10,7 +10,6 @@ public interface BankDao {
 	public void showLoans(User user);
 	public void showAllUsers();
 	public void updateAccountAmount(BankAccount ba);
-	public void updateLoan(User user, int loanId, String status, String approvaldate);
 	public void updateAccessStatus(User u);
 	public void updateApproval(User u);
 	public void addNewUser(User user);

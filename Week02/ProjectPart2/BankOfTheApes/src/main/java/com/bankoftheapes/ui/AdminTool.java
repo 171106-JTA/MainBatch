@@ -1,7 +1,5 @@
 package com.bankoftheapes.ui;
 
-import java.util.HashMap;
-
 import com.bankoftheapes.dao.QueryUtil;
 import com.bankoftheapes.user.User;
 
@@ -164,6 +162,7 @@ public class AdminTool {
 				UserInterface.startLogging("Admin has promoted user " + u.getName() + " to administrator.");
 			}
 			qu.updateAccessStatus(u);
+			qu.updateApproval(u);
 			return;
 		}
 		
@@ -176,6 +175,7 @@ public class AdminTool {
 		//Log promotion
 		UserInterface.startLogging("Moderator has promoted user " + u.getName() + " to moderator.");
 		qu.updateAccessStatus(u);
+		qu.updateApproval(u);
 	}
 	
 }
