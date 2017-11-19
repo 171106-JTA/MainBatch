@@ -1,6 +1,7 @@
 package daxterix.bank.dao;
 
 import daxterix.bank.model.User;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
 
+    private final Logger logger = Logger.getLogger(getClass());
     private ConnectionManager connectionManager;
 
     public UserDAOImpl(ConnectionManager connectionManager) {
@@ -27,6 +29,10 @@ public class UserDAOImpl implements UserDAO {
             queryRes = stmt.executeQuery();
             if (queryRes.next())
                 return readFromRow(queryRes);
+        }
+        catch (SQLException e){
+            logger.error(String.format("[%s select()] Exception while selecting %s:\n%s", getClass(), email, e));
+            throw e;
         }
         finally {
             Closer.close(stmt);
@@ -50,6 +56,10 @@ public class UserDAOImpl implements UserDAO {
                 users.add(readFromRow(queryRes));
             return users;
         }
+        catch (SQLException e){
+            logger.error(String.format("[%s selectAll()] Exception while selecting all:\n%s", getClass(), e));
+            throw e;
+        }
         finally {
             Closer.close(stmt);
             Closer.close(queryRes);
@@ -70,6 +80,10 @@ public class UserDAOImpl implements UserDAO {
 
             if (queryRes.next())
                 return readFromRow(queryRes);
+        }
+        catch (SQLException e){
+            logger.error(String.format("[%s selectForAccount()] Exception while selecting for account %d:\n%s", getClass(), accountNumber, e));
+            throw e;
         }
         finally {
             Closer.close(stmt);
@@ -93,6 +107,10 @@ public class UserDAOImpl implements UserDAO {
             if (queryRes.next())
                 return readFromRow(queryRes);
         }
+        catch (SQLException e){
+            logger.error(String.format("[%s selectForRequest()] Exception while selecting for request %d:\n%s", getClass(), requestId, e));
+            throw e;
+        }
         finally {
             Closer.close(stmt);
             Closer.close(queryRes);
@@ -111,7 +129,13 @@ public class UserDAOImpl implements UserDAO {
             stmt.setString(2, user.getPassword());
             stmt.setInt(3, user.isAdmin()? 1 : 0);
             stmt.setInt(4, user.isLocked()? 1 : 0);
-            return stmt.executeUpdate();
+            int affected = stmt.executeUpdate();
+            logger.debug(String.format("[%s save()] saved %s; %d rows affected", getClass(), user, affected));
+            return affected;
+        }
+        catch (SQLException e){
+            logger.error(String.format("[%s save()] Exception while saving %s:\n%s", getClass(), user, e));
+            throw e;
         }
         finally {
             Closer.close(stmt);
@@ -129,7 +153,13 @@ public class UserDAOImpl implements UserDAO {
             stmt.setInt(2, info.isAdmin()? 1 : 0);
             stmt.setInt(3, info.isLocked()? 1 : 0);
             stmt.setString(4, info.getEmail());
-            return stmt.executeUpdate();
+            int affected = stmt.executeUpdate();
+            logger.debug(String.format("[%s update()] updated %s; %d rows affected", getClass(), info, affected));
+            return affected;
+        }
+        catch (SQLException e){
+            logger.error(String.format("[%s update()] Exception while updating %s:\n%s", getClass(), info, e));
+            throw e;
         }
         finally {
             Closer.close(stmt);
@@ -144,7 +174,13 @@ public class UserDAOImpl implements UserDAO {
             String sql = "DELETE FROM bankuser WHERE useremail = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, email);
-            return stmt.executeUpdate();
+            int affected = stmt.executeUpdate();
+            logger.debug(String.format("[%s delete()] deleted %s; %d rows affected", getClass(), email, affected));
+            return affected;
+        }
+        catch (SQLException e){
+            logger.error(String.format("[%s delete()] Exception while deleting %s:\n%s", getClass(), email, e));
+            throw e;
         }
         finally {
             Closer.close(stmt);
@@ -159,7 +195,13 @@ public class UserDAOImpl implements UserDAO {
         try (Connection conn = connectionManager.getConnection()) {
             String sql = "DELETE FROM bankuser";
             stmt = conn.createStatement();
-            return stmt.executeUpdate(sql);
+            int affected = stmt.executeUpdate(sql);
+            logger.debug(String.format("[%s deleteAll()] deleted all; %d rows affected", getClass(), affected));
+            return affected;
+        }
+        catch (SQLException e){
+            logger.error(String.format("[%s deleteAll()] Exception while deleting all:\n%s", getClass(), e));
+            throw e;
         }
         finally {
             Closer.close(stmt);
