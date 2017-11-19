@@ -11,7 +11,7 @@ public interface BankDao {
 	public void showAllUsers();
 	public void updateAccountAmount(BankAccount ba);
 	//public void updateLoan();
-	//public void updateAccessStatus();
+	public void updateAccessStatus(User u);
 	public void updateApproval(User u);
 	//public void deleteLoan();
 	public void addNewUser(User user);

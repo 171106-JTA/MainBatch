@@ -173,6 +173,23 @@ public class QueryUtil implements BankDao{
 		}
 	}
 	
+	@Override
+	public void updateAccessStatus(User u) {
+		CallableStatement cs = null;
+		
+		try(Connection conn = ConnectionUtil.getConnection()){
+			String sql = "{call promote_user(?, ?)}";
+			cs = conn.prepareCall(sql);
+			cs.setString(1, u.getName());
+			cs.setString(2, u.getAccess_level());
+			cs.executeQuery();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(cs);
+		}
+		
+	}
 	private void commitChanges() {
 		Statement stmt = null;
 		

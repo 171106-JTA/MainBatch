@@ -47,7 +47,7 @@ public class Admin extends UserInterface{
 					//AdminTool.banUser(users);
 					break;
 				case 4:
-					//AdminTool.promoteUser(users, u.getAccess_level());
+					AdminTool.promoteUser(u.getAccess_level(), qu);
 					break;
 				case 5:
 					//AdminTool.approveLoan(users);
