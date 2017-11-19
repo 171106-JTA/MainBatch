@@ -8,88 +8,136 @@ import com.revature.businessobject.info.Info;
  *
  */
 public class UserInfo extends Info {
+	public static final String SSN = "ssn";
 	public static final String EMAIL = "email";
-	public static final String ADDRESS = "address";
-	public static final String PHONENUMBER = "phonenumber";
+	public static final String PHONENUMBER = "phone_number";
+	public static final String FIRSTNAME = "first_name";
+	public static final String LASTNAME = "last_name";
+	public static final String STATECITYID = "state_city_id";
+	public static final String ADDRESS1 = "address_1";
+	public static final String ADDRESS2 = "address_2";
+	public static final String POSTALCODE = "postal_code";
+	public static final String STATUSID = "status_id";
+	public static final String ROLEID = "role_id";
 	
+	private long ssn;
 	private String email;
-	private String address;
 	private String phonenumber;
+	private String address1;
+	private String address2;
+	private String firstname;
+	private String lastname;
+	private String postalcode;
+	private long stateCityId;
+	private long roleId;
+	private long statusId;
 	
-	/**
-	 * Initializes basic user information
-	 * @param userId primary key used to identify user
-	 * @param email account email
-	 * @param address where they live
-	 * @param phonenumber primary phone
-	 */
-	public UserInfo(long userId, String email, String address, String phonenumber) {
+	public UserInfo(long userId) {
 		super(userId);
+	}
+	
+	public UserInfo(long userId, long ssn, String email, String phonenumber,
+			String address1, String address2, String firstname, String lastname,
+			String postalcode, long stateCityId, long roleId, long statusId) {
+		super(userId);
+		this.ssn = ssn;
 		this.email = email;
-		this.address = address;
 		this.phonenumber = phonenumber;
+		this.address1 = address1;
+		this.address2 = address2;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.postalcode = postalcode;
+		this.stateCityId = stateCityId;
+		this.roleId = roleId;
+		this.statusId = statusId;
 	}
 
-	/**
-	 * @return User email
-	 */
+	public long getSsn() {
+		return ssn;
+	}
+
+	public void setSsn(long ssn) {
+		this.ssn = ssn;
+	}
+
 	public String getEmail() {
 		return email;
 	}
 
-	/**
-	 * @return User primary address
-	 */
-	public String getAddress() {
-		return address;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
-	/**
-	 * @return User primary phone number 
-	 */
 	public String getPhonenumber() {
 		return phonenumber;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result
-				+ ((phonenumber == null) ? 0 : phonenumber.hashCode());
-		return result;
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		UserInfo other = (UserInfo) obj;
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (phonenumber == null) {
-			if (other.phonenumber != null)
-				return false;
-		} else if (!phonenumber.equals(other.phonenumber))
-			return false;
-		return true;
+	public String getAddress1() {
+		return address1;
 	}
-	
-	
+
+	public void setAddress1(String address1) {
+		this.address1 = address1;
+	}
+
+	public String getAddress2() {
+		return address2;
+	}
+
+	public void setAddress2(String address2) {
+		this.address2 = address2;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getPostalcode() {
+		return postalcode;
+	}
+
+	public void setPostalcode(String postalcode) {
+		this.postalcode = postalcode;
+	}
+
+	public long getStateCityId() {
+		return stateCityId;
+	}
+
+	public void setStateCityId(long stateCityId) {
+		this.stateCityId = stateCityId;
+	}
+
+	public long getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(long roleId) {
+		this.roleId = roleId;
+	}
+
+	public long getStatusId() {
+		return statusId;
+	}
+
+	public void setStatusId(long statusId) {
+		this.statusId = statusId;
+	}	
 }

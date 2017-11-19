@@ -238,13 +238,13 @@ public final class UserRequestHandler {
 		
 		// Set account details
 		transact.put(Info.USERID, Long.toString(request.getUserId()));
-		transact.put(Account.TYPE, type);
-		transact.put(Account.STATUS, Status.PENDING);
+		transact.put(Account.TYPEID, type);
+		transact.put(Account.STATUSID, Status.PENDING);
 		transact.put(Account.NUMBER, number);
 
 		switch (type) {
 			case Type.CHECKING:
-				transact.put(Checking.TOTAL, Float.toString(0.0f));
+				transact.put(Checking.BALANCE, Float.toString(0.0f));
 				break;
 			case Type.CREDIT:
 				transact.put(Credit.TOTAL, Float.toString(0.0f));
@@ -303,7 +303,7 @@ public final class UserRequestHandler {
 			Require.requireSelfQuery(request);
 				
 		// Set type of account we are looking for 
-		query.put(Account.TYPE, type);
+		query.put(Account.TYPEID, type);
 	
 		return Server.database.select(BusinessClass.ACCOUNT, query);
 	}
@@ -317,7 +317,7 @@ public final class UserRequestHandler {
 		FieldParams transact = new FieldParams();
 		
 		// Ensure we are only updating account status 
-		transact.put(Account.STATUS, request.getTransaction().get(Account.STATUS));
+		transact.put(Account.STATUSID, request.getTransaction().get(Account.STATUSID));
 		
 		return new Resultset(Server.database.update(BusinessClass.ACCOUNT, request.getQuery(), transact));
 	}

@@ -344,9 +344,9 @@ public class FilePersistenceTest {
 		// Set data;
 		params.put(Checking.USERID, Long.toString(customerId));
 		params.put(Checking.NUMBER, Long.toString(checkingId));
-		params.put(Checking.TOTAL, Float.toString(100.0f));
-		params.put(Checking.STATUS, Status.ACTIVE);
-		params.put(Checking.TYPE, customerCheckingAcct.getType());
+		params.put(Checking.BALANCE, Float.toString(100.0f));
+		params.put(Checking.STATUSID, Status.ACTIVE);
+		params.put(Checking.TYPEID, customerCheckingAcct.getType());
 		
 		// Perform test
 		assertEquals("Should add new account with fieldparams", 1, manager.insert(BusinessClass.ACCOUNT, params));
@@ -394,7 +394,7 @@ public class FilePersistenceTest {
 		
 		// Set Data 
 		cnds.put(Checking.USERID, Long.toString(customerId));
-		params.put(Checking.TOTAL, Float.toString(1.0f));
+		params.put(Checking.BALANCE, Float.toString(1.0f));
 		manager.insert(customerCheckingAcct);
 		
 		// Perform test
@@ -465,10 +465,10 @@ public class FilePersistenceTest {
 		params.put(Credit.USERID, Long.toString(customerId));
 		params.put(Credit.NUMBER, Long.toString(checkingId));
 		params.put(Credit.TOTAL, Float.toString(100.0f));
-		params.put(Credit.TYPE, customerCheckingAcct.getType());
+		params.put(Credit.TYPEID, customerCheckingAcct.getType());
 		params.put(Credit.INTEREST, Float.toString(10.05f));
 		params.put(Credit.CREDITLIMIT, Float.toString(1500.0f));
-		params.put(Credit.STATUS, Status.ACTIVE);
+		params.put(Credit.STATUSID, Status.ACTIVE);
 		
 		// Perform test
 		assertEquals("Should add new account with fieldparams", 1, manager.insert(BusinessClass.ACCOUNT, params));

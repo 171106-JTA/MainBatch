@@ -7,7 +7,7 @@ import com.revature.businessobject.BusinessObject;
  * @author Antony Lulciuc
  */
 public class Info extends BusinessObject{
-	public static final String USERID = "userid";
+	public static final String USERID = "user_id";
 	
 	/**
 	 * User id (FORIEGN KEY)

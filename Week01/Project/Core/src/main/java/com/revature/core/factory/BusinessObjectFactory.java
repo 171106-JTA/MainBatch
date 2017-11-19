@@ -54,6 +54,14 @@ public class BusinessObjectFactory {
 				return userInfoBuilder.getBusinessObject(args);
 			case BusinessClass.ACCOUNT:
 				return accountBuilder.getBusinessObject(args);
+			case BusinessClass.CODELIST:
+				return null;
+			case BusinessClass.INVOICE:
+				return null;
+			case BusinessClass.RECEIPT:
+				return null;
+			case BusinessClass.JOINTACCOUNT:
+				return null;
 			default:
 				return null;
 		}

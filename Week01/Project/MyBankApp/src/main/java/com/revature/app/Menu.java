@@ -188,7 +188,7 @@ public class Menu {
 		println("\tAccount Type: Checking");
 		println("\tAccount status: " + checking.getStatus().toUpperCase());
 		println("\tAccount Number: " + checking.getNumber());
-		println("\tTotal: $" + checking.getTotal());
+		println("\tTotal: $" + checking.getBalance());
 		println("===============================================================");
 	}
 	

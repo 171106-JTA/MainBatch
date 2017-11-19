@@ -43,11 +43,11 @@ public class FieldParamsAccountComparator implements Comparator<Object>{
 				if (result == 0 && fieldParams.containsKey(Account.NUMBER)) 
 					result = fieldParams.get(Account.NUMBER).compareTo(Long.toString(account.getNumber()));
 				
-				if (result == 0 && fieldParams.containsKey(Account.TYPE)) 
-					result = fieldParams.get(Account.TYPE).compareTo(account.getType());
+				if (result == 0 && fieldParams.containsKey(Account.TYPEID)) 
+					result = fieldParams.get(Account.TYPEID).compareTo(account.getType());
 				
-				if (result == 0 && fieldParams.containsKey(Account.STATUS)) 
-					result = fieldParams.get(Account.STATUS).compareTo(account.getStatus());
+				if (result == 0 && fieldParams.containsKey(Account.STATUSID)) 
+					result = fieldParams.get(Account.STATUSID).compareTo(account.getStatus());
 				
 				// If checking account
 				if (result == 0 && right instanceof Checking)

@@ -5,6 +5,12 @@ import java.util.Date;
 import com.revature.businessobject.BusinessObject;
 
 public class Invoice extends BusinessObject {
+	public static final String ID = "id";
+	public static final String ACCOUNTNUMBER = "account_number";
+	public static final String DATEISSUED = "date_issued";
+	public static final String PAYMENTDATE = "payment_date";
+	public static final String AMOUNTDUE = "amount_due";
+	
 	private long id;
 	private String accountNumber;
 	private Date dateIssued;

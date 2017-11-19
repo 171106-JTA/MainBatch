@@ -17,10 +17,19 @@ public class UserInfoBuilder implements BusinessObjectBuilder {
 	 */
 	@Override
 	public BusinessObject getBusinessObject(FieldParams args) {
-		// TODO Auto-generated method stub
-		return isValid(args) ? new UserInfo(Long.parseLong(args.get(UserInfo.USERID)), 
-				args.get(UserInfo.EMAIL), args.get(UserInfo.ADDRESS), args.get(UserInfo.PHONENUMBER)) : null;
+		BusinessObject object = null;
+		
+		if (isValid(args)) {
+			object = new UserInfo(Long.parseLong(args.get(UserInfo.USERID)), Long.parseLong(args.get(UserInfo.SSN)),
+							args.get(UserInfo.EMAIL), args.get(UserInfo.PHONENUMBER), args.get(UserInfo.ADDRESS1),
+							args.get(UserInfo.ADDRESS2), args.get(UserInfo.FIRSTNAME), args.get(UserInfo.LASTNAME),
+							args.get(UserInfo.POSTALCODE), Long.parseLong(args.get(UserInfo.STATECITYID)), 
+							Long.parseLong(args.get(UserInfo.ROLEID)), Long.parseLong(args.get(UserInfo.STATUSID)));
+		}
+		
+		return object;
 	}
+		
 
 	/**
 	 * Used to ensure all arguments needed to instantiate object
@@ -30,7 +39,7 @@ public class UserInfoBuilder implements BusinessObjectBuilder {
 	@Override
 	public boolean isValid(FieldParams args) {
 		// TODO Auto-generated method stub
-		return args != null && args.get(UserInfo.USERID) != null;
+		return args != null && args.get(UserInfo.USERID) != null && args.get(UserInfo.SSN) != null;
 	}
 
 }

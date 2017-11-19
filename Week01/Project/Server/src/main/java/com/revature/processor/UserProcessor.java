@@ -95,7 +95,7 @@ public class UserProcessor implements Processorable {
 			case "SETACCOUNTSTATUS":
 				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN },  request);
 				Require.requireQuery(new String[] { Info.USERID }, request);
-				Require.requireTransaction(new String[] { Account.STATUS }, request);
+				Require.requireTransaction(new String[] { Account.STATUSID }, request);
 				res = URH.setAccountStatus(request);
 				break;
 			default:

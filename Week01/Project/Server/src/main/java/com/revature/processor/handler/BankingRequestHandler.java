@@ -53,10 +53,10 @@ public final class BankingRequestHandler {
 				throw new RequestException(request, "Account must be activated before use!");		
 			
 			// Perform calculation
-			amount += account.getTotal();
+			amount += account.getBalance();
 			
 			// Update account total
-			transact.put(Checking.TOTAL, StringFormater.currency(amount));
+			transact.put(Checking.BALANCE, StringFormater.currency(amount));
 			
 			// Update account
 			return new Resultset(Server.database.update(BusinessClass.ACCOUNT, request.getQuery(), transact));
@@ -99,14 +99,14 @@ public final class BankingRequestHandler {
 				throw new RequestException(request, "Account must be activated before use!");
 			
 			// Perform calculation
-			amount = account.getTotal() - amount;
+			amount = account.getBalance() - amount;
 			
 			// Prevent account overdraw
 			if (amount < 0.0f)
 				throw new RequestException(request, "You do not have enough funds to preform transaction!");
 			
 			// Update account total
-			transact.put(Checking.TOTAL, StringFormater.currency(amount));
+			transact.put(Checking.BALANCE, StringFormater.currency(amount));
 			
 			// Update account
 			return new Resultset(Server.database.update(BusinessClass.ACCOUNT, request.getQuery(), transact));

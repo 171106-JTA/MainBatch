@@ -3,6 +3,8 @@ package com.revature.businessobject.info.account;
 import com.revature.businessobject.BusinessObject;
 
 public class JointAccount extends BusinessObject {
+	
+	
 	private long userIdOne;
 	private long userIdTwo;
 	private String accountNumber;

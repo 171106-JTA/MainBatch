@@ -22,9 +22,8 @@ public abstract class DatabaseSelect extends DatabasePersistence {
 		Resultset res = null;
 		
 		try (Connection conn = ConnectionUtil.getConnection();) {
-			for (String key : cnds.keySet()) {
+			for (String key : cnds.keySet())
 				clause.add(key + "=?");
-			}
 			
 			// Append where 
 			if (size > 0)

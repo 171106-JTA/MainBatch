@@ -29,12 +29,12 @@ public class AccountBuilder implements BusinessObjectBuilder {
 		// if data valid
 		if (isValid(args)) {
 			try {
-				switch (args.get(Account.TYPE)) {
+				switch (args.get(Account.TYPEID)) {
 					case Type.CHECKING:
 						object =  new Checking(Long.parseLong(args.get(Checking.USERID)), 
 											Long.parseLong(args.get(Checking.NUMBER)),
-											Float.parseFloat(args.get(Checking.TOTAL)),
-											args.get(Checking.STATUS));
+											Float.parseFloat(args.get(Checking.BALANCE)),
+											args.get(Checking.STATUSID));
 						break;
 					case Type.CREDIT:
 						object =  new Credit(Long.parseLong(args.get(Credit.USERID)),
@@ -42,7 +42,7 @@ public class AccountBuilder implements BusinessObjectBuilder {
 										  Float.parseFloat(args.get(Credit.TOTAL)),
 										  Float.parseFloat(args.get(Credit.INTEREST)),
 										  Float.parseFloat(args.get(Credit.CREDITLIMIT)),
-										  args.get(Checking.STATUS));
+										  args.get(Checking.STATUSID));
 						break;
 				}
 			} catch (NumberFormatException e) {
@@ -64,12 +64,12 @@ public class AccountBuilder implements BusinessObjectBuilder {
 		
 		result = result && args.get(Account.USERID) != null;
 		result = result && args.get(Account.NUMBER) != null;
-		result = result && args.get(Account.TYPE) != null;
-		result = result && args.get(Account.STATUS) != null;
+		result = result && args.get(Account.TYPEID) != null;
+		result = result && args.get(Account.STATUSID) != null;
 		
-		switch (args.get(Account.TYPE)) {
+		switch (args.get(Account.TYPEID)) {
 			case Type.CHECKING:
-				result = result && args.get(Checking.TOTAL) != null;
+				result = result && args.get(Checking.BALANCE) != null;
 				break;
 			case Type.CREDIT:
 				result = result && args.get(Credit.TOTAL) != null;

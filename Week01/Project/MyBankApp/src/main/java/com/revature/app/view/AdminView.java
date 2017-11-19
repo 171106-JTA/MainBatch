@@ -243,7 +243,7 @@ public class AdminView implements View {
 		
 		// Set params
 		params.put(Info.USERID, Long.toString(account.getUserId()));
-		transact.put(Account.STATUS, status);
+		transact.put(Account.STATUSID, status);
 		
 		// Create request
 		request = new Request(MyBank.data, Routes.USER, "SETACCOUNTSTATUS", params, transact);
@@ -368,7 +368,7 @@ public class AdminView implements View {
 		FieldParams params = new FieldParams();
 		
 		// Set params to pull pending user records
-		params.put(Account.STATUS, Status.PENDING);
+		params.put(Account.STATUSID, Status.PENDING);
 		
 		// Get pending users
 		pendingAccounts = MyBank.send(new Request(MyBank.data, Routes.USER, "GETACCOUNT", params, null));
@@ -400,9 +400,9 @@ public class AdminView implements View {
 	private void printAccountCount() {
 		FieldParams params = new FieldParams();
 
-		params.put(Account.STATUS, Status.ACTIVE);
+		params.put(Account.STATUSID, Status.ACTIVE);
 		allAccounts = MyBank.send(new Request(MyBank.data, Routes.USER, "GETACCOUNT", params, null));
-		params.put(Account.STATUS, Status.BLOCKED);
+		params.put(Account.STATUSID, Status.BLOCKED);
 		allAccounts.addAll(MyBank.send(new Request(MyBank.data, Routes.USER, "GETACCOUNT", params, null)));
 		Menu.println("We have " + allAccounts.size() + " accounts!");;
 	}

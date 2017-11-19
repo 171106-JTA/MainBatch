@@ -30,8 +30,8 @@ public class FieldParamsCheckingComparator implements Comparator<Object> {
 			result = 0;
 			
 			// perform test
-			if (result == 0 && fieldParams.containsKey(Checking.TOTAL)) 
-				result = fieldParams.get(Checking.TOTAL).compareTo(Float.toString(account.getTotal()));
+			if (result == 0 && fieldParams.containsKey(Checking.BALANCE)) 
+				result = fieldParams.get(Checking.BALANCE).compareTo(Float.toString(account.getBalance()));
 		}
 		
 		return result;

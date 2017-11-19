@@ -121,9 +121,9 @@ public class FieldParamsFactory {
 		// Set field param data 
 		params.put(Checking.USERID, Long.toString(checking.getUserId()));
 		params.put(Checking.NUMBER, Long.toString(checking.getNumber()));
-		params.put(Checking.TOTAL, Float.toString(checking.getTotal()));
-		params.put(Checking.TYPE, checking.getType());
-		params.put(Checking.STATUS, checking.getStatus());
+		params.put(Checking.BALANCE, Float.toString(checking.getBalance()));
+		params.put(Checking.TYPEID, checking.getType());
+		params.put(Checking.STATUSID, checking.getStatus());
 		
 		return params;
 	}
@@ -142,8 +142,8 @@ public class FieldParamsFactory {
 		params.put(Credit.TOTAL, Float.toString(credit.getTotal()));
 		params.put(Credit.INTEREST, Float.toString(credit.getInterest()));
 		params.put(Credit.CREDITLIMIT, Float.toString(credit.getCreditLimit()));
-		params.put(Credit.TYPE, credit.getType());
-		params.put(Checking.STATUS, credit.getStatus());
+		params.put(Credit.TYPEID, credit.getType());
+		params.put(Checking.STATUSID, credit.getStatus());
 		
 		return params;
 	}
