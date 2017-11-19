@@ -8,104 +8,48 @@ import java.util.Date;
  *
  */
 public class Credit extends Account {
-	public static final String TOTAL = "total";
-	public static final String INTEREST = "insterest";
-	public static final String CREDITLIMIT = "creditlimit";
+	public static final String BALANCE = "balance";
+	public static final String MINIMALPAYMENTDUE = "minimal_payment_due";
+	public static final String CREDITLIMIT = "credit_limit";
+	public static final String RATEID = "rate_id";
 	
-	private float total;
-	private float interest;
+	private float balance;
+	private float minimalPaymentDue;
 	private float creditLimit;
+	private long rateId;
 	
-
-
 	public Credit(long userId, String number, long typeId, long statusId,
-			String created, float total, float interest, float creditLimit) {
+			String created, float balance, float minimalPaymentDue,
+			float creditLimit, long rateId) {
 		super(userId, number, typeId, statusId, created, Type.CREDIT);
-		this.total = total;
-		this.interest = interest;
+		this.balance = balance;
+		this.minimalPaymentDue = minimalPaymentDue;
 		this.creditLimit = creditLimit;
+		this.rateId = rateId;
 	}
-
-	/**
-	 * @return remaining balance owed to account
-	 */
-	public float getTotal() {
-		return total;
+	
+	public float getBalance() {
+		return balance;
 	}
-
-	/**
-	 * Assigns total amount of owed to this account
-	 * @param total - amount still owed to bank
-	 */
-	public void setTotal(float total) {
-		this.total = total;
+	public void setBalance(float balance) {
+		this.balance = balance;
 	}
-
-	/**
-	 * @return Total interest applied to account every month
-	 */
-	public float getInterest() {
-		return interest;
+	public float getMinimalPaymentDue() {
+		return minimalPaymentDue;
 	}
-
-	/**
-	 * Assigns monthly interest
-	 * @param interest applied eevery month
-	 */
-	public void setInterest(float interest) {
-		this.interest = interest;
+	public void setMinimalPaymentDue(float minimalPaymentDue) {
+		this.minimalPaymentDue = minimalPaymentDue;
 	}
-
-	/**
-	 * @return total amount user is allowed to borrow from bank on account
-	 */
 	public float getCreditLimit() {
 		return creditLimit;
 	}
-
-	/**
-	 * Set maximum amount user is allowed to borrow on account
-	 * @param creditLimit - amount user is allowed to spend using this account
-	 */
 	public void setCreditLimit(float creditLimit) {
 		this.creditLimit = creditLimit;
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + Float.floatToIntBits(creditLimit);
-		result = prime * result + Float.floatToIntBits(interest);
-		result = prime * result + Float.floatToIntBits(total);
-		return result;
+	public long getRateId() {
+		return rateId;
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Credit other = (Credit) obj;
-		if (Float.floatToIntBits(creditLimit) != Float
-				.floatToIntBits(other.creditLimit))
-			return false;
-		if (Float.floatToIntBits(interest) != Float
-				.floatToIntBits(other.interest))
-			return false;
-		if (Float.floatToIntBits(total) != Float.floatToIntBits(other.total))
-			return false;
-		return true;
+	public void setRateId(long rateId) {
+		this.rateId = rateId;
 	}
-
-	@Override
-	public String toString() {
-		return "Credit [total=" + total + ", interest=" + interest
-				+ ", creditLimit=" + creditLimit + ", "+ super.toString() + "]";
-	}
-	
-	
 }

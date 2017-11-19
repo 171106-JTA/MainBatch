@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 import com.revature.businessobject.info.account.Account;
 import com.revature.businessobject.info.account.Checking;
+import com.revature.businessobject.info.account.Credit;
 import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.User;
 import com.revature.core.BusinessClass;
@@ -183,9 +184,22 @@ public class WhereClauseBuilder {
 			try {
 				// Attempt to assemble where clause
 				switch (key) {
-					
+					case Credit.NUMBER:
+					case Credit.CREATED:
+						statement.setString(pos, params.get(key));
+						break;
+					case Credit.TYPEID:
+					case Credit.STATUSID:
+					case Credit.RATEID:
+						statement.setLong(pos, Long.parseLong(params.get(key)));
+						break;
+					case Credit.BALANCE:
+					case Credit.MINIMALPAYMENTDUE:
+					case Credit.CREDITLIMIT:
+						statement.setFloat(pos, Float.parseFloat(params.get(key)));
+						break;
 				}
-			} catch (SQLException e) {
+			} catch (NumberFormatException | SQLException e) {
 				e.printStackTrace();
 				logger.warn("failed to build userinfo where clause, message=" + e.getMessage());
 				return false;

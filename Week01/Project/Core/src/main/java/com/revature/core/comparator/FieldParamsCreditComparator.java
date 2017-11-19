@@ -30,14 +30,17 @@ public class FieldParamsCreditComparator implements Comparator<Object>{
 			result = 0;
 			
 			// Perform tests
-			if (result == 0 && fieldParams.containsKey(Credit.TOTAL)) 
-				result = fieldParams.get(Credit.TOTAL).compareTo(Float.toString(account.getTotal()));
+			if (result == 0 && fieldParams.containsKey(Credit.BALANCE)) 
+				result = fieldParams.get(Credit.BALANCE).compareTo(Float.toString(account.getBalance()));
 			
-			if (result == 0 && fieldParams.containsKey(Credit.INTEREST)) 
-				result = fieldParams.get(Credit.INTEREST).compareTo(Float.toString(account.getInterest()));
+			if (result == 0 && fieldParams.containsKey(Credit.MINIMALPAYMENTDUE)) 
+				result = fieldParams.get(Credit.MINIMALPAYMENTDUE).compareTo(Float.toString(account.getMinimalPaymentDue()));
 			
 			if (result == 0 && fieldParams.containsKey(Credit.CREDITLIMIT)) 
 				result = fieldParams.get(Credit.CREDITLIMIT).compareTo(Float.toString(account.getCreditLimit()));
+			
+			if (result == 0 && fieldParams.containsKey(Credit.RATEID)) 
+				result = fieldParams.get(Credit.RATEID).compareTo(Long.toString(account.getRateId()));
 		}
 		
 		return result;

@@ -32,17 +32,22 @@ public class AccountBuilder implements BusinessObjectBuilder {
 				switch (args.get(Account.TYPEID)) {
 					case Type.CHECKING:
 						object =  new Checking(Long.parseLong(args.get(Checking.USERID)), 
-											Long.parseLong(args.get(Checking.NUMBER)),
-											Float.parseFloat(args.get(Checking.BALANCE)),
-											args.get(Checking.STATUSID));
+											args.get(Checking.NUMBER),
+											Long.parseLong(args.get(Checking.TYPEID)),
+											Long.parseLong(args.get(Checking.STATUSID)),
+											args.get(Checking.CREATED),
+											Float.parseFloat(args.get(Checking.BALANCE)));
 						break;
 					case Type.CREDIT:
-						object =  new Credit(Long.parseLong(args.get(Credit.USERID)),
-										  Long.parseLong(args.get(Credit.NUMBER)),
-										  Float.parseFloat(args.get(Credit.TOTAL)),
-										  Float.parseFloat(args.get(Credit.INTEREST)),
-										  Float.parseFloat(args.get(Credit.CREDITLIMIT)),
-										  args.get(Checking.STATUSID));
+						object =  new Credit(Long.parseLong(args.get(Credit.USERID)), 
+											args.get(Credit.NUMBER),
+											Long.parseLong(args.get(Credit.TYPEID)),
+											Long.parseLong(args.get(Credit.STATUSID)),
+											args.get(Credit.CREATED),
+											Float.parseFloat(args.get(Credit.BALANCE)),
+											Float.parseFloat(args.get(Credit.MINIMALPAYMENTDUE)),
+											Float.parseFloat(args.get(Credit.CREDITLIMIT)),
+											Long.parseLong(args.get(Credit.RATEID)));
 						break;
 				}
 			} catch (NumberFormatException e) {
@@ -72,9 +77,10 @@ public class AccountBuilder implements BusinessObjectBuilder {
 				result = result && args.get(Checking.BALANCE) != null;
 				break;
 			case Type.CREDIT:
-				result = result && args.get(Credit.TOTAL) != null;
-				result = result && args.get(Credit.INTEREST) != null;
+				result = result && args.get(Credit.BALANCE) != null;
+				result = result && args.get(Credit.MINIMALPAYMENTDUE) != null;
 				result = result && args.get(Credit.CREDITLIMIT) != null;
+				result = result && args.get(Credit.RATEID) != null;
 				break;
 		}
 		

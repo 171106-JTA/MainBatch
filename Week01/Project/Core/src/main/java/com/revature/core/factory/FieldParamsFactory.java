@@ -148,9 +148,10 @@ public class FieldParamsFactory {
 		params.put(Credit.USERID, Long.toString(credit.getUserId()));
 		params.put(Credit.TYPEID, Long.toString(credit.getTypeId()));
 		params.put(Credit.STATUSID, Long.toString(credit.getStatusId()));
+		params.put(Credit.RATEID, Long.toString(credit.getRateId()));
 		params.put(Credit.NUMBER, credit.getNumber());
-		params.put(Credit.TOTAL, Float.toString(credit.getTotal()));
-		params.put(Credit.INTEREST, Float.toString(credit.getInterest()));
+		params.put(Credit.BALANCE, Float.toString(credit.getBalance()));
+		params.put(Credit.MINIMALPAYMENTDUE, Float.toString(credit.getMinimalPaymentDue()));
 		params.put(Credit.CREDITLIMIT, Float.toString(credit.getCreditLimit()));
 		
 		return params;
