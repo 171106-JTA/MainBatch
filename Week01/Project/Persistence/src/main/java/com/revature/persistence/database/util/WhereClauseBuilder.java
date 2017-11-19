@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import org.apache.log4j.Logger;
 
 import com.revature.businessobject.info.account.Account;
+import com.revature.businessobject.info.account.Checking;
 import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.User;
 import com.revature.core.BusinessClass;
@@ -130,9 +131,9 @@ public class WhereClauseBuilder {
 						statement.setLong(pos, Long.parseLong(params.get(key)));
 						break;
 				}
-			} catch (SQLException e) {
+			} catch (NumberFormatException | SQLException e) {
 				e.printStackTrace();
-				logger.warn("failed to build userinfo where clause, message=" + e.getMessage());
+				logger.warn("failed to build account where clause, message=" + e.getMessage());
 				return false;
 			}
 			
@@ -150,11 +151,21 @@ public class WhereClauseBuilder {
 			try {
 				// Attempt to assemble where clause
 				switch (key) {
-					
+					case Checking.NUMBER:
+					case Checking.CREATED:
+						statement.setString(pos, params.get(key));
+						break;
+					case Checking.TYPEID:
+					case Checking.STATUSID:
+						statement.setLong(pos, Long.parseLong(params.get(key)));
+						break;
+					case Checking.BALANCE:
+						statement.setFloat(pos, Float.parseFloat(params.get(key)));
+						break;
 				}
-			} catch (SQLException e) {
+			} catch (NumberFormatException | SQLException e) {
 				e.printStackTrace();
-				logger.warn("failed to build userinfo where clause, message=" + e.getMessage());
+				logger.warn("failed to build checking where clause, message=" + e.getMessage());
 				return false;
 			}
 			
