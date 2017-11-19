@@ -1,5 +1,7 @@
 package com.revature.businessobject.info.account;
 
+import java.util.Date;
+
 /**
  * 
  * @author Antony Lulciuc
@@ -14,16 +16,11 @@ public class Credit extends Account {
 	private float interest;
 	private float creditLimit;
 	
-	/**
-	 * Initializes Credit account
-	 * @param userId unique identifier (foreign key)
-	 * @param number account
-	 * @param total amount owed 
-	 * @param interest 
-	 * @param creditLimit
-	 */
-	public Credit(long userId, long number, float total, float interest, float creditLimit, String status) {
-		super(userId, number, Type.CREDIT, status);
+
+
+	public Credit(long userId, String number, long typeId, long statusId,
+			String created, float total, float interest, float creditLimit) {
+		super(userId, number, typeId, statusId, created, Type.CREDIT);
 		this.total = total;
 		this.interest = interest;
 		this.creditLimit = creditLimit;

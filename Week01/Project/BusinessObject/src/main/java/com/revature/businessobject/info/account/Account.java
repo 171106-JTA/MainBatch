@@ -1,5 +1,7 @@
 package com.revature.businessobject.info.account;
 
+import java.util.Date;
+
 import com.revature.businessobject.info.Info;
 
 public class Account extends Info {
@@ -8,9 +10,11 @@ public class Account extends Info {
 	public static final String STATUSID = "status_id";
 	public static final String CREATED = "created";
 	
-	private long number;
+	private String number;
+	private String created;
 	private String type;
-	private String status;
+	private long typeId;
+	private long statusId;
 	
 	/**
 	 * Initialize basic account data 
@@ -19,66 +23,53 @@ public class Account extends Info {
 	 * @param type what kind of account is it
 	 * @see Type 
 	 */
-	public Account(long userId, long number, String type, String status) {
+	public Account(long userId, String number, long typeId, long statusId, String created, String type) {
 		super(userId);
 		this.number = number;
+		this.typeId = typeId;
+		this.statusId = statusId;
 		this.type = type;
-		this.status = status;
 	}
 
-	/**
-	 * @return account number 
-	 */
-	public long getNumber() {
+	public String getNumber() {
 		return number;
 	}
 
-	/**
-	 * @see Type
-	 * @return type of account
-	 */
+	public void setNumber(String number) {
+		this.number = number;
+	}
+
+	public long getTypeId() {
+		return typeId;
+	}
+	
+	public void setTypeId(long typeId) {
+		this.typeId = typeId;
+	}
+
+	public long getStatusId() {
+		return statusId;
+	}
+
+	public void setStatusId(long statusId) {
+		this.statusId = statusId;
+	}
+
+	public String getCreated() {
+		return created;
+	}
+
+	public void setCreated(String created) {
+		this.created = created;
+	}
+	
 	public String getType() {
 		return type;
 	}
-
-	/**
-	 * @see Status
-	 * @return is the account active/pending/blocked?
-	 */
-	public String getStatus() {
-		return status;
+	
+	public void setType(String type) {
+		this.type = type;
 	}
 	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + (int) (number ^ (number >>> 32));
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Account other = (Account) obj;
-		if (number != other.number)
-			return false;
-		if (type != other.type)
-			return false;
-		if (status != other.status)
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Account [number=" + number + ", type=" + type + ", status="
-				+ status + ", " + super.toString() + "]";
-	}
+	
 }

@@ -1,5 +1,7 @@
 package com.revature.businessobject.info.account;
 
+import java.util.Date;
+
 /**
  * Allows user to deposit and withdraw funds from bank 
  * with this type of account
@@ -11,18 +13,12 @@ public class Checking extends Account {
 	// Total amount of funds checking account has available 
 	private float balance;
 	
-	/**
-	 * Initialize checking account instance 
-	 * @param userId (FORIEGN KEY)
-	 * @param number (primary key)
-	 * @param balance 
-	 * @param status
-	 */
-	public Checking(long userId, long number, float balance, String status) {
-		super(userId, number, Type.CHECKING, status);
+	public Checking(long userId, String number, long typeId, long statusId,
+			String created, float balance) {
+		super(userId, number, typeId, statusId, created, Type.CHECKING);
 		this.balance = balance;
 	}
-	
+
 	/**
 	 * @return available funds for account
 	 */

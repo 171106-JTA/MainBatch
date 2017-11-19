@@ -182,8 +182,8 @@ public class FileDataUpdator extends FileDataDeletor {
 		FieldParams cnds = new FieldParams();
 		
 		// Set condition (composite key)
-		cnds.put("id", Long.toString(acct.getUserId()));
-		cnds.put("number", Long.toString(acct.getNumber()));
+		cnds.put(Account.USERID, Long.toString(acct.getUserId()));
+		cnds.put(Account.NUMBER, acct.getNumber());
 	
 		return updateAccount(cnds, fieldParamsFactory.getFieldParams(acct));
 	}

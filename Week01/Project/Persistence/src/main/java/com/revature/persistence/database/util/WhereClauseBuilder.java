@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
+import com.revature.businessobject.info.account.Account;
 import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.User;
 import com.revature.core.BusinessClass;
@@ -120,7 +121,14 @@ public class WhereClauseBuilder {
 			try {
 				// Attempt to assemble where clause
 				switch (key) {
-					
+					case Account.NUMBER:
+					case Account.CREATED:
+						statement.setString(pos, params.get(key));
+						break;
+					case Account.TYPEID:
+					case Account.STATUSID:
+						statement.setLong(pos, Long.parseLong(params.get(key)));
+						break;
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
