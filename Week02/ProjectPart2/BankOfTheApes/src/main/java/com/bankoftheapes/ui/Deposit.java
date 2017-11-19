@@ -1,5 +1,6 @@
 package com.bankoftheapes.ui;
 
+import com.bankoftheapes.dao.QueryUtil;
 import com.bankoftheapes.user.BankAccount;
 import com.bankoftheapes.user.User;
 
@@ -10,8 +11,7 @@ public class Deposit {
 	 * 
 	 * @param user User object to set deposit amount into
 	 */
-	public static void Screen(User user) {
-		BankAccount ba = user.getBankAccount();
+	public static void Screen(BankAccount ba, String username, QueryUtil qu) {
 		
 		System.out.println("Depositing");
 		System.out.print("Please enter amount to be deposited: ");
@@ -25,6 +25,7 @@ public class Deposit {
 		double currAmount = prevAmount + amount;
 		ba.setAmount(currAmount);
 		//Logs the deposit
-		UserInterface.startLogging(user.getName() + " has deposited " + amount + " Banana(s)");
+		UserInterface.startLogging(username + " has deposited " + amount + " Banana(s)");
+		qu.updateAccountAmount(ba);
 	}
 }

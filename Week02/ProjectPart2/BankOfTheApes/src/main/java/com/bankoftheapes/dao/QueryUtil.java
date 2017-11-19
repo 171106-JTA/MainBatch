@@ -1,5 +1,6 @@
 package com.bankoftheapes.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -61,7 +62,7 @@ public class QueryUtil implements BankDao{
 	}
 	
 	@Override
-	public BankAccount getAccountInfo(User u) {
+	public BankAccount getAccountInfo(User user) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		BankAccount ba = null;
@@ -69,13 +70,13 @@ public class QueryUtil implements BankDao{
 		try(Connection conn = ConnectionUtil.getConnection()){
 			String sql = "SELECT * FROM Bank_Account WHERE USERNAME = ?";
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, u.getName());
+			ps.setString(1, user.getName());
 			rs = ps.executeQuery();
 			while(rs.next()) {
-				ba = new BankAccount(u.getAccId());
-				ba.setAmount(rs.getInt("Amount"));
+				ba = new BankAccount(user.getAccId());
+				ba.setAmount(rs.getDouble("Amount"));
 			}
-			u.setBankAccount(ba);
+			user.setBankAccount(ba);
 		}catch(SQLException e) {
 			return null;
 		}finally {
@@ -83,5 +84,23 @@ public class QueryUtil implements BankDao{
 			close(ps);
 		}
 		return ba;
+	}
+	
+	@Override
+	public void updateAccountAmount(BankAccount ba) {
+		CallableStatement cs = null;
+		
+		try(Connection conn = ConnectionUtil.getConnection()){
+			String sql = "{call update_account_amount(?, ?)}";
+			cs = conn.prepareCall(sql);
+			cs.setInt(1, ba.getAccId());
+			cs.setDouble(2, ba.getAmount());
+			cs.executeQuery();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(cs);
+		}
+		
 	}
 }

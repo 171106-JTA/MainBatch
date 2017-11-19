@@ -2,6 +2,8 @@ package com.bankoftheapes.ui;
 
 import java.text.DecimalFormat;
 
+import com.bankoftheapes.dao.QueryUtil;
+import com.bankoftheapes.user.BankAccount;
 import com.bankoftheapes.user.User;
 
 public class Withdraw {
@@ -12,7 +14,7 @@ public class Withdraw {
 	 * 
 	 * @param user - User object in order to deduct withdrawal amount from
 	 */
-	public static void Screen(User user) {
+	public static void Screen(BankAccount ba, String username, QueryUtil qu) {
 		
 		System.out.println("Withdrawing");
 		System.out.print("Please enter withdrawal amount: ");
@@ -23,13 +25,14 @@ public class Withdraw {
 			System.out.println("Invalid input. Please try again.");
 			return;
 		}
-		double prevAmount = user.getBalance();
+		double prevAmount = ba.getAmount();
 		double currAmount = prevAmount - amount;
 		if(currAmount >= 0) {
-			user.setBalance(currAmount);
+			ba.setAmount(currAmount);
 			System.out.println(df.format(amount) + " Banana(s) has been withdrawn.");
 			//Logs withdrawal of user 
-			UserInterface.startLogging(user.getName() + " has withdrawn " + amount + " Banana(s)");
+			UserInterface.startLogging(username + " has withdrawn " + amount + " Banana(s)");
+			qu.updateAccountAmount(ba);
 			return;
 		}
 		System.out.println("Invalid input. Please try again.");

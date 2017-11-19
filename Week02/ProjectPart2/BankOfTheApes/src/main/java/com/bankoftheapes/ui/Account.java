@@ -24,7 +24,7 @@ public class Account extends UserInterface{
 		int option = 0;
 		while(option != 4) {
 			System.out.println();
-			System.out.println("You Have " + ba.getDollars() + "." + ba.getCents() + " Bananas");
+			System.out.println("You Have " + ba.getAmount() + " Bananas");
 			System.out.println("1. Withdraw");
 			System.out.println("2. Deposit");
 			System.out.println("3. Loan");
@@ -34,10 +34,10 @@ public class Account extends UserInterface{
 			
 			
 			if(option == 1) {
-				Withdraw.Screen(u);
+				Withdraw.Screen(ba, u.getName(), qu);
 			}
 			else if(option == 2) {
-				Deposit.Screen(u);
+				Deposit.Screen(ba, u.getName(), qu);
 			}
 			else if(option == 3) {
 				ApplyLoan.Screen(u);
