@@ -15,7 +15,7 @@ public class OutputUtils {
      * @param cmdCodes - triggering commands
      */
     public static void printCommands(String[] cmds, String[] cmdCodes) {
-        System.out.println("You can do one of the following:");
+        System.out.println("\nYou can do one of the following:\n");
 
         for (int i = 0; i+1 < cmds.length; i += 2) {
             String left = String.format("(%s) %s", cmdCodes[i], cmds[i]);

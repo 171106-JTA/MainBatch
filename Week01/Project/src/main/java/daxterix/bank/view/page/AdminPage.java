@@ -1,6 +1,7 @@
 package daxterix.bank.view.page;
 
 import daxterix.bank.dao.DAOUtils;
+import daxterix.bank.model.User;
 import daxterix.bank.view.InputUtils;
 import daxterix.bank.view.OutputUtils;
 
@@ -10,18 +11,16 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AdminPage extends Page {
-    // private Admin admin; TODO
+    private User admin;
 
     /**
      * interacts with Admin users to mange Customers and their requests
      *
      * @param admin
      */
-    /* TODO
-    public AdminPage(Admin admin) {
+    public AdminPage(User admin) {
         this.admin = admin;
     }
-    */
 
     /**
      * Helpful for error handling, denotes the result of an attempt to
@@ -44,7 +43,7 @@ public class AdminPage extends Page {
     @Override
     protected Page _run() {
         String[] cmds = {"View instructions", "Show pending requests", "Grant a creation request", "Grant a promotion request", "Drop a request", "Show locked customers", "Lock an account", "Unlock an account", "logout"};
-        String[] codes = {"help", "printreq", "create [request id]", "promote [request id]", "drop [request-id]", "printlocked", "lock [username]", "unlock [username]", "locked", "logout"};
+        String[] codes = {"help", "printreq", "create <request id>", "promote <request id>", "drop <request-id>", "printlocked", "lock <username>", "unlock <username>", "locked", "logout"};
         OutputUtils.printCommands(cmds, codes);
 
         while(true){

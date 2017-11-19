@@ -1,9 +1,17 @@
 package daxterix.bank.view.page;
 
 import daxterix.bank.dao.DAOUtils;
+import daxterix.bank.dao.RequestDAO;
+import daxterix.bank.dao.UserDAO;
+import daxterix.bank.model.User;
+import daxterix.bank.model.UserRequest;
 import daxterix.bank.view.InputUtils;
 
+import java.sql.SQLException;
+
 public class RegisterCustomerPage extends Page {
+    private UserDAO userDao = DAOUtils.getUserDao();
+
     /**
      * see Page._run()
      *
@@ -11,19 +19,44 @@ public class RegisterCustomerPage extends Page {
      */
     @Override
     protected Page _run() {
-        String username = InputUtils.readNonEmptyLine("username");
-        String password = InputUtils.readAndConfirm(()-> InputUtils.readMasked("password"));
-        System.out.printf("user %s created\n", username);
+        String email = "";
+        while(true) {
+            email = InputUtils.readNonEmptyLine("email");
+            if (userExists(email)) {
+                System.out.println("Email taken. Please choose another email.");
+                if (checkQuit())
+                    return new WelcomePage();
+            }
+            else
+                break;
+        }
+        String password = InputUtils.readAndConfirm(() -> InputUtils.readMasked("password"));
+        System.out.printf("user %s created\n", email);
 
-        /*
-        RequestDAO dao = DAOUtils.getRequestDao();
-        if  (dao.save(new CreationRequest(new Customer(username, password))))
-            System.out.println("Success!");
-        else
-            System.out.println("Error: request creation failed. Please try again later.");
-        */
-
+        RequestDAO reqDao = DAOUtils.getRequestDao();
+        try {
+            userDao.save(new User(email, password));
+            reqDao.save(new UserRequest(email, UserRequest.CREATION));
+            System.out.println("New master account created (locked). Please wait for an admin to unlock your new account.");
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
         return new WelcomePage();
+    }
+
+    /**
+     * returns true if a user with given id exists, false otherwise or if error encountered
+     * @param email
+     * @return
+     */
+    public boolean userExists(String email) {
+        try {
+            return userDao.select(email) != null;
+        } catch (SQLException e) {
+            System.out.println("SQL Exception while checking username");
+        }
+        return false;
     }
 
     @Override
