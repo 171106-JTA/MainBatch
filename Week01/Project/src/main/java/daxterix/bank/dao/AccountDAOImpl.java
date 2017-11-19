@@ -78,14 +78,14 @@ public class AccountDAOImpl implements AccountDAO {
     }
 
     @Override
-    public int save(Account user) throws SQLException {
+    public int save(Account account) throws SQLException {
         PreparedStatement stmt = null;
 
         try (Connection conn = connectionManager.getConnection()) {
             String sql = "INSERT INTO bankaccount(useremail, balance) VALUES (?, ?)";
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, user.getEmail());
-            stmt.setDouble(2, user.getBalance());
+            stmt.setString(1, account.getEmail());
+            stmt.setDouble(2, account.getBalance());
             return stmt.executeUpdate();
         }
         finally {

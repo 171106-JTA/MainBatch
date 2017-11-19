@@ -37,6 +37,32 @@ public class Account {
         this.balance = balance;
     }
 
+    /**
+     * deposit given amount to account balance, amount must be >= 0
+     *
+     * @param amt
+     * @return
+     */
+    public boolean deposit(double amt) {
+        if (amt < 0)
+            return false;
+        balance += amt;
+        return true;
+    }
+
+    /**
+     * withdraw given amount from account balance, amount must be <= balance and >= 0
+     *
+     * @param amt
+     * @return
+     */
+    public boolean withdraw(double amt) {
+        if (amt < 0 || amt > balance)
+            return false;
+        balance -= amt;
+        return true;
+    }
+
 
     /**
      * compare two Accounts, overlook ids if one of them has an id of -1

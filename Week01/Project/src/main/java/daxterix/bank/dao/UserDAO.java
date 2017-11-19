@@ -35,22 +35,13 @@ public interface UserDAO {
     int save(User user) throws SQLException;
 
     /**
-     * update a user's info
+     * update a user's info, given email must match that of the user to be updated
      *
      * @param info
      * @return
      * @throws SQLException
      */
     int update(User info) throws SQLException;
-
-    /**
-     * delete a user (and all filed requests, and accounts)
-     *
-     * @param email
-     * @return
-     * @throws SQLException
-     */
-    int delete(String email) throws SQLException;
 
     /**
      * return the user that owns the given account
@@ -70,8 +61,20 @@ public interface UserDAO {
      */
     User selectForRequest(long requestId) throws SQLException;
 
+
     /**
-     * deletes all Users, and all records (and all filed requests, and accounts)
+     * delete a user (cannot delete a user without deleting its associated
+     * requests, and accounts)
+     *
+     * @param email
+     * @return
+     * @throws SQLException
+     */
+    int delete(String email) throws SQLException;
+
+    /**
+     * deletes all Users, and all records (cannot delete a user without
+     * deleting its associated requests, and accounts)
      *
      * @return - number of rows affected
      */
