@@ -1,7 +1,14 @@
 package com.revature.persistence.database;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.revature.businessobject.BusinessObject;
 import com.revature.core.FieldParams;
+import com.revature.persistence.database.util.ConnectionUtil;
 
 public class DatabaseUpdator extends DatabaseDeletor {
 
@@ -11,8 +18,34 @@ public class DatabaseUpdator extends DatabaseDeletor {
 	}
 
 	public int update(String name, FieldParams cnds, FieldParams values) {
-		// TODO Auto-generated method stub
-		return 0;
+		String sql = "UPDATE " + validateTableName(name);
+		String set = " SET ";
+		String where = " WHERE ";
+		List<String> setParams = new ArrayList<>();
+		List<String> whereParams = new ArrayList<>();
+		PreparedStatement statement = null;
+		int total = 0;
+		
+		try (Connection conn = ConnectionUtil.getConnection();) {
+			for (String key : cnds.keySet())
+				whereParams.add(key + "=?");
+			
+			for (String key : values.keySet()) 
+				setParams.add(key + "=?");
+			
+			// Build sql statement
+			sql += set + String.join(",", setParams) + where + String.join(",", whereParams);
+			statement = conn.prepareStatement(sql);
+			clauseBuilder.build(name, statement, values, cnds);
+			total = statement.executeUpdate();
+		}catch (SQLException e) {
+			e.printStackTrace();
+			logger.warn("failed to update record " + cnds + values + " message=" + e.getMessage());
+		} finally {
+			ConnectionUtil.close(statement);
+		}
+		
+		return total;
 	}
 
 }
