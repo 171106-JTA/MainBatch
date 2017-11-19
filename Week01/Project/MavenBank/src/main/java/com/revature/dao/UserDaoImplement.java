@@ -87,7 +87,6 @@ public class UserDaoImplement implements UserDao {
 				double accountAmount = rs.getDouble("accountAmount");
 				retUser = new User(usrname, firstname, lastname, middleinitial, passwd, permission, status,
 						accountAmount);
-				System.out.println(retUser);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

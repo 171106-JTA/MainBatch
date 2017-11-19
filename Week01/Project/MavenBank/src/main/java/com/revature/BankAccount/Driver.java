@@ -28,7 +28,6 @@ import com.revature.dao.UserDaoImplement;
  */
 public class Driver {
 	private static final String databaseFile = "database.txt"; // File containing database
-	private HashMap<String, User> db;
 	private User currentUser;
 	protected UserDaoImplement dao; 
 	
@@ -65,26 +64,13 @@ public class Driver {
 	 */
 	public static void main(String[] args) {
 		Driver mp = new Driver();
-		mp.db = new HashMap<String, User>();
 		
 		//Basic database insert!!!!
 		mp.dao = new UserDaoImplement();
-//		String tmp = "y";
-//		mp.dao.createUser(new User(tmp, tmp, tmp, tmp, tmp, 0, 0, 0));
-//		
 		
 		boolean exit = false;
 		
 		logger.trace("Application Start");
-
-		// Read database from the file
-		try {
-			logger.trace("Reading Database");
-			mp.readDatabase(mp.databaseFile);
-		} catch (IOException e1) {
-			logger.error("Error trying to close the ObjectInputStream while reading the database.", e1);
-			e1.printStackTrace();
-		} // To Do: Any finally statement?
 
 		// Print at the start of the program
 		System.out.println("Welcome");
@@ -94,19 +80,6 @@ public class Driver {
 			String userChoice = mp.mainMenu();
 			exit = mp.controlLogic(userChoice);
 		}
-
-		// Save the database to the 'database.txt' file. Erase whatever is in the file
-		// currently
-		// To Do: Might be able to abstract this try/catch statement with the one at
-		// readDatabase() call
-		try {
-			logger.trace("Ending Applicatin. Saving Database to file");
-			mp.saveDb();
-		} catch (IOException e) {
-			logger.error("Error while closing ObjectOutputStream when saving database", e);
-			e.printStackTrace();
-			// To D o: Return message with catch statement???
-		} // To Do: Any finally statement?
 	}
 
 	/**
@@ -169,59 +142,6 @@ public class Driver {
 		}
 
 		return exit;
-	}
-
-//	public void default_database() {
-//		String firstName = "Evan";
-//		String lastName = "West";
-//		String middleInitial = "A";
-//		String username = "evanwest";
-//		String password = "password";
-//		int permissions = 1;
-//		int status = 1;
-//		int accountAmount = 0;
-//		User default_user_1 = new User(firstName, lastName, middleInitial, username, password, permissions, status,
-//				accountAmount);
-//
-//		db.put(default_user_1.getUsername(), default_user_1);
-//	}
-
-	/**
-	 * Read serialized HashMap object from file and store in the 'db' member object.
-	 * 
-	 * @param fileName
-	 *            Name of file containing serialized HashMap database
-	 * @throws IOException
-	 *             Throws this exception if input stream cannot be closed (in
-	 *             finally statement)
-	 */
-	@SuppressWarnings("unchecked")
-	public void readDatabase(String fileName) throws IOException {
-		try {
-			// Read in File
-			ois = new ObjectInputStream(new FileInputStream(fileName));
-
-			/*
-			 * To Do: There is a warning generated here because casting the 'Object'
-			 * returned from readObject to a HashMap. See the link below for a possible fix
-			 * https://stackoverflow.com/questions/262367/type-safety-unchecked-cast
-			 */
-			db = (HashMap<String, User>) ois.readObject();
-
-			// Print database. For coding purposes
-			// System.out.println("The Database!!!!: ");
-			// for (String key : db.keySet()) {
-			// System.out.println(this.db.get(key));
-			// }
-		} catch (ClassNotFoundException e) {
-			// To Do: Fill in
-			e.printStackTrace();
-		} finally {
-			// Close input stream
-			if (ois != null) {
-				ois.close();
-			}
-		}
 	}
 
 	/**
@@ -531,7 +451,7 @@ public class Driver {
 	 * 						that meet the status and permission requirements
 	 */
 	private List<String> getAListOfUsers(final int status, final int permissions) {
-		// Search db for users meeting the specified conditions
+		// Search the database for users meeting the specified conditions
 		return dao.getUsersConditionally(status, permissions);
 	}	
 	
@@ -548,7 +468,6 @@ public class Driver {
 		
 		boolean userAltered = dao.alterUserStatusAndPermission(input, currentStatus, 
 				currentPermission, newStatus, newPermission);
-		System.out.println("user altered: " + userAltered);
 		if(userAltered) {
 			System.out.println("Account Changed!");
 			logger.trace("Account Changed!");
@@ -692,7 +611,6 @@ public class Driver {
 		currentUser.setAccountAmount(amount);
 		
 		dao.alterAccountAmount(currentUser);
-//		this.db.put(currentUser.getUsername(), currentUser);
 	}
 
 	/**
@@ -710,7 +628,6 @@ public class Driver {
 				amount = curAccount - amount;
 				currentUser.setAccountAmount(amount);
 				dao.alterAccountAmount(currentUser);
-//				this.db.put(currentUser.getUsername(), currentUser);
 			} else {
 				System.out.println("Not enough in your account to withraw $" + amount);
 			}
@@ -719,42 +636,20 @@ public class Driver {
 		}
 	}
 
-	/**
-	 * Saves the database to a file at the end of the application
-	 * 
-	 * @throws IOException
-	 *             Thrown when the ObjectOutputStream could not be closed
-	 */
-	public void saveDb() throws IOException {
-		// To Do: Don't pass in database! use this.db to access!!!!!
-		try {
-			oos = new ObjectOutputStream(new FileOutputStream(databaseFile));
-			oos.writeObject(this.db);
-			oos.close();
-		} catch (IOException e) {
-			// To Do: Return message with catch statement???
-			e.printStackTrace();
-		} finally {
-			if (oos != null) {
-				oos.close();
-			}
-		}
-	}
-
 	////////////////////////////////////////////////////////
 	// Functions for Unit Testing
 	////////////////////////////////////////////////////////
-	public HashMap<String, User> getDb() {
-		return this.db;
-	}
-
-	public void addUserToDb(User user) {
-		db.put(user.getUsername(), user);
-	}
-
-	public void setDb(HashMap<String, User> newDb) {
-		db = newDb;
-	}
+//	public HashMap<String, User> getDb() {
+//		return this.db;
+//	}
+//
+//	public void addUserToDb(User user) {
+//		db.put(user.getUsername(), user);
+//	}
+//
+//	public void setDb(HashMap<String, User> newDb) {
+//		db = newDb;
+//	}
 
 	public void setCurrentUser(User user) {
 		currentUser = user;
