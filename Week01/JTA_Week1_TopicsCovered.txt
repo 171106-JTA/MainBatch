@@ -105,7 +105,7 @@ Variable Shadowing, overloading, overriding
 Variable Shadowing: creating a variable in an inside scope that 
 is used instead of an outscope variable by the same name
 Overloading: same function with multiple differeing versions
-Overriding: When the funcitonality of a method is changed. 
+Overriding: When the funcitonality of a method is changed. same function signiture, but different implementation
 i.e. A child class can override its parent's functions. 
 
 =========================================================
