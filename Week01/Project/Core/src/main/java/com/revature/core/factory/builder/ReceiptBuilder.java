@@ -1,7 +1,10 @@
 package com.revature.core.factory.builder;
 
+import java.sql.ResultSet;
+
 import com.revature.businessobject.BusinessObject;
 import com.revature.core.FieldParams;
+import com.revature.core.Resultset;
 
 public class ReceiptBuilder implements BusinessObjectBuilder {
 
@@ -11,6 +14,11 @@ public class ReceiptBuilder implements BusinessObjectBuilder {
 		return null;
 	}
 
+	public Resultset getBusinessObject(ResultSet args) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	@Override
 	public boolean isValid(FieldParams args) {
 		// TODO Auto-generated method stub

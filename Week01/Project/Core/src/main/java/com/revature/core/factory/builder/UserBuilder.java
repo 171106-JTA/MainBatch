@@ -1,11 +1,15 @@
 package com.revature.core.factory.builder;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import com.revature.businessobject.BusinessObject;
 import com.revature.businessobject.user.Admin;
+import com.revature.businessobject.user.Checkpoint;
 import com.revature.businessobject.user.Customer;
 import com.revature.businessobject.user.User;
-import com.revature.businessobject.user.Checkpoint;
 import com.revature.core.FieldParams;
+import com.revature.core.Resultset;
 
 /**
  * Initializes Objects of type User 
@@ -46,6 +50,22 @@ public class UserBuilder implements BusinessObjectBuilder {
 		return object;
 	}
 
+	public Resultset getBusinessObject(ResultSet args) {
+		Resultset data = new Resultset();
+		User user;
+		
+		try {
+			while (args.next()) {
+				user = new User(args.getLong(User.ID), args.getString(User.USERNAME), args.getString(User.PASSWORD), Checkpoint.NONE);
+				data.add(user);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return data;
+	}
+	
 	/**
 	 * Used to ensure all arguments needed to instantiate object
 	 * @param args what to check
