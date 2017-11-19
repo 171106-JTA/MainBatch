@@ -5,8 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.bankoftheapes.user.BankAccount;
 import com.bankoftheapes.user.User;
 import com.bankoftheapes.util.ConnectionUtil;
+import static com.bankoftheapes.util.CloseStream.close;;
 
 public class QueryUtil implements BankDao{
 	private Connection conn;
@@ -51,7 +53,35 @@ public class QueryUtil implements BankDao{
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return null;
+		}finally {
+			close(ps);
+			close(rs);
 		}
 		return u;
+	}
+	
+	@Override
+	public BankAccount getAccountInfo(User u) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		BankAccount ba = null;
+		
+		try(Connection conn = ConnectionUtil.getConnection()){
+			String sql = "SELECT * FROM Bank_Account WHERE USERNAME = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, u.getName());
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				ba = new BankAccount(u.getAccId());
+				ba.setAmount(rs.getInt("Amount"));
+			}
+			u.setBankAccount(ba);
+		}catch(SQLException e) {
+			return null;
+		}finally {
+			close(rs);
+			close(ps);
+		}
+		return ba;
 	}
 }

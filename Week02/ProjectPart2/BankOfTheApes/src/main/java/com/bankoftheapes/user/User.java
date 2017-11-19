@@ -11,12 +11,14 @@ public class User implements Serializable{
 	private String password;
 	private int banned; //field for locking an account
 	private Loan loan;
+	private BankAccount bankAccount;
 	
 	public User(String name, String password) {
 		this.name = name;
 		this.password = password;
 		this.approved = 0;
 		this.banned = 0;
+		this.bankAccount = null;
 	}
 	
 	public User() {
@@ -45,6 +47,14 @@ public class User implements Serializable{
 
 	public void setBanned(int banned) {
 		this.banned = banned;
+	}
+
+	public BankAccount getBankAccount() {
+		return bankAccount;
+	}
+
+	public void setBankAccount(BankAccount bankAccount) {
+		this.bankAccount = bankAccount;
 	}
 
 	public int getAccId() {

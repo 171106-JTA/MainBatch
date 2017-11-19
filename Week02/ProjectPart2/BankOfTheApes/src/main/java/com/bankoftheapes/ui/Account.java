@@ -1,8 +1,7 @@
 package com.bankoftheapes.ui;
 
-import java.text.DecimalFormat;
-import java.util.HashMap;
-
+import com.bankoftheapes.dao.QueryUtil;
+import com.bankoftheapes.user.BankAccount;
 import com.bankoftheapes.user.User;
 
 public class Account extends UserInterface{
@@ -12,19 +11,20 @@ public class Account extends UserInterface{
 	 * 
 	 * @param users HashMap<String, User> used to gather user information for transactions
 	 */
-	public static void Screen(HashMap<String, User> users) {
-		User u = UserInterface.loginScreen(users);
-		DecimalFormat df = new DecimalFormat("#0.00");
+	public static void Screen(QueryUtil qu) {
+		User u = UserInterface.loginScreen(qu);
 		
 		if(u == null) {
 			return;
 		}
 		
+		BankAccount ba = qu.getAccountInfo(u);
+		
 		System.out.println("Welcome Back!");
 		int option = 0;
 		while(option != 4) {
 			System.out.println();
-			System.out.println("You Have " + df.format(u.getBalance()) + " Bananas");
+			System.out.println("You Have " + ba.getDollars() + "." + ba.getCents() + " Bananas");
 			System.out.println("1. Withdraw");
 			System.out.println("2. Deposit");
 			System.out.println("3. Loan");
@@ -47,6 +47,6 @@ public class Account extends UserInterface{
 			}
 		}	
 		System.out.println("Thank you. Have a nice day! Hail Ceasar!");
-		UserInterface.cleanUp(users);
+		UserInterface.cleanUp();
 	}
 }

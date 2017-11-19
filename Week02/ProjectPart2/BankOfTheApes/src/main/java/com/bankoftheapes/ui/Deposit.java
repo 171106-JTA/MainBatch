@@ -1,5 +1,6 @@
 package com.bankoftheapes.ui;
 
+import com.bankoftheapes.user.BankAccount;
 import com.bankoftheapes.user.User;
 
 public class Deposit {
@@ -10,6 +11,8 @@ public class Deposit {
 	 * @param user User object to set deposit amount into
 	 */
 	public static void Screen(User user) {
+		BankAccount ba = user.getBankAccount();
+		
 		System.out.println("Depositing");
 		System.out.print("Please enter amount to be deposited: ");
 		double amount = UserInterface.readDouble();
@@ -18,9 +21,9 @@ public class Deposit {
 			System.out.println("Invalid input. Please try again.");
 			return;
 		}
-		double prevAmount = user.getBalance();
+		double prevAmount = ba.getAmount();
 		double currAmount = prevAmount + amount;
-		user.setBalance(currAmount);
+		ba.setAmount(currAmount);
 		//Logs the deposit
 		UserInterface.startLogging(user.getName() + " has deposited " + amount + " Banana(s)");
 	}

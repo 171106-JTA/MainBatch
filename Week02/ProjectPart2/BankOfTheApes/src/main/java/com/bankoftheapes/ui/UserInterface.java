@@ -88,7 +88,7 @@ public class UserInterface {
 	 * 
 	 * @param users HashMap to be serialized
 	 */
-	protected static void cleanUp(HashMap<String, User> users) {
+	protected static void cleanUp() {
 		scan.close();
 	}	
 	

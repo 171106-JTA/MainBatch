@@ -3,6 +3,7 @@ package com.bankoftheapes.bank;
 import java.util.HashMap;
 
 import com.bankoftheapes.dao.QueryUtil;
+import com.bankoftheapes.ui.Account;
 import com.bankoftheapes.ui.Splash;
 import com.bankoftheapes.ui.UserInterface;
 import com.bankoftheapes.user.User;
@@ -55,7 +56,7 @@ public class BankOfTheApes {
 		
 		switch(option) {
 			case 1:
-				UserInterface.loginScreen(qu);
+				Account.Screen(qu);
 				break;
 			case 2:
 				UserInterface.loginScreen(qu);
