@@ -27,6 +27,11 @@ public class UserAccountPage extends Page {
         this.myAccount = myAccount;
     }
 
+    /**
+     * see Page._run
+     *
+     * @return
+     */
     @Override
     protected Page _run() {
 
@@ -134,7 +139,7 @@ public class UserAccountPage extends Page {
         }
     }
 
-        /**
+    /**
      * Transfer given amount to given account
      *
      * @param first -- represents the amount
@@ -168,6 +173,11 @@ public class UserAccountPage extends Page {
         }
     }
 
+    /**
+     * closes an account, aborts if account balance is not 0
+     *
+     * @return
+     */
      public Page closeAccount() {
         try {
             if (!InputUtils.confirmDecision()) {

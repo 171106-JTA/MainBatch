@@ -32,7 +32,7 @@ public class DAOUtils {
     }
 
     /***
-     * get data access object for basic CRUD operations for Admin records
+     * get data access object for basic CRUD operations for User records
      *
      * @return
      */
@@ -40,39 +40,48 @@ public class DAOUtils {
         return new UserDAOImpl(new ConnectionManager(username, password, url));
     }
 
+     /***
+     * get data access object for basic CRUD operations for Request records
+     *
+     * @return
+     */
     public static RequestDAO getRequestDao() {
         return new RequestDAOImpl(new ConnectionManager(username, password, url));
     }
 
+     /***
+     * get data access object for basic CRUD operations for Account records
+     *
+     * @return
+     */
     public static AccountDAO getAccountDao() {
         return new AccountDAOImpl(new ConnectionManager(username, password, url));
     }
 
+     /***
+     * get data access object for basic CRUD operations for User records, but for a test database
+     *
+     * @return
+     */
     public static UserDAO getTestUserDao() {
         return new UserDAOImpl(new ConnectionManager(testUsername, testPassword, url));
     }
 
+     /***
+     * get data access object for basic CRUD operations for Account records, but for a test database
+     *
+     * @return
+     */
     public static AccountDAO getTestAccountDao() {
         return new AccountDAOImpl(new ConnectionManager(testUsername, testPassword, url));
     }
 
+     /***
+     * get data access object for basic CRUD operations for Request records, but for a test database
+     *
+     * @return
+     */
     public static RequestDAO getTestRequestDao() {
         return new RequestDAOImpl(new ConnectionManager(testUsername, testPassword, url));
     }
-
-
-    /*
-    public static CustomerDAO getUnlockedCustomerDao() {
-        //return new CustomerDAO(unlockedCustomerPath);
-        return null;
-    }
-    public static CustomerDAO getLockedCustomerDao() {
-        //return new CustomerDAO(lockedCustomerPath);
-        return null;
-    }
-    public static RequestDAO getRequestDao() {
-        //return new RequestDAO(requestPath);
-        return null;
-    }
-    */
 }

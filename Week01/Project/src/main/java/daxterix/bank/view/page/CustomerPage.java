@@ -155,6 +155,12 @@ public class CustomerPage extends Page {
         return null;
     }
 
+    /**
+     * navigates user to chosen account, provided the user owns the account
+     *
+     * @param accountStr
+     * @return
+     */
     public Page goToAccount(String accountStr) {
         long accountNum;
         try {
@@ -176,6 +182,9 @@ public class CustomerPage extends Page {
     }
 
 
+    /**
+     * creates a promotion request. aborts if user currently has a pending promotion request
+     */
     public void handlePromoteRequest() {
         if (customer.isAdmin()) {
             programReply("You are already an admin.");

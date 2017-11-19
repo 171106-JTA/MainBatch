@@ -152,6 +152,7 @@ public class AdminPage extends Page {
 
     /**
      * lock the given user account
+     *
      * @param second
      */
     void lockAccount(String second) {
@@ -200,6 +201,8 @@ public class AdminPage extends Page {
     }
 
     /**
+     * handles fulfilling of chosen user requests
+     *
      * @param requestIdStr
      * @return
      */
