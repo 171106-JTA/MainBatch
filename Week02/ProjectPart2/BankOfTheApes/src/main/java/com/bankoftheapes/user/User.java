@@ -1,8 +1,6 @@
 package com.bankoftheapes.user;
 
-import java.io.Serializable;
-
-public class User implements Serializable{
+public class User {
 	private String access_level;
 	private int accId;
 	private int loanId;

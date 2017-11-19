@@ -7,13 +7,12 @@ public interface BankDao {
 	public BankAccount getAccountInfo(User user);
 	public User getUserInfo(String username);
 	public boolean userExists(String username);
-	//public Loan getLoanInfo();
+	public void showLoans(User user);
 	public void showAllUsers();
 	public void updateAccountAmount(BankAccount ba);
-	//public void updateLoan();
+	public void updateLoan(User user, int loanId, String status, String approvaldate);
 	public void updateAccessStatus(User u);
 	public void updateApproval(User u);
-	//public void deleteLoan();
 	public void addNewUser(User user);
-	
+	public void applyLoan(User user);
 }

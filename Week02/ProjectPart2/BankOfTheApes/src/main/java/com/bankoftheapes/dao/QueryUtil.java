@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.bankoftheapes.user.BankAccount;
+import com.bankoftheapes.user.Loan;
 import com.bankoftheapes.user.User;
 import com.bankoftheapes.util.ConnectionUtil;;
 
@@ -190,6 +191,73 @@ public class QueryUtil implements BankDao{
 		}
 		
 	}
+	
+	@Override
+	public void applyLoan(User user) {
+		PreparedStatement ps = null;
+		Loan loan = user.getLoan();
+		
+		try(Connection conn = ConnectionUtil.getConnection()){
+			String sql = "INSERT INTO Loan "
+					+ "(USERNAME, LOAN_AMOUNT, REQUESTDATE) "
+					+ "VALUES (?, ?, ?)";
+			ps  = conn.prepareStatement(sql);
+			ps.setString(1, user.getName());
+			ps.setDouble(2, loan.getAmount());
+			ps.setString(3, loan.getDate());
+			ps.executeQuery();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			commitChanges();
+			close(ps);
+		}
+		
+	}
+	
+	@Override
+	public void showLoans(User user) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try(Connection conn = ConnectionUtil.getConnection()){
+			String sql = "SELECT LOANID, LOAN_AMOUNT, STATUS, PAIDOFF FROM Loan WHERE USERNAME = ?";
+			ps  = conn.prepareStatement(sql);
+			ps.setString(1, user.getName());
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				System.out.println(rs.getInt("LOANID") + " " + rs.getDouble("LOAN_AMOUNT") + 
+						" " + rs.getString("STATUS") + " " + rs.getString("PAIDOFF"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			commitChanges();
+			close(ps);
+		}
+	}
+	
+	@Override
+	public void updateLoan(User user, int loanId, String status, String approvalDate) {
+		PreparedStatement ps = null;
+		
+		try(Connection conn = ConnectionUtil.getConnection()){
+			String sql = "UPDATE LOAN SET STATUS = ?, APPROVALDATE = ?" +
+						" WHERE USERNAME = ? AND LOANID = ?";
+			ps  = conn.prepareStatement(sql);
+			ps.setString(1, status);
+			ps.setString(2, approvalDate);
+			ps.setString(3, user.getName());
+			ps.setInt(4, loanId);
+			ps.executeQuery();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			commitChanges();
+			close(ps);
+		}
+	}		
+	
 	private void commitChanges() {
 		Statement stmt = null;
 		

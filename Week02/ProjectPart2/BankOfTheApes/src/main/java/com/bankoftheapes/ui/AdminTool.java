@@ -19,49 +19,6 @@ public class AdminTool {
 	}
 	
 	/**
-	 * Administrator only approval screen. 
-	 * Admin finds the loanee through console input and approves/rejects their loan
-	 * Shows the admin the loan amount first
-	 * 
-	 * @param users Used to quickly find the loanee for approval
-	 */
-	public static void approveLoan(HashMap<String, User> users) {
-		String input = "";
-		User u;
-		System.out.print("Enter user name of loanee: ");
-		input = UserInterface.readInput();
-		u = users.get(input);
-		
-		if(u == null) {
-			System.out.println("User not found.\n");
-			return;
-		}
-		
-		if(u.getLoan().getAmount() == 0) {
-			System.out.println("User has no loans to approve.");
-			return;
-		}
-		
-		System.out.println("Loan of " + u.getLoan().getAmount());
-		System.out.print("To approve, enter a; To reject, r --> ");
-		input = UserInterface.readInput();
-		switch(input) {
-			//When approved, loan amount is added to account
-			case "a":
-				u.getLoan().setApproval(true);
-				u.setBalance(u.getLoan().getAmount());
-				UserInterface.startLogging("Loan of " + u.getLoan().getAmount()+ " for " + u.getName() + " has been approved");
-				break;
-			//When rejected, loan amount returns to 0
-			case "r":
-				UserInterface.startLogging("Loan of " + u.getLoan().getAmount()+ " for " + u.getName() + " has been rejected");
-				u.setLoan(null);
-				break;
-			default:
-				System.out.println("Incorrect Input.");
-		}
-	}
-	/**
 	 * Menu used by administrators to approve or disapprove a user
 	 * 
 	 * @param users HashMap of users for quick look-ups
@@ -90,19 +47,18 @@ public class AdminTool {
 		switch(input) {
 			case "a":
 				u.setApproved(1);
-				qu.updateApproval(u);
 				//Log admin approval
 				UserInterface.startLogging("Management has approved user " + u.getName());
 				break;
 			case "d":
 				u.setApproved(0);
-				qu.updateApproval(u);
 				//Log admin disapproval
 				UserInterface.startLogging("Management has disapproved user " + u.getName());
 				break;
 			default:
 				System.out.println("Incorrect input.");
 		}
+		qu.updateApproval(u);
 	}
 	
 	/**
@@ -110,21 +66,21 @@ public class AdminTool {
 	 * 
 	 * @param users HashMap of users for quick look-ups
 	 */
-	public static void banUser(HashMap<String, User> users) {
+	public static void banUser(QueryUtil qu) {
 		System.out.println("Ban Screen");
 		String input = "";
-		User u;
+		User u = null;
 		
 		System.out.print("Enter username: ");
 		input = UserInterface.readInput();
-		u = users.get(input);
+		u = qu.getUserInfo(input);
 		if(u == null) {
 			System.out.println("User not found.");
 			return;
 		}
 		
 		//Prevent administrators from banning each other
-		if(u.getAccess_level() == 2) {
+		if(u.getAccess_level().equals("ADM")) {
 			System.out.println("You cannot ban another administrator.");
 			return;
 		}
@@ -133,18 +89,19 @@ public class AdminTool {
 		input = UserInterface.readInput();
 		switch(input) {
 			case "b":
-				u.setBanned(true);
+				u.setBanned(1);
 				//Log admin ban
 				UserInterface.startLogging("Admin has banned user " + u.getName());
 				break;
 			case "u":
-				u.setBanned(false);
+				u.setBanned(0);
 				//Log admin unban
 				UserInterface.startLogging("Admin has unbanned user " + u.getName());
 				break;
 			default:
 				System.out.println("Incorrect Input.");
 		}
+		qu.updateApproval(u);
 	}
 	
 	/**

@@ -1,44 +1,30 @@
 package com.bankoftheapes.ui;
 
+import java.time.LocalDate;
+
+import com.bankoftheapes.dao.QueryUtil;
+import com.bankoftheapes.user.BankAccount;
 import com.bankoftheapes.user.Loan;
 import com.bankoftheapes.user.User;
 
 public class ApplyLoan extends UserInterface {
 	
-	public static void Screen(User user) {
+	public static void Screen(User user, QueryUtil qu) {
 		System.out.println("\nLoan Application");
 		System.out.println("1. Show Loan Status");
 		System.out.println("2. Apply Loan");
-		System.out.println("3. Repay Loan");
 		System.out.print("Enter option: ");
 		int input = UserInterface.readIntInput();
 		
 		switch(input) {
 			case 1:
-				showLoan(user);
+				qu.showLoans(user);
 				break;
 			case 2:
-				applyLoan(user);
-				break;
-			case 3:
-				repayLoan(user);
+				applyLoan(user, qu);
 				break;
 			default:
 				System.out.println("Invalid Input.");
-		}
-	}
-	
-	/**
-	 * Shows the loan amount and status
-	 * 
-	 * @param u the user
-	 */
-	private static void showLoan(User u) {
-		if(u.getLoan() == null) {
-			System.out.println("No loans in system.");
-		}
-		else {
-			System.out.println(u.getLoan());
 		}
 	}
 	
@@ -48,44 +34,22 @@ public class ApplyLoan extends UserInterface {
 	 * 
 	 * @param u the user applying for a loan
 	 */
-	private static void applyLoan(User u) {
+	private static void applyLoan(User u, QueryUtil qu) {
+		Loan loan = null;
+		
 		if(u.getLoan() != null) {
 			System.out.println("Loan already in system");
 			return;
 		}
+		
 		System.out.print("Enter loan amount: ");
 		double d = UserInterface.readDouble();
-		u.setLoan(new Loan(d));
+		loan = new Loan(d, LocalDate.now().toString());
+		
+		u.setLoan(loan);
 		System.out.println("Loan Request of " + d + " has been received.");
 		UserInterface.startLogging(u.getName() + " has applied for a loan of " + d);
+		qu.applyLoan(u);
 	}
 	
-	/**
-	 * The method automatically deducts the loan amount for the user account when enough money is present.
-	 * Otherwise the repayment is rejected
-	 * 
-	 * @param u The user, who will have their money deducted
-	 */
-	private static void repayLoan(User u) {
-		double currAmount = 0;
-		double loanAmount = 0;
-		double afterAmount = 0;
-		if(u.getLoan() == null) {
-			System.out.println("No loans found.");
-			return;
-		}
-		
-		currAmount = u.getBalance();
-		loanAmount = u.getLoan().getAmount();
-		afterAmount = 0;
-		
-		if(loanAmount > currAmount) {
-			System.out.println("Not enough money in Account. Cannot repay loan.");
-			return;
-		}
-		afterAmount = currAmount - loanAmount;
-		u.setBalance(afterAmount);
-		//Resets the loan back to null
-		u.setLoan(null);
-	}
 }

@@ -78,3 +78,9 @@
 2017-11-19 14:32:13 INFO  Logging:24 - Admin has promoted user hd to administrator.
 2017-11-19 14:35:01 INFO  Logging:24 - Admin has promoted user hd to administrator.
 2017-11-19 14:35:56 INFO  Logging:24 - Admin has promoted user hd to administrator.
+2017-11-19 15:37:45 INFO  Logging:24 - admin has applied for a loan of 100.0
+2017-11-19 15:40:03 INFO  Logging:24 - admin has applied for a loan of 100.0
+2017-11-19 15:44:10 INFO  Logging:24 - admin has applied for a loan of 100.0
+2017-11-19 15:47:14 INFO  Logging:24 - admin has applied for a loan of 1000.0
+2017-11-19 16:30:49 INFO  Logging:24 - admin has withdrawn 10.0 Banana(s)
+2017-11-19 16:30:56 INFO  Logging:24 - admin has deposited 20.00 Banana(s)

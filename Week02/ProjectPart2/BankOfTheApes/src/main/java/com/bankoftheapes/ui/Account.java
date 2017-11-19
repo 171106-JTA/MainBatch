@@ -1,5 +1,7 @@
 package com.bankoftheapes.ui;
 
+import java.text.DecimalFormat;
+
 import com.bankoftheapes.dao.QueryUtil;
 import com.bankoftheapes.user.BankAccount;
 import com.bankoftheapes.user.User;
@@ -13,6 +15,7 @@ public class Account extends UserInterface{
 	 */
 	public static void Screen(QueryUtil qu) {
 		User u = UserInterface.loginScreen(qu);
+		DecimalFormat df = new DecimalFormat("#0.00");
 		
 		if(u == null) {
 			return;
@@ -24,7 +27,7 @@ public class Account extends UserInterface{
 		int option = 0;
 		while(option != 4) {
 			System.out.println();
-			System.out.println("You Have " + ba.getAmount() + " Bananas");
+			System.out.println("You Have " + df.format(ba.getAmount()) + " Bananas");
 			System.out.println("1. Withdraw");
 			System.out.println("2. Deposit");
 			System.out.println("3. Loan");
@@ -40,7 +43,7 @@ public class Account extends UserInterface{
 				Deposit.Screen(ba, u.getName(), qu);
 			}
 			else if(option == 3) {
-				ApplyLoan.Screen(u);
+				ApplyLoan.Screen(u, qu);
 			}
 			else if(option > 4 || option < 1) {
 				System.out.println("Invalid option. Please try again.");

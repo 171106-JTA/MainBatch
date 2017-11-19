@@ -1,7 +1,6 @@
 package com.bankoftheapes.ui;
 
-import java.util.HashMap;
-
+import com.bankoftheapes.dao.QueryUtil;
 import com.bankoftheapes.user.User;
 
 public class Moderator {
@@ -11,14 +10,14 @@ public class Moderator {
 	 * @param users HashMap of users used to gather access, approval, and banned statuses of users
 	 * @param u user object needed to check 
 	 */
-	public static void Screen(HashMap<String, User> users, User u) {
+	public static void Screen(User u, QueryUtil qu) {
 		
 		if(u == null) {
 			return;
 		}
 		//Checks to see if the user has the right access_level;
 		//They get kicked out if the user is not authorized
-		if(u.getAccess_level() != 1) {
+		if(u.getAccess_level().equals("MOD")) {
 			System.out.println("Wrong Menu");
 			return;
 		}
@@ -35,17 +34,17 @@ public class Moderator {
 			
 			switch(option) {
 				case 1:
-					AdminTool.showAllUser(users);
+					AdminTool.showAllUser(qu);
 					break;
 				case 2:
-					AdminTool.approveUser(users);
+					AdminTool.approveUser(qu);
 					break;
 				case 3:
-					AdminTool.promoteUser(users, u.getAccess_level());
+					AdminTool.promoteUser(u.getAccess_level(), qu);
 					break;
 				case 4:
 					System.out.println("Thank you for the hard work!");
-					UserInterface.cleanUp(users);
+					UserInterface.cleanUp();
 					break;
 				default:
 					System.out.println("Invalid input. Please try again");
