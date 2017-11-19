@@ -1,7 +1,6 @@
 package com.bankoftheapes.ui;
 
-import java.util.HashMap;
-
+import com.bankoftheapes.dao.QueryUtil;
 import com.bankoftheapes.user.User;
 
 public class NewUser extends UserInterface{
@@ -12,9 +11,10 @@ public class NewUser extends UserInterface{
 	 * 
 	 * @param users HashMap of users to check if username is taken
 	 */
-	public static void Screen(HashMap<String, User> users) {
+	public static void Screen(QueryUtil qu) {
 		String user;
 		String password;
+		User u = null;
 		
 		/* Loop helps prevent duplicate usernames
 		 * user must enter unique username to continue
@@ -23,7 +23,7 @@ public class NewUser extends UserInterface{
 			//Asks for username
 			System.out.print("Username: ");
 			user = UserInterface.readInput();
-			if(users.containsKey(user)) {
+			if(qu.userExists(user)) {
 				System.out.println("Username taken. Please try again.");
 			}
 			else {
@@ -33,9 +33,13 @@ public class NewUser extends UserInterface{
 		//Asks for password
 		System.out.print("Password: ");
 		password = UserInterface.readInput();
-		users.put(user, new User(user, password));
+		u = new User(user, password);
+		u.setAccess_level("REG");
+		u.setBanned(0);
+		u.setApproved(0);
+		qu.addNewUser(u);
 		
 		System.out.println("Have a nice day!");
-		UserInterface.cleanUp(users);
+		UserInterface.cleanUp();
 	}
 }

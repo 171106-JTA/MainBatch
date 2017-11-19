@@ -1,15 +1,17 @@
 package com.bankoftheapes.dao;
 
+import static com.bankoftheapes.util.CloseStream.close;
+
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import com.bankoftheapes.user.BankAccount;
 import com.bankoftheapes.user.User;
-import com.bankoftheapes.util.ConnectionUtil;
-import static com.bankoftheapes.util.CloseStream.close;;
+import com.bankoftheapes.util.ConnectionUtil;;
 
 public class QueryUtil implements BankDao{
 	private Connection conn;
@@ -17,18 +19,26 @@ public class QueryUtil implements BankDao{
 	@Override
 	public boolean userExists(String username) {
 		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String user = null;
 		
 		try(Connection conn = ConnectionUtil.getConnection()){
 			String sql = "SELECT * FROM Customer WHERE USERNAME = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, username);
-			ps.executeQuery();
-			
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				user = rs.getString("USERNAME");
+			}
+			if(user == null) {
+				return false;
+			}
 		}catch(SQLException e) {
-			System.out.println("Username taken");
-			return true;
+			e.printStackTrace();
+		}finally {
+			close(ps);
 		}
-		return false;
+		return true;
 	}
 	
 	@Override
@@ -100,6 +110,44 @@ public class QueryUtil implements BankDao{
 			e.printStackTrace();
 		}finally {
 			close(cs);
+		}
+		
+	}
+	
+	@Override
+	public void addNewUser(User user) {
+		PreparedStatement ps = null;
+		
+		try(Connection conn = ConnectionUtil.getConnection()){
+			String sql = "INSERT INTO Customer "
+					+ "(USERNAME, PASS, LOCKSTATUS, APPROVALSTATUS, ACCESSLEVEL) "
+					+ "VALUES (?, ?, ?, ?, ?)";
+			ps  = conn.prepareStatement(sql);
+			ps.setString(1, user.getName());
+			ps.setString(2, user.getPassword());
+			ps.setInt(3, user.isBanned());
+			ps.setInt(4, user.isApproved());
+			ps.setString(5, user.getAccess_level());
+			ps.executeQuery();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			commitChanges();
+			close(ps);
+		}
+	}
+	
+	private void commitChanges() {
+		Statement stmt = null;
+		
+		try(Connection conn = ConnectionUtil.getConnection()){
+			String sql = "COMMIT";
+			stmt = conn.createStatement();
+			stmt.executeUpdate(sql);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
 		}
 		
 	}

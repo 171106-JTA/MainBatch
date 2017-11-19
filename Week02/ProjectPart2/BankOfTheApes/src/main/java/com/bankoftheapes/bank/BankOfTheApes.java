@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import com.bankoftheapes.dao.QueryUtil;
 import com.bankoftheapes.ui.Account;
+import com.bankoftheapes.ui.NewUser;
 import com.bankoftheapes.ui.Splash;
 import com.bankoftheapes.ui.UserInterface;
 import com.bankoftheapes.user.User;
@@ -59,7 +60,7 @@ public class BankOfTheApes {
 				Account.Screen(qu);
 				break;
 			case 2:
-				UserInterface.loginScreen(qu);
+				NewUser.Screen(qu);;
 				break;
 			case 3:
 				UserInterface.loginScreen(qu);
