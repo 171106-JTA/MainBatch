@@ -20,15 +20,20 @@ public class ConnectionUtil {
 		}
 		
 		//Populate properties through a file.
-/*		String url = prop.getProperty("url");
+		String url = prop.getProperty("url");
 		String username = prop.getProperty("username");
 		String password = prop.getProperty("password");
-		Class.forName(prop.getProperty("class")); //OPTIONAL, some may need to do this
-*/		
+		try {
+			Class.forName(prop.getProperty("class"));
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} //OPTIONAL, some may need to do this
+		
 		//Populate properties the safe way.
 		 
 		
-		String props[] = System.getenv("DBProps").split(";");
-		return DriverManager.getConnection(props[1],props[2], props[3]);
+		//String props[] = System.getenv("DBProps").split(";");
+		return DriverManager.getConnection(url,username, password);
 	}
 }
