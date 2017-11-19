@@ -131,6 +131,7 @@ public class FlashCardDaoImpl implements FlashCardDao {
 			while (rs.next()) {
 				fc = new FlashCard(rs.getString(2), rs.getString(3));
 				listfc.add(fc);
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

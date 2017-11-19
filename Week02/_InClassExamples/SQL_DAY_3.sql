@@ -19,7 +19,6 @@ DROP TABLE my_polkamans;
 DROP TABLE trainer;
 DROP TABLE moves;
 DROP TABLE polkaman;
-DROP TABLE polkamans;
 /*
     CASCADE CONTRAINTS is optional, not really needed. But it will delete
     constraints that point to the table
@@ -29,16 +28,16 @@ DROP TABLE polkamans;
 
 /
 
-CREATE TABLE polkamans (
-    pkmn_id number(3), --you can add: primary key,
+CREATE TABLE polkaman (
+    pkmn_id number(3) PRIMARY KEY, --you can add: primary key,
     pkmn_name varchar2(100) NOT NULL, --We dont want a polkaman without a name
     type1 varchar2(50) NOT NULL,
-    type2 varchar2(50) NULL,    --A polkaman might not have two types
-    CONSTRAINT PK_polkamans PRIMARY KEY(pkmn_id)
+    type2 varchar2(50) NULL    --A polkaman might not have two types
+    --CONSTRAINT PK_polkamans PRIMARY KEY(pkmn_id)
 );
 / --Separate executions with this forward slash
 
-SELECT * FROM polkamans; --Grab all data from polkamans
+SELECT * FROM polkaman; --Grab all data from polkamans
 
 CREATE TABLE Moves (
     move_id number(3) primary key,
