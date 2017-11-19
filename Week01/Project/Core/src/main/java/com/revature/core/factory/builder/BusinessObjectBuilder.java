@@ -1,7 +1,10 @@
 package com.revature.core.factory.builder;
 
+import java.sql.ResultSet;
+
 import com.revature.businessobject.BusinessObject;
 import com.revature.core.FieldParams;
+import com.revature.core.Resultset;
 
 /**
  * @author Antony Lulciuc
@@ -13,6 +16,13 @@ public interface BusinessObjectBuilder {
 	 * @return new BusinessObject on success else null
 	 */
 	public BusinessObject getBusinessObject(FieldParams args);
+	
+	/**
+	 * Converts SQL result set into BusinessObject result set
+	 * @param args - SQL ResultSet
+	 * @return BusinessObject resetset
+	 */
+	public Resultset getBusinessObject(ResultSet args);
 	
 	/**
 	 * Used to ensure all arguments needed to instantiate object

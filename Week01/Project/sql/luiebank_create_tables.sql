@@ -76,6 +76,7 @@ CREATE TABLE MB_BANK_ACCOUNT (
 CREATE TABLE MB_CREDIT_ACCOUNT(
     account_number VARCHAR2(32),
     credit_limit NUMBER(32,2) DEFAULT 0,
+    balance NUMBER(32, 2) DEFAULT 0,
     minimal_payment_due NUMBER(32,2) DEFAULT 0,
     rate_id NUMBER,
     CONSTRAINT fk_bank_credit_number FOREIGN KEY (account_number) REFERENCES MB_ACCOUNT(account_number),

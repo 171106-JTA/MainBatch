@@ -1,5 +1,8 @@
 package com.revature.core.factory.builder;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import org.apache.log4j.Logger;
 
 import com.revature.businessobject.BusinessObject;
@@ -8,6 +11,7 @@ import com.revature.businessobject.info.account.Checking;
 import com.revature.businessobject.info.account.Credit;
 import com.revature.businessobject.info.account.Type;
 import com.revature.core.FieldParams;
+import com.revature.core.Resultset;
 
 /**
  * Initializes Objects of type Checking/Credit 
@@ -58,6 +62,25 @@ public class AccountBuilder implements BusinessObjectBuilder {
 		return object;
 	}
 
+	
+	public Resultset getBusinessObject(ResultSet res) {
+		Resultset data = new Resultset();
+		Account acct;
+		
+		try {
+			while (res.next()) {
+				acct = new Account(res.getLong(Account.USERID), res.getString(Account.NUMBER), res.getLong(Account.TYPEID),
+						res.getLong(Account.STATUSID), res.getString(Account.CREATED), Type.ACCOUNT);
+				
+				data.add(acct);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return data;
+	}
+	
 	/**
 	 * Used to ensure all arguments needed to instantiate object
 	 * @param args what to check

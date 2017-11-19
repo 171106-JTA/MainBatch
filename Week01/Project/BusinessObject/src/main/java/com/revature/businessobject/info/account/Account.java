@@ -28,6 +28,7 @@ public class Account extends Info {
 		this.number = number;
 		this.typeId = typeId;
 		this.statusId = statusId;
+		this.created = created;
 		this.type = type;
 	}
 

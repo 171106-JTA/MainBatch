@@ -74,7 +74,24 @@ public class BusinessObjectFactory {
 	
 	
 	public Resultset getResultset(String name, ResultSet res) {
-		return null;
+		switch (name.toLowerCase()) {
+			case BusinessClass.USER:
+				return userBuilder.getBusinessObject(res);
+			case BusinessClass.USERINFO:
+				return userInfoBuilder.getBusinessObject(res);
+			case BusinessClass.ACCOUNT:
+				return accountBuilder.getBusinessObject(res);
+			case BusinessClass.CODELIST:
+				return codeListBuilder.getBusinessObject(res);
+			case BusinessClass.INVOICE:
+				return invoiceBuilder.getBusinessObject(res);
+			case BusinessClass.RECEIPT:
+				return receiptBuilder.getBusinessObject(res);
+			case BusinessClass.JOINTACCOUNT:
+				return jointAccountBuilder.getBusinessObject(res);
+			default:
+				return null;
+		}
 	}
 	
 }

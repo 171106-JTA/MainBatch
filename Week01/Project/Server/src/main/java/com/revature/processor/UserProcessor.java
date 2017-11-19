@@ -56,7 +56,7 @@ public class UserProcessor implements Processorable {
 				break;
 			case "CREATEUSERINFO":
 				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.PENDING, Checkpoint.NONE }, request);
-				Require.requireAllTransaction(new String[] { UserInfo.USERID, UserInfo.PHONENUMBER, UserInfo.EMAIL, UserInfo.ADDRESS }, request);
+				Require.requireAllTransaction(new String[] { UserInfo.USERID, UserInfo.PHONENUMBER, UserInfo.EMAIL, UserInfo.ADDRESS1 }, request);
 				res = URH.createUserInfo(request);
 				break;
 			case "GETUSERINFO":
@@ -65,7 +65,7 @@ public class UserProcessor implements Processorable {
 				break;
 			case "SETUSERINFO":
 				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
-				Require.requireAllTransaction(new String[] { UserInfo.ADDRESS, UserInfo.EMAIL, UserInfo.PHONENUMBER },  request);
+				Require.requireAllTransaction(new String[] { UserInfo.ADDRESS1, UserInfo.EMAIL, UserInfo.PHONENUMBER },  request);
 				res = URH.setUserInfo(request);
 				break;
 			case "CREATECHECKINGACCOUNT":
