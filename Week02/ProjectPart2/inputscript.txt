@@ -1,0 +1,67 @@
+create
+Stuart
+Gillette
+sjgillet
+passwords
+passwords
+y
+login
+admin
+password
+activate user
+sjgillet
+logout
+login
+sjgillet
+passwords
+open
+y
+open
+y
+logout
+login
+admin
+password
+
+
+create
+Wilford
+Wilfordson
+wilford
+passwordw
+passwordw
+y
+login
+admin
+password
+activate user
+wilford
+logout
+login
+wilford
+passwordw
+open
+y
+open
+y
+open
+y
+open
+y
+open
+y
+open
+y
+logout
+
+activate account
+0035899
+activate account
+5935143
+activate account
+7757719
+activate account
+3381636
+activate account
+2701260
+
