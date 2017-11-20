@@ -31,8 +31,6 @@ public class ConnectionUtil {
 		} //OPTIONAL, some may need to do this
 		
 		//Populate properties the safe way.
-		 
-		
 		//String props[] = System.getenv("DBProps").split(";");
 		return DriverManager.getConnection(url,username, password);
 	}
