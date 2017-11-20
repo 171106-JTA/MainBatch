@@ -127,7 +127,7 @@ public class Account {
 					
 				case "viewHistory":
 					String viewTransactions = "SELECT * FROM transactions WHERE current_user_id = " + uid;
-					rs = ps.executeQuery(viewTransactions);
+					rs = ps.executeQuery(viewTransactions); //if works, can update rest
 					
 					while(rs.next()) {
 						System.out.println(rs.toString());
