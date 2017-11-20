@@ -1,167 +1,193 @@
 package com.revature.main;
 
+import static com.revature.util.CloseStreams.close;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.InputMismatchException;
 
-import com.revature.log.LogUtil;
+
+import com.revature.util.ConnectionUtil;
 
 /**
- * Provides basic account functionality
- * e.g. withdrawals, deposits, transfers
+ * Provides basic account functionality e.g. withdrawals, deposits, transfers
  */
 public class Account {
-	/**
-	 * Main transaction prompt that checks if account is 
-	 * currently logged in, has admin rights; 
-	 * prints current balance; and lists basic options.
-	 * 
-	 * Local variable input keeps track of console commands.
-	 * @param u is user object passed from driver upon successful login
-	 */
-	public static void displayBalance(User u) {
-		String 	input, u2;
-		boolean loggedOut = false;
-		boolean isAdmin = u.getAdmin();
-		double 	d, dolAmt = u.getBalance();
+	public static PreparedStatement ps = null;
+	public static PreparedStatement ds = null;
+	public static ResultSet rs = null;
+
+	public static void displayBalance(String usrnm, String pswrd) {
+		Integer uid, rid, accountStat;
+		Double dolAmt, balance, rBalance;
+		String input;
 		DecimalFormat df = new DecimalFormat("0.00");
+		boolean isAdmin = false, loggedOut = false;
 
-		while(!loggedOut) {
-			System.out.println("\nYour current karma balance is: $" + df.format(dolAmt));
-			System.out.println("What type of transaction would you like to make? \n> withdrawal  > deposit  > transfer  > viewHistory  > logout  > delete" + (isAdmin ? "  > admin" : ""));
-			input = Driver.scanner.next();
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			String sql = "SELECT * FROM bank_users WHERE username = '" + usrnm + "' AND userpassword = '" + pswrd + "'";
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			uid = rs.getInt("current_user_id");
+			balance = rs.getDouble("balance");
+			isAdmin = Boolean.parseBoolean(rs.getString("admin_status"));
+			 
+			
 
-			switch(input) {
-			case "withdrawal":
-				System.out.println("\nHow much do you want to withdraw?");
+			while (!loggedOut) {
+				System.out.println("\nYour current karma balance is: $" + df.format(balance));
+				System.out.println("\n> withdraw  > deposit  > transfer  > viewHistory  > logout  > delete" + (isAdmin ? "  > admin" : ""));
+				input = Driver.scanner.next();
 
-				while(!Driver.scanner.hasNextDouble()) {
+				switch (input) {
+				case "withdrawal":
+					System.out.println("\nHow much do you want to withdraw?");
+
+					while (!Driver.scanner.hasNextDouble()) {
 						System.out.println("Please input a valid number: ");
 						Driver.scanner.next();
-				}//InputMismatchException custom message
-				
-				d = Driver.scanner.nextDouble();
-				
-				if (!enoughFunds(u,d)) {
-					System.out.println("\nInsufficient funds; please choose another transaction:");
+					} // InputMismatchException custom message
+
+					dolAmt = Driver.scanner.nextDouble();
+
+					if (dolAmt > balance) {
+						System.out.println("\nInsufficient funds; please choose another transaction:");
+						continue;
+					} else {
+						String updateBalance = "UPDATE bank_users SET balance = " + (balance -= dolAmt) + "WHERE user_id = " + uid;
+						String pushTransaction = "INSERT INTO transactions (current_user_id, trans_type, trans_amount) VALUES (" + uid + ",'withdrawal'," + dolAmt +")";
+						ps = conn.prepareStatement(updateBalance);	ps.execute();
+						ps = conn.prepareStatement(pushTransaction);	ps.execute();
+						continue;
+					}
+
+					// ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+				case "deposit":
+					System.out.println("\nHow much do you want to deposit?");
+
+					while (!Driver.scanner.hasNextDouble()) {
+						System.out.println("Please input a valid number: ");
+						Driver.scanner.next();
+					}
+
+					dolAmt = Driver.scanner.nextDouble();
+					String updateBalance = "UPDATE bank_users SET balance = " + (balance += dolAmt) + "WHERE user_id = " + uid;
+					String pushTransaction = "INSERT INTO transactions (current_user_id, trans_type, trans_amount) VALUES (" + uid + ",'deposit'," + dolAmt + ")";
+					ps = conn.prepareStatement(updateBalance);	ps.execute();
+					ps = conn.prepareStatement(pushTransaction);	ps.execute();
 					continue;
-				} else {
-					u.setBalance(dolAmt -=d );
-					continue;
-				}
-			
-			//––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+				// ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+				case "transfer":
+					System.out.println("Existing Users:\n");
+					System.out.println("\nflag key:\t0=unapproved 1=approved 2=blocked 3=inactive");
+					String printAll = "SELECT username, account_status FROM bank_users";
+					ps = conn.prepareStatement(printAll);
+					rs = ps.executeQuery();
+					while(rs.next()) {
+						rs.toString();
+					}
 					
-			case "deposit":
-				System.out.println("\nHow much do you want to deposit?");
+					System.out.println("\nInput recipient and amount: ");
+					try {
+						String recipient = Driver.scanner.next();
+						dolAmt = Driver.scanner.nextDouble();
 
-				while(!Driver.scanner.hasNextDouble()) {
-						System.out.println("Please input a valid number: ");
-						Driver.scanner.next();
-				}
-
-				dolAmt += Driver.scanner.nextDouble();
-				u.setBalance(dolAmt);
-				continue;
-
-			//––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-			
-			case "transfer":
-				System.out.println("Existing Users:\n");
-				System.out.println("\nflag key:\t0=unapproved 1=approved 2=blocked 3=inactive");
-				for (User j : Driver.userList) System.out.println(j.toString());
-				System.out.println("Please input recipient and amount (name, number):");
-				try {
-					u2 = Driver.scanner.next(); d = Driver.scanner.nextDouble();
-					if (enoughFunds(u, d))	dolAmt -= transfer(u, u2, d);
-				} catch (InputMismatchException e) {
-					System.out.println("Please submit transfer in proper format."); 	
-//					LogUtil.log.warn("input not in proper format", e);
+						String recipientRecord = "SELECT * FROM bank_users WHERE username = '" + recipient + "'";
+						ps = conn.prepareStatement(recipientRecord);
+						rs = ps.executeQuery();
+						rid = rs.getInt("recipient_id");
+						rBalance = rs.getDouble("balance");
+						accountStat = rs.getInt("account_status");
+						
+						if (accountStat != 1) 		System.out.println("Account is not available for transfer.");
+						else if (uid == rid) 		System.out.println("Cannot transfer to own account.");
+						else if (dolAmt < balance) {
+							String transferto = "UPDATE bank_users SET balance =" + (balance -= dolAmt) + "WHERE user_id = " + uid;
+							String transferfrom = "UPDATE bank_users SET balance =" + (rBalance += dolAmt) + "WHERE user_id = " + rid;
+							pushTransaction = "INSERT INTO transactions VALUES (" + uid + ",'transfer'," + dolAmt + "," + rid + ")";
+							ps = conn.prepareStatement(transferto);		ps.execute();
+							ps = conn.prepareStatement(transferfrom);		ps.execute();
+							ps = conn.prepareStatement(pushTransaction);	ps.execute();
+							System.out.println("K$" + dolAmt + " was successfully transfered to: " + recipient);
+						} else 						System.out.println("Insufficient funds.");
+					} catch (InputMismatchException e) {
+						System.out.println("Please submit transfer in proper format.");
+						// LogUtil.log.warn("input not in proper format", e);
+						continue;
+					}
 					continue;
-				}
-				continue;
 
-			//––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-			
-			case "admin":
-				if(isAdmin) Admin.displayFunctions();
-				else System.out.println("\nNice try, non-admin Σ( ￣□￣||).");
-				continue;
+				// ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+					
+				case "viewHistory":
+					String viewTransactions = "SELECT * FROM transactions WHERE current_user_id = " + uid;
+					rs = ps.executeQuery(viewTransactions);
+					
+					while(rs.next()) {
+						System.out.println(rs.toString());
+					}
+					continue;
+				// ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-			//––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-			
-			case "logout":
-				System.out.println("\nHave a good day!");
-				return; // back to driver
-			
-			//––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-			
-			case "delete":
-				if(dolAmt != 0) {
-					System.out.println("\nAll funds must be withdrawn or transferred before account can be deleted.");
-				} else if(isAdmin) {
-					System.out.println("Are you sure? Another admin must approve your deletion, and your account will be disabled. (yes/no)");
-					if (Driver.scanner.next().equals("yes")) {
+				case "admin":
+					if (isAdmin)
+						Admin.displayFunctions(usrnm, pswrd);
+					else
+						System.out.println("\nNice try, non-admin Σ( ￣□￣||).");
+					continue;
+
+				// ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+				case "logout":
+					loggedOut = true;
+					System.out.println("\nHave a good day!");
+					return; // back to driver, finally still closes resources
+
+				// ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+				case "delete":
+					if (balance != 0) {
+						System.out.println("\nAll funds must be withdrawn or transferred before account can be deleted.");
+					} else if (isAdmin) {
+						System.out.println(
+								"Are you sure? Another admin must approve your deletion, and your account will be disabled. (yes/no)");
+						if (Driver.scanner.next().equals("yes")) {
+							System.out.println("\nYour account has been marked for deletion and is now inactive.");
+							String deleteAcct = "UPDATE bank_users SET account_status = 3 WHERE user_id = " + uid;
+							ps = conn.prepareStatement(deleteAcct);	ps.execute();
+							return;
+						} else
+							System.out.println("\nAccount has NOT been marked for deletion.");
+						continue;
+					} else {
 						System.out.println("\nYour account has been marked for deletion and is now inactive.");
-						u.setStatusFlag(3);
+						String deleteAcct = "UPDATE bank_users SET account_status = 3 WHERE user_id = " + uid; 
+						ps = conn.prepareStatement(deleteAcct);	ps.execute();
 						return;
 					}
-					else System.out.println("\nAccount has NOT been marked for deletion.");
 					continue;
-				} else {
-					System.out.println("\nYour account has been marked for deletion and is now inactive.");
-					u.setStatusFlag(3);
-					return;
+
+				// ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+				default:
+					if (input.equals("\n"))
+						continue; // incorrect withdrawal amt ends up here
+					System.out.println("\nChoose a valid prompt:");
+					continue;
 				}
-				continue;
-
-			//––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
-
-			default:
-				if(input.equals("\n"))	continue;	//incorrect withdrawal amt ends up here
-				System.out.println("\nPlease choos a valid prompt:");
-				continue;
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Driver.log.trace("Dang.");
+		} finally {
+			close(ps);
+			close(rs);
 		}
-	}
-
-	/**
-	 * Makes sure
-	 * @param u user object has
-	 * @param d amount available in their account and
-	 * @returns true if they do.
-	 * 
-	 * Must return true for transfer to go through.
-	 */
-	private static boolean enoughFunds(User u, double d) {
-		if (u.getBalance() < d) return false;
-		return true;
-	}
-
-	/**
-	 * Transfers funds from
-	 * @param u to
-	 * @param u2 provided desired amount
-	 * @param d exists and can be used and
-	 * @returns the amount transfered to update the 
-	 * current accounts running balance.
-	 * 
-	 * Prevents users from transferring funds to
-	 * inactive accounts, or to themselves.
-	 */
-	private static double transfer(User u, String u2, double d) {
-		User recipient = User.returnExisting(u2);
-		
-		if (recipient.getStatusFlag()!=1) {
-			System.out.println("User's account is not available for transfer, please try again later.");
-			return 0;
-		} else if(recipient.equals(u)) {
-			System.out.println("Cannot transfer to own account;");
-			return 0;
-		}
-
-		u.setBalance(u.getBalance()-d);
-		recipient.setBalance(recipient.getBalance()+d);
-		System.out.println("$" + d + " was successfully transfered to: " + recipient.getUserID());
-		return d;	
 	}
 }

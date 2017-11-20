@@ -1,7 +1,5 @@
 package com.revature.main;
 
-import java.io.Serializable;
-
 /**
  * Defines a User object as one with an ID, password, balance administrative
  * privileges flags and account standing flags.
@@ -108,13 +106,8 @@ public class User implements Comparable<User> {
 	 * @return corresponding User object else it returns an empty one
 	 */
 	public static User returnExisting(String id) {
-		User j = new User();
-		for (User u : Driver.userList) {
-			if (u.getUserID().equals(id)) {
-				return u;
-			}
-		}
-		return j;
+		//replace w db access?
+		return null;
 	}
 
 	/**

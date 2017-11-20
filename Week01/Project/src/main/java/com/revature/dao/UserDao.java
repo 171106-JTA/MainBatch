@@ -22,4 +22,9 @@ public interface UserDao {
 	 * updates/sets user admin status in DB
 	 */
 	public void setAdminStatus();
+	
+	/* 
+	 * stores transaction type, amt, initiating user, recipient user in DB
+	 */
+	public void storeTransaction();
 }

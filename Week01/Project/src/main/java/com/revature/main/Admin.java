@@ -8,8 +8,10 @@ public class Admin {
 	/**
 	 * Displays options and (while) loops to provide continuous (switch-case) access
 	 * to them.
+	 * @param pswrd 
+	 * @param usrnm 
 	 */
-	public static void displayFunctions() {
+	public static void displayFunctions(String usrnm, String pswrd) {
 		String input;
 		boolean wandWielding = true;
 		System.out.print("\nHello Admin.");

@@ -4,11 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-import com.revature.log.LogUtil;
+import org.apache.log4j.Logger;
+
 import com.revature.util.ConnectionUtil;
 import static com.revature.util.CloseStreams.close;
 
@@ -22,9 +21,11 @@ public class Driver {
 	public static Scanner scanner = new Scanner(System.in);
 	public static PreparedStatement ps = null;
 	public static ResultSet rs = null;
+	final static  Logger log = Logger.getLogger(Driver.class);
 	
 	public static void main(String[] args) throws Exception {
-
+		log.trace("Help");
+		
 
 		boolean running = true;
 		System.out.println("Welcome to the National Bank of Second Chances; this is your third~!");
@@ -50,11 +51,11 @@ public class Driver {
 					rs = ps.executeQuery();
 					if (rs.next()) { 			//false when rs is empty and user dne; if true, should only return one record
 						Integer active = Integer.parseInt(rs.getString("account_status"));
-						if 		(active == 1)	Account.displayBalance();
+						if 		(active == 1)	Account.displayBalance(username, password);
 						else if (active == 0)	System.out.println("Account has not yet been activated. Try again later.");
 						else if (active == 2)	System.out.println("Account has been blocked; wait for reactivation.");
 						else if (active == 3)	System.out.println("Account has been marked for deletion and is no longer active.");
-
+						
 						continue;
 					}
 					System.out.println( "\nWrong credentials provided, or account does not yet exist. To create one, type 'create'.");
