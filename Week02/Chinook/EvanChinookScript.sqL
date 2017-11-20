@@ -53,11 +53,6 @@ SELECT * FROM EMPLOYEE
 /************************************
 2.7 DELETE
 ************************************/
---Disable constraint. Research why this is bad!
---Delete all cascading contraint stuff
---ALTER TABLE INVOICE
---    DISABLE CONSTRAINT FK_INVOICECUSTOMERID;
-
 DELETE FROM INVOICELINE
     WHERE INVOICEID IN (SELECT INVOICEID FROM INVOICE
             WHERE CUSTOMERID = (SELECT CUSTOMERID FROM CUSTOMER 
@@ -188,7 +183,7 @@ BEGIN
     RETURN EMP_REF;
 END;
 /
-
+--Testing GET_EMP()
 --DECLARE
 --    EMP_CURSOR SYS_REFCURSOR;
 --    SOME_EMP_ID EMPLOYEE.EMPLOYEEID%TYPE;
@@ -330,3 +325,61 @@ END;
 /************************************************************************
 6.0 Triggers
 ************************************************************************/
+CREATE OR REPLACE TRIGGER AFTER_INSERT_EMP_TRIGGER
+AFTER INSERT ON EMPLOYEE
+FOR EACH ROW
+BEGIN
+    dbms_output.put_line('AFTER EMPLOYEE INSERT TRIGGER');
+END;
+
+CREATE OR REPLACE TRIGGER AFTER_UPDATE_ALBUM_TRIGGER
+AFTER UPDATE ON ALBUM
+FOR EACH ROW
+BEGIN
+    dbms_output.put_line('AFTER ALBUM UPDATE TRIGGER');
+END;
+
+CREATE OR REPLACE TRIGGER AFTER_DELETE_EMP_TRIGGER
+AFTER DELETE ON EMPLOYEE
+FOR EACH ROW
+BEGIN
+    dbms_output.put_line('AFTER EMPLOYEE DELETE TRIGGER');
+END;
+
+/************************************************************************
+7.0 Joins
+************************************************************************/
+/************************************
+7.1 INNER
+************************************/
+SELECT CUSTOMER.FIRSTNAME, CUSTOMER.LASTNAME, INVOICE.INVOICEID
+FROM CUSTOMER INNER JOIN INVOICE 
+ON CUSTOMER.CUSTOMERID = INVOICE.CUSTOMERID;
+
+/************************************
+7.2 OUTER
+************************************/
+SELECT CUSTOMER.CUSTOMERID, CUSTOMER.FIRSTNAME, CUSTOMER.LASTNAME, 
+    Invoice.InvoiceId, Invoice.TOTAL
+FROM CUSTOMER FULL OUTER JOIN INVOICE
+ON Customer.CustomerId = Invoice.CustomerId;
+
+/************************************
+7.3 Right
+************************************/
+SELECT ARTIST.NAME, ALBUM.TITLE
+FROM ARTIST LEFT JOIN ALBUM 
+ON ARTIST.ARTISTID = ALBUM.ARTISTID;
+
+/************************************
+7.4 Cross
+************************************/
+SELECT *
+FROM ARTIST CROSS JOIN ALBUM
+ORDER BY ARTIST.NAME ASC;
+
+/************************************
+7.5 SELF
+************************************/
+SELECT * 
+FROM EMPLOYEE A, EMPLOYEE B;
