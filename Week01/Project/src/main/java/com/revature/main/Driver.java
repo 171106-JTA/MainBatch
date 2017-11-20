@@ -97,7 +97,9 @@ public class Driver {
 					ps = conn.prepareStatement(sql);
 					ps.setString(1, desiredUsrnm);
 					ps.setString(2, desiredPswrd);
-					rs = ps.executeQuery();
+					if(ps.execute())		System.out.println("\nThanks for creating a new account; it's under review and will be approved shortly. Attempt logging in then.");
+					else					log.warn("New user not created.");
+					continue;
 				} catch (SQLException e) {
 					e.printStackTrace();
 					//logging?
@@ -105,11 +107,7 @@ public class Driver {
 					close(ps);
 					close(rs);
 				}
-				System.out.println("\nThanks for creating a new account; it's under review and will be approved shortly. Attempt logging in then.");
-				continue;
 				
-			
-
 			// ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 			case "quit":
