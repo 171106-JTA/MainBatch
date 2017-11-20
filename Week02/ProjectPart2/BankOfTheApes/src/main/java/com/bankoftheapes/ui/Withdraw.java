@@ -12,7 +12,9 @@ public class Withdraw {
 	 * The screen for withdrawing funds. It prevents the user from withdrawing more than
 	 * what is present in his/her account
 	 * 
-	 * @param user - User object in order to deduct withdrawal amount from
+	 * @param ba - BankAccount object holding the amount of a customer
+	 * @param username - username of the customer
+	 * @param qu - object that contains the needed instance variables to communicate with the server
 	 */
 	public static void Screen(BankAccount ba, String username, QueryUtil qu) {
 		

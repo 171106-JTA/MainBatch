@@ -4,7 +4,7 @@ public class BankAccount {
 	private double amount;
 	private int accId;
 	
-	public BankAccount(int amount,int accId) {
+	public BankAccount(double amount, int accId) {
 		super();
 		this.amount = amount;
 		this.accId = accId;

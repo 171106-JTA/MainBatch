@@ -16,6 +16,14 @@ import com.bankoftheapes.util.ConnectionUtil;;
 
 public class QueryUtil implements BankDao{
 	
+	/**
+	 * This method checks for the existence of a user. Used to find username availability.
+	 * Utilizes a preparedstatement to query the DB.
+	 * 
+	 * @param String username - the username to find
+	 * 
+	 * @return Boolean true if the username is taken, otherwise false
+	 */
 	@Override
 	public boolean userExists(String username) {
 		PreparedStatement ps = null;
@@ -41,6 +49,13 @@ public class QueryUtil implements BankDao{
 		return true;
 	}
 	
+	/**
+	 * This method gets the info of a user from the customer table. Utilizes a preparedstatement to query the DB.
+	 * 
+	 * @param String username - the username to be find
+	 * 
+	 * @return User a User object that will passed around in the program
+	 */
 	@Override
 	public User getUserInfo(String username) {
 		PreparedStatement ps = null;
@@ -71,6 +86,13 @@ public class QueryUtil implements BankDao{
 		return u;
 	}
 	
+	/**
+	 * This method gets the user's account info from the account table. Utilizes a preparedstatement.
+	 * 
+	 * @param User user - object to set the bank account to
+	 * 
+	 * @return BankAccount the actual account of the user
+	 */
 	@Override
 	public BankAccount getAccountInfo(User user) {
 		PreparedStatement ps = null;
@@ -96,6 +118,13 @@ public class QueryUtil implements BankDao{
 		return ba;
 	}
 	
+	/**
+	 * This method updates the bankaccount's amount. Utilizes a callablestatement.
+	 * 
+	 * @param BankAccount ba - the BankAccount object that hold the temporary values
+	 * 
+	 * 
+	 */
 	@Override
 	public void updateAccountAmount(BankAccount ba) {
 		CallableStatement cs = null;
@@ -114,6 +143,12 @@ public class QueryUtil implements BankDao{
 		
 	}
 	
+	/**
+	 * This method addes a new user to the customer table.
+	 * 
+	 * @param User user - the temporary user object that holds the customer info
+	 * 
+	 */
 	@Override
 	public void addNewUser(User user) {
 		PreparedStatement ps = null;
@@ -134,6 +169,10 @@ public class QueryUtil implements BankDao{
 		}
 	}
 	
+	/**
+	 * Shows all the users in the database
+	 * 
+	 */
 	@Override
 	public void showAllUsers() {
 		Statement stmt = null;
@@ -155,6 +194,12 @@ public class QueryUtil implements BankDao{
 		
 	}
 	
+	/**
+	 * THis method is used to update the approval status of a customer.
+	 * 
+	 * @param User u - the User object holding the temporary information
+	 * 
+	 */
 	@Override
 	public void updateApproval(User u) {
 		CallableStatement cs = null;
@@ -173,6 +218,12 @@ public class QueryUtil implements BankDao{
 		}
 	}
 	
+	/**
+	 * Method to promote a user to admin or mod.
+	 * 
+	 * @param User u - object that holds the temporary values to be used in the program.
+	 * 
+	 */
 	@Override
 	public void updateAccessStatus(User u) {
 		CallableStatement cs = null;
@@ -191,6 +242,12 @@ public class QueryUtil implements BankDao{
 		
 	}
 	
+	/**
+	 * Method used to apply for a loan.
+	 * 
+	 * @param User user - holds the temporary data to be used in the program
+	 * 
+	 */
 	@Override
 	public void applyLoan(User user) {
 		PreparedStatement ps = null;
@@ -214,6 +271,12 @@ public class QueryUtil implements BankDao{
 		
 	}
 	
+	/**
+	 * Shows all the loans of a user
+	 * 
+	 * @param User user - object needed to find the loans of a user
+	 * 
+	 */
 	@Override
 	public void showLoans(User user) {
 		PreparedStatement ps = null;
@@ -235,7 +298,11 @@ public class QueryUtil implements BankDao{
 			close(ps);
 		}
 	}	
-	
+
+	/**
+	 * Commits changes to the database.
+	 * 
+	 */
 	private void commitChanges() {
 		Statement stmt = null;
 		

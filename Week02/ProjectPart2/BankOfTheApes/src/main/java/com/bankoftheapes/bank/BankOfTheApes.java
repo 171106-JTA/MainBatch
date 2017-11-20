@@ -1,7 +1,5 @@
 package com.bankoftheapes.bank;
 
-import java.util.HashMap;
-
 import com.bankoftheapes.dao.QueryUtil;
 import com.bankoftheapes.ui.Account;
 import com.bankoftheapes.ui.Admin;

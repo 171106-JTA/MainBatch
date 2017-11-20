@@ -112,7 +112,7 @@ public class UserInterface {
 		u = qu.getUserInfo(user);
 		
 		if(u != null && password.equals(u.getPassword())) {
-			System.out.println("Right");
+			//System.out.println("Right");
 			if(u.isApproved() == 1) {
 				return u;
 			}

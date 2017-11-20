@@ -9,7 +9,7 @@ public class Admin extends UserInterface{
 	 * Displays operations screen for administrators. Actions include: banning users, 
 	 * approving users, promoting users to admin, and showing all users
 	 * 
-	 * @param users HashMap of users used to gather access, approval, and banned statuses of users
+	 * @param qu objected needed for DB methods
 	 * @param u user object needed to check access level and name
 	 */
 	public static void Screen(User u, QueryUtil qu) {

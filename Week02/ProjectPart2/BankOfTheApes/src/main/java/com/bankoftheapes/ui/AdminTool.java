@@ -8,7 +8,7 @@ public class AdminTool {
 	/**
 	 * Displays information of users, such as usernames, approval status, ban status, and access level
 	 * 
-	 * @param users HashMap of users to loop through
+	 * @param qu QueryUtil object needed for DB methods
 	 */
 	public static void showAllUser(QueryUtil qu) {
 		
@@ -19,7 +19,7 @@ public class AdminTool {
 	/**
 	 * Menu used by administrators to approve or disapprove a user
 	 * 
-	 * @param users HashMap of users for quick look-ups
+	 * @param qu QueryUtil needed object to call DB methods
 	 */
 	public static void approveUser(QueryUtil qu) {
 		System.out.println("Approval Screen");
@@ -62,7 +62,7 @@ public class AdminTool {
 	/**
 	 * Menu used by administrators to ban or unban a user
 	 * 
-	 * @param users HashMap of users for quick look-ups
+	 * @param qu needed for DB methods
 	 */
 	public static void banUser(QueryUtil qu) {
 		System.out.println("Ban Screen");
@@ -105,7 +105,8 @@ public class AdminTool {
 	/**
 	 * Menu for administrator used to promote another user to administrator status
 	 * 
-	 * @param users HashMap of users for quick look-ups
+	 * @param access_level - string of user access level: ADM, MOD, REG
+	 * @param qu object of DB methods
 	 */
 	public static void promoteUser(String access_level, QueryUtil qu) {
 		System.out.println("Promote Screen");

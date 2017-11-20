@@ -11,7 +11,7 @@ public class Account extends UserInterface{
 	/**
 	 * Displays account screen for regular users. Transaction options include: withdrawal and deposits
 	 * 
-	 * @param users HashMap<String, User> used to gather user information for transactions
+	 * @param qu QueryUtil object needed for DB methods
 	 */
 	public static void Screen(QueryUtil qu) {
 		User u = UserInterface.loginScreen(qu);
