@@ -24,9 +24,6 @@ public class Driver {
 	final static  Logger log = Logger.getLogger(Driver.class);
 	
 	public static void main(String[] args) throws Exception {
-		log.trace("Help");
-		
-
 		boolean running = true;
 		System.out.println("Welcome to the National Bank of Second Chances; this is your third~!");
 		while (running) {
