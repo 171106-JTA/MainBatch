@@ -1,0 +1,423 @@
+2017-11-12 17:36:42 INFO  UI:259 - Deposit. Xavier.Garibay's balance is now 1694.0
+2017-11-12 17:36:49 INFO  UI:281 - Withdraw. Xavier.Garibay's balance is now 194.0
+2017-11-12 17:36:55 INFO  UI:492 - User file has been updated and app closed
+
+2017-11-12 17:40:05 INFO  UI:213 - sarah applied for an account
+2017-11-12 17:40:05 INFO  UI:494 - User file has been updated and app closed
+
+2017-11-12 17:41:32 INFO  UI:352 - sarah's account has been rejected
+2017-11-12 17:41:36 INFO  UI:493 - User file has been updated and app closed
+
+2017-11-12 18:46:13 INFO  UI:67 - Users defaulted
+2017-11-12 18:46:22 INFO  UI:571 - User file has been updated and app closed
+
+2017-11-12 18:46:48 INFO  UI:307 - Loan Application. Xavier.Garibay's potential loan is 1000.0
+2017-11-12 18:47:23 INFO  UI:307 - Loan Application. John.Doe's potential loan is 200.0
+2017-11-12 18:47:49 INFO  UI:623 - John.Doe's loan has been rejected
+2017-11-12 18:47:57 INFO  UI:571 - User file has been updated and app closed
+
+2017-11-12 18:50:47 INFO  UI:307 - Loan Application. John.Doe's potential loan is 800.0
+2017-11-12 18:51:13 INFO  UI:618 - John.Doe's loan has been approved
+2017-11-12 18:52:17 INFO  UI:261 - Deposit. John.Doe's balance is now 1095.0
+2017-11-12 18:53:07 INFO  UI:571 - User file has been updated and app closed
+
+2017-11-12 19:00:28 INFO  UI:307 - Loan Application. John.Doe's potential loan is 1000.0
+2017-11-12 19:00:32 INFO  UI:572 - User file has been updated and app closed
+
+2017-11-12 19:02:49 INFO  UI:620 - John.Doe's loan has been approved
+2017-11-12 19:04:05 INFO  UI:572 - User file has been updated and app closed
+
+2017-11-12 19:05:28 INFO  UI:261 - Deposit. John.Doe's balance is now 500.0
+2017-11-12 19:05:38 INFO  UI:307 - Loan Application. John.Doe's potential loan is 1275.0
+2017-11-12 19:06:10 INFO  UI:621 - John.Doe's loan has been approved
+2017-11-12 19:06:59 INFO  UI:573 - User file has been updated and app closed
+
+2017-11-12 19:11:19 INFO  UI:575 - User file has been updated and app closed
+
+2017-11-12 19:19:06 INFO  UI:263 - Deposit. username's balance is now 200.0
+2017-11-12 19:19:06 INFO  UI:577 - User file has been updated and app closed
+
+2017-11-12 19:19:06 INFO  UI:532 - test's account has been unlocked
+2017-11-12 19:19:06 INFO  UI:309 - Loan Application. 's potential loan is 1.0
+2017-11-12 19:19:06 INFO  UI:473 - test was promoted to admin
+2017-11-12 19:19:06 INFO  UI:212 - test applied for an account
+2017-11-12 19:19:06 INFO  UI:431 - 1's account has been approved
+2017-11-12 19:19:06 INFO  UI:436 - 2's account has been rejected
+2017-11-12 19:19:06 INFO  UI:530 - test's account has been locked
+2017-11-12 19:19:06 INFO  UI:212 - username applied for an account
+2017-11-12 19:19:06 INFO  UI:431 - 1's account has been approved
+2017-11-12 19:19:06 INFO  UI:436 - 2's account has been rejected
+2017-11-12 19:19:06 INFO  UI:263 - Deposit. 's balance is now 200.0
+2017-11-12 19:20:31 INFO  UI:431 - User's account has been approved
+2017-11-12 19:28:11 INFO  UI:263 - Deposit. username's balance is now 200.0
+2017-11-12 19:28:11 INFO  UI:577 - User file has been updated and app closed
+
+
+2017-11-12 19:47:06 INFO  UI:25 - TEST AREA BEGIN
+2017-11-12 19:47:06 INFO  UI:25 - TEST AREA BEGIN
+2017-11-12 19:47:06 INFO  UI:263 - Deposit. username's balance is now 200.0
+2017-11-12 19:47:06 INFO  UI:25 - TEST AREA BEGIN
+2017-11-12 19:47:06 INFO  UI:535 - User file has been updated and app closed
+
+
+2017-11-12 19:54:40 INFO  UI:535 - User file has been updated and app closed
+
+2017-11-12 19:55:37 INFO  UI:535 - User file has been updated and app closed
+
+2017-11-13 10:16:00 INFO  UI:533 - User file has been updated and app closed
+
+2017-11-13 15:30:20 INFO  UI:533 - User file has been updated and app closed
+
+2017-11-13 16:03:10 INFO  UI:210 - xavier applied for an account
+2017-11-13 16:03:10 INFO  UI:533 - User file has been updated and app closed
+
+2017-11-13 16:04:37 INFO  UI:387 - xavier's account has been approved
+2017-11-13 16:05:24 INFO  UI:261 - Deposit. xavier's balance is now 205.0
+2017-11-13 16:05:35 INFO  UI:283 - Withdraw. xavier's balance is now 192.0
+2017-11-13 16:05:53 INFO  UI:307 - Loan Application. xavier's potential loan is 1000.0
+2017-11-13 16:06:00 INFO  UI:533 - User file has been updated and app closed
+
+2017-11-13 16:06:33 INFO  UI:585 - xavier's loan has been approved
+2017-11-13 16:06:45 INFO  UI:533 - User file has been updated and app closed
+
+2017-11-13 16:07:11 INFO  UI:647 - Loan payment. Loan balance is now 750.0
+2017-11-13 16:07:11 INFO  UI:648 - Account balance is now 942.0
+2017-11-14 13:05:16 INFO  UI:261 - Deposit. Xavier.Garibay's balance is now 3100.0
+2017-11-14 13:05:24 INFO  UI:283 - Withdraw. Xavier.Garibay's balance is now 3100.0
+2017-11-14 13:05:40 INFO  UI:429 - John.Doe was promoted to admin
+2017-11-14 13:06:59 INFO  UI:585 - Xavier.Garibay's loan has been approved
+2017-11-14 13:07:37 INFO  UI:486 - xavier's account has been locked
+2017-11-14 13:07:49 INFO  UI:533 - User file has been updated and app closed
+
+2017-11-14 13:25:23 INFO  UI:536 - User file has been updated and app closed
+
+2017-11-14 13:25:32 INFO  UI:536 - User file has been updated and app closed
+
+2017-11-14 13:25:53 INFO  UI:213 - create applied for an account
+2017-11-14 13:26:06 INFO  UI:536 - User file has been updated and app closed
+
+2017-11-14 13:26:36 INFO  UI:213 - login applied for an account
+2017-11-14 13:27:06 INFO  UI:395 - create's account has been rejected
+2017-11-14 13:27:19 INFO  UI:395 - login's account has been rejected
+2017-11-14 13:31:02 INFO  UI:213 - hello applied for an account
+2017-11-14 13:31:07 INFO  UI:213 - bye applied for an account
+2017-11-14 13:31:26 INFO  UI:395 - create's account has been rejected
+2017-11-14 13:31:31 INFO  UI:395 - hello's account has been rejected
+2017-11-14 13:31:45 INFO  UI:395 - bye's account has been rejected
+2017-11-14 13:31:55 INFO  UI:536 - User file has been updated and app closed
+
+2017-11-14 13:34:29 INFO  UI:534 - User file has been updated and app closed
+
+2017-11-14 13:37:21 INFO  UI:262 - Deposit. Xavier.Garibay's balance is now 4113.0
+2017-11-14 13:37:57 INFO  UI:284 - Withdraw. John.Doe's balance is now 487.0
+2017-11-14 13:38:05 INFO  UI:530 - User file has been updated and app closed
+
+2017-11-14 13:45:34 INFO  UI:31 - TEST
+2017-11-14 13:45:34 INFO  UI:31 - TEST
+2017-11-14 13:45:34 INFO  UI:262 - Deposit. username's balance is now 200.0
+2017-11-14 13:45:34 INFO  UI:31 - TEST
+2017-11-14 13:45:34 INFO  UI:532 - User file has been updated and app closed
+
+2017-11-14 13:45:34 INFO  UI:31 - TEST
+2017-11-14 13:45:34 INFO  UI:31 - TEST
+2017-11-14 13:45:34 INFO  UI:487 - test's account has been unlocked
+2017-11-14 13:45:34 INFO  UI:31 - TEST
+2017-11-14 13:45:34 INFO  UI:31 - TEST
+2017-11-14 13:45:34 INFO  UI:386 - User's account has been approved
+2017-11-14 13:45:34 INFO  UI:31 - TEST
+2017-11-14 13:45:34 INFO  UI:31 - TEST
+2017-11-14 13:45:34 INFO  UI:428 - test was promoted to admin
+2017-11-14 13:45:34 INFO  UI:31 - TEST
+2017-11-14 13:45:34 INFO  UI:212 - test applied for an account
+2017-11-14 13:45:34 INFO  UI:31 - TEST
+2017-11-14 13:45:34 INFO  UI:386 - 1's account has been approved
+2017-11-14 13:45:34 INFO  UI:391 - 2's account has been rejected
+2017-11-14 13:45:34 INFO  UI:31 - TEST
+2017-11-14 13:45:35 INFO  UI:646 - Loan payment. Loan balance is now 0.0
+2017-11-14 13:45:35 INFO  UI:647 - Account balance is now 500.0
+2017-11-14 13:45:35 INFO  UI:31 - TEST
+2017-11-14 13:45:35 INFO  UI:485 - test's account has been locked
+2017-11-14 13:45:35 INFO  UI:31 - TEST
+2017-11-14 13:45:35 INFO  UI:212 - username applied for an account
+2017-11-14 13:45:35 INFO  UI:31 - TEST
+2017-11-14 13:45:35 INFO  UI:31 - TEST
+2017-11-14 13:45:35 INFO  UI:386 - 1's account has been approved
+2017-11-14 13:45:35 INFO  UI:391 - 2's account has been rejected
+2017-11-14 13:45:35 INFO  UI:31 - TEST
+2017-11-14 13:45:35 INFO  UI:262 - Deposit. 's balance is now 200.0
+2017-11-14 13:45:35 INFO  UI:31 - TEST
+2017-11-14 13:45:35 INFO  UI:584 - loan's loan has been approved
+2017-11-14 13:45:35 INFO  UI:31 - TEST
+2017-11-14 13:46:05 INFO  UI:31 - TEST
+2017-11-14 13:46:05 INFO  UI:212 - username applied for an account
+2017-11-14 13:46:23 INFO  UI:31 - TEST
+2017-11-14 13:46:23 INFO  UI:31 - TEST
+2017-11-14 13:46:23 INFO  UI:262 - Deposit. username's balance is now 200.0
+2017-11-14 13:46:23 INFO  UI:31 - TEST
+2017-11-14 13:46:23 INFO  UI:532 - User file has been updated and app closed
+
+2017-11-14 13:46:23 INFO  UI:31 - TEST
+2017-11-14 13:46:23 INFO  UI:31 - TEST
+2017-11-14 13:46:23 INFO  UI:487 - test's account has been unlocked
+2017-11-14 13:46:23 INFO  UI:31 - TEST
+2017-11-14 13:46:23 INFO  UI:31 - TEST
+2017-11-14 13:46:23 INFO  UI:386 - User's account has been approved
+2017-11-14 13:46:23 INFO  UI:31 - TEST
+2017-11-14 13:46:23 INFO  UI:31 - TEST
+2017-11-14 13:46:23 INFO  UI:428 - test was promoted to admin
+2017-11-14 13:46:23 INFO  UI:31 - TEST
+2017-11-14 13:46:23 INFO  UI:212 - test applied for an account
+2017-11-14 13:46:23 INFO  UI:31 - TEST
+2017-11-14 13:46:23 INFO  UI:386 - 1's account has been approved
+2017-11-14 13:46:23 INFO  UI:391 - 2's account has been rejected
+2017-11-14 13:46:23 INFO  UI:31 - TEST
+2017-11-14 13:46:23 INFO  UI:646 - Loan payment. Loan balance is now 0.0
+2017-11-14 13:46:23 INFO  UI:647 - Account balance is now 500.0
+2017-11-14 13:46:23 INFO  UI:31 - TEST
+2017-11-14 13:46:23 INFO  UI:485 - test's account has been locked
+2017-11-14 13:46:23 INFO  UI:31 - TEST
+2017-11-14 13:46:23 INFO  UI:212 - username applied for an account
+2017-11-14 13:46:23 INFO  UI:31 - TEST
+2017-11-14 13:46:23 INFO  UI:31 - TEST
+2017-11-14 13:46:23 INFO  UI:386 - 1's account has been approved
+2017-11-14 13:46:23 INFO  UI:391 - 2's account has been rejected
+2017-11-14 13:46:23 INFO  UI:31 - TEST
+2017-11-14 13:46:23 INFO  UI:262 - Deposit. 's balance is now 200.0
+2017-11-14 13:46:23 INFO  UI:31 - TEST
+2017-11-14 13:46:23 INFO  UI:584 - loan's loan has been approved
+2017-11-14 13:46:23 INFO  UI:31 - TEST
+2017-11-14 13:48:15 INFO  UI:31 - TEST
+2017-11-14 13:48:15 INFO  UI:31 - TEST
+2017-11-14 13:48:15 INFO  UI:262 - Deposit. username's balance is now 200.0
+2017-11-14 13:48:15 INFO  UI:31 - TEST
+2017-11-14 13:48:15 INFO  UI:532 - User file has been updated and app closed
+
+2017-11-14 13:48:15 INFO  UI:31 - TEST
+2017-11-14 13:48:15 INFO  UI:31 - TEST
+2017-11-14 13:48:15 INFO  UI:487 - test's account has been unlocked
+2017-11-14 13:48:15 INFO  UI:31 - TEST
+2017-11-14 13:48:15 INFO  UI:31 - TEST
+2017-11-14 13:48:15 INFO  UI:386 - User's account has been approved
+2017-11-14 13:48:15 INFO  UI:31 - TEST
+2017-11-14 13:48:15 INFO  UI:31 - TEST
+2017-11-14 13:48:15 INFO  UI:428 - test was promoted to admin
+2017-11-14 13:48:15 INFO  UI:31 - TEST
+2017-11-14 13:48:15 INFO  UI:212 - test applied for an account
+2017-11-14 13:48:15 INFO  UI:31 - TEST
+2017-11-14 13:48:15 INFO  UI:386 - 1's account has been approved
+2017-11-14 13:48:15 INFO  UI:391 - 2's account has been rejected
+2017-11-14 13:48:15 INFO  UI:31 - TEST
+2017-11-14 13:48:15 INFO  UI:646 - Loan payment. Loan balance is now 0.0
+2017-11-14 13:48:15 INFO  UI:647 - Account balance is now 500.0
+2017-11-14 13:48:15 INFO  UI:31 - TEST
+2017-11-14 13:48:15 INFO  UI:485 - test's account has been locked
+2017-11-14 13:48:15 INFO  UI:31 - TEST
+2017-11-14 13:48:15 INFO  UI:212 - username applied for an account
+2017-11-14 13:48:15 INFO  UI:31 - TEST
+2017-11-14 13:48:15 INFO  UI:31 - TEST
+2017-11-14 13:48:15 INFO  UI:386 - 1's account has been approved
+2017-11-14 13:48:15 INFO  UI:391 - 2's account has been rejected
+2017-11-14 13:48:15 INFO  UI:31 - TEST
+2017-11-14 13:48:15 INFO  UI:262 - Deposit. 's balance is now 200.0
+2017-11-14 13:48:15 INFO  UI:31 - TEST
+2017-11-14 13:48:15 INFO  UI:584 - loan's loan has been approved
+2017-11-14 13:48:15 INFO  UI:31 - TEST
+2017-11-14 14:03:56 INFO  UI:532 - User file has been updated and app closed
+
+2017-11-16 16:42:46 INFO  UI:532 - User file has been updated and app closed
+
+2017-11-18 15:47:27 INFO  UI:65 - Users defaulted
+2017-11-18 15:49:56 INFO  UI:65 - Users defaulted
+2017-11-18 15:50:16 INFO  UI:284 - Withdraw. Xavier.Garibay's balance is now 1385.0
+2017-11-18 15:50:21 INFO  UI:532 - User file has been updated and app closed
+
+2017-11-18 15:50:43 INFO  UI:532 - User file has been updated and app closed
+
+2017-11-18 17:49:36 INFO  UI:532 - User file has been updated and app closed
+
+2017-11-18 23:22:43 INFO  UI:541 - User file has been updated and app closed
+
+2017-11-18 23:30:56 INFO  UI:542 - User file has been updated and app closed
+
+2017-11-19 00:12:42 INFO  UI:222 - john applied for an account
+2017-11-19 00:13:19 INFO  UI:542 - User file has been updated and app closed
+
+2017-11-19 00:13:34 INFO  UI:542 - User file has been updated and app closed
+
+2017-11-19 00:13:48 INFO  UI:222 - john applied for an account
+2017-11-19 00:15:14 INFO  UI:222 - john applied for an account
+2017-11-19 00:16:00 INFO  UI:222 - john applied for an account
+2017-11-19 00:23:04 INFO  UI:222 - john applied for an account
+2017-11-19 00:23:46 INFO  UI:222 - john applied for an account
+2017-11-19 00:24:27 INFO  UI:222 - x applied for an account
+2017-11-19 00:31:44 INFO  UI:222 - c applied for an account
+2017-11-19 00:35:07 INFO  UI:222 - jo applied for an account
+2017-11-19 00:35:58 INFO  UI:542 - User file has been updated and app closed
+
+2017-11-19 00:36:09 INFO  UI:222 - jo applied for an account
+2017-11-19 00:38:05 INFO  UI:222 - jon applied for an account
+2017-11-19 00:39:01 INFO  UI:222 - dod applied for an account
+2017-11-19 00:39:15 INFO  UI:542 - User file has been updated and app closed
+
+2017-11-19 11:48:48 INFO  UI:261 - Deposit. Xavier.Garibay's balance is now 2400
+2017-11-19 11:48:58 INFO  UI:592 - User file has been updated and app closed
+
+2017-11-19 11:50:05 INFO  UI:592 - User file has been updated and app closed
+
+2017-11-19 12:12:57 INFO  UI:262 - Deposit. Xavier.Garibay's balance is now 2400
+2017-11-19 12:13:11 INFO  UI:593 - User file has been updated and app closed
+
+2017-11-19 12:14:00 INFO  UI:262 - Deposit. Xavier.Garibay's balance is now 2400
+2017-11-19 12:15:31 INFO  UI:262 - Deposit. Xavier.Garibay's balance is now 2400
+2017-11-19 12:15:35 INFO  UI:594 - User file has been updated and app closed
+
+2017-11-19 12:15:58 INFO  UI:594 - User file has been updated and app closed
+
+2017-11-19 13:52:49 INFO  UI:196 - john applied for an account
+2017-11-19 13:54:45 INFO  UI:196 - john applied for an account
+2017-11-19 13:57:02 INFO  UI:381 - john's account has been approved
+2017-11-19 13:57:29 INFO  UI:249 - Loan Application attempt. john's loan status is -1000
+2017-11-19 13:58:20 INFO  UI:577 - john's loan has been approved
+2017-11-19 13:58:43 INFO  UI:629 - Loan payment. Loan balance is now 750
+2017-11-19 13:58:43 INFO  UI:630 - Account balance is now 750
+2017-11-19 13:58:59 INFO  UI:196 - josh applied for an account
+2017-11-19 13:59:15 INFO  UI:386 - josh's account has been rejected
+2017-11-19 18:03:33 INFO  UI:25 - TEST
+2017-11-19 18:04:22 INFO  UI:25 - TEST
+2017-11-19 18:39:11 INFO  UI:30 - TEST
+2017-11-19 18:39:13 INFO  UI:30 - TEST
+2017-11-19 18:41:11 INFO  UI:30 - TEST
+2017-11-19 18:41:41 INFO  UI:30 - TEST
+2017-11-19 18:42:24 INFO  UI:30 - TEST
+2017-11-19 18:42:54 INFO  UI:30 - TEST
+2017-11-19 18:44:58 INFO  UI:30 - TEST
+2017-11-19 18:47:36 INFO  UI:30 - TEST
+2017-11-19 18:50:39 INFO  UI:174 - jane applied for an account
+2017-11-19 18:51:29 INFO  UI:174 - joh applied for an account
+2017-11-19 19:02:47 INFO  UI:379 - jane's account has been rejected
+2017-11-19 19:03:25 INFO  UI:30 - TEST
+2017-11-19 19:03:26 INFO  UI:30 - TEST
+2017-11-19 19:25:52 INFO  UI:42 - TEST
+2017-11-19 19:27:24 INFO  UI:42 - TEST
+2017-11-19 19:29:31 INFO  UI:42 - TEST
+2017-11-19 19:29:32 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 19:30:17 INFO  UI:42 - TEST
+2017-11-19 19:30:19 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 19:38:19 INFO  UI:37 - TEST
+2017-11-19 19:38:21 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 19:38:21 INFO  UI:37 - TEST
+2017-11-19 19:46:48 INFO  UI:37 - TEST
+2017-11-19 19:46:50 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 19:46:50 INFO  UI:37 - TEST
+2017-11-19 19:46:50 INFO  UI:37 - TEST
+2017-11-19 19:46:51 INFO  UI:37 - TEST
+2017-11-19 19:46:51 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 19:47:08 INFO  UI:37 - TEST
+2017-11-19 19:48:09 INFO  UI:37 - TEST
+2017-11-19 19:48:11 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 19:48:11 INFO  UI:37 - TEST
+2017-11-19 19:48:11 INFO  UI:37 - TEST
+2017-11-19 19:48:12 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 19:48:12 INFO  UI:37 - TEST
+2017-11-19 19:48:12 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 19:55:58 INFO  UI:38 - TEST
+2017-11-19 19:56:00 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 19:56:00 INFO  UI:38 - TEST
+2017-11-19 19:56:00 INFO  UI:38 - TEST
+2017-11-19 19:56:00 INFO  UI:38 - TEST
+2017-11-19 19:56:01 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 19:56:01 INFO  UI:38 - TEST
+2017-11-19 19:56:01 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 20:01:42 INFO  UI:38 - TEST
+2017-11-19 20:01:44 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 20:01:44 INFO  UI:38 - TEST
+2017-11-19 20:01:44 INFO  UI:38 - TEST
+2017-11-19 20:01:45 INFO  UI:38 - TEST
+2017-11-19 20:01:45 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 20:01:45 INFO  UI:38 - TEST
+2017-11-19 20:01:45 INFO  UI:38 - TEST
+2017-11-19 20:01:46 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 20:01:46 INFO  UI:38 - TEST
+2017-11-19 20:02:10 INFO  UI:38 - TEST
+2017-11-19 20:02:31 INFO  UI:38 - TEST
+2017-11-19 20:03:21 INFO  UI:38 - TEST
+2017-11-19 20:04:05 INFO  UI:38 - TEST
+2017-11-19 20:10:26 INFO  UI:38 - TEST
+2017-11-19 20:10:28 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 20:10:28 INFO  UI:38 - TEST
+2017-11-19 20:10:28 INFO  UI:38 - TEST
+2017-11-19 20:10:29 INFO  UI:38 - TEST
+2017-11-19 20:10:29 INFO  UI:374 - joh's account has been approved
+2017-11-19 20:10:30 INFO  UI:38 - TEST
+2017-11-19 20:10:30 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 20:10:30 INFO  UI:38 - TEST
+2017-11-19 20:10:30 INFO  UI:38 - TEST
+2017-11-19 20:10:31 INFO  UI:38 - TEST
+2017-11-19 20:10:31 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 20:10:31 INFO  UI:38 - TEST
+2017-11-19 20:10:56 INFO  UI:38 - TEST
+2017-11-19 20:10:58 INFO  UI:374 - usernames's account has been approved
+2017-11-19 20:11:13 INFO  UI:38 - TEST
+2017-11-19 20:11:15 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 20:11:15 INFO  UI:38 - TEST
+2017-11-19 20:11:15 INFO  UI:38 - TEST
+2017-11-19 20:11:15 INFO  UI:38 - TEST
+2017-11-19 20:11:16 INFO  UI:374 - usernames's account has been approved
+2017-11-19 20:11:16 INFO  UI:38 - TEST
+2017-11-19 20:11:17 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 20:11:17 INFO  UI:38 - TEST
+2017-11-19 20:11:17 INFO  UI:38 - TEST
+2017-11-19 20:11:17 INFO  UI:38 - TEST
+2017-11-19 20:11:17 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 20:11:17 INFO  UI:38 - TEST
+2017-11-19 20:13:46 INFO  UI:38 - TEST
+2017-11-19 20:13:47 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 20:14:21 INFO  UI:38 - TEST
+2017-11-19 20:14:23 INFO  UI:424 - username was promoted to admin
+2017-11-19 20:18:14 INFO  UI:38 - TEST
+2017-11-19 20:18:16 INFO  UI:484 - username's account has been locked
+2017-11-19 20:25:03 INFO  UI:38 - TEST
+2017-11-19 20:25:05 INFO  UI:547 - usernames's loan has been approved
+2017-11-19 20:31:21 INFO  UI:38 - TEST
+2017-11-19 20:31:23 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 20:31:23 INFO  UI:38 - TEST
+2017-11-19 20:31:24 INFO  UI:38 - TEST
+2017-11-19 20:31:24 INFO  UI:38 - TEST
+2017-11-19 20:31:24 INFO  UI:38 - TEST
+2017-11-19 20:31:24 INFO  UI:38 - TEST
+2017-11-19 20:31:25 INFO  UI:374 - usernames's account has been approved
+2017-11-19 20:31:25 INFO  UI:38 - TEST
+2017-11-19 20:31:25 INFO  UI:599 - Loan payment. Loan balance is now 0
+2017-11-19 20:31:25 INFO  UI:600 - Account balance is now 100
+2017-11-19 20:31:25 INFO  UI:38 - TEST
+2017-11-19 20:31:26 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 20:31:26 INFO  UI:38 - TEST
+2017-11-19 20:31:26 INFO  UI:38 - TEST
+2017-11-19 20:31:26 INFO  UI:38 - TEST
+2017-11-19 20:31:26 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 20:31:26 INFO  UI:38 - TEST
+2017-11-19 20:31:27 INFO  UI:484 - username's account has been locked
+2017-11-19 20:31:27 INFO  UI:38 - TEST
+2017-11-19 20:31:45 INFO  UI:38 - TEST
+2017-11-19 20:32:43 INFO  UI:38 - TEST
+2017-11-19 20:32:45 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 20:32:45 INFO  UI:38 - TEST
+2017-11-19 20:32:46 INFO  UI:547 - usernames's loan has been approved
+2017-11-19 20:32:46 INFO  UI:38 - TEST
+2017-11-19 20:32:46 INFO  UI:38 - TEST
+2017-11-19 20:32:47 INFO  UI:38 - TEST
+2017-11-19 20:32:47 INFO  UI:424 - username was promoted to admin
+2017-11-19 20:32:47 INFO  UI:38 - TEST
+2017-11-19 20:32:48 INFO  UI:374 - usernames's account has been approved
+2017-11-19 20:32:48 INFO  UI:38 - TEST
+2017-11-19 20:32:48 INFO  UI:599 - Loan payment. Loan balance is now 0
+2017-11-19 20:32:48 INFO  UI:600 - Account balance is now 100
+2017-11-19 20:32:48 INFO  UI:38 - TEST
+2017-11-19 20:32:48 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 20:32:48 INFO  UI:38 - TEST
+2017-11-19 20:32:48 INFO  UI:38 - TEST
+2017-11-19 20:32:49 INFO  UI:38 - TEST
+2017-11-19 20:32:49 INFO  UI:214 - Deposit. username's balance is now 517
+2017-11-19 20:32:49 INFO  UI:38 - TEST
+2017-11-19 20:32:49 INFO  UI:484 - username's account has been locked
+2017-11-19 20:32:49 INFO  UI:38 - TEST
