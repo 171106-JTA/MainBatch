@@ -1,0 +1,327 @@
+2017-11-12 03:34:47 TRACE GLOBAL:288 - john has withdrawn 1000.0$.
+2017-11-12 12:57:43 TRACE GLOBAL:298 - caleb schumake has attempted to withdraw passed their limit.
+2017-11-12 12:57:52 TRACE GLOBAL:295 - caleb schumake has withdrawn 45.0$.
+2017-11-12 12:58:23 TRACE GLOBAL:184 - All data has been serialized.
+2017-11-12 12:58:42 DEBUG SingleClientConnManager:212 - Get connection for route HttpRoute[{s}->https://rest.textmagic.com]
+2017-11-12 12:58:42 DEBUG DefaultClientConnectionOperator:145 - Connecting to rest.textmagic.com:443
+2017-11-12 12:58:43 DEBUG RequestAddCookies:132 - CookieSpec selected: best-match
+2017-11-12 12:58:43 DEBUG RequestAuthCache:75 - Auth cache not set in the context
+2017-11-12 12:58:43 DEBUG DefaultHttpClient:643 - Attempt 1 to execute request
+2017-11-12 12:58:43 DEBUG DefaultClientConnection:264 - Sending request: POST /api/v2/messages HTTP/1.1
+2017-11-12 12:58:43 DEBUG wire:63 - >> "POST /api/v2/messages HTTP/1.1[\r][\n]"
+2017-11-12 12:58:43 DEBUG wire:63 - >> "User-Agent: textmagic-rest-java/v2[\r][\n]"
+2017-11-12 12:58:43 DEBUG wire:63 - >> "Accept: application/json[\r][\n]"
+2017-11-12 12:58:43 DEBUG wire:63 - >> "Accept-Charset: utf-8[\r][\n]"
+2017-11-12 12:58:43 DEBUG wire:63 - >> "Accept-Language: en-US[\r][\n]"
+2017-11-12 12:58:43 DEBUG wire:63 - >> "X-TM-Username: calebschumake[\r][\n]"
+2017-11-12 12:58:43 DEBUG wire:63 - >> "X-TM-Key: JrNjtrhgN0C0cK08N1P0iOWZy1O7XI[\r][\n]"
+2017-11-12 12:58:43 DEBUG wire:63 - >> "Content-Length: 75[\r][\n]"
+2017-11-12 12:58:43 DEBUG wire:63 - >> "Content-Type: application/x-www-form-urlencoded; charset=UTF-8[\r][\n]"
+2017-11-12 12:58:43 DEBUG wire:63 - >> "Host: rest.textmagic.com[\r][\n]"
+2017-11-12 12:58:43 DEBUG wire:63 - >> "Connection: Keep-Alive[\r][\n]"
+2017-11-12 12:58:43 DEBUG wire:63 - >> "[\r][\n]"
+2017-11-12 12:58:43 DEBUG headers:268 - >> POST /api/v2/messages HTTP/1.1
+2017-11-12 12:58:43 DEBUG headers:271 - >> User-Agent: textmagic-rest-java/v2
+2017-11-12 12:58:43 DEBUG headers:271 - >> Accept: application/json
+2017-11-12 12:58:43 DEBUG headers:271 - >> Accept-Charset: utf-8
+2017-11-12 12:58:43 DEBUG headers:271 - >> Accept-Language: en-US
+2017-11-12 12:58:43 DEBUG headers:271 - >> X-TM-Username: calebschumake
+2017-11-12 12:58:43 DEBUG headers:271 - >> X-TM-Key: JrNjtrhgN0C0cK08N1P0iOWZy1O7XI
+2017-11-12 12:58:43 DEBUG headers:271 - >> Content-Length: 75
+2017-11-12 12:58:43 DEBUG headers:271 - >> Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+2017-11-12 12:58:43 DEBUG headers:271 - >> Host: rest.textmagic.com
+2017-11-12 12:58:43 DEBUG headers:271 - >> Connection: Keep-Alive
+2017-11-12 12:58:43 DEBUG wire:77 - >> "phones=17343016126&text=Hi+caleb+schumake%2C+your+account+has+been+blocked."
+2017-11-12 12:58:43 DEBUG wire:63 - << "HTTP/1.1 201 Created[\r][\n]"
+2017-11-12 12:58:43 DEBUG wire:63 - << "Date: Sun, 12 Nov 2017 17:58:43 GMT[\r][\n]"
+2017-11-12 12:58:43 DEBUG wire:63 - << "Content-Type: application/json[\r][\n]"
+2017-11-12 12:58:43 DEBUG wire:63 - << "Transfer-Encoding: chunked[\r][\n]"
+2017-11-12 12:58:43 DEBUG wire:63 - << "Connection: keep-alive[\r][\n]"
+2017-11-12 12:58:43 DEBUG wire:63 - << "Set-Cookie: __cfduid=d101c3a5acd5f69aedb2296dda54b9e7e1510509523; expires=Mon, 12-Nov-18 17:58:43 GMT; path=/; domain=.textmagic.com; HttpOnly[\r][\n]"
+2017-11-12 12:58:43 DEBUG wire:63 - << "Cache-Control: max-age=0, must-revalidate, no-cache, no-store, private[\r][\n]"
+2017-11-12 12:58:43 DEBUG wire:63 - << "Location: https://rest.textmagic.com/api/v2/messages/149637287[\r][\n]"
+2017-11-12 12:58:43 DEBUG wire:63 - << "Strict-Transport-Security: max-age=31536000[\r][\n]"
+2017-11-12 12:58:43 DEBUG wire:63 - << "Server: cloudflare-nginx[\r][\n]"
+2017-11-12 12:58:43 DEBUG wire:63 - << "CF-RAY: 3bcb6187bae6245c-IAD[\r][\n]"
+2017-11-12 12:58:43 DEBUG wire:63 - << "[\r][\n]"
+2017-11-12 12:58:43 DEBUG DefaultClientConnection:249 - Receiving response: HTTP/1.1 201 Created
+2017-11-12 12:58:43 DEBUG headers:252 - << HTTP/1.1 201 Created
+2017-11-12 12:58:43 DEBUG headers:255 - << Date: Sun, 12 Nov 2017 17:58:43 GMT
+2017-11-12 12:58:43 DEBUG headers:255 - << Content-Type: application/json
+2017-11-12 12:58:43 DEBUG headers:255 - << Transfer-Encoding: chunked
+2017-11-12 12:58:43 DEBUG headers:255 - << Connection: keep-alive
+2017-11-12 12:58:43 DEBUG headers:255 - << Set-Cookie: __cfduid=d101c3a5acd5f69aedb2296dda54b9e7e1510509523; expires=Mon, 12-Nov-18 17:58:43 GMT; path=/; domain=.textmagic.com; HttpOnly
+2017-11-12 12:58:43 DEBUG headers:255 - << Cache-Control: max-age=0, must-revalidate, no-cache, no-store, private
+2017-11-12 12:58:43 DEBUG headers:255 - << Location: https://rest.textmagic.com/api/v2/messages/149637287
+2017-11-12 12:58:43 DEBUG headers:255 - << Strict-Transport-Security: max-age=31536000
+2017-11-12 12:58:43 DEBUG headers:255 - << Server: cloudflare-nginx
+2017-11-12 12:58:43 DEBUG headers:255 - << CF-RAY: 3bcb6187bae6245c-IAD
+2017-11-12 12:58:43 DEBUG ResponseProcessCookies:122 - Cookie accepted: "[version: 0][name: __cfduid][value: d101c3a5acd5f69aedb2296dda54b9e7e1510509523][domain: .textmagic.com][path: /][expiry: Mon Nov 12 12:58:43 EST 2018]". 
+2017-11-12 12:58:43 DEBUG DefaultHttpClient:487 - Connection can be kept alive indefinitely
+2017-11-12 12:58:43 DEBUG wire:63 - << "a2[\r][\n]"
+2017-11-12 12:58:43 DEBUG wire:77 - << "{"id":149637287,"href":"\/api\/v2\/messages\/149637287","type":"message","sessionId":90498919,"bulkId":null,"messageId":149637287,"scheduleId":null,"chatId":null}"
+2017-11-12 12:58:43 DEBUG wire:63 - << "[\r][\n]"
+2017-11-12 12:58:43 DEBUG wire:63 - << "0[\r][\n]"
+2017-11-12 12:58:43 DEBUG wire:63 - << "[\r][\n]"
+2017-11-12 12:58:43 DEBUG SingleClientConnManager:267 - Releasing connection org.apache.http.impl.conn.SingleClientConnManager$ConnAdapter@176d53b2
+2017-11-12 12:59:05 DEBUG SingleClientConnManager:212 - Get connection for route HttpRoute[{s}->https://rest.textmagic.com]
+2017-11-12 12:59:05 DEBUG DefaultHttpClient:411 - Stale connection check
+2017-11-12 12:59:05 DEBUG RequestAddCookies:132 - CookieSpec selected: best-match
+2017-11-12 12:59:05 DEBUG RequestAddCookies:184 - Cookie [version: 0][name: __cfduid][value: d101c3a5acd5f69aedb2296dda54b9e7e1510509523][domain: .textmagic.com][path: /][expiry: Mon Nov 12 12:58:43 EST 2018] match [(secure)rest.textmagic.com:443/api/v2/messages]
+2017-11-12 12:59:05 DEBUG RequestAuthCache:75 - Auth cache not set in the context
+2017-11-12 12:59:05 DEBUG DefaultHttpClient:643 - Attempt 1 to execute request
+2017-11-12 12:59:05 DEBUG DefaultClientConnection:264 - Sending request: POST /api/v2/messages HTTP/1.1
+2017-11-12 12:59:05 DEBUG wire:63 - >> "POST /api/v2/messages HTTP/1.1[\r][\n]"
+2017-11-12 12:59:05 DEBUG wire:63 - >> "User-Agent: textmagic-rest-java/v2[\r][\n]"
+2017-11-12 12:59:05 DEBUG wire:63 - >> "Accept: application/json[\r][\n]"
+2017-11-12 12:59:05 DEBUG wire:63 - >> "Accept-Charset: utf-8[\r][\n]"
+2017-11-12 12:59:05 DEBUG wire:63 - >> "Accept-Language: en-US[\r][\n]"
+2017-11-12 12:59:05 DEBUG wire:63 - >> "X-TM-Username: calebschumake[\r][\n]"
+2017-11-12 12:59:05 DEBUG wire:63 - >> "X-TM-Key: JrNjtrhgN0C0cK08N1P0iOWZy1O7XI[\r][\n]"
+2017-11-12 12:59:05 DEBUG wire:63 - >> "Content-Length: 78[\r][\n]"
+2017-11-12 12:59:05 DEBUG wire:63 - >> "Content-Type: application/x-www-form-urlencoded; charset=UTF-8[\r][\n]"
+2017-11-12 12:59:05 DEBUG wire:63 - >> "Host: rest.textmagic.com[\r][\n]"
+2017-11-12 12:59:05 DEBUG wire:63 - >> "Connection: Keep-Alive[\r][\n]"
+2017-11-12 12:59:05 DEBUG wire:63 - >> "Cookie: __cfduid=d101c3a5acd5f69aedb2296dda54b9e7e1510509523[\r][\n]"
+2017-11-12 12:59:05 DEBUG wire:63 - >> "Cookie2: $Version=1[\r][\n]"
+2017-11-12 12:59:05 DEBUG wire:63 - >> "[\r][\n]"
+2017-11-12 12:59:05 DEBUG headers:268 - >> POST /api/v2/messages HTTP/1.1
+2017-11-12 12:59:05 DEBUG headers:271 - >> User-Agent: textmagic-rest-java/v2
+2017-11-12 12:59:05 DEBUG headers:271 - >> Accept: application/json
+2017-11-12 12:59:05 DEBUG headers:271 - >> Accept-Charset: utf-8
+2017-11-12 12:59:05 DEBUG headers:271 - >> Accept-Language: en-US
+2017-11-12 12:59:05 DEBUG headers:271 - >> X-TM-Username: calebschumake
+2017-11-12 12:59:05 DEBUG headers:271 - >> X-TM-Key: JrNjtrhgN0C0cK08N1P0iOWZy1O7XI
+2017-11-12 12:59:05 DEBUG headers:271 - >> Content-Length: 78
+2017-11-12 12:59:05 DEBUG headers:271 - >> Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+2017-11-12 12:59:05 DEBUG headers:271 - >> Host: rest.textmagic.com
+2017-11-12 12:59:05 DEBUG headers:271 - >> Connection: Keep-Alive
+2017-11-12 12:59:05 DEBUG headers:271 - >> Cookie: __cfduid=d101c3a5acd5f69aedb2296dda54b9e7e1510509523
+2017-11-12 12:59:05 DEBUG headers:271 - >> Cookie2: $Version=1
+2017-11-12 12:59:05 DEBUG wire:77 - >> "phones=17343016126&text=+Hi+caleb+schumake%2C+your+account+has+been+unblocked."
+2017-11-12 12:59:05 DEBUG wire:63 - << "HTTP/1.1 201 Created[\r][\n]"
+2017-11-12 12:59:05 DEBUG wire:63 - << "Date: Sun, 12 Nov 2017 17:59:05 GMT[\r][\n]"
+2017-11-12 12:59:05 DEBUG wire:63 - << "Content-Type: application/json[\r][\n]"
+2017-11-12 12:59:05 DEBUG wire:63 - << "Transfer-Encoding: chunked[\r][\n]"
+2017-11-12 12:59:05 DEBUG wire:63 - << "Connection: keep-alive[\r][\n]"
+2017-11-12 12:59:05 DEBUG wire:63 - << "Cache-Control: max-age=0, must-revalidate, no-cache, no-store, private[\r][\n]"
+2017-11-12 12:59:05 DEBUG wire:63 - << "Location: https://rest.textmagic.com/api/v2/messages/149637291[\r][\n]"
+2017-11-12 12:59:05 DEBUG wire:63 - << "Strict-Transport-Security: max-age=31536000[\r][\n]"
+2017-11-12 12:59:05 DEBUG wire:63 - << "Server: cloudflare-nginx[\r][\n]"
+2017-11-12 12:59:05 DEBUG wire:63 - << "CF-RAY: 3bcb62120b03245c-IAD[\r][\n]"
+2017-11-12 12:59:05 DEBUG wire:63 - << "[\r][\n]"
+2017-11-12 12:59:05 DEBUG DefaultClientConnection:249 - Receiving response: HTTP/1.1 201 Created
+2017-11-12 12:59:05 DEBUG headers:252 - << HTTP/1.1 201 Created
+2017-11-12 12:59:05 DEBUG headers:255 - << Date: Sun, 12 Nov 2017 17:59:05 GMT
+2017-11-12 12:59:05 DEBUG headers:255 - << Content-Type: application/json
+2017-11-12 12:59:05 DEBUG headers:255 - << Transfer-Encoding: chunked
+2017-11-12 12:59:05 DEBUG headers:255 - << Connection: keep-alive
+2017-11-12 12:59:05 DEBUG headers:255 - << Cache-Control: max-age=0, must-revalidate, no-cache, no-store, private
+2017-11-12 12:59:05 DEBUG headers:255 - << Location: https://rest.textmagic.com/api/v2/messages/149637291
+2017-11-12 12:59:05 DEBUG headers:255 - << Strict-Transport-Security: max-age=31536000
+2017-11-12 12:59:05 DEBUG headers:255 - << Server: cloudflare-nginx
+2017-11-12 12:59:05 DEBUG headers:255 - << CF-RAY: 3bcb62120b03245c-IAD
+2017-11-12 12:59:05 DEBUG DefaultHttpClient:487 - Connection can be kept alive indefinitely
+2017-11-12 12:59:05 DEBUG wire:63 - << "a2[\r][\n]"
+2017-11-12 12:59:05 DEBUG wire:77 - << "{"id":149637291,"href":"\/api\/v2\/messages\/149637291","type":"message","sessionId":90498923,"bulkId":null,"messageId":149637291,"scheduleId":null,"chatId":null}"
+2017-11-12 12:59:05 DEBUG wire:63 - << "[\r][\n]"
+2017-11-12 12:59:05 DEBUG wire:63 - << "0[\r][\n]"
+2017-11-12 12:59:05 DEBUG wire:63 - << "[\r][\n]"
+2017-11-12 12:59:05 DEBUG SingleClientConnManager:267 - Releasing connection org.apache.http.impl.conn.SingleClientConnManager$ConnAdapter@235834f2
+2017-11-12 12:59:33 TRACE GLOBAL:184 - All data has been serialized.
+2017-11-12 13:00:58 TRACE GLOBAL:184 - All data has been serialized.
+2017-11-12 13:01:27 TRACE GLOBAL:93 - User has been placed on pending approval list
+2017-11-12 13:01:27 TRACE GLOBAL:184 - All data has been serialized.
+2017-11-12 13:01:41 DEBUG SingleClientConnManager:212 - Get connection for route HttpRoute[{s}->https://rest.textmagic.com]
+2017-11-12 13:01:41 DEBUG DefaultClientConnectionOperator:145 - Connecting to rest.textmagic.com:443
+2017-11-12 13:01:41 DEBUG RequestAddCookies:132 - CookieSpec selected: best-match
+2017-11-12 13:01:41 DEBUG RequestAuthCache:75 - Auth cache not set in the context
+2017-11-12 13:01:41 DEBUG DefaultHttpClient:643 - Attempt 1 to execute request
+2017-11-12 13:01:41 DEBUG DefaultClientConnection:264 - Sending request: POST /api/v2/messages HTTP/1.1
+2017-11-12 13:01:41 DEBUG wire:63 - >> "POST /api/v2/messages HTTP/1.1[\r][\n]"
+2017-11-12 13:01:41 DEBUG wire:63 - >> "User-Agent: textmagic-rest-java/v2[\r][\n]"
+2017-11-12 13:01:41 DEBUG wire:63 - >> "Accept: application/json[\r][\n]"
+2017-11-12 13:01:41 DEBUG wire:63 - >> "Accept-Charset: utf-8[\r][\n]"
+2017-11-12 13:01:41 DEBUG wire:63 - >> "Accept-Language: en-US[\r][\n]"
+2017-11-12 13:01:41 DEBUG wire:63 - >> "X-TM-Username: calebschumake[\r][\n]"
+2017-11-12 13:01:41 DEBUG wire:63 - >> "X-TM-Key: JrNjtrhgN0C0cK08N1P0iOWZy1O7XI[\r][\n]"
+2017-11-12 13:01:41 DEBUG wire:63 - >> "Content-Length: 63[\r][\n]"
+2017-11-12 13:01:41 DEBUG wire:63 - >> "Content-Type: application/x-www-form-urlencoded; charset=UTF-8[\r][\n]"
+2017-11-12 13:01:41 DEBUG wire:63 - >> "Host: rest.textmagic.com[\r][\n]"
+2017-11-12 13:01:41 DEBUG wire:63 - >> "Connection: Keep-Alive[\r][\n]"
+2017-11-12 13:01:41 DEBUG wire:63 - >> "[\r][\n]"
+2017-11-12 13:01:41 DEBUG headers:268 - >> POST /api/v2/messages HTTP/1.1
+2017-11-12 13:01:41 DEBUG headers:271 - >> User-Agent: textmagic-rest-java/v2
+2017-11-12 13:01:41 DEBUG headers:271 - >> Accept: application/json
+2017-11-12 13:01:41 DEBUG headers:271 - >> Accept-Charset: utf-8
+2017-11-12 13:01:41 DEBUG headers:271 - >> Accept-Language: en-US
+2017-11-12 13:01:41 DEBUG headers:271 - >> X-TM-Username: calebschumake
+2017-11-12 13:01:41 DEBUG headers:271 - >> X-TM-Key: JrNjtrhgN0C0cK08N1P0iOWZy1O7XI
+2017-11-12 13:01:41 DEBUG headers:271 - >> Content-Length: 63
+2017-11-12 13:01:41 DEBUG headers:271 - >> Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+2017-11-12 13:01:41 DEBUG headers:271 - >> Host: rest.textmagic.com
+2017-11-12 13:01:41 DEBUG headers:271 - >> Connection: Keep-Alive
+2017-11-12 13:01:41 DEBUG wire:77 - >> "phones=17343016126&text=Hi+c%2C+your+account+has+been+approved."
+2017-11-12 13:01:41 DEBUG wire:63 - << "HTTP/1.1 201 Created[\r][\n]"
+2017-11-12 13:01:41 DEBUG wire:63 - << "Date: Sun, 12 Nov 2017 18:01:41 GMT[\r][\n]"
+2017-11-12 13:01:41 DEBUG wire:63 - << "Content-Type: application/json[\r][\n]"
+2017-11-12 13:01:41 DEBUG wire:63 - << "Transfer-Encoding: chunked[\r][\n]"
+2017-11-12 13:01:41 DEBUG wire:63 - << "Connection: keep-alive[\r][\n]"
+2017-11-12 13:01:41 DEBUG wire:63 - << "Set-Cookie: __cfduid=db1584d89399730dcda3e7c5cce55d3a31510509701; expires=Mon, 12-Nov-18 18:01:41 GMT; path=/; domain=.textmagic.com; HttpOnly[\r][\n]"
+2017-11-12 13:01:41 DEBUG wire:63 - << "Cache-Control: max-age=0, must-revalidate, no-cache, no-store, private[\r][\n]"
+2017-11-12 13:01:41 DEBUG wire:63 - << "Location: https://rest.textmagic.com/api/v2/messages/149637578[\r][\n]"
+2017-11-12 13:01:41 DEBUG wire:63 - << "Strict-Transport-Security: max-age=31536000[\r][\n]"
+2017-11-12 13:01:41 DEBUG wire:63 - << "Server: cloudflare-nginx[\r][\n]"
+2017-11-12 13:01:41 DEBUG wire:63 - << "CF-RAY: 3bcb65e21d005687-IAD[\r][\n]"
+2017-11-12 13:01:41 DEBUG wire:63 - << "[\r][\n]"
+2017-11-12 13:01:41 DEBUG DefaultClientConnection:249 - Receiving response: HTTP/1.1 201 Created
+2017-11-12 13:01:41 DEBUG headers:252 - << HTTP/1.1 201 Created
+2017-11-12 13:01:41 DEBUG headers:255 - << Date: Sun, 12 Nov 2017 18:01:41 GMT
+2017-11-12 13:01:41 DEBUG headers:255 - << Content-Type: application/json
+2017-11-12 13:01:41 DEBUG headers:255 - << Transfer-Encoding: chunked
+2017-11-12 13:01:41 DEBUG headers:255 - << Connection: keep-alive
+2017-11-12 13:01:41 DEBUG headers:255 - << Set-Cookie: __cfduid=db1584d89399730dcda3e7c5cce55d3a31510509701; expires=Mon, 12-Nov-18 18:01:41 GMT; path=/; domain=.textmagic.com; HttpOnly
+2017-11-12 13:01:41 DEBUG headers:255 - << Cache-Control: max-age=0, must-revalidate, no-cache, no-store, private
+2017-11-12 13:01:41 DEBUG headers:255 - << Location: https://rest.textmagic.com/api/v2/messages/149637578
+2017-11-12 13:01:41 DEBUG headers:255 - << Strict-Transport-Security: max-age=31536000
+2017-11-12 13:01:41 DEBUG headers:255 - << Server: cloudflare-nginx
+2017-11-12 13:01:41 DEBUG headers:255 - << CF-RAY: 3bcb65e21d005687-IAD
+2017-11-12 13:01:41 DEBUG ResponseProcessCookies:122 - Cookie accepted: "[version: 0][name: __cfduid][value: db1584d89399730dcda3e7c5cce55d3a31510509701][domain: .textmagic.com][path: /][expiry: Mon Nov 12 13:01:41 EST 2018]". 
+2017-11-12 13:01:41 DEBUG DefaultHttpClient:487 - Connection can be kept alive indefinitely
+2017-11-12 13:01:41 DEBUG wire:63 - << "a2[\r][\n]"
+2017-11-12 13:01:41 DEBUG wire:77 - << "{"id":149637578,"href":"\/api\/v2\/messages\/149637578","type":"message","sessionId":90499101,"bulkId":null,"messageId":149637578,"scheduleId":null,"chatId":null}"
+2017-11-12 13:01:41 DEBUG wire:63 - << "[\r][\n]"
+2017-11-12 13:01:41 DEBUG wire:63 - << "0[\r][\n]"
+2017-11-12 13:01:41 DEBUG wire:63 - << "[\r][\n]"
+2017-11-12 13:01:41 DEBUG SingleClientConnManager:267 - Releasing connection org.apache.http.impl.conn.SingleClientConnManager$ConnAdapter@176d53b2
+2017-11-12 13:05:34 TRACE GLOBAL:184 - All data has been serialized.
+2017-11-12 13:16:50 TRACE GLOBAL:68 - First time application has opened. Currently no serialized data to read in
+2017-11-12 13:17:35 TRACE GLOBAL:93 - User has been placed on pending approval list
+2017-11-12 13:17:35 TRACE GLOBAL:184 - All data has been serialized.
+2017-11-12 13:18:03 DEBUG SingleClientConnManager:212 - Get connection for route HttpRoute[{s}->https://rest.textmagic.com]
+2017-11-12 13:18:03 DEBUG DefaultClientConnectionOperator:145 - Connecting to rest.textmagic.com:443
+2017-11-12 13:18:03 DEBUG RequestAddCookies:132 - CookieSpec selected: best-match
+2017-11-12 13:18:03 DEBUG RequestAuthCache:75 - Auth cache not set in the context
+2017-11-12 13:18:03 DEBUG DefaultHttpClient:643 - Attempt 1 to execute request
+2017-11-12 13:18:03 DEBUG DefaultClientConnection:264 - Sending request: POST /api/v2/messages HTTP/1.1
+2017-11-12 13:18:03 DEBUG wire:63 - >> "POST /api/v2/messages HTTP/1.1[\r][\n]"
+2017-11-12 13:18:03 DEBUG wire:63 - >> "User-Agent: textmagic-rest-java/v2[\r][\n]"
+2017-11-12 13:18:03 DEBUG wire:63 - >> "Accept: application/json[\r][\n]"
+2017-11-12 13:18:03 DEBUG wire:63 - >> "Accept-Charset: utf-8[\r][\n]"
+2017-11-12 13:18:03 DEBUG wire:63 - >> "Accept-Language: en-US[\r][\n]"
+2017-11-12 13:18:03 DEBUG wire:63 - >> "X-TM-Username: calebschumake[\r][\n]"
+2017-11-12 13:18:03 DEBUG wire:63 - >> "X-TM-Key: JrNjtrhgN0C0cK08N1P0iOWZy1O7XI[\r][\n]"
+2017-11-12 13:18:03 DEBUG wire:63 - >> "Content-Length: 76[\r][\n]"
+2017-11-12 13:18:03 DEBUG wire:63 - >> "Content-Type: application/x-www-form-urlencoded; charset=UTF-8[\r][\n]"
+2017-11-12 13:18:03 DEBUG wire:63 - >> "Host: rest.textmagic.com[\r][\n]"
+2017-11-12 13:18:03 DEBUG wire:63 - >> "Connection: Keep-Alive[\r][\n]"
+2017-11-12 13:18:03 DEBUG wire:63 - >> "[\r][\n]"
+2017-11-12 13:18:03 DEBUG headers:268 - >> POST /api/v2/messages HTTP/1.1
+2017-11-12 13:18:03 DEBUG headers:271 - >> User-Agent: textmagic-rest-java/v2
+2017-11-12 13:18:03 DEBUG headers:271 - >> Accept: application/json
+2017-11-12 13:18:03 DEBUG headers:271 - >> Accept-Charset: utf-8
+2017-11-12 13:18:03 DEBUG headers:271 - >> Accept-Language: en-US
+2017-11-12 13:18:03 DEBUG headers:271 - >> X-TM-Username: calebschumake
+2017-11-12 13:18:03 DEBUG headers:271 - >> X-TM-Key: JrNjtrhgN0C0cK08N1P0iOWZy1O7XI
+2017-11-12 13:18:03 DEBUG headers:271 - >> Content-Length: 76
+2017-11-12 13:18:03 DEBUG headers:271 - >> Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+2017-11-12 13:18:03 DEBUG headers:271 - >> Host: rest.textmagic.com
+2017-11-12 13:18:03 DEBUG headers:271 - >> Connection: Keep-Alive
+2017-11-12 13:18:03 DEBUG wire:77 - >> "phones=17343016126&text=Hi+caleb+schumake%2C+your+account+has+been+approved."
+2017-11-12 13:18:04 DEBUG wire:63 - << "HTTP/1.1 201 Created[\r][\n]"
+2017-11-12 13:18:04 DEBUG wire:63 - << "Date: Sun, 12 Nov 2017 18:18:04 GMT[\r][\n]"
+2017-11-12 13:18:04 DEBUG wire:63 - << "Content-Type: application/json[\r][\n]"
+2017-11-12 13:18:04 DEBUG wire:63 - << "Transfer-Encoding: chunked[\r][\n]"
+2017-11-12 13:18:04 DEBUG wire:63 - << "Connection: keep-alive[\r][\n]"
+2017-11-12 13:18:04 DEBUG wire:63 - << "Set-Cookie: __cfduid=d1a933ca4d1d42f3b5570c0cbaeb63a351510510683; expires=Mon, 12-Nov-18 18:18:03 GMT; path=/; domain=.textmagic.com; HttpOnly[\r][\n]"
+2017-11-12 13:18:04 DEBUG wire:63 - << "Cache-Control: max-age=0, must-revalidate, no-cache, no-store, private[\r][\n]"
+2017-11-12 13:18:04 DEBUG wire:63 - << "Location: https://rest.textmagic.com/api/v2/messages/149637982[\r][\n]"
+2017-11-12 13:18:04 DEBUG wire:63 - << "Strict-Transport-Security: max-age=31536000[\r][\n]"
+2017-11-12 13:18:04 DEBUG wire:63 - << "Server: cloudflare-nginx[\r][\n]"
+2017-11-12 13:18:04 DEBUG wire:63 - << "CF-RAY: 3bcb7ddd785c56bd-IAD[\r][\n]"
+2017-11-12 13:18:04 DEBUG wire:63 - << "[\r][\n]"
+2017-11-12 13:18:04 DEBUG DefaultClientConnection:249 - Receiving response: HTTP/1.1 201 Created
+2017-11-12 13:18:04 DEBUG headers:252 - << HTTP/1.1 201 Created
+2017-11-12 13:18:04 DEBUG headers:255 - << Date: Sun, 12 Nov 2017 18:18:04 GMT
+2017-11-12 13:18:04 DEBUG headers:255 - << Content-Type: application/json
+2017-11-12 13:18:04 DEBUG headers:255 - << Transfer-Encoding: chunked
+2017-11-12 13:18:04 DEBUG headers:255 - << Connection: keep-alive
+2017-11-12 13:18:04 DEBUG headers:255 - << Set-Cookie: __cfduid=d1a933ca4d1d42f3b5570c0cbaeb63a351510510683; expires=Mon, 12-Nov-18 18:18:03 GMT; path=/; domain=.textmagic.com; HttpOnly
+2017-11-12 13:18:04 DEBUG headers:255 - << Cache-Control: max-age=0, must-revalidate, no-cache, no-store, private
+2017-11-12 13:18:04 DEBUG headers:255 - << Location: https://rest.textmagic.com/api/v2/messages/149637982
+2017-11-12 13:18:04 DEBUG headers:255 - << Strict-Transport-Security: max-age=31536000
+2017-11-12 13:18:04 DEBUG headers:255 - << Server: cloudflare-nginx
+2017-11-12 13:18:04 DEBUG headers:255 - << CF-RAY: 3bcb7ddd785c56bd-IAD
+2017-11-12 13:18:04 DEBUG ResponseProcessCookies:122 - Cookie accepted: "[version: 0][name: __cfduid][value: d1a933ca4d1d42f3b5570c0cbaeb63a351510510683][domain: .textmagic.com][path: /][expiry: Mon Nov 12 13:18:03 EST 2018]". 
+2017-11-12 13:18:04 DEBUG DefaultHttpClient:487 - Connection can be kept alive indefinitely
+2017-11-12 13:18:04 DEBUG wire:63 - << "a2[\r][\n]"
+2017-11-12 13:18:04 DEBUG wire:77 - << "{"id":149637982,"href":"\/api\/v2\/messages\/149637982","type":"message","sessionId":90499444,"bulkId":null,"messageId":149637982,"scheduleId":null,"chatId":null}"
+2017-11-12 13:18:04 DEBUG wire:63 - << "[\r][\n]"
+2017-11-12 13:18:04 DEBUG wire:63 - << "0[\r][\n]"
+2017-11-12 13:18:04 DEBUG wire:63 - << "[\r][\n]"
+2017-11-12 13:18:04 DEBUG SingleClientConnManager:267 - Releasing connection org.apache.http.impl.conn.SingleClientConnManager$ConnAdapter@176d53b2
+2017-11-12 13:18:23 DEBUG SingleClientConnManager:212 - Get connection for route HttpRoute[{s}->https://rest.textmagic.com]
+2017-11-12 13:18:23 DEBUG DefaultHttpClient:411 - Stale connection check
+2017-11-12 13:18:23 DEBUG RequestAddCookies:132 - CookieSpec selected: best-match
+2017-11-12 13:18:23 DEBUG RequestAddCookies:184 - Cookie [version: 0][name: __cfduid][value: d1a933ca4d1d42f3b5570c0cbaeb63a351510510683][domain: .textmagic.com][path: /][expiry: Mon Nov 12 13:18:03 EST 2018] match [(secure)rest.textmagic.com:443/api/v2/messages]
+2017-11-12 13:18:23 DEBUG RequestAuthCache:75 - Auth cache not set in the context
+2017-11-12 13:18:23 DEBUG DefaultHttpClient:643 - Attempt 1 to execute request
+2017-11-12 13:18:23 DEBUG DefaultClientConnection:264 - Sending request: POST /api/v2/messages HTTP/1.1
+2017-11-12 13:18:23 DEBUG wire:63 - >> "POST /api/v2/messages HTTP/1.1[\r][\n]"
+2017-11-12 13:18:23 DEBUG wire:63 - >> "User-Agent: textmagic-rest-java/v2[\r][\n]"
+2017-11-12 13:18:23 DEBUG wire:63 - >> "Accept: application/json[\r][\n]"
+2017-11-12 13:18:23 DEBUG wire:63 - >> "Accept-Charset: utf-8[\r][\n]"
+2017-11-12 13:18:23 DEBUG wire:63 - >> "Accept-Language: en-US[\r][\n]"
+2017-11-12 13:18:23 DEBUG wire:63 - >> "X-TM-Username: calebschumake[\r][\n]"
+2017-11-12 13:18:23 DEBUG wire:63 - >> "X-TM-Key: JrNjtrhgN0C0cK08N1P0iOWZy1O7XI[\r][\n]"
+2017-11-12 13:18:23 DEBUG wire:63 - >> "Content-Length: 88[\r][\n]"
+2017-11-12 13:18:23 DEBUG wire:63 - >> "Content-Type: application/x-www-form-urlencoded; charset=UTF-8[\r][\n]"
+2017-11-12 13:18:23 DEBUG wire:63 - >> "Host: rest.textmagic.com[\r][\n]"
+2017-11-12 13:18:23 DEBUG wire:63 - >> "Connection: Keep-Alive[\r][\n]"
+2017-11-12 13:18:23 DEBUG wire:63 - >> "Cookie: __cfduid=d1a933ca4d1d42f3b5570c0cbaeb63a351510510683[\r][\n]"
+2017-11-12 13:18:23 DEBUG wire:63 - >> "Cookie2: $Version=1[\r][\n]"
+2017-11-12 13:18:23 DEBUG wire:63 - >> "[\r][\n]"
+2017-11-12 13:18:23 DEBUG headers:268 - >> POST /api/v2/messages HTTP/1.1
+2017-11-12 13:18:23 DEBUG headers:271 - >> User-Agent: textmagic-rest-java/v2
+2017-11-12 13:18:23 DEBUG headers:271 - >> Accept: application/json
+2017-11-12 13:18:23 DEBUG headers:271 - >> Accept-Charset: utf-8
+2017-11-12 13:18:23 DEBUG headers:271 - >> Accept-Language: en-US
+2017-11-12 13:18:23 DEBUG headers:271 - >> X-TM-Username: calebschumake
+2017-11-12 13:18:23 DEBUG headers:271 - >> X-TM-Key: JrNjtrhgN0C0cK08N1P0iOWZy1O7XI
+2017-11-12 13:18:23 DEBUG headers:271 - >> Content-Length: 88
+2017-11-12 13:18:23 DEBUG headers:271 - >> Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+2017-11-12 13:18:23 DEBUG headers:271 - >> Host: rest.textmagic.com
+2017-11-12 13:18:23 DEBUG headers:271 - >> Connection: Keep-Alive
+2017-11-12 13:18:23 DEBUG headers:271 - >> Cookie: __cfduid=d1a933ca4d1d42f3b5570c0cbaeb63a351510510683
+2017-11-12 13:18:23 DEBUG headers:271 - >> Cookie2: $Version=1
+2017-11-12 13:18:23 DEBUG wire:77 - >> "phones=17343016126&text=Hi+caleb+schumake%2C+your+account+has+been+promoted+to+an+admin."
+2017-11-12 13:18:23 DEBUG wire:63 - << "HTTP/1.1 201 Created[\r][\n]"
+2017-11-12 13:18:23 DEBUG wire:63 - << "Date: Sun, 12 Nov 2017 18:18:23 GMT[\r][\n]"
+2017-11-12 13:18:23 DEBUG wire:63 - << "Content-Type: application/json[\r][\n]"
+2017-11-12 13:18:23 DEBUG wire:63 - << "Transfer-Encoding: chunked[\r][\n]"
+2017-11-12 13:18:23 DEBUG wire:63 - << "Connection: keep-alive[\r][\n]"
+2017-11-12 13:18:23 DEBUG wire:63 - << "Cache-Control: max-age=0, must-revalidate, no-cache, no-store, private[\r][\n]"
+2017-11-12 13:18:23 DEBUG wire:63 - << "Location: https://rest.textmagic.com/api/v2/messages/149637989[\r][\n]"
+2017-11-12 13:18:23 DEBUG wire:63 - << "Strict-Transport-Security: max-age=31536000[\r][\n]"
+2017-11-12 13:18:23 DEBUG wire:63 - << "Server: cloudflare-nginx[\r][\n]"
+2017-11-12 13:18:23 DEBUG wire:63 - << "CF-RAY: 3bcb7e594bd856bd-IAD[\r][\n]"
+2017-11-12 13:18:23 DEBUG wire:63 - << "[\r][\n]"
+2017-11-12 13:18:23 DEBUG DefaultClientConnection:249 - Receiving response: HTTP/1.1 201 Created
+2017-11-12 13:18:23 DEBUG headers:252 - << HTTP/1.1 201 Created
+2017-11-12 13:18:23 DEBUG headers:255 - << Date: Sun, 12 Nov 2017 18:18:23 GMT
+2017-11-12 13:18:23 DEBUG headers:255 - << Content-Type: application/json
+2017-11-12 13:18:23 DEBUG headers:255 - << Transfer-Encoding: chunked
+2017-11-12 13:18:23 DEBUG headers:255 - << Connection: keep-alive
+2017-11-12 13:18:23 DEBUG headers:255 - << Cache-Control: max-age=0, must-revalidate, no-cache, no-store, private
+2017-11-12 13:18:23 DEBUG headers:255 - << Location: https://rest.textmagic.com/api/v2/messages/149637989
+2017-11-12 13:18:23 DEBUG headers:255 - << Strict-Transport-Security: max-age=31536000
+2017-11-12 13:18:23 DEBUG headers:255 - << Server: cloudflare-nginx
+2017-11-12 13:18:23 DEBUG headers:255 - << CF-RAY: 3bcb7e594bd856bd-IAD
+2017-11-12 13:18:23 DEBUG DefaultHttpClient:487 - Connection can be kept alive indefinitely
+2017-11-12 13:18:23 DEBUG wire:63 - << "a2[\r][\n]"
+2017-11-12 13:18:23 DEBUG wire:77 - << "{"id":149637989,"href":"\/api\/v2\/messages\/149637989","type":"message","sessionId":90499451,"bulkId":null,"messageId":149637989,"scheduleId":null,"chatId":null}"
+2017-11-12 13:18:23 DEBUG wire:63 - << "[\r][\n]"
+2017-11-12 13:18:23 DEBUG wire:63 - << "0[\r][\n]"
+2017-11-12 13:18:23 DEBUG wire:63 - << "[\r][\n]"
+2017-11-12 13:18:23 DEBUG SingleClientConnManager:267 - Releasing connection org.apache.http.impl.conn.SingleClientConnManager$ConnAdapter@235834f2
+2017-11-12 13:18:34 TRACE GLOBAL:184 - All data has been serialized.
