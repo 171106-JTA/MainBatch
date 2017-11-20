@@ -2,11 +2,12 @@ package com.revature.main;
 
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 import org.apache.log4j.Logger;
 
+import com.revature.dao.jBankDAO;
+import com.revature.dao.jBankDAOImpl;
 import com.revature.model.account.User;
 import com.revature.model.account.UserLevel;
 
@@ -26,14 +27,20 @@ public class Driver {
 	public final static Logger logger = Logger.getLogger(Driver.class);
 	public static Scanner sc = new Scanner(System.in);
 	public static ObjectOutputStream oos;
-	
 
-	public static void main(String... args) {
+	public static void main(String... args) throws Exception {
+		jBankDAO dao = new jBankDAOImpl();
+		//Connection conn = ConnectionUtil.getConnection();
+		System.out.println("hello");
+		dao.getAllUser();
+		
+		
 		Driver bankSession = new Driver();
 		setBankOn(true);
-		bankSession.welcomePrompt();
+		userAccounts = new ArrayList<>();
 
 		do {
+			bankSession.welcomePrompt();
 			switch (bankSession.getUserChoice()) {
 			case CREATE:
 				bankSession.createAccount();
@@ -58,12 +65,13 @@ public class Driver {
 		User newUser = new User();
 		String firstName;
 		String lastName;
+		jBankDAO dao = new jBankDAOImpl();
 
 		while (!validInfo.equals("yes")) {
-			System.out.println("CREATE_ACCOUNT");
 
+			System.out.println("CREATE_ACCOUNT");
 			do {
-				System.out.print("username: ");
+				System.out.print("username:>");
 				newUser.setUsername(sc.nextLine());
 			} while (checkDupUsername(newUser.getUsername()));
 
@@ -89,19 +97,18 @@ public class Driver {
 
 			// add regex later
 			System.out.println("PIN: ");
-			newUser.setPin(sc.nextLine());
-
+			newUser.setPin(sc.nextInt());
+			sc.nextLine();
 			// take yes or no, yes can be cased anyways but must be typed "YES"
 			// come back to implement function that only takes yes + y variants and no + n
 			// variants,
 			System.out.println(newUser + "\n\nAre these informations correct?(yes/no)");
 			validInfo = sc.nextLine();
 			validInfo = validInfo.toLowerCase();
-
 		}
 		logger.trace("Account created.");
-		userAccounts.add(newUser);
-
+		dao.createUser(newUser);
+		dao.commitQuery();
 	}
 
 	public void welcomePrompt() {

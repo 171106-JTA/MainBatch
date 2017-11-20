@@ -8,7 +8,7 @@ import com.revature.model.transaction.Transaction;
 public interface jBankDAO {
 	public List<User> getAllUser();
 	public List<Transaction> getTransactionsByUID();
-	public boolean addUser(User user);
-	public boolean updateUser(User user);
-	public boolean deleteUserByUID(int uid);
+	public void createUser(User user);
+	public void commitQuery();
+	public User grabUser(String user, String pw);
 }
