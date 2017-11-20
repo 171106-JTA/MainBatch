@@ -231,7 +231,7 @@ public class AdminPage extends Page {
             programReply("[AdminPage.handleRequest] SQL Error while handling request command.");
         }
         catch (NullPointerException | NumberFormatException e) {
-            programReply("Please provide a valid request id. Press 'printreq' to view pending requests and their ids.");
+            programReply("Please provide a valid request id. Enter 'requests' to view pending requests and their ids.");
         }
 
     }

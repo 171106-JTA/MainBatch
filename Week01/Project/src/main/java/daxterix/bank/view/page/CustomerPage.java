@@ -115,7 +115,7 @@ public class CustomerPage extends Page {
             double startingDeposit = Double.parseDouble(depositStr);
             double amtd = Double.parseDouble(depositStr);
             if (amtd < MIN_STARTING_DEPOSIT)
-                System.out.printf("\nStarting deposit must be at least %s.\n\n", MIN_STARTING_DEPOSIT);
+                System.out.printf("\nStarting deposit must be at least $%.2f.\n\n", MIN_STARTING_DEPOSIT);
             else {
                 Account newAcc = new Account(customer.getEmail(), startingDeposit);
                 accountDao.save(newAcc);
@@ -124,7 +124,7 @@ public class CustomerPage extends Page {
             }
         }
         catch (NumberFormatException | NullPointerException e){
-            System.out.printf("\nStarting deposit must be a decimal of at least %s.\n\n", MIN_STARTING_DEPOSIT);
+            System.out.printf("\nStarting deposit must be a decimal of at least %.2f.\n\n", MIN_STARTING_DEPOSIT);
         }
         catch (SQLException e) {
             e.printStackTrace();

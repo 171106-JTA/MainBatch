@@ -15,7 +15,7 @@ public class WelcomePage extends Page{
      */
     @Override
     protected Page _run() {
-        String[] cmds = {"Register as a customer", "Login as a Customer", "Login as an Admin", "View instructions"};
+        String[] cmds = {"Register as a customer", "Login as a customer", "Login as an admin", "View instructions"};
         String[] codes = {"rc", "lc", "la", "help"};
         OutputUtils.printCommands(cmds, codes);
 

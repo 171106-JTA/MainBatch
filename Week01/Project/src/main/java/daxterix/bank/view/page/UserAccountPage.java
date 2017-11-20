@@ -111,10 +111,13 @@ public class UserAccountPage extends Page {
      */
     void handleWithdrawal(double amt) {
         try {
-            myAccount.withdraw(amt);
-            accountDao.update(myAccount);
-            programReply("Withdrawal successful.");
-            printAccountBalance();
+            if (myAccount.withdraw(amt)) {
+                accountDao.update(myAccount);
+                programReply("Withdrawal successful.");
+                printAccountBalance();
+            }
+            else
+                programReply("Nice try, but you cannot withdraw a negative amount or an amount greater than your balance.");
         }
         catch (SQLException e) {
             programReply("[UserAccountPage.deposit] SQL Error while depositing.");
@@ -129,10 +132,14 @@ public class UserAccountPage extends Page {
      */
     void handleDeposit(double amt) {
         try {
-            myAccount.deposit(amt);
-            accountDao.update(myAccount);
-            programReply("Deposit successful.");
-            printAccountBalance();
+            if (myAccount.deposit(amt)) {
+                accountDao.update(myAccount);
+                programReply("Deposit successful.");
+                printAccountBalance();
+            }
+            else {
+                programReply("Cannot deposit a negative amount.");
+            }
         }
         catch (SQLException e) {
             programReply("[UserAccountPage.deposit] SQL Error while depositing.");
@@ -156,7 +163,7 @@ public class UserAccountPage extends Page {
             else if (destAcct.getNumber() == myAccount.getNumber())
                 programReply("You are attempting to transfer between the same account account.");
             else if (!myAccount.withdraw(transferAmt))
-                programReply("Nice try, but you can't transfer more than you own.");
+                programReply("Nice try, but you cannot transfer a negative amount or an amount greater than your balance.");
             else {
                 destAcct.deposit(transferAmt);
                 accountDao.update(destAcct);
@@ -207,7 +214,7 @@ public class UserAccountPage extends Page {
      */
 
     void printAccountBalance() {
-        System.out.printf("\nAccount Balance: %s\n\n", myAccount.getBalance());
+        System.out.printf("\nAccount Balance: %.2f\n\n", myAccount.getBalance());
     }
 
     @Override
