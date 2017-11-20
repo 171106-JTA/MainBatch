@@ -224,7 +224,7 @@ public final class Require {
 	 * @throws RequestException
 	 */
 	public static void requireCheckpoint(String[] checkpoints, String checkpoint, Request request) throws RequestException {
-		int index = Collections.indexOfSubList(Arrays.asList(checkpoints), Arrays.asList(new String[] { checkpoint }));
+		int index = Collections.indexOfSubList(Arrays.asList(checkpoints), Arrays.asList(new String[] { checkpoint.toLowerCase() }));
 		
 		// If we did not find checkpoint
 		if (index < 0) 

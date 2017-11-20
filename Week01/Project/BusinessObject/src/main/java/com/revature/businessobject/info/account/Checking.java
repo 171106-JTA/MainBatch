@@ -15,7 +15,7 @@ public class Checking extends Account {
 	
 	public Checking(long userId, String number, long typeId, long statusId,
 			String created, float balance) {
-		super(userId, number, typeId, statusId, created, Type.CHECKING);
+		super(userId, number, typeId, statusId, created, balance, Type.CHECKING);
 		this.balance = balance;
 	}
 

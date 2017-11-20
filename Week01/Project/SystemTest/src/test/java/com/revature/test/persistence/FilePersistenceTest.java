@@ -67,7 +67,7 @@ public class FilePersistenceTest {
 		values = new FieldParams();
 		admin = new Admin(adminId, adminUsername, adminPassword);
 		customer = new Customer(customerId, customerUsername, customerPassword);
-		adminInfo = new UserInfo(adminId, ssnAdmin, "abc@xyz.com", "12345", "My Street and stuff", null, "bill", "bob", "123456", 0L, 0L,0L);
+		adminInfo = new UserInfo(adminId, ssnAdmin, "abc@xyz.com", "12345", "My Street and stuff", null, "bill", "bob", "123456", 0L, 0L);
 		customerCheckingAcct = new Checking(customerId, checkingId, 0,0,"3", 100.0f);
 		customerCreditAcct = new Credit(customerId, creditId,   0,0,"3", 1500.0f, 3.0f, 2.0f, 4L);
 		FilePersistence.setDirectory(System.getProperty("user.dir") + "\\data\\");

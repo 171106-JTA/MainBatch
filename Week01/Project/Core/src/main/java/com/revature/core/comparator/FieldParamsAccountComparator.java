@@ -49,13 +49,17 @@ public class FieldParamsAccountComparator implements Comparator<Object>{
 				if (result == 0 && fieldParams.containsKey(Account.STATUSID)) 
 					result = fieldParams.get(Account.STATUSID).compareTo(Long.toString(account.getStatusId()));
 				
-				// If checking account
+				if (result == 0 && fieldParams.containsKey(Account.BALANCE)) 
+					result = fieldParams.get(Account.BALANCE).compareTo(Float.toString(account.getBalance()));
+				
+				
+				/*// If checking account
 				if (result == 0 && right instanceof Checking)
 					return checkingComparator.compare(left, right);
 				
 				// If credit account
 				if (result == 0 && right instanceof Credit)
-					return creditComparator.compare(left, right);
+					return creditComparator.compare(left, right);*/
 			}
 		}
 		

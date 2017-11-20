@@ -21,7 +21,7 @@ public class Credit extends Account {
 	public Credit(long userId, String number, long typeId, long statusId,
 			String created, float balance, float minimalPaymentDue,
 			float creditLimit, long rateId) {
-		super(userId, number, typeId, statusId, created, Type.CREDIT);
+		super(userId, number, typeId, statusId, created, balance,  Type.CREDIT);
 		this.balance = balance;
 		this.minimalPaymentDue = minimalPaymentDue;
 		this.creditLimit = creditLimit;

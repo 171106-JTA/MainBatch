@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.revature.businessobject.BusinessObject;
 import com.revature.core.FieldParams;
 import com.revature.core.Resultset;
 import com.revature.persistence.database.util.ConnectionUtil;
@@ -17,16 +18,20 @@ public abstract class DatabaseQuery extends DatabasePersistence {
 		List<String> clause = new ArrayList<String>();
 		PreparedStatement statement = null;
 		String sql = "SELECT * FROM " + validateTableName(name);
-		int size = cnds.size();
 		ResultSet sqlRes = null;
 		Resultset res = null;
 		
+		if (cnds == null)
+			cnds = new FieldParams();
+		
 		try (Connection conn = ConnectionUtil.getConnection();) {
-			for (String key : cnds.keySet())
-				clause.add(key + "=?");
+			for (String key : cnds.keySet()) {
+				if (!key.equals(BusinessObject.SESSIONID))
+					clause.add(key + "=?");
+			}
 			
 			// Append where 
-			if (size > 0)
+			if (clause.size() > 0)
 				sql += " WHERE " + String.join(" AND ", clause);
 			
 			// Set select 

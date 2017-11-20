@@ -1,5 +1,8 @@
 package com.revature.processor;
 
+import java.util.List;
+
+import com.revature.businessobject.info.CodeList;
 import com.revature.businessobject.info.Info;
 import com.revature.businessobject.info.account.Account;
 import com.revature.businessobject.info.account.Type;
@@ -17,7 +20,7 @@ import com.revature.server.session.require.Require;
  * @author Antony Lulciuc
  */
 public class UserProcessor implements Processorable {
-	private static UserRequestHandler URH = new UserRequestHandler();
+	private UserRequestHandler URH = new UserRequestHandler();
 	
 	/**
 	 * Process user request 
@@ -35,7 +38,7 @@ public class UserProcessor implements Processorable {
 				res = URH.login(request);
 				break;
 			case "CREATEUSER":
-				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.NONE }, request);
+				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER, Checkpoint.NONE }, request);
 				Require.requireAllTransaction(new String[] { User.USERNAME,  User.PASSWORD }, request);
 				res = URH.createUser(request);
 				break;
@@ -65,7 +68,7 @@ public class UserProcessor implements Processorable {
 				break;
 			case "SETUSERINFO":
 				Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER },  request);
-				Require.requireAllTransaction(new String[] { UserInfo.ADDRESS1, UserInfo.EMAIL, UserInfo.PHONENUMBER },  request);
+				Require.requireTransaction(new String[] { UserInfo.STATUSID, UserInfo.ADDRESS1, UserInfo.EMAIL, UserInfo.PHONENUMBER },  request);
 				res = URH.setUserInfo(request);
 				break;
 			case "CREATECHECKINGACCOUNT":

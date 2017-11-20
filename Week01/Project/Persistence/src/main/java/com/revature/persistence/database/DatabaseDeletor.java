@@ -24,11 +24,12 @@ public abstract class DatabaseDeletor extends DatabaseInsertor {
 		int total = 0;
 		
 		try (Connection conn = ConnectionUtil.getConnection();) {
-			for (String key : cnds.keySet()) 
-				params.add(key + "=?");
-			
+			for (String key : cnds.keySet())  {
+				if (!key.equals(BusinessObject.SESSIONID))
+					params.add(key + "=?");
+			}
 			if (params.size() > 0) 
-				sql += " WHERE " + String.join(",", params);
+				sql += " WHERE " + String.join(" AND ", params);
 			
 			
 			statement = conn.prepareStatement(sql);

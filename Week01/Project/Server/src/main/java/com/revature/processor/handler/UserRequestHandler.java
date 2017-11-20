@@ -1,14 +1,18 @@
 package com.revature.processor.handler;
 
-import java.util.Arrays;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.revature.businessobject.BusinessObject;
+import com.revature.businessobject.info.CodeList;
 import com.revature.businessobject.info.Info;
 import com.revature.businessobject.info.account.Account;
 import com.revature.businessobject.info.account.Status;
 import com.revature.businessobject.info.account.Type;
-import com.revature.businessobject.info.account.Checking;
-import com.revature.businessobject.info.account.Credit;
+import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.Checkpoint;
 import com.revature.businessobject.user.User;
 import com.revature.core.BusinessClass;
@@ -16,7 +20,7 @@ import com.revature.core.FieldParams;
 import com.revature.core.Request;
 import com.revature.core.Resultset;
 import com.revature.core.exception.RequestException;
-import com.revature.processor.handler.helper.GenericHelper;
+import com.revature.persistence.database.util.ConnectionUtil;
 import com.revature.server.Server;
 import com.revature.server.session.require.Require;
 
@@ -25,6 +29,14 @@ import com.revature.server.session.require.Require;
  * @author Antony Lulciuc
  */
 public final class UserRequestHandler {
+	private static List<CodeList> userCheckpoints;
+	private static List<CodeList> accountStatus;
+	private static List<CodeList> accountType;
+
+	public UserRequestHandler() { 
+		
+	}
+	
 	
 	/**
 	 * Performs select query on database for user with specified username and password
@@ -34,9 +46,26 @@ public final class UserRequestHandler {
 	public Resultset login(Request request) throws RequestException {
 		Resultset res = Server.database.select(BusinessClass.USER, request.getQuery());
 		
+		if (userCheckpoints == null)
+			init();
+		
 		// If user found then validate checkpoint 
 		if (res.size() > 0) {
 			User user = (User) res.get(0);
+			FieldParams params = new FieldParams();
+			Resultset data;
+			UserInfo info;
+			
+			params.put(UserInfo.USERID, Long.toString(user.getId()));
+			data = Server.database.select(BusinessClass.USERINFO, params);
+			
+			if (data.size() > 0) {
+				info = (UserInfo)data.get(0);
+				user.setCheckpoint(getCodeListById(userCheckpoints, info.getStatusId()).getValue().toLowerCase());
+			} else {
+				user.setCheckpoint(Checkpoint.NONE);
+			}
+			
 			Require.requireCheckpoint(new String[] { Checkpoint.ADMIN, Checkpoint.CUSTOMER, 
 					Checkpoint.PENDING, Checkpoint.NONE }, user.getCheckpoint(), request);
 		}
@@ -54,23 +83,12 @@ public final class UserRequestHandler {
 	 * @return modified record count should equal 1
 	 */
 	public Resultset createUser(Request request) throws RequestException {
-		BusinessObject user = GenericHelper.getLargest(BusinessClass.USER, Arrays.asList(new String[] { User.ID }));
-		FieldParams transact = request.getTransaction();
-		FieldParams verify = new FieldParams();
+		FieldParams trans = request.getTransaction();
+		int total = 0;
 		
-		// Ensure data does not already exist in the database 
-		verify.put(User.USERNAME, transact.get(User.USERNAME));
-		Require.requireUnique(BusinessClass.USER, verify, request);
+		total = Server.database.insert(BusinessClass.USER, trans);
 		
-		// Update User id
-		transact.put(User.ID, user != null ? Long.toString(((User)user).getId() + 1) : "0");
-		
-		// If non-admin then set account to pending 
-		if (!request.getCheckpoint().equals(Checkpoint.ADMIN)) 
-			transact.put(User.CHECKPOINT, Checkpoint.PENDING);
-		
-		// Insert user 
-		return new Resultset(Server.database.insert(BusinessClass.USER, request.getTransaction()));
+		return new Resultset(total);
 	}
 	
 	/**
@@ -79,7 +97,11 @@ public final class UserRequestHandler {
 	 * @return total number of records removed 
 	 */
 	public Resultset deleteUser(Request request) {
+		FieldParams info = new FieldParams();
+		FieldParams accounts = new FieldParams();
 		FieldParams userdata = new FieldParams();
+		Resultset res;
+		Account acct;
 		String userid;
 		int total;
 		
@@ -92,12 +114,28 @@ public final class UserRequestHandler {
 		}
 		
 		// set parameters needed to remove user data
-		userdata.put(Info.USERID, userid);
 		userdata.put(User.ID, userid);
+		info.put(Info.USERID, userid);
+		
+		// get accounts 
+		res = Server.database.select(BusinessClass.ACCOUNT, info);
+		
+		// If content found delete all account data
+		if (res.size() > 0) {
+			for (BusinessObject object : res) {
+				acct = (Account)object;
+				accounts.put(Account.NUMBER, acct.getNumber());
+				
+				// delete all accounts
+				Server.database.delete(BusinessClass.CHECKING, accounts);
+				Server.database.delete(BusinessClass.CREDIT, accounts);
+				Server.database.delete(BusinessClass.ACCOUNT, accounts);
+			}
+		}
+		
 		
 		// Remove all records associated with this id
-		total = Server.database.delete(BusinessClass.USERINFO, userdata);
-		total += Server.database.delete(BusinessClass.ACCOUNT, userdata);
+		total = Server.database.delete(BusinessClass.USERINFO, info);
 		total += Server.database.delete(BusinessClass.USER, userdata);
 		
 		return new Resultset(total);
@@ -109,10 +147,48 @@ public final class UserRequestHandler {
 	 * @return 0 to n user records
 	 */
 	public Resultset getUser(Request request) throws RequestException {
+		FieldParams query = request.getQuery();
+		FieldParams params = new FieldParams();
+		Resultset data;
+		UserInfo info;
+		Resultset res;
+		CodeList codelist;
+		User user;
+		
 		if (!request.getCheckpoint().equals(Checkpoint.ADMIN))
 			Require.requireSelfQuery(request);
 		
-		return Server.database.select(BusinessClass.USER, request.getQuery());
+		if (query.get(User.CHECKPOINT) != null) {
+			res = new Resultset();
+			codelist = getCodeListByValue(userCheckpoints, query.get(User.CHECKPOINT));
+			params.put(UserInfo.STATUSID, Long.toString(codelist.getId()));
+			data = Server.database.select(BusinessClass.USERINFO, params);
+			
+			for (BusinessObject object : data) {
+				params.clear();
+				params.put(User.ID, Long.toString(((UserInfo)object).getUserId()));
+				res.addAll(Server.database.select(BusinessClass.USER, params));
+			}
+		} else {
+			res = Server.database.select(BusinessClass.USER, request.getQuery());
+		}
+		
+		for (BusinessObject item : res) {
+			params.clear();
+			
+			user = (User)item;
+			params.put(UserInfo.USERID, Long.toString(user.getId()));
+			data = Server.database.select(BusinessClass.USERINFO, params);
+			
+			if (data.size() > 0) {
+				info = (UserInfo)data.get(0);
+				user.setCheckpoint(getCodeListById(userCheckpoints, info.getStatusId()).getValue().toLowerCase());
+			} else {
+				user.setCheckpoint(Checkpoint.PENDING);
+			}	
+		}
+		
+		return res;
 	}
 	
 	/**
@@ -140,10 +216,9 @@ public final class UserRequestHandler {
 		// If user account Ensure they are updating their account only 
 		if (!request.getCheckpoint().equals(Checkpoint.ADMIN)) {
 			Require.requireSelfQuery(request);
-			
-			// Users are not allowed to update checkpoints 
-			trans.remove(User.CHECKPOINT);
-		}
+		} 
+		
+		trans.remove(User.CHECKPOINT);
 		
 		// Ensure we do not change user id
 		trans.remove(User.ID);
@@ -163,18 +238,32 @@ public final class UserRequestHandler {
 	 * @throws RequestException
 	 */
 	public Resultset createUserInfo(Request request) throws RequestException {
-		FieldParams conditions = new FieldParams();
+		FieldParams loc = new FieldParams();
+		FieldParams trans = request.getTransaction();
+		Resultset res;
+		CodeList item;
 		
-		// UserInfo record must not exist 
-		Require.requireUnique(BusinessClass.USERINFO, request.getTransaction(), request);
+		loc.put(CodeList.CODE, "CITY-CODE-GROUP");
+		loc.put(CodeList.VALUE, trans.get(UserInfo.STATE));
+		loc.put(CodeList.DESCRIPTION, trans.get(UserInfo.CITY));
+		res = Server.database.select(BusinessClass.CODELIST, loc);
 		
-		// Set condition params
-		conditions.put(User.ID, Long.toString(request.getUserId()));
+		if (res.size() == 0)
+			return null;
 		
-		// User account must exist before it can be created 
-		Require.requireExists(BusinessClass.USER, conditions, request);
+		item = (CodeList)res.get(0);
+		trans.put(UserInfo.STATECITYID, Long.toString(item.getId()));
+		trans.remove(UserInfo.STATE);
+		trans.remove(UserInfo.CITY);
 		
-		return new Resultset(Server.database.insert(BusinessClass.USERINFO, request.getTransaction()));
+		for (CodeList record : userCheckpoints) {
+			if ("pending".equals(record.getValue().toLowerCase())) {
+				trans.put(UserInfo.STATUSID, Long.toString(record.getId()));
+				break;
+			}
+		}
+		
+		return new Resultset(Server.database.insert(BusinessClass.USERINFO, trans));
 	}
 	
 	/**
@@ -184,11 +273,23 @@ public final class UserRequestHandler {
 	 * @throws RequestException
 	 */
 	public Resultset getUserInfo(Request request) throws RequestException { 
+		Resultset res;
+		UserInfo info;
+		CodeList item;
+		
 		// For NON-ADMINS only personal account information should be accessible 
 		if (!request.getCheckpoint().equals(Checkpoint.ADMIN)) 
 			Require.requireSelfQuery(request);
 		
-		return Server.database.select(BusinessClass.USERINFO, request.getQuery());
+		res = Server.database.select(BusinessClass.USERINFO, request.getQuery());
+		
+		for (BusinessObject object : res) {
+			info = (UserInfo)object;
+			item = getCodeListById(userCheckpoints, info.getStatusId());
+			info.setStatus(item.getValue());
+		}
+		
+		return res;
 	}
 	
 	/**
@@ -213,6 +314,11 @@ public final class UserRequestHandler {
 		// We are not allowed to change the userid
 		transact.remove(Info.USERID);
 		
+		if (transact.get(UserInfo.STATUSID) != null) {
+			CodeList item = getCodeListByValue(userCheckpoints, transact.get(UserInfo.STATUSID));
+			transact.put(UserInfo.STATUSID, Long.toString(item.getId()));
+		}
+		
 		return new Resultset(Server.database.update(BusinessClass.USERINFO, query, transact));
 	}
 	
@@ -228,35 +334,25 @@ public final class UserRequestHandler {
 	 * @throws RequestException
 	 */
 	public Resultset createAccount(Request request, String type) throws RequestException {
-		FieldParams transact = new FieldParams();
-		BusinessObject largest;
-		String number;
+		CallableStatement stat = null;
+		String sql = "{call create_account(?,?,?,?)}";
+		int total = 0;
 		
-		// Get account number 
-		largest = GenericHelper.getLargest(BusinessClass.ACCOUNT, Arrays.asList(new String[] { Account.NUMBER }));
-		number = largest == null ? "0" : Long.toString(((Account)largest).getNumber() + 1);
-		
-		// Set account details
-		transact.put(Info.USERID, Long.toString(request.getUserId()));
-		transact.put(Account.TYPEID, type);
-		transact.put(Account.STATUSID, Status.PENDING);
-		transact.put(Account.NUMBER, number);
-
-		switch (type) {
-			case Type.CHECKING:
-				transact.put(Checking.BALANCE, Float.toString(0.0f));
-				break;
-			case Type.CREDIT:
-				transact.put(Credit.TOTAL, Float.toString(0.0f));
-				transact.put(Credit.INTEREST, Float.toString(0.0f));
-				transact.put(Credit.CREDITLIMIT, Float.toString(0.0f));
-				break;
-			default:
-				throw new RequestException(request, "Unknown account type=[\'" + type + "\']!");	
+		try (Connection conn = ConnectionUtil.getConnection();) {
+			stat = conn.prepareCall(sql);
+			stat.setLong(1, request.getUserId());
+			stat.setString(2,  Status.PENDING);
+			stat.setString(3, "checking");
+			stat.setString(4, null);
+			stat.executeQuery();
+			total = 1;
+		} catch (SQLException e) {
+			
+		} finally {
+			ConnectionUtil.close(stat);
 		}
 		
-		
-		return new Resultset(Server.database.insert(BusinessClass.ACCOUNT, transact));
+		return new Resultset(total);
 	}
 	
 	/**
@@ -266,11 +362,18 @@ public final class UserRequestHandler {
 	 * @throws RequestException
 	 */
 	public Resultset deleteAccount(Request request) throws RequestException {
+		FieldParams params = new FieldParams();
+		int total = 0;
 		// If non-admin account, then we should be deleting own account ONLY
 		if (!request.getCheckpoint().equals(Checkpoint.ADMIN))
 			Require.requireSelfQuery(request);
 			
-		return new Resultset(Server.database.delete(BusinessClass.ACCOUNT, request.getQuery()));
+		params.put(Account.NUMBER, request.getQuery().get(Account.NUMBER));
+		total = Server.database.delete(BusinessClass.CHECKING, params);
+		total += Server.database.delete(BusinessClass.CREDIT, params);
+		total += Server.database.delete(BusinessClass.ACCOUNT, request.getQuery());
+		
+		return new Resultset(total);
 	}
 	
 	/**
@@ -280,11 +383,48 @@ public final class UserRequestHandler {
 	 * @throws RequestException
 	 */
 	public Resultset getAccount(Request request) throws RequestException {
-		// For NON-ADMINS only personal account information should be accessible 
-		if (!request.getCheckpoint().equals(Checkpoint.ADMIN)) 
+		FieldParams query = request.getQuery();
+		FieldParams params = new FieldParams();
+		Resultset data;
+		Account acct;
+		Resultset res;
+		CodeList codelist;
+		Resultset accounts;
+		
+		if (!request.getCheckpoint().equals(Checkpoint.ADMIN))
 			Require.requireSelfQuery(request);
+		
+		if (query.get(Account.STATUSID) != null) {
+			res = new Resultset();
+			codelist = getCodeListByValue(accountStatus, query.get(Account.STATUSID));
+			params.put(Account.STATUSID, Long.toString(codelist.getId()));
+			data = Server.database.select(BusinessClass.ACCOUNT, params);
+			
+			for (BusinessObject object : data) {
+				params.clear();
+				params.put(Account.USERID, Long.toString(((Account)object).getUserId()));
+				res.addAll(accounts = Server.database.select(BusinessClass.ACCOUNT, params));
 				
-		return Server.database.select(BusinessClass.ACCOUNT, request.getQuery());
+				for (BusinessObject account : accounts) {
+					codelist = getCodeListById(accountType, ((Account)account).getTypeId());
+					((Account)account).setType("checking");
+				}
+			}
+		} else {
+			res = Server.database.select(BusinessClass.ACCOUNT, request.getQuery());
+		}
+		
+		for (BusinessObject item : res) {
+			params.clear();
+			
+			acct = (Account)item;
+			params.put(Account.STATUSID, Long.toString(acct.getStatusId()));
+			codelist = getCodeListById(accountStatus, acct.getStatusId());
+			acct.setStatus(codelist.getValue());
+			acct.setType("checking");
+		}
+		
+		return res;
 	}
 	
 	/**
@@ -297,15 +437,40 @@ public final class UserRequestHandler {
 	 */
 	public Resultset getAccount(Request request, String type) throws RequestException {
 		FieldParams query = request.getQuery();
+		FieldParams params = new FieldParams();
+		Resultset data;
+		Account acct;
+		Resultset res;
+		CodeList codelist;
 		
-		// For NON-ADMINS only personal account information should be accessible 
-		if (!request.getCheckpoint().equals(Checkpoint.ADMIN)) 
+		if (!request.getCheckpoint().equals(Checkpoint.ADMIN))
 			Require.requireSelfQuery(request);
-				
-		// Set type of account we are looking for 
-		query.put(Account.TYPEID, type);
-	
-		return Server.database.select(BusinessClass.ACCOUNT, query);
+		
+		if (query.get(Account.STATUSID) != null) {
+			res = new Resultset();
+			codelist = getCodeListByValue(accountStatus, query.get(Account.STATUSID));
+			params.put(Account.STATUSID, Long.toString(codelist.getId()));
+			data = Server.database.select(BusinessClass.ACCOUNT, params);
+			
+			for (BusinessObject object : data) {
+				params.clear();
+				params.put(User.ID, Long.toString(((UserInfo)object).getUserId()));
+				res.addAll(Server.database.select(BusinessClass.ACCOUNT, params));
+			}
+		} else {
+			res = Server.database.select(BusinessClass.ACCOUNT, request.getQuery());
+		}
+		
+		for (BusinessObject item : res) {
+			params.clear();
+			
+			acct = (Account)item;
+			params.put(Account.STATUSID, Long.toString(acct.getStatusId()));
+			codelist = getCodeListById(accountStatus, acct.getStatusId());
+			acct.setStatus(codelist.getValue());
+		}
+		
+		return res;
 	}
 	
 	/**
@@ -317,8 +482,75 @@ public final class UserRequestHandler {
 		FieldParams transact = new FieldParams();
 		
 		// Ensure we are only updating account status 
-		transact.put(Account.STATUSID, request.getTransaction().get(Account.STATUSID));
+		transact.put(Account.STATUSID, Long.toString(getCodeListByValue(accountStatus, request.getTransaction().get(Account.STATUSID)).getId()));
 		
 		return new Resultset(Server.database.update(BusinessClass.ACCOUNT, request.getQuery(), transact));
 	}
+
+	///
+	//	PRIVATE METHODS
+	///
+	
+	private void init() {
+		FieldParams params = new FieldParams();
+		Resultset res;
+		
+		// init checkpoint/status data
+		userCheckpoints = new ArrayList<>();
+		params.put(CodeList.CODE, "USER-STATUS");
+		
+		// get data
+		res = Server.database.select(BusinessClass.CODELIST, params);
+		
+		for (BusinessObject object : res) 
+			userCheckpoints.add((CodeList)object);	
+
+		// init status data
+		accountStatus = new ArrayList<>();
+		params.put(CodeList.CODE, "ACCOUNT-STATUS");
+		
+		// get data
+		res = Server.database.select(BusinessClass.CODELIST, params);
+				
+		for (BusinessObject object : res) 
+			accountStatus.add((CodeList)object);
+		
+		// init TYPE data
+		accountType = new ArrayList<>();
+		params.put(CodeList.CODE, "ACCOUNT-TYPE");
+		
+		// get data
+		res = Server.database.select(BusinessClass.CODELIST, params);
+				
+		for (BusinessObject object : res) 
+			accountType.add((CodeList)object);	
+	}
+	
+	
+	private CodeList getCodeListById(List<CodeList> list, long id) {
+		CodeList code = null;
+		
+		for (CodeList item : list) {
+			if (item.getId() == id) {
+				code = item;
+				break;
+			}
+		}
+		
+		return code;
+	}
+	
+	private CodeList getCodeListByValue(List<CodeList> list, String value) {
+		CodeList code = null;
+		
+		for (CodeList item : list) {
+			if (item.getValue().equals(value.toUpperCase())) {
+				code = item;
+				break;
+			}
+		}
+		
+		return code;
+	}
+	
 }

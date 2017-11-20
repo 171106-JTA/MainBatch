@@ -36,11 +36,13 @@ public abstract class DatabasePersistence implements Persistenceable {
 			case BusinessClass.USERINFO:
 				return BankTable.USERINFO;
 			case BusinessClass.CREDIT:
-				return BankTable.CREDIT_ACCOUNT_VIEW;
+				return BankTable.CREDIT_ACCOUNT;
 			case BusinessClass.CHECKING:
-				return BankTable.CHECKING_ACCOUNT_VIEW;
+				return BankTable.CHECKING_ACCOUNT;
 			case BusinessClass.ACCOUNT:
 				return BankTable.ACCOUNT;
+			case BusinessClass.CODELIST:
+				return BankTable.CODELIST;
 			default:
 				return null;
 		}

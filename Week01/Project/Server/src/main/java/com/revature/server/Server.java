@@ -1,16 +1,10 @@
 package com.revature.server;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.revature.businessobject.BusinessObject;
-import com.revature.businessobject.info.user.UserInfo;
-import com.revature.businessobject.user.Admin;
-import com.revature.businessobject.user.Checkpoint;
 import com.revature.businessobject.user.User;
 import com.revature.core.FieldParams;
 import com.revature.core.Request;
@@ -18,7 +12,7 @@ import com.revature.core.Resultset;
 import com.revature.core.exception.RequestException;
 import com.revature.core.factory.FieldParamsFactory;
 import com.revature.persistence.Persistenceable;
-import com.revature.persistence.file.FileDataManager;
+import com.revature.persistence.database.DatabaseManager;
 import com.revature.route.RequestRouter;
 import com.revature.route.Routeable;
 import com.revature.server.session.Session;
@@ -29,7 +23,7 @@ import com.revature.server.session.Session;
  */
 public class Server implements Runnable {
 	public static Routeable router = new RequestRouter();
-	public static Persistenceable database = FileDataManager.getManager();
+	public static Persistenceable database = DatabaseManager.getManager();
 	public static Logger logger = Logger.getLogger(Server.class);
 	
 	// Active sessions for Server
@@ -42,10 +36,9 @@ public class Server implements Runnable {
 	private boolean runThread = true;
 	
 	/**
-	 * No args constructor - Initializes default admin user 
+	 * No args constructor
 	 */
 	public Server() {
-		initBoss();
 	}
 	
 	/**
@@ -197,42 +190,8 @@ public class Server implements Runnable {
 		}
 	}
 	
+	
 	///
 	//	PRIVATE METHODS 
 	///
-	
-	/**
-	 * Initialize default user TODO remove method and store process locally 
-	 */
-	private void initBoss() {
-		FieldParams query = new FieldParams();
-		List<BusinessObject> bigboss = null;
-		Request request;
-
-		// Attempt to load existing data 
-		database.setup(null);
-		
-		// Set query params
-		query.put(User.ID, "0");
-		query.put(User.USERNAME, "big.boss");
-		
-		// Build request to attempt to find Boss
-		request = new Request(0, 0, "USER", "GETUSER", query, null);
-		request.setCheckpoint(Checkpoint.ADMIN);
-		
-		try {
-			// If account not found then create
-			if (router.handleRequest(request).size() == 0) {
-				bigboss = new ArrayList<>();
-				bigboss.add(new Admin(0, "big.boss", "master"));
-				bigboss.add(new UserInfo(0, "big.boss@mybank.com", "34123 Mybank St., 14356 Pluto", "1234567890"));
-				bigboss.add(new User(1, "guest", "guest", Checkpoint.NONE));
-			}
-		} catch (RequestException e) {
-			// TODO log
-		}
-		
-		// Perform database initialization
-		database.setup(bigboss);
-	}
 }

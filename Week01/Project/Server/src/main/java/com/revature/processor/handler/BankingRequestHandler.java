@@ -1,6 +1,12 @@
 package com.revature.processor.handler;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.revature.businessobject.BusinessObject;
+import com.revature.businessobject.info.CodeList;
 import com.revature.businessobject.info.Info;
+import com.revature.businessobject.info.account.Account;
 import com.revature.businessobject.info.account.Checking;
 import com.revature.businessobject.info.account.Status;
 import com.revature.businessobject.info.account.Transaction;
@@ -17,6 +23,9 @@ import com.revature.server.Server;
  * @author Antony Lulciuc
  */
 public final class BankingRequestHandler {
+	List<CodeList> accountStatus;
+	
+	
 	/**
 	 * Attempts to add funds to account
 	 * @param request - must define query and transaction
@@ -26,9 +35,13 @@ public final class BankingRequestHandler {
 	public Resultset checkingAddFunds(Request request) throws RequestException {
 		FieldParams transact = request.getTransaction();
 		FieldParams query = request.getQuery();
-		Checking account;
+		Account account;
 		Resultset data;
 		float amount;
+		
+		if (accountStatus == null) {
+			init();
+		}
 		
 		try {
 			// Ensure we are adding a numerical value
@@ -43,20 +56,23 @@ public final class BankingRequestHandler {
 		else {
 			// Set session user id as id
 			query.put(Info.USERID, Long.toString(request.getUserId()));
+			query.remove(Account.BALANCE);
 			
 			// Get current account 
 			if ((data = Server.database.select(BusinessClass.ACCOUNT, query)).size() == 0)
 					throw new RequestException(request, "Account not found!");
 			
 			// Ensure account is active
-			if (!(account = (Checking)data.get(0)).getStatus().equals(Status.ACTIVE))
+			if (!getCodeListById(accountStatus, ((account = (Account)data.get(0)).getStatusId())).getValue().toLowerCase().equals(Status.ACTIVE))
 				throw new RequestException(request, "Account must be activated before use!");		
 			
 			// Perform calculation
 			amount += account.getBalance();
 			
+			transact.clear();
+			
 			// Update account total
-			transact.put(Checking.BALANCE, StringFormater.currency(amount));
+			transact.put(Account.BALANCE, StringFormater.currency(amount));
 			
 			// Update account
 			return new Resultset(Server.database.update(BusinessClass.ACCOUNT, request.getQuery(), transact));
@@ -72,9 +88,13 @@ public final class BankingRequestHandler {
 	public Resultset checkingRemoveFunds(Request request) throws RequestException {
 		FieldParams transact = request.getTransaction();
 		FieldParams query = request.getQuery();
-		Checking account;
+		Account account;
 		Resultset data;
 		float amount;
+		
+		if (accountStatus == null) {
+			init();
+		}
 		
 		try {
 			// Ensure we are adding a numerical value
@@ -89,13 +109,14 @@ public final class BankingRequestHandler {
 		else {
 			// Set session user id as id
 			query.put(Info.USERID, Long.toString(request.getUserId()));
+			query.remove(Account.BALANCE);
 			
 			// Get current account 
 			if ((data = Server.database.select(BusinessClass.ACCOUNT, query)).size() == 0)
 					throw new RequestException(request, "Account not found!");
 			
 			// Ensure account is active
-			if (!(account = (Checking)data.get(0)).getStatus().equals(Status.ACTIVE))
+			if (!getCodeListById(accountStatus, ((account = (Account)data.get(0)).getStatusId())).getValue().toLowerCase().equals(Status.ACTIVE))
 				throw new RequestException(request, "Account must be activated before use!");
 			
 			// Perform calculation
@@ -105,6 +126,8 @@ public final class BankingRequestHandler {
 			if (amount < 0.0f)
 				throw new RequestException(request, "You do not have enough funds to preform transaction!");
 			
+			transact.clear();
+			
 			// Update account total
 			transact.put(Checking.BALANCE, StringFormater.currency(amount));
 			
@@ -112,4 +135,48 @@ public final class BankingRequestHandler {
 			return new Resultset(Server.database.update(BusinessClass.ACCOUNT, request.getQuery(), transact));
 		}
 	}
+	
+	
+	private void init() {
+		FieldParams params = new FieldParams();
+		Resultset res;
+		
+		// init status data
+		accountStatus = new ArrayList<>();
+		params.put(CodeList.CODE, "ACCOUNT-STATUS");
+		
+		// get data
+		res = Server.database.select(BusinessClass.CODELIST, params);
+				
+		for (BusinessObject object : res) 
+			accountStatus.add((CodeList)object);
+	}
+	
+	
+	private CodeList getCodeListById(List<CodeList> list, long id) {
+		CodeList code = null;
+		
+		for (CodeList item : list) {
+			if (item.getId() == id) {
+				code = item;
+				break;
+			}
+		}
+		
+		return code;
+	}
+	
+	private CodeList getCodeListByValue(List<CodeList> list, String value) {
+		CodeList code = null;
+		
+		for (CodeList item : list) {
+			if (item.getValue().equals(value.toUpperCase())) {
+				code = item;
+				break;
+			}
+		}
+		
+		return code;
+	}
+	
 }

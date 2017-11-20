@@ -35,12 +35,13 @@ public class AccountBuilder implements BusinessObjectBuilder {
 			try {
 				switch (args.get(Account.TYPEID)) {
 					case Type.CHECKING:
-						object =  new Checking(Long.parseLong(args.get(Checking.USERID)), 
+						object =  new Account(Long.parseLong(args.get(Checking.USERID)), 
 											args.get(Checking.NUMBER),
 											Long.parseLong(args.get(Checking.TYPEID)),
 											Long.parseLong(args.get(Checking.STATUSID)),
 											args.get(Checking.CREATED),
-											Float.parseFloat(args.get(Checking.BALANCE)));
+											Float.parseFloat(args.get(Checking.BALANCE)),
+											Type.CHECKING);
 						break;
 					case Type.CREDIT:
 						object =  new Credit(Long.parseLong(args.get(Credit.USERID)), 
@@ -70,7 +71,7 @@ public class AccountBuilder implements BusinessObjectBuilder {
 		try {
 			while (res.next()) {
 				acct = new Account(res.getLong(Account.USERID), res.getString(Account.NUMBER), res.getLong(Account.TYPEID),
-						res.getLong(Account.STATUSID), res.getString(Account.CREATED), Type.ACCOUNT);
+						res.getLong(Account.STATUSID), res.getString(Account.CREATED), res.getFloat(Account.BALANCE), Type.ACCOUNT);
 				
 				data.add(acct);
 			}
@@ -97,7 +98,7 @@ public class AccountBuilder implements BusinessObjectBuilder {
 		
 		switch (args.get(Account.TYPEID)) {
 			case Type.CHECKING:
-				result = result && args.get(Checking.BALANCE) != null;
+				result = result && args.get(Account.BALANCE) != null;
 				break;
 			case Type.CREDIT:
 				result = result && args.get(Credit.BALANCE) != null;

@@ -1,6 +1,7 @@
 package com.revature.app;
 import com.revature.app.view.AdminView;
 import com.revature.app.view.CustomerView;
+import com.revature.businessobject.info.CodeList;
 import com.revature.businessobject.info.account.Account;
 import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.Checkpoint;
@@ -98,19 +99,12 @@ public class MyBank {
 	 */
 	public static void createAccount() {
 		FieldParams params = new FieldParams();
-		Resultset res;
+		FieldParams info = new FieldParams();
 		String username;
 		String password;
-		String email;
-		String address;
-		String phonenumber;
+		Resultset res;
 		
 		Menu.printCreateUserMenu();
-		username = Menu.getInput("Usename: ");
-		password = Menu.getInput("Password: ");
-		email = Menu.getInput("Email: ");
-		address = Menu.getInput("Address: ");
-		phonenumber = Menu.getInput("Phonenumber: ");
 		
 		// Sign in as guest
 		signin("guest", "guest");
@@ -118,8 +112,19 @@ public class MyBank {
 		if (data != null) {
 			// Set new user params
 			params.put(User.SESSIONID, data.get(User.SESSIONID));
-			params.put(User.USERNAME, username);
-			params.put(User.PASSWORD, password);
+			params.put(User.USERNAME, username = Menu.getInput("Usename: "));
+			params.put(User.PASSWORD, password = Menu.getInput("Password: "));
+			info.put(User.SESSIONID, data.get(User.SESSIONID));
+			info.put(UserInfo.FIRSTNAME, Menu.getInput("First name: "));
+			info.put(UserInfo.LASTNAME, Menu.getInput("Last name: "));
+			info.put(UserInfo.SSN, Menu.getInput("SSN: "));
+			info.put(UserInfo.EMAIL, Menu.getInput("Email: "));
+			info.put(UserInfo.PHONENUMBER, Menu.getInput("Phonenumber: "));
+			info.put(UserInfo.ADDRESS1, Menu.getInput("Address 1: "));
+			info.put(UserInfo.ADDRESS2, Menu.getInput("Address 2: "));
+			info.put(UserInfo.STATE, Menu.getInput("State: "));
+			info.put(UserInfo.CITY, Menu.getInput("City: "));
+			info.put(UserInfo.POSTALCODE, Menu.getInput("Zip: "));
 			
 			Menu.print("\n\tAttempting to create account...");
 			
@@ -128,48 +133,27 @@ public class MyBank {
 				Menu.println("fail!\n");
 				Menu.println("\t\terror:>" + res.getException().getMessage() + "\n");	
 			} else {
-				Menu.print("done\n\tAttempting to create user info...");
+				Menu.print("done\n");
 				
 				// Close guest account
 				server.kill(Integer.parseInt(data.get(User.SESSIONID)));
 				
 				// login in account
 				signin(username, password);
+				info.put(User.SESSIONID, data.get(User.SESSIONID));
+				info.put(UserInfo.USERID, data.get(User.ID));
 				
-				// Set userinfo data
-				params.clear();
-				params.put(UserInfo.USERID, data.get(User.ID));
-				params.put(User.SESSIONID, data.get(User.SESSIONID));
-				params.put(UserInfo.EMAIL, email);
-				params.put(UserInfo.ADDRESS, address);
-				params.put(UserInfo.PHONENUMBER, phonenumber);
-				
-				// Did we fail to create user information?
-				if ((res = send(new Request(data, Routes.USER, "CREATEUSERINFO", null, params))).getRecordsModified() == 0) {
-					Menu.println("fail!");
-					Menu.println("\n\t\terror:>" + res.getException().getMessage() + "\n");
-					Menu.print("\tAttempting rollback...");
-					params.clear();
-					params.put(User.ID, data.get(User.ID));
-					params.put(User.USERNAME, data.get(User.USERNAME));
-					params.put(User.PASSWORD, data.get(User.PASSWORD));
-					
-					if ((res = send(new Request(data, Routes.USER, "DELETEUSER", params, null))).getRecordsModified() == 0) {
-						Menu.println("fail!");
-						Menu.println("\tPlease wait for assistance");
-						Menu.println("\n\t\terror:>" + res.getException().getMessage() + "\n");
-					}
-					else {
-						Menu.println("done");
-					}
-					
-					Menu.println("\tPlease try again.");
-				}
-				else {
-					Menu.println("done");
+				Menu.print("\n\tAttempting to create user info...");
+				// Request to create new account
+				if ((res = send(new Request(data, Routes.USER, "CREATEUSERINFO", null, info))).getRecordsModified() == 0) {
+					Menu.println("fail!\n");
+					Menu.println("\t\terror:>" + res.getException().getMessage() + "\n");	
+					send(new Request(data, Routes.USER, "DELETEUSER", params, null));
+				} else {
+					Menu.print("done\n");
 					Menu.println("Account now waiting for approval!");
-					Menu.println("Thank you!");
-				}
+					Menu.println("Thank you!");			
+				}	
 			}
 			
 			// Close session

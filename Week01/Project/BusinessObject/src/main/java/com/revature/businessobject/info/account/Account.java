@@ -9,10 +9,14 @@ public class Account extends Info {
 	public static final String TYPEID = "type_id";
 	public static final String STATUSID = "status_id";
 	public static final String CREATED = "created";
+	public static final String BALANCE = "balance";
+	
 	
 	private String number;
 	private String created;
 	private String type;
+	private String status;
+	private float balance;
 	private long typeId;
 	private long statusId;
 	
@@ -23,13 +27,30 @@ public class Account extends Info {
 	 * @param type what kind of account is it
 	 * @see Type 
 	 */
-	public Account(long userId, String number, long typeId, long statusId, String created, String type) {
+	public Account(long userId, String number, long typeId, long statusId, String created, Float balance, String type) {
 		super(userId);
 		this.number = number;
 		this.typeId = typeId;
 		this.statusId = statusId;
 		this.created = created;
 		this.type = type;
+		this.balance = balance;
+	}
+
+	public float getBalance() {
+		return balance;
+	}
+
+	public void setBalance(float balance) {
+		this.balance = balance;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public String getNumber() {

@@ -148,7 +148,7 @@ public class Menu {
 		else {
 			info = (UserInfo) res.get(0);
 			println("\tEmail: " + info.getEmail());
-			println("\tAddress: " + info.getAddress());
+			println("\tAddress: " + info.getAddress1());
 			println("\tPhonenumber: " + info.getPhonenumber());
 		}
 	}
@@ -166,9 +166,9 @@ public class Menu {
 			for (BusinessObject item : res) {
 				Account acct = (Account)item;
 				
-				switch (acct.getType()) {
+				switch (acct.getType().toLowerCase()) {
 					case Type.CHECKING:
-						printCheckingAccount((Checking)acct);
+						printCheckingAccount(acct);
 						break;
 					case Type.CREDIT:
 						printCreditAccount((Credit)acct);
@@ -183,11 +183,12 @@ public class Menu {
 	 * Prints checking account
 	 * @param checking - checking account instance 
 	 */
-	public static void printCheckingAccount(Checking checking) {
+	public static void printCheckingAccount(Account checking) {
 		println("===============================================================");
 		println("\tAccount Type: Checking");
 		println("\tAccount status: " + checking.getStatus().toUpperCase());
 		println("\tAccount Number: " + checking.getNumber());
+		println("\tCreated: " + checking.getCreated());
 		println("\tTotal: $" + checking.getBalance());
 		println("===============================================================");
 	}
@@ -198,12 +199,6 @@ public class Menu {
 	 */
 	public static void printCreditAccount(Credit credit) {
 		println("===============================================================");
-		println("\tAccount Type: Credit");
-		println("\tAccount status: " + credit.getStatus().toUpperCase());
-		println("\tAccount Number: " + credit.getNumber());
-		println("\tMonthly Interest: " + credit.getInterest() + "%");
-		println("\tCredit Limit: $" + credit.getCreditLimit());
-		println("\tTotal: $" + credit.getTotal());
 		println("===============================================================");
 	}
 }

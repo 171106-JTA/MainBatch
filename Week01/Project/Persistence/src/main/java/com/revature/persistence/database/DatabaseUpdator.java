@@ -27,14 +27,18 @@ public class DatabaseUpdator extends DatabaseDeletor {
 		int total = 0;
 		
 		try (Connection conn = ConnectionUtil.getConnection();) {
-			for (String key : cnds.keySet())
-				whereParams.add(key + "=?");
+			for (String key : cnds.keySet()) {
+				if (!key.equals(BusinessObject.SESSIONID))
+					whereParams.add(key + "=?");
+			}
 			
-			for (String key : values.keySet()) 
-				setParams.add(key + "=?");
+			for (String key : values.keySet()) {
+				if (!key.equals(BusinessObject.SESSIONID))
+					setParams.add(key + "=?");
+			}
 			
 			// Build sql statement
-			sql += set + String.join(",", setParams) + where + String.join(",", whereParams);
+			sql += set + String.join(",", setParams) + where + String.join(" AND ", whereParams);
 			statement = conn.prepareStatement(sql);
 			clauseBuilder.build(name, statement, values, cnds);
 			total = statement.executeUpdate();

@@ -95,7 +95,6 @@ public class FieldParamsFactory {
 		params.put(UserInfo.LASTNAME, userInfo.getLastname());
 		params.put(UserInfo.POSTALCODE, userInfo.getPostalcode());
 		params.put(UserInfo.STATECITYID, Long.toString(userInfo.getStateCityId()));
-		params.put(UserInfo.ROLEID, Long.toString(userInfo.getRoleId()));
 		params.put(UserInfo.STATUSID, Long.toString(userInfo.getStatusId()));
 		
 		return params;
@@ -108,9 +107,9 @@ public class FieldParamsFactory {
 	 */
 	private FieldParams convertAccountToFieldParams(Account acct) {
 		// Convert based on type
-		switch (acct.getType()) {
+		switch (acct.getType().toLowerCase()) {
 			case Type.CHECKING:
-				return convertCheckingToFieldParams((Checking)acct);
+				return convertCheckingToFieldParams(acct);
 			case Type.CREDIT:
 				return convertCreditToFieldParams((Credit)acct);
 			default:
@@ -123,15 +122,15 @@ public class FieldParamsFactory {
 	 * @param checking what to convert
 	 * @return FieldParams representation of account
 	 */
-	private FieldParams convertCheckingToFieldParams(Checking checking) {
+	private FieldParams convertCheckingToFieldParams(Account checking) {
 		FieldParams params = new FieldParams();
 		
 		// Set field param data 
-		params.put(Checking.USERID, Long.toString(checking.getUserId()));
-		params.put(Checking.TYPEID, Long.toString(checking.getTypeId()));
-		params.put(Checking.STATUSID, Long.toString(checking.getStatusId()));
-		params.put(Checking.BALANCE, Float.toString(checking.getBalance()));
-		params.put(Checking.NUMBER, checking.getNumber());
+		params.put(Account.USERID, Long.toString(checking.getUserId()));
+		params.put(Account.TYPEID, Long.toString(checking.getTypeId()));
+		params.put(Account.STATUSID, Long.toString(checking.getStatusId()));
+		params.put(Account.BALANCE, Float.toString(checking.getBalance()));
+		params.put(Account.NUMBER, checking.getNumber());
 		
 		return params;
 	}

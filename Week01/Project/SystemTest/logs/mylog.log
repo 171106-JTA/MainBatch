@@ -1083,3 +1083,485 @@
 2017-11-17 20:20:22 DEBUG ConnectionUtil:45 - opened connection to database
 2017-11-17 20:20:22 DEBUG ConnectionUtil:27 - attempting to clsoe stream
 2017-11-17 20:20:22 DEBUG ConnectionUtil:29 - closed stream
+2017-11-19 11:00:24 DEBUG ConnectionUtil:68 - attempting to open connection to database
+2017-11-19 11:00:25 DEBUG ConnectionUtil:73 - opened connection to database
+2017-11-19 11:00:25 DEBUG ConnectionUtil:33 - attempting to clsoe stream
+2017-11-19 11:00:25 DEBUG ConnectionUtil:35 - closed stream
+2017-11-19 11:00:25 DEBUG ConnectionUtil:68 - attempting to open connection to database
+2017-11-19 11:00:25 DEBUG ConnectionUtil:73 - opened connection to database
+2017-11-19 11:01:38 DEBUG ConnectionUtil:68 - attempting to open connection to database
+2017-11-19 11:01:39 DEBUG ConnectionUtil:73 - opened connection to database
+2017-11-19 11:01:39 DEBUG ConnectionUtil:33 - attempting to clsoe stream
+2017-11-19 11:01:39 DEBUG ConnectionUtil:35 - closed stream
+2017-11-19 11:01:39 DEBUG ConnectionUtil:68 - attempting to open connection to database
+2017-11-19 11:01:39 DEBUG ConnectionUtil:73 - opened connection to database
+2017-11-19 11:01:44 DEBUG ConnectionUtil:68 - attempting to open connection to database
+2017-11-19 11:01:44 DEBUG ConnectionUtil:73 - opened connection to database
+2017-11-19 11:01:55 DEBUG ConnectionUtil:44 - attempting to clsoe stream
+2017-11-19 11:03:53 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 11:03:54 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 11:03:54 DEBUG ConnectionUtil:36 - attempting to clsoe stream
+2017-11-19 11:03:54 DEBUG ConnectionUtil:38 - closed stream
+2017-11-19 11:03:54 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 11:03:54 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 11:05:46 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 11:05:47 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 11:05:47 DEBUG ConnectionUtil:36 - attempting to clsoe stream
+2017-11-19 11:05:47 DEBUG ConnectionUtil:38 - closed stream
+2017-11-19 11:05:47 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 11:05:47 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 11:05:52 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 11:05:52 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 11:06:34 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-19 11:06:34 DEBUG ConnectionUtil:51 - closed stream
+2017-11-19 11:06:34 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 11:06:34 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 11:06:57 DEBUG ConnectionUtil:36 - attempting to clsoe stream
+2017-11-19 11:06:57 DEBUG ConnectionUtil:38 - closed stream
+2017-11-19 14:36:36 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:36:37 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:36:37 DEBUG ConnectionUtil:36 - attempting to clsoe stream
+2017-11-19 14:36:37 DEBUG ConnectionUtil:38 - closed stream
+2017-11-19 14:36:42 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:36:42 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:36:42 WARN  DatabasePersistence:39 - failed to delete records {checkpoint=none, password=test, username=test} message=Missing IN or OUT parameter at index:: 1
+2017-11-19 14:36:42 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 14:36:42 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 14:36:42 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:36:42 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:37:44 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:37:44 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:37:44 DEBUG ConnectionUtil:36 - attempting to clsoe stream
+2017-11-19 14:37:44 DEBUG ConnectionUtil:38 - closed stream
+2017-11-19 14:37:46 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:37:46 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:37:46 WARN  DatabasePersistence:39 - failed to delete records {checkpoint=none, password=test, username=test} message=Missing IN or OUT parameter at index:: 1
+2017-11-19 14:37:46 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 14:37:46 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 14:37:46 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:37:46 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:37:59 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:37:59 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:38:52 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:38:53 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:38:53 DEBUG ConnectionUtil:36 - attempting to clsoe stream
+2017-11-19 14:38:53 DEBUG ConnectionUtil:38 - closed stream
+2017-11-19 14:38:55 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:38:55 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:38:55 WARN  DatabasePersistence:39 - failed to delete records {checkpoint=none, password=test, username=test} message=Missing IN or OUT parameter at index:: 1
+2017-11-19 14:38:55 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 14:38:55 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 14:38:55 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:38:55 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:39:00 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:39:00 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:39:50 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:39:51 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:39:51 DEBUG ConnectionUtil:36 - attempting to clsoe stream
+2017-11-19 14:39:51 DEBUG ConnectionUtil:38 - closed stream
+2017-11-19 14:39:53 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:39:53 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:39:53 WARN  DatabasePersistence:39 - failed to delete records {checkpoint=none, password=test, username=test} message=Missing IN or OUT parameter at index:: 1
+2017-11-19 14:39:53 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 14:39:53 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 14:39:53 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:39:53 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:40:35 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:40:36 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:41:54 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:41:54 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:41:54 DEBUG ConnectionUtil:36 - attempting to clsoe stream
+2017-11-19 14:41:54 DEBUG ConnectionUtil:38 - closed stream
+2017-11-19 14:42:00 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:42:00 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:42:00 WARN  DatabasePersistence:39 - failed to delete records {checkpoint=none, password=test, username=test} message=Missing IN or OUT parameter at index:: 1
+2017-11-19 14:42:00 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 14:42:00 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 14:42:00 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:42:00 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:42:17 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:42:17 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:43:40 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:43:40 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:43:40 DEBUG ConnectionUtil:36 - attempting to clsoe stream
+2017-11-19 14:43:40 DEBUG ConnectionUtil:38 - closed stream
+2017-11-19 14:43:46 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:43:46 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:43:46 WARN  DatabasePersistence:39 - failed to delete records {checkpoint=none, password=test, username=test} message=Missing IN or OUT parameter at index:: 1
+2017-11-19 14:43:46 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 14:43:46 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 14:43:46 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:43:46 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:45:12 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:45:12 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:45:12 DEBUG ConnectionUtil:36 - attempting to clsoe stream
+2017-11-19 14:45:12 DEBUG ConnectionUtil:38 - closed stream
+2017-11-19 14:45:15 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:45:15 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:45:15 WARN  DatabasePersistence:39 - failed to delete records {checkpoint=none, password=test, username=test} message=Missing IN or OUT parameter at index:: 1
+2017-11-19 14:45:15 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 14:45:15 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 14:45:15 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:45:15 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:45:24 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:45:24 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:45:30 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 14:45:30 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 14:45:40 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:45:40 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:46:11 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-19 14:46:11 DEBUG ConnectionUtil:51 - closed stream
+2017-11-19 14:46:11 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 14:46:12 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 14:46:17 DEBUG ConnectionUtil:36 - attempting to clsoe stream
+2017-11-19 14:46:17 DEBUG ConnectionUtil:38 - closed stream
+2017-11-19 14:46:36 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:46:37 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:47:30 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:47:31 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:47:31 DEBUG ConnectionUtil:36 - attempting to clsoe stream
+2017-11-19 14:47:31 DEBUG ConnectionUtil:38 - closed stream
+2017-11-19 14:47:35 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:47:35 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:47:37 WARN  DatabasePersistence:39 - failed to delete records {password=test, username=test} message=ORA-00933: SQL command not properly ended
+
+2017-11-19 14:47:37 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 14:47:37 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 14:47:50 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:47:51 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:47:51 DEBUG ConnectionUtil:36 - attempting to clsoe stream
+2017-11-19 14:47:51 DEBUG ConnectionUtil:38 - closed stream
+2017-11-19 14:47:55 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:47:55 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:49:13 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:49:13 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:49:13 DEBUG ConnectionUtil:36 - attempting to clsoe stream
+2017-11-19 14:49:13 DEBUG ConnectionUtil:38 - closed stream
+2017-11-19 14:49:16 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:49:16 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:49:34 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:49:35 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:49:35 DEBUG ConnectionUtil:36 - attempting to clsoe stream
+2017-11-19 14:49:35 DEBUG ConnectionUtil:38 - closed stream
+2017-11-19 14:49:39 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:49:39 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:51:06 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:51:06 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:51:06 DEBUG ConnectionUtil:36 - attempting to clsoe stream
+2017-11-19 14:51:06 DEBUG ConnectionUtil:38 - closed stream
+2017-11-19 14:51:06 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:51:06 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:54:07 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:54:08 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:54:08 DEBUG ConnectionUtil:36 - attempting to clsoe stream
+2017-11-19 14:54:08 DEBUG ConnectionUtil:38 - closed stream
+2017-11-19 14:54:12 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:54:13 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:54:23 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 14:54:23 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 14:54:29 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:54:29 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:54:31 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:54:31 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:54:31 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 14:54:31 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 14:54:31 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:54:31 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:54:31 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-19 14:54:31 DEBUG ConnectionUtil:51 - closed stream
+2017-11-19 14:54:31 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 14:54:31 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 14:54:31 DEBUG ConnectionUtil:36 - attempting to clsoe stream
+2017-11-19 14:54:31 DEBUG ConnectionUtil:38 - closed stream
+2017-11-19 14:54:39 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:54:39 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:54:45 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 14:54:45 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 14:54:45 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:54:45 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:54:45 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:54:45 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:54:45 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-19 14:54:45 DEBUG ConnectionUtil:51 - closed stream
+2017-11-19 14:54:45 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 14:54:45 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 14:54:45 DEBUG ConnectionUtil:36 - attempting to clsoe stream
+2017-11-19 14:54:45 DEBUG ConnectionUtil:38 - closed stream
+2017-11-19 14:54:49 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 14:54:49 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 14:54:49 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 14:54:49 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:09:13 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:09:13 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:09:13 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:09:13 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:09:13 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:09:13 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:09:13 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-19 15:09:13 DEBUG ConnectionUtil:51 - closed stream
+2017-11-19 15:09:13 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:09:13 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:09:13 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:09:13 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:09:13 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:09:13 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:09:13 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:09:13 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:09:13 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-19 15:09:13 DEBUG ConnectionUtil:51 - closed stream
+2017-11-19 15:09:13 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:09:13 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:09:13 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:09:13 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:09:13 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:09:13 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:09:21 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:09:21 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:09:22 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:09:22 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:09:22 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:09:22 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:09:22 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-19 15:09:22 DEBUG ConnectionUtil:51 - closed stream
+2017-11-19 15:09:22 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:09:22 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:09:22 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:09:22 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:09:22 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:09:22 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:09:22 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:09:22 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:09:22 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-19 15:09:22 DEBUG ConnectionUtil:51 - closed stream
+2017-11-19 15:09:22 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:09:22 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:09:22 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:09:22 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:09:22 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:09:22 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:09:30 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:09:31 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:09:31 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:09:31 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:09:31 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:09:31 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:09:31 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-19 15:09:31 DEBUG ConnectionUtil:51 - closed stream
+2017-11-19 15:09:31 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:09:31 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:09:31 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:09:31 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:09:31 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:09:31 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:09:37 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:09:37 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:09:37 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:09:37 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:10:02 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:10:02 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:31:12 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:31:13 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:31:13 WARN  DatabasePersistence:40 - failed to insert data, where values={password=test, username=test} message=ORA-00001: unique constraint (LUIE.UNIQUE_USERNAME) violated
+
+2017-11-19 15:31:13 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:31:13 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:31:13 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:31:13 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:31:13 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:31:13 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:31:13 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:31:13 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:31:13 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:31:13 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:31:13 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:31:13 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:31:13 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:31:13 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:31:13 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:31:13 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:31:13 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-19 15:31:13 DEBUG ConnectionUtil:51 - closed stream
+2017-11-19 15:31:13 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:31:13 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:31:13 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:31:13 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:31:13 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:31:13 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:31:13 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:31:13 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:31:13 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-19 15:31:13 DEBUG ConnectionUtil:51 - closed stream
+2017-11-19 15:31:13 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:31:13 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:31:13 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:31:13 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:31:13 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:31:13 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:31:17 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:31:18 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:31:18 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:31:18 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:31:18 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:31:18 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:31:18 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-19 15:31:18 DEBUG ConnectionUtil:51 - closed stream
+2017-11-19 15:31:18 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:31:18 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:31:18 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:31:18 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:31:18 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:31:18 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:31:21 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:31:21 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:31:21 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:31:21 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:31:26 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:31:26 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:32:22 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:32:22 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:32:28 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:32:28 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:32:33 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-19 15:32:33 DEBUG ConnectionUtil:51 - closed stream
+2017-11-19 15:32:33 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:32:33 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:32:51 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:32:51 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:32:51 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:32:51 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:32:51 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:32:51 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:32:51 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-19 15:32:51 DEBUG ConnectionUtil:51 - closed stream
+2017-11-19 15:32:51 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:32:51 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 15:32:51 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 15:32:51 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 15:32:51 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 15:32:51 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:30:06 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:30:07 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:30:07 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:30:07 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:30:07 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:30:07 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:30:07 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-19 17:30:07 DEBUG ConnectionUtil:51 - closed stream
+2017-11-19 17:30:07 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:30:07 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:30:07 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:30:07 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:30:07 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:30:07 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:30:07 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:30:07 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:30:07 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:30:07 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:30:07 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:30:07 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:30:07 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:30:07 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:30:07 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:30:07 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:30:07 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-19 17:30:07 DEBUG ConnectionUtil:51 - closed stream
+2017-11-19 17:30:07 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:30:07 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:30:07 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:30:07 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:30:07 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:30:07 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:30:07 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:30:08 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:30:08 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-19 17:30:08 DEBUG ConnectionUtil:51 - closed stream
+2017-11-19 17:30:08 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:30:08 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:30:08 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:30:08 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:30:08 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:30:08 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:30:15 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:30:15 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:30:15 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:30:15 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:30:15 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:30:15 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:30:15 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-19 17:30:15 DEBUG ConnectionUtil:51 - closed stream
+2017-11-19 17:30:15 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:30:15 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:30:15 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:30:15 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:30:15 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:30:15 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:30:15 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:30:16 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:30:16 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:30:16 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:30:16 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:30:16 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:30:16 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:30:16 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:30:16 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:30:16 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:30:16 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-19 17:30:16 DEBUG ConnectionUtil:51 - closed stream
+2017-11-19 17:30:16 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:30:16 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:30:16 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:30:16 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:30:16 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:30:16 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:30:16 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:30:16 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:30:16 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-19 17:30:16 DEBUG ConnectionUtil:51 - closed stream
+2017-11-19 17:30:16 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:30:16 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:30:16 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:30:16 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:30:16 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:30:16 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:32:22 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:32:23 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:32:23 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:32:23 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:32:23 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:32:23 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:32:23 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-19 17:32:23 DEBUG ConnectionUtil:51 - closed stream
+2017-11-19 17:32:23 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:32:23 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:32:23 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:32:23 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:32:23 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:32:23 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:32:23 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:32:23 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:32:23 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:32:23 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:32:23 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:32:23 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:32:23 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:32:23 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:32:23 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:32:23 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:32:23 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-19 17:32:23 DEBUG ConnectionUtil:51 - closed stream
+2017-11-19 17:32:23 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:32:23 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:32:23 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:32:23 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:32:23 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:32:23 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:32:23 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:32:23 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:32:23 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-19 17:32:23 DEBUG ConnectionUtil:51 - closed stream
+2017-11-19 17:32:23 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:32:23 DEBUG ConnectionUtil:64 - closed stream
+2017-11-19 17:32:23 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-19 17:32:23 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-19 17:32:23 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-19 17:32:23 DEBUG ConnectionUtil:64 - closed stream

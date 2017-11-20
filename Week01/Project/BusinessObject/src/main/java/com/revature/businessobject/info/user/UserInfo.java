@@ -18,8 +18,8 @@ public class UserInfo extends Info {
 	public static final String ADDRESS2 = "address_2";
 	public static final String POSTALCODE = "postal_code";
 	public static final String STATUSID = "status_id";
-	public static final String ROLEID = "role_id";
-	
+	public static final String STATE = "state";
+	public static final String CITY = "city";
 	private long ssn;
 	private String email;
 	private String phonenumber;
@@ -29,16 +29,15 @@ public class UserInfo extends Info {
 	private String lastname;
 	private String postalcode;
 	private long stateCityId;
-	private long roleId;
 	private long statusId;
-	
+
 	public UserInfo(long userId) {
 		super(userId);
 	}
 	
 	public UserInfo(long userId, long ssn, String email, String phonenumber,
 			String address1, String address2, String firstname, String lastname,
-			String postalcode, long stateCityId, long roleId, long statusId) {
+			String postalcode, long stateCityId, long statusId) {
 		super(userId);
 		this.ssn = ssn;
 		this.email = email;
@@ -49,7 +48,6 @@ public class UserInfo extends Info {
 		this.lastname = lastname;
 		this.postalcode = postalcode;
 		this.stateCityId = stateCityId;
-		this.roleId = roleId;
 		this.statusId = statusId;
 	}
 
@@ -123,14 +121,6 @@ public class UserInfo extends Info {
 
 	public void setStateCityId(long stateCityId) {
 		this.stateCityId = stateCityId;
-	}
-
-	public long getRoleId() {
-		return roleId;
-	}
-
-	public void setRoleId(long roleId) {
-		this.roleId = roleId;
 	}
 
 	public long getStatusId() {

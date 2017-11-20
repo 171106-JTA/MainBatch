@@ -81,18 +81,6 @@ END;
 /    
 
 /**
- *  Acquires id of specified user roll (see MB_CODE_LIST.code='USER-ROLE')
- *  @param role - desired user role
- *  @param role_id - id of desired role
- */
-CREATE OR REPLACE PROCEDURE get_user_role_id(role IN MB_CODE_LIST.value%TYPE, role_id OUT MB_CODE_LIST.id%TYPE)
-    IS
-BEGIN
-    get_code_list_id('USER-ROLE', role, NULL, role_id);
-END;
-/
-
-/**
  *  Acquires id of specified user roll (see MB_CODE_LIST.code='USER-STATUS')
  *  @param status - desired user status
  *  @param status_id - id of desired status
@@ -130,13 +118,13 @@ END;
 
 /** 
  *  Creates user account
- *  @param role - user role see where code='USER-ROLE'
  *  @param status - user status see where code='USER-STATUS'
  *  @param username - user account name
  *  @param password - what is used to validate user
+ *  @param ssn
  *  @param first_name - users first name
  *  @param last_name - users last name
- *  @param email - user email account
+ *  @uSERparam email - user email account
  *  @param phone_number - user personal phonenumber
  *  @param address_1 - where they live (primary)
  *  @param address_2 - second place of residency (can be null)
@@ -144,7 +132,7 @@ END;
  *  @param state - name of state of where user resides 
  *  @param city - name of city where user resides 
  */
-CREATE OR REPLACE PROCEDURE create_user (role IN MB_CODE_LIST.value%TYPE, status IN MB_CODE_LIST.value%TYPE, my_username IN MB_USER.USERNAME%TYPE, password IN MB_USER.PASSWORD%TYPE, 
+CREATE OR REPLACE PROCEDURE create_user (status IN MB_CODE_LIST.value%TYPE, my_username IN MB_USER.USERNAME%TYPE, password IN MB_USER.PASSWORD%TYPE, 
                                          ssn IN MB_USER_INFO.ssn%TYPE, first_name IN MB_USER_INFO.first_name%TYPE, last_name IN MB_USER_INFO.last_name%TYPE,
                                          email IN MB_USER_INFO.email%TYPE, phone_number IN MB_USER_INFO.phone_number%TYPE, address_1 IN MB_USER_INFO.address_1%TYPE, 
                                          address_2 IN MB_USER_INFO.address_2%TYPE,  postal_code IN MB_USER_INFO.postal_code%TYPE, state IN MB_CODE_LIST.code%TYPE,
@@ -152,7 +140,6 @@ CREATE OR REPLACE PROCEDURE create_user (role IN MB_CODE_LIST.value%TYPE, status
     IS
      CURSOR c_user_id IS (SELECT u.id FROM MB_USER u WHERE u.username = my_username);
      user_id NUMBER;
-     user_role_id NUMBER;
      user_status_id NUMBER;
      user_state_city_id NUMBER;
 BEGIN
@@ -170,7 +157,6 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE(my_username);
     DBMS_OUTPUT.PUT_LINE(user_id);
     
-    get_user_role_id(role, user_role_id);
     get_user_status_id(status, user_status_id);
     get_city_code_group_id(state, city, user_state_city_id);
     
@@ -186,8 +172,7 @@ BEGIN
                        address_1, 
                        address_2, 
                        postal_code,
-                       user_status_id,
-                       user_role_id);
+                       user_status_id);
                        
     -- Save changes 
     COMMIT;

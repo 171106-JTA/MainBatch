@@ -47,8 +47,6 @@ CREATE SEQUENCE mb_seq_receipt_id_counter
     INCREMENT BY 1;
 /
 
-
-
 -- TRIGGERS
 
 CREATE OR REPLACE TRIGGER mb_increment_user_id 

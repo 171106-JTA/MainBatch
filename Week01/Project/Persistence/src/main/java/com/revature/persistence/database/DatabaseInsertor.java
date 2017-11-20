@@ -25,8 +25,10 @@ public abstract class DatabaseInsertor extends DatabaseQuery {
 		
 		// Prepare transaction 
 		for (String key : values.keySet()) {
-			params.add(key);
-			data.add(key + "=?");
+			if (!key.equals(BusinessObject.SESSIONID)) {
+				params.add(key);
+				data.add("?");
+			}
 		}
 		
 		sql += "(" + String.join(",", params) + ")" + "VALUES(" + String.join(",", data) + ")";

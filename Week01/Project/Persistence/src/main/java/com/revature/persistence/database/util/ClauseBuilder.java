@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
+import com.revature.businessobject.BusinessObject;
 import com.revature.businessobject.info.CodeList;
 import com.revature.businessobject.info.account.Account;
 import com.revature.businessobject.info.account.Checking;
@@ -92,8 +93,9 @@ public class ClauseBuilder {
 					case User.USERNAME:
 					case User.PASSWORD:
 						statement.setString(pos, params.get(key));
-						statement.setString(pos, params.get(key));
 						break;
+					case BusinessObject.SESSIONID:
+						continue;
 				}
 			} catch (NumberFormatException | SQLException e) {
 				logger.warn("failed to build user where clause, message=" + e.getMessage());
@@ -113,10 +115,10 @@ public class ClauseBuilder {
 			try {
 				// Attempt to assemble where clause
 				switch (key) {
+					case UserInfo.USERID:
 					case UserInfo.SSN:
 					case UserInfo.STATECITYID:
 					case UserInfo.STATUSID:
-					case UserInfo.ROLEID:
 						statement.setLong(pos, Long.parseLong(params.get(key)));
 						break;
 					case UserInfo.EMAIL:
@@ -128,6 +130,8 @@ public class ClauseBuilder {
 					case UserInfo.POSTALCODE:
 						statement.setString(pos,  params.get(key));
 						break;
+					case BusinessObject.SESSIONID:
+						continue;
 				}
 			} catch (NumberFormatException | SQLException e) {
 				e.printStackTrace();
@@ -151,10 +155,16 @@ public class ClauseBuilder {
 					case Account.CREATED:
 						statement.setString(pos, params.get(key));
 						break;
+					case Account.USERID:
 					case Account.TYPEID:
 					case Account.STATUSID:
 						statement.setLong(pos, Long.parseLong(params.get(key)));
 						break;
+					case Account.BALANCE:
+						statement.setFloat(pos, Float.parseFloat(params.get(key)));
+						break;
+					case BusinessObject.SESSIONID:
+						continue;
 				}
 			} catch (NumberFormatException | SQLException e) {
 				e.printStackTrace();
@@ -178,6 +188,7 @@ public class ClauseBuilder {
 					case Checking.CREATED:
 						statement.setString(pos, params.get(key));
 						break;
+					case Credit.USERID:
 					case Checking.TYPEID:
 					case Checking.STATUSID:
 						statement.setLong(pos, Long.parseLong(params.get(key)));
@@ -185,6 +196,8 @@ public class ClauseBuilder {
 					case Checking.BALANCE:
 						statement.setFloat(pos, Float.parseFloat(params.get(key)));
 						break;
+					case BusinessObject.SESSIONID:
+						continue;
 				}
 			} catch (NumberFormatException | SQLException e) {
 				e.printStackTrace();
@@ -208,6 +221,7 @@ public class ClauseBuilder {
 					case Credit.CREATED:
 						statement.setString(pos, params.get(key));
 						break;
+					case Credit.USERID:
 					case Credit.TYPEID:
 					case Credit.STATUSID:
 					case Credit.RATEID:
@@ -218,6 +232,8 @@ public class ClauseBuilder {
 					case Credit.CREDITLIMIT:
 						statement.setFloat(pos, Float.parseFloat(params.get(key)));
 						break;
+					case BusinessObject.SESSIONID:
+						continue;
 				}
 			} catch (NumberFormatException | SQLException e) {
 				e.printStackTrace();
@@ -247,6 +263,8 @@ public class ClauseBuilder {
 					case CodeList.DESCRIPTION:
 						statement.setString(pos, params.get(key));
 						break;
+					case BusinessObject.SESSIONID:
+						continue;
 				}
 			} catch (NumberFormatException | SQLException e) {
 				e.printStackTrace();

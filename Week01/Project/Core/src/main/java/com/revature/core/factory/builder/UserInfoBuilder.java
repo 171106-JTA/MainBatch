@@ -30,7 +30,7 @@ public class UserInfoBuilder implements BusinessObjectBuilder {
 							args.get(UserInfo.EMAIL), args.get(UserInfo.PHONENUMBER), args.get(UserInfo.ADDRESS1),
 							args.get(UserInfo.ADDRESS2), args.get(UserInfo.FIRSTNAME), args.get(UserInfo.LASTNAME),
 							args.get(UserInfo.POSTALCODE), Long.parseLong(args.get(UserInfo.STATECITYID)), 
-							Long.parseLong(args.get(UserInfo.ROLEID)), Long.parseLong(args.get(UserInfo.STATUSID)));
+							Long.parseLong(args.get(UserInfo.STATUSID)));
 		}
 		
 		return object;
@@ -45,7 +45,7 @@ public class UserInfoBuilder implements BusinessObjectBuilder {
 				info = new UserInfo(args.getLong(UserInfo.USERID), args.getLong(UserInfo.SSN), args.getString(UserInfo.EMAIL),
 						args.getString(UserInfo.PHONENUMBER), args.getString(UserInfo.ADDRESS1), args.getString(UserInfo.ADDRESS2),
 						args.getString(UserInfo.FIRSTNAME), args.getString(UserInfo.LASTNAME), args.getString(UserInfo.POSTALCODE),
-						args.getLong(UserInfo.STATECITYID), args.getLong(UserInfo.ROLEID), args.getLong(UserInfo.STATUSID));
+						args.getLong(UserInfo.STATECITYID), args.getLong(UserInfo.STATUSID));
 				
 				data.add(info);
 			}

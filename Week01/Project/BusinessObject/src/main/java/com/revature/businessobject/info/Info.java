@@ -14,6 +14,8 @@ public class Info extends BusinessObject{
 	 */
 	private long userId;
 
+	private String status;
+	
 	/**
 	 * Initialization of basic user information
 	 * @param userId primary key
@@ -30,6 +32,14 @@ public class Info extends BusinessObject{
 		return userId;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

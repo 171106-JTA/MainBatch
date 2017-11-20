@@ -18,46 +18,54 @@ public final class ConnectionUtil {
 	private static Logger logger = Logger.getLogger(ConnectionUtil.class);
 	
 	public static void close(Closeable stream) {
-		try {
-			logger.debug("attempting to clsoe stream");;
-			stream.close();
-			logger.debug("closed stream");
-		} catch(IOException e) {
-			e.printStackTrace();
-			logger.debug("failed to close stream, message: " + e.getMessage());
+		if (stream != null) {
+			try {
+				logger.debug("attempting to clsoe stream");;
+				stream.close();
+				logger.debug("closed stream");
+			} catch(IOException e) {
+				e.printStackTrace();
+				logger.debug("failed to close stream, message: " + e.getMessage());
+			}
 		}
 	}
 	
 	public static void close(Connection connection) {
-		try {
-			logger.debug("attempting to clsoe stream");;
-			connection.close();
-			logger.debug("closed stream");
-		} catch(SQLException e) {
-			e.printStackTrace();
-			logger.debug("failed to close stream, message: " + e.getMessage());
+		if (connection != null) {
+			try {
+				logger.debug("attempting to clsoe stream");;
+				connection.close();
+				logger.debug("closed stream");
+			} catch(SQLException e) {
+				e.printStackTrace();
+				logger.debug("failed to close stream, message: " + e.getMessage());
+			}
 		}
 	}
 	
 	public static void close(ResultSet res) {
-		try {
-			logger.debug("attempting to clsoe stream");;
-			res.close();
-			logger.debug("closed stream");
-		} catch(SQLException e) {
-			e.printStackTrace();
-			logger.debug("failed to close stream, message: " + e.getMessage());
+		if (res != null) {
+			try {
+				logger.debug("attempting to clsoe stream");;
+				res.close();
+				logger.debug("closed stream");
+			} catch(SQLException e) {
+				e.printStackTrace();
+				logger.debug("failed to close stream, message: " + e.getMessage());
+			}
 		}
 	}
 	
 	public static void close(Statement statement) {
-		try {
-			logger.debug("attempting to clsoe stream");;
-			statement.close();
-			logger.debug("closed stream");
-		} catch(SQLException e) {
-			e.printStackTrace();
-			logger.debug("failed to close stream, message: " + e.getMessage());
+		if (statement != null) {
+			try {
+				logger.debug("attempting to clsoe stream");;
+				statement.close();
+				logger.debug("closed stream");
+			} catch(SQLException e) {
+				e.printStackTrace();
+				logger.debug("failed to close stream, message: " + e.getMessage());
+			}
 		}
 	}
 	

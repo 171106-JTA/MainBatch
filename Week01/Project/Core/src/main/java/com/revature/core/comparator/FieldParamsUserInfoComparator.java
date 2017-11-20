@@ -59,9 +59,6 @@ public class FieldParamsUserInfoComparator implements Comparator<Object> {
 			if (fieldParams.containsKey(UserInfo.STATECITYID)) 
 				result = fieldParams.get(UserInfo.STATECITYID).compareTo(Long.toString(info.getStateCityId()));
 			
-			if (fieldParams.containsKey(UserInfo.ROLEID)) 
-				result = fieldParams.get(UserInfo.ROLEID).compareTo(Long.toString(info.getRoleId()));
-			
 			if (fieldParams.containsKey(UserInfo.STATUSID)) 
 				result = fieldParams.get(UserInfo.STATUSID).compareTo(Long.toString(info.getStatusId()));
 		}

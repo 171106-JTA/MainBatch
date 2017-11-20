@@ -8,6 +8,7 @@ import com.revature.businessobject.BusinessObject;
 import com.revature.businessobject.info.Info;
 import com.revature.businessobject.info.account.Account;
 import com.revature.businessobject.info.account.Status;
+import com.revature.businessobject.info.user.UserInfo;
 import com.revature.businessobject.user.Checkpoint;
 import com.revature.businessobject.user.User;
 import com.revature.core.FieldParams;
@@ -187,14 +188,15 @@ public class AdminView implements View {
 	 */
 	private void updateUserCheckpoint(User user, String checkpoint) {
 		FieldParams trans = new FieldParams();
+		FieldParams query = new FieldParams();
 		Request request;
 		Resultset res;
 		
 		// Set request params
-		trans.put(User.CHECKPOINT, checkpoint);
-	
+		trans.put(UserInfo.STATUSID, checkpoint);
+		query.put(UserInfo.USERID, Long.toString(user.getId()));
 		// Create request
-		request = new Request(MyBank.data, Routes.USER, "SETUSER", factory.getFieldParams(user), trans);
+		request = new Request(MyBank.data, Routes.USER, "SETUSERINFO", query, trans);
 		
 		Menu.print("\tAttempting to update user checkpoint...");
 		
@@ -243,6 +245,7 @@ public class AdminView implements View {
 		
 		// Set params
 		params.put(Info.USERID, Long.toString(account.getUserId()));
+		params.put(Account.NUMBER, account.getNumber());
 		transact.put(Account.STATUSID, status);
 		
 		// Create request
@@ -270,6 +273,7 @@ public class AdminView implements View {
 		
 		// Set params
 		params.put(Info.USERID, Long.toString(account.getUserId()));
+		params.put(Account.NUMBER, account.getNumber());
 		
 		// Create request
 		request = new Request(MyBank.data, Routes.USER, "DELETEACCOUNT", params, null);

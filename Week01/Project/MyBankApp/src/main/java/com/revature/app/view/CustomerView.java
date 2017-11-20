@@ -149,7 +149,7 @@ public class CustomerView implements View {
 		
 		// Prepare request
 		transact.put(UserInfo.EMAIL, email);
-		transact.put(UserInfo.ADDRESS, address);
+		transact.put(UserInfo.ADDRESS1, address);
 		transact.put(UserInfo.PHONENUMBER, phonenumber);
 		
 		// Create request
@@ -208,7 +208,7 @@ public class CustomerView implements View {
 					// Set params to view user information
 					params = factory.getFieldParams(accounts.get(index));
 					params.put(User.SESSIONID, MyBank.data.get(User.SESSIONID));
-					Menu.printCheckingAccount((Checking)accounts.get(index));
+					Menu.printCheckingAccount((Account)accounts.get(index));
 					printAccountOptions();
 					input = Menu.getInput(name + ":>");
 					
@@ -241,7 +241,7 @@ public class CustomerView implements View {
 	 * @param account - where to place funds 
 	 */
 	private void addFunds(Account account) {
-		if (!account.getStatus().equals(Status.ACTIVE))
+		if (!account.getStatus().toLowerCase().equals(Status.ACTIVE))
 			Menu.println("Account needs to be activated first!");
 		else { 
 			FieldParams query = factory.getFieldParams(account);
@@ -273,7 +273,7 @@ public class CustomerView implements View {
 	 * @param account - where to take funds from
 	 */
 	private void removeFunds(Account account) {
-		if (!account.getStatus().equals(Status.ACTIVE))
+		if (!account.getStatus().toLowerCase().equals(Status.ACTIVE))
 			Menu.println("Account needs to be activated first!");
 		else { 
 			FieldParams query = factory.getFieldParams(account);
