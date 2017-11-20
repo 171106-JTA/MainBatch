@@ -137,6 +137,7 @@ public class FlashCardDaoImpl implements FlashCardDao {
 			e.printStackTrace();
 		} finally {
 			close(ps);
+			close(rs);
 		}
 
 		return listfc;
@@ -163,6 +164,7 @@ public class FlashCardDaoImpl implements FlashCardDao {
 			e.printStackTrace();
 		} finally {
 			close(stmt);
+			close(ps);
 		}
 		return affected; // num rows affected
 	}

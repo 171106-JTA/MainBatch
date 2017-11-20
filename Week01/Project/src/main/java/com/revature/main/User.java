@@ -30,8 +30,14 @@ public class User implements Comparable<User> {
 		this.isAdmin = false;
 		statusFlag = 0;
 	}
-
-	/**
+	
+	public User(String ID, int Flag, boolean isAdmin) {
+		this.ID = ID;
+		this.isAdmin = isAdmin;
+		statusFlag = Flag;
+	}
+	
+	/*
 	 * Constructor used to hardcode the first administrator.
 	 * 
 	 * @param ID
@@ -115,7 +121,7 @@ public class User implements Comparable<User> {
 	 */
 	@Override
 	public String toString() {
-		return "ID: " + getUserID() + "\tstatus: " + getStatusFlag() + "\tadmin: " + getAdmin();
+		return "name: " + getUserID() + "\tstatus: " + getStatusFlag() + "\tadmin: " + getAdmin();
 	}
 
 	/**

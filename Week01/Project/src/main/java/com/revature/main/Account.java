@@ -6,8 +6,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import java.text.DecimalFormat;
 import java.util.InputMismatchException;
+//import java.util.ArrayList;
+//import java.util.List;
 
 import com.revature.util.ConnectionUtil;
 
@@ -29,9 +32,11 @@ public class Account {
 			String sql = "SELECT * FROM bank_users WHERE username = '" + usrnm + "' AND userpassword = '" + pswrd + "'";
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-			uid = rs.getInt("current_user_id");
-			balance = rs.getDouble("balance");
-			isAdmin = Boolean.parseBoolean(rs.getString("admin_status"));
+			while(rs.next()) {
+				uid = rs.getInt("user_id");
+				balance = rs.getDouble("balance");
+				isAdmin = Boolean.parseBoolean(rs.getString("admin_status"));				
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			Driver.log.trace("Dang.");
@@ -47,7 +52,7 @@ public class Account {
 			input = Driver.scanner.next();
 
 			switch (input) {
-			case "withdrawal":
+			case "withdraw":
 				try (Connection conn = ConnectionUtil.getConnection()) {
 					System.out.println("\nHow much do you want to withdraw?");
 
@@ -64,7 +69,7 @@ public class Account {
 					} else {
 						String updateBalance = "UPDATE bank_users SET balance = " + (balance -= dolAmt)
 								+ "WHERE user_id = " + uid;
-						String pushTransaction = "INSERT INTO transactions (current_user_id, trans_type, trans_amount) VALUES ("
+						String pushTransaction = "INSERT INTO transactions (current_uid, trans_type, trans_amount) VALUES ("
 								+ uid + ",'withdrawal'," + dolAmt + ")";
 						ps = conn.prepareStatement(updateBalance);
 						ps.execute();
@@ -75,6 +80,7 @@ public class Account {
 				} catch (SQLException e) {
 					e.printStackTrace();
 					Driver.log.trace("Dang.");
+					continue;
 				} finally {
 					close(ps);
 					close(rs);
@@ -93,7 +99,7 @@ public class Account {
 					dolAmt = Driver.scanner.nextDouble();
 					String updateBalance = "UPDATE bank_users SET balance = " + (balance += dolAmt) + "WHERE user_id = "
 							+ uid;
-					String pushTransaction = "INSERT INTO transactions (current_user_id, trans_type, trans_amount) VALUES ("
+					String pushTransaction = "INSERT INTO transactions (current_uid, trans_type, trans_amount) VALUES ("
 							+ uid + ",'deposit'," + dolAmt + ")";
 
 					ps = conn.prepareStatement(updateBalance);
@@ -104,6 +110,7 @@ public class Account {
 				} catch (SQLException e) {
 					e.printStackTrace();
 					Driver.log.trace("Dang.");
+					continue;
 				} finally {
 					close(ps);
 					close(rs);
@@ -112,14 +119,16 @@ public class Account {
 
 			case "transfer":
 				try (Connection conn = ConnectionUtil.getConnection()) {
-					System.out.println("Existing Users:\n");
-					System.out.println("\nflag key:\t0=unapproved 1=approved 2=blocked 3=inactive");
-					String printAll = "SELECT username, account_status FROM bank_users";
-
+					System.out.println("\nExisting Users:\n");
+					System.out.println("flag key:\t0=unapproved 1=approved 2=blocked 3=inactive");
+					String printAll = "SELECT username, account_status, admin_status FROM bank_users";
+					
 					ps = conn.prepareStatement(printAll);
 					rs = ps.executeQuery();
+					User u = null;
 					while (rs.next()) {
-						rs.toString();
+						u = new User(rs.getString("username"), rs.getInt("account_status"), Boolean.parseBoolean(rs.getString("admin_status")));
+						System.out.println(u.toString());
 					}
 
 					System.out.println("\nInput recipient and amount: ");
@@ -130,30 +139,32 @@ public class Account {
 						String recipientRecord = "SELECT * FROM bank_users WHERE username = '" + recipient + "'";
 						ps = conn.prepareStatement(recipientRecord);
 						rs = ps.executeQuery();
-						rid = rs.getInt("recipient_id");
-						rBalance = rs.getDouble("balance");
-						accountStat = rs.getInt("account_status");
-
-						if (accountStat != 1)
-							System.out.println("Account is not available for transfer.");
-						else if (uid == rid)
-							System.out.println("Cannot transfer to own account.");
-						else if (dolAmt < balance) {
-							String transferto = "UPDATE bank_users SET balance =" + (balance -= dolAmt)
-									+ "WHERE user_id = " + uid;
-							String transferfrom = "UPDATE bank_users SET balance =" + (rBalance += dolAmt)
-									+ "WHERE user_id = " + rid;
-							String pushTransaction = "INSERT INTO transactions VALUES (" + uid + ",'transfer'," + dolAmt + ","
-									+ rid + ")";
-							ps = conn.prepareStatement(transferto);
-							ps.execute();
-							ps = conn.prepareStatement(transferfrom);
-							ps.execute();
-							ps = conn.prepareStatement(pushTransaction);
-							ps.execute();
-							System.out.println("K$" + dolAmt + " was successfully transfered to: " + recipient);
-						} else
-							System.out.println("Insufficient funds.");
+						
+						if(rs.next()) {
+							rid = rs.getInt("user_id");
+							rBalance = rs.getDouble("balance");
+							accountStat = rs.getInt("account_status");
+							if (accountStat != 1)
+								System.out.println("Account is not available for transfer.");
+							else if (uid == rid)
+								System.out.println("Cannot transfer to own account.");
+							else if (dolAmt < balance) {
+								String transferto = "UPDATE bank_users SET balance =" + (balance -= dolAmt)
+										+ "WHERE user_id = " + uid;
+								String transferfrom = "UPDATE bank_users SET balance =" + (rBalance += dolAmt)
+										+ "WHERE user_id = " + rid;
+								String pushTransaction = "INSERT INTO transactions VALUES (" + uid + ",'transfer'," + dolAmt + ","
+										+ rid + ")";
+								ps = conn.prepareStatement(transferto);
+								rs = ps.executeQuery();
+								ps = conn.prepareStatement(transferfrom);
+								rs = ps.executeQuery();
+								ps = conn.prepareStatement(pushTransaction);
+								rs = ps.executeQuery();
+								System.out.println("K$" + dolAmt + " was successfully transfered to: " + recipient);
+							} else
+								System.out.println("Insufficient funds.");							
+						}
 					} catch (InputMismatchException e) {
 						System.out.println("Please submit transfer in proper format.");
 						// LogUtil.log.warn("input not in proper format", e);
@@ -162,7 +173,9 @@ public class Account {
 					continue;
 				} catch (SQLException e) {
 					e.printStackTrace();
-					Driver.log.trace("Dang.");
+//					Driver.log.trace("Cannot transfer to account that dne.");
+					System.out.println("Transfer failed.");
+					continue;
 				} finally {
 					close(ps);
 					close(rs);
@@ -170,17 +183,22 @@ public class Account {
 				// ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 			case "viewHistory":
+//				List<String> history = new ArrayList<String>();
+				Transaction t = null;
 				try (Connection conn = ConnectionUtil.getConnection()) {
-					String viewTransactions = "SELECT * FROM transactions WHERE current_user_id = " + uid;
-					rs = ps.executeQuery(viewTransactions); // if works, can update rest
+					String viewTransactions = "SELECT * FROM transactions WHERE current_uid = " + uid;
+					ps = conn.prepareStatement(viewTransactions);
+					rs = ps.executeQuery(); 
 
-					while (rs.next())
-						System.out.println(rs.toString());
-
+					while (rs.next()) {
+						t = new Transaction(rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getInt(4));
+						System.out.println(t.toString());						
+					}
 					continue;
 				} catch (SQLException e) {
 					e.printStackTrace();
 					Driver.log.trace("Dang.");
+					continue;
 				} finally {
 					close(ps);
 					close(rs);
@@ -230,7 +248,8 @@ public class Account {
 					continue;
 				} catch (SQLException e) {
 					e.printStackTrace();
-					Driver.log.trace("Dang.");
+					Driver.log.trace("Unable to delete.");
+					continue;
 				} finally {
 					close(ps);
 					close(rs);

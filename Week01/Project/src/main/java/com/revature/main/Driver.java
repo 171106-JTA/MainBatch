@@ -37,9 +37,9 @@ public class Driver {
 			case "login":
 				
 				try (Connection conn = ConnectionUtil.getConnection()) {
-					String sql = "SELECT * FROM bank_users WHERE username=? AND userpassword=?";
+					String sql = "SELECT username, account_status FROM bank_users WHERE username = ? AND userpassword = ?";
 
-					System.out.print("> username: ");
+					System.out.print("\n> username: ");
 					String username = scanner.next();
 					System.out.print("> password: ");
 					String password = scanner.next();
@@ -50,7 +50,8 @@ public class Driver {
 
 					rs = ps.executeQuery();
 					if (rs.next()) { 			//false when rs is empty and user dne; if true, should only return one record
-						Integer active = Integer.parseInt(rs.getString("account_status"));
+						Integer active = rs.getInt("account_status");
+						
 						if 		(active == 1)	Account.displayBalance(username, password);
 						else if (active == 0)	System.out.println("Account has not yet been activated. Try again later.");
 						else if (active == 2)	System.out.println("Account has been blocked; wait for reactivation.");
@@ -76,7 +77,7 @@ public class Driver {
 				String desiredPswrd = null;
 				
 				try (Connection conn = ConnectionUtil.getConnection();) {
-					System.out.println("\nChoose a username:");
+					System.out.print("\n> username: ");
 					boolean isAvailable = false;
 					
 					while (!isAvailable) {
@@ -89,15 +90,16 @@ public class Driver {
 						else isAvailable = true;
 					}
 					
-					System.out.println("\nChoose a password: ");
+					System.out.print("> password: ");
 					desiredPswrd = scanner.next();
 						
-					String sql = "INSERT INTO bank_users (username, userpassword, balance, account_status, admin_status"
+					String sql = "INSERT INTO bank_users (username, userpassword, balance, account_status, admin_status)"
 							+ " VALUES(?, ?, 0, 0, 'false')"; 
 					ps = conn.prepareStatement(sql);
 					ps.setString(1, desiredUsrnm);
 					ps.setString(2, desiredPswrd);
-					if(ps.execute())		System.out.println("\nThanks for creating a new account; it's under review and will be approved shortly. Attempt logging in then.");
+					rs = ps.executeQuery();
+					if (rs.next())		System.out.println("\nThanks for creating a new account; it's under review and will be approved shortly. Attempt logging in then.");
 					else					log.warn("New user not created.");
 					continue;
 				} catch (SQLException e) {
