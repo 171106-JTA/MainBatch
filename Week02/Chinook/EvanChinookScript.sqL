@@ -13,7 +13,7 @@ SELECT * FROM EMPLOYEE
 --Why does IS work when = failed. What's the difference?
 SELECT * FROM EMPLOYEE E
     WHERE UPPER(E.FIRSTNAME) = 'ANDREW' AND E.REPORTSTO IS NULL;
-
+/
 /************************************
 2.2 ORDER BY
 ************************************/
@@ -22,25 +22,25 @@ SELECT * FROM ALBUM
 
 SELECT FIRSTNAME FROM CUSTOMER
     ORDER BY CITY ASC; 
-
+/
 /************************************
 2.4 UPDATE
 ************************************/
 UPDATE CUSTOMER
     SET FIRSTNAME='ROBERT', LASTNAME='WALTER'
     WHERE UPPER(FIRSTNAME)='AARON' AND UPPER(LASTNAME)='MITCHELL'; 
-
+/
 --UPDATE RECORD AS SPECIFIED
 UPDATE ARTIST
     SET NAME='CCR'
     WHERE UPPER(NAME)='CREEDENCE CLEARWATER REVIVAL';
-
+/
 /************************************
 2.5 LIKE
 ************************************/
 SELECT * FROM INVOICE
     WHERE UPPER(BILLINGADDRESS) LIKE 'T%';
-    
+/ 
 /************************************
 2.6 BETWEEN
 ************************************/
@@ -49,17 +49,26 @@ SELECT * FROM INVOICE
     
 SELECT * FROM EMPLOYEE
     WHERE HIREDATE BETWEEN TO_DATE('1-JUN-2003') AND TO_DATE('1-MAR-2004');
-    
+/
 /************************************
 2.7 DELETE
 ************************************/
 --Disable constraint. Research why this is bad!
 --Delete all cascading contraint stuff
-ALTER TABLE INVOICE
-    DISABLE CONSTRAINT FK_INVOICECUSTOMERID;
+--ALTER TABLE INVOICE
+--    DISABLE CONSTRAINT FK_INVOICECUSTOMERID;
+
+DELETE FROM INVOICELINE
+    WHERE INVOICEID IN (SELECT INVOICEID FROM INVOICE
+            WHERE CUSTOMERID = (SELECT CUSTOMERID FROM CUSTOMER 
+                    WHERE UPPER(FIRSTNAME)='ROBERT' AND UPPER(LASTNAME)='WALTER'));
+DELETE FROM INVOICE
+    WHERE CUSTOMERID = (SELECT CUSTOMERID FROM CUSTOMER 
+                    WHERE UPPER(FIRSTNAME)='ROBERT' AND UPPER(LASTNAME)='WALTER');
 DELETE FROM CUSTOMER 
     WHERE UPPER(FIRSTNAME)='ROBERT' AND UPPER(LASTNAME)='WALTER';
 /
+
 /************************************************************************
 3.0 SQL FUNCTIONS
 ************************************************************************/
@@ -80,30 +89,28 @@ END;
 BEGIN 
     DBMS_OUTPUT.PUT_LINE(CUR_TIME());
 END;
-
-
-SELECT * FROM MEDIATYPE;
+/
 -------TASK 3.1.2-------
---CREATE OR REPLACE len_of_mediatype(media_id IN NUMBER)
---RETURN NUMBER
---IS
---    the_length NUMBER;
---BEGIN
---    SELECT LENGTH(NAME) INTO the_length FROM MEDIATYPE
---        WHERE MEDIATYPEID=media_id;
---    RETURN the_length;
---END;
-
+CREATE OR REPLACE FUNCTION len_of_mediatype(media_id IN NUMBER)
+RETURN NUMBER
+IS
+    the_length NUMBER;
+BEGIN
+    SELECT LENGTH(NAME) INTO the_length FROM MEDIATYPE
+        WHERE MEDIATYPEID=media_id;
+    RETURN the_length;
+END;
+/
+--Test len_of_mediatype()
 DECLARE
     media_id NUMBER(4);
     the_length NUMBER(4);
 BEGIN
-    media_id := 1;
-    SELECT LENGTH(NAME) INTO the_length FROM MEDIATYPE 
-        WHERE MEDIATYPEID=media_id;
+    media_id := 3;
+    the_length := len_of_mediatype(media_id);
     DBMS_OUTPUT.PUT_LINE(the_length);
 END;
-
+/
 /************************************
 3.2 SYSETM DEFINED AGGREGATE FUNCTIONS
 ************************************/
@@ -169,42 +176,97 @@ END;
 /
 /************************************
 3.4 USER DEFINED TABLE VALUED FUNCTIONS
---How is this question asking us for a scalar function????
---This appears to be another aggregate function questions
 ************************************/
---SELECT * FROM EMPLOYEE;
---
---CREATE OR REPLACE TYPE MY_EMP AS OBJECT (
---    EMPLOYEEID NUMBER,
---    LASTNAME VARCHAR2(100),
---    FIRSTNAME VARCHAR2(100), 
---    TITLE VARCHAR2(100)
---    --EXTEND THIS
---);
---
---CREATE OR REPLACE TYPE MY_EMP_TABLE AS TABLE OF MY_EMP;
---
---CREATE OR REPLACE FUNCTION GET_EMP(MIN_BIRTH_DATE IN DATE)
-----CREATE OR REPLACE FUNCTION GET_EMP()
---RETURN MY_EMP_TABLE
---IS
---    CUST_EMP_TABLE MY_EMP_TABLE;
---BEGIN
---    CUST_EMP_TABLE := MY_EMP_TABLE();
---    CUST_EMP_TABLE.EXTEND;
---    CUST_EMP_TABLE(CUST_EMP_TABLE.COUNT) := MY_EMP(1, 'WEST', 'EVAN', 'MR.');
---    DBMS_OUTPUT.PUT_LINE(MIN_BIRTH_DATE);
---    RETURN CUST_EMP_TABLE;
---END;
---
-----Test GET_EMP()
---SELECT * FROM TABLE(GET_EMP(TO_DATE('1968-12-31', 'YYYY-MM-DD')));
---
+CREATE OR REPLACE FUNCTION GET_EMP
+RETURN SYS_REFCURSOR
+IS
+    EMP_REF SYS_REFCURSOR;
+BEGIN
+    OPEN EMP_REF FOR 
+        SELECT * FROM EMPLOYEE
+        WHERE BIRTHDATE > TO_DATE('31-12-68', 'DD-MM-YY');
+    RETURN EMP_REF;
+END;
+/
+
 --DECLARE
---    CUST_DATE DATE;
---    TEMP VARCHAR2(100);
+--    EMP_CURSOR SYS_REFCURSOR;
+--    SOME_EMP_ID EMPLOYEE.EMPLOYEEID%TYPE;
+--    SOME_EMP_FIRSTNAME EMPLOYEE.FIRSTNAME%TYPE;
+--    SOME_EMP_LASTNAME EMPLOYEE.LASTNAME%TYPE;
+--    SOME_EMP_BIRTHDATE EMPLOYEE.BIRTHDATE%TYPE;
 --BEGIN
---    CUST_DATE := TO_DATE('1968-12-31', 'YYYY-MM-DD');
---    DBMS_OUTPUT.PUT_LINE(CUST_DATE);
---    GET_EMP(CUST_DATE);
+--    EMP_CURSOR := GET_EMP();
+--    DBMS_OUTPUT.PUT_LINE('HELLO THERE');
+--    LOOP
+--        FETCH EMP_CURSOR INTO SOME_EMP_ID, SOME_EMP_FIRSTNAME, SOME_EMP_LASTNAME, SOME_EMP_BIRTHDATE; --Grab the current recods its pointing at
+--        EXIT WHEN EMP_CURSOR%NOTFOUND; --%NOTFOUND does not exist until therer are no records left. 
+--        
+--        DBMS_OUTPUT.PUT_LINE(SOME_EMP_ID);
+----        DBMS_OUTPUT.PUT_LINE(SOME_EMP_ID || ' ' || SOME_EMP_FIRSTNAME || ' ' || SOME_EMP_LASTNAME ' ' || SOME_EMP_BIRTHDATE);
+--    END LOOP;
 --END;
+
+
+--Test query for comparing dates
+--SELECT * FROM EMPLOYEE 
+--    WHERE BIRTHDATE > TO_DATE('1968-12-31', 'YYYY-MM-DD');
+
+/************************************************************************
+4.0 Stored Procedures
+************************************************************************/
+/************************************
+4.1 BASIC STORED PROCEDURE
+************************************/
+CREATE OR REPLACE PROCEDURE GET_EMP_NAMES(EMP_CURSOR OUT SYS_REFCURSOR)
+IS
+BEGIN
+    OPEN EMP_CURSOR FOR 
+        SELECT FIRSTNAME, LASTNAME FROM EMPLOYEE;
+END;
+/
+--Test GET_EMP_NAMES() 
+DECLARE
+    EMP_NAME_CURSOR SYS_REFCURSOR;
+    SOME_FNAME EMPLOYEE.FIRSTNAME%TYPE;
+    SOME_LNAME EMPLOYEE.LASTNAME%TYPE;
+BEGIN
+    GET_EMP_NAMES(EMP_NAME_CURSOR);
+    DBMS_OUTPUT.PUT_LINE('HELLO THERE');
+    LOOP
+        FETCH EMP_NAME_CURSOR INTO SOME_FNAME, SOME_LNAME; --Grab the current recods its pointing at
+        EXIT WHEN EMP_NAME_CURSOR%NOTFOUND; --%NOTFOUND does not exist until therer are no records left. 
+        
+        DBMS_OUTPUT.PUT_LINE(SOME_FNAME || ' ' || SOME_LNAME);
+--        DBMS_OUTPUT.PUT_LINE(SOME_EMP_ID || ' ' || SOME_EMP_FIRSTNAME || ' ' || SOME_EMP_LASTNAME ' ' || SOME_EMP_BIRTHDATE);
+    END LOOP;
+END;
+
+SELECT * FROM EMPLOYEE;
+
+/************************************
+4.2 Stored Procedure Input Parameters
+************************************/
+CREATE OR REPLACE PROCEDURE alter_user(
+    Emp_ID  EMPLOYEE.EmployeeId%TYPE,
+    LName   EMPLOYEE.LastName%TYPE, 
+    FName   EMPLOYEE.FirstName%TYPE,
+    Tit     EMPLOYEE.Title%TYPE, 
+    BD      EMPLOYEE.BirthDate%TYPE,
+    HD      EMPLOYEE.HireDate%TYPE,
+    Add     EMPLOYEE.Address%TYPE,
+    Cit     EMPLOYEE.City%TYPE,
+    St      EMPLOYEE.State%TYPE,
+    Ctry    EMPLOYEE.Country%TYPE,
+    PC      EMPLOYEE.PostalCode%TYPE,
+    PH      EMPLOYEE.Phone%TYPE,
+    FX      EMPLOYEE.Fax%TYPE,
+    EML     EMPLOYEE.Email%TYPE)
+IS
+BEGIN
+    UPDATE EMPLOYEE
+    SET LastName = LName, FirstName = FName, Title = Tit, BirthDate = BD, HireDate = HD, Address = Add, City = Cit, 
+        State = St, Country = Ctry, PostalCode = PC, Phone = PH, Fax = FX, Email = EML
+    WHERE EMPLOYEEID = Emp_ID; 
+END;
+
