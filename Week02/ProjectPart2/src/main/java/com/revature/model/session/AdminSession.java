@@ -8,7 +8,8 @@ import com.revature.dao.jBankDAOImpl;
 import com.revature.model.account.User;
 import com.revature.model.account.UserLevel;
 
-public class AdminSession {
+public class AdminSession extends UserSession {
+
 	private boolean isAdminNow;
 	private int adminChoice;
 	private Scanner sc = new Scanner(System.in);
@@ -18,6 +19,15 @@ public class AdminSession {
 	final private int APPROVE = 3;
 	final private int BANK = 4;
 
+	public AdminSession(User user) {
+		super(user);
+	}
+
+	public AdminSession() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public void getSession() {
 		setAdminNow(true);
 		do {
@@ -26,8 +36,6 @@ public class AdminSession {
 				System.out.println("Please select number from one of the choice and press /'Enter/'");
 				adminMenu();
 			}
-			
-
 			switch (getAdminChoice()) {
 			case PROMOTE:
 				promoteUserPrompt();
@@ -50,19 +58,19 @@ public class AdminSession {
 		System.out.println("List of users with pending approval:");
 		jBankDAO dao = new jBankDAOImpl();
 		List<User> myUsers = dao.getAllUser();
-		for(User user : myUsers) {
-			if(user.isApproved() == false) {
+		for (User user : myUsers) {
+			if (user.isApproved() == false) {
 				System.out.println("> username:" + user.getUsername());
 			}
 		}
 		String userInput;
 		System.out.println("> Any user you want to approve? (Type 'quit' to exit):");
 		userInput = sc.nextLine().toLowerCase();
-		if(userInput.equals("quit")) {
+		if (userInput.equals("quit")) {
 			return;
 		}
 		dao.approveUser(userInput);
-		
+
 	}
 
 	private void lockUserPrompt() {
@@ -95,8 +103,7 @@ public class AdminSession {
 		} else {
 			if (userInput.equals("lock")) {
 				dao.lockUser(promotee, true);
-			}
-			else {
+			} else {
 				dao.lockUser(promotee, false);
 			}
 		}
@@ -122,7 +129,8 @@ public class AdminSession {
 		System.out.println("> This user's level is currently: " + promotee.getUserLevel());
 		System.out.println("> Enter promotion title: (BASIC,VIP,ADMIN)");
 		String userInput = sc.nextLine().toUpperCase();
-		System.out.println(dao.promoteUser(promotee, userInput) + " user has been updated");
+		if(dao.promoteUser(promotee, userInput))
+		System.out.println(promotee +"'s status have changed to " + userInput);
 
 	}
 

@@ -76,8 +76,8 @@ public class Driver {
 			AdminSession adminSess = new AdminSession();
 			adminSess.getSession();
 		}
-		UserSession userSess = new UserSession();
-		
+		UserSession userSess = new UserSession(currUser);
+		userSess.getSession();
 	}
 
 	private void createAccount() {

@@ -5,7 +5,7 @@ CREATE TABLE jbank_users
     firstName varchar2(50),
     lastName varchar2(50),
     userpwd varchar2(50),
-    userlevel varchar2(10),
+        userlevel varchar2(10),
     pin number(4),
     locked_tf varchar(5),
     approved_tf varchar(5),
@@ -33,3 +33,22 @@ END;
 /
 
 SELECT * FROM jbank_users;
+
+
+DROP SEQUENCE tr_seq;
+CREATE SEQUENCE tr_seq
+    start with 1001
+    increment by 3;
+
+CREATE OR REPLACE TRIGGER tr_seq_trigger --auto increment
+BEFORE INSERT ON jbank_trans
+FOR EACH ROW
+BEGIN --This keyword signifies a block for a transaction. 
+    IF :new.trans_id IS NULL THEN 
+    SELECT tr_seq.nextval INTO :new.trans_id from dual;    
+    END IF;
+    
+END;    
+/
+
+ALTER TABLE jbank_trans MODIFY TRAN_DATE default sysdate not null;

@@ -13,6 +13,7 @@ import java.util.List;
 
 import com.revature.model.account.User;
 import com.revature.model.account.UserLevel;
+import com.revature.model.transaction.TransType;
 import com.revature.model.transaction.Transaction;
 import com.revature.util.ConnectionUtil;
 
@@ -26,7 +27,6 @@ public class jBankDAOImpl implements jBankDAO {
 					+ "VALUES('" + usr.getUsername() + "', '" + usr.getFirstName() + "', '" + usr.getLastName() + "', '"
 					+ usr.getPassword() + "', '" + usr.getUserLevel() + "', '" + usr.getPin() + "', '" + usr.isLocked()
 					+ "', '" + usr.isApproved() + "', '" + usr.getBalance() + "')";
-			System.out.println(sql);
 			stmt = conn.createStatement();
 			int affected = stmt.executeUpdate(sql);
 			System.out.println(affected + " Rows affected");
@@ -153,17 +153,35 @@ public class jBankDAOImpl implements jBankDAO {
 	}
 
 	@Override
-	public List<Transaction> getTransactionsByUID() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Transaction> getTransactionsByUID(User user) {
+		List<Transaction> trans = new ArrayList<>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			String sql = "SELECT * FROM jbank_Trans where user_id=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, user.getUid());
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				Transaction trn = new Transaction();
+				trn.setAmount(rs.getDouble("AMOUNT"));
+				trn.setTransactionID(rs.getInt("TRANS_ID"));
+				trn.setTransactionDate(rs.getDate("TRAN_DATE"));
+				trn.setTransactionType(TransType.valueOf(rs.getString("TRANS_TYPE").toUpperCase()));
+				trn.setUid(rs.getInt("USER_ID"));
+				trans.add(trn);
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return trans;
 	}
 
 	@Override
-	public int promoteUser(User user, String usrLvl) {
+	public boolean promoteUser(User user, String usrLvl) {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		int count = 0;
-		User usr = new User();
 
 		try (Connection conn = ConnectionUtil.getConnection()) {
 			String sql = "UPDATE jbank_users SET USERLEVEL = ? WHERE user_id = ?";
@@ -171,30 +189,15 @@ public class jBankDAOImpl implements jBankDAO {
 			ps.setString(1, usrLvl);
 			ps.setInt(2, user.getUid());
 			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				count++;
-				usr.setUid(rs.getInt("USER_ID"));
-				usr.setUsername(rs.getString("USERNAME"));
-				usr.setFirstName(rs.getString("FIRSTNAME"));
-				usr.setLastName(rs.getString("LASTNAME"));
-				usr.setPassword(rs.getString("USERPWD"));
-				usr.setUserLevel(UserLevel.valueOf(rs.getString("USERLEVEL")));
-				usr.setPin(rs.getInt("PIN"));
-				usr.setApproved(Boolean.valueOf(rs.getString("APPROVED_TF")));
-				usr.setLocked(Boolean.valueOf(rs.getString("LOCKED_TF")));
-				usr.setBalance(rs.getDouble("BALANCE"));
-
-			}
-			usr.setUid(rs.getInt(1));
+			return true;
 
 		} catch (SQLException e) {
-
+			return false;
 		} finally {
 			close(ps);
 			close(rs);
 		}
-		return count;
+
 	}
 
 	@Override
@@ -257,5 +260,58 @@ public class jBankDAOImpl implements jBankDAO {
 		// use logger
 		System.out.println(username + " has been approved.");
 		return count;
+	}
+
+	@Override
+	public int createTransaction(TransType type, double amt, User user) {
+		int affected = 0;
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			String sql = "INSERT INTO agni.jbank_trans(USER_ID, TRANS_TYPE, AMOUNT) VALUES('" + user.getUid() + "', '"
+					+ String.valueOf(type) + "', '" + amt + "')";
+			System.out.println(sql);
+			stmt = conn.createStatement();
+			affected = stmt.executeUpdate(sql);
+			System.out.println(affected + " transactions happened");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(stmt);
+		}
+		return affected;
+	}
+
+	@Override
+	public void balanceUpdate(TransType type, double amt, User user) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			String sql;
+			double total;
+			if (type.equals(TransType.DEPOSIT)) {
+				total = user.getBalance() + amt;
+				sql = "UPDATE jbank_users SET balance = ? WHERE USER_ID = ?";
+
+			} else if (type.equals(TransType.WITHDRAW)) {
+				total = user.getBalance() - amt;
+				sql = "UPDATE jbank_users SET balance = ? WHERE USER_ID = ?";
+			} else {
+				System.out.println("unable to process");
+				return;
+			}
+			ps = conn.prepareStatement(sql);
+			ps.setDouble(1, amt);
+			ps.setInt(2, user.getUid());
+			rs = ps.executeQuery();
+			commitQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ps);
+			close(rs);
+		}
+		// use logger
+		System.out.println("update made");
+
 	}
 }
