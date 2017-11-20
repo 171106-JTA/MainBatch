@@ -211,7 +211,15 @@ public class Driver {
 	 */
 	public void createNewClientAccount() {
 		User newUser = getNewClientInfo();
-		addNewClientToDatabase(newUser);
+		boolean userInserted = addNewClientToDatabase(newUser);
+		
+		if (userInserted) {
+			logger.trace("Adding new user to database");
+			System.out.println("Account Created! Please wait for an Administrator to approve your account.");
+		} else {
+			System.out.println("Woops! Account NOT created. User already exists or invalid input");
+			logger.trace("Account NOT created. User already exists or invalid input");
+		}
 	}
 
 	private User getNewClientInfo() {
@@ -244,16 +252,10 @@ public class Driver {
 		return newUser;
 	}
 
-	public void addNewClientToDatabase(User newUser) {
+	public boolean addNewClientToDatabase(User newUser) {
 		boolean userInserted = dao.createUser(newUser);
 		
-		if (userInserted) {
-			logger.trace("Adding new user to database");
-			System.out.println("Account Created! Please wait for an Administrator to approve your account.");
-		} else {
-			System.out.println("Woops! Account NOT created. User already exists or invalid input");
-			logger.trace("Account NOT created. User already exists or invalid input");
-		}
+		return userInserted;
 	}
 
 	/**
@@ -657,5 +659,9 @@ public class Driver {
 
 	public User getCurrentUser() {
 		return currentUser;
+	}
+	
+	public void initializeDao() {
+		dao = new UserDaoImplement();
 	}
 }

@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -227,7 +226,6 @@ public class UserDaoImplement implements UserDao {
 		return userAltered;
 	}
 	
-
 	public boolean alterUserStatusAndPermission(String username, final int currentStatus, final int currentPermission,
 			final int newStatus, final int newPermission) {
 		PreparedStatement ps = null;

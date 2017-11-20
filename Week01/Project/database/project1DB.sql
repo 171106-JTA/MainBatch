@@ -23,7 +23,8 @@ CREATE TABLE USER_INFO(
     CONSTRAINT FK_username FOREIGN KEY(USERNAME) REFERENCES ACCOUNT(USERNAME)
 );
 /
---Sample users, if needed
+--Sample users for unit testing
+--This is tempory fix. Eventually will mock up the database for unit testing
 INSERT INTO ACCOUNT
 VALUES('A','A',0,0,0);
 INSERT INTO USER_INFO
@@ -76,59 +77,59 @@ BEGIN
 END;
 /
 
-CREATE OR REPLACE PROCEDURE alter_user(
-    cur_username IN VARCHAR,
-    cur_status IN NUMBER,
-    cur_permission IN NUMBER,
-    new_status IN NUMBER,
-    new_permission IN NUMBER)
-IS
-BEGIN
-    UPDATE a_user
-    SET STATUS = new_status, PERMISSION=new_permission
-    WHERE USERNAME=cur_username AND STATUS=cur_status AND PERMISSION=cur_permission; 
-END;
-
---Testing the insert_user procedure!
-DECLARE
-    TMP VARCHAR(5);
-BEGIN
-    TMP := 'Z';
-    insert_user(TMP, TMP, TMP, TMP, TMP, 0, 0, 0);
-END;
-/
---Testing the alter_user procedure!
-DECLARE
-    CUR_USRNM VARCHAR(50);
-    CUR_STATUS NUMBER;
-    CUR_PERMISSION NUMBER;
-    NEW_STATUS NUMBER;
-    NEW_PERMISSION NUMBER;
-BEGIN
-    CUR_USRNM := 'E';
-    CUR_STATUS := 1;
-    CUR_PERMISSION := 1;
-    NEW_STATUS := 1;
-    NEW_PERMISSION := 1;
-    alter_user(CUR_USRNM, CUR_STATUS, CUR_PERMISSION, NEW_STATUS, NEW_PERMISSION);
-END;
-/
-
---SELECT ACCOUNT.USERNAME, ACCOUNT.USER_PASSWORD, ACCOUNT.STATUS, ACCOUNT.PERMISSION, 
---        ACCOUNT.ACCOUNTAMOUNT, USER_INFO.FIRSTNAME, USER_INFO.LASTNAME, 
---        USER_INFO.MIDDLEINITIAL 
---        FROM ACCOUNT JOIN USER_INFO
---        ON ACCOUNT.USERNAME = USER_INFO.USERNAME
---        WHERE ACCOUNT.USERNAME='evan' AND ACCOUNT.USER_PASSWORD='password';
-SELECT * FROM ACCOUNT NATURAL JOIN USER_INFO
-        WHERE USERNAME='evan' AND USER_PASSWORD='password';
-        
-SELECT * FROM ACCOUNT NATURAL JOIN USER_INFO
-    WHERE USERNAME = 'evan';
-SELECT * FROM USER_INFO;
-
-SELECT * FROM ACCOUNT JOIN USER_INFO ON USERNAME;
-
-UPDATE a_user 
-SET STATUS = 1, PERMISSION=1
-WHERE USERNAME= 'E' AND STATUS=0 AND PERMISSION=0;
+--CREATE OR REPLACE PROCEDURE alter_user(
+--    cur_username IN VARCHAR,
+--    cur_status IN NUMBER,
+--    cur_permission IN NUMBER,
+--    new_status IN NUMBER,
+--    new_permission IN NUMBER)
+--IS
+--BEGIN
+--    UPDATE a_user
+--    SET STATUS = new_status, PERMISSION=new_permission
+--    WHERE USERNAME=cur_username AND STATUS=cur_status AND PERMISSION=cur_permission; 
+--END;
+--
+----Testing the insert_user procedure!
+--DECLARE
+--    TMP VARCHAR(5);
+--BEGIN
+--    TMP := 'Z';
+--    insert_user(TMP, TMP, TMP, TMP, TMP, 0, 0, 0);
+--END;
+--/
+----Testing the alter_user procedure!
+--DECLARE
+--    CUR_USRNM VARCHAR(50);
+--    CUR_STATUS NUMBER;
+--    CUR_PERMISSION NUMBER;
+--    NEW_STATUS NUMBER;
+--    NEW_PERMISSION NUMBER;
+--BEGIN
+--    CUR_USRNM := 'E';
+--    CUR_STATUS := 1;
+--    CUR_PERMISSION := 1;
+--    NEW_STATUS := 1;
+--    NEW_PERMISSION := 1;
+--    alter_user(CUR_USRNM, CUR_STATUS, CUR_PERMISSION, NEW_STATUS, NEW_PERMISSION);
+--END;
+--/
+--
+----SELECT ACCOUNT.USERNAME, ACCOUNT.USER_PASSWORD, ACCOUNT.STATUS, ACCOUNT.PERMISSION, 
+----        ACCOUNT.ACCOUNTAMOUNT, USER_INFO.FIRSTNAME, USER_INFO.LASTNAME, 
+----        USER_INFO.MIDDLEINITIAL 
+----        FROM ACCOUNT JOIN USER_INFO
+----        ON ACCOUNT.USERNAME = USER_INFO.USERNAME
+----        WHERE ACCOUNT.USERNAME='evan' AND ACCOUNT.USER_PASSWORD='password';
+--SELECT * FROM ACCOUNT NATURAL JOIN USER_INFO
+--        WHERE USERNAME='evan' AND USER_PASSWORD='password';
+--        
+--SELECT * FROM ACCOUNT NATURAL JOIN USER_INFO
+--    WHERE USERNAME = 'evan';
+--SELECT * FROM USER_INFO;
+--
+--SELECT * FROM ACCOUNT JOIN USER_INFO ON USERNAME;
+--
+--UPDATE a_user 
+--SET STATUS = 1, PERMISSION=1
+--WHERE USERNAME= 'E' AND STATUS=0 AND PERMISSION=0;
