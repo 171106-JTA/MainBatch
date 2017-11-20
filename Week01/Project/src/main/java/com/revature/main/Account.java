@@ -17,7 +17,6 @@ import com.revature.util.ConnectionUtil;
  */
 public class Account {
 	public static PreparedStatement ps = null;
-	public static PreparedStatement ds = null;
 	public static ResultSet rs = null;
 
 	public static void displayBalance(String usrnm, String pswrd) {
@@ -129,17 +128,14 @@ public class Account {
 					String viewTransactions = "SELECT * FROM transactions WHERE current_user_id = " + uid;
 					rs = ps.executeQuery(viewTransactions); //if works, can update rest
 					
-					while(rs.next()) {
-						System.out.println(rs.toString());
-					}
+					while(rs.next()) System.out.println(rs.toString());
+				
 					continue;
 				// ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 				case "admin":
-					if (isAdmin)
-						Admin.displayFunctions(usrnm, pswrd);
-					else
-						System.out.println("\nNice try, non-admin Σ( ￣□￣||).");
+					if (isAdmin)		Admin.displayFunctions(usrnm, pswrd);
+					else				System.out.println("\nNice try, non-admin Σ( ￣□￣||).");
 					continue;
 
 				// ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––

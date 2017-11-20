@@ -1,121 +1,110 @@
 package com.revature.main;
 
+import static com.revature.util.CloseStreams.close;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import com.revature.util.ConnectionUtil;
+
 /**
  * Defines and implements administrative funcitonality, e.g. account access,
  * deletion.
  */
 public class Admin {
-	/**
-	 * Displays options and (while) loops to provide continuous (switch-case) access
-	 * to them.
-	 * @param pswrd 
-	 * @param usrnm 
-	 */
+	public static PreparedStatement ps = null;
+	public static ResultSet rs = null;
+
 	public static void displayFunctions(String usrnm, String pswrd) {
 		String input;
 		boolean wandWielding = true;
 		System.out.print("\nHello Admin.");
 
-		while (wandWielding) {
-			System.out.println(
-					"\nWhat would you like to do? \n> viewAll  > approve  > block  > grantAdmin  > revokeAdmin  > delete  > return ");
-			input = Driver.scanner.next();
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			while (wandWielding) {
+				System.out.println("\n> viewAll  > approve  > block  > grantAdmin  > revokeAdmin  > delete  > return ");
+				input = Driver.scanner.next();
 
-			switch (input) {
-			case "viewAll":
-				System.out.println("\nflag key:\t0=unapproved 1=approved 2=blocked 3=inactive");
-				Driver.userList.sort(null); // sort userlist by status
-				for (User all : Driver.userList) {
-					System.out.println(all.toString());
+				switch (input) {
+				case "viewAll":
+					System.out.println("\nflag key:\t0=unapproved 1=approved 2=blocked 3=inactive");
+					String view = "SELECT user_id, username, account_status, admin_status FROM bank_users";
+					ps = conn.prepareStatement(view);
+					rs = ps.executeQuery();
+					
+					while(rs.next())		rs.toString();
+					continue;
+
+				case "approve":
+					String acct = Driver.scanner.next();
+					String approve = "UPDATE bank_users SET account_status = 1 WHERE username = '" + acct + "'";
+					ps = conn.prepareStatement(approve);
+					if(ps.execute())		System.out.println(acct + " has been approved.");
+					else 				Driver.log.warn("User approval incomplete.");
+					
+					continue;
+
+				case "block":
+					acct = Driver.scanner.next();
+					String block = "UPDATE bank_users SET account_status = 2 WHERE username = '" + acct + "'";
+					ps = conn.prepareStatement(block);
+					if(ps.execute())		System.out.println(acct + " has been blocked.");
+					else 				Driver.log.warn("User block incomplete.");
+					
+					continue;
+
+				case "grantAdmin":
+					acct = Driver.scanner.next();
+					String grant = "UPDATE bank_users SET admin_status = 'true' WHERE username = '" + acct + "'";
+					
+					ps = conn.prepareStatement(grant);
+					if(ps.execute())		System.out.println(acct + " has been made an admin.");
+					else 				Driver.log.warn("User grant incomplete.");
+					
+					continue;
+
+				case "revokeAdmin":
+					acct = Driver.scanner.next();
+					String revoke = "UPDATE bank_users SET admin_status = 'false' WHERE username = '" + acct + "'";
+					
+					ps = conn.prepareStatement(revoke);
+					if(ps.execute())		System.out.println(acct + " is no longer an admin.");
+					else 				Driver.log.warn("User revoke incomplete.");
+			
+					continue;
+
+				case "delete":
+					acct = Driver.scanner.next();
+					String checkForDelete = "SELECT account_status FROM bank_users WHERE username = '" + acct + "'";
+					String delete = "DELETE FROM bank_users WHERE username = '" + acct + "'";
+					
+					ps = conn.prepareStatement(checkForDelete);
+					rs = ps.executeQuery();
+					if(rs.getInt("account_status") != 3) System.out.println("Cannot delete user without request.");
+					else {
+						ps = conn.prepareStatement(delete);
+						if(ps.execute())		System.out.println(acct + " is no longer an admin.");
+						else 				Driver.log.warn("User revoke incomplete.");						
+					}
+					
+					continue;
+
+				case "return":
+					return; // returns to basic account functions
+
+				default:
+					System.out.println("\nPlease choose a valid admin command.");
+					continue;
 				}
-				continue;
-
-			case "approve":
-				approveAccount(User.returnExisting(Driver.scanner.next())); // passes string → user object → method
-				continue;
-
-			case "block":
-				blockAccount(User.returnExisting(Driver.scanner.next()));
-				continue;
-
-			case "grantAdmin":
-				makeAdmin(User.returnExisting(Driver.scanner.next()));
-				continue;
-
-			case "revokeAdmin":
-				revokeAdmin(User.returnExisting(Driver.scanner.next()));
-				continue;
-
-			case "delete":
-				User xx = User.returnExisting(Driver.scanner.next());
-				if (xx.getStatusFlag() == 3)
-					Driver.userList.remove(xx);
-				else
-					System.out.println("Cannot delete user without request.");
-				continue;
-
-			case "return":
-				return; // returns to basic account functions
-
-			default:
-				System.out.println("\nPlease choose a valid admin command.");
-				continue;
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			Driver.log.trace("Dang.");
+		} finally {
+			close(ps);
+			close(rs);
 		}
-
 	}
-
-	/**
-	 * Takes User object and sets status flag to approved.
-	 * 
-	 * @param u
-	 */  
-	private static void approveAccount(User u) {
-		if (!u.getUserID().equals(" ")) {
-			u.setStatusFlag(1);
-			System.out.println(u.getUserID() + " has been approved.");
-		} else
-			System.out.println("\nCannot approve a nonexistent account."); // returnExisting() returns blank usr if id
-																			// not found
-	}
-
-	/**
-	 * Takes User object and sets status flag to blocked.
-	 * 
-	 * @param u
-	 */
-	private static void blockAccount(User u) {
-		if ((!u.getUserID().equals(" ")) && (u.getStatusFlag() == 1)) {
-			u.setStatusFlag(2);
-			System.out.println("\n" + u.getUserID() + " has been blocked.");
-		} else
-			System.out.println("\nCannot block a nonexistent/unapproved account.");
-	}
-
-	/**
-	 * Takes User object and sets admin flag to granted.
-	 * 
-	 * @param u
-	 */
-	private static void makeAdmin(User u) {
-		if ((!u.getUserID().equals(" ")) && (u.getStatusFlag() == 1)) {
-			u.setAdmin(true);
-			System.out.println("\n" + u.getUserID() + " has been made an admin.");
-		} else
-			System.out.println("\nCannot grant admin status to a nonexistent/unactivated account.");
-	}
-
-	/**
-	 * Takes User object and sets admin flag to revoked.
-	 * 
-	 * @param u
-	 */
-	private static void revokeAdmin(User u) {
-		if ((!u.getUserID().equals(" ")) && (u.getStatusFlag() == 1)) {
-			u.setAdmin(false);
-			System.out.println("\n" + u.getUserID() + " is no longer an admin.");
-		} else
-			System.out.println("\nCannot revoke admin status from a nonexistent/unactivated account.");
-	}
-
 }
