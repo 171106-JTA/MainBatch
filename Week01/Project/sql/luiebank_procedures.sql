@@ -188,7 +188,9 @@ END;
 /**
  *
  */
-CREATE OR REPLACE PROCEDURE create_account(my_user_id IN MB_USER.id%TYPE, account_status IN MB_CODE_LIST.value%TYPE, account_type IN MB_CODE_LIST.value%TYPE,
+CREATE OR REPLACE PROCEDURE create_account(my_user_id IN MB_USER.id%TYPE, 
+                                account_status IN MB_CODE_LIST.value%TYPE, 
+                                account_type IN MB_CODE_LIST.value%TYPE,
                                 rate_level IN MB_CODE_LIST.value%TYPE)
 IS
     account_id MB_ACCOUNT.account_number%TYPE;
