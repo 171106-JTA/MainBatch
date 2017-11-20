@@ -8,12 +8,12 @@ public class MyLogger {
 	
 	public static void main(String[] args) {
 		MyLogger log = new MyLogger();
-		log.logTransactions("Bank log!");
+		log.logTransactions("Bank App Log!");
 	}
 	
-	//We only log info
 	public void logTransactions(String message){
 		logger.info(message);
+		logger.trace(message);
 	}
 
 }

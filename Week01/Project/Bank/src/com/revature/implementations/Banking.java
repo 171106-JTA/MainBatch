@@ -5,12 +5,12 @@
  * @author Mahamadou
  * @Version 1.0
  * @Date 11/13/2017
- * 
  */
 package com.revature.implementations;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import com.revature.display.MyDisplays;
@@ -18,275 +18,310 @@ import com.revature.objects.*;
 
 public class Banking {
 	
-	private static Scanner reader = new Scanner(System.in); //Reading from System.in
-
 	//1. Load the customers list into an ArrayList
-	ArrayList<Customer> baseCustomers = new MyDisplays<Customer>().readObject("customers.ser");
+	static ArrayList<Customer> baseCustomers = new MyDisplays<Customer>().readObject("customers.ser");
 	//2. Load the accounts list into an ArrayList
-	ArrayList<Account> baseAccounts = new MyDisplays<Account>().readObject("accounts.ser");
+	static ArrayList<Account> baseAccounts = new MyDisplays<Account>().readObject("accounts.ser");
 	//2. Load the transactions list into an ArrayList
-	ArrayList<Transaction> baseTransactions = new MyDisplays<Transaction>().readObject("transactions.ser");
+	static ArrayList<Transaction> baseTransactions = new MyDisplays<Transaction>().readObject("transactions.ser");
+	//2. Load the transactions list into an ArrayList
+	static ArrayList<Loan> baseLoans = new MyDisplays<Loan>().readObject("loans.ser");
+	
+	public static int nbOfCustomers;
+	public static int nbOfTransactions;
+	
+	private static Scanner reader = new Scanner(System.in); //Reading from System.in
 
 	public static void main(String[] args) {
 		
+		//To be use for auto increment id 
+		nbOfCustomers = baseCustomers.size();
+		nbOfTransactions = baseTransactions.size();
+		
 		//3. Prompt the user to identify himself or create an account
-		int menuChoice = 0;
+		int menuChoice = -1;
 		Customer connectedCustomer = null;	
-		Account connectedAccount =null;
-		String response = null, wantToQuit = "N", account = null;
+		ArrayList<Account> connectedAccounts = new ArrayList<>();
+		String response = null;
+		boolean newCustomerResult = false;
+		double amount = 0.0, balance = 0.0;		//To be used for the transactions
+		int customerID = -1;					//To be used in customer valiation and promotion
+		boolean newActivation = true;
+		int loanChoice = -1;					//To be used for loan approval process
+		String loanNumber = null;
+		
+		/* wantToQuit = "N", account = null;
 		String acctNumber;
 		double transactAmount;
+*/		
 		
+		//Welcome Message
+		System.out.println("Please start by making a choice \n"
+						+ "----------------------------------\n");
+		
+		//Loop until the user types in a valid response
+		System.out.println(
+							"1. Log In\n2. Sign Up\n");
 		do {
-			//Loop until the user types in a valid response
-			System.out.println("New user (Y/N)?");
-			response = reader.nextLine().toUpperCase();
-
-			switch (response) {
-			case "Y":
-				//Customer responded Yes, so he can create a customer account
-				if (new Banking().newCustomer())
-					System.out.println("Account created. Please wait for validation!");
-				else
-					response = null;
+			try {
+				menuChoice = reader.nextInt();
+			}
+			catch(InputMismatchException e) {
+				menuChoice = -1;
 				break;
-			case "N":
-				/*Since the customer is a returning user, he won't have to create 
-				 *an account but log in by providing a username and password.
-				 *if success, the customer data are loaded into a session variable.
-				 */
-				if ((connectedCustomer = new Banking().login()) == null) {
-					System.out.println("Want to quit?");
-					wantToQuit = ((reader.nextLine().toUpperCase() == "Y") ? "Y" : "N");}
-				break;
-			default:
-				response = null;
-				break;
-		}	}
-		while(response == null && wantToQuit == "N");		
-		/*4.Display the customer's accounts information.
-		 * 	Call the displayUserMenu to display the menu
-		 */
-		if (connectedCustomer != null) {
-			/*Logs the connection of the user*/
-			new MyLogger().logTransactions(new Date() + " - " + connectedCustomer.getName());
-			
-			connectedCustomer.toString();
-			for(Account acct : new Banking().baseAccounts) {
-				if (acct.getCustomerID() == connectedCustomer.getId()) {
-					connectedAccount = acct;
-					System.out.println(acct.toString());
-					for(Transaction transact : new Banking().baseTransactions)
-						if (transact.getAccountNber().equals(acct.getAccountNber())){
-							System.out.println(transact.toString());
-				}	} 	}
-							
-			menuChoice = new Banking().displayUserMenu(connectedCustomer.getRoleID());
-
-			do {
+			}
+			finally {
 				switch(menuChoice) {
-				case 1:
-					//Activate Accounts
-					if (connectedCustomer.getRoleID() == 1)
-						System.out.println("You don't have this permission!");
-					else {
-						System.out.println("Account number to activate: ");
-						account = reader.nextLine();
-						for(Account acct : new Banking().baseAccounts) {
-							if (acct.getAccountNber().equals(account))
-								new Banking().activateAccounts(acct);
-					}	}
-					break;
-				case 2:
-					//Withdraw
-					System.out.println("Account number: ");
-					acctNumber = reader.nextLine();
-					System.out.println("Transaction amount: ");
-					transactAmount = reader.nextDouble();
+				case 1:															//Login
+					/*User login */
+					boolean leave = false;
+					do {
+						menuChoice = 1;											//In case we recover from a failed login
+					reader.nextLine(); //reset the reader
+					//Call the login function and load the customer
+					System.out.println("----------------------------------\nLOGIN \n----------------------------------\n" +
+					"User name: \n");
+					String userName = reader.nextLine();
+					System.out.println("Password:\n");
+					String password = reader.nextLine();
 					
-					new Banking().withdraw(acctNumber, transactAmount);
-					connectedAccount.setBalance(connectedAccount.getBalance() - transactAmount);
-					/*Logs the withdrawal*/
-					new MyLogger().logTransactions(new Date() + "\tWithdrawal\t" + connectedCustomer.getName() + "\t" + transactAmount);
-
-					break;
-				case 3:
-					//Deposit
-					System.out.println("Account number: ");
-					acctNumber = reader.nextLine();
-					System.out.println("Transaction amount: ");
-					transactAmount = reader.nextDouble();
+					connectedCustomer = new MyDisplays().login(userName, password, baseCustomers);
 					
-					
-					new Banking().deposit(acctNumber, transactAmount);
-					connectedAccount.setBalance(connectedAccount.getBalance() + transactAmount);
-
-					/*Logs the deposit*/
-					new MyLogger().logTransactions(new Date() + "\tDeposit\t" + connectedCustomer.getName() + "\t" + transactAmount);
-					break;
-				case 4:
-					//Promote
-					if (connectedCustomer.getRoleID() == 1)
-						System.out.println("You don't have this permission!");
-					else {
-							
-						System.out.println("Account to promote: ");
-						account = reader.nextLine();
-						for(Account acct : new Banking().baseAccounts) {
-							if (acct.getAccountNber().equals(account))
-								new Banking().promoteUser(acct);}
-					
+					if (connectedCustomer == null) {
+						System.out.println("Try again?");
+						response = reader.nextLine().trim();
+						
+						leave = ((response.toUpperCase().equals("YES") || response.toUpperCase().equals("Y"))? false : true);
+						menuChoice = -1;
 					}
-					/*Logs the promotion*/
-					new MyLogger().logTransactions(new Date() + "\t" + account + "\t promoted by" + connectedCustomer.getName());
+					}
+					while (connectedCustomer == null && leave == false);
 					break;
+				case 2:															//SignUp
+					/*New customer creation*/
+					leave = false;
+					do {
+						menuChoice = 2;											//In case we recover from a failed login
+
+						newCustomerResult = new MyDisplays().newCustomer(baseCustomers);
+						if (newCustomerResult == false) {
+						reader.nextLine();
+						System.out.println("Try again?");
+						response = reader.nextLine().trim();
+						
+						leave = ((response.toUpperCase().equals("YES") || response.toUpperCase().equals("Y"))? false : true);
+						menuChoice = -1;
+					}
+						else
+							System.out.println("New customer created! \n plase wait for your account to be review and approved.");
+					}
+					while (newCustomerResult == false && leave == false);
+					break;
+					
 				default:
-					menuChoice = 0;
+					System.out.println("Invalid entry!\n");
+					menuChoice = -1;
 					break;
 				}
 			}
-			while (menuChoice == 0);
 		}
-				
-		//Close the scanner
-		if (reader != null)
-			reader.close();
-	}
-	
-	public int displayUserMenu(int roleID) {
-	/*Method to display a menu using the user role permissions*/		
-		int val = 0;
+		while (menuChoice == -1);
 		
-		switch (roleID) {
-		case 0: 
-			System.out.println("\nYou are an Admin \n "
-					+ "1 Activate account\n "
-					+ "2 Withdrawal\n "
-					+ "3 Deposit\n "
-					+ "4 Promote Customer\n "
-					+ "Choice?:");
-			val = reader.nextInt();
-			break;			
-		case 1: 
-			System.out.println("\nWelcome valued customer \n "
-					+ "2 Withdrawal\n "
-					+ "3 Deposit\n "
-					+ "Choice?:");
-			val =  reader.nextInt();
-			break;			
-		default: 
-			val = 0;
-			break;
-		}
-		
-		return val;
-	}
-	
-	public Customer login() {
-		/*
-		 * Customer login process
-		 * */
-		
-		String userName = null, password = null, response = "Y";
-		Customer connectedCustomer = null;
-		
-		do {	
-			System.out.println("Username: ");
-			userName = reader.nextLine();
+		if (connectedCustomer != null && connectedCustomer.isActive()) {
+			//Display Welcome message
+			System.out.println("Welcome " + connectedCustomer.getName() + "\n");
 			
-			System.out.println("Password: ");
-			password = reader.nextLine();
+			//Retrieve account info to be stored in currentAccounts
+			for (Account account : baseAccounts) {
+				if (account.getCustomerID() == connectedCustomer.getId())
+					connectedAccounts.add(account);
+				}
 			
-			for(Customer cust : baseCustomers) {
-				if (userName.equals(cust.getUserName().toString()) && password.equals(cust.getPassword().toString())) {
-					System.out.println("Welcome " + cust.getName());
-					connectedCustomer = cust;												//store the user data into connectedUser
+			//Display accounts balance
+			for(Account account : connectedAccounts)
+				System.out.println("----------------------------------\nAccount #: " + account.getAccountNber() + " - Balance: $" + account.getBalance() + "\n----------------------------------\n");
+			
+			//TODO--Call menu fct
+			int action = new MyDisplays().displayUserMenu(connectedCustomer.getRoleID());
+			boolean foundCustomer = false;		//Used to control the input while activating an account
+			
+			switch(action) {
+			case 1:
+				if (connectedCustomer.getRoleID() != 0) {
+					System.out.println("Permission refused!");
 					break;
+				}
+				newActivation = true;
+				do {
+				customerID = -1;
+				ArrayList<Customer> toBeValidated = new ArrayList<>();
+				//Display the accounts that need activation
+				for (Customer customer : baseCustomers) {
+					if (customer.isActive() == false) {
+						System.out.println(customer.getId() + "\t" + customer.getName()  + "\t" + customer.getUserName() + "\t" + customer.getSince());
+						//Save the customerID for control
+						toBeValidated.add(customer);
+					}
+				}
+				if(toBeValidated.size() == 0) {
+					System.out.println("No account waiting for validation found!");
+					newActivation = false;
 				}
 				else {
-					System.out.println("Wrong credentials, try again?");
-					if((reader.next()).toUpperCase().equals(new String("Y")))
-						response = "Y";
-					else
-						response = "N";
+					System.out.println("Enter the customer ID to activate");
+					customerID = reader.nextInt();
+					foundCustomer = false;
+					for(Customer customer : toBeValidated) {
+						if (customer.getId() == customerID) {
+							new MyDisplays().activateAccounts(customer);
+							//Creates a new account for the customer
+							System.out.println("Creating a new account for the customer...");
+							baseAccounts.add(new Account("ACCT" + customer.getId(), new Date(), 1, true, customer.getId()));	
+							foundCustomer = true;
+	
+							//Updates the customers list			
+							new MyDisplays<Account>().serialize(baseAccounts, "accounts.ser");		
+							for (Customer customer1 : baseCustomers) {
+								if(customer1.getId() == customerID)
+									customer1.activate();
+							}
+							//baseCustomers.add(customer);
+							
+							//Serializes and reload the file
+							new MyDisplays<Customer>().serialize(baseCustomers, "customers.ser");		
+							new MyDisplays<Account>().serialize(baseAccounts, "accounts.ser");		
+	
+						}					
+					}
+					if (foundCustomer == false)
+						System.out.println("This customer ID was not found!");
+					
+					System.out.println("Another activation?");
+					newActivation = reader.nextBoolean();
+				}
+				}
+				while (newActivation == true);
+				
+				break;
+			case 2:		//Withdrawal
+				System.out.println("Amount to be withdrawn: ");
+				amount = reader.nextDouble();
+				balance = new MyDisplays().withdraw(connectedAccounts.get(0).getAccountNber(), amount, baseTransactions, baseAccounts);
+				System.out.println("Transaction completed!\nNew balance: $" + balance);
+				break;
+			case 3:		//Deposit
+				System.out.println("Amount to be deposit: ");
+				amount = reader.nextDouble();
+				balance = new MyDisplays().deposit(connectedAccounts.get(0).getAccountNber(), amount, baseTransactions, baseAccounts);
+				System.out.println("Transaction completed!\nNew balance: $" + balance);
+				break;
+			case 4:		//View Transactions
+				new MyDisplays().listTransactions(connectedAccounts, baseTransactions);
+				break;
+			case 5:		//Promote customer
+				if (connectedCustomer.getRoleID() != 0) {
+					System.out.println("Permission refused!");
 					break;
-				}					
+				}
+
+				newActivation = true;
+				do {
+
+				System.out.println("Enter the customer ID to activate");
+				customerID = reader.nextInt();
+				foundCustomer = false;
+					for(Customer customer : baseCustomers) {
+						if (customer.getId() == customerID) {
+							new MyDisplays().promoteUser(customer);
+							foundCustomer = true;
+	
+							//Updates the customers list			
+							new MyDisplays<Account>().serialize(baseAccounts, "accounts.ser");		
+					
+							//Serializes and reload the file
+							new MyDisplays<Customer>().serialize(baseCustomers, "customers.ser");		
+						
+						}					
+					}
+					if (foundCustomer == false)
+						System.out.println("This customer ID was not found!");
+					
+					System.out.println("Another activation?");
+					newActivation = reader.nextBoolean();
+				}
+				while (newActivation == true);
+				
+				System.out.println("Promote customer...");
+				break;
+			case 6:		//Loans
+				if (connectedCustomer.getRoleID() != 0) {
+					System.out.println("Permission refused!");
+					break;
+				}
+
+				newActivation = true;
+				do {
+				customerID = -1;
+				ArrayList<Loan> toBeApprove = new ArrayList<>();
+				//Display the loans that need approval
+				for (Loan loan : baseLoans) {
+					if (((Loan)loan).isApproved() == false) {
+						System.out.println(loan.getAccountNber() + "\t" + loan.getCustomerID()  + "\t" + loan.getCreationDate());
+						//Save the customerID for control
+						toBeApprove.add((Loan)loan);
+					}
+				}
+				if(toBeApprove.size() == 0) {
+					System.out.println("No loan waiting for approval found!");
+					newActivation = false;
+					break;
+				}
+				
+				System.out.println("Enter the loan number review");
+				loanNumber = reader.nextLine();
+				foundCustomer = false;
+				for (Loan loan : baseLoans) {
+					if(loanNumber.equals(loan.getAccountNber())) {
+						for(Customer customer : baseCustomers) {
+							if (customer.getId() == loan.getCustomerID()) {
+							new MyDisplays().displayUser(customerID);
+							System.out.println("0 Deny\n1 Approve");
+							loanChoice = reader.nextInt();
+							switch(loanChoice) {
+							case 0:		//Denial
+								System.out.println("Denied!");
+								break;
+							case 1:
+								System.out.println("Approved!");
+							default:
+								break;
+							}			
+						
+							foundCustomer = true;
+	
+							//Updates the customers list			
+							new MyDisplays<Loan>().serialize(baseLoans, "loans.ser");		
+							
+							System.out.println("Another approval?");
+							newActivation = reader.nextBoolean();
+							}
+						}
+					}
+				}
+				
+				}
+				while(newActivation == true);
+
+				break;
+				
+			default:
+				System.out.println("Wrong entry...");
+				break;
 			}
 		}
+			//System.out.println(connectedCustomer.toString());
 		
-		while(connectedCustomer == null && response == "Y");
+	}
+	
 
-		return connectedCustomer;
-	}
-
-	public boolean newCustomer() {
-		/*Creates and serializes a customer*/
-		String name = null, address, email, phone, dob, ssn, passwordConfirm, userName, password;
-		System.out.println("Please provide your Social: ");
-		ssn = reader.nextLine().toUpperCase();
-		/*
-		 * 1st control to avoid duplicate accounts based on the social security number*/
-		for(Customer cust : baseCustomers) {
-			if (ssn.equals(cust.getSsn().toString())) {
-				System.out.println("This social can't be used to create a new user!");
-				return false;
-			}
-		}
-		//Customer social not found, then the operation can resume.
-		//name, address, email, phone, ssn, customerID, userName, password;
-		System.out.println("First and Last name: ");
-		name = reader.nextLine();
-		System.out.println("Address on 1 line: ");
-		address = reader.nextLine();
-		System.out.println("Email address: ");
-		email = reader.nextLine();
-		System.out.println("Phone number: ");
-		phone = reader.nextLine();
-		System.out.println("DOB: ");
-		dob = reader.nextLine();
-		System.out.println("User name: ");
-		userName = reader.nextLine().toUpperCase();
-		
-		do{//Password confirmation
-			System.out.println("Password: ");
-			password = reader.nextLine();
-		
-			/*2nd Control for the password*/
-			System.out.println("Confirm password ");
-			passwordConfirm = reader.nextLine();
-		}
-		while (!password.equals(passwordConfirm));
-		
-		//Updates the customers list			
-		baseCustomers.add(new Customer(name, address, email, phone, ssn, new MyDisplays<>().reverseFormatDate(dob), 
-				new Date(), userName, password, 1, true));
-		//Serializes and reload the file
-		new MyDisplays<Customer>().serialize(baseCustomers, "customers.ser");		
-		return true;
-	}
-	
-	public void deposit(String accountNber, double amount) {
-		//Updates the deposits list		
-		baseTransactions.add(new Transaction(new Date(), "Deposit", amount, accountNber)); 
-		//Serializes and reload the file
-		new MyDisplays<Transaction>().serialize(baseTransactions, "transaction.ser");		
-	}
-	
-	public void withdraw(String accountNber, double amount) {
-		//Updates the deposits list			
-		baseTransactions.add(new Transaction(new Date(), "Deposit", (-1 * amount), accountNber)); 
-		baseTransactions.add(new Transaction(new Date(), "Deposit", (-1 * amount), accountNber)); 
-		//Serializes and reload the file
-		new MyDisplays<Transaction>().serialize(baseTransactions, "transaction.ser");			
-	}
-
-	public void activateAccounts(Account account) {
-		account.activate();
-		System.out.println("Accont activated!");
-	}
-	
-	public void promoteUser(Account account) {
-		account.promote();
-	}
-	
 }

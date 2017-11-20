@@ -34,24 +34,20 @@ public class Customer extends Person implements Serializable {
 	
 	private String userName;		//User credentials
 	private String password;
-	private int roleID = 0;			//Default value set to 0 for simple user
+	private int roleID = 1;			//Default value set to 1 for simple user
 	
 	private boolean isActive = false;
 	
 	//Constructor
-	public Customer(String name, String adress, String email, String phone, String ssn, Date dob,
+	public Customer(int customerID, String name, String adress, String email, String phone, String ssn, Date dob,
 			Date since, String userName, String password, int roleID, boolean isActive) {
-		super(name, adress, email, phone, ssn, dob);
+		super(customerID, name, adress, email, phone, ssn, dob);
 		this.since = since;
 		this.userName = userName;
 		this.password = password;
 	}
 	
-	public Customer() {
-		
-	}
-	
-	public Date getSince() {
+		public Date getSince() {
 		return since;
 	}
 	public void setSince(Date since) {
@@ -86,6 +82,11 @@ public class Customer extends Person implements Serializable {
 	public void desactivate() {
 		this.isActive = false;
 	}
+	
+	public void promote() {
+		this.setRoleID(0);
+	}
+
 	
 	@Override
 	public String toString() {

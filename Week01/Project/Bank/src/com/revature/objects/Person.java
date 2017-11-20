@@ -40,8 +40,8 @@ public class Person implements Serializable {
 
 	
 	//Constructor
-	public Person(String name, String address, String email, String phone, String ssn, Date dob) {
-		this.id = ++nbOfPersons;
+	public Person(int id, String name, String address, String email, String phone, String ssn, Date dob) {
+		this.id = id;
 		this.name = name;
 		this.address = address;
 		this.email = email;

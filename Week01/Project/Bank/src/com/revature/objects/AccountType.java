@@ -22,7 +22,8 @@ public class AccountType {
 	 * */
 	
 	//Properties
-	private int accTypeID;
+	private int accTypeID;			//0 Admin
+									//1 Simple user
 	private String accTypeName;
 	private Date accTypDate; 		//Date of type incorporation
 	

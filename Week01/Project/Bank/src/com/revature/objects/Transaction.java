@@ -38,8 +38,8 @@ public class Transaction implements Serializable {
 	protected static int nberOfTransactions;
 
 	//Constructor
-	public Transaction(Date date, String details, double amount, String accountNber) {
-		this.id = ++nberOfTransactions;
+	public Transaction(int id, Date date, String details, double amount, String accountNber) {
+		this.id = id;
 		this.date = date;
 		this.details = details;
 		this.amount = amount;
