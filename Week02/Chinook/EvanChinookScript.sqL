@@ -247,21 +247,21 @@ SELECT * FROM EMPLOYEE;
 /************************************
 4.2 Stored Procedure Input Parameters
 ************************************/
-CREATE OR REPLACE PROCEDURE alter_user(
-    Emp_ID  EMPLOYEE.EmployeeId%TYPE,
-    LName   EMPLOYEE.LastName%TYPE, 
-    FName   EMPLOYEE.FirstName%TYPE,
-    Tit     EMPLOYEE.Title%TYPE, 
-    BD      EMPLOYEE.BirthDate%TYPE,
-    HD      EMPLOYEE.HireDate%TYPE,
-    Add     EMPLOYEE.Address%TYPE,
-    Cit     EMPLOYEE.City%TYPE,
-    St      EMPLOYEE.State%TYPE,
-    Ctry    EMPLOYEE.Country%TYPE,
-    PC      EMPLOYEE.PostalCode%TYPE,
-    PH      EMPLOYEE.Phone%TYPE,
-    FX      EMPLOYEE.Fax%TYPE,
-    EML     EMPLOYEE.Email%TYPE)
+CREATE OR REPLACE PROCEDURE alter_employee(
+    Emp_ID  IN EMPLOYEE.EmployeeId%TYPE,
+    LName   IN EMPLOYEE.LastName%TYPE, 
+    FName   IN EMPLOYEE.FirstName%TYPE,
+    Tit     IN EMPLOYEE.Title%TYPE, 
+    BD      IN EMPLOYEE.BirthDate%TYPE,
+    HD      IN EMPLOYEE.HireDate%TYPE,
+    Add     IN EMPLOYEE.Address%TYPE,
+    Cit     IN EMPLOYEE.City%TYPE,
+    St      IN EMPLOYEE.State%TYPE,
+    Ctry    IN EMPLOYEE.Country%TYPE,
+    PC      IN EMPLOYEE.PostalCode%TYPE,
+    PH      IN EMPLOYEE.Phone%TYPE,
+    FX      IN EMPLOYEE.Fax%TYPE,
+    EML     IN EMPLOYEE.Email%TYPE)
 IS
 BEGIN
     UPDATE EMPLOYEE
@@ -269,4 +269,64 @@ BEGIN
         State = St, Country = Ctry, PostalCode = PC, Phone = PH, Fax = FX, Email = EML
     WHERE EMPLOYEEID = Emp_ID; 
 END;
+/
 
+CREATE OR REPLACE PROCEDURE GET_EMP_MANAGERS(EMP_ID IN NUMBER, EMP_MANAGER_CURSOR OUT SYS_REFCURSOR)
+IS
+BEGIN
+    OPEN EMP_MANAGER_CURSOR FOR 
+        SELECT * FROM EMPLOYEE
+        WHERE EMPLOYEEID IN (SELECT ReportsTo FROM EMPLOYEE 
+                            WHERE EMPLOYEEID = EMP_ID);
+END;
+/
+
+/************************************
+4.3 Stored Procedure Output Parameters
+************************************/
+CREATE OR REPLACE PROCEDURE GET_EMP_MANAGERS(CUST_ID IN NUMBER, CUST_NAME OUT VARCHAR2, COMPANY OUT VARCHAR2)
+IS
+    TEMP_FIRST VARCHAR2(100);
+    TEMP_LAST VARCHAR2(100);
+BEGIN
+    SELECT FirstName, LastName, Company INTO TEMP_FIRST, TEMP_LAST, COMPANY FROM CUSTOMER
+    WHERE CustomerId = CUST_ID;
+    CUST_NAME := TEMP_FIRST || ' ' || TEMP_LAST;
+END;
+/
+
+/************************************************************************
+5.0 Transactions
+************************************************************************/
+CREATE OR REPLACE PROCEDURE Remove_Invoice(Inv_ID IN NUMBER)
+IS
+BEGIN
+    delete from InvoiceLine where INVOICEID = Inv_ID;
+    delete from Invoice where INVOICEID = Inv_ID;
+    COMMIT;
+END;
+
+CREATE OR REPLACE PROCEDURE create_customer(
+    Cust_ID  IN CUSTOMER.CustomerId%TYPE,
+    LName   IN CUSTOMER.LastName%TYPE, 
+    FName   IN CUSTOMER.FirstName%TYPE,
+    Comp     IN CUSTOMER.Company%TYPE, 
+    Add     IN CUSTOMER.Address%TYPE,
+    Cit     IN CUSTOMER.City%TYPE,
+    St      IN CUSTOMER.State%TYPE,
+    Ctry    IN CUSTOMER.Country%TYPE,
+    PC      IN CUSTOMER.PostalCode%TYPE,
+    PH      IN CUSTOMER.Phone%TYPE,
+    FX      IN CUSTOMER.Fax%TYPE,
+    EML     IN CUSTOMER.Email%TYPE)
+IS
+BEGIN
+    INSERT INTO CUSTOMER (CustomerId, LastName, FirstName, Company, Address, 
+    City, State, Country, PostalCode, Phone, Fax, Email)
+    VALUES(Cust_ID, LName, FName, Comp, Add, Cit, 
+         St, Ctry, PC, PH, FX, EML);
+END;
+
+/************************************************************************
+6.0 Triggers
+************************************************************************/
