@@ -24,7 +24,7 @@ DROP TABLE moves CASCADE CONSTRAINTS;
 DROP TABLE pokemans CASCADE CONSTRAINTS; 
 /*
     CASCADE CONSTRAINTS is optional, not realy needed. But it will delete constraints that point to the table, as well as the table itself to 
-    be dropped instead of throwing an error. preventing you frrom dropping to begin with. 
+    be dropped instead of throwing an error. preventing you from dropping to begin with. 
 */
 /
 

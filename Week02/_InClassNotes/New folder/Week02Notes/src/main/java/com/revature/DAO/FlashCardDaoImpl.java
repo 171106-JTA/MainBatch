@@ -21,7 +21,7 @@ public class FlashCardDaoImpl implements FlashCardDao {
 	public void createFlashCard(FlashCard fc) {
 		/*
 		 * Try-With-Resources
-		 * In a try block, you cna include any streams as a parameter, and Java will manage it for you and close it 
+		 * In a try block, you can include any streams as a parameter, and Java will manage it for you and close it 
 		 * automatically without you having to worry about it. Any class that implements autoclosable can do this. 
 		 */
 		try (Connection conn = ConnectionUtil.getConnection())
@@ -109,7 +109,6 @@ public class FlashCardDaoImpl implements FlashCardDao {
 			String sql = "{call get_answer(?,?)}";
 			cs = conn.prepareCall(sql);
 			cs.setString(1, fc.getQuestion());
-			cs.setString(2, fc.getAnswer());
 			cs.registerOutParameter(2, java.sql.Types.VARCHAR);
 			cs.executeQuery();
 			
@@ -138,7 +137,26 @@ public class FlashCardDaoImpl implements FlashCardDao {
 		String sql = "SELECT * FROM flash_cards";
 		// the variables for retrieving from the database
 		Statement stmt = null;
-		// TODO: Implement the rest of this
+		ResultSet rs= null;
+		try (Connection conn = ConnectionUtil.getConnection())
+		{
+			// we use just a plain old Statement to interact with the DB
+			stmt = conn.createStatement();
+			// now we execute the query and get result set
+			rs = stmt.executeQuery(sql);
+			while (rs.next())
+			{
+				// we add a new FlashCard to flashCards, using the 1-based ResultSet
+				flashCards.add(new FlashCard(rs.getInt(1), rs.getString(2), rs.getString(3)));
+			}
+			
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		finally {
+			close(rs);
+		}
 		
 		return flashCards;
 	}
@@ -146,14 +164,61 @@ public class FlashCardDaoImpl implements FlashCardDao {
 	@Override
 	// should return the amount of rows affected
 	public int updateFlashCardById(FlashCard fc) {
-		// TODO: Implement this
-		return 0;
+		PreparedStatement ps;
+		String sql_setQuestion = "UPDATE flash_card SET fc_question = ? WHERE fc_id = ?",
+				sql_setAnswer = "UPDATE flash_card SET fc_answer = ? WHERE fc_id = ?";
+		int rowsEffected = 0;
+		try (Connection conn = ConnectionUtil.getConnection())
+		{
+			// we make two updates here...
+			// ... first to the answer ... 
+			ps = conn.prepareStatement(sql_setAnswer);
+			// updating the question first
+			// setting of parameters is 1-based!
+			ps.setString(1, fc.getQuestion());
+			ps.setInt(2, fc.getId());
+			rowsEffected = ps.executeUpdate(sql_setAnswer);
+			// ... now to the question ...
+			ps = conn.prepareStatement(sql_setQuestion);
+			ps.setString(1,  fc.getAnswer());
+			ps.setInt(2,  fc.getId());
+			rowsEffected = ps.executeUpdate(sql_setAnswer);
+			System.out.printf("%d Rows effected", rowsEffected);
+		}
+		catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+
+		}
+		
+		return rowsEffected;
 	}
 
 	@Override
 	// should return the amount of rows affected
 	public int deleteFlashCardById(FlashCard fc) {
-		// TODO: Implement this
-		return 0;
+		PreparedStatement ps;
+		String sql = "DELETE FROM flash_card WHERE fc_id = ?";
+		int rowsEffected = 0;
+		try (Connection conn = ConnectionUtil.getConnection())
+		{
+			ps = conn.prepareStatement(sql);
+			// everything is 1-based in SQL and its interfaces
+			ps.setInt(1, fc.getId());
+			rowsEffected = ps.executeUpdate();
+			System.out.printf("%d rows effected", rowsEffected);
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+		finally
+		{
+
+		}
+		return rowsEffected;
 	}
 }
