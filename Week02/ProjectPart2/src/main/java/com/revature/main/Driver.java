@@ -10,6 +10,8 @@ import com.revature.dao.jBankDAO;
 import com.revature.dao.jBankDAOImpl;
 import com.revature.model.account.User;
 import com.revature.model.account.UserLevel;
+import com.revature.model.session.AdminSession;
+import com.revature.model.session.UserSession;
 
 public class Driver {
 
@@ -30,11 +32,8 @@ public class Driver {
 
 	public static void main(String... args) throws Exception {
 		jBankDAO dao = new jBankDAOImpl();
-		//Connection conn = ConnectionUtil.getConnection();
-		System.out.println("hello");
 		dao.getAllUser();
-		
-		
+	
 		Driver bankSession = new Driver();
 		setBankOn(true);
 		userAccounts = new ArrayList<>();
@@ -56,8 +55,29 @@ public class Driver {
 	}
 
 	private void openSession() {
-		// TODO Auto-generated method stub
-
+		jBankDAO dao = new jBankDAOImpl();
+		String username;
+		String password; 
+		System.out.print(">Username: ");
+		username = sc.nextLine();
+		System.out.print(">Password: ");
+		password = sc.nextLine();
+		User currUser = dao.grabUser(username, password);
+		while(currUser == null) {
+			System.out.println("> Incorrect username or pw.");
+			System.out.print("> username: ");
+			username = sc.nextLine();
+			System.out.print("> password: ");
+			password = sc.nextLine();
+			currUser = dao.grabUser(username, password);
+		}
+		System.out.println(currUser);
+		if(currUser.getUserLevel() == UserLevel.ADMIN) {
+			AdminSession adminSess = new AdminSession();
+			adminSess.getSession();
+		}
+		UserSession userSess = new UserSession();
+		
 	}
 
 	private void createAccount() {

@@ -20,12 +20,16 @@ public class User {
 		this.isApproved = false;
 	}
 
+	
+
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", password=" + password + ", firstName=" + firstName
+		return "User [uid=" + uid + ", username=" + username + ", password=" + password + ", firstName=" + firstName
 				+ ", lastName=" + lastName + ", userLevel=" + userLevel + ", pin=" + pin + ", balance=" + balance
 				+ ", isLocked=" + isLocked + ", isApproved=" + isApproved + "]";
 	}
+
+
 
 	// Getters and setter
 	//
