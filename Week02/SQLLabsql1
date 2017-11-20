@@ -1,0 +1,331 @@
+select * from Jordan.Employee;
+select * from Jordan.Employee where LastName = 'King';
+select * from Jordan.EMPLOYEE
+where FIRSTNAME = 'Andrew' and REPORTSTO is Null;
+SELECT * FROM Jordan.ALBUM
+Order by TITLE desc;
+SELECT * FROM Jordan.CUSTOMER
+ORDER By CITY asc;
+Insert into Jordan.Genre
+Values(26, 'Trap');
+Insert into Jordan.Genre
+Values(27, 'Moody');
+Insert into Jordan.EMPLOYEE 
+Values (9, Johnson, Jack, 'Sales Support Agent', 4, TO_DATE('1990-12-27 00:00:00','yyyy-mm-dd hh24:mi:ss'), TO_DATE('2009-8-14 00:00:00','yyyy-mm-dd hh24:mi:ss'), '11730 Plaza America Drive 2nd Floor', 'Reston', 'VA', 'USA', 20170, '+1(234)5678901', '+1(234)5678902', 'jmyers@revture.com');
+Insert into Jordan.EMPLOYEE 
+Values (10, Jackson, John, 'IT Staff', 3, TO_DATE('1991-2-8 00:00:00','yyyy-mm-dd hh24:mi:ss'), TO_DATE('2012-4-25 00:00:00','yyyy-mm-dd hh24:mi:ss'), '2224 Astoria Circle', 'Herndon', 'VA', 'USA', '20190', '+1(234)5678903', '+1(234)5678904', 'hjung@revature.com');
+Insert into Jordan.Customer
+Values (60, 'Jeffrey', 'Micheals', 'Revature', '11730 Plaza America Drive 2nd Floor', 'Reston', 'VA', 'USA', 20170, '+1(234)5678905', '+1(234)5678906', 'mtseng@revature.com', 6.22);
+Insert into Jordan.Customer
+Values (61, 'Michael', 'Jeffreys', 'Revature', '2224 Astoria Circle', 'Herndon', 'VA', 'USA', 20190, '+1(234)5678907', '+1(234)5678908', 'mtraore@revature.com', 6.26);
+Update Jordan.Customer
+SET FIRSTNAME= 'Aaron', LASTNAME= 'Mitchell'
+WHERE CUSTOMERID = 32;
+Update Jordan.Artist
+Set NAME = 'CCR'
+Where ARTISTID = 76;
+SELECT * FROM Jordan.INVOICE
+Where BILLINGADDRESS like '%T';
+SELECT Total From Jordan.INVOICE
+Where Total BETWEEN 15 and 20;
+Select * from Jordan.EMPLOYEE
+where HIREDATE > TO_DATE('2003-06-01 00:00:00','yyyy-mm-dd hh24:mi:ss') and HIREDATE < ANY ('2004-03-01 00:00:00','yyyy-mm-dd hh24:mi:ss');
+ALTER TABLE INVOICE DROP CONSTRAINT FK_INVOICECUSTOMERID;
+Delete from Jordan.Customer
+Where firstname='Robert', lastname='Walter';
+
+SELECT CURRENT_TIMESTAMP FROM dual;
+create or replace function what_time_is_it
+return CURRENT_TIMESTAMP is
+
+  lts CURRENT_TIMESTAMP;
+
+begin
+
+  select CURRENT_TIMESTAMP		
+    into lts
+    from dual;
+
+  return lts;
+
+end;
+/
+
+Select Length(Name) from Jordan.MEDIATYPE;
+create or replace function what_is_length
+return Length(Name) is
+
+    l Length(Name)
+begin
+
+    select Length(Name)
+    into l
+    from mediatype;
+    
+    return l;
+
+end;
+/
+
+Select AVG(Total) from Jordan.INVOICE;
+create or replace function what_is_avg
+return AVG(Total) is
+
+    a AVG(Total)
+begin
+
+    select AVG(Total)
+    into a
+    from INVOICE;
+    
+    return a;
+
+end;
+/
+
+Select GREATEST(UnitPrice) from Jordan.TRACK;
+create or replace function what_is_expensive
+return GREATEST(UnitPrice) is
+
+    gup GREATEST(UnitPrice)
+begin
+
+    select GREATEST(UnitPrice) 
+    into gup
+    from TRACK;
+    
+    return gup desc;
+--make it ordered in desc
+end;
+/
+
+Select AVG(UNITPRICE) from Jordan.INVOICELINE;
+create or replace function what_is_avg2
+return AVG(UNITPRICE) is
+
+    a2 AVG(UNITPRICE)
+begin
+
+    select AVG(UNITPRICE)
+    into a2
+    from INVOICELINE;
+    
+    return a2;
+
+end;
+/
+
+Select BIRTHDATE > TO_DATE('1968-12-31 00:00:00','yyyy-mm-dd hh24:mi:ss') FROM Jordan.EMPLOYEE; --DO THIS 
+create or replace function who_is_young
+return BIRTHDATE > TO_DATE('1968-12-31 00:00:00','yyyy-mm-dd hh24:mi:ss') is
+
+    young BIRTHDATE > TO_DATE('1968-12-31 00:00:00','yyyy-mm-dd hh24:mi:ss')
+begin
+
+    select BIRTHDATE > TO_DATE('1968-12-31 00:00:00','yyyy-mm-dd hh24:mi:ss')
+    into young
+    from EMPLOYEE;
+    
+    return bday;
+
+end;
+/
+ 
+CREATE OR REPLACE PROCEDURE get_names (cp OUT SYS_REFCURSOR)
+is
+BEGIN
+    OPEN cp FOR
+    SELECT  FIRSTNAME, EMPLOYEE.LASTNAME from EMPLOYEE;
+END;
+/
+DECLARE
+    fc SYS_REFCURSOR;
+    n1 VARCHAR2(40);
+    n2 VARCHAR2(40);
+begin
+    get_names(fc);
+    LOOP --Begin loop block
+        FETCH fc INTO n1,n2; --Grab the current its pointing at.
+        EXIT WHEN fc%NOTFOUND;
+        --get_names(n1,n2);
+        dbms_output.put_line(n1 || ' ' || n2);
+    END LOOP;
+END;
+/
+
+ 
+ CREATE OR REPLACE PROCEDURE updateDBUSER(
+	   userid IN Jordan.EMPLOYEE.EMPLOYEEID%TYPE,
+	   emp_city IN Jordan.EMPLOYEE.CITY%TYPE)
+IS
+BEGIN
+
+  UPDATE Jordan.EMPLOYEE SET city = emp_city where EMPLOYEEID = userid;
+
+END;
+/
+
+BEGIN
+    UPDATEDBUSER(10, 'DC');
+END;
+/
+
+create or replace function yourManager (
+	   userid IN Jordan.EMPLOYEE.EMPLOYEEID%TYPE)
+return Number is
+
+    r Number(3);
+begin
+
+    select EMPLOYEE.REPORTSTO
+    into r
+    from Jordan.EMPLOYEE where EMPLOYEEID = userid;
+    
+    return r;
+
+end;
+/
+
+ CREATE OR REPLACE PROCEDURE whosInCharge(
+	   userid IN Jordan.EMPLOYEE.EMPLOYEEID%TYPE)
+IS
+        ym Number(3);
+BEGIN
+        ym := yourManager(userid);
+        IF ym is NOT NULL THEN
+             DBMS_OUTPUT.PUT_LINE(ym);
+        ELSE
+             DBMS_OUTPUT.PUT_LINE('Done');
+        END IF;
+
+
+END;
+/
+
+BEGIN
+    whosInCharge(8);
+END;
+/
+
+create or replace function yourCompany (
+	   customerid OUT Jordan.CUSTOMER.CUSTOMERID%TYPE)
+return Number is
+
+    nc Number(3);
+begin
+--(CustomerId, FirstName, LastName, Company, Address, City, State, Country, PostalCode, Phone, Fax, Email, SupportRepId)
+    select CUSTOMER.COMPANY, CUSTOMER.FIRSTNAME
+    into nc
+    from Jordan.CUSTOMER where COMPANY = nc;
+    
+    return nc;
+
+end;
+/
+
+CREATE OR REPLACE PROCEDURE whoWorksWhere(custom IN Jordan.CUSTOMER.CUSTOMERID%TYPE, fname OUT Jordan.CUSTOMER.FIRSTNAME%TYPE, lname OUT Jordan.CUSTOMER.LASTNAME%TYPE, comp OUT Jordan.CUSTOMER.COMPANY%TYPE)
+    IS
+    BEGIN
+    SELECT Jordan.CUSTOMER.FIRSTNAME, Jordan.CUSTOMER.LASTNAME, Jordan.CUSTOMER.COMPANY INTO fname, lname, comp
+    FROM Jordan.CUSTOMER
+    WHERE CUSTOMERID = custom;
+    DBMS_OUTPUT.PUT_LINE(fname || ' ' || lname || ' ' || comp);        
+    END;
+/
+
+BEGIN
+    whoWorksWHere(3);
+END;
+/
+
+CREATE OR REPLACE PROCEDURE noInvoice(ivid IN Jordan.INVOICE.INVOICEID)
+    ALTER TABLE Jordan.INVOICE DROP CONSTRAINT FK_INVOICECUSTOMERID;
+    SELECT INVOICEID into ivid FROM Jordan.INVOICE WHERE INVOICEID = ivid;
+    BEGIN
+        DELETE ivid;
+    END;
+/
+--COMMIT;
+
+CREATE OR REPLACE PROCEDURE newRecord(CID Jordan.CUSTOMER.CUSTOMERID%TYPE, rec VARCHAR2, rec2 VARCHAR, rec3 VARCHAR2, rec4 VARCHAR2)
+    BEGIN 
+        INSERT INTO Jordan.CUSTOMER (CUSTOMERID, FIRSTNAME, LASTNAME, EMAIL)
+        VALUES (rec, rec2, rec3, rec4)
+        WHERE CUSTOMERID = CID
+    END;
+/
+
+
+CREATE OR REPLACE TRIGGER emp_trigger
+AFTER INSERT
+   ON Jordan.EMPLOYEE
+   FOR EACH ROW
+DECLARE
+      username varchar2(10);
+BEGIN
+   SELECT firstname INTO username
+   FROM EMPLOYEE;
+    INSERT INTO EMPLOYEE
+    (employeeid, lastname, firstname)
+    Values
+    (:new.employeeid, :new.lastname, :new.firstname);
+END;
+--------------------------------------------------------------------------------
+CREATE OR REPLACE TRIGGER alb_trigger
+AFTER UPDATE
+   ON album
+   FOR EACH ROW
+DECLARE
+   uname varchar2(10);
+BEGIN
+   SELECT user INTO uname
+   FROM album;
+   INSERT INTO album
+   (albumid, title, artistid)
+   VALUES
+   (:new.albumid, :new.title, :old.artistid);
+END;
+/
+--------------------------------------------------------------------------------
+CREATE OR REPLACE TRIGGER cus_trigger
+AFTER DELETE
+   ON Jordan.CUSTOMER
+   FOR EACH ROW
+DECLARE
+   username varchar2(10);
+BEGIN
+   -- Find username of person performing the DELETE on the table
+   SELECT user INTO username
+   FROM Jordan.CUSTOMER;
+   -- Insert record into audit table
+   INSERT INTO Jordan.CUSTOMER
+   (CUSTOMERID, FIRSTNAME, LASTNAME, EMAIL)
+   VALUES
+   (:old.CUSTOMERID, :old.FIRSTNAME, :old.LASTNAME, :old.EMAIL);
+END;
+/
+--------------------------------------------------------------------------------
+SELECT CUSTOMER.FIRSTNAME, CUSTOMER.LASTNAME, INVOICE.INVOICEID
+FROM CUSTOMER 
+INNER JOIN INVOICE
+ON CUSTOMER.CUSTOMERID = INVOICE.INVOICEID;
+/
+SELECT CUSTOMER.CUSTOMERID, INVOICE.INVOICEID, CUSTOMER.FIRSTNAME, CUSTOMER.LASTNAME, INVOICE.TOTAL
+FROM CUSTOMER
+FULL OUTER JOIN INVOICE
+ON CUSTOMER.CUSTOMERID = INVOICE.CUSTOMERID;
+/
+SELECT Jordan.ALBUM.TITLE, Jordan.ARTIST.NAME
+FROM Jordan.ALBUM
+RIGHT OUTER JOIN Jordan.Artist
+ON Album.ARTISTID = Artist.ARTISTID;
+/
+SELECT *
+FROM Jordan.ALBUM 
+CROSS JOIN Jordan.ARTIST
+ORDER BY ARTIST.NAME ASC;
+/
+SELECT *
+FROM EMPLOYEE x
+Join Jordan.EMPLOYEE y
+on x.REPORTSTO = y.REPORTSTO;
