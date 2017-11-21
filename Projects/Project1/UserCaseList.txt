@@ -1,0 +1,79 @@
+===============================================
+Employee Use Cases
+===============================================
+Login/Logout
+View Available Tuition Reimbursement
+View List of Unapproved Reimbursements
+View List of Approved and Pending Reimbursements
+View To-Dos for Grade submission (submit grade of test, presentation, ect.)
+View List Completed Reimbursements
+View Specific Reimbursements with accompanying status and to-dos
+Create/Fill Out new reimbursement form
+- Include a Read Only projected riembursement field
+- Select from default passing grades or insert custom
+- Include an approval email
+Notifications of changed approval amounts
+Accept/Cancel requests based on changed approval amounts
+On reimbursement approval and confirmation 
+
+IF TIME: 
+Save partial reimbursement form
+View list of partial reimbursement forms
+Have employee information associated with the account, that gets auto filled on start of riembursement form
+
+
+===============================================
+Direct Supervisor
+===============================================
+Login/Logout
+View List of Unapproved Reimbursements
+View specific Reimbursements
+Approve Riembursement
+Deny Riembursement
+- Provide reason for denial
+Request Additional information from the employee
+View Tardy notifications/emails from BenCo
+View List of uploaded presentations
+View Specific presentation uploads
+Confirm the presentation was satisfactory and presented to appropriate parties
+
+Notes: 
+- Skip Department Head Approval, if the Direct Supervisor is also a Department Head
+- Auto Approve requests if the direct supervisor does not approve in a timely manner
+
+
+===============================================
+Department Head
+===============================================
+Login/Logout
+View List of Unapproved Reimbursements
+View specific Reimbursements
+Approve Riembursement
+Deny Riembursement
+- Provide reason for denial
+Request additional information from employee
+
+===============================================
+Benefits Coordinator Approval (BenCo)
+===============================================
+Login/Logout
+View List of Unapproved Reimbursements
+View specific Reimbursements
+Approve Riembursement
+Deny Riembursement
+- Provide reason for denial
+Request additional information from employee
+Request additional info from Direct Supervisor
+Request additional info from Department Head
+Change riembursement amount
+- If negative change, auto-notification to employee
+- If positive change, give reason and mark report as exceeding available funds
+View List of pending Grade confirmation
+View specific Grades
+Confirm 
+
+Notes: 
+- If tardy on approval, send escalation email to BenCo's direct supervistor
+
+General:
+Veiw Information on Reimbursement Program
