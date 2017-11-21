@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<BookStore>
+    <Book genre="sci-fi">
+        <title language="english">Unnamed</title>
+        <year>1997</year>
+        <price>4.00</price>
+        <author>me </author>
+    </Book>
+    <Book genre="fantasy">
+        <title language="english"></title>
+        <year>1998</year>
+        <price>3.00</price>
+        <author>my mother</author>
+    </Book>
+    <Book genre="adventure">
+        <title language="english"> </title>
+        <year>1999</year>
+        <price>2.00</price>
+        <author>my father</author>
+    </Book>
+</BookStore>
