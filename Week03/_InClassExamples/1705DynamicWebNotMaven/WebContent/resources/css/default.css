@@ -1,0 +1,10 @@
+body {
+	background-color: #333333; /* #RRGGBB */
+	color: #eeeeee;
+}
+select {
+	color: #000000;
+}
+.darkfont {
+	color: #333333;
+}
