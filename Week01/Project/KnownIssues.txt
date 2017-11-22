@@ -3,7 +3,11 @@
 ☐ to-fix ☑ fixed
 
 ☐ after activated User, that was locked, logs in, User is still "locked" to the Admin
+	☐ probably fixable via making the DataStore the Admins and Application all share, into a singleton object
 ☐ UI prevents locked Users from creating accounts, but someone can still say:
-	☐ lockedUser.createAccount()	// and then manipulate that Account
+	☑? lockedUser.createAccount()	// and then manipulate that Account
 	☐ lockedUser.getAccounts().add(new Account()) // and then manipulate that Account
+☑? missing "promote user to admin" feature
+☑? list of users Admin can do operations on not visible on admin submenu after selection
+☐ forgot to test promote functionality of Admin
 	

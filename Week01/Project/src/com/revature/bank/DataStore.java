@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 
 public class DataStore implements Serializable {
-
+	// 	TODO: make this singleton
 	/**
 	 * 
 	 */
@@ -17,6 +17,8 @@ public class DataStore implements Serializable {
 	 * The time at which this was created/initialized, in milliseconds. 
 	 */
 	public final long timeStamp;
+	
+	private static boolean hasBeenCreated = false;
 	
 	/**
 	 * Instantiates a blank DataStore for the application to use. 
@@ -123,6 +125,58 @@ public class DataStore implements Serializable {
 	 */
 	public void setAccounts(Accounts accounts) {
 		_accounts = accounts;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((_accounts == null) ? 0 : _accounts.hashCode());
+		result = prime * result + ((_activeUsers == null) ? 0 : _activeUsers.hashCode());
+		result = prime * result + ((_admins == null) ? 0 : _admins.hashCode());
+		result = prime * result + ((_bannedUsers == null) ? 0 : _bannedUsers.hashCode());
+		result = prime * result + ((_lockedUsers == null) ? 0 : _lockedUsers.hashCode());
+		result = prime * result + (int) (timeStamp ^ (timeStamp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DataStore other = (DataStore) obj;
+		if (_accounts == null) {
+			if (other._accounts != null)
+				return false;
+		} else if (!_accounts.equals(other._accounts))
+			return false;
+		if (_activeUsers == null) {
+			if (other._activeUsers != null)
+				return false;
+		} else if (!_activeUsers.equals(other._activeUsers))
+			return false;
+		if (_admins == null) {
+			if (other._admins != null)
+				return false;
+		} else if (!_admins.equals(other._admins))
+			return false;
+		if (_bannedUsers == null) {
+			if (other._bannedUsers != null)
+				return false;
+		} else if (!_bannedUsers.equals(other._bannedUsers))
+			return false;
+		if (_lockedUsers == null) {
+			if (other._lockedUsers != null)
+				return false;
+		} else if (!_lockedUsers.equals(other._lockedUsers))
+			return false;
+		if (timeStamp != other.timeStamp)
+			return false;
+		return true;
 	}
 	
 	

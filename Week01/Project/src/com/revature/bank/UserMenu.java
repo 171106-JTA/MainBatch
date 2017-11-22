@@ -135,7 +135,10 @@ public class UserMenu implements Menu {
 		// if there are no accounts for this user to choose from, return sentry value for that
 		if (userAccounts.size() == 0) return NO_ACCOUNT;
 		// if there's just one Account, return its number
-		if (userAccounts.size() == 1) return userAccounts.get(0).getNumber();
+		if (userAccounts.size() == 1) {
+			System.out.printf("Bal: $%.2f\n", userAccounts.get(0).getBalance());
+			return userAccounts.get(0).getNumber();
+		}
 		// display the Accounts to the end user
 		System.out.println("We have the following accounts for you:\n\n");
 		for (Account a : userAccounts)

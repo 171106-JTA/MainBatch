@@ -61,7 +61,7 @@ public class UserMenu implements Menu {
 			options.put(selections[selections.length - 1] + 1, "Exit");
 		}
 		// if the user doesn't have an Account, silently create one
-		if (user.getAccounts().isEmpty()) user.getAccounts().add(new Account());
+		if ((user.getAccounts() == null) || (user.getAccounts().isEmpty())) user.getAccounts().add(new Account());
 	}
 	
 	@Override

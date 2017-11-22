@@ -1,0 +1,35 @@
+
+
+#loginContainer
+{
+	
+	min-width: 325px;
+	width: 40%;
+	
+}
+
+#loginForm > *:not(input[type="submit"])
+{
+	width: 100%;
+	overflow: hidden;
+}
+
+#loginForm > * > * 
+{
+	float: left;
+}
+
+#loginForm > * > *:not(:first-child):not([type="submit"]):not([type="reset"]):not(button)
+{
+	margin-left: -4px;	
+}
+
+
+#newUserButton
+{
+	color: blue;
+}
+
+
+/* input[type="submit"]*/
+

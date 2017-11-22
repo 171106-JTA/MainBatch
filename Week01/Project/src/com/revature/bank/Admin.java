@@ -11,8 +11,7 @@ public class Admin extends User implements Serializable {
 	private static final long serialVersionUID = 3L;
 
 	private DataStore _data;
-	public static DefaultAdmin DEFAULT_ADMIN;
-	
+	public static DefaultAdmin DEFAULT_ADMIN = DefaultAdmin.getDefaultAdmin();	// not being used
 	public Admin(DataStore data)
 	{
 		this("", "", data);
@@ -34,7 +33,21 @@ public class Admin extends User implements Serializable {
 	{
 		super(name, pass, User.ACTIVE);
 		_data = data;
-		if (DEFAULT_ADMIN != null) DEFAULT_ADMIN = DefaultAdmin.getDefaultAdmin(data);
+		// pass the data on to DEFAULT_ADMIN
+//		DEFAULT_ADMIN.setDataStore(data);
+	}
+	
+	public Admin(User u)
+	{
+		this(u, new DataStore());
+	}
+	
+	public Admin(User u, DataStore data)
+	{
+		this(u._name, u._pass, data);
+		_pass = u._pass;
+		_state = u._state;
+		
 	}
 	
 	/** 
@@ -170,13 +183,13 @@ public class Admin extends User implements Serializable {
 	 * 
 	 * WARNING: This function is now generic, which is dangerous since there is no template specialization in Java.
 	 */
-	private <T> void moveToList(List<T> list, Users fromList, User user, String newState)
+	private <T extends User> void moveToList(List<T> list, Users fromList, User user, String newState)
 	{
 		// if user is already in list, we're done here.
 //		if (list.getByName(user.getName()) != null) return;
 		for (T elem : list)
 		{
-			if (((User)elem).getName().equals(user.getName())) return;
+			if (elem.getName().equals(user.getName())) return;
 		}
 		// find the user in fromList
 		int j = fromList.getIndexByUserName(user.getName());
@@ -184,11 +197,21 @@ public class Admin extends User implements Serializable {
 		if (j != -1)
 		{
 			// remove them from that list
-			user = fromList.remove(j);
+			User userToCopyFrom = fromList.remove(j);
+			// if user is not the same as userToCopyFrom
+			if (!user.equals(userToCopyFrom))
+			{
+				// copy all of its data, minus the state
+				user._name = userToCopyFrom._name;
+				user._pass = userToCopyFrom._pass;
+				user.setAccounts(userToCopyFrom.getAccounts());
+				((Admin)user)._data = _data;
+			}
 			// change their state to newState
 			user.setState(newState);
 			// add them to list
 			list.add((T) user);
+//			T newUser = new T(user._name, user._pass);
 		}
 		// we just changed something in the data store. Update it for all the other Admins!
 		writeToDataStore();

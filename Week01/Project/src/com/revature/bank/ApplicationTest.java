@@ -39,6 +39,25 @@ public class ApplicationTest {
 	@After
 	public void tearDown() throws Exception {
 	}
+	
+	@Test
+	public void testUserCopies()
+	{
+		User user = new User("copyMe", "passwor", User.ACTIVE),
+				copy1 = new User(user);
+		assertEquals(user.getName(), copy1.getName());
+		System.out.println(user.getPass());
+		System.out.println(copy1.getPass());
+		assertEquals(user.getPass(), copy1.getPass());
+		assertEquals(user.getState(), copy1.getState());
+		assertEquals(user.getAccounts(), copy1.getAccounts());
+		assertEquals(user.getLoginMessage(), copy1.getLoginMessage());
+		assertEquals(user, copy1);
+		// create account, attempt duplication, and test equality of the two  
+		user.createAccount();
+		User copy2 = new User(user);
+		assertEquals(user, copy2);
+	}
 
 	@Test
 	public void testUserPassHash() {
@@ -75,6 +94,55 @@ public class ApplicationTest {
 		User user = new User("Test", "User");
 		// test should pass iff that User is locked by default
 		assertEquals(User.LOCKED, user.getState());
+	}
+	
+	@Test 
+	public void testUserStates()
+	{
+		// let's create a User per each user state
+		User activeUser = new User("ImActive", "RightNow", User.ACTIVE),
+			lockedUser = new User("CantGetIn", "ImLocked"),
+			flaggedUser = new User("NothinToSeeHere", "moveAlong", User.FLAGGED),
+			bannedUser = new User("dysgruntl", "ImBanned", User.BANNED);
+		// these asserts better work
+		assertEquals(User.ACTIVE, activeUser.getState());
+		assertEquals(User.LOCKED, lockedUser.getState());
+		assertEquals(User.FLAGGED,flaggedUser.getState());
+		assertEquals(User.BANNED, bannedUser.getState());
+	}
+	
+	@Test
+	public void testCopyConstructors()
+	{
+		// let's test the copy constructors
+		User sampleUser = new User("Sample", "User");
+		Admin sampleAdmin = new Admin(sampleUser),
+				otherAdmin = new Admin(sampleUser.getName(), sampleUser.getPass());
+		// now let's assert on their properties, minus their DataStores
+		assertEquals(otherAdmin.getName(), sampleAdmin.getName());
+		 /*the two arguments won't equal each other, because the hash function User's constructors call doesn't care
+		 if the password String's already been hashed */
+		assertNotEquals(otherAdmin.getPass(), sampleAdmin.getPass()); 
+		// This also fails, but because you can transfer states with that copy constructor. (Do you really need to?)
+//		assertEquals(otherAdmin.getState(), sampleAdmin.getState());
+		assertEquals(otherAdmin.getAccounts(), sampleAdmin.getAccounts());
+		 /*these tests fail because equals() is not implemented on the DataStore, because if it was, it would cause
+			StackOverflowError. */
+//		assertEquals(otherAdmin.getDataStore().getAdmins(), sampleAdmin.getDataStore().getAdmins());
+//		assertEquals(otherAdmin, sampleAdmin);
+		
+	}
+	
+	@Test
+	public void testDefaultAdmin()
+	{
+		// TODO: implement this test
+		// create a default admin
+		DefaultAdmin da = DefaultAdmin.getDefaultAdmin();
+		// check that that DefaultAdmin is the same as the one found in an Admins object
+		assertEquals(new DataStore().getAdmins().getFirst(), da);
+		// check that that DefaultAdmin is the same as the one found in an Admin class
+		assertEquals(Admin.DEFAULT_ADMIN, da);
 	}
 	
 	// now testing operations on the DataStore, in a state-independent way
@@ -256,5 +324,25 @@ public class ApplicationTest {
 		assertFalse(_data.getActiveUsers().contains(activeUser));
 		// lockedUser should no longer be marked locked in any way
 		assertFalse(_data.getLockedUsers().contains(lockedUser));
+	}
+	
+	@Test
+	public void testPromoteUser()
+	{
+		// make sure there's an active User to promote in the DataStore
+		User activeUser;
+		if (!_data.getActiveUsers().isEmpty())
+		{
+			activeUser = new User("PromoteMe", "rightNow", User.ACTIVE);
+			_data.getActiveUsers().add(activeUser);
+		}
+		else
+		{
+			activeUser = _data.getActiveUsers().getFirst();
+		}
+		// try to promote a User
+		_data.getAdmins().getFirst().promote(activeUser);
+		// the Admins list should now contain activeUser
+		assertTrue(_data.getAdmins().contains(new Admin(activeUser, _data)));
 	}
 }

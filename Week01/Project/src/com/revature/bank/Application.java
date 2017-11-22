@@ -335,8 +335,8 @@ public class Application {
 	{
 		// building the list of active Users...
 		Users activeUsers = new Users();
-		User bobbert = new User("Bobbert", "ryanHasThisStuckInMyHead"),
-			genericUser = new User("Employee", "CodeLikeA0x426f7373");
+		User bobbert = new User("Bobbert", "ryanHasThisStuckInMyHead", User.ACTIVE),
+			genericUser = new User("Employee", "CodeLikeA0x426f7373", User.ACTIVE);
 		// creating Accounts, and for users, and pushing each user to activeUsers
 		Accounts accounts = new Accounts();
 		accounts.push(bobbert.createAccount());
@@ -349,8 +349,8 @@ public class Application {
 		lockedUsers.push(new User("Seth", "catch45"));
 		// building the list of banned Users
 		Users bannedUsers = new Users();
-		bannedUsers.push(new User("Dysgruntl", "BringEmDown"));
-		bannedUsers.push(new User("Haxxor", "l33tAllDaaay"));
+		bannedUsers.push(new User("Dysgruntl", "BringEmDown", User.BANNED));
+		bannedUsers.push(new User("Haxxor", "l33tAllDaaay", User.BANNED));
 		// building list of Admins
 		Admins admins = new Admins();	// Admins data structure automatically adds in default admin!
 		// building the DataStore

@@ -1,0 +1,28 @@
+
+.main
+{
+	min-width: 450px;
+	width: 50%;
+}
+
+#formContainer
+{
+	padding: 20px;
+}
+
+#newUserRegistration > *:not(input[type="submit"])
+{
+	width: 100%;
+	overflow: hidden;
+}
+
+#newUserRegistration > * > *
+{
+	float: left;
+}
+
+#newUserRegistration > * > *:not(:first-child):not([type="submit"]):not([type="reset"]):not(button)
+{
+	margin-left: -4px;	
+}
+

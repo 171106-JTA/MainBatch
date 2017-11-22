@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bookstore>
+	<!-- at least three of these -->
+	<book 
+		
+		genre="Fiction">
+		<title 
+			
+			language="English">
+			Eragon
+		</title>
+		<author>
+			Christopher Paolini
+		</author>
+		<year>
+			2010
+		</year>
+		<price>
+			15
+		</price>
+	</book>
+	<book 
+		genre="Fiction">
+		<title 
+			language="English">
+			Harry Potter
+		</title>
+		<author>
+			JK Rowling
+		</author>
+		<year>
+			2006
+		</year>
+		<price>
+			10
+		</price>
+	</book>
+	<book 
+		genre="Programming">
+		<title 
+			language="English">
+			Learning Node.js
+		</title>
+		<author>
+			Marc Wandschneider
+		</author>
+		<year>
+			2014
+		</year>
+		<price>
+			25
+		</price>
+	</book>
+</bookstore>

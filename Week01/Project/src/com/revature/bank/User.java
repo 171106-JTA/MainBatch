@@ -17,7 +17,7 @@ public class User implements Serializable {
 	
 	protected String _name, 
 		_pass; // will be hashed
-	private String _state; // the state of the User
+	protected String _state; // the state of the User
 	private Accounts _accounts;
 	/**
 	 * The active state. NOTE: Use these constants to change state of User.
@@ -76,6 +76,14 @@ public class User implements Serializable {
 		_accounts = accounts;
 		// ideally, we would have initialized state, but let's pass on that for now.
 		_state = state;		
+	}
+	
+	public User(User other)
+	{
+		this(other._name, other._pass, other._accounts, other._state);
+		// copy _pass,_accounts
+		_pass = other._pass;
+		_accounts = other._accounts;
 	}
 
 	/**
@@ -171,15 +179,20 @@ public class User implements Serializable {
 	}
 	
 	/**
-	 * creates new Account for this user and appends it to their list of Accounts.
-	 * @return the zero-balance account this just created
+	 * creates new Account for this user and appends it to their list of Accounts, iff this User is active
+	 * @return the zero-balance account this just created, or null if this User is not active
 	 */
+	// TODO: unit test this in the case of locked, banned, or flagged account
 	public Account createAccount()
-	{
-		// TODO: fix this such that it won't run unless User is active
-		Account newAccount = new Account();
-		_accounts.push(newAccount);
-		return newAccount;
+	{ 
+		System.out.printf("Trying to create new Account on this. _state == %s\n", _state);
+		if (_state.equals(User.ACTIVE))
+		{
+			Account newAccount = new Account();
+			_accounts.push(newAccount);
+			return newAccount;
+		}
+		return null;
 	}
 	
 	/**

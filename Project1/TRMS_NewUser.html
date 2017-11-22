@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf8"><!-- by default, web pages are not UTF-8 -->
+		<title>Employee Registration Form</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.0/mustache.min.js"></script>
+		<link rel="stylesheet" href="css/TRMS_base.css">
+		<link rel="stylesheet" href="css/TRMS_NewUser.css">
+	</head>
+	<body>
+		<h1 class="textCenter">Employee Registration Form</h1>
+		<div class="main pageCenter">
+			<form id="newUserRegistration">
+				<span class="row">
+					<label for="firstName" class="half">First name</label>
+					<input type="text" id="firstName" class="half"></input>
+				</span>
+				<span class="rowTight">
+					<label for="lastName" class="half">Last name</label>
+					<input type="text" id="lastName" class="half"></input>
+				</span>
+				<span class="rowTight">
+					<label for="empIDNumber" class="half">Employee ID number</label>
+					<input type="text" class="number" class="half"></input>
+				</span>
+				<span class="rowTight">
+					<label for="dept" class="half">Department</label>
+					<select id="dept" class="half">
+					<!-- To be populated with data from a Mustache template-->
+					{{#departments}}
+						<option id="{{departmentHTMLID}}">{{departmentName}}</option>
+					{{/departments}}
+					</select>
+				</span>
+				<span class="rowTight">
+					<label for="manager" class="half">Manager name</label>
+					<input type="text" id="manager" class="half"></input>
+				</span>
+				<span class="rowTight">
+					<label for="password" class="half">Password</label>
+					<input type="text" id="password" class="half"></input>
+				</span>
+				<span class="rowTight">
+					<label for="confirmPassword" class="half">Confirm password</label>
+					<input type="text" id="confirmPassword" class="half"></input>
+				</span>
+				<span class="right row buttonRow">
+					<input type="reset" class="right" value="Clear"/>
+					<input type="submit" class="right" value="Submit" />
+				</span>
+			</form>
+		</div>
+		
+	</body>
+</html>

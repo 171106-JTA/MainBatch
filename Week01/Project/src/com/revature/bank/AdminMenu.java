@@ -1,12 +1,13 @@
 package com.revature.bank;
 
 public class AdminMenu extends UserMenu implements Menu {
-	private static final int[] MENU_SELECTIONS = { 1, 2 , 3 };//, 4 };
+	private static final int[] MENU_SELECTIONS = { 1, 2 , 3 , 4 };
 	private static final String[] MENU_SELECTIONS_TEXT = {
 		"Activate a User",
 		"Lock a User",
 //		"Flag a User",
-		"Ban a User"
+		"Ban a User",
+		"Promote a User to Admin"
 	};
 	/**
 	 * The constant corresponding to an invalid name
@@ -77,6 +78,12 @@ public class AdminMenu extends UserMenu implements Menu {
 				// bring them to the ban user prompt
 				banUserPrompt();
 			}
+			// if that text contains "promote"
+			else if (userChoiceText.contains("promote"))
+			{
+				// bring them to promote user prompt
+				promoteToAdmin();
+			}
 			// otherwise, look for any exit keywords for user choice text
 			else 
 			{
@@ -97,7 +104,7 @@ public class AdminMenu extends UserMenu implements Menu {
 			System.out.println("Activate User Prompt");
 			System.out.println(Application.LINE_SEPARATOR + "\n");
 			// get the user name 
-			String username = fetchUserNameFromAdmin();
+			String username = fetchUserNameFromAdmin(User.LOCKED);
 			if (username.equals(INVALID_NAME))
 			{
 				System.out.println("Invalid entry. Please try again.");
@@ -140,7 +147,7 @@ public class AdminMenu extends UserMenu implements Menu {
 			System.out.println("Lock User Prompt");
 			System.out.println(Application.LINE_SEPARATOR + "\n");
 			// get the user name 
-			String username = fetchUserNameFromAdmin();
+			String username = fetchUserNameFromAdmin(User.ACTIVE);
 			// if we have invalid name from user, tell the user to retry
 			if (username.equals(INVALID_NAME))
 			{
@@ -189,7 +196,7 @@ public class AdminMenu extends UserMenu implements Menu {
 			System.out.println("Ban User Prompt");
 			System.out.println(Application.LINE_SEPARATOR + "\n");
 			// get the user name 
-			String username = fetchUserNameFromAdmin();
+			String username = fetchUserNameFromAdmin(User.ACTIVE, User.LOCKED);
 			if (username.equals(INVALID_NAME))
 			{
 				System.out.println("Invalid entry. Please try again.");
@@ -207,6 +214,7 @@ public class AdminMenu extends UserMenu implements Menu {
 						// ask the admin if they want to ban any more of them
 						keepGoing = userEnteredYes("Ban any more active or locked users?");
 					}
+					else keepGoing = false;
 				}
 				// if it failed because the user entered the wrong string for the user name
 				catch (IllegalArgumentException e)
@@ -220,9 +228,65 @@ public class AdminMenu extends UserMenu implements Menu {
 		}
 		while (keepGoing);
 	}
-
-	private String fetchUserNameFromAdmin()
+	
+	// TODO: black-box test this.
+	private void promoteToAdmin()
 	{
+		boolean keepGoing = false;
+		do
+		{
+			System.out.println("Promote User prompt");
+			System.out.println(Application.LINE_SEPARATOR + "\n");
+			// get the user name
+			String username = fetchUserNameFromAdmin(User.ACTIVE);
+			try 
+			{
+				// try to promote this user
+				_admin.promote(username);
+				System.out.println("User successfully promoted");
+				// if there are any more promotable users
+				if (_admin.anyActiveUsers())
+				{
+					// ask the Admin if they want to promote any more of them
+					keepGoing = userEnteredYes("Promote any more users?");
+				}
+				else {
+					keepGoing = false;
+				}
+			}
+			catch (IllegalArgumentException e)
+			{
+				// if it failed, prompt the user for permission to try another user
+				System.out.println(e.getMessage());
+				keepGoing = userEnteredYes("Try again?");
+			}
+		}
+		while (keepGoing);
+	}
+
+	private String fetchUserNameFromAdmin(String... userStates)
+	{
+		// output a list of user names to choose from, based on user state (the following logic should probably be offloaded to a Map)
+		System.out.println("Users : ");
+		for (String userState : userStates)
+		{
+			switch (userState)
+			{
+				case User.ACTIVE:
+					System.out.println(_admin.getDataStore().getActiveUsers());
+					continue;
+				/*// not implemented yet
+				case User.FLAGGED:
+					System.out.println(_admin.getDataStore().getFlaggedUsers());
+					continue;*/
+				case User.LOCKED:
+					System.out.println(_admin.getDataStore().getLockedUsers());
+					continue;
+				case User.BANNED:
+					System.out.println(_admin.getDataStore().getBannedUsers());
+					continue;
+			}
+		}
 		System.out.println("Enter the user name: ");
 		String username = scanner.nextLine();
 		// look for user by that name in the admin's DataStore

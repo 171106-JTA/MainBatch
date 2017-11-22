@@ -6,6 +6,7 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class UserDAOImpl implements UserDAO {
 		CallableStatement cs = null;
 		
 		boolean hasValidCredentials = false;
+		int foundID = USER_NOT_FOUND;
 		try (Connection conn = ConnectionUtil.getConnection())
 		{
 			String sql = "{? = call find_user_by_credentials(?,?)}";
@@ -54,14 +56,8 @@ public class UserDAOImpl implements UserDAO {
 			cs.registerOutParameter(1, java.sql.Types.INTEGER);
 			cs.execute();
 			// get the id from the CallableStatement
-			int foundID = cs.getInt(1);
+			foundID = cs.getInt(1);
 			hasValidCredentials = (foundID != USER_NOT_FOUND);
-			// if user has valid credentials
-			if (hasValidCredentials)
-			{
-				// we get the id from the ResultSet and give it to user
-				user.setUserID(foundID);
-			}
 		}
 		catch (SQLException e)
 		{
@@ -71,7 +67,7 @@ public class UserDAOImpl implements UserDAO {
 		{
 			close(cs);
 		}
-		return hasValidCredentials ? user : null;
+		return hasValidCredentials ? getUserById(foundID) : null;
 	}
 
 	/**
@@ -132,10 +128,13 @@ public class UserDAOImpl implements UserDAO {
 				if (name.isEmpty()) name = rs.getString("USER_NAME");
 				if (pass.isEmpty()) pass = rs.getString("USER_PASS");
 				if (state.isEmpty()) state = rs.getString("STATE_NAME");
-				// next, we get the Account data and append it to Accounts
+				
+				// can't do any account stuff here. Have to offload that to another function
+				/*// next, we get the Account data and append it to Accounts
 				accounts.add(new Account(rs.getInt("ACCOUNT_ID"),
-						rs.getDouble("ACCOUNT_BALANCE")));
-				user = new User(name, pass, accounts, state);
+						rs.getDouble("ACCOUNT_BALANCE")));*/
+				user = new User(name, pass, state);
+				user.setAccounts(getAccountsFor(user));
 			}
 		} 
 		catch (SQLException e) {

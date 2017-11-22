@@ -33,9 +33,10 @@ CREATE TABLE Accounts(
     account_ID  NUMBER PRIMARY KEY NOT NULL,
     user_ID     NUMBER NOT NULL,
     account_balance NUMBER(9,2) DEFAULT 0 NOT NULL,
-    account_creation_date   DATE
+    account_creation_date   DATE DEFAULT CURRENT_TIMESTAMP
 );
 /
+
 --putting auto-increment on all the tables...
 --...first, we create all the sequences...
 --...dropping the all first for good measure...
@@ -273,4 +274,16 @@ BEGIN
         WHERE admin_id = (SELECT admin_id FROM admins_view WHERE user_name = username);
     
 END;
+/
+
+--having an account created for a user if they don't have one yet
+CREATE OR REPLACE TRIGGER create_default_account
+    AFTER INSERT ON users
+        FOR EACH ROW
+            BEGIN
+                INSERT INTO accounts(user_id)
+                    SELECT (:new.user_id) FROM dual
+                    WHERE NOT EXISTS (SELECT * FROM Users_Accounts_View WHERE user_id = :new.user_id);
+                commit;
+            END;
 /

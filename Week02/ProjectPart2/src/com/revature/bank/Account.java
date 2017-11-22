@@ -24,6 +24,11 @@ public class Account implements Serializable {
 		this(randomAcctNumber(), balance);
 	}
 	
+	public Account(int acctNumber)
+	{
+		this(acctNumber, 0.0);
+	}
+	
 	public Account(int acctNumber, double balance)
 	{
 		// initialize acctNumbers and add acctNumber to it if not already done

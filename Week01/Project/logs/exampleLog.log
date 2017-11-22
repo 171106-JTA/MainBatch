@@ -3539,15 +3539,593 @@ Acct. Bal: $0.00
 Old balance: $50.00
 Withdrawal amount: $12.17
 2017-11-15 00:03:38 INFO  Application:136 - New balance: $37.83
-2017-11-19 23:35:55 INFO  Application:58 - Account instantiated
-Acct #: 5022969
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 2699660
 Acct. Bal: $0.00
-2017-11-20 00:14:52 INFO  Application:58 - Account instantiated
-Acct #: 4337178
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 3818054
 Acct. Bal: $0.00
-2017-11-20 00:31:32 INFO  Application:58 - Account instantiated
-Acct #: 8257951
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 1596005
 Acct. Bal: $0.00
-2017-11-20 01:20:19 INFO  Application:58 - Account instantiated
-Acct #: 8369737
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 8361043
 Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 8854905
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 1777889
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 3002026
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 3592953
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 7243369
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 1587699
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 1140849
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 8832181
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 9721360
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 1907273
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 4383618
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 6132081
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 6035209
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 5239708
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 1541135
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 2108119
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 5429410
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 501551
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 3170073
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 5868512
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 3668435
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 3037636
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 2995166
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 6021796
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 74584
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 7359250
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 6984298
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:58 - Account instantiated
+Acct #: 2669822
+Acct. Bal: $0.00
+2017-11-15 15:13:51 INFO  Application:131 - Withdrawal happening.
+Old balance: $50.00
+Withdrawal amount: $21.03
+2017-11-15 15:13:51 INFO  Application:136 - New balance: $28.97
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 420536
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 7655795
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 6434290
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 7435495
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 3768933
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 1255287
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 8500841
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 525579
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 5146003
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 5564173
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 2218610
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 1692588
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 9379755
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 7700137
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 6830456
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 5103705
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 2452014
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 8745945
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 8015402
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 6035968
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 4806206
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 3359000
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 6760292
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 8210698
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 6976497
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 5824674
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 846542
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 366640
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 6380173
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 6104721
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 3247953
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:58 - Account instantiated
+Acct #: 803808
+Acct. Bal: $0.00
+2017-11-15 15:18:17 INFO  Application:131 - Withdrawal happening.
+Old balance: $50.00
+Withdrawal amount: $24.10
+2017-11-15 15:18:17 INFO  Application:136 - New balance: $25.90
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 4714927
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 5354744
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 3080607
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 7508490
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 4661232
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 6741424
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 5479262
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 9958635
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 8536667
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 7847620
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 1498834
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 660164
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 4683178
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 1999283
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 5970451
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 2496161
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 1002941
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 9028855
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 5616618
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 8301369
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 7102081
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 5162722
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 986924
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 6401202
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 7620616
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 4205752
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 5119684
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 757310
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 2049238
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 6116965
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 9586554
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:58 - Account instantiated
+Acct #: 6740527
+Acct. Bal: $0.00
+2017-11-15 15:20:00 INFO  Application:131 - Withdrawal happening.
+Old balance: $50.00
+Withdrawal amount: $33.97
+2017-11-15 15:20:00 INFO  Application:136 - New balance: $16.03
+2017-11-15 15:24:00 INFO  Application:58 - Account instantiated
+Acct #: 803874
+Acct. Bal: $0.00
+2017-11-15 15:24:00 INFO  Application:58 - Account instantiated
+Acct #: 2645787
+Acct. Bal: $0.00
+2017-11-15 15:24:00 INFO  Application:58 - Account instantiated
+Acct #: 889152
+Acct. Bal: $0.00
+2017-11-15 15:24:00 INFO  Application:58 - Account instantiated
+Acct #: 560429
+Acct. Bal: $0.00
+2017-11-15 15:24:00 INFO  Application:58 - Account instantiated
+Acct #: 5379174
+Acct. Bal: $0.00
+2017-11-15 15:24:00 INFO  Application:58 - Account instantiated
+Acct #: 2960240
+Acct. Bal: $0.00
+2017-11-15 15:24:00 INFO  Application:58 - Account instantiated
+Acct #: 1050148
+Acct. Bal: $0.00
+2017-11-15 15:24:00 INFO  Application:58 - Account instantiated
+Acct #: 3964649
+Acct. Bal: $0.00
+2017-11-15 15:24:00 INFO  Application:58 - Account instantiated
+Acct #: 9024648
+Acct. Bal: $0.00
+2017-11-15 15:24:00 INFO  Application:58 - Account instantiated
+Acct #: 5495433
+Acct. Bal: $0.00
+2017-11-15 15:24:00 INFO  Application:58 - Account instantiated
+Acct #: 5761376
+Acct. Bal: $0.00
+2017-11-15 15:24:00 INFO  Application:58 - Account instantiated
+Acct #: 7401232
+Acct. Bal: $0.00
+2017-11-15 15:24:00 INFO  Application:58 - Account instantiated
+Acct #: 7130969
+Acct. Bal: $0.00
+2017-11-15 15:24:00 INFO  Application:58 - Account instantiated
+Acct #: 5319794
+Acct. Bal: $0.00
+2017-11-15 15:24:00 INFO  Application:58 - Account instantiated
+Acct #: 4472598
+Acct. Bal: $0.00
+2017-11-15 15:24:00 INFO  Application:58 - Account instantiated
+Acct #: 5789544
+Acct. Bal: $0.00
+2017-11-15 15:24:00 INFO  Application:58 - Account instantiated
+Acct #: 6063196
+Acct. Bal: $0.00
+2017-11-15 15:24:00 INFO  Application:58 - Account instantiated
+Acct #: 9457592
+Acct. Bal: $0.00
+2017-11-15 15:24:00 INFO  Application:58 - Account instantiated
+Acct #: 6504981
+Acct. Bal: $0.00
+2017-11-15 15:24:00 INFO  Application:58 - Account instantiated
+Acct #: 4987278
+Acct. Bal: $0.00
+2017-11-15 15:24:00 INFO  Application:58 - Account instantiated
+Acct #: 6329161
+Acct. Bal: $0.00
+2017-11-15 15:24:00 INFO  Application:58 - Account instantiated
+Acct #: 2517186
+Acct. Bal: $0.00
+2017-11-15 15:24:00 INFO  Application:58 - Account instantiated
+Acct #: 7212188
+Acct. Bal: $0.00
+2017-11-15 15:24:01 INFO  Application:58 - Account instantiated
+Acct #: 2993701
+Acct. Bal: $0.00
+2017-11-15 15:24:01 INFO  Application:58 - Account instantiated
+Acct #: 6099815
+Acct. Bal: $0.00
+2017-11-15 15:24:01 INFO  Application:58 - Account instantiated
+Acct #: 275368
+Acct. Bal: $0.00
+2017-11-15 15:24:01 INFO  Application:58 - Account instantiated
+Acct #: 7133972
+Acct. Bal: $0.00
+2017-11-15 15:24:01 INFO  Application:58 - Account instantiated
+Acct #: 6130630
+Acct. Bal: $0.00
+2017-11-15 15:24:01 INFO  Application:58 - Account instantiated
+Acct #: 384557
+Acct. Bal: $0.00
+2017-11-15 15:24:01 INFO  Application:58 - Account instantiated
+Acct #: 3818206
+Acct. Bal: $0.00
+2017-11-15 15:24:01 INFO  Application:58 - Account instantiated
+Acct #: 4215793
+Acct. Bal: $0.00
+2017-11-15 15:24:01 INFO  Application:58 - Account instantiated
+Acct #: 6204860
+Acct. Bal: $0.00
+2017-11-15 15:24:01 INFO  Application:131 - Withdrawal happening.
+Old balance: $50.00
+Withdrawal amount: $32.87
+2017-11-15 15:24:01 INFO  Application:136 - New balance: $17.13
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 1892645
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 2867494
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 1436207
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 2035133
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 4223809
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 5603787
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 4932727
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 4130653
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 6958595
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 221075
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 1566983
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 8468377
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 2150673
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 3048831
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 7835257
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 4485400
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 5324092
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 5281517
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 7825528
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 5727454
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 7357725
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 1909702
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 6532925
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 2427416
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 8093518
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 4564691
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 2672579
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 4614917
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 5304083
+Acct. Bal: $0.00
+2017-11-15 15:36:02 INFO  Application:58 - Account instantiated
+Acct #: 7041623
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 3878297
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 4786905
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 4768740
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 5152419
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 2241810
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 1398761
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 3422299
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 9802086
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 9765922
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 4373411
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 7020494
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 5644508
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 5484805
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 3746763
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 9434705
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 8045391
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 22960
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 5329305
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 7442047
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 9638224
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 9739391
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 1821121
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 4121293
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 7358114
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 3759522
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 9741660
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 8564438
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 609116
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 1807752
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 60308
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 8220089
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:58 - Account instantiated
+Acct #: 3299768
+Acct. Bal: $0.00
+2017-11-15 15:36:32 INFO  Application:131 - Withdrawal happening.
+Old balance: $50.00
+Withdrawal amount: $27.04
+2017-11-15 15:36:32 INFO  Application:136 - New balance: $22.96
