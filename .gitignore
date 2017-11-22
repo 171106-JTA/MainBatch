@@ -31,3 +31,6 @@
 #Mac
 .DS_Store
 /.recommenders/
+
+#NPM
+**/node_modules/
