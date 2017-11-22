@@ -19,4 +19,44 @@
     <servlet-name>HelloWorld2</servlet-name>
     <url-pattern>/HeyBobbert</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetAndPost</display-name>
+    <servlet-name>GetAndPost</servlet-name>
+    <servlet-class>com.revature.servlets.GetAndPost</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetAndPost</servlet-name>
+    <url-pattern>/GetAndPost</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Headers</display-name>
+    <servlet-name>Headers</servlet-name>
+    <servlet-class>com.revature.servlets.Headers</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Headers</servlet-name>
+    <url-pattern>/Headers</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CreateSession</display-name>
+    <servlet-name>CreateSession</servlet-name>
+    <servlet-class>com.revature.servlets.CreateSession</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateSession</servlet-name>
+    <url-pattern>/CreateSession</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FetchSession</display-name>
+    <servlet-name>FetchSession</servlet-name>
+    <servlet-class>com.revature.servlets.FetchSession</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FetchSession</servlet-name>
+    <url-pattern>/FetchSession</url-pattern>
+  </servlet-mapping>
 </web-app>
