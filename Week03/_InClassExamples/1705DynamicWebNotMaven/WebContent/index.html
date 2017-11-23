@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="resources/css/default.css">
+
+<meta charset="ISO-8859-1">
+<title>My Main Servlet Hub</title>
+</head>
+<body>
+	<a href="htmlexample.html">HTML</a>
+	<hr>
+
+	<h1>WELCOME TO MY SERVLET HUB</h1>
+	<p>Navigate below to test out servlet examples!</p>
+
+	<hr>
+	<h2>HELLO WORLD</h2>
+	<p>
+		Servlets are interacted with via form submissions. <br>Inside the
+		form start tag, you can optionalloy set a method property. <br>But
+		it is the action tag, that will direct us to a servlet to handle. <br>
+		<strong>Note: action should equal to the servlet URL pattern,
+			as indicated in the web.xml.</strong>
+	</p>
+
+	<form action="HeyBobbert">
+		<input type="submit" value="HELLO!">
+	</form>
+
+	<hr>
+	<h2>POST AND GET</h2>
+	<p>
+		Utilize the 'method' attribute for a form to indicate which HTTP
+		method to use.<br> If not method is specified, GET is used by
+		default!
+	</p>
+	<h3>GET</h3>
+	<form action="SomethingDifferent" method="get">
+		<ul style="list-style-type: none;">
+			<li>FIRST NAME</li>
+			<li><input type="text" name="first"></li>
+			<li>LAST NAME</li>
+			<li><input type="text" name="last"></li>
+			<li><input type="submit" value="GET"></li>
+		</ul>
+	</form>
+
+	<h3>POST</h3>
+	<form action="SomethingDifferent" method="post">
+		<ul style="list-style-type: none;">
+			<li>FIRST NAME</li>
+			<li><input type="text" name="first"></li>
+			<li>LAST NAME</li>
+			<li><input type="text" name="last"></li>
+			<li><input type="submit" value="POST"></li>
+		</ul>
+	</form>
+
+	<hr>
+	<h2>HEADER INFORMATION</h2>
+
+	<form action="Headers">
+		<ul style="list-style-type: none;">
+			<li><input type="submit" value="HEADER"></li>
+		</ul>
+	</form>
+
+	<hr>
+	<h2>COOKIES</h2>
+
+	<form action="CreateCookie">
+		<ul style="list-style-type: none;">
+			<li>Username</li>
+			<li><input type="text" name="username" placeholder="Username"
+				required></li>
+			<li>Password</li>
+			<li><input type="password" name="password" placeholder="Password"
+				required></li>	
+			<li><input type="submit" value="Create Cookie"></li>
+		</ul>
+	</form>
+	
+	<form action="FetchCookie">
+		<ul style="list-style-type: none;">
+			<li><input type="submit" value="Fetch Cookies"></li>
+		</ul>
+	</form>
+	
+	<form action="DeleteCookie">
+		<ul style="list-style-type: none;">
+			<li><input type="submit" value="Delete Cookies"></li>
+		</ul>
+	</form>
+
+	<hr>
+	<h2>SESSIONS</h2>
+
+	<form action="CreateSession">
+		<ul style="list-style-type: none;">
+			<li>First Name</li>
+			<li><input type="text" name="fname" placeholder="First Name"
+				required></li>
+			<li>Last Name</li>
+			<li><input type="text" name="lname" placeholder="Last Name"
+				required></li>	
+			<li><input type="submit" value="Create Session"></li>
+		</ul>
+	</form>
+	
+	<form action="TrackSession">
+		<ul style="list-style-type: none;">
+			<li><input type="submit" value="Track Session"></li>
+		</ul>
+	</form>
+	
+		<form action="DeleteSession">
+		<ul style="list-style-type: none;">
+			<li><input type="submit" value="Delete Session"></li>
+		</ul>
+	</form>
+	
+		<hr>
+	<h2>FILTERS</h2>
+
+	<form action="AdminPage.html">
+		<ul style="list-style-type: none;">
+			<li>First Name</li>
+			<li><input type="text" name="username" placeholder="Username"
+				required></li>
+			<li>Last Name</li>
+			<li><input type="password" name="password" placeholder="Password"
+				required></li>	
+			<li><input type="submit" value="Access Admin"></li>
+		</ul>
+	</form>
+
+</body>
+</html>
