@@ -489,5 +489,22 @@ select * from flash_cards;
 
 commit;
 
+<<<<<<< HEAD
 -- IN is like = except for a set of values, operates like a for loop
 --like a nested for loop
+=======
+/*
+SQL Injection
+
+X=';select * from polkaman where pkmn_name like '%' OR pkmn_name = '
+
+select * from polkaman where lower(pkmn_name) = '';select * from polkaman'';
+*/
+select * from flash_cards;
+
+DECLARE
+    x VARCHAR(4000);
+BEGIN
+    get_answer('Did JDBC work?', x);
+END;
+>>>>>>> 0ea703c841360d7f970f5ca932b6fa5f41e34953

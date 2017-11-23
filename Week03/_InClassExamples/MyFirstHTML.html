@@ -1,0 +1,118 @@
+<!-- 
+HTML:  HyperText Markup Language
+
+-Describes a structure of a web page using markup
+-Tags that represent elements which make up the building 
+    blocks of webpages
+-Tags are not shown to the suer, but used to render content.
+Remember: XML hold data, HTML shows data 
+-->
+<!DOCTYPE html> <!-- Tells the browser which version of html to use, default html is 5 -->
+<html>
+    <head>
+        <meta charset="UTF-8"> <!-- By default, web pages are not UTF-8 -->
+        <title>This is my custom page!</title>
+    </head>
+    <body>
+        <h1>This is my website!</h1>
+        <p>This is a paragraph about bobbert or something. Honestley, I dont actually know what to write here, I am just trying to kill time and fill up at least two whole lines of content so that I can show everyone how it will form a paragraph for me. How neat is it tha tthis is only a 3 day week.</p>
+        <hr>
+        <p>Separate content in style!</p>
+        <p>I<br>
+        separated<br>
+        these<br>
+        words<br></p>
+        <hr>
+        <h3>HTML NOTES</h3>
+        <ol>
+            <li>Elements containt a start and end tag</li>
+            <li>Element tags can be nseted. Just like this list</li>
+            <li>Convention suggest only lowercase letters for tags</li>
+            <li>
+                <b><u>Attributes</u></b>
+                <ul>
+                    <li>All elements CAN have attributes</li>
+                    <li>Attributes provide additional information about tags</li>
+                    <li>Always rested in start tag</li>
+                    <li>Typically used in name/value pairs</li>
+                </ul>
+            
+            </li>
+        </ol>
+        <hr>
+        <table border='50px'> <!-- use for table -->
+            <tr> <!-- Use for table rows -->
+                <th>TAGS</th> <!-- Use <th> for table header values -->
+                <th>USE</th>
+            </tr>
+            <tr>
+                <td><b>&lt;b&gt;</b></td>
+                <td>Use these tags to bold anything in between</td>
+            </tr>
+            <tr>
+                <td><strong>&lt;strong&gt;</strong></td>
+                <td>Same as above</td>
+            </tr>
+            <tr>
+                <td><i>&lt;i&gt;</i></td>
+                <td>Italicising text</td>
+            </tr>
+            <tr>
+                <td><em>&lt;em&gt;</em></td>
+                <td>Used for emphirical text</td>
+            </tr>
+            <tr>
+                <td><mark>&lt;mark&gt;</mark></td>
+                <td>Used highlighting</td>
+            </tr>
+            <tr>
+                <td><del>&lt;del&gt;</del></td>
+                <td>Used <del>capitilizing</del> crossing out text</td>
+            </tr>
+            <tr>
+                <td><u>&lt;u&gt;</u></td>
+                <td>Used for underlining text</td>
+            </tr>
+            <!-- Used for comments, end users cannot see these, but if they inspect
+                the page they CAN -->
+        </table>
+        <hr>
+        <img src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
+        alt="My Alternate text"
+        style="width:800px;height:50px">
+        <div>
+            <p>Use div to divide sections from eachother</p>
+        </div>
+        <div>
+            <p>Use <span style="color:firebrick">span</span> to divide inline sections</p>
+        </div>
+        <hr>
+        
+        <form action="ThankYou.html">
+            <ul  style="list-style: none"> <!--No bullet points -->
+                    <li><b>INPUT USERNAME</b></li>
+                    <li><input type="text" required></li>
+                    <li><b>INPUT PASSWORD</b></li>
+                    <li><input type="password" required></li>
+                    <li><input type="reset" value="RESET"></li> <!-- use the value attribute to set button text" -->
+                    <li><input type="submit" value="SUBMIT"></li>
+            </ul>
+            <input type="radio" name="someGroup" value="Number 1" checked>Number1<br>
+            <input type="radio" name="someGroup" value="Number dos">Number dos<br>
+            <input type="radio" name="someGroup" value="Number drei">number drei<br>
+            <input type="checkbox" value="Dog">Dog
+            <input type="checkbox" value="Cat">Cat
+            <input type="checkbox" value="Bobbert">Bobbert
+            <select id="AlwaysUseUniqueIDs">
+                <option value="dogbert">dogbert</option>
+                <option value="dilbert">dilbert</option>
+                <option value="Kyle">Kyle</option>
+            </select>
+        </form>
+        <ul>
+            <li><a href="http://www.google.com">CLICK HERER!</a></li>
+            <li><a href="http://lmgtfy.com/?q=let+me+google+that+for+you">I will teach you how to google!</a></li>
+        </ul>
+        
+    </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="resources/css/default.css">
+<title>Insert title here</title>
+</head>
+<body class="container">
+	<div class=row>
+		<div class="col-md-3"><!-- xs/sm/md/lg --> <!-- Follow up with cell span (out of 12) -->
+			<h1>FORMS</h1>
+			<form action="#">
+				<h3>Text Boxes</h3>
+				<!-- Type indicates what kind of input you are seeking -->
+				<!-- Using the name attribute helps us reference via servlets. -->
+				<!-- Good practice suggests you always have some kind of identifier
+					for input fields so as to refer to them in different parts of the
+					applications. -->
+				<ul style="list-style-type: none;">
+					<li>Input Username</li>
+					<li><input type="text" name="user" placeholder="Username"></li>
+					<li>Input Password</li>
+					<li><input type="password" name="pass" placeholder="Password"></li>
+					<li>Input Email</li>
+					<li><input type="email" name="email" placeholder="email"></li>
+					<li>Input Age</li>
+					<li><input type="number" name="age" placeholder="age"></li>
+					<hr>
+					<h3>Check Boxes</h3>
+					<li><input type="checkbox" name="cbdog" value="dog"
+						checked="checked">DOG</li>
+					<li><input type="checkbox" name="cbcat" value="cat">CAT</li>
+					<li><input type="checkbox" name="cbbobbert" value="bobbert">BOBBERT</li>
+					<hr>
+					<h3>Radio Button</h3>
+					<li><input type="radio" name="PreferredTime" value="Morning"
+						checked="checked">Morning</li>
+					<li><input type="radio" name="PreferredTime" value="Afternoon">Afternoon</li>
+					<li><input type="radio" name="PreferredTime" value="Night">Night</li>
+				</ul>
+	
+				<hr>
+				<h3>Dropdown</h3>
+				<p>Choose Favorite Color</p>
+				<select name="color" class=weblist>
+					<option>Select Option</option>
+					<option>Blue</option>
+					<option>Red</option>
+					<option>Green</option>
+					<option>Bobbert</option>
+				</select> <br> <input type="reset" Value="I Screwed up"> <br>
+				<input type="submit" value="GET">
+	<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+			</form>
+		</div>
+		<div class = col-md-9></div>
+	</div>
+</body>
+</html>
