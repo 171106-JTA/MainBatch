@@ -488,3 +488,6 @@ GRANT DBA TO minibobbert;
 select * from flash_cards;
 
 commit;
+
+-- IN is like = except for a set of values, operates like a for loop
+--like a nested for loop

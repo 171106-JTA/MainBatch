@@ -39,15 +39,7 @@ CREATE SEQUENCE fc_seq
     on the specific *table* the trigger was made for. (don't need multiple per table)
     A trigger can be coded to react to most CRUD operations. (Excluding select)
 */
-CREATE OR REPLACE TRIGGER fc_seq_trigger --auto increment
-BEFORE INSERT ON flash_cards
-FOR EACH ROW
-BEGIN --This keyword signifies a block for a transaction (an atomic unit of work).
-    IF :new.fc_id IS NULL THEN
-    SELECT fc_seq.nextval INTO :new.fc_id from dual;
-    END IF;
-END;
-/
+
 
 /*
     SELECT INTO statement
@@ -69,7 +61,7 @@ VALUES('Did my trigger work?', 'Sure hope so...');
 /*
     A named transaction that can be invoked when called.
 
-    CREATE [OR REPLACE] proc-name
+    CREATE [OR REPLACE] PROCEDURE proc-name
     IS
         This section is where you can DECLARE variables
     BEGIN
@@ -182,18 +174,18 @@ BEGIN
 END;
 
 /*
-    -A function differs from a stored procedure in the following ways:
+    A function differs from a stored procedure in the following ways:
     A stored procedure does NOT have to return anything
     A stored procedure CAN have as many IN/OUT parameters as it wants.
     A stored procedure can alter the database such as insert, delte, etc.
-    A stored procedure can NOT be called mid query.
+    A stored procedure can NOT be called mid query. why?
     A stored procedure can call other stored procedures within it.
     A stored procedure can call functions.
 
     A function MUST return ONE and only ONE thing.
     A function CAN use OUT parameters, but this is highly advised against.
     A function can NOT perform database operations.
-    A function can be called mid query.
+    A function CAN be called mid query.
     A function can call other functions.
     A function cannot call a stored procedure.
 */
@@ -202,10 +194,11 @@ CREATE OR REPLACE FUNCTION get_max_id
 RETURN NUMBER
 IS
     max_id NUMBER;
-BEGIN
+BEGIN 
     SELECT max(fc_id) INTO max_id from flash_cards;
     RETURN max_id;
 END;
+
 
 DECLARE
     max_id number;
@@ -213,6 +206,7 @@ BEGIN
     max_id := get_max_id();
     DBMS_OUTPUT.PUT_LINE(max_id);
 END;
+
 
 DECLARE
     firstNum number;
@@ -240,7 +234,7 @@ BEGIN
 END;
 
 
---EXCETION HANDLING EXAMPLE
+--EXCEPTION HANDLING EXAMPLE
 CREATE OR REPLACE PROCEDURE exceptionExample
 IS
     CURSOR badCurse IS
