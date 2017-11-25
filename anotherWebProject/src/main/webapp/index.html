@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf8">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		<h1>Hello Mike</h1>
+		<p>Navigate below to test our servlet examples!</p>
+		
+		<hr>
+		<h2>HELLO WORLD</h2>
+		<p>
+			Servlets are interacted with via form submissions. <br>
+			Inside the form start tag, you can optionally set a method property.<br>
+			But it is the action tag, that will direct us to a servlet to handle.<br>
+			<b>NOTE: Action should equal to the servlet URL pattern as indicated in the web.xml</b>
+		</p>
+		<form action="HeyBobbert">
+			<input type="submit" value="Hello!">
+		</form>
+		<hr>
+		<h2>POST and GET</h2>
+		<p>
+			Utilize the 'method attribute fro a form in order to indicate which HTTP method to use.<br>
+			if no method is specified, GET is used by default.<br>
+		</p>
+		<h3>GET</h3>
+		<form action="GetAndPost">
+			<ul style="list-style: none;">
+				<li>First name</li>
+				<li><input type="text" name="username" placeholder="USERNAME"></li>
+				<li>Last name</li>
+				<li><input type="password" name="password" placeholder="PASSWORD"></li>
+				<li><input type="submit" value="SUBMIT LOGIN"></li>
+				
+			</ul>
+		</form>
+		<h3>POST</h3>
+		<form action="GetAndPost" method="post">
+			<ul style="list-style: none;">
+				<li>First name</li>
+				<li><input type="text" name="username" placeholder="USERNAME"></li>
+				<li>Last name</li>
+				<li><input type="password" name="password" placeholder="PASSWORD"></li>
+				<li><input type="submit" value="SUBMIT LOGIN"></li>
+				
+			</ul>
+		</form>
+		
+		<h2>HEADERS</h2>
+		<form action="Headers">
+			<ul style="list-style-type: none;">
+				<li><input type="submit" value="GET HEADER INFO"></li>
+			</ul>
+		</form>
+		<h2>SESSIONS</h2>
+		<form action="CreateSession" method="post">
+			<ul style="list-style: none;">
+				<li>Username</li>
+				<li><input type="text" name="username" placeholder="USERNAME"></li>
+				<li>Password</li>
+				<li><input type="password" name="password" placeholder="PASSWORD"></li>
+				<li><input type="submit" value="SUBMIT LOGIN"></li>
+				
+			</ul>
+		</form>
+		
+	</body>
+</html>

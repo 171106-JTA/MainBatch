@@ -13,15 +13,21 @@
 			<form id="newUserRegistration">
 				<span class="row">
 					<label for="firstName" class="half">First name</label>
-					<input type="text" id="firstName" class="half"></input>
+					<input type="text" id="firstName" class="half">
+						<span class="hidden tooltip"></span>					
+					</input>
 				</span>
 				<span class="rowTight">
 					<label for="lastName" class="half">Last name</label>
-					<input type="text" id="lastName" class="half"></input>
+					<input type="text" id="lastName" class="half">
+						<span class="hidden tooltip"></span>					
+					</input>
 				</span>
 				<span class="rowTight">
 					<label for="empIDNumber" class="half">Employee ID number</label>
-					<input type="text" class="number" class="half"></input>
+					<input type="text" class="number" class="half">
+						<span class="hidden tooltip"></span>		
+					</input>
 				</span>
 				<span class="rowTight">
 					<label for="dept" class="half">Department</label>
@@ -31,18 +37,37 @@
 						<option id="{{departmentHTMLID}}">{{departmentName}}</option>
 					{{/departments}}
 					</select>
+					<span class="hidden tooltip"></span>		
 				</span>
 				<span class="rowTight">
 					<label for="manager" class="half">Manager name</label>
-					<input type="text" id="manager" class="half"></input>
+					<input type="text" id="manager" class="half">
+						<span class="hidden tooltip"></span>	
+					</input>
+				</span>
+				<span class="rowTight">
+					<label for="username" class="half">Username</label>
+					<input type="text" id="username" class="half">
+						<span class="hidden tooltip"></span>	
+					</input>
 				</span>
 				<span class="rowTight">
 					<label for="password" class="half">Password</label>
-					<input type="text" id="password" class="half"></input>
+					<input type="text" id="password" class="half">
+						<span class="hidden tooltip"></span>	
+					</input>
 				</span>
 				<span class="rowTight">
 					<label for="confirmPassword" class="half">Confirm password</label>
-					<input type="text" id="confirmPassword" class="half"></input>
+					<input type="text" id="confirmPassword" class="half">
+						<span class="hidden tooltip"></span>
+					</input>
+				</span>
+				<span class="rowTight">
+					<label for="email" class="half" title="A confirmation email will be sent to this e-mail address.">E-mail address</label>
+					<input type="email" class="half" title="A confirmation email will be sent to this e-mail address.">
+						<span class="hidden tooltip"></span>
+					</input>
 				</span>
 				<span class="right row buttonRow">
 					<input type="reset" class="right" value="Clear"/>

@@ -28,7 +28,7 @@ form
 	overflow: auto;
 }
 
-input[type="text"],input[type="password"]
+input[type="text"],input[type="password"], input[type="email"]
 {
 	border-left-style: none !important;
     border-right-style: none !important;
@@ -54,6 +54,12 @@ input[type="submit"]
 input[type="submit"]:hover
 {
 	background-color: #fb0;
+}
+
+.hidden
+{
+	display: none;
+	visibility: hidden;
 }
 
 .row:not(.buttonRow),.rowTight:not(.buttonRow)
@@ -95,6 +101,13 @@ input[type="submit"]:hover
 	text-align: right;
 }
 
+/* AngularJS styles */
+input.ng-invalid
+{
+	background-color: pink;
+	border-bottom-color: red !important;
+}
+
 /* Multiple-width classes */
 .triple { width: 300%; }
 .double { width: 200%; }
@@ -111,3 +124,30 @@ input[type="submit"]:hover
 .fourth { width: 25%;}
 .fifth { width: 20%; }
 .sixth { width: 16.6666666666666667%; }
+
+/* The tooltip stuff */
+.tooltip
+{
+	z-index: 1;
+	display: inline-block;
+	width: 200px;
+	background-color: #e55;
+	padding: 5px;
+	position: absolute;
+	color: #fff;
+	border-radius: 6px;
+	margin-left: 6px;
+}
+
+
+.tooltip::after
+{
+	content: "";
+	position: absolute;
+	top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+	border-color: transparent #e55 transparent transparent;
+}
