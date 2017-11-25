@@ -20,5 +20,10 @@
             <artifactId>ojdbc7</artifactId>
             <version>12.1.0</version>
         </dependency>
+		<dependency>
+			<groupId>BusinessObject</groupId>
+			<artifactId>BusinessObject</artifactId>
+			<version>0.0.1</version>
+		</dependency>
     </dependencies>
 </project>
