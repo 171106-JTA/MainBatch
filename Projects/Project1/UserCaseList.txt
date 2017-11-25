@@ -4,7 +4,7 @@ Employee Use Cases
 Login/Logout
 View Available Tuition Reimbursement
 View List of Unapproved Reimbursements
-View List of Approved and Pending Reimbursements
+View List of Approved, Pending, Confirmed Reimbursements
 View To-Dos for Grade submission (submit grade of test, presentation, ect.)
 View List Completed Reimbursements
 View Specific Reimbursements with accompanying status and to-dos
@@ -16,7 +16,7 @@ Notifications of changed approval amounts
 Accept/Cancel requests based on changed approval amounts
 On reimbursement approval and confirmation 
 
-IF TIME: 
+IF TIME:
 Save partial reimbursement form
 View list of partial reimbursement forms
 Have employee information associated with the account, that gets auto filled on start of riembursement form
@@ -74,6 +74,7 @@ Confirm
 
 Notes: 
 - If tardy on approval, send escalation email to BenCo's direct supervistor
+
 
 General:
 Veiw Information on Reimbursement Program
