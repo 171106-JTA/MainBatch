@@ -32,7 +32,14 @@ function validUsername()
 	// for now, usernames are valid iff they aren't empty
 	var usernameNotEmpty = !isEmpty($('#username'));
 	
-	return usernameNotEmpty;
+	if (!usernameNotEmpty) 
+	{
+		throw {
+			field : 'username',
+			errors: [ EMPTY_FIELD ]
+		}
+	}
+	return true;
 }
 
 /* Checks if password is valid
@@ -44,38 +51,98 @@ function validPassword()
 	// for now, passwords are valid iff they aren't empty
 	var passwordNotEmpty = !isEmpty($('#password'));
 	
-	return passwordNotEmpty;
+	if (!passwordNotEmpty)
+	{
+		throw {
+			field : 'password',
+			errors: [ EMPTY_FIELD ]
+		};
+	}
+	return true;
 }
 
 /* Does login logic, logging the user in
  * 
  */
 function login() { 
+	// no user field should be blank
+	if (($('#username').val().trim() == '') && ($('#password').val().trim() == ''))
+	{
+		console.log("no fields should be blank");
+		return;
+	}
 	// user authentication logic goes here....
-	// if the username is invalid
-	if (!validUsername())
+	var errorObj = {
+		username : {},
+		password : {}
+	};
+	var validCredentials = false;
+	try
 	{
-		// add '.ng-invalid' class to the $('#username')
-		if (!$('#username').hasClass('ng-invalid')) $('#username').addClass('ng-invalid');
-		
+		validCredentials = validUsername();
+		console.log('validCredentials == ' + validCredentials);
 	}
-	// otherwise if $('#username') has class 'ng-invalid'
-	else if ($('#username').hasClass('ng-invalid'))
+	catch (customException)
 	{
-		// remove it
-		$('#username').removeClass('ng-invalid');
+		validCredentials = false;
+		errorObj[customException.field] = customException;
+		console.log(JSON.stringify(errorObj, null, '\t'));
 	}
-	// same logic for password field
-	if (!validPassword())
+	finally
 	{
-		if (!$('#password').hasClass('ng-invalid')) $('#password').addClass('ng-invalid');
-	}	
-	else if ($('#password').hasClass('ng-invalid'))
-	{
-		$('#password').removeClass('ng-invalid');
+		try 
+		{
+			validCredentials &= validPassword();
+			console.log('validCredentials == ' + validCredentials);
+		}
+		catch (otherException)
+		{
+			validCredentials = false;
+			errorObj[otherException.field] = otherException;
+			console.log(JSON.stringify(errorObj, null, '\t'));
+		}
+		finally
+		{
+			if (validCredentials)
+			{
+				// page redirect logic goes here
+				console.log('You have entered valid credentials!');
+			}
+			else
+			{
+				renderErrors(errorObj);
+			}
+		}
 	}
 }
 
+/* Renders any errors on any of the fields
+ * Parameters:
+ *	• errorObj : the error object
+ */
+function renderErrors(errorObj)
+{
+	console.log('errorObj == ' + JSON.stringify(errorObj, null, '\t'));
+	// TODO: replace with $.get() requests
+	var badUserTmpl = '<span class="{{^errors}}hidden {{/errors}}tooltip">' + 
+		'{{#errors}}' + 
+			'<ul>' + 
+				'<li>{{.}}</li>' + 
+			'</ul>' + 
+		'{{/errors}}' + 
+	'</span>', 
+		badPassTmpl = badUserTmpl;
+	// render the templates
+	var renderedUserToolTip = Mustache.to_html(badUserTmpl, errorObj.username),
+		renderedPassToolTip = Mustache.to_html(badPassTmpl, errorObj.password);
+	// if there is tooltip right next to the fields, replace them. otherwise, append to the fields
+	if ($('#username').next('.tooltip').length === 0) $('#username').append(renderedUserToolTip);
+	else $('#username').next('.tooltip') = renderedUserToolTip;
+	
+	if ($('#password').next('.tooltip').length === 0) $('#password').append(renderedPassToolTip);
+	else $('#password').next('.tooltip') = renderedPassToolTip;
+	
+}
 
 $(function() { 
 	// a click of the 'New User?' button should summon the 'New User' page
@@ -114,10 +181,6 @@ $(function() {
 			// remove the ng-invalid class from it
 			if ($(this).hasClass('ng-invalid')) $(this).removeClass('ng-invalid');
 		}
-	});
-	// clear button should also remove any classes from $('#username'),$('#password')
-	$('input[type="reset"]').click(function(event) { 
-		$('#username,#password').removeClass('ng-invalid');
 	});
 	
 });
