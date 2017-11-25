@@ -41,13 +41,22 @@ CREATE SEQUENCE fc_seq
 */
 
 
+CREATE OR REPLACE TRIGGER fc_seq_trigger --auto increment
+BEFORE INSERT ON flash_cards
+FOR EACH ROW
+BEGIN --This keyword signifies a block for a transaction. 
+    IF :new.fc_id IS NULL THEN 
+    SELECT fc_seq.nextval INTO :new.fc_id from dual;    
+    END IF;
+END;   
+
 /*
-    SELECT INTO statement
+    Select into statement
     -A select into statement will grab data and place it into a variable.
     IN PL/SQL there exist implicit objects that we can use to access data.
     These objects all are preceeded with a ':'.
-    In our example, we accessed :new, which points to the current record that is about
-    to be inserted. This lets us manipulate data before it actually gets inserted.
+    In our example, we accessed :new, with points to the current record that is about
+    to be inserted. This let's manipulate data before it actually gets inserted.
     You can compare :new to a staging platform.
     -dual is a dummy table that is always available. It's only purpose is to allow
     a developer to have proper syntax in statements where the table does not matter.
@@ -55,8 +64,6 @@ CREATE SEQUENCE fc_seq
 
 INSERT INTO flash_cards (FC_QUESTION, FC_ANSWER)
 VALUES('Did my trigger work?', 'Sure hope so...');
-
-
 --Stored Procedures
 /*
     A named transaction that can be invoked when called.
