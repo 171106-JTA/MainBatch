@@ -1,5 +1,6 @@
 package com.revature.dao;
 
+import java.lang.reflect.Type;
 import java.util.List;
 
 import com.revature.businessobject.BusinessObject;
@@ -7,14 +8,14 @@ import com.revature.businessobject.BusinessObject;
 /**
  * Communication medium between database and server
  * @author Antony Lulciuc
- * @param <T> Java representation of Database Table
  */
 public final class DAOBusinessObject {
+	
 	/**
 	 * Acquires all records of represented type from database
 	 * @return all records of represented type
 	 */
-	public static List<BusinessObject> loadAll() {
+	public static List<BusinessObject> loadAll(Class<BusinessObject> type) {
 		// stub
 		return null;
 	}
@@ -24,7 +25,7 @@ public final class DAOBusinessObject {
 	 * @param item - what to check records against
 	 * @return list of records which met the criteria specified by argument 
 	 */
-	public List<BusinessObject> load(BusinessObject item) {
+	public static List<BusinessObject> load(BusinessObject item) {
 		// stub
 		return null;
 	}
@@ -34,7 +35,7 @@ public final class DAOBusinessObject {
 	 * @param items - what to save in database
 	 * @return number of records created 
 	 */
-	public int insert(List<BusinessObject> items) {
+	public static int insert(List<BusinessObject> items) {
 		// stub
 		return 0;
 	}
@@ -44,7 +45,7 @@ public final class DAOBusinessObject {
 	 * @param item - what to save in database
 	 * @return 1 if item added to database else 0
 	 */
-	public int insert(BusinessObject item) {
+	public static int insert(BusinessObject item) {
 		// stub
 		return 0;
 	}
@@ -55,7 +56,7 @@ public final class DAOBusinessObject {
 	 * @param value - new values for record
 	 * @return number of records updated 
 	 */
-	public int update(BusinessObject item, BusinessObject value) {
+	public static int update(BusinessObject item, BusinessObject value) {
 		// stub
 		return 0;
 	}
@@ -65,7 +66,7 @@ public final class DAOBusinessObject {
 	 * @param items - list of items to delete
 	 * @return number of records removed from database
 	 */
-	public int delete(List<BusinessObject> items) {
+	public static int delete(List<BusinessObject> items) {
 		// stub
 		return 0;
 	}
@@ -75,7 +76,7 @@ public final class DAOBusinessObject {
 	 * @param item - what to delete
 	 * @return number of records removed from database
 	 */
-	public int delete(BusinessObject item) {
+	public static int delete(BusinessObject item) {
 		// stub
 		return 0;
 	}
