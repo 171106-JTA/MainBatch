@@ -80,6 +80,27 @@ public final class ConnectionPool {
 		connectionsFree.add(conn);
 	}
 	
+	/**
+	 * @return total number of connections created by instance 
+	 */
+	public synchronized int getConnectionCount() {
+		return connectionsFree.size() + connectionsInUse.size();
+	}
+	
+	/**
+	 * @return number of connections in use
+	 */
+	public synchronized int getConnectionInUseCount() {
+		return connectionsInUse.size();
+	}
+	
+	/**
+	 * @return number of connections free for use
+	 */
+	public synchronized int getConnectionFreeCount() {
+		return connectionsFree.size();
+	}
+	
 	///
 	//	PRIVATE METHODS 
 	///
