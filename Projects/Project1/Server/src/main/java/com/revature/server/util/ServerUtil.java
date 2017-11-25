@@ -20,8 +20,8 @@ public final class ServerUtil {
 	
 	/**
 	 * Converts json to java object
-	 * @param json - 
-	 * @return
+	 * @param json - what to transform to java
+	 * @return Java representation of json
 	 */
 	public static <T> T toJava(String json) {
 		Type type = new TypeToken<T>() {}.getType(); 
