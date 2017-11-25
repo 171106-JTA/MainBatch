@@ -489,3 +489,18 @@ GRANT DBA TO minibobbert;
 select * from flash_cards;
 
 commit;
+
+/*
+SQL Injection
+
+X=';select * from polkaman where pkmn_name like '%' OR pkmn_name = '
+
+select * from polkaman where lower(pkmn_name) = '';select * from polkaman'';
+*/
+select * from flash_cards;
+
+DECLARE
+    x VARCHAR(4000);
+BEGIN
+    get_answer('Did JDBC work?', x);
+END;
