@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- jQuery minified js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- Bootstrap CDN -->
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <!-- Flatly Bootstrap theme -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT"
+        crossorigin="anonymous">
+    <!-- custom css -->
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="./index.html">PL/SQL Guide </a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-toggle">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="./index.html">Home</a>
+                        </li>
+                        <li class="active">
+                            <a href="./sql_page.html">SQL Tutorial</a>
+                        </li>
+                        <li>
+                            <a href="pl_sql_page.html">Oracle PL/SQL</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Web with Java
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="#">Servlet</a>
+                                </li>
+                                <li>
+                                    <a href="#">Cookie</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#">Services</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Page Contents -->
+    <div class="container">
+        <div class="introduction">
+            <h1>SQL Tutorial</h1>
+            <p>SQL Stands for Structured query language. It is used for manipulating database. Its keywords are seperated into
+                5 categories. </p>
+            <ul>
+                <li>DDL, Data Definition Language</li>
+                <li>DML, Data Manipulation Language</li>
+                <li>DQL, Data Query Language</li>
+                <li>DCL, Data Control Language</li>
+                <li>TCL, Transaction Control Language</li>
+            </ul>
+            <p>
+                DDL Consists of CREATE, ALTER and DROP, and they go along with table_name.
+                <br> DML consists of INSERT, SELECT, DELETE, UPDATE.
+                <br>DQL consists of SELECT ... basically SELECT statement. It's not even mentioned most of the times.
+                <br>DCL consists of GRANT/REVOKE, its about security
+                <br> consists of SET_TRANSACTION, SAVEPOINT, COMMIT, ROLLBACK
+            </p>
+            <h3>For example of their usage go look at examples at
+                <a href="https://www.w3schools.com/sql/default.asp">https://www.w3schools.com/sql/default.asp</a>
+            </h3>
+            <h3>Sort of randomly ordered SQL Guide</h3>
+            <p>View is just another name for table in SQL</p>
+            <br>
+
+            <h5>WHERE VS HAVING</h5>
+            <p>HAVING works on aggregated data while WHERE clause works on row's data. Think of WHERE as pre filter and HAVING as post filter.</p>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- jQuery minified js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- Bootstrap CDN -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <!-- Flatly Bootstrap theme -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT"
+        crossorigin="anonymous">
+    <!-- custom css -->
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="./index.html">PL/SQL Guide </a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-toggle">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="./index.html">Home</a>
+                        </li>
+                        <li>
+                            <a href="./sql_page.html">SQL Tutorial</a>
+                        </li>
+                        <li class="active">
+                            <a href="pl_sql_page.html">Oracle PL/SQL</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Web with Java
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="#">Servlet</a>
+                                </li>
+                                <li>
+                                    <a href="#">Cookie</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#">Services</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Page Contents -->
+    <div class="container">
+        <div id="intoduction">
+            <h1>Java Servlets</h1>
+        </div>
+        <h3>What are servlets?</h3>
+        <p>
+            Servlets are programs that runs on a web/application server.
+            <br> web server vs application server?
+            <br> Quick summary, web server provides contents to be viewed in web browser (via http) and app server provides things(business
+            logic and process)to applications (Also have more functionality like version control and console).
+            <br> Servlet acts as a middle layer between the client and the database(?)
+
+        </p>
+        <p>
+            Topics:
+            <br> Servlet lifecycle starting from the request
+            <br> Cookie Handling
+            <br>
+            <div>
+                What are cookies? aka HTTP Cookie, web cookie, Internet cookie, browser cookie, or simply cookie
+                <p>
+                    Basically, cookies are files that are left on your computer after visiting a website. When you visit that website again,
+                    these cookies can be scanned by that website to give it information about your previous encounter of
+                    the website, usually at least.
+                </p>
+                        </div>
+            Session Handling
+            <br> Servlet context vs config
+            <br> Web.xml
+            <br> Custom Error pages
+            <br> Front Controller
+            <br> GET vs POST
+            <br>
+            <div>
+                Get stores information in the query string/can be cached/do not request sensitive data over get
+            </div>
+            <div>
+                Post returns data in the body. Cannot be cached
+            </div>
+        </p>
+
+    </div>
+</body>

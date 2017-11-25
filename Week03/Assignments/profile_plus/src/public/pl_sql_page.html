@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- jQuery minified js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- Bootstrap CDN -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <!-- Flatly Bootstrap theme -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT"
+        crossorigin="anonymous">
+    <!-- custom css -->
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="./index.html">PL/SQL Guide </a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-toggle">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="./index.html">Home</a>
+                        </li>
+                        <li>
+                            <a href="./sql_page.html">SQL Tutorial</a>
+                        </li>
+                        <li class="active">
+                            <a href="pl_sql_page.html">Oracle PL/SQL</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Web with Java
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="#">Servlet</a>
+                                </li>
+                                <li>
+                                    <a href="#">Cookie</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#">Services</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Page Contents -->
+    <div class="container">
+        <div id="intoduction">
+            <h1>Oracle PL/SQL Tutorial</h1>
+        </div>
+        <div id="trigger">
+            <h3>What are triggers?</h3>
+            <p>
+                Triggers are procedures stored in PL/SQL or Java that run (fire) implicitly whenever a table or view is modified or when
+                some user actions or database system actions occur. Most commonly used triggers are triggers set for DML(Data
+                Manipulation Language).
+
+            </p>
+            <div id="isolation-level">
+                <h3>Transaction Isolation Level</h3>
+                <p>
+                    ANSI/ISO SQL standard defines four levels of transaction isolation, with different possible outcomes for the same transaction
+                    scenario. These levels are defined in terms of three phenomena that are either permitted or not at a
+                    given isolation level.
+                    <br> These phenomena are ...
+                    <h3>Dirty Read</h3>
+                    <p>You are permitted to read
+                        <b>uncommited, or dirty, data.</b>
+                    </p>
+                    <h3>Nonrepeatable Read</h3>
+                    <p>If read a tow at time t1 and try to reread that row at time t2, the row may have changed. It may have
+                        have been disappeared, it may have been updated etc.
+                        <br>A non-repeatable read occurs, when during the course of a transaction, a row is retrieved twice and
+                        the values within the row differ between reads.</p>
+                    <h3>Phantom Read</h3>
+                    <p>If you execute a query at time t1 and again at time t2, additional row may have been added to the data
+                        base which may affect your results. A phantom read occurs when, in the course of a transaction, two
+                        identical queries are executed, and the collection of rows returned by the second query is different
+                        from the first.
+                        <br>
+                        <b>This differs from a nonrepeatable read in that with a phantom read, data you already read hasn't
+                            been changed, but instead more data satisfies your query criteria than before.</b>
+                    </p>
+                    <h3>Example of Phantom read vs non-repeatable read</h3>
+                    <p>
+                        <ul>
+                            <li>User A runs the same query twice.</li>
+                            <li>In between, User B runs a transaction and commits.</li>
+                            <li>Non-repeatable read: The A row that user A has queried has adifferent value if you queries second
+                                time.
+                            </li>
+                            <li>Phantom read: All the rows in the query have the same value before and after </li>
+                        </ul>
+                    </p>
+                </p>
+                <h3>On to actual isolation levels.</h3>
+                <p>
+                    There are 4 isolation levels highest to lowest, they are Serializable, Repeatable read, read commited and read uncommunited.
+                </p>
+                <table>
+                    <tr border="5">
+                        <th>Isolation Level</th>
+                        <th>Dirty read</th>
+                        <th>Non-repeatable read</th>
+                        <th>Phantom read</th>
+                    </tr>
+                    <tr>
+                        <td>Read Uncommited</td>
+                        <td>Permitted</td>
+                        <td>Permitted</td>
+                        <td>Permitted</td>
+                    </tr>
+                    <tr>
+                        <td>Read Commited</td>
+                        <td>Not permitted</td>
+                        <td>Permitted</td>
+                        <td>Permitted</td>
+                    </tr>
+                    <tr>
+                        <td>Repeatable Read</td>
+                        <td>Not permitted</td>
+                        <td>Not permitted</td>
+                        <td>Permitted</td>
+                    </tr>
+                    <tr>
+                        <td>Serializable</td>
+                        <td>Not permitted</td>
+                        <td>Not permitted</td>
+                        <td>Not permitted</td>
+                    </tr>
+                </table>
+                <p>Oracle Data base EXPLICITLY supports the READ COMMITED and SERIALIZABLE isolation level as they're defined in the standard.<br>
+                    However, <b>REPEATABLE READ</b> is the isolation level that the SQL standard claims will guarantee a read-consistent result from SQL. 
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    </div>
+
+</body>
+
+</html>

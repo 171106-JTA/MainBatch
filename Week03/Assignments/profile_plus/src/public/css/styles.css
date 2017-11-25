@@ -1,0 +1,39 @@
+p{
+    margin: 30px 50px 0 50px;
+    font-size:16px;
+}
+body{
+    height: 4000px;
+}
+ul{
+    font-size: 18px;
+    margin-left:50px;
+}
+code{
+    font-size: 18px;
+    margin: 30px 50px 0 50px;
+    color: #0000FF;
+}
+div h3 {
+    padding: 0 50px 0 50px;
+}
+.container{
+    padding: 0 80px 0 80px;
+}
+.fa:hover{
+    color: #008080;
+
+}
+#profile-pic{
+    width: 150px;
+    height : 150px;
+    display: block;
+    margin: auto;
+    margin-top: 50px;
+}
+#my-profile-icons{
+    position: fixed;
+    left: 150px;
+    top:200px;
+    z-index:5;
+}

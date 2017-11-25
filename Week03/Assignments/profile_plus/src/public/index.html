@@ -1,38 +1,94 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <!-- Bootstrap CDN does not load when viewing html from local -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/darkly/bootstrap.min.css" rel="stylesheet" integrity="sha384-S7YMK1xjUjSpEnF4P8hPUcgjXYLZKK3fQW1j5ObLSl787II9p8RO9XUGehRmKsxd" crossorigin="anonymous">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- jQuery minified js -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <!-- Bootstrap CDN -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>
+  <!-- Flatly Bootstrap theme -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT"
+    crossorigin="anonymous">
+  <!-- font awesome CDN -->
+  <script src="https://use.fontawesome.com/c6666d0930.js"></script>
+
+  <!-- custom css -->
+  <link rel="stylesheet" href="./css/styles.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarColor01">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+  <header>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-toggle">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="./index.html">PL/SQL Guide </a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-toggle">
+          <ul class="nav navbar-nav">
+            <li class="active">
+              <a href="./index.html">Home</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
+            <li>
+              <a href="./sql_page.html">SQL Tutorial</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Pricing</a>
+            <li>
+              <a href="pl_sql_page.html">Oracle PL/SQL</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Web with Java
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <li>
+                  <a href="#">Servlet</a>
+                </li>
+                <li>
+                  <a href="#">Cookie</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <a href="#">Services</a>
+                </li>
+              </ul>
             </li>
           </ul>
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" placeholder="Search" type="text">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-          </form>
         </div>
-      </nav>
+      </div>
+    </nav>
+  </header>
+  <!-- Page Contents -->
+  <div class="container">
+
+    <h1>Home</h1>
+    <div class="page-intro">
+      <img id="profile-pic" src="https://orig00.deviantart.net/da57/f/2012/035/d/f/198___murkrow_by_winter_freak-d4opf9n.png" alt="murkrow image by winter-freak">
+      <p>Static web page for revature.
+      </p>
+    </div>
+    <div id="my-profile-icons">
+      <a href="https://www.github.com/hsjungcr">
+        <i class="fa fa-github fa-4x" aria-hidden="true"></i>
+      </a><br><br>
+      <a href="https://www.linkedin.com/in/hsjungcr/">
+        <i class="fa fa-linkedin-square fa-4x" aria-hidden="true"></i>
+      </a>
+    </div>
+
+  </div>
+
 </body>
 
 </html>
