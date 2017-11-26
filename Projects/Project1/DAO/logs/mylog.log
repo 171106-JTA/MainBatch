@@ -60,3 +60,144 @@
 2017-11-26 11:44:34 DEBUG ConnectionUtil:64 - closed stream
 2017-11-26 11:44:34 DEBUG ConnectionUtil:49 - attempting to clsoe stream
 2017-11-26 11:44:34 DEBUG ConnectionUtil:51 - closed stream
+2017-11-26 13:32:18 DEBUG DAOBusinessObject:137 - preforming insert INSERT INTO EAR_USER (roleid,password,username) VALUES(?,?,?) ...
+2017-11-26 13:32:19 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:32:27 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:32:38 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-26 13:32:38 DEBUG ConnectionUtil:64 - closed stream
+2017-11-26 13:33:36 DEBUG DAOBusinessObject:81 - preforming query SELECT * FROM EAR_USER WHERE roleid=? AND password=? AND username=? ...
+2017-11-26 13:33:36 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:33:36 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:33:38 DEBUG BusinessObjectFactory:51 - converting resultset to Java objects
+2017-11-26 13:33:38 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-26 13:33:38 DEBUG ConnectionUtil:64 - closed stream
+2017-11-26 13:33:38 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-26 13:33:38 DEBUG ConnectionUtil:51 - closed stream
+2017-11-26 13:35:16 DEBUG DAOBusinessObject:137 - preforming insert INSERT INTO EAR_USER (roleid,password,username) VALUES(?,?,?) ...
+2017-11-26 13:35:16 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:35:24 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:36:13 DEBUG DAOBusinessObject:137 - preforming insert INSERT INTO EAR_USER (roleid,password,username) VALUES(?,?,?) ...
+2017-11-26 13:36:13 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:36:14 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:36:14 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-26 13:36:14 DEBUG ConnectionUtil:64 - closed stream
+2017-11-26 13:36:14 DEBUG DAOBusinessObject:81 - preforming query SELECT * FROM EAR_USER WHERE roleid=? AND password=? AND username=? ...
+2017-11-26 13:36:14 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:36:14 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:36:14 DEBUG BusinessObjectFactory:51 - converting resultset to Java objects
+2017-11-26 13:36:14 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-26 13:36:14 DEBUG ConnectionUtil:64 - closed stream
+2017-11-26 13:36:14 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-26 13:36:14 DEBUG ConnectionUtil:51 - closed stream
+2017-11-26 13:36:49 DEBUG DAOBusinessObject:179 - preforming update UPDATE EAR_USER SET password=?,username=? WHERE roleid=? AND password=? AND username=? ...
+2017-11-26 13:36:53 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:36:53 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:37:41 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-26 13:37:41 DEBUG ConnectionUtil:64 - closed stream
+2017-11-26 13:38:32 DEBUG DAOBusinessObject:137 - preforming insert INSERT INTO EAR_USER (roleid,password,username) VALUES(?,?,?) ...
+2017-11-26 13:38:32 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:38:33 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:38:47 DEBUG DAOBusinessObject:137 - preforming insert INSERT INTO EAR_USER (roleid,password,username) VALUES(?,?,?) ...
+2017-11-26 13:38:47 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:38:48 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:38:54 DEBUG DAOBusinessObject:137 - preforming insert INSERT INTO EAR_USER (roleid,password,username) VALUES(?,?,?) ...
+2017-11-26 13:38:54 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:38:54 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:39:23 DEBUG DAOBusinessObject:137 - preforming insert INSERT INTO EAR_USER (roleid,password,username) VALUES(?,?,?) ...
+2017-11-26 13:39:23 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:39:24 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:40:02 DEBUG DAOBusinessObject:137 - preforming insert INSERT INTO EAR_USER (roleid,password,username) VALUES(?,?,?) ...
+2017-11-26 13:40:02 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:40:03 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:40:24 DEBUG DAOBusinessObject:137 - preforming insert INSERT INTO EAR_USER (roleid,password,username) VALUES(?,?,?) ...
+2017-11-26 13:40:24 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:40:25 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:40:25 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-26 13:40:25 DEBUG ConnectionUtil:64 - closed stream
+2017-11-26 13:40:25 DEBUG DAOBusinessObject:81 - preforming query SELECT * FROM EAR_USER WHERE roleid=? AND password=? AND username=? ...
+2017-11-26 13:40:25 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:40:25 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:40:25 DEBUG BusinessObjectFactory:51 - converting resultset to Java objects
+2017-11-26 13:40:25 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-26 13:40:25 DEBUG ConnectionUtil:64 - closed stream
+2017-11-26 13:40:25 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-26 13:40:25 DEBUG ConnectionUtil:51 - closed stream
+2017-11-26 13:40:34 DEBUG DAOBusinessObject:179 - preforming update UPDATE EAR_USER SET password=?,username=? WHERE roleid=? AND password=? AND username=? ...
+2017-11-26 13:40:36 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:40:36 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:40:42 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-26 13:40:42 DEBUG ConnectionUtil:64 - closed stream
+2017-11-26 13:40:55 DEBUG DAOBusinessObject:81 - preforming query SELECT * FROM EAR_USER WHERE password=? AND username=? ...
+2017-11-26 13:40:55 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:40:55 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:40:55 DEBUG BusinessObjectFactory:51 - converting resultset to Java objects
+2017-11-26 13:40:55 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-26 13:40:55 DEBUG ConnectionUtil:64 - closed stream
+2017-11-26 13:40:55 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-26 13:40:55 DEBUG ConnectionUtil:51 - closed stream
+2017-11-26 13:41:27 DEBUG DAOBusinessObject:231 - preforming delete DELETE FROM EAR_USER WHERE roleid=? AND password=? AND username=? ...
+2017-11-26 13:41:27 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:41:27 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:41:32 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-26 13:41:32 DEBUG ConnectionUtil:64 - closed stream
+2017-11-26 13:41:34 DEBUG DAOBusinessObject:231 - preforming delete DELETE FROM EAR_USER WHERE roleid=? AND password=? AND username=? ...
+2017-11-26 13:41:34 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:41:35 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:41:35 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-26 13:41:35 DEBUG ConnectionUtil:64 - closed stream
+2017-11-26 13:41:45 DEBUG DAOBusinessObject:137 - preforming insert INSERT INTO EAR_USER (roleid,password,username) VALUES(?,?,?) ...
+2017-11-26 13:41:45 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:41:45 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:41:45 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-26 13:41:45 DEBUG ConnectionUtil:64 - closed stream
+2017-11-26 13:41:48 DEBUG DAOBusinessObject:231 - preforming delete DELETE FROM EAR_USER WHERE roleid=? AND password=? AND username=? ...
+2017-11-26 13:41:48 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:41:48 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:41:48 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-26 13:41:48 DEBUG ConnectionUtil:64 - closed stream
+2017-11-26 13:41:48 DEBUG DAOBusinessObject:231 - preforming delete DELETE FROM EAR_USER WHERE roleid=? AND password=? AND username=? ...
+2017-11-26 13:41:48 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:41:48 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:41:48 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-26 13:41:48 DEBUG ConnectionUtil:64 - closed stream
+2017-11-26 13:41:48 DEBUG DAOBusinessObject:42 - preforming query SELECT * FROM EAR_USER ...
+2017-11-26 13:41:48 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:41:48 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:41:48 DEBUG BusinessObjectFactory:51 - converting resultset to Java objects
+2017-11-26 13:41:48 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-26 13:41:48 DEBUG ConnectionUtil:64 - closed stream
+2017-11-26 13:41:48 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-26 13:41:48 DEBUG ConnectionUtil:51 - closed stream
+2017-11-26 13:41:48 DEBUG DAOBusinessObject:231 - preforming delete DELETE FROM EAR_USER WHERE roleid=? AND password=? AND username=? ...
+2017-11-26 13:41:48 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:41:48 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:41:48 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-26 13:41:48 DEBUG ConnectionUtil:64 - closed stream
+2017-11-26 13:41:48 DEBUG DAOBusinessObject:231 - preforming delete DELETE FROM EAR_USER WHERE roleid=? AND password=? AND username=? ...
+2017-11-26 13:41:48 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:41:48 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:41:48 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-26 13:41:48 DEBUG ConnectionUtil:64 - closed stream
+2017-11-26 13:41:48 DEBUG DAOBusinessObject:137 - preforming insert INSERT INTO EAR_USER (roleid,password,username) VALUES(?,?,?) ...
+2017-11-26 13:41:48 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:41:48 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:41:48 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-26 13:41:48 DEBUG ConnectionUtil:64 - closed stream
+2017-11-26 13:41:48 DEBUG DAOBusinessObject:81 - preforming query SELECT * FROM EAR_USER WHERE roleid=? AND password=? AND username=? ...
+2017-11-26 13:41:48 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:41:48 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:41:48 DEBUG BusinessObjectFactory:51 - converting resultset to Java objects
+2017-11-26 13:41:48 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-26 13:41:48 DEBUG ConnectionUtil:64 - closed stream
+2017-11-26 13:41:48 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-26 13:41:48 DEBUG ConnectionUtil:51 - closed stream
+2017-11-26 13:41:48 DEBUG DAOBusinessObject:231 - preforming delete DELETE FROM EAR_USER WHERE roleid=? AND password=? AND username=? ...
+2017-11-26 13:41:48 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:41:48 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:41:48 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-26 13:41:48 DEBUG ConnectionUtil:64 - closed stream
+2017-11-26 13:41:48 DEBUG DAOBusinessObject:231 - preforming delete DELETE FROM EAR_USER WHERE roleid=? AND password=? AND username=? ...
+2017-11-26 13:41:48 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 13:41:48 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 13:41:48 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-26 13:41:48 DEBUG ConnectionUtil:64 - closed stream

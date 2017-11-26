@@ -170,7 +170,7 @@ public final class DAOBusinessObject {
 		int total = 0;
 		
 		// Build update statement
-		sql += "SET " + String.join(",", nParams);
+		sql += " SET " + String.join(",", nParams);
 		
 		// If where clause needed 
 		if (uParams.size() > 0)
@@ -184,8 +184,8 @@ public final class DAOBusinessObject {
 			statement = conn.prepareStatement(sql);
 			
 			// Sanitize parameterized statement
-			assignClauseValues(statement, toUpdate, 1);
-			assignClauseValues(statement, newValues, uParams.size() + 1);
+			assignClauseValues(statement, newValues, 1);
+			assignClauseValues(statement, toUpdate, nParams.size() + 1);
 			
 			// Perform transaction
 			total = statement.executeUpdate();
