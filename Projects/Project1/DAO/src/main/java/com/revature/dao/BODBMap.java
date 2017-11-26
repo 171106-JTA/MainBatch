@@ -57,6 +57,7 @@ public final class BODBMap {
 		mapping.put(UserInfo.class.getSimpleName().toLowerCase(), "EAR_USER_INFO");
 		mapping.put(CodeList.class.getSimpleName().toLowerCase(), "CODE_LIST");
 		mapping.put(Form.class.getSimpleName().toLowerCase(), "EAR_FORM");
+		mapping.put(BenefitCoordinator.class.getSimpleName().toLowerCase(), "EAR_BENEFIT_COORDINATOR");
 	}
 	
 }
