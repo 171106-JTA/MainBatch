@@ -1,0 +1,4 @@
+2017-11-25 15:57:09 DEBUG ConnectionPool:117 - attempting to open connection [1]
+2017-11-25 15:57:09 DEBUG ConnectionPool:117 - attempting to open connection [2]
+2017-11-25 15:57:41 DEBUG ConnectionPool:117 - attempting to open connection [1]
+2017-11-25 15:57:54 DEBUG ConnectionPool:117 - attempting to open connection [2]

@@ -1,23 +1,54 @@
 package com.revature.dao;
 
-import java.lang.reflect.Type;
+import static com.revature.dao.util.ConnectionUtil.close;
+import static com.revature.dao.util.ConnectionUtil.getConnection;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.revature.businessobject.BusinessObject;
+import com.revature.dao.factory.BusinessObjectFactory;
 
 /**
  * Communication medium between database and server
  * @author Antony Lulciuc
  */
 public final class DAOBusinessObject {
+	private static BusinessObjectFactory factory = BusinessObjectFactory.getFactory();
+	private static BODBMap map = BODBMap.getMap();
+	private static Logger logger = Logger.getLogger(DAOBusinessObject.class);
 	
 	/**
 	 * Acquires all records of represented type from database
 	 * @return all records of represented type
 	 */
-	public static List<BusinessObject> loadAll(Class<BusinessObject> type) {
-		// stub
-		return null;
+	public static List<BusinessObject> loadAll(Class<? extends BusinessObject> type) {
+		String sql = "SELECT * FROM " +  map.get(type.getSimpleName());
+		List<BusinessObject> records = null;
+		Statement statement = null;
+		ResultSet res = null;
+		
+		logger.debug("preforming query " + sql + " ...");
+		
+		// Attempt to load all records from database
+		try (Connection conn = getConnection()) {
+			statement = conn.createStatement();
+			res = statement.executeQuery(sql);
+			records = factory.getBusinessObject(res, type);
+		} catch (SQLException e) {
+			logger.debug("query failed " + sql + ", message=" + e);
+			e.printStackTrace();
+		} finally {
+			close(statement);
+			close(res);
+		}
+		
+		return records;
 	}
 	
 	/**
@@ -80,4 +111,5 @@ public final class DAOBusinessObject {
 		// stub
 		return 0;
 	}
+	
 }

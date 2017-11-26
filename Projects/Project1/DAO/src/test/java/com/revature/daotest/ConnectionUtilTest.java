@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import com.revature.dao.util.ConnectionUtil;
+
 public class ConnectionUtilTest {
 
 	@BeforeClass
@@ -22,7 +24,17 @@ public class ConnectionUtilTest {
 	}
 
 	@Test
-	public void test() {
+	public void createConnectionPoolWithDefaultConnections() {
+
+	}
+
+	
+	public void createConnectionPoolWith10Connections() {
+		fail("Not yet implemented");
+	}
+
+	
+	public void createConnectionPoolWith20Connections() {
 		fail("Not yet implemented");
 	}
 
