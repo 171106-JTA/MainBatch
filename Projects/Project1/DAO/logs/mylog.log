@@ -2,3 +2,45 @@
 2017-11-25 15:57:09 DEBUG ConnectionPool:117 - attempting to open connection [2]
 2017-11-25 15:57:41 DEBUG ConnectionPool:117 - attempting to open connection [1]
 2017-11-25 15:57:54 DEBUG ConnectionPool:117 - attempting to open connection [2]
+2017-11-26 01:36:35 DEBUG DAOBusinessObject:36 - preforming query SELECT * FROM EAR_USER ...
+2017-11-26 01:36:38 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 01:36:46 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 01:36:58 DEBUG BusinessObjectFactory:48 - converting resultset to Java objects
+2017-11-26 01:37:19 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-26 01:37:19 DEBUG ConnectionUtil:64 - closed stream
+2017-11-26 01:37:34 DEBUG DAOBusinessObject:36 - preforming query SELECT * FROM EAR_USER ...
+2017-11-26 01:37:34 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 01:37:35 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 01:37:39 DEBUG BusinessObjectFactory:48 - converting resultset to Java objects
+2017-11-26 01:40:30 DEBUG DAOBusinessObject:36 - preforming query SELECT * FROM EAR_USER ...
+2017-11-26 01:40:30 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 01:40:30 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 01:40:34 DEBUG BusinessObjectFactory:49 - converting resultset to Java objects
+2017-11-26 01:40:42 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-26 01:40:42 DEBUG ConnectionUtil:64 - closed stream
+2017-11-26 01:40:42 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-26 01:40:42 DEBUG ConnectionUtil:51 - closed stream
+2017-11-26 01:44:21 DEBUG DAOBusinessObject:36 - preforming query SELECT * FROM EAR_USER ...
+2017-11-26 01:44:21 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 01:44:22 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 01:44:24 DEBUG BusinessObjectFactory:49 - converting resultset to Java objects
+2017-11-26 01:49:08 DEBUG DAOBusinessObject:36 - preforming query SELECT * FROM EAR_USER ...
+2017-11-26 01:49:08 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 01:49:08 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 01:49:11 DEBUG BusinessObjectFactory:49 - converting resultset to Java objects
+2017-11-26 01:57:58 DEBUG DAOBusinessObject:36 - preforming query SELECT * FROM EAR_USER ...
+2017-11-26 01:57:58 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 01:57:59 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 01:58:01 DEBUG BusinessObjectFactory:51 - converting resultset to Java objects
+2017-11-26 01:58:26 DEBUG DAOBusinessObject:36 - preforming query SELECT * FROM EAR_USER ...
+2017-11-26 01:58:26 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 01:58:27 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 01:58:28 DEBUG BusinessObjectFactory:51 - converting resultset to Java objects
+2017-11-26 01:59:44 DEBUG DAOBusinessObject:36 - preforming query SELECT * FROM EAR_USER ...
+2017-11-26 01:59:44 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 01:59:45 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 01:59:46 DEBUG BusinessObjectFactory:50 - converting resultset to Java objects
+2017-11-26 02:00:45 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-26 02:00:45 DEBUG ConnectionUtil:64 - closed stream
+2017-11-26 02:00:45 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-26 02:00:45 DEBUG ConnectionUtil:51 - closed stream

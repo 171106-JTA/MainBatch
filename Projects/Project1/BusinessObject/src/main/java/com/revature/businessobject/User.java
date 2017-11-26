@@ -6,6 +6,10 @@ public class User implements BusinessObject {
 	private String username;
 	private String password;
 	
+	public User() {
+		// do nothing
+	}
+	
 	public User(Integer id, Integer roleId, String username, String password) {
 		super();
 		this.id = id;

@@ -5,4 +5,5 @@ package com.revature.businessobject;
  * @author Antony Lulciuc
  */
 public interface BusinessObject {
+
 }

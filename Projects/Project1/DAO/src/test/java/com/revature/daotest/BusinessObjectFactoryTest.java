@@ -29,8 +29,6 @@ public class BusinessObjectFactoryTest {
 	@Test
 	public void shouldGetUserFieldData() {
 		Map<String, Map<String, Object>> data = factory.getParams(user);
-		
-		
 		assertEquals(2, data.size());	
 	}
 

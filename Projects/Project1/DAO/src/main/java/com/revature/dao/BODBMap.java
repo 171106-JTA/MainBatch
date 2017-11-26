@@ -10,8 +10,8 @@ import com.revature.businessobject.User;
  * @author Antony Lulciuc
  */
 public final class BODBMap {
-	private static BODBMap map = new BODBMap();
 	private static Map<String, String> mapping = new TreeMap<>();
+	private static BODBMap map = new BODBMap();
 	
 	/**
 	 * Initializes mapping of Java to Database Tables 
@@ -33,7 +33,7 @@ public final class BODBMap {
 	 * @return database table name represented by java class name
 	 */
 	public String get(String key) {
-		return mapping.get(key);
+		return mapping.get(key.toLowerCase());
 	}
 	
 	/**
