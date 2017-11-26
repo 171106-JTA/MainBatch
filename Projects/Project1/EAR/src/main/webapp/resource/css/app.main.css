@@ -1,0 +1,71 @@
+/**
+ *	CSS used throughout the application
+ */
+ 
+ html, body {
+ 	height: 100%;
+ }
+ 
+ /* Primary button color */
+ .btn-primary {
+ 	background-color: #0072ff;
+ }
+ 
+ .btn-primary:hover {
+ 	background-color: #0099ff!important;
+ 	border-color: #00aaff;
+ }
+ 
+ .btn-primary:active {
+ 	background-color: #004aff!important;
+ }
+ 
+ 
+ /* Main Title block */
+ .header-block {
+ 	margin-top: 20%;
+ }
+  
+ /* Aligns content horizontal center*/
+.center-block {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Defines max width for input box for wide spaces */
+.input-max-width {
+	max-width: 387px;
+}
+
+/* Adjust header block according to viewport height */ 
+
+@media screen and (min-height: 50px) {
+	 .header-block {
+ 		margin-top: 5%!important;
+ 	}
+}
+
+@media screen and (min-height: 350px) {
+	 .header-block {
+ 		margin-top: 6%!important;
+ 	}
+}
+
+@media screen and (min-height: 350px) {
+	 .header-block {
+ 		margin-top: 8%!important;
+ 	}
+}
+
+@media screen and (min-height: 350px) {
+	 .header-block {
+ 		margin-top: 10%!important;
+ 	}
+}
+
+@media screen and (min-height: 600px) {
+	 .header-block {
+ 		margin-top: 20%!important;
+ 	}
+}

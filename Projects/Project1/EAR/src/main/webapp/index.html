@@ -4,16 +4,55 @@
 		<meta charset="ISO-8859-1">
 		<title>EAR</title>
 		
+		<link rel="shortcut icon" href="./resource/image/icon.png" />
+		
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		
 		<!-- Latest compiled JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+		<!-- custom links -->
+		<link rel="stylesheet" href="./resource/css/app.main.css">
+		<link rel="stylesheet" href="./resource/css/login.css">
+		
+		<!-- custom scripts -->
+
 	</head>
 	<body>
-		
+	
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 header-block">
+					<img src="./resource/image/login_title.png" class="img-responsive center-block">
+					<div class="col-xs-12 text-center">
+						<label class="title">Employee Application Reimbursement System</label>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<form>
+						<div class="input-fa-wrapper" style="padding-bottom: 5px;">
+							<input class="form-control input-max-width center-block" type="text" name="username" placeholder="&#xf2bd; Username">
+							<div style="height: 5px;"></div>
+							<input class="form-control input-max-width center-block" type="password" name="password" placeholder="&#xf023; Password">
+						</div>
+						<div class="input-max-width center-block">
+							<div class="col-xs-8" style="padding-left:0px; padding-right: 5px;">
+								<button class="form-control" type="submit" name="submit"><span class="fa fa-chevron-right"></span>&nbsp;Login</button>
+							</div>
+							<div class="col-xs-4" style="padding:0px;">
+								<button class="form-control btn-primary" type="submit" name="register"><span class="fa fa-file-text-o"></span>&nbsp;Register</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>

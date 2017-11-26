@@ -1,0 +1,12 @@
+/**
+ *	Login CSS
+ */
+  
+ .input-fa-wrapper input {
+    position: relative; 
+    font-family: 'FontAwesome';
+}
+
+.title {
+	font-size: 1.25em;
+}
