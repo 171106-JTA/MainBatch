@@ -40,18 +40,18 @@ DROP TABLE EAR_FORM_ASSIGNEE CASCADE CONSTRAINTS;
 -- CREATE TABLES 
 
 CREATE TABLE EAR_USER (
-    id NUMBER,
+    id INTEGER,
     username VARCHAR2(32) UNIQUE NOT NULL,
     password VARCHAR2(32) NOT NULL,
-    roleid NUMBER,
+    roleid INTEGER,
     CONSTRAINT pk_user_id PRIMARY KEY (id),
     CONSTRAINT fk_role_id FOREIGN KEY (roleid) REFERENCES CODE_LIST(id)
 );
 
 CREATE TABLE EAR_USER_INFO (
-    id NUMBER,
-    userid NUMBER,
-    statecityid NUMBER,
+    id INTEGER,
+    userid INTEGER,
+    statecityid INTEGER,
     firstname VARCHAR2(32) NOT NULL,
     lastname VARCHAR2(32) NOT NULL,
     phonenumber VARCHAR2(24) NOT NULL,
@@ -63,19 +63,19 @@ CREATE TABLE EAR_USER_INFO (
 );
 
 CREATE TABLE EAR_BENEFIT_COORDINATOR (
-    id NUMBER,
-    bencoid NUMBER,
-    supervisorid NUMBER,
+    id INTEGER,
+    bencoid INTEGER,
+    supervisorid INTEGER,
     CONSTRAINT pk_benco_index_id PRIMARY KEY (id),
     CONSTRAINT fk_benco_id FOREIGN KEY (bencoid) REFERENCES EAR_USER(id),
     CONSTRAINT fk_benco_supervisor_id FOREIGN KEY (supervisorid) REFERENCES EAR_USER(id)
 );
 
 CREATE TABLE EAR_SUPERVISOR (
-    id NUMBER,
-    supervisorid NUMBER,
-    headsupervisorid NUMBER,
-    departmentid NUMBER,
+    id INTEGER,
+    supervisorid INTEGER,
+    headsupervisorid INTEGER,
+    departmentid INTEGER,
     CONSTRAINT pk_supervisor_index_id PRIMARY KEY (id),
     CONSTRAINT fk_supervisor_id FOREIGN KEY (supervisorid) REFERENCES EAR_USER(id),
     CONSTRAINT fk_headsupervisor_id FOREIGN KEY (headsupervisorid) REFERENCES EAR_USER(id),
@@ -83,9 +83,9 @@ CREATE TABLE EAR_SUPERVISOR (
 );
 
 CREATE TABLE EAR_MESSAGE (
-    id NUMBER,
-    fromid NUMBER,
-    messagepriorityid NUMBER,
+    id INTEGER,
+    fromid INTEGER,
+    messagepriorityid INTEGER,
     title VARCHAR2(64),
     message VARCHAR2(4000) NULL,
     CONSTRAINT pk_message_id PRIMARY KEY (id),
@@ -94,8 +94,8 @@ CREATE TABLE EAR_MESSAGE (
 );
 
 CREATE TABLE EAR_MESSAGE_ATTACHMENT (
-    id NUMBER,
-    messageid NUMBER,
+    id INTEGER,
+    messageid INTEGER,
     blobattachment BLOB NULL,
     clobattachment CLOB NULL,
     CONSTRAINT pk_message_attachment_id PRIMARY KEY (id),
@@ -103,18 +103,18 @@ CREATE TABLE EAR_MESSAGE_ATTACHMENT (
 );
 
 CREATE TABLE EAR_RECIPIENT (
-    id NUMBER,
-    messageid NUMBER,
+    id INTEGER,
+    messageid INTEGER,
     recipientemail VARCHAR2(50) NOT NULL,
     CONSTRAINT pk_recipient_id PRIMARY KEY (id),
     CONSTRAINT fk_recip_message_id FOREIGN KEY (messageid) REFERENCES EAR_MESSAGE(id)
 );
 
 CREATE TABLE EAR_FORM (
-    id NUMBER,
-    userid NUMBER,
-    departmentid NUMBER,
-    eventstatecityid NUMBER,
+    id INTEGER,
+    userid INTEGER,
+    departmentid INTEGER,
+    eventstatecityid INTEGER,
     firstname VARCHAR2(32) NOT NULL,
     lastname VARCHAR2(32) NOT NULL,
     phonenumber VARCHAR2(24) NOT NULL,
@@ -132,9 +132,9 @@ CREATE TABLE EAR_FORM (
 );
 
 CREATE TABLE EAR_FORM_ATTACHMENT (
-    id NUMBER,
-    formid NUMBER,
-    typeid NUMBER,
+    id INTEGER,
+    formid INTEGER,
+    typeid INTEGER,
     blobattachment BLOB NULL,
     clobattachment CLOB NULL,
     CONSTRAINT pk_form_attachment_id PRIMARY KEY (id),
@@ -143,19 +143,19 @@ CREATE TABLE EAR_FORM_ATTACHMENT (
 );
 
 CREATE TABLE EAR_FORM_ASSIGNEE (
-    id NUMBER,
-    assigneeid NUMBER,
-    formid NUMBER,
+    id INTEGER,
+    assigneeid INTEGER,
+    formid INTEGER,
     CONSTRAINT pk_form_assignee_id PRIMARY KEY (id),
     CONSTRAINT fk_assignee_id FOREIGN KEY (assigneeid) REFERENCES EAR_USER(id),
     CONSTRAINT fk_application_form_id FOREIGN KEY (formid) REFERENCES EAR_FORM(id)
 );
 
 CREATE TABLE EAR_FORM_STATUS (
-    id NUMBER,
-    formid NUMBER, 
-    processedby NUMBER,
-    statusid NUMBER,
+    id INTEGER,
+    formid INTEGER, 
+    processedby INTEGER,
+    statusid INTEGER,
     originalestimate NUMBER(8,2) NOT NULL,
     reimbursement NUMBER(8,2) NULL,
     description VARCHAR(1024) NULL,

@@ -3,6 +3,7 @@ package com.revature.dao;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.revature.businessobject.CodeList;
 import com.revature.businessobject.User;
 
 /**
@@ -54,6 +55,7 @@ public final class BODBMap {
 	 */
 	private void init() {
 		mapping.put(User.class.getSimpleName().toLowerCase(), "EAR_USER");
+		mapping.put(CodeList.class.getSimpleName().toLowerCase(), "CODE_LIST");
 	}
 	
 }
