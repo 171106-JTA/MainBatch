@@ -69,7 +69,7 @@ public final class DAOBusinessObject {
 	 */
 	public static List<BusinessObject> load(BusinessObject item) {
 		String sql = "SELECT * FROM " + map.get(item.getClass().getSimpleName());
-		List<String> params = prepareParameters(item);
+		List<String> params = prepareParameters(item, true);
 		List<BusinessObject> records = null;
 		PreparedStatement statement = null;
 		ResultSet res = null;
@@ -112,6 +112,7 @@ public final class DAOBusinessObject {
 	public static int insert(List<BusinessObject> items) {
 		int total = 0;
 
+		// insert data 
 		for (BusinessObject item : items) 
 			total += insert(item);
 	
@@ -124,17 +125,44 @@ public final class DAOBusinessObject {
 	 * @return 1 if item added to database else 0
 	 */
 	public static int insert(BusinessObject item) {
-		// stub
-		return 0;
+		String sql = "INSERT INTO " + map.get(item.getClass().getSimpleName());
+		List<String> identifiers = getIdentifiers(item);
+		List<String> params = prepareParameters(item, false);
+		PreparedStatement statement = null;
+		int total = 0;
+		
+		// Build insert statement
+		sql += " (" + String.join(",", identifiers) + ") VALUES(" + String.join(",", params) +")";
+		
+		logger.debug("preforming query " + sql + " ...");
+
+		// Attempt to insert record into database
+		try (Connection conn = getConnection()) {
+			// Get handle to statement 
+			statement = conn.prepareStatement(sql);
+			
+			// Sanitize parameterized statement
+			assignClauseValues(statement, item, 1);
+			
+			// Perform transaction
+			total = statement.executeUpdate();
+		} catch (SQLException | ClassCastException e) {
+			logger.debug("query failed " + sql + ", message=" + e);
+			e.printStackTrace();
+		} finally {
+			close(statement);
+		}
+
+		return total;
 	}
 	
 	/**
 	 * Attempts to update existing record
-	 * @param item - what to update
-	 * @param value - new values for record
+	 * @param toUpdate - what to update
+	 * @param newValues - new values for record
 	 * @return number of records updated 
 	 */
-	public static int update(BusinessObject item, BusinessObject value) {
+	public static int update(BusinessObject toUpdate, BusinessObject newValues) {
 		// stub
 		return 0;
 	}
@@ -172,7 +200,7 @@ public final class DAOBusinessObject {
 	 * @param item - what to convert
 	 * @return parameterized list representing object fields (non-null values only)
 	 */
-	private static List<String> prepareParameters(BusinessObject item) {
+	private static List<String> prepareParameters(BusinessObject item, boolean includeIdentifier) {
 		Map<String, Map<String, Object>> params = factory.getParams(item);
 		List<String> parameterization = new LinkedList<>();
 		Map<String, Object> fields;
@@ -185,10 +213,34 @@ public final class DAOBusinessObject {
 
 			// assign field names
 			for (Map.Entry<String, Object> data : fields.entrySet()) 
-				parameterization.add(data.getKey().toLowerCase() + "=?");
+				parameterization.add(includeIdentifier ? data.getKey().toLowerCase() + "=?" : "?");
 		}
 		
 		return parameterization;
+	}
+	
+	/**
+	 * Creates list of all fields which are not null
+	 * @param item - what to convert
+	 * @return field identifier list
+	 */
+	private static List<String> getIdentifiers(BusinessObject item) {
+		Map<String, Map<String, Object>> params = factory.getParams(item);
+		List<String> identifiers = new LinkedList<>();
+		Map<String, Object> fields;
+		
+		
+		// Assign fields to clause
+		for (Map.Entry<String, Map<String, Object>> node : params.entrySet()) {
+			// Get fields 
+			fields = node.getValue();
+
+			// assign field names
+			for (Map.Entry<String, Object> data : fields.entrySet()) 
+				identifiers.add(data.getKey().toLowerCase());
+		}
+		
+		return identifiers;
 	}
 	
 	/**
