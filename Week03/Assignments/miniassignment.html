@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Mini HTML</title>
+		<style>
+			div.right {
+				float: right;
+				width: 300px;
+				margin-right: 2cm;
+			}
+			div.left {
+				float: left;
+				width: 300px;
+				margin-right: 2cm;
+			}
+			div.fixed {
+				position: fixed;
+				bottom: 0;
+				right: 0;
+				width: 300px;
+				border: 3px solid #73AD21;
+			}
+			.center-text{
+				text-align: center;
+			}
+			.tomato{
+				color:tomato;
+			}
+			p{
+				color:purple;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<div class="left">
+		<table>
+			<tr>
+				<td>
+					<h2>Meats</h2>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="checkbox" value="Pepperoni"> Pepperoni
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="checkbox" value="Ham"> Ham
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h2>Fiber</h2>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="radio" name="radiobuttons" value="Spinach" checked>Spinach
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="radio" name="radiobuttons" value="Pineapples">Pineapples
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h2>Spicy</h2>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<select id="spicy">
+						<option value="Banana Peppers">Banana Peppers</option>
+						<option value="Cherry Peppers">Cherry Peppers</option>
+					</select>	
+				</td>
+			</tr>
+		</table>
+		</div>
+	
+		<div class="right">
+		<table>
+			<tr>
+				<td>
+				<div>
+				<img src="http://2.bp.blogspot.com/_2J5KtWSIXnk/SbNSduSqgeI/AAAAAAAAA3M/GFOiRkyZjgk/s400/Kool-Aid+Man.jpg" 
+				alt="Kool-Aid Man" style="width:200px;height:200px">
+				</div>
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+				<div class="right">
+					<h1 class="center-text tomato">About Me</h1>
+					<p>
+					Michael Tseng is a recent UCI graduate, who enjoys eating pizza. 
+					His work involves stuff that involves things that are important to others.
+					He is best known for the thing helped that important person accomplish great achievements of greatness.
+					That is all.
+					</p>
+				</div>
+				</td>
+			</tr>
+		</table>
+		</div>
+		
+		<div class="fixed">
+			<ol>
+				<li><a href="http://www.google.com">Go to Google</a></li>
+				<li><a href="http://www.theverge.com">Go to Verge</a></li>
+			</ol>
+		</div>
+	</body>
+</html>
