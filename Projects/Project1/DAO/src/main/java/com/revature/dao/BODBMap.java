@@ -3,6 +3,8 @@ package com.revature.dao;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.revature.businessobject.User;
+
 /**
  * Maps Java BusinessObject Classes to Database Tables 
  * @author Antony Lulciuc
@@ -51,7 +53,7 @@ public final class BODBMap {
 	 * Maps Java BusinessObject Classes to Database Tables
 	 */
 	private void init() {
-		
+		mapping.put(User.class.getSimpleName().toLowerCase(), "EAR_USER");
 	}
 	
 }
