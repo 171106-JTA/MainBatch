@@ -65,7 +65,5 @@ public final class BODBMap {
 		mapping.put(MessageAttachment.class.getSimpleName().toLowerCase(), "EAR_MESSAGE_ATTACHMENT");
 		mapping.put(Recipient.class.getSimpleName().toLowerCase(), "EAR_RECIPIENT");
 		mapping.put(Supervisor.class.getSimpleName().toLowerCase(), "EAR_SUPERVISOR");
-		
 	}
-	
 }
