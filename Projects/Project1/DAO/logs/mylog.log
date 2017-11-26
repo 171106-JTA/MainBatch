@@ -44,3 +44,19 @@
 2017-11-26 02:00:45 DEBUG ConnectionUtil:64 - closed stream
 2017-11-26 02:00:45 DEBUG ConnectionUtil:49 - attempting to clsoe stream
 2017-11-26 02:00:45 DEBUG ConnectionUtil:51 - closed stream
+2017-11-26 11:43:43 DEBUG DAOBusinessObject:81 - preforming query SELECT * FROM EAR_USER WHERE username=? ...
+2017-11-26 11:43:44 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 11:43:48 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 11:44:07 DEBUG BusinessObjectFactory:51 - converting resultset to Java objects
+2017-11-26 11:44:27 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-26 11:44:27 DEBUG ConnectionUtil:64 - closed stream
+2017-11-26 11:44:28 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-26 11:44:28 DEBUG ConnectionUtil:51 - closed stream
+2017-11-26 11:44:31 DEBUG DAOBusinessObject:42 - preforming query SELECT * FROM EAR_USER ...
+2017-11-26 11:44:31 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-11-26 11:44:31 DEBUG ConnectionUtil:81 - opened connection to database
+2017-11-26 11:44:34 DEBUG BusinessObjectFactory:51 - converting resultset to Java objects
+2017-11-26 11:44:34 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-11-26 11:44:34 DEBUG ConnectionUtil:64 - closed stream
+2017-11-26 11:44:34 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-11-26 11:44:34 DEBUG ConnectionUtil:51 - closed stream

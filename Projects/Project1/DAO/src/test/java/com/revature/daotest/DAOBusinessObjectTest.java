@@ -31,8 +31,7 @@ public class DAOBusinessObjectTest {
 	@Test
 	public void shouldLoadAllUsers() {
 		List<BusinessObject> users = DAOBusinessObject.loadAll(User.class);
-		
 		assertTrue(users.size() > 0);
 	}
-
+	
 }

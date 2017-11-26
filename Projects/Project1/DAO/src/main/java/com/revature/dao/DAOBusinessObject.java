@@ -220,6 +220,12 @@ public final class DAOBusinessObject {
 					case "integer":
 						statement.setInt(pos, (Integer)data.getValue());
 						break;
+					case "long":
+						statement.setLong(pos, (Long)data.getValue());
+						break;
+					case "boolean":
+						statement.setBoolean(pos, (Boolean)data.getValue());
+						break;
 					case "float":
 						statement.setFloat(pos, (Float)data.getValue());
 						break;
@@ -244,44 +250,5 @@ public final class DAOBusinessObject {
 				++pos;
 			}
 		}
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	}	
 }

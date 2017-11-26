@@ -90,8 +90,15 @@ public final class BusinessObjectFactory {
 								case "boolean":
 									field.set(object, res.getBoolean(name));
 									break;
-									
-									// TODO - Add Blob & Clob
+								case "blob":
+									field.set(object, res.getBlob(name));
+									break;
+								case "clob":
+									field.set(object, res.getClob(name));
+									break;
+								case "date":
+									field.set(object, res.getDate(name));
+									break;
 							}
 							
 							// reset
