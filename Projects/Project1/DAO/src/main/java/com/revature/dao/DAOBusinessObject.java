@@ -134,7 +134,7 @@ public final class DAOBusinessObject {
 		// Build insert statement
 		sql += " (" + String.join(",", identifiers) + ") VALUES(" + String.join(",", params) +")";
 		
-		logger.debug("preforming query " + sql + " ...");
+		logger.debug("preforming insert " + sql + " ...");
 
 		// Attempt to insert record into database
 		try (Connection conn = getConnection()) {
@@ -147,7 +147,7 @@ public final class DAOBusinessObject {
 			// Perform transaction
 			total = statement.executeUpdate();
 		} catch (SQLException | ClassCastException e) {
-			logger.debug("query failed " + sql + ", message=" + e);
+			logger.debug("insert failed " + sql + ", message=" + e);
 			e.printStackTrace();
 		} finally {
 			close(statement);
@@ -163,8 +163,40 @@ public final class DAOBusinessObject {
 	 * @return number of records updated 
 	 */
 	public static int update(BusinessObject toUpdate, BusinessObject newValues) {
-		// stub
-		return 0;
+		String sql = "UPDATE " + map.get(toUpdate.getClass().getSimpleName());
+		List<String> uParams = prepareParameters(toUpdate, true);
+		List<String> nParams = prepareParameters(newValues, true);
+		PreparedStatement statement = null;
+		int total = 0;
+		
+		// Build update statement
+		sql += "SET " + String.join(",", nParams);
+		
+		// If where clause needed 
+		if (uParams.size() > 0)
+			sql += " WHERE " + String.join(" AND ", uParams);
+		
+		logger.debug("preforming update " + sql + " ...");
+
+		// Attempt to update record into database
+		try (Connection conn = getConnection()) {
+			// Get handle to statement 
+			statement = conn.prepareStatement(sql);
+			
+			// Sanitize parameterized statement
+			assignClauseValues(statement, toUpdate, 1);
+			assignClauseValues(statement, newValues, uParams.size() + 1);
+			
+			// Perform transaction
+			total = statement.executeUpdate();
+		} catch (SQLException | ClassCastException e) {
+			logger.debug("update failed " + sql + ", message=" + e);
+			e.printStackTrace();
+		} finally {
+			close(statement);
+		}
+
+		return total;
 	}
 	
 	/**
@@ -187,8 +219,35 @@ public final class DAOBusinessObject {
 	 * @return number of records removed from database
 	 */
 	public static int delete(BusinessObject item) {
-		// stub
-		return 0;
+		String sql = "DELETE FROM " + map.get(item.getClass().getSimpleName());
+		List<String> params = prepareParameters(item, true);
+		PreparedStatement statement = null;
+		int total = 0;
+		
+		// If where clause needed 
+		if (params.size() > 0)
+			sql += " WHERE " + String.join(" AND ", params);
+		
+		logger.debug("preforming delete " + sql + " ...");
+
+		// Attempt to update record into database
+		try (Connection conn = getConnection()) {
+			// Get handle to statement 
+			statement = conn.prepareStatement(sql);
+			
+			// Sanitize parameterized statement
+			assignClauseValues(statement, item, 1);
+
+			// Perform transaction
+			total = statement.executeUpdate();
+		} catch (SQLException | ClassCastException e) {
+			logger.debug("delete failed " + sql + ", message=" + e);
+			e.printStackTrace();
+		} finally {
+			close(statement);
+		}
+
+		return total;
 	}
 	
 	///

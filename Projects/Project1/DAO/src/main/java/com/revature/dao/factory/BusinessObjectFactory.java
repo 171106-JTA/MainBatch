@@ -128,47 +128,51 @@ public final class BusinessObjectFactory {
 	 */
 	public Map<String, Map<String, Object>> getParams(BusinessObject businessObject) {
 		Map<String, Map<String, Object>> params = new HashMap<>();
-		Class<? extends BusinessObject> clazz = businessObject.getClass();
+		Class<? extends BusinessObject> clazz;
 		Map<String, Object> fields;
 		Object data;
 		String name;
 		
-		// Go through all fields and extract all non-null values 
-		for (Field field : clazz.getDeclaredFields()) {
-			// set access property
-			field.setAccessible(true);
-			data = null;
-
-			try {
-				// get data
-				data = field.get(businessObject);
-			} catch (IllegalArgumentException | IllegalAccessException e) {
-				e.printStackTrace();
-				logger.warn("failed to access instance variables, message=" + e);
-			}
+		// Ensure valid argument supplied
+		if (businessObject != null) {
+			clazz = businessObject.getClass();
 			
-			// if valid value 
-			if (data != null) {
-				name = data.getClass().getSimpleName();
-				
-				// if Exists then add to map of that type
-				if (params.containsKey(name)) {
-					fields = params.get(name);
-					fields.put(field.getName(), data);
-				} else {
-					// create new list to store value
-					fields = new HashMap<>();
-					fields.put(field.getName(), data);
-					
-					// insert new list 
-					params.put(name, fields);
+			// Go through all fields and extract all non-null values 
+			for (Field field : clazz.getDeclaredFields()) {
+				// set access property
+				field.setAccessible(true);
+				data = null;
+	
+				try {
+					// get data
+					data = field.get(businessObject);
+				} catch (IllegalArgumentException | IllegalAccessException e) {
+					e.printStackTrace();
+					logger.warn("failed to access instance variables, message=" + e);
 				}
+				
+				// if valid value 
+				if (data != null) {
+					name = data.getClass().getSimpleName();
+					
+					// if Exists then add to map of that type
+					if (params.containsKey(name)) {
+						fields = params.get(name);
+						fields.put(field.getName(), data);
+					} else {
+						// create new list to store value
+						fields = new HashMap<>();
+						fields.put(field.getName(), data);
+						
+						// insert new list 
+						params.put(name, fields);
+					}
+				}
+				
+				// reset to false
+				field.setAccessible(false);
 			}
-			
-			// reset to false
-			field.setAccessible(false);
 		}
-		
 		return params;
 	}
 }
