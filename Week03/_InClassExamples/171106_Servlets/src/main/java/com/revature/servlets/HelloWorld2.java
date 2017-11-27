@@ -28,8 +28,8 @@ public class HelloWorld2 extends HttpServlet {
 		//Grab the writer of the response to utilize it to send backa  dynamic webpage.
 		PrintWriter out = response.getWriter();
 		
+		out.print("<h1>HELLO BOBBERT!</h1>");
 		out.println(
-				"<h1>HELLO BOBBERT!</h1>" +
 				"<hr>" +
 				"<a href='index.html'>BACK</a>"
 				);
