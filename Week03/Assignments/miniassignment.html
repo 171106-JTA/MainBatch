@@ -3,6 +3,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Mini HTML</title>
+		<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<style>
 			div.right {
 				float: right;
@@ -19,7 +21,10 @@
 				bottom: 0;
 				right: 0;
 				width: 300px;
-				border: 3px solid #73AD21;
+				background-color: tomato;
+				border-color:  #66b3ff;
+				border-width: 10px;
+				border-style: dotted dashed solid double;
 			}
 			.center-text{
 				text-align: center;
@@ -30,10 +35,29 @@
 			p{
 				color:purple;
 			}
+			.backcolor{
+				background-color: tomato;
+			}
 		</style>
 	</head>
 	
 	<body>
+	
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">HTML Example</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="home.html">HOME</a></li>
+			</ul>
+		</div>
+	</nav>
+		<div class="jumbotron text-center backcolor">
+			<h1>Welcome to My Mini Assignment</h1>
+			<img src="http://2.bp.blogspot.com/_2J5KtWSIXnk/SbNSduSqgeI/AAAAAAAAA3M/GFOiRkyZjgk/s400/Kool-Aid+Man.jpg" 
+				alt="Kool-Aid Man" style="width:200px;height:200px">
+		</div>
 		<div class="left">
 		<table>
 			<tr>
@@ -84,14 +108,6 @@
 	
 		<div class="right">
 		<table>
-			<tr>
-				<td>
-				<div>
-				<img src="http://2.bp.blogspot.com/_2J5KtWSIXnk/SbNSduSqgeI/AAAAAAAAA3M/GFOiRkyZjgk/s400/Kool-Aid+Man.jpg" 
-				alt="Kool-Aid Man" style="width:200px;height:200px">
-				</div>
-				</td>
-			</tr>
 			
 			<tr>
 				<td>
