@@ -2,6 +2,7 @@ package com.revature.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +18,8 @@ public class HelloWorld2 extends HttpServlet {
 	//Method called first and only once throughout life cycle.
 	public void init() throws ServletException{
 		System.out.println("Servlet Instantiated!");
+		
+
 	}
 	
 	//Service method is the method that actually performs the actions with the data.
@@ -29,6 +32,32 @@ public class HelloWorld2 extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		out.print("<h1>HELLO BOBBERT!</h1>");
+		
+		//Config parameters
+		out.print("<table border='2px'><tr><th>INIT PARAM NAME</th><th>INIT PARAM VALUE</th></tr>");
+		
+		Enumeration names = 
+		this.getInitParameterNames();
+		
+		while(names.hasMoreElements()){
+			String name = (String)names.nextElement();
+			out.println("<tr><td>" + name + "</td><td>" + this.getInitParameter(name) + "</td></tr>");
+		}
+		out.println("</table>");
+		
+		//Context Parameters
+		out.print("<hr><table border='1px'><tr><th>CONTEXT PARAM NAME</th><th>CONTEXT PARAM VALUE</th></tr>");
+		
+		names = 
+		this.getServletContext().getInitParameterNames();
+		
+		
+		while(names.hasMoreElements()){
+			String name = (String)names.nextElement();
+			out.println("<tr><td>" + name + "</td><td>" + this.getServletContext().getInitParameter(name) + "</td></tr>");
+		}
+		out.println("</table>");
+		
 		out.println(
 				"<hr>" +
 				"<a href='index.html'>BACK</a>"
