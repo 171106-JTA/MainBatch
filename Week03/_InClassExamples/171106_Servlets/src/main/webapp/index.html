@@ -2,12 +2,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script
+    src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+    src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>My Homepage!</title>
 </head>
 <body>
 	<h1>WELCOME TO MY SERVLET HUB</h1>
 	<p>Navigate below to test our servlet examples!</p>
-	
+
 	<hr>
 	<h2>HELLO WORLD</h2>
 	<p>
@@ -22,7 +33,7 @@
 	<hr>
 	<h2>POST AND GET</h2>
 	<p>
-		Utilize the 'method' attribute for a form in order to indicate which HTTP 
+		Utilize the 'method' attribute for a form in order to indicate which HTTP
 		method to use. <br> If no method is specified, GET is used by default!
 	</p>
 	<h3>GET</h3>
@@ -45,14 +56,14 @@
 			<li><input type="submit" value="SUBMIT LOGIN"></li>
 		</ul>
 	</form>
-	
+
 	<h2>HEADERS</h2>
 	<form action="Headers">
 		<ul style="list-style-type: none;">
 			<li><input type="submit" value="GET HEADER INFORMATION"></li>
 		</ul>
 	</form>
-	
+
 	<h2>SESSIONS</h2>
 	<form action="CreateSession">
 		<ul style="list-style-type: none;">
@@ -62,13 +73,13 @@
 			<li><input type="password" name="password" placeholder="PASSWORD"></li>
 			<li><input type="submit" value="SUBMIT LOGIN"></li>
 		</ul>
-	</form>	
-	
+	</form>
+
 	<form action="FetchSession">
 		<ul style="list-style-type: none;">
 			<li><input type="submit" value="Fetch Session"></li>
 		</ul>
-	</form>	
-	
+	</form>
+
 </body>
 </html>
