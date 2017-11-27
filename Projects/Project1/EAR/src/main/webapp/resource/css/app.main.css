@@ -38,7 +38,9 @@
 	max-width: 387px;
 }
 
-/* Adjust header block according to viewport height */ 
+/**
+	 Adjust header block according to viewport height 
+	 													**/ 
 
 @media screen and (min-height: 50px) {
 	 .header-block {

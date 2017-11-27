@@ -4,7 +4,11 @@
   <artifactId>EAR</artifactId>
   <version>0.0.1</version>
   <packaging>war</packaging>
-  
+  <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+    
   <dependencies>
   	<!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
 	<dependency>
