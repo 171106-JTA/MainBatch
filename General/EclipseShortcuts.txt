@@ -1,0 +1,4 @@
+Auto import all libraries	 						ctl - shft - o
+Save all documents	 								ctl - shift - s
+Auto-indent 										ctl - shift - f
+Switch to/from full screen for current document 	ctl - m -> 
