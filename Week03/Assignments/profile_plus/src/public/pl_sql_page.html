@@ -50,7 +50,7 @@
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <a href="#">Servlet</a>
+                                    <a href="servlet.html">Servlet</a>
                                 </li>
                                 <li>
                                     <a href="#">Cookie</a>
@@ -120,8 +120,8 @@
                 <p>
                     There are 4 isolation levels highest to lowest, they are Serializable, Repeatable read, read commited and read uncommunited.
                 </p>
-                <table>
-                    <tr border="5">
+                <table cellpadding="100px" border="5px">
+                    <tr>
                         <th>Isolation Level</th>
                         <th>Dirty read</th>
                         <th>Non-repeatable read</th>
@@ -155,6 +155,9 @@
                 <p>Oracle Data base EXPLICITLY supports the READ COMMITED and SERIALIZABLE isolation level as they're defined in the standard.<br>
                     However, <b>REPEATABLE READ</b> is the isolation level that the SQL standard claims will guarantee a read-consistent result from SQL. 
                 </p>
+                <h3>Example of non-repeatable read phenomena</h3>
+                <p>non-repeatable read is for <b>a row</b></p>
+                <img src="./img/repeatable_read_1.png" alt="repeatable read example">
             </div>
 
         </div>

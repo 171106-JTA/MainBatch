@@ -1,40 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="utf-8">
 <title>TRMS(Tuition Reimbursement Management System)</title>
+
+<!-- CDN, Content delivery network. Our app will use files in the severs listed in href -->
+
+<!-- jQuery minified js -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Bootstrap CDN -->
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"></script>
 <!-- Bootswatch Flatly Theme CDN Link -->
 <link
 	href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css"
 	rel="stylesheet"
 	integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT"
 	crossorigin="anonymous">
-
+<!-- Some font import -->
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro"
+	rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="resouces/css/myStyles.css">
 </head>
 <body>
-	<ul class="nav nav-tabs">
-		<li class="active"><a href="#home" data-toggle="tab">Home</a></li>
-		<li><a href="#profile" data-toggle="tab">Profile</a></li>
-		<li class="dropdown"><a class="dropdown-toggle"
-			data-toggle="dropdown" href="#"> More<span class="caret"></span>
-		</a>
-			<ul class="dropdown-menu">
-				<li><a href="#dropdown1" data-toggle="tab">Setting</a></li>
-				<li class="divider"></li>
-				<li><a href="#dropdown2" data-toggle="tab">Stuff</a></li>
-			</ul></li>
-	</ul>
-
-	<h1>User Login</h1>
-	<form action="PostUserLogin" method="Post">
-		<ul style="list-style-type: none;">
-			<li>Username:</li>
-			<li><input type="text" name="username"></li>
-			<li>Password:</li>
-			<li><input type="password" name="password"></li>
-			<li><input class="btn btn-default" type="submit" value="Log In"><input class="btn btn-default"type="button" value="Create Account"></li>
+	<div class="container-fluid">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+			<li><a href="#profile" data-toggle="tab">Profile</a></li>
+			<li class="dropdown"><a class="dropdown-toggle"
+				data-toggle="dropdown" href="#"> More<span class="caret"></span>
+			</a>
+				<ul class="dropdown-menu">
+					<li><a href="#dropdown1" data-toggle="tab">Setting</a></li>
+					<li class="divider"></li>
+					<li><a href="#dropdown2" data-toggle="tab">Stuff</a></li>
+				</ul></li>
 		</ul>
-	</form>
-
+		<h1>User Login</h1>
+		<form action="UserPage" method="post">
+			<!-- Fun fact, action doesn't need to point to servlet-name or display name, it just has to match url-pattern -->
+			<ul style="list-style-type: none;">
+				<li>Username:</li>
+				<li><input type="text" name="username"></li>
+				<li>Password:</li>
+				<li><input type="password" name="password"></li>
+				<li><button class="btn btn-default" type="submit"
+						value="submit">Log in</button> <a href="create_acct.html"><button
+							formaction="#" class="btn btn-default">Create account</button></a></li>
+			</ul>
+		</form>
+		<div id="forgot-username">
+			<a href="find_username.html">forgot username?</a>
+		</div>
+		<div id="forgot-pw">
+			<a href="find_pw.html">forgot password?</a>
+		</div>
+	</div>
 </body>
 </html>

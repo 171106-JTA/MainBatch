@@ -1,12 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
-  <display-name>trms</display-name>
-  <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	<display-name>trms</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	<servlet>
+		<description></description>
+		<display-name>PostUserLogin</display-name>
+		<servlet-name>PostUserLogin</servlet-name>
+		<servlet-class>com.revature.servlet.PostUserLogin</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>PostUserLogin</servlet-name>
+		<url-pattern>/UserPage</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>CreateCookie</display-name>
+		<servlet-name>CreateCookie</servlet-name>
+		<servlet-class>com.revature.servlet.CreateCookie</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CreateCookie</servlet-name>
+		<url-pattern>/CreateCookie</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>doFilter</display-name>
+		<servlet-name>doFilter</servlet-name>
+		<servlet-class>com.revature.trms.filter.doFilter</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>doFilter</servlet-name>
+		<url-pattern>/doFilter</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<description></description>
+		<display-name>FetchCookie</display-name>
+		<servlet-name>FetchCookie</servlet-name>
+		<servlet-class>com.revature.trms.servlet.FetchCookie</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FetchCookie</servlet-name>
+		<url-pattern>/FetchCookie</url-pattern>
+	</servlet-mapping>
+	<context-param>
+		<param-name>Content var</param-name>
+		<param-value>my context param val</param-value>
+	</context-param>
+	<servlet>
+		<description></description>
+		<display-name>DeleteCookie</display-name>
+		<servlet-name>DeleteCookie</servlet-name>
+		<servlet-class>com.revature.trms.servlet.DeleteCookie</servlet-class>
+		<init-param>
+			<param-name>Initial parameter</param-name>
+			<param-value>Bobbish</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+		<!-- Load on startup 'pre-loads' a servlet at server start time. It will 
+			call the ini() method of this servlet before the actual application is ready 
+			for use. This help cuts startup times occuring during an actual users interaction 
+			for situation where a servlet would take a long time to load. You can use 
+			this tag for multiple servlets and it will pre load each one starting with 
+			the lowerst number first then onward -->
+
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteCookie</servlet-name>
+		<url-pattern>/DeleteCookie</url-pattern>
+	</servlet-mapping>
+	<filter>
+		<display-name>AuthorizationFilter</display-name>
+		<filter-name>AuthorizationFilter</filter-name>
+		<filter-class>com.revature.trms.filter.AuthorizationFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>AuthorizationFilter</filter-name>
+		<url-pattern>/AuthorizationFilter</url-pattern>
+	</filter-mapping>
 </web-app>

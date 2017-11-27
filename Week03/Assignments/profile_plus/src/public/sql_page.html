@@ -95,8 +95,27 @@
             <br>
 
             <h5>WHERE VS HAVING</h5>
-            <p>HAVING works on aggregated data while WHERE clause works on row's data. Think of WHERE as pre filter and HAVING as post filter.</p>
-
+            <p>HAVING works on aggregated data while WHERE clause works on row's data. Think of WHERE as pre filter and HAVING
+                as post filter.</p>
+            <p>Fun Fact: HAVING was added to SQL because WHERE could not work with aggregate fucntion</p>
+            <h4>Union vs JOIN</h4>
+            <p>UNION puts lines from queries after each other, while JOIN makes a cartesian product and
+                subsets it -- completely different operations. </p>
+            <p>
+                UNION is written like 
+                <code>
+                        <br>
+                    SELECT name, address, city FROM CUSTOMER <br>
+                    UNION<br>
+                    SELECT name, address, city FROM MARKET
+                </code><br>
+                where there needs to be same number of columns and same type of data whereas JOIN just needs one commom column and 
+                <code><br>
+                    SELECT * FROM Customers<br>
+                    INNER JOIN<br>
+                    Suppliers on Customers.city = Suppliers.city;<br>
+                </code>
+            </p>
         </div>
 
     </div>

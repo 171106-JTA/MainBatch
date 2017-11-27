@@ -41,10 +41,10 @@
                         <li>
                             <a href="./sql_page.html">SQL Tutorial</a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="pl_sql_page.html">Oracle PL/SQL</a>
                         </li>
-                        <li class="dropdown">
+                        <li class="dropdown active">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="true">Web with Java
                                 <span class="caret"></span>
                             </a>
@@ -87,17 +87,51 @@
             <br>
             <div>
                 What are cookies? aka HTTP Cookie, web cookie, Internet cookie, browser cookie, or simply cookie
-                <p>
-                    Basically, cookies are files that are left on your computer after visiting a website. When you visit that website again,
-                    these cookies can be scanned by that website to give it information about your previous encounter of
-                    the website, usually at least.
+                <br> Basically, cookies are files that are left on your computer after visiting a website. When you visit that
+                website again, these cookies can be scanned by that website to give it information about your previous encounter
+                of the website, usually at least.
+                <br> Example of Creating cookie
+                <code>
+                    <br>Cookie cookie = new Cookie("email", request.getParameter("email"));
+                    <br>cookie.setMaxAge(60); // in seconds
+                    <br>response.addCookie(cookie);
+                    <br>response.setContentType("text/html");
+                </code>
+                <h3>Reading Cookie with Servlet</h3>
+                <p>To create cookie call javax.servlet.http.Cookie Object by calling getCookie() method of HttpServerRequest.
+                    Then cycle through an array and use getName() and get Value() methods to access each Cookies and associated
+                    values
                 </p>
-                        </div>
+                <code>
+                    <br>Cookie cookie = null;
+                    <br>Cookie[] cookies = null;
+                    <br>cookies = request.getCookies();
+                    <br>response.setContentType("text/html");
+                    <br>if( cookies != null ) {
+                        <br>out.println("Found Cookies Name and Value");
+                        <br> 
+                        <br>for (int i = 0; i < cookies.length; i++) {
+                            <br>    cookie = cookies[i];
+                            <br>    out.print("Name : " + cookie.getName( ) + ",  ");
+                            <br>    out.print("Value: " + cookie.getValue( ) + " <br/>");
+                            <br>}
+                            <br>      } else {
+                                <br>out.println("No cookies founds");
+                                <br>}
+                </code>
+            </div>
             Session Handling
             <br> Servlet context vs config
+            <div id="servlet-specific">
+                ServletConfig parameters are specified for a particular servlet and are unknown to other servlets. It is used for initialising
+                purposes.
+                <br> ServletContext parameters are specified for an entire application outside of any particular servlet
+            </div>
             <br> Web.xml
             <br> Custom Error pages
             <br> Front Controller
+            <div>Controller that handles all requests for a web site. It works as a delegator. Big example of implementation is
+                spring framwork </div>
             <br> GET vs POST
             <br>
             <div>
@@ -105,6 +139,10 @@
             </div>
             <div>
                 Post returns data in the body. Cannot be cached
+            </div>
+            <br>
+            <div id="client-http-req">
+
             </div>
         </p>
 
