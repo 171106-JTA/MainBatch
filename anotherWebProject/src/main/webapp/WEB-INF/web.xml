@@ -23,7 +23,7 @@
     <description></description>
     <display-name>HelloWorld2</display-name>
     <servlet-name>HelloWorld2</servlet-name>
-    <servlet-class>com.revature.HelloWorld</servlet-class>
+    <servlet-class>com.revature.servlets.HelloWorld</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>HelloWorld2</servlet-name>
@@ -33,7 +33,7 @@
     <description></description>
     <display-name>GetAndPost</display-name>
     <servlet-name>GetAndPost</servlet-name>
-    <servlet-class>com.revature.GetAndPost</servlet-class>
+    <servlet-class>com.revature.servlets.GetAndPost</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>GetAndPost</servlet-name>
@@ -43,7 +43,7 @@
     <description></description>
     <display-name>Headers</display-name>
     <servlet-name>Headers</servlet-name>
-    <servlet-class>com.revature.Headers</servlet-class>
+    <servlet-class>com.revature.servlets.Headers</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Headers</servlet-name>

@@ -16,9 +16,13 @@
 	overflow: hidden;
 }
 
-#newUserRegistration > * > *
+#newUserRegistration select, #newUserRegistration input:not([type="reset"]):not([type="submit"]) 
 {
-	float: left;
+    float: right;
+}
+/* This is thanks to @UncaughtTypeError from StackOverflow */
+#newUserRegistration label {
+    float: none;
 }
 
 #newUserRegistration > * > *:not(:first-child):not([type="submit"]):not([type="reset"]):not(button)
@@ -26,7 +30,7 @@
 	margin-left: -4px;	
 }
 
-#newUserRegistration span
+/*#newUserRegistration span
 {
 	overflow: auto;
-}
+}*/

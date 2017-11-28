@@ -23,11 +23,6 @@ html
 	transform: translate(-50%, -50%);
 }
 
-form
-{
-	overflow: auto;
-}
-
 input[type="text"],input[type="password"], input[type="email"]
 {
 	border-left-style: none !important;
@@ -65,8 +60,11 @@ input[type="submit"]:hover
 .row:not(.buttonRow),.rowTight:not(.buttonRow)
 {
 	display: block;
+	position: relative;
 	width: 100%;
 }
+
+
 
 .row
 {
@@ -128,11 +126,13 @@ input.ng-invalid
 /* The tooltip stuff */
 .tooltip
 {
+	top: -5px;
+	left: 101%;
 	z-index: 1;
 	display: inline-block;
 	width: 200px;
 	background-color: #e55;
-	padding: 5px;
+	padding: 5px 0;
 	position: absolute;
 	color: #fff;
 	border-radius: 6px;

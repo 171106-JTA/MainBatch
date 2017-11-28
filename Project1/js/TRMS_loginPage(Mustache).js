@@ -42,6 +42,22 @@ function validUsername()
 	return true;
 }
 
+/* Validates the username, asynchronously. 
+ * Parameters:
+ *	• err     : the initial error object 
+ *	• callback: the callback to invoke after this function completes
+ */
+function validateUsername(err, callback)
+{
+	// for now, usernames are valid iff they aren't empty
+	var usernameEmpty = isEmpty($('#username'));
+	if (usernameEmpty)
+	{
+		err.username = { errors : [ EMPTY_FIELD ] };
+	}
+	callback(err);
+}
+
 /* Checks if password is valid
  * Returns:
  *	• true if password is in the data store or false if it either isn't or violates the password rules
@@ -61,22 +77,29 @@ function validPassword()
 	return true;
 }
 
+/* Validates password asynchronously
+ */
+function validatePassword(err, callback)
+{
+	var passwordEmpty = isEmpty($('#password'));
+	if (passwordEmpty)
+	{
+		err.password = { errors : [ EMPTY_FIELD ] };
+	}
+	
+	callback(err);
+}
+
 /* Does login logic, logging the user in
  * 
  */
 function login() { 
-	// no user field should be blank
-	if (($('#username').val().trim() == '') && ($('#password').val().trim() == ''))
-	{
-		console.log("no fields should be blank");
-		return;
-	}
 	// user authentication logic goes here....
 	var errorObj = {
 		username : {},
 		password : {}
 	};
-	var validCredentials = false;
+	/*var validCredentials = false;
 	try
 	{
 		validCredentials = validUsername();
@@ -113,7 +136,22 @@ function login() {
 				renderErrors(errorObj);
 			}
 		}
-	}
+	}*/
+	// callback hell!
+	
+	validateUsername({}, 
+		function (err) 
+		{
+			validatePassword (err, function(e)
+			{
+				if (e)
+				{
+					// render the tool tips here
+					renderErrors(e);
+				}
+			})
+		}
+	);
 }
 
 /* Renders any errors on any of the fields
@@ -122,25 +160,26 @@ function login() {
  */
 function renderErrors(errorObj)
 {
-	console.log('errorObj == ' + JSON.stringify(errorObj, null, '\t'));
 	// TODO: replace with $.get() requests
-	var badUserTmpl = '<span class="{{^errors}}hidden {{/errors}}tooltip">' + 
-		'{{#errors}}' + 
-			'<ul>' + 
-				'<li>{{.}}</li>' + 
-			'</ul>' + 
-		'{{/errors}}' + 
+	var badUserTmpl = '<span class="{{^.}}hidden {{/.}}tooltip">' + 
+		'{{#.}}' + 
+			'{{#errors}}' + 
+				'<ul>' + 
+					'<li>{{.}}</li>' + 
+				'</ul>' + 
+			'{{/errors}}' + 
+		'{{/.}}' +
 	'</span>', 
 		badPassTmpl = badUserTmpl;
 	// render the templates
 	var renderedUserToolTip = Mustache.to_html(badUserTmpl, errorObj.username),
 		renderedPassToolTip = Mustache.to_html(badPassTmpl, errorObj.password);
 	// if there is tooltip right next to the fields, replace them. otherwise, append to the fields
-	if ($('#username').next('.tooltip').length === 0) $('#username').append(renderedUserToolTip);
-	else $('#username').next('.tooltip') = renderedUserToolTip;
+	if ($('#username').next('.tooltip').length === 0) $('#username').after(renderedUserToolTip);
+	else $('#username').next('.tooltip').replaceWith(renderedUserToolTip);
 	
-	if ($('#password').next('.tooltip').length === 0) $('#password').append(renderedPassToolTip);
-	else $('#password').next('.tooltip') = renderedPassToolTip;
+	if ($('#password').next('.tooltip').length === 0) $('#password').after(renderedPassToolTip);
+	else $('#password').next('.tooltip').replaceWith(renderedPassToolTip);
 	
 }
 
@@ -183,4 +222,7 @@ $(function() {
 		}
 	});
 	
+	$('input[type="reset"]').click(function(event) { 
+		$('#username,#password').removeClass('ng-invalid');
+	})
 });
