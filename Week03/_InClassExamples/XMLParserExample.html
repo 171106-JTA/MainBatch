@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+
+        <p id="demo"></p>
+        <script>
+            var parser, xmlDoc;
+            var text="<bookstore><book><title>Lord of the Bobberts</title></book></bookstore>";
+            parser = new DOMParser();
+            xmlDoc = parser.parseFromString(text, "text/xml");
+            document.getElementById("demo").innerHTML=
+                xmlDoc.getElementsByTagName("title")[0].childNodes[0].nodeValue;
+        </script>
+    </body>
+</html>
