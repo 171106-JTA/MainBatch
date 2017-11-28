@@ -9,14 +9,34 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  
   <servlet>
     <description></description>
     <display-name>FrontController</display-name>
     <servlet-name>FrontController</servlet-name>
     <servlet-class>com.revature.ear.controller.FrontController</servlet-class>
+    <init-param>
+    	<param-name>login</param-name>
+    	<param-value></param-value>
+    </init-param>
+    <init-param>
+    	<param-name></param-name>
+    	<param-value></param-value>
+    </init-param>
+    <init-param>
+    	<param-name></param-name>
+    	<param-value></param-value>
+    </init-param>
+    <init-param>
+    	<param-name></param-name>
+    	<param-value></param-value>
+    </init-param>
+    
+    
+    <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>FrontController</servlet-name>
-    <url-pattern>/FrontController</url-pattern>
+    <url-pattern>*.do</url-pattern>
   </servlet-mapping>
 </web-app>
