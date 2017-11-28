@@ -1,20 +1,19 @@
 package com.revature.dao;
 
-import static com.revature.util.CloseStreams.close;
-
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import com.revature.beans.FlashCard;
-import com.revature.util.ConnectionUtil;
+import com.revature.util.*;
 
 public class FlashCardDaoImpl implements FlashCardDao{
 	private Statement stmt = null;
-	
+
 	public void createFlashCard(FlashCard fc){
 		/*
 		 * Try-With-Resources
@@ -23,14 +22,14 @@ public class FlashCardDaoImpl implements FlashCardDao{
 		 * to worry about it. Any class that implements autocloseable can do this.
 		 */
 		try(Connection conn = ConnectionUtil.getConnection();){
-			
+
 			String sql = "INSERT INTO bobbert.flash_cards(fc_question,fc_answer)" +
 						 "VALUES('" + fc.getQuestion() + "', '" + fc.getAnswer() + "')";
 			stmt = conn.createStatement();
 			int affected = stmt.executeUpdate(sql);
-			
+
 			System.out.println(affected + " Rows affected");
-			
+
 		}catch(SQLException e){
 			e.printStackTrace();
 		}finally{
@@ -41,7 +40,7 @@ public class FlashCardDaoImpl implements FlashCardDao{
 		PreparedStatement ps = null;
 		ResultSet rs = null; //ResultSets hold query data
 		FlashCard fc = null;
-		
+
 		try(Connection conn = ConnectionUtil.getConnection();){
 			String sql = "SELECT * FROM flash_cards WHERE fc_id = ?";
 			ps = conn.prepareStatement(sql);
@@ -51,19 +50,19 @@ public class FlashCardDaoImpl implements FlashCardDao{
 			//above, sequentially.
 			ps.setInt(1, id);
 			rs = ps.executeQuery();
-			
-			
-			
+
+
+
 			while(rs.next()){
-				fc = new FlashCard( 
+				fc = new FlashCard(
 						rs.getString("fc_question"), //NOTE: you can pull either by column # or name.
 						rs.getString(3) //Grab data from column 3
 						);
-				
+
 				fc.setId(rs.getInt(1)); //Grab data from column 1
 			}
-			
-			
+
+
 
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -71,13 +70,13 @@ public class FlashCardDaoImpl implements FlashCardDao{
 			close(ps);
 			close(rs);
 		}
-		
+		``
 		return fc;
 	};
-	
+
 	public void createFlashCardSP(FlashCard fc){
 		CallableStatement cs = null;
-		
+
 		try(Connection conn = ConnectionUtil.getConnection()){
 			String q = fc.getQuestion();
 			String a = fc.getAnswer();
@@ -93,27 +92,42 @@ public class FlashCardDaoImpl implements FlashCardDao{
 			close(cs);
 		}
 	}
-	
+
 	public FlashCard getAnswerByQuestion(FlashCard fc){
 		CallableStatement cs = null;
 
 		try(Connection conn = ConnectionUtil.getConnection()){
-			
+
 			String sql = "{call get_answer(?,?)}";
 			cs = conn.prepareCall(sql);
 			cs.setString(1, fc.getQuestion());
 			cs.registerOutParameter(2, java.sql.Types.VARCHAR);
 			cs.executeQuery();
-			
+
 			fc = new FlashCard("blah", cs.getString(2));
-			
+
 		}catch(SQLException e){
 			e.printStackTrace();
 		}finally{
 			close(cs);
 		}
-		
-		
+
+
 		return fc;
+	}
+	@Override
+	public List<FlashCard> getAllFlashCards() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public int updateFlashCardById(FlashCard fc) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	@Override
+	public int deleteFlashCardById(Integer id) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

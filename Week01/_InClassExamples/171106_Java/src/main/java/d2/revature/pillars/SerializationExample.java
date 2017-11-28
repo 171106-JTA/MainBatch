@@ -15,7 +15,7 @@ public class SerializationExample {
 	 * 				- Variable deallocated after method execution.
 	 * Loop scope - Variable only used within the loop it was created in.
 	 */
-	
+
 	//Instance Scope
 	public static ObjectOutputStream oos;
 
@@ -25,15 +25,15 @@ public class SerializationExample {
 		System.out.println(emp);
 
 		try {
-			oos = new ObjectOutputStream(new FileOutputStream("employee.ser"));
+			oos = new ObjectOutputStream(new FileOutputStream("employee.ser")); //will create if dne, or overwrite/ delete and create new if does exist
 			oos.writeObject(emp);
-			
-			
-		} catch (IOException e) {
+
+
+		} catch (IOException e) { //from what? don't have read/write perm maybe
 
 			e.printStackTrace();
-		}
-		
+		}// need close? writing to bufffer, want to close   !!MUST close cause if don't and try TO open it above, will throw exception
+
 	}
 
 }

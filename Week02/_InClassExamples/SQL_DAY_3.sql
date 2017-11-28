@@ -19,26 +19,25 @@ DROP TABLE my_polkamans;
 DROP TABLE trainer;
 DROP TABLE moves;
 DROP TABLE polkaman;
-DROP TABLE polkamans;
 /*
     CASCADE CONTRAINTS is optional, not really needed. But it will delete
-    constraints that point to the table 
+    constraints that point to the table
     to be dropped instead of throwing an error
     preventing you from dropping to begin with.
 */
 
 /
 
-CREATE TABLE polkamans (
-    pkmn_id number(3), --you can add: primary key,
+CREATE TABLE polkaman (
+    pkmn_id number(3) PRIMARY KEY, --you can add: primary key,
     pkmn_name varchar2(100) NOT NULL, --We dont want a polkaman without a name
     type1 varchar2(50) NOT NULL,
-    type2 varchar2(50) NULL,    --A polkaman might not have two types
-    CONSTRAINT PK_polkamans PRIMARY KEY(pkmn_id)
+    type2 varchar2(50) NULL    --A polkaman might not have two types
+    --CONSTRAINT PK_polkamans PRIMARY KEY(pkmn_id)
 );
 / --Separate executions with this forward slash
 
-SELECT * FROM polkamans; --Grab all data from polkamans
+SELECT * FROM polkaman; --Grab all data from polkamans
 
 CREATE TABLE Moves (
     move_id number(3) primary key,
@@ -74,7 +73,7 @@ CREATE TABLE my_polkamans (
 INSERT INTO POLKAMANS (PKMN_ID, PKMN_NAME, TYPE1) --Write which columns you insert into to
 VALUES (4, 'Firemander', 'fire'); --the actual values to be inserted
 --If you insert into all columns, you need not specify them all.
-INSERT INTO POLKAMANS 
+INSERT INTO POLKAMANS
 VALUES (1, 'Plantesaurus', 'Plant', null);
 
 INSERT INTO POLKAMANS
@@ -131,21 +130,21 @@ select * from polkamans WHERE pkmn_id >3
 AND type1 = 'fire';
 
 --UPDATE DATA EXAMPLE
-UPDATE moves 
+UPDATE moves
 set MOVE_TYPE = 'Agua',
 MOVE_NAME = 'splashes' --you can do multiple updates in one transaction
 where MOVE_TYPE = 'Overpowered';
 select * from moves;
 
 --ALTER EXAMPLE
-ALTER TABLE polkamans 
+ALTER TABLE polkamans
 RENAME TO polkaman;
 
 --TRUNCATE TABLE my_polkamans;
 --select * from my_polkamans;
 
 --DELETE EXAMPLE
-DELETE FROM my_polkamans 
+DELETE FROM my_polkamans
 WHERE my_pkmn_id = 3;
 
 select * from my_polkamans;
@@ -198,9 +197,9 @@ HP.
 
 select * from my_polkamans;
 --AS is an alias, they use double quotes, and are used for convenience.
-select pkmn_id AS "Polkaman ID", sum(MAX_HP) AS "SUM"  
+select pkmn_id AS "Polkaman ID", sum(MAX_HP) AS "SUM"
 from my_polkamans
-where Trainer_ID != 3 
+where Trainer_ID != 3
 group by pkmn_id HAVING sum(Max_HP) > 300;
 /*
     A common question to be asked is, where vs having.
@@ -216,10 +215,10 @@ select pkmn_id from (select * from polkaman); --Nested select example, albeit a 
 
 /*
  IN keyword
- -IN can be used to replace the '=' in a conditional. 
+ -IN can be used to replace the '=' in a conditional.
  -Basically serves as a convenient OR clause.
- 
- 
+
+
 */
 select * from polkaman
 WHERE pkmn_id in (1,4,7); --1 OR 4 OR 7
@@ -297,7 +296,7 @@ create table garbageB(
     col1 number(2),
     col2 number(2)
     );
-    
+
 INSERT INTO garbageA
 Values(1,2);
 INSERT INTO garbageA
@@ -340,7 +339,7 @@ select * from Employee A
 inner join Employee B
 on A.EMP_ID = B.SUP_ID;
 /*
-Our self join brings us a view with each supervisor, and 
+Our self join brings us a view with each supervisor, and
 the employees that work below them.
 Note: Self join is not an actual keyword, but a conc
 */
@@ -388,7 +387,7 @@ UNION ALL
 select * from setB;
 
 --MINUS
---Filter out records that are in both queries, from the Query 
+--Filter out records that are in both queries, from the Query
 select * from setA
 Minus
 select * from setB;
@@ -402,7 +401,7 @@ select * from setB;
 /*
 Rules for set operators
 -The two queries must have matching column counts,
-as well as the column datatypes being presented in the 
+as well as the column datatypes being presented in the
 same order. column names do not have to match.
 It will just take the names of the left query anyway.
 */
@@ -414,7 +413,7 @@ select trainer_id,trainer_name from trainer;
 --Will NOT WORK
 --select * from polkaman
 --union
---select * from trainer; 
+--select * from trainer;
 
 
 /*
@@ -490,6 +489,10 @@ select * from flash_cards;
 
 commit;
 
+<<<<<<< HEAD
+-- IN is like = except for a set of values, operates like a for loop
+--like a nested for loop
+=======
 /*
 SQL Injection
 
@@ -504,3 +507,4 @@ DECLARE
 BEGIN
     get_answer('Did JDBC work?', x);
 END;
+>>>>>>> 0ea703c841360d7f970f5ca932b6fa5f41e34953
