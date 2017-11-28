@@ -16,20 +16,8 @@
     <servlet-name>FrontController</servlet-name>
     <servlet-class>com.revature.ear.controller.FrontController</servlet-class>
     <init-param>
-    	<param-name>login</param-name>
-    	<param-value></param-value>
-    </init-param>
-    <init-param>
-    	<param-name></param-name>
-    	<param-value></param-value>
-    </init-param>
-    <init-param>
-    	<param-name></param-name>
-    	<param-value></param-value>
-    </init-param>
-    <init-param>
-    	<param-name></param-name>
-    	<param-value></param-value>
+    	<param-name>LoginHome</param-name>
+    	<param-value>loginHome</param-value>
     </init-param>
     
     

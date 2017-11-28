@@ -8,7 +8,7 @@
  
  /* Primary button color */
  .btn-primary {
- 	background-color: #0072ff;
+ 	background-color: #0072ff!important;
  }
  
  .btn-primary:hover {
@@ -36,6 +36,12 @@
 /* Defines max width for input box for wide spaces */
 .input-max-width {
 	max-width: 387px;
+}
+
+/* Adjusts padding for inputs in a div */
+.input-max-group-adjust input {
+	padding-left: 2px; 
+	padding-right: 2px;
 }
 
 /**

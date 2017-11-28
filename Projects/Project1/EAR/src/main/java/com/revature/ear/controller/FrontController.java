@@ -13,9 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.revature.businessobject.User;
+import com.revature.service.util.Login;
+
 /**
  * Servlet implementation class FrontController
  */
+@SuppressWarnings("unused")
 public class FrontController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Map<String, Object> mapping = new TreeMap<>();
@@ -23,9 +27,15 @@ public class FrontController extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FrontController() {
-        super();
-        initController();
+    @Override
+	public void init() {
+    	try {
+			super.init();
+		} catch (ServletException e) {
+			e.printStackTrace();
+		}
+    	
+    	initController();
     }
 
 	/**
@@ -40,7 +50,9 @@ public class FrontController extends HttpServlet {
 		
 		try {
 			// Do we have a mapping to appropriate action?
-			if (mapping.containsKey(action)) { 
+			if (!mapping.containsKey(action)) 
+				statusCode = 500;
+			else {
 				clazz = this.getClass();
 				
 				// Get mapped method
@@ -50,11 +62,11 @@ public class FrontController extends HttpServlet {
 				method.setAccessible(true);
 				
 				// process request
-				method.invoke(this, request, response);
+				statusCode = (int) method.invoke(this, request, response);
 				
 				// reset accessibility 
 				method.setAccessible(false);
-			} 
+			}
 		} catch (IllegalAccessException | IllegalArgumentException |InvocationTargetException| NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
 		} finally {
@@ -70,8 +82,6 @@ public class FrontController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-
-	
 	
 	///
 	//	PRIVATE METHODS 
@@ -91,7 +101,93 @@ public class FrontController extends HttpServlet {
 	}
 	
 	///
-	//	Controller methods 
+	//	CONTROLLER METHODS 
 	///
+	
+	private int loginHome(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String submit = request.getParameter("submit");
+		int status = 200;
+		
+		// If no issue on client side
+		if (submit == null) 
+			status = 500;
+		else {
+			switch (submit.toLowerCase()) {
+				case "login":
+					status = loginExistingUser(request, response);
+					break;
+				case "register":
+					status = registerUser(request, response);
+					break;
+				default:
+					status = 500;
+					break;
+			}
+		}
+		
+		return status;
+	}
+	
+	///
+	//	HELPER METHODS 
+	///
+	
+	private int loginExistingUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		Login login = new Login();
+		User user = null;
+		int status = 401;
+		
+		// Attempt to log into user account
+		if ((user = login.login(username, password)) != null) {
+			// TODO : add code to load appropriate screen based on user Credentials 
+		}
+		
+		return status;
+	}
+	
+	private int registerUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher rq = request.getRequestDispatcher("register.html");
+		rq.forward(request, response);
+		return 200;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
