@@ -19,6 +19,9 @@
 		<!-- custom links -->
 		<link rel="stylesheet" href="./resource/css/app.main.css">
 		
+		<!-- custom scripts -->
+		<script src="./resource/js/util.js" type="text/javascript"></script>
+		
 	</head>
 	<body>
 		<div class="container">
@@ -26,36 +29,50 @@
 				<div class="row">
 					<img src="./resource/image/register_title.png" class="img-responsive">
 				</div>
-				<div class="row">
-					<div class="col-sm-12">
-						<label>Employee ID:</label>
-						<input class="form-control input-max-width" type="number">
+				<form>
+					<div class="row">
+						<div class="col-sm-12">
+							<label>Employee ID<i info-icon="Employee ID provided by your company"></i>:</label>
+							<input class="form-control input-max-width" type="number">
+						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-6">
-						<label>First Name:</label>
-						<input class="form-control input-max-group-adjust center-block" type="text">
+					<div class="row">
+						<div class="col-sm-6">
+							<label>First Name:</label>
+							<input class="form-control input-max-group-adjust center-block" type="text" required>
+						</div>
+						<div class="col-sm-6">
+							<label>Last Name:</label>
+							<input class="form-control input-max-group-adjust" type="text" required>
+						</div>
 					</div>
-					<div class="col-sm-6">
-						<label>Last Name:</label>
-						<input class="form-control input-max-group-adjust" type="text">
+					<div class="row">
+						<div class="col-sm-12">
+							<label>Email:</label>
+							<input class="form-control input-max-width" type="email" required>
+						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-12">
-						<label>Email:</label>
-						<input class="form-control input-max-width" type="email">
+					<div class="row">
+						<div class="col-sm-12">
+							<label>User Name:</label>
+							<input class="form-control input-max-width" type="text" required>
+						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-4 input-max-group-adjust" style="padding-top: 5px;">
-						<button class="form-control"><span class="fa fa-times" aria-hidden="true"></span>&nbsp;Clear</button>
+					<div class="row">
+						<div class="col-sm-12">
+							<label>Password:</label>
+							<input class="form-control input-max-width" type="password" required>
+						</div>
 					</div>
-					<div class="col-sm-8 input-max-group-adjust" style="padding-top: 5px;">
-						<button class="form-control btn-primary" type="submit" name="submit" value="register"><span class="fa fa-file-text-o" aria-hidden="true"></span>&nbsp;Register</button>
+					<div class="row">
+						<div class="col-sm-4 input-max-group-adjust" style="padding-top: 5px;">
+							<button class="form-control clear"><span class="fa fa-times" aria-hidden="true"></span>&nbsp;Clear</button>
+						</div>
+						<div class="col-sm-8 input-max-group-adjust" style="padding-top: 5px;">
+							<button class="form-control btn-primary submit" type="submit" name="submit" value="register"><span class="fa fa-file-text-o" aria-hidden="true"></span>&nbsp;Register</button>
+						</div>
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 	</body>
