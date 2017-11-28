@@ -127,4 +127,14 @@
     <servlet-name>TrainerRegistration</servlet-name>
     <url-pattern>/TrainerRegistration</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>TrainerLogin</display-name>
+    <servlet-name>TrainerLogin</servlet-name>
+    <servlet-class>com.revature.servlets.TrainerLogin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TrainerLogin</servlet-name>
+    <url-pattern>/TrainerLogin</url-pattern>
+  </servlet-mapping>
 </web-app>
