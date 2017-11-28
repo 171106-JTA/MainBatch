@@ -117,4 +117,14 @@
     <servlet-name>FrontController</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>TrainerRegistration</display-name>
+    <servlet-name>TrainerRegistration</servlet-name>
+    <servlet-class>com.revature.servlets.TrainerRegistration</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TrainerRegistration</servlet-name>
+    <url-pattern>/TrainerRegistration</url-pattern>
+  </servlet-mapping>
 </web-app>
