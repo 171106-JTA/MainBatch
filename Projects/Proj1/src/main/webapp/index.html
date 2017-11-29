@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>TRMS</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- Flatly Bootswatch theme -->
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT"
+	crossorigin="anonymous">
+<script src="resources/js/main.js"></script>
+<script src="resources/js/fizzbuzz.js"></script>
+</head>
+
+<body>
+	<div class="container-fluid">
+		<h1>TRMS</h1>
+		<p id="para1">Some guide</p>
+		<hr>
+		<div id="d3" style="padding: 20px; background-color: blue;">
+			<div id="d2" style="padding: 20px; background-color: green;">
+				<div id="d1" style="padding: 20px; background-color: red;">
+					<p>TEST</p>
+				</div>
+			</div>
+		</div>
+		<div>
+			<input type="text" id="inputField"> <input type="button"
+				value="submit" onclick="submitName()">
+		</div>
+		<div>
+			<table class="table table-bordered" id="myTable">
+			
+				<tr>
+					<th>ID</th>
+					<th>NAME</th>
+					<th>REMOVE</th>
+				</tr>
+
+			</table>
+		</div>
+		<hr>
+		<input type="text" id="num1">
+		<input type="text" id="num2">
+		<input type="button" value="fizzbuzz" onclick="fizzbuzz()">
+		<div id="myFizzbuzz"></div>
+	
+	</div>
+</body>
+</html>
