@@ -67,15 +67,36 @@ var initEventHandlers = function () {
 	$("button[class~='clear']").on("click", onClearForm);
 	
 	// Assign on submit form to check required input boxes
-	$("button[class~='submit']").on("click", onClickForm);
+	$("button[class~='submit']").on("click", onSubmitForm);
 	
 }
 
 /**
- * Generates information icons for all i tags with attribute info-icon
+ * Generates information icons for all span tags with attribute info-icon
  */
 var initInfoIcons = function () {
+	var spans = $("span[info-icon]");
+	var options;
+	var title;
+	var rect
+
+	// Add fa-info-circle
+	spans.addClass("fa fa-info-circle");
 	
+	$.each(spans.toArray(), function (i, span) {
+		title = $(span).attr("info-icon");
+		rect = span.getBoundingClientRect();
+		
+		// Set options arguments for creating tooltip
+		options = { 
+			'title': title,
+			'placement': rect.top < 50 ? 'bottom' : 'top',
+			'trigger': 'click'
+		};
+
+		// create tooltip
+		$(span).tooltip(options);
+	});
 }
 
 ///
@@ -110,14 +131,16 @@ var onSubmitForm = function (e) {
 /**
  * Removes all data from form
  */
-var onClearForm = function () {
+var onClearForm = function (e) {
 	var form = Util.getParent({ "node": $(this), "parentTagName": "form" });
 	var inputs = form.find("input");
 	
 	// Clear all input from form
-	inputs.clear();
+	inputs.val("");
+	
+	// Prevent required icon message display
+	e.preventDefault();
 }
-
 
 ///
 //	HELPER FUNCTIONS
@@ -148,7 +171,7 @@ var checkParentAgainstParams = function (params) {
 	// if parent not null
 	if (parent != null && name != null) {
 		// check tag name
-		found = parent.att("tagName").toLowerCase() === name.toLowerCase();
+		found = parent.prop("tagName").toLowerCase() === name.toLowerCase();
 		
 		// check attributes 
 		if (found && attributes != null) {
