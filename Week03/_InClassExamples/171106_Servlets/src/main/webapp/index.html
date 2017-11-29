@@ -16,6 +16,8 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<script src="resources/javascript/javascript.js"></script>
+
 <link rel="stylesheet" type="text/css"
 	href="resources/css/MyCustomCSS.css">
 <meta charset="UTF-8">
@@ -219,6 +221,18 @@
 					<li>LAST NAME</li>
 					<li><b style='color:red'>*</b><input type="text" name="lname" placeholder="last name" required></li>
 					<li><input type="submit" value="LOGIN"></li>
+				</ul>
+			</form>
+		</div>
+		<div class="well darkfont">
+			<form id=loginForm>
+				<ul style="list-style-type: none">
+					<li>USERNAME</li>
+					<li><input type="text" name="username" placeholder="username"></li>
+					<li>PASSWORD</li>
+					<li><input type="password" name="password"
+						placeholder="password"></li>
+					<li><input type="button" value="LOGIN" onclick="validateLogin()"></li>
 				</ul>
 			</form>
 		</div>
