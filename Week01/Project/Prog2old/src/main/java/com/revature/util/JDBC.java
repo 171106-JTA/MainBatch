@@ -5,35 +5,49 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.*;
 
-import com.revature.model.Properties;
-import com.revature.model.dao.Dao;
+import com.revature.model.DBProperties;
+import com.revature.model.daoImpl.*;
 import com.revature.model.interfaces.product.Pool;
 
 public class JDBC {
 	// JDBC singleton instance
-	private JDBC jdbc;
-	
-	// precompile a pool of Database Connections
-	private Pool<Connection> pool = new ConnectionPool();
-	
-	private JDBC(){
+	private static JDBC jdbc;
+
+	// pre=compile a thread for reading SQL files
+	private Thread sqlReaderThread = new SQLReaderThread();
+
+	// pre-compile a pool of Database Connections
+	private Pool<Connection> pool;
+
+	private JDBC() {
+		sqlReaderThread.start();
+		pool = new ConnectionPool<Connection>(DBProperties.POOL_SIZE);
 	}
-	
-	public  synchronized JDBC getinstance() {
-		if(jdbc == null)
+
+	public static synchronized JDBC getinstance() {
+		if (jdbc == null)
 			jdbc = new JDBC();
 		return jdbc;
 	}
-	
-	private class ConnectionPool implements Pool<Connection> {
-		Set<Connection> locked = Collections.synchronizedSet(new HashSet<Connection>());
-		Set<Connection> open = Collections.synchronizedSet(new HashSet<Connection>());
 
+	public List<Object> queryDB(String query) {
+		return null;
+	}
+
+	private class ConnectionPool<T> implements Pool<T> {
+		Set<T> locked = Collections.synchronizedSet(new HashSet<T>());
+		Set<T> open = Collections.synchronizedSet(new HashSet<T>());
+
+		public ConnectionPool(int size) {
+
+		}
+
+		@SuppressWarnings("unchecked")
 		@Override
 		public void createPool(int size) {
-			for(int i = 0; i < size;) {
+			for (int i = 0; i < size;) {
 				try {
-					if(open.add(DriverManager.getConnection(Properties.DB_URL)))
+					if (open.add((T) DriverManager.getConnection(DBProperties.URL)))
 						i++;
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -41,11 +55,12 @@ public class JDBC {
 			}
 		}
 
+		@SuppressWarnings("unchecked")
 		@Override
-		public synchronized Connection borrowObject() {
+		public synchronized T borrowObject() {
 			if (open.isEmpty())
 				try {
-					open.add(DriverManager.getConnection(Properties.DB_URL));
+					open.add((T) DriverManager.getConnection(DBProperties.URL));
 				} catch (SQLException e) {
 					e.printStackTrace();
 					return null;
@@ -53,21 +68,22 @@ public class JDBC {
 			return open.iterator().next();
 		}
 
+		@SuppressWarnings("unchecked")
 		@Override
 		public synchronized boolean returnObject(Connection c) {
 			if (!locked.remove(c))
 				return false;
-			return open.add(c);
+			return open.add((T) c);
 
 		}
 
 		@Override
 		public boolean freePool() {
-			if(!locked.isEmpty())
+			if (!locked.isEmpty())
 				return false;
-			for (Connection c : open) {
+			for (T c : open) {
 				try {
-					c.close();
+					((Connection) c).close();
 					open.remove(c);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
@@ -75,6 +91,28 @@ public class JDBC {
 				}
 			}
 			return open.isEmpty();
+		}
+	}
+
+	public Collection<Object> read(String fetch) {
+
+		return null;
+	}
+
+	public boolean write(String fetch) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	private class SQLReaderThread extends Thread {
+
+		@Override
+		public void run() {
+			DaoImpl.readSQLFiles(UserDaoImpl.class);
+			DaoImpl.readSQLFiles(AdminDaoImpl.class);
+			DaoImpl.readSQLFiles(RequestDaoImpl.class);
+			DaoImpl.readSQLFiles(TransactionDaoImpl.class);
+			DaoImpl.readSQLFiles(LoanDaoImpl.class);
 		}
 	}
 }

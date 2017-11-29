@@ -228,16 +228,11 @@ public class Properties {
 			+ "\n Interest increase: " + INT_RATE_PER_MO + "Credit penalty: " + CRED_LIMIT_RATE ;
 
 	// sql directories
-	public static final String SQL_DIR = "./sql";
-	public static final String LOAN_DIR = "./loan";
-	public static final String USER_DIR = "./user";
-	public static final String TRANS_DIR = "./trans";
-	public static final String REQ_DIR = "./req";
-	
-	// sql files
-	public static final String INSERT = "./insert.sql";
-	public static final String UPDATE = "./update.sql";
-	public static final String DELETE = "./delete.sql";
+//	public static final String SQL_DIR = "./sql";
+//	public static final String LOAN_DIR = "./loan";
+//	public static final String USER_DIR = "./user";
+//	public static final String TRANS_DIR = "./trans";
+//	public static final String REQ_DIR = "./req";
 	
 	
 	// timeouts

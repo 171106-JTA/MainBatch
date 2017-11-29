@@ -16,6 +16,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.log4j.Level;
 
 import com.revature.model.account.*;
+import com.revature.model.interfaces.dao.*;
 import com.revature.model.request.*;
 import com.revature.throwable.*;
 import com.revature.view.Console;
@@ -68,14 +69,17 @@ public class Model implements Serializable, Observer {
 		requestSet = new Hashtable<Integer, Request>();
 		requests = new LinkedList<Request>();
 		admUsers = new HashSet<String>();
+		
+		Dao dao = new DaoImpl();
+		
 
-		queryUsers(Properties.PROT_ADD, Properties.ROOT_ADMIN_USER, RootUserAccount.class, Properties.ROOT_ADMIN_USER,
-				Properties.ROOT_ADMIN_PASS, Properties.ROOT_USER_BAL);
-		queryAdmins(Properties.PROT_ADD, Properties.ROOT_ADMIN_USER, AdminAccount.class, Properties.ROOT_ADMIN_USER,
-				Properties.ROOT_ADMIN_PASS, users.get(Properties.ROOT_ADMIN_USER));
-		synchronized (users) {
-			users.get(Properties.ROOT_ADMIN_USER).setStatus(Properties.ACCT_STAT_GOOD);
-		}
+//		queryUsers(Properties.PROT_ADD, Properties.ROOT_ADMIN_USER, RootUserAccount.class, Properties.ROOT_ADMIN_USER,
+//				Properties.ROOT_ADMIN_PASS, Properties.ROOT_USER_BAL);
+//		queryAdmins(Properties.PROT_ADD, Properties.ROOT_ADMIN_USER, AdminAccount.class, Properties.ROOT_ADMIN_USER,
+//				Properties.ROOT_ADMIN_PASS, users.get(Properties.ROOT_ADMIN_USER));
+//		synchronized (users) {
+//			users.get(Properties.ROOT_ADMIN_USER).setStatus(Properties.ACCT_STAT_GOOD);
+//		}
 	}
 
 	/**

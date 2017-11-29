@@ -1,4 +1,4 @@
-package com.revature.model.dao;
+package com.revature.model.interfaces.dao;
 
 import com.revature.model.account.AdminAccount;
 

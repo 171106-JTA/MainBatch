@@ -2,29 +2,31 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="After" key="selection"/>
-		<item value="true" key="casesensitive"/>
+		<item value="NetworkSetup" key="selection"/>
+		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="AfterEach"/>
-			<item value="BeforeEach"/>
-			<item value=".html"/>
-			<item value="port"/>
-			<item value="Connection"/>
-			<item value="q"/>
-			<item value=".file"/>
-			<item value="Appender"/>
-			<item value="encrypt"/>
-			<item value="serialize()"/>
-			<item value=".nextLine()"/>
-			<item value="scan"/>
-			<item value="int inStr"/>
-			<item value="in"/>
-			<item value="br"/>
+			<item value="NetworkSetup"/>
+			<item value="Request("/>
+			<item value="new Req"/>
+			<item value="RATE"/>
+			<item value="create"/>
+			<item value="create "/>
+			<item value="new UserAcc"/>
+			<item value="Session"/>
+			<item value="UsersSession"/>
+			<item value="UserSession"/>
+			<item value="query"/>
+			<item value="Comm"/>
+			<item value="DBProperties."/>
+			<item value="Commands"/>
+			<item value="Comands"/>
 		</list>
 		<list key="replacehistory">
+			<item value=""/>
+			<item value="Protocol"/>
 			<item value="After"/>
 			<item value="Before"/>
 			<item value=".rootHtmlAppender"/>
@@ -37,9 +39,7 @@
 			<item value="in"/>
 			<item value=".in"/>
 			<item value="inStr"/>
-			<item value=""/>
 			<item value="Model"/>
-			<item value="CodeTester"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">

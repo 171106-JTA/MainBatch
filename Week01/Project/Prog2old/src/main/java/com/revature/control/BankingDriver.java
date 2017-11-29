@@ -21,6 +21,7 @@ import com.revature.model.Properties;
 import com.revature.model.account.UserAccount;
 import com.revature.model.request.Request;
 import com.revature.throwable.*;
+import com.revature.util.JDBC;
 import com.revature.view.Console;
 
 /**
@@ -31,6 +32,7 @@ import com.revature.view.Console;
 public class BankingDriver {
 	private static String user = null;
 	private static Model m;
+	private Thread setup = new NetworkSetupThread();
 	private BufferedReader br;
 	private Socket client;
 	private ServerSocket server;
@@ -49,6 +51,9 @@ public class BankingDriver {
 	 */
 	public BankingDriver(InputStream in, PrintStream out, PrintStream err) {
 		int portID = Properties.PORT_ID;
+
+		// start db networking thread
+		setup.start();
 		
 		// set stdin, stdout, and stderr
 		System.setOut(out);
@@ -56,19 +61,19 @@ public class BankingDriver {
 		br = new BufferedReader(new InputStreamReader(in));
 
 		// hook shutdown to serialize
-		Runtime.getRuntime().addShutdownHook(new ExitThread());
+//		Runtime.getRuntime().addShutdownHook(new ExitThread());
 
 		// Create a new server connection
-		while (true) {
-			try {
-				client = new Socket();
-				client.connect(server.getLocalSocketAddress(), Properties.TIMEOUT);
-			} catch(SocketTimeoutException e) {
-				Console.print(System.err, e);
-			} catch (IOException e) {
-				Console.print(System.err, e);
-			}
-		}
+//		while (true) {
+//			try {
+//				client = new Socket();
+//				client.connect(server.getLocalSocketAddress(), Properties.TIMEOUT);
+//			} catch(SocketTimeoutException e) {
+//				Console.print(System.err, e);
+//			} catch (IOException e) {
+//				Console.print(System.err, e);
+//			}
+//		}
 
 		// try to deserialize object
 		// set model to new instance
@@ -744,5 +749,13 @@ public class BankingDriver {
 
 		// default to stdin for user input
 		new BankingDriver(System.in, System.out, System.err);
+	}
+	
+	// start JDBC/Connection pool on separate thread to avoid main thread hanging forever
+	private class NetworkSetupThread extends Thread {
+		
+		public void run() {
+			JDBC.getinstance();
+		}
 	}
 }

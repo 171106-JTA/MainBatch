@@ -1,15 +1,12 @@
-package com.revature.model.dao;
+package com.revature.model.interfaces.dao;
 
-public class UserDao<T> implements Dao<T> {
-	private static String insert;
-	private static String update;
-	private static String delete;
+import java.util.Collection;
+
+public interface Dao {
 	
-	@Override
-	public void createDao() {
-		
-		
-	}
-
+	public Collection<Object> fetch(boolean atomic, String query);
+	public boolean insert(boolean atomic, String query);
+	public boolean update(boolean atomic, String query);
+	public boolean delete(boolean atomic, String query);
 	
 }

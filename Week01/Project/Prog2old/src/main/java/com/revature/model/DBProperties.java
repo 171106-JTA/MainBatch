@@ -64,7 +64,16 @@ public class DBProperties {
 	public static final String Perm_TYPE_PK = "Permissions_TYPE_ID";
 	public static final String Trans_PK = "Transaction_ID";	
 	public static final String TransType_PK = "Transaction_Type_ID";
-	public static final String Loan_PK = "Loan_ID";	
+	public static final String Loan_PK = "Loan_ID";
+	
+	public static final int POOL_SIZE = 10;
+	public static final String SQL_DIR = "./sql/";
+	
+	// sql files
+	public static final String INSERT = "./insert.sql";
+	public static final String UPDATE = "./update.sql";
+	public static final String DELETE = "./delete.sql";
+	public static final String FETCH = "./fetch.sql"; 
 	
 	
 	
