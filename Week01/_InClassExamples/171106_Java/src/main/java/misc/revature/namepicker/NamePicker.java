@@ -10,7 +10,7 @@ public class NamePicker {
 
 	static BufferedReader br;
 	static ArrayList <String>nameList;
-	static final String inputFile = "171106_Names2";
+	static final String inputFile = "171106_Names";
 	
 	public static void main(String[] args) throws IOException {		
 		try {

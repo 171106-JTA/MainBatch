@@ -9,11 +9,20 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <context-param>
+    <param-name>ContextVariable</param-name>
+    <param-value>Ryan Lessley</param-value>
+  </context-param>
   <servlet>
     <description></description>
     <display-name>HelloWorld2</display-name>
     <servlet-name>HelloWorld2</servlet-name>
     <servlet-class>com.revature.servlets.HelloWorld2</servlet-class>
+    <init-param>
+      <param-name>InitialParameter</param-name>
+      <param-value>Bobbert</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>HelloWorld2</servlet-name>
@@ -58,5 +67,74 @@
   <servlet-mapping>
     <servlet-name>FetchSession</servlet-name>
     <url-pattern>/FetchSession</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CreateCookie</display-name>
+    <servlet-name>CreateCookie</servlet-name>
+    <servlet-class>com.revature.servlets.CreateCookie</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateCookie</servlet-name>
+    <url-pattern>/CreateCookie</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FetchCookie</display-name>
+    <servlet-name>FetchCookie</servlet-name>
+    <servlet-class>com.revature.servlets.FetchCookie</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FetchCookie</servlet-name>
+    <url-pattern>/FetchCookie</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteCookie</display-name>
+    <servlet-name>DeleteCookie</servlet-name>
+    <servlet-class>com.revature.servlets.DeleteCookie</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteCookie</servlet-name>
+    <url-pattern>/DeleteCookie</url-pattern>
+  </servlet-mapping>
+  <filter>
+    <display-name>AuthorizationFilter</display-name>
+    <filter-name>AuthorizationFilter</filter-name>
+    <filter-class>com.revature.filters.AuthorizationFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AuthorizationFilter</filter-name>
+    <url-pattern>/AdminPage.html</url-pattern>
+  </filter-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FrontController</display-name>
+    <servlet-name>FrontController</servlet-name>
+    <servlet-class>com.revature.servlets.FrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FrontController</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>TrainerRegistration</display-name>
+    <servlet-name>TrainerRegistration</servlet-name>
+    <servlet-class>com.revature.servlets.TrainerRegistration</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TrainerRegistration</servlet-name>
+    <url-pattern>/TrainerRegistration</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>TrainerLogin</display-name>
+    <servlet-name>TrainerLogin</servlet-name>
+    <servlet-class>com.revature.servlets.TrainerLogin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TrainerLogin</servlet-name>
+    <url-pattern>/TrainerLogin</url-pattern>
   </servlet-mapping>
 </web-app>

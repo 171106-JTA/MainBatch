@@ -25,6 +25,8 @@ public class FetchSession extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		
+		
+		
 		if(session.isNew()){
 			out.println("Please create a session first!");
 			session.invalidate(); //Clears the session entirely
