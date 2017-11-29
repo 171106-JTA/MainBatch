@@ -1,6 +1,8 @@
 // constants used throughout this app
 var EMPTY_FIELD = "field is empty",
+	NOT_AN_EMAIL= "not an email address",
 	USER_NOT_FOUND = "User is not in our system";
+var MAX_LOGIN_ATTEMPTS = 5;
 
 /* Checks if field is empty
  * Parameters: 
@@ -23,6 +25,22 @@ function isEmpty(field)
 	return ($(field).val().trim() === '');	
 }
 
+/* Same as above, but checks for valid email
+ */
+function isEmail(field)
+{
+	var email;
+	if ((field === field.toString()) && ($(field).length == 0))
+	{
+		email = field;
+	}
+	else
+	{
+		email = $(field).val();
+	}
+	return (email.indexOf('@') !== -1) && (email.indexOf('.') !== -1);
+}
+
 /* Checks if username is valid
  * Returns:
  *	• true if username is in the data store or false if it either isn't or is empty
@@ -32,7 +50,7 @@ function validUsername()
 	// for now, usernames are valid iff they aren't empty
 	var usernameNotEmpty = !isEmpty($('#username'));
 	
-	return usernameNotEmpty;
+	return usernameNotEmpty && isEmail($('#username'));
 }
 
 /* Checks if password is valid
@@ -74,17 +92,18 @@ function login() {
 	{
 		$('#password').removeClass('ng-invalid');
 	}
+	// TODO: AJAX logic to send to the server
+	// TODO: on error, re-render errors or if allotted login attempts exceeded, redirect to locked out screen
+	// TODO: on success, redirect to dashboard
 }
 
 
 $(function() { 
-	// a click of the 'New User?' button should summon the 'New User' page
+	// a click of the new user button should take the user to the new user screen
 	$('#newUserButton').click(function(event) { 
 		window.location.href = 'TRMS_NewUser.html';
-		console.log(window.location.href);
 		event.preventDefault();
 	});
-	
 	// a click of the login button should log the user in
 	$('input[type="submit"]').click(function(event) { 
 		login();

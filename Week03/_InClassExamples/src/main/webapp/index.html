@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>JavaScript</title>
+		<script src="resources/js/main.js"></script>
+	</head>
+	<body>
+		<h1>JavaScript stuff</h1>
+		<p id="para1">
+			
+		</p>
+		<hr>
+		<div id="d3" style="padding:20px;background-color:blue;">
+			<div id="d2" style="padding:20px;background-color:green;">
+				<div id="d1" style="padding:20px;background-color:red;">
+					TEST
+				</div>
+			</div>
+		</div>
+		<hr>
+		<input type="text" id="inputField">
+		<input type="button" value="submit" onclick="submitName()">
+		<table border="3px" id="myTable">
+			<tr>
+				<th>ID</th><th>NAME</th><th>REMOVE</th>
+			</tr>
+		</table>
+		<hr>
+		<div id="inClassFizzBuzz">
+			<span>Enter two numbers: </span>
+			<br>
+			<label for="firstNumber">First number:</label>
+			<input id="firstNumber" type="number">
+			<label for="secondNumber">Second number:</label>
+			<input id="secondNumber" type="number">
+			<input type="submit" onclick="generateFizzBuzz()"> 
+		</div>
+		<ul id="fizzBuzzList">
+		
+		</ul>
+		<hr>
+		<p onclick="triggerError()"> TRIGGER ERROR </p>
+		<hr>
+		<h1>REGISTER A USER</h1>
+		<form method="post" action="RegisterUser" name="registration" onsubmit="return validateRegistration()">
+			<ul style="list-style-type: none">
+				<li>Username</li>
+				<li><input type="text" name="username" required></li>
+				<li>Password</li>
+				<li><input type="password" name="password" required></li>
+				<li>Confirm password</li>
+				<li><input type="password" name="password2" required></li>
+				<li>Email</li>
+				<li><input type="email" name="email" required></li>
+				<li>First name</li>
+				<li><input type="text" name="fname" required></li>
+				<li>Middle name</li>
+				<li><input type="text" name="mname" required></li>
+				<li>Last name</li>
+				<li><input type="text" name="lname" required></li>
+				<li><input type="reset" value="reset" required></li>
+				<li><input type="submit" value="submit" required></li>
+			</ul>
+		</form>
+		<hr>
+		<input type="text" id="input" placeholder="Input number">
+		<input type="button" onclick="sendAJAX()" value="submit">
+		<div id="results">
+			<p id="AJAXError"></p>
+			
+		</div>
+	</body>
+</html>

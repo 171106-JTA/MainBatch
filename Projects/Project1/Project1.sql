@@ -1,5 +1,6 @@
 DROP TABLE p1_employees CASCADE CONSTRAINTS;
 DROP TABLE p1_departments CASCADE CONSTRAINTS;
+DROP TABLE p1_department_roles CASCADE CONSTRAINTS;
 DROP TABLE p1_reimbursable_expense_types CASCADE CONSTRAINTS;
 DROP TABLE p1_reimbursment_requests CASCADE CONSTRAINTS;
 DROP TABLE p1_reimbursable_events CASCADE CONSTRAINTS;
@@ -11,6 +12,14 @@ DROP TABLE p1_grade_scales CASCADE CONSTRAINTS;
 CREATE TABLE p1_departments (
     department_id NUMBER PRIMARY KEY,
     department_name VARCHAR2(50)
+);
+
+CREATE TABLE p1_department_roles (
+    department_role_id NUMBER PRIMARY KEY,
+    department_id NUMBER,
+    department_role_name VARCHAR2(40),
+    
+    CONSTRAINT FK_dept_id FOREIGN KEY (department_id) REFERENCES p1_departments(department_id)
 );
 
 CREATE TABLE p1_states ( 
@@ -32,15 +41,15 @@ CREATE TABLE p1_employees (
     employee_id NUMBER PRIMARY KEY,
     employee_first_name VARCHAR2(35) NOT NULL,
     employee_last_name VARCHAR2(35) NOT NULL,
-    department_id NUMBER NOT NULL,
+    department_role_id NUMBER NOT NULL,
     manager_id NUMBER,
     employee_salary NUMBER(8,2),
-    employee_home_location_id NUMBER NOT NULL,
+    employee_home_location_id NUMBER,
     employee_email VARCHAR2(254), 
 	employee_pass VARCHAR2(64), 
     employee_is_locked_out NUMBER(1,0) DEFAULT 0 NOT NULL,
     
-    CONSTRAINT FK_department FOREIGN KEY (department_id) REFERENCES p1_departments(department_id),
+    CONSTRAINT FK_department_role FOREIGN KEY (department_role_id) REFERENCES p1_department_roles(department_role_id),
     CONSTRAINT FK_manager FOREIGN KEY (manager_id) REFERENCES p1_employees(employee_id),
     CONSTRAINT FK_home_location FOREIGN KEY (employee_home_location_id) REFERENCES p1_locations(location_id)
 );
@@ -92,6 +101,7 @@ CREATE TABLE p1_reimbursement_requests (
 --create our sequences here
 DROP SEQUENCE p1_employees_seq;
 DROP SEQUENCE p1_departments_seq;
+DROP SEQUENCE p1_department_roles_seq;
 DROP SEQUENCE p1_ret_seq;
 DROP SEQUENCE p1_rr_seq;
 DROP SEQUENCE p1_re_seq;
@@ -106,6 +116,9 @@ CREATE SEQUENCE p1_employees_seq
 CREATE SEQUENCE p1_departments_seq
 	START WITH 1
 	INCREMENT BY 1;
+CREATE SEQUENCE p1_department_roles_seq
+    START WITH 1
+    INCREMENT BY 1;
 CREATE SEQUENCE p1_ret_seq
 	START WITH 1
 	INCREMENT BY 1;
@@ -141,6 +154,15 @@ CREATE OR REPLACE TRIGGER p1_departments_trigger
 	BEGIN
 		IF :new.department_id IS NULL THEN
 			SELECT p1_departments_seq.nextval INTO :new.department_id FROM DUAL;
+		END IF;
+	END;
+/
+CREATE OR REPLACE TRIGGER p1_department_roles_trigger
+	BEFORE INSERT ON p1_department_roles
+	FOR EACH ROW
+	BEGIN
+		IF :new.department_role_id IS NULL THEN
+			SELECT p1_department_roles_seq.nextval INTO :new.department_role_id FROM DUAL;
 		END IF;
 	END;
 /
@@ -209,6 +231,7 @@ CREATE OR REPLACE VIEW p1_employees_view AS
 	concat(e.Employee_First_Name, ' ' || e.Employee_Last_Name) AS employee_name,
     e.Employee_email,
 	d.department_name,
+    dr.department_role_name,
 	concat(m.Employee_First_Name, ' ' || m.Employee_Last_Name) AS manager_name,
 	e.Employee_Salary,
 	l.location_Address,
@@ -217,8 +240,9 @@ CREATE OR REPLACE VIEW p1_employees_view AS
 	l.Location_State_Abbr,
 	l.Location_Zip
 		FROM p1_employees e
-			INNER JOIN p1_departments d USING (department_id)
-			INNER JOIN p1_locations l ON e.Employee_Home_Location_ID = l.Location_ID
+            INNER JOIN p1_department_roles dr USING (department_role_id)
+			INNER JOIN p1_departments d ON (d.department_id = dr.department_id)
+			LEFT JOIN p1_locations l ON e.Employee_Home_Location_ID = l.Location_ID
             JOIN p1_employees m ON e.Manager_ID = m.Employee_ID
 ;
 
@@ -324,8 +348,87 @@ INSERT INTO p1_departments(department_name) VALUES ('Human Resources');
 INSERT INTO p1_departments(department_name) VALUES ('Sales');
 INSERT INTO p1_departments(department_name) VALUES ('Information Technology');
 /
-
+INSERT INTO p1_department_roles(department_id, department_role_name) VALUES (5, 'Customer Service Representative');
+INSERT INTO p1_department_roles(department_id, department_role_name) VALUES (5, 'Customer Service Lead');
+INSERT INTO p1_department_roles(department_id, department_role_name) VALUES (5, 'Cashier');
+INSERT INTO p1_department_roles(department_id, department_role_name) VALUES (6, 'Benefits Coordinator');
+INSERT INTO p1_department_roles(department_id, department_role_name) VALUES (6, 'HR Specialist');
+INSERT INTO p1_department_roles(department_id, department_role_name) VALUES (7, 'Sales Representative');
+INSERT INTO p1_department_roles(department_id, department_role_name) VALUES (7, 'Sales Lead'); 
+INSERT INTO p1_department_roles(department_id, department_role_name) VALUES (8, 'IT Support Specialist'); 
+INSERT INTO p1_department_roles(department_id, department_role_name) VALUES (8, 'Web Developer');
+INSERT INTO p1_department_roles(department_id, department_role_name) VALUES (8, 'Software Engineer');
+INSERT INTO p1_department_roles(department_id, department_role_name) VALUES (8, 'Web Administrator');
+INSERT INTO p1_department_roles(department_id, department_role_name) VALUES (8, 'Senior Software Engineer');
+/
 --create our functions and procedures here
+--the procedure to be used by the user that initializes the accounts.
+CREATE OR REPLACE PROCEDURE p1_init_employee(id IN p1_employees.Employee_ID%TYPE DEFAULT p1_employees_seq.nextval,
+	first_name IN p1_employees.Employee_First_Name%TYPE,
+	last_name IN p1_employees.Employee_Last_Name%TYPE,
+	email IN p1_employees.Employee_Email%TYPE,
+	department IN p1_departments.Department_Name%TYPE,
+    department_role IN p1_department_roles.Department_Role_Name%TYPE
+)
+IS
+BEGIN
+--    prob should do some exception handling here
+	INSERT INTO p1_employees(employee_id, employee_first_name, employee_last_name, employee_email, department_role_id, employee_role)
+		VALUES (
+			id, 
+			first_name,
+			last_name, 
+			email,
+			(SELECT dr.department_role_id FROM p1_department_roles dr WHERE dr.department_id = (SELECT d.department_id FROM p1_departments d WHERE d.department_name = department) 
+                AND dr.department_role_name = department_role)
+        );
+	commit;
+END;
+/
+--for employees that access their accounts to create login credentials
+--can't prefix this with "p1_" because that would violate the 30-character limit on procedure names :'(
+CREATE OR REPLACE PROCEDURE create_login_credentials_for(id IN p1_employees.Employee_ID%TYPE,
+    user IN p1_employees.Employee_Email%TYPE,   -- usernames are simply the email addresses of the users
+    pass IN p1_employees.Employee_Pass%TYPE
+)
+IS
+BEGIN
+    UPDATE p1_employees
+        SET employee_email = user,
+            employee_pass  = sha256.encrypt(pass)
+        WHERE employee_id  = id;
+END;
+/
 
-
+--for giving a location to an employee
+CREATE OR REPLACE PROCEDURE p1_set_location_for_employee(id IN p1_employees.Employee_ID%TYPE,
+    address IN p1_locations.location_address%TYPE,
+    city IN p1_locations.location_city%TYPE,
+    state IN p1_locations.location_state_abbr%TYPE,
+    zipcode IN p1_locations.location_zip%TYPE)
+IS 
+    locationID NUMBER;
+BEGIN
+    -- insert into the locations table and get its id
+    INSERT INTO p1_locations(location_address, location_city, location_state_abbr, location_zip)
+        VALUES (address, city, state, zipcode)
+        RETURNING location_id INTO locationID;
+    -- set the location id of that employee to the location id of the record we ust inserted
+    UPDATE p1_employees
+        SET Employee_Home_Location_ID = locationID
+        WHERE Employee_ID = id;
+END;
+/
+CREATE OR REPLACE FUNCTION user_is_manager(id IN p1_Employees.Employee_ID%TYPE)
+RETURN NUMBER
+IS 
+    manageeCount NUMBER;
+    isManager NUMBER(1,0) := 0;
+BEGIN
+    SELECT decode(count(employee_id), 0, 0, 1) INTO isManager FROM p1_Employees WHERE manager_id = id;
+--    isManager := (manageeCount > 0);
+    
+    return isManager;   
+END;
+/
 COMMIT;

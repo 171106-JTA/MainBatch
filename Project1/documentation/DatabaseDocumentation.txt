@@ -1,0 +1,12 @@
+stored procedures
+• p1_init_employee(id, first_name, last_name, email, department, role)
+• create_login_credentials_for(id, user, pass)
+• p1_set_location_for_employee(id, address, city, state, zipcode)
+
+functions
+• user_is_manager(id)
+
+views
+• p1_employees_view
+• p1_re_view
+• p1_rr_view

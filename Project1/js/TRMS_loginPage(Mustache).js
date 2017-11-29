@@ -1,6 +1,7 @@
 // constants used throughout this app
 var EMPTY_FIELD = "field is empty",
 	USER_NOT_FOUND = "User is not in our system";
+var MAX_LOGIN_ATTEMPTS = 5;
 
 /* Checks if field is empty
  * Parameters: 
@@ -138,7 +139,6 @@ function login() {
 		}
 	}*/
 	// callback hell!
-	
 	validateUsername({}, 
 		function (err) 
 		{
@@ -149,6 +149,9 @@ function login() {
 					// render the tool tips here
 					renderErrors(e);
 				}
+				// TODO: AJAX logic to send to the server
+				// TODO: on error, re-render errors or if allotted login attempts exceeded, redirect to locked out screen
+				// TODO: on success, redirect to dashboard
 			})
 		}
 	);
@@ -184,13 +187,11 @@ function renderErrors(errorObj)
 }
 
 $(function() { 
-	// a click of the 'New User?' button should summon the 'New User' page
+	// a click of the new user button should take the user to the new user screen
 	$('#newUserButton').click(function(event) { 
 		window.location.href = 'TRMS_NewUser.html';
-		console.log(window.location.href);
 		event.preventDefault();
 	});
-	
 	// a click of the login button should log the user in
 	$('input[type="submit"]').click(function(event) { 
 		login();

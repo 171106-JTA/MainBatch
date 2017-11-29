@@ -2,51 +2,53 @@
 <html>
 	<head>
 		<meta charset="utf8"><!-- by default, web pages are not UTF-8 -->
-		<title>Employee Registration Form</title>
+		<title>New User</title>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.0/mustache.min.js"></script>
 		<link rel="stylesheet" href="css/TRMS_base.css">
 		<link rel="stylesheet" href="css/TRMS_NewUser.css">
 	</head>
 	<body>
-		<h1 class="textCenter">Employee Registration Form</h1>
+		<h1 class="textCenter">New User</h1>
 		<div class="main pageCenter">
 			<form id="newUserRegistration">
 				<span class="row">
 					<label for="firstName" class="half">First name</label>
-					<input type="text" id="firstName" class="half" />
+					<input type="text" id="firstName" class="half" required />
 					<span class="hidden tooltip"></span>					
 				</span>
 				<span class="row">
 					<label for="lastName" class="half">Last name</label>
-					<input type="text" id="lastName" class="half" />
+					<input type="text" id="lastName" class="half" required />
 					<span class="hidden tooltip"></span>					
 				</span>
 				<span class="row">
-					<label for="empIDNumber" class="half">Employee ID number</label>
-					<input type="text" class="number half" />
-					<span class="hidden tooltip"></span>		
-				</span>
-				<span class="row">
 					<label for="dept" class="half">Department</label>
-					<select id="dept" class="half">
+					<input list="dept" class="half" type="text" />
+					<datalist id="dept">
 					<!-- To be populated with data from a Mustache template-->
 					{{#departments}}
-						<option id="{{departmentHTMLID}}">{{departmentName}}</option>
-					{{/departments}}
-					</select>
+						<option value="{{departmentName}}"></option>
+					{{/departments}}					
+					</datalist>
 					<span class="hidden tooltip"></span>		
 				</span>
+				<!-- a field for department roles is to be inserted here once departmentName has been selected -->
 				<span class="row">
 					<label for="manager" class="half">Manager name</label>
-					<input type="text" id="manager" class="half" />
+					<input type="text" list="manager" class="half" />
+					<datalist id="manager">
+					{{#managers}}
+						<option value="{{manager}}">
+					{{/managers}}
+					</datalist>
 					<span class="hidden tooltip"></span>	
 				</span>
-				<span class="row">
-					<label for="username" class="half">Username</label>
-					<input type="text" id="username" class="half" />
-					<span class="hidden tooltip"></span>	
+				<span class="row" title="The e-mail address of the employee.">
+					<label for="email" class="half">Username</label>
+					<input type="email" class="half" required />
+					<span class="hidden tooltip"></span>
 				</span>
-				<span class="row">
+				<span class="row" title="This will be left to the new user if not specified">
 					<label for="password" class="half">Password</label>
 					<input type="text" id="password" class="half" />
 					<span class="hidden tooltip"></span>	
@@ -54,11 +56,6 @@
 				<span class="row">
 					<label for="confirmPassword" class="half">Confirm password</label>
 					<input type="text" id="confirmPassword" class="half" />
-					<span class="hidden tooltip"></span>
-				</span>
-				<span class="row">
-					<label for="email" class="half" title="A confirmation email will be sent to this e-mail address.">E-mail address</label>
-					<input type="email" class="half" title="A confirmation email will be sent to this e-mail address." />
 					<span class="hidden tooltip"></span>
 				</span>
 				<span class="right row buttonRow">

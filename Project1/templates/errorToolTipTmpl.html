@@ -1,8 +1,10 @@
 
-<span class="{{^errors}}hidden {{/errors}}tooltip">
-	{{#errors}}
-	<ul>
-		<li>{{.}}</li>
-	</ul>
-	{{/errors}}
+<span class="{{^.}}hidden {{/.}}tooltip">
+	{{#.}}
+		{{#errors}}
+		<ul>
+			<li>{{.}}</li>
+		</ul>
+		{{/errors}}
+	{{/.}}
 </span>					

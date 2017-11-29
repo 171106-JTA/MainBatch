@@ -51,6 +51,15 @@ input[type="submit"]:hover
 	background-color: #fb0;
 }
 
+input[type="reset"]:hover
+{
+	background-color: darkgrey;
+}
+
+input[type="reset"] + input[type="submit"] {
+    margin-left: -5px;
+}
+
 .hidden
 {
 	display: none;
