@@ -16,6 +16,8 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+<script src="resources/javascript/javascript.js"></script>
+
 <link rel="stylesheet" type="text/css"
 	href="resources/css/MyCustomCSS.css">
 <meta charset="UTF-8">
@@ -199,6 +201,38 @@
 					<li><input type="password" name="password"
 						placeholder="password"></li>
 					<li><input type="submit" value="LOGIN"></li>
+				</ul>
+			</form>
+		</div>
+		<div class="well darkfont">
+			<form action="TrainerRegistration">
+				<ul style="list-style-type: none">
+					<li><b style='color:red'>*</b>USERNAME</li>
+					<li><input type="text" name="username" placeholder="username" required></li>
+					<li><b style='color:red'>*</b>PASSWORD</li>
+					<li><input type="password" name="password"
+						placeholder="password" required></li>
+					<li><b style='color:red'>*</b>EMAIL</li>
+					<li><input type="email" name="email" placeholder="email" required></li>
+					<li><b style='color:red'>*</b>FIRST NAME</li>
+					<li><input type="text" name="fname" placeholder="first name" required></li>
+					<li>MIDDLE NAME</li>
+					<li><input type="text" name="mname" placeholder="middle name"></li>
+					<li>LAST NAME</li>
+					<li><b style='color:red'>*</b><input type="text" name="lname" placeholder="last name" required></li>
+					<li><input type="submit" value="LOGIN"></li>
+				</ul>
+			</form>
+		</div>
+		<div class="well darkfont">
+			<form id=loginForm>
+				<ul style="list-style-type: none">
+					<li>USERNAME</li>
+					<li><input type="text" name="username" placeholder="username"></li>
+					<li>PASSWORD</li>
+					<li><input type="password" name="password"
+						placeholder="password"></li>
+					<li><input type="button" value="LOGIN" onclick="validateLogin()"></li>
 				</ul>
 			</form>
 		</div>
