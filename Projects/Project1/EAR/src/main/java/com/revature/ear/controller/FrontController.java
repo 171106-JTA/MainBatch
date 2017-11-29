@@ -153,7 +153,9 @@ public class FrontController extends HttpServlet {
 		return 200;
 	}
 	
-	
+	private int createAccount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		return 0;
+	}
 	
 	
 	

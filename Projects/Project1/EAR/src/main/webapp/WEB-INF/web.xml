@@ -19,7 +19,10 @@
     	<param-name>LoginHome</param-name>
     	<param-value>loginHome</param-value>
     </init-param>
-    
+    <init-param>
+    	<param-name>CreateAccount</param-name>
+    	<param-value>createAccount</param-value>
+    </init-param>
     
     <load-on-startup>1</load-on-startup>
   </servlet>

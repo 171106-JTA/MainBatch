@@ -32,9 +32,10 @@ var initUtil = function () {
 			 * @property {StringTuple[]} params.attributes - attributes associated with parent (optional)
 			 * @property {String[]} params.properties - properties associated with parent (optional)
 			 * @property {String} params.parentTagName - parent tag name  (required)
-			 * @returns JQuery instance of parent node if found else null  
+			 * @returns {JQuery} instance of parent node if found else null  
 			 */
 			getParent: function (params) {
+				var helper = this.helper;
 				var node = params.node;
 				var parentTagName = params.parentTagName;
 				var found = false;
@@ -49,12 +50,61 @@ var initUtil = function () {
 					args.parent = node.parent();
 					
 					// Go though each parent node to find it
-					while (args.parent != null && !(found = checkParentAgainstParams(args)))
+					while (args.parent != null && !(found = helper.checkParentAgainstParams(args)))
 						args.parent = args.parent.parent();
 				}
 		
 				// return parent node if found 
 				return found ? args.parent : null;
+			},
+			
+			
+			helper: {
+				/**
+				 * @description Determines if parent node is specified in params
+				 * @param {Object} params - Contains parent node specifications 
+				 * @property {JQuery} params.parent - parent node in question (required)
+				 * @property {StringTuple[]} params.attributes - attributes associated with parent (optional)
+				 * @property {String[]} params.properties - properties associated with parent (optional)
+				 * @property {String} params.parentTagName - parent tag name  (required)
+				 * @returns {boolean} true is found else false.
+				 */
+				checkParentAgainstParams: function (params) {
+					var parent = params.parent;
+					var name = params.parentTagName;
+					var attributes = params.attributes;
+					var properties = params.properties;
+					var found = false;
+					
+					// if parent not null
+					if (parent != null && name != null) {
+						// check tag name
+						found = parent.prop("tagName").toLowerCase() === name.toLowerCase();
+						
+						// check attributes 
+						if (found && attributes != null) {
+							// Go through each attribute and locate value
+							$.each(attributes, function (i, attr){
+								if (parent.attr(attr.key) == null)
+									return found = false;
+								if (parent.attr(attr.key).search(attr.value) < 0)
+									return found = false;
+							});
+						}
+						
+						// check properties
+						if (found && properties != null){
+							// Go through each property and determine if has
+							$.each(properties, function (i, prop) {
+								// if not found then failed 
+								if (parent.prop(prop) == null)
+									return found = false;
+							});
+						}
+					}
+					
+					return found;
+				}
 			}
 	};
 }
@@ -159,49 +209,6 @@ var addRequiredIndicator = function (node) {
 	if (label != null && label.search(indicator) < 0)
 		label.text(indicator + label.text());
 }
-
-
-var checkParentAgainstParams = function (params) {
-	var parent = params.parent;
-	var name = params.parentTagName;
-	var attributes = params.attributes;
-	var properties = params.properties;
-	var found = false;
-	
-	// if parent not null
-	if (parent != null && name != null) {
-		// check tag name
-		found = parent.prop("tagName").toLowerCase() === name.toLowerCase();
-		
-		// check attributes 
-		if (found && attributes != null) {
-			// Go through each attribute and locate value
-			$.each(attributes, function (i, attr){
-				if (parent.attr(attr.key) == null)
-					return found = false;
-				if (parent.attr(attr.key).search(attr.value) < 0)
-					return found = false;
-			});
-		}
-		
-		// check properties
-		if (found && properties != null){
-			// Go through each property and determine if has
-			$.each(properties, function (i, prop) {
-				// if not found then failed 
-				if (parent.prop(prop) == null)
-					return found = false;
-			});
-		}
-	}
-	
-	return found;
-}
-
-
-
-
-
 
 
 ///
