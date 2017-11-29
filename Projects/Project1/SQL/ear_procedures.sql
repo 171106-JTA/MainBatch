@@ -133,9 +133,9 @@ BEGIN
     
     -- Generate User Information data
     INSERT INTO EAR_USER_INFO (USERID, STATECITYID, FIRSTNAME, LASTNAME,
-                               PHONENUMBER, ADDRESS, EMAIL)
+                               PHONENUMBER, ADDRESS, EMAIL, CREATED)
                 VALUES(user_id, user_state_city_id, firstname,  lastname,
-                       phonenumber, address, email);
+                       phonenumber, address, email, TO_DATE(get_date(0), 'YYYY-MM-DD HH24:MI:SS'));
                        
     -- Save changes 
     COMMIT;

@@ -3,18 +3,18 @@ package com.revature.businessobject;
 public class BenefitCoordinator implements BusinessObject {
 	private Integer id;
 	private Integer bencoId;
-	private Integer supervisorId;
+	private Integer departmentId;
 	
 	public BenefitCoordinator() {
 		// do nothing
 	}
 	
 	public BenefitCoordinator(Integer id, Integer bencoId,
-			Integer supervisorId) {
+			Integer departmentId) {
 		super();
 		this.id = id;
 		this.bencoId = bencoId;
-		this.supervisorId = supervisorId;
+		this.departmentId = departmentId;
 	}
 
 	public Integer getId() {
@@ -33,11 +33,11 @@ public class BenefitCoordinator implements BusinessObject {
 		this.bencoId = bencoId;
 	}
 
-	public Integer getSupervisorId() {
-		return supervisorId;
+	public Integer getDepartmentId() {
+		return departmentId;
 	}
 
-	public void setSupervisorId(Integer supervisorId) {
-		this.supervisorId = supervisorId;
+	public void setDepartmentId(Integer departmentId) {
+		this.departmentId = departmentId;
 	}
 }

@@ -154,6 +154,15 @@ public class FrontController extends HttpServlet {
 	}
 	
 	private int createAccount(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String employeeId = request.getParameter("employeeid");
+		String firstname = request.getParameter("firstname");
+		String lastname = request.getParameter("lastname");
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		
+		
+		
+		
 		return 0;
 	}
 	

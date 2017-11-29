@@ -2,22 +2,21 @@ package com.revature.businessobject;
 
 public class Supervisor implements BusinessObject {
 	private Integer id;
+	private Integer bencoId;
 	private Integer supervisorId;
-	private Integer headSupervisorId;
-	private Integer departmentId;
 	
 	public Supervisor() {
 		// do nothing
 	}
 
-	public Supervisor(Integer id, Integer supervisorId,
-			Integer headSupervisorId, Integer departmentId) {
+
+	public Supervisor(Integer id, Integer bencoId, Integer supervisorId) {
 		super();
 		this.id = id;
+		this.bencoId = bencoId;
 		this.supervisorId = supervisorId;
-		this.headSupervisorId = headSupervisorId;
-		this.departmentId = departmentId;
 	}
+
 
 	public Integer getId() {
 		return id;
@@ -35,19 +34,16 @@ public class Supervisor implements BusinessObject {
 		this.supervisorId = supervisorId;
 	}
 
-	public Integer getHeadSupervisorId() {
-		return headSupervisorId;
+
+	public Integer getBencoId() {
+		return bencoId;
 	}
 
-	public void setHeadSupervisorId(Integer headSupervisorId) {
-		this.headSupervisorId = headSupervisorId;
-	}
 
-	public Integer getDepartmentId() {
-		return departmentId;
+	public void setBencoId(Integer bencoId) {
+		this.bencoId = bencoId;
 	}
-
-	public void setDepartmentId(Integer departmentId) {
-		this.departmentId = departmentId;
-	}
+	
+	
+	
 }
