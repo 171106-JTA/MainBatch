@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.revature.businessobject.User;
-import com.revature.service.util.Login;
+import com.revature.service.Login;
 
 /**
  * Servlet implementation class FrontController

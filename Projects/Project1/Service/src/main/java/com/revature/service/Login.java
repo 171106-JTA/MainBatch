@@ -1,4 +1,4 @@
-package com.revature.service.util;
+package com.revature.service;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class Login {
 	 * @param password - password associated with account
 	 * @return user account
 	 */
-	public User login(String username, String password) {
+	public static User login(String username, String password) {
 		List<BusinessObject> records;
 		User account = null;
 		
@@ -36,7 +36,7 @@ public class Login {
 	 * @param user - valid user instance 
 	 * @return Information pertaining to user 
 	 */
-	public UserInfo getUserInfo(User user) {
+	public static UserInfo getUserInfo(User user) {
 		List<BusinessObject> records;
 		UserInfo info = null;
 		
