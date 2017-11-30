@@ -9,21 +9,19 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  
   <servlet>
     <description></description>
     <display-name>FrontController</display-name>
     <servlet-name>FrontController</servlet-name>
     <servlet-class>com.revature.ear.controller.FrontController</servlet-class>
     <init-param>
-    	<param-name>LoginHome</param-name>
-    	<param-value>loginHome</param-value>
+      <param-name>LoginHome</param-name>
+      <param-value>loginHome</param-value>
     </init-param>
     <init-param>
-    	<param-name>CreateAccount</param-name>
-    	<param-value>createAccount</param-value>
+      <param-name>CreateAccount</param-name>
+      <param-value>createAccount</param-value>
     </init-param>
-    
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>

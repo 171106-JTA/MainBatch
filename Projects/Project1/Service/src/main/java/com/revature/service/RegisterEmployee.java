@@ -51,20 +51,46 @@ public class RegisterEmployee {
 	 * @return true if account made else false
 	 */
 	public static boolean registerAccount(CompanyEmployee employee, String username, String password, String email) {
-		List<BusinessObject> records = null;
 		List<CodeList> codes = GetCodeList.getCodeList(new CodeList(null, "USER-ROLE", "EMPLOYEE", null));
+		List<BusinessObject> records = null;
 		boolean result = false;
 		CodeList code;
-		UserInfo info;
 		User user;
 		
-		if (employee != null && username != null && password != null & email != null && codes.size() == 1) {
+		// If valid user data supplied 
+		if (validateAcctRegArgs(employee, username, password, email) && codes.size() == 1) {
 			code = codes.get(0);
-			DAOBusinessObject.insert(new User(null, code.getId(), username, password));
+			
+			// Create User 
+			DAOBusinessObject.insert(user = new User(null, code.getId(), username, password));
+			
+			// Get newly created account
+			if ((records = DAOBusinessObject.load(user)).size() == 1) {
+				user = (User)records.get(0);
+				
+				// Create user Information, if failed then delete user record
+				if (!(result = DAOBusinessObject.insert(new UserInfo(user.getId(), employee)) == 1))
+					DAOBusinessObject.delete(user);
+			}
 		}
 		
-		
-		
-		return false;
+		return result;
 	}
+	
+	
+	
+	///
+	//	PRIVATE METHODS 
+	///
+	
+	private static boolean validateAcctRegArgs(CompanyEmployee employee, String username, String password, String email) {
+		boolean result = employee != null;
+		
+		result = result && username != null;
+		result = result && password != null;
+		result = result && email != null;
+		
+		return result;
+	}
+	
 }

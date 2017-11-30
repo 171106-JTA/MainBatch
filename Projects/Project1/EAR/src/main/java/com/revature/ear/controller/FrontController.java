@@ -1,6 +1,7 @@
 package com.revature.ear.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Enumeration;
@@ -13,8 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.revature.businessobject.CompanyEmployee;
 import com.revature.businessobject.User;
 import com.revature.service.Login;
+import com.revature.service.RegisterEmployee;
 
 /**
  * Servlet implementation class FrontController
@@ -135,12 +138,11 @@ public class FrontController extends HttpServlet {
 	private int loginExistingUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		Login login = new Login();
 		User user = null;
 		int status = 401;
 		
 		// Attempt to log into user account
-		if ((user = login.login(username, password)) != null) {
+		if ((user = Login.login(username, password)) != null) {
 			// TODO : add code to load appropriate screen based on user Credentials 
 		}
 		
@@ -159,11 +161,34 @@ public class FrontController extends HttpServlet {
 		String lastname = request.getParameter("lastname");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		String email = request.getParameter("email");
+		CompanyEmployee employee;
+		RequestDispatcher rd;
+		String page;
+		int status = 500;
 		
+		// Validate Company employee
+		if ((employee = RegisterEmployee.validateEmployee(employeeId != null ? Integer.parseInt(employeeId) : -1, firstname, lastname)) != null)  {
+			// Attempt to create account
+			if (RegisterEmployee.registerAccount(employee, username, password, email)) {
+				page = "register_ok.html";
+				status = 200;
+			} else {
+				// failed to create account
+				page = "register_fail.html";
+			}
+		} else {
+			// failed to find employee
+			page = "register_fail.html";
+		}
 		
+		// Return to landing page and notify user of result
+		rd = request.getRequestDispatcher(page);
+	
+		// Dispatch redirection
+		rd.forward(request, response);
 		
-		
-		return 0;
+		return 200;
 	}
 	
 	

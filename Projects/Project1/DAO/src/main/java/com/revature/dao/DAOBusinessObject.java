@@ -96,7 +96,10 @@ public final class DAOBusinessObject {
 		} catch (SQLException | ClassCastException e) {
 			logger.debug("query failed " + sql + ", message=" + e);
 			e.printStackTrace();
-		} finally {
+		} catch (Exception e){
+			logger.debug("query failed " + sql + ", message=" + e);
+			e.printStackTrace();
+		}finally {
 			close(statement);
 			close(res);
 		}

@@ -14,6 +14,17 @@ public class UserInfo implements BusinessObject {
 		// do nothing
 	}
 	
+	public UserInfo(Integer userId, CompanyEmployee employee) {
+		super();
+		this.userId = userId;
+		this.stateCityId = employee.getStateCityId();
+		this.firstName = employee.getFirstName();
+		this.lastName = employee.getLastName();
+		this.address = employee.getAddress();
+		this.email = employee.getEmail();
+		this.phoneNumber = employee.getPhoneNumber();
+	}
+	
 	public UserInfo(Integer id, Integer userId, Integer stateCityId,
 			String firstName, String lastName, String phoneNumber,
 			String address, String email) {

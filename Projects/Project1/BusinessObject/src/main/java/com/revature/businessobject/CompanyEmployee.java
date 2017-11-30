@@ -8,6 +8,7 @@ public class CompanyEmployee implements BusinessObject {
 	private String firstName;
 	private String lastName;
 	private String address;
+	private String phoneNumber;
 	private String email;
 	
 	public CompanyEmployee() {
@@ -16,7 +17,7 @@ public class CompanyEmployee implements BusinessObject {
 	
 	public CompanyEmployee(Integer id, Integer stateCityId,
 			Integer departmentId, Integer employeeId, String firstName,
-			String lastName, String address, String email) {
+			String lastName, String address, String phoneNumber, String email) {
 		super();
 		this.id = id;
 		this.stateCityId = stateCityId;
@@ -25,6 +26,7 @@ public class CompanyEmployee implements BusinessObject {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
+		this.phoneNumber = phoneNumber;
 		this.email = email;
 	}
 
@@ -82,6 +84,14 @@ public class CompanyEmployee implements BusinessObject {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phonenumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getEmail() {

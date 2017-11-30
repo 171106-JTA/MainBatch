@@ -77,9 +77,10 @@ public final class ConnectionUtil {
 		
 		try {
 			prop = System.getenv("DBProp").split(";");
+			Class.forName(prop[0]);
 			conn = DriverManager.getConnection(prop[1], prop[2], prop[3]);
 			logger.debug("opened connection to database");
-		} catch (ArrayIndexOutOfBoundsException | SQLException e) {
+		} catch (ArrayIndexOutOfBoundsException | SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 			logger.error("failed to get connection to database, message:" + e.getMessage());
 		}
