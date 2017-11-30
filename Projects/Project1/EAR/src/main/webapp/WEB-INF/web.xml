@@ -28,4 +28,14 @@
     <servlet-name>FrontController</servlet-name>
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Dashboard</display-name>
+    <servlet-name>Dashboard</servlet-name>
+    <servlet-class>com.revature.ear.Dashboard</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Dashboard</servlet-name>
+    <url-pattern>/Dashboard</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -252,6 +252,10 @@ BEGIN
     IF :new.id IS NULL THEN 
         SELECT EAR_USER_INFO_SEQ.nextval INTO :new.id FROM DUAL;
     END IF;
+    
+    IF :new.created IS NULL THEN
+        SELECT TO_DATE(SYSDATE, 'YYYY-MM-DD HH24:MI:SS') INTO :new.created FROM DUAL;
+    END IF;
 END;
 /  
 

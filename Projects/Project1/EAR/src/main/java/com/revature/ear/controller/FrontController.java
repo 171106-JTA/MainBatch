@@ -1,10 +1,10 @@
 package com.revature.ear.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -13,11 +13,16 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.revature.businessobject.CodeList;
 import com.revature.businessobject.CompanyEmployee;
 import com.revature.businessobject.User;
+import com.revature.service.GetCodeList;
+import com.revature.service.GetUserInfo;
 import com.revature.service.Login;
 import com.revature.service.RegisterEmployee;
+import com.revature.service.util.ServiceUtil;
 
 /**
  * Servlet implementation class FrontController
@@ -108,8 +113,13 @@ public class FrontController extends HttpServlet {
 	///
 	
 	private int loginHome(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		String submit = request.getParameter("submit");
 		int status = 200;
+
+		// destroy if not new
+		if (!session.isNew())
+			session.invalidate();
 		
 		// If no issue on client side
 		if (submit == null) 
@@ -138,19 +148,33 @@ public class FrontController extends HttpServlet {
 	private int loginExistingUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		List<CodeList> codes = GetCodeList.getCodeListByCode("USER-ROLE");
+		RequestDispatcher rd;
 		User user = null;
 		int status = 401;
 		
 		// Attempt to log into user account
 		if ((user = Login.login(username, password)) != null) {
-			// TODO : add code to load appropriate screen based on user Credentials 
+			HttpSession session = request.getSession();
+			
+			// save user info
+			for (CodeList code : codes) {
+				if (code.getId().equals(user.getRoleId())) {
+					session.setAttribute("username", username);
+					session.setAttribute("role", code.getValue());
+					session.setAttribute("userinfo", ServiceUtil.toJson(GetUserInfo.getUserInfoByUserId(user.getId())));
+					rd = request.getRequestDispatcher("Dashboard");
+					rd.forward(request, response);
+					break;
+				}
+			}
 		}
 		
 		return status;
 	}
 	
 	private int registerUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rq = request.getRequestDispatcher("register.html");
+		RequestDispatcher rq = request.getRequestDispatcher("./resource/html/register.html");
 		rq.forward(request, response);
 		return 200;
 	}
@@ -171,15 +195,15 @@ public class FrontController extends HttpServlet {
 		if ((employee = RegisterEmployee.validateEmployee(employeeId != null ? Integer.parseInt(employeeId) : -1, firstname, lastname)) != null)  {
 			// Attempt to create account
 			if (RegisterEmployee.registerAccount(employee, username, password, email)) {
-				page = "register_ok.html";
+				page = "./resource/html/register_ok.html";
 				status = 200;
 			} else {
 				// failed to create account
-				page = "register_fail.html";
+				page = "./resource/html/register_fail.html";
 			}
 		} else {
 			// failed to find employee
-			page = "register_fail.html";
+			page = "./resource/html/register_fail.html";
 		}
 		
 		// Return to landing page and notify user of result
