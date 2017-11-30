@@ -1,0 +1,25 @@
+Project 1
+
+Pristeen presentation
+
+Required Technologies:
+Java
+Oracle PL/SQL
+HTML/CSS/JavaScript
+JDBC
+SErvltes & AJax
+JavaDocs
+JUnit
+*MockITO - DB testing
+- Prevent's hitting the data at all
+- * = if we don't cover it, its not required
+log4J
+
+Don't have to follow the theme of the project. 
+Have fun with the theme. 
+
+We can expand on the requirements
+
+15 minute presentation
+
+Note: Use Postman to test endpoints!
