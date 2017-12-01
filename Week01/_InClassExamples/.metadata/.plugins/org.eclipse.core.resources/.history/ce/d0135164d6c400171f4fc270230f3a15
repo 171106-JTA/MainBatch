@@ -1,9 +1,0 @@
-package com.revature.exception;
-
-public abstract class BankingException extends RuntimeException {
-	
-	public BankingException() {
-		super();
-	}
-
-}

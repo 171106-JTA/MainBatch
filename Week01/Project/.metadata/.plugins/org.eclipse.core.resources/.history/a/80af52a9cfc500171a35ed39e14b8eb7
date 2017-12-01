@@ -1,8 +1,0 @@
-package com.revature.exception;
-
-public class CancelException extends RuntimeException {
-
-	public CancelException() {
-		super();
-	}
-}

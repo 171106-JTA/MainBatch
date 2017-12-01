@@ -1,0 +1,24 @@
+2017-11-11 04:44:35 TRACE LoggingExample:17 - Approaching exception.
+2017-11-11 04:44:35 INFO  LoggingExample:22 - Exception occurred: / by zero
+2017-11-11 04:44:35 TRACE LoggingExample:25 - My first log!
+2017-11-11 04:44:35 DEBUG LoggingExample:26 - My first log!
+2017-11-11 04:44:35 INFO  LoggingExample:27 - My first log!
+2017-11-11 04:44:35 WARN  LoggingExample:28 - My first log!
+2017-11-11 04:44:35 ERROR LoggingExample:29 - My first log!
+2017-11-11 04:44:35 FATAL LoggingExample:30 - My first log!
+2017-11-11 04:54:25 TRACE LoggingExample:17 - Approaching exception.
+2017-11-11 04:54:25 INFO  LoggingExample:22 - Exception occurred: / by zero
+2017-11-11 04:54:25 TRACE LoggingExample:25 - My first log!
+2017-11-11 04:54:25 DEBUG LoggingExample:26 - My first log!
+2017-11-11 04:54:25 INFO  LoggingExample:27 - My first log!
+2017-11-11 04:54:25 WARN  LoggingExample:28 - My first log!
+2017-11-11 04:54:25 ERROR LoggingExample:29 - My first log!
+2017-11-11 04:54:25 FATAL LoggingExample:30 - My first log!
+2017-11-11 04:54:30 TRACE LoggingExample:17 - Approaching exception.
+2017-11-11 04:54:30 INFO  LoggingExample:22 - Exception occurred: / by zero
+2017-11-11 04:54:30 TRACE LoggingExample:25 - My first log!
+2017-11-11 04:54:30 DEBUG LoggingExample:26 - My first log!
+2017-11-11 04:54:30 INFO  LoggingExample:27 - My first log!
+2017-11-11 04:54:30 WARN  LoggingExample:28 - My first log!
+2017-11-11 04:54:30 ERROR LoggingExample:29 - My first log!
+2017-11-11 04:54:30 FATAL LoggingExample:30 - My first log!

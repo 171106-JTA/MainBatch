@@ -27,8 +27,6 @@ public class TrainerLogin extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.println("CUSTOM ERROR");
 		
-		
-		
 /*		RequestDispatcher rd = request.getRequestDispatcher("http://www.google.com");
 		rd.forward(request, response);*/
 		

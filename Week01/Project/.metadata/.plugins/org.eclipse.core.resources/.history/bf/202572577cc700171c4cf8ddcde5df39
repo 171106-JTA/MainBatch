@@ -1,5 +1,0 @@
-package com.revature.throwable;
-
-public class InvalidUserNameException extends Exception {
-
-}
