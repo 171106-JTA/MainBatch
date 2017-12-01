@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="AssignmentCSS.css">
+    </head>
+    <body id="content">
+        <button id="togglesign" type="checkbox" onclick="
+        if (innerHTML == 'sign in'){
+            innerHTML = 'sign up';
+            document.getElementById('signup').hidden = true;
+            document.getElementById('signin').hidden = false;
+        } else {
+            innerHTML = 'sign in';
+            document.getElementById('signin').hidden = true;
+            document.getElementById('signup').hidden = false;
+        };">sign in</button>
+        <form hidden id="signin">
+            <ul class="fieldlist">
+                <li>sign in</li>
+                <li><input type="text" placeholder="username"></li>
+                <li><input type="text" placeholder="password"></li>
+            </ul>
+        </form>
+        <form id="signup">
+            <ul class="fieldlist">
+                <li>sign up</li>
+                <li><input type="text" placeholder="username"></li>
+                <li><input type="text" placeholder="password"></li>
+                <li><input type="text" placeholder="verify password"></li>
+                <li><input type="text" placeholder="email"></li>
+            </ul>
+        </form>
+        <button id="submitbutton"type="submit" value="submit">submit</button>
+        <form id="newmessage">
+            <input type="text">
+            <input type="submit" value="submit>">
+        </form>
+        <div id="messages">
+            <textarea>
+
+            </textarea>
+        </div>
+    </body>
+</html>

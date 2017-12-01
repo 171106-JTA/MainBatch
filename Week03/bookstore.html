@@ -1,0 +1,16 @@
+<!DOCTYPE html encoding="UTF-0">
+<html>
+	<head>
+	</head>
+	<body>
+		<p id="demo">
+		</p>
+		<script>
+			var parser, xmlDoc;
+			var text = "<bookstore><book><title>Castle in the Attic<title><book><bookstore>";
+			parser = new DOMParser();
+			xmlDoc = parser.parseFromString(text, "text/xml");
+			document.getgetElementById("demo").innerHTML = xmlDoc.getElementByTagName("title")[0].childNodes[0].nodeValue;
+		</script>
+	</body>
+</html>
