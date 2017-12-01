@@ -76,7 +76,6 @@ public class ObjectDAO {
      * saves a generic hibernate annotated bean instance, returns the
      * (potentially generated) id of the persisted object
      *
-     * @param <T>
      * @param obj
      * @return
      * @throws DuplicateIdException

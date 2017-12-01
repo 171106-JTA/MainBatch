@@ -106,11 +106,6 @@ public class Config {
     }
 
     @Bean
-    public LookUpDAO lookUpDAO(SessionFactory sessionFactory) {
-        return new LookUpDAOImpl(sessionFactory);
-    }
-
-    @Bean
     public ObjectDAO objectDAO(SessionFactory sessionFactory) {
         return new ObjectDAO(sessionFactory);
     }
