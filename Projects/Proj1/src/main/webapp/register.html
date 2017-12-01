@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>TRMS</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- Flatly Bootswatch theme -->
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT"
+	crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="resources/css/myStyles.css">
+<script src="resources/js/main.js"></script>
+
+</head>
+
+<body>
+	<div class="container-fluid">
+		<h1>TRMS</h1>
+
+
+		<h1>Register a user</h1>
+		<form name="registration" onsubmit="return validateRegistration()">
+			<ul style="list-style-type: none">
+				<li>Name</li>
+				<li><input type="text" placeholder="First" name="fname"
+					required> <input type="text" placeholder="Last"
+					name="lname" required></li>
+				<li>Choose your username</li>
+				<li><input type="text" placeholder="username" name="username"
+					required></li>
+				<li>Create a password</li>
+				<li><input type="password" placeholder="Enter your password"
+					name="password" required></li>
+
+				<li>Confirm your password</li>
+				<li><input type="password" placeholder="Confirm your password"
+					name="password2" required></li>
+
+				<li>Enter your email address</li>
+				<li><input type="email" placeholder="email" name="email"
+					required></li>
+
+				<li><input class="btn btn-primary custom-submit" type="submit"
+					value="submit"> <input class="btn btn-danger custom-submit"
+					type="reset" value="reset"></li>
+			</ul>
+		</form>
+		<hr>
+		<input type="number" name="input" placeholder="input number" required>
+		<input type="button" onclick="sendAJAX" value="submit">
+		<div id="results"></div>
+	</div>
+
+</body>
+</html>
