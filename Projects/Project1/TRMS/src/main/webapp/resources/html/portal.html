@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="../js/jquery-3.2.1.min.js"></script>
+<script src="../js/portal.js"></script>
+<meta charset="UTF-8">
+<title>Employee Portal</title>
+</head>
+<body>
+	<hr>
+
+	<div id="login">
+		<form action="LoginServlet" id="loginForm" method="post">
+			<table>
+				<caption>Login</caption>
+				<tr>
+					<th>Username:</th>
+					<td><input type="text" id="username" required></td>
+				</tr>
+				<tr>
+					<th>Password:</th>
+					<td><input type="password" id="password" required></td>
+				</tr>
+				<tr>
+					<td><input type="submit"></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<div id="register">
+		<form action="RegistrationServlet" id="regForm" method="post">
+			<table>
+				<caption>Register</caption>
+				<tr>
+					<th>Username:</th>
+					<td><input type="text" id="username" required></td>
+				</tr>
+				<tr>
+					<th>Password:</th>
+					<td><input type="text" id="enter_password"
+						pattern="^(?=.*\d)(?=.*[A-Z])\w{5,20}$" required
+						title="must be between 5 and 20 characters and contain 1 capital letter and 1 number"></td>
+				</tr>
+				<tr>
+					<th>Confirm Password:</th>
+					<td><input type="password" id="confirm_password" required>
+						<div id="password_match"></td>
+				</tr>
+				<tr>
+					<th>Age:</th>
+					<td><input type="text" id="age" pattern="[0-9]{3}" required></td>
+				</tr>
+				<tr>
+					<th>SSN:</th>
+					<td><input type="text" id="ssn1" pattern="\d{3}"required">-
+						<input type="text" id="ssn2" pattern="\d{2}" required>- <input
+						type="text" id="ssn3" pattern="\d{4}" required></td>
+				</tr>
+				<tr>
+					<td><input type="submit"></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+</body>
+</html>
