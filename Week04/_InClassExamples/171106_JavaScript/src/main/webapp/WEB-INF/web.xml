@@ -9,4 +9,24 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>RegisterUser</display-name>
+    <servlet-name>RegisterUser</servlet-name>
+    <servlet-class>com.revature.servlets.UserRegistration</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegisterUser</servlet-name>
+    <url-pattern>/RegisterUser</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetUsers</display-name>
+    <servlet-name>GetUsers</servlet-name>
+    <servlet-class>com.revature.servlets.GetUsers</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetUsers</servlet-name>
+    <url-pattern>/GetUsers</url-pattern>
+  </servlet-mapping>
 </web-app>
