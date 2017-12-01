@@ -101,6 +101,14 @@ public class Employee {
 	public void setTitle(Title title) {
 		this.title = title;
 	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
 	
 	
 }

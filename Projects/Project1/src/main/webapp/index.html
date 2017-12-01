@@ -15,29 +15,29 @@
 <body>
 	<div class="container-fluid">
 		<div align="right">
-			<h5><i>New to TRMS?</i></h5>
+			<h5>
+				<i>New to TRMS?</i>
+			</h5>
 			<a href="register.html">Create an account</a>
 		</div>
 		<br> <br> <br> <br>
 		<div class="row">
-			<div class="col-lg-12">
+			<div class="col-lg-3"></div>
+			<div class="col-lg-6">
 				<h1 align="center">Welcome to TRMS.</h1>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-12" align="center">
-				<form action="Login.do">
-					<ul style="list-style-type: none;">
-						<li>Username</li>
-						<li><input type="text" name="username" placeholder="username"
-							required></li>
-						<li>Password</li>
-						<li><input type="password" name="password"
-							placeholder="password" required></li>
-						<li><input type="Submit" name="Submit Login"></li>
-					</ul>
-				</form>
-
+				<div class="well">
+					<form method="post" action="Employee.html">
+						<ul style="list-style-type: none;">
+							<li>Username</li>
+							<li><input type="text" name="usernameLogin"
+								placeholder="username" required></li>
+							<li>Password</li>
+							<li><input type="password" name="passwordLogin"
+								placeholder="password" required></li>
+							<li><input type="Submit" value="Login"></li>
+						</ul>
+					</form>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -22,4 +22,13 @@
 		<servlet-name>MyFrontController</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
+	<filter>
+		<display-name>LoginFilter</display-name>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>com.revature.filters.LoginFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+		<url-pattern>/Employee.html</url-pattern>
+	</filter-mapping>
 </web-app>

@@ -9,31 +9,26 @@ import com.revature.dao.TRMSDao;
 public class RegisterEmployee {
 
 	public static boolean register(HttpServletRequest request) {
-		final String username = (String) request.getAttribute("regUsername");
-		final int password = String.valueOf(request.getAttribute("regPassword1")).hashCode();
-		final String fname = (String) request.getAttribute("fname");
-		final String lname = (String) request.getAttribute("lname");
-		final String phoneNumber = (String)request.getAttribute("phoneNumber");
-		final String address = (String) request.getAttribute("address");
-		final String zipcode = (String) request.getAttribute("zipcode");
-		final String city = (String) request.getAttribute("city");
-		final String state = (String) request.getAttribute("state");
+		final String username = (String) request.getParameter("regUsername");
+		final int password = String.valueOf(request.getParameter("regPassword1")).hashCode();
+		final String fname = (String) request.getParameter("fname");
+		final String lname = (String) request.getParameter("lname");
+		final String phoneNumber = (String)request.getParameter("phoneNumber");
+		final String address = (String) request.getParameter("address");
+		final String zipcode = (String) request.getParameter("zipcode");
+		final String city = (String) request.getParameter("city");
+		final String state = (String) request.getParameter("state");
 		
 		final Employee emp = new Employee(username, password, fname, lname, phoneNumber, Title.UNVERIFIED, address, zipcode,
 				city, state);
 
 		if (TRMSDao.getEmployeeByUsername(username) == null) {
-			System.out.println("We are registering a new user");
 			TRMSDao dao = TRMSDao.getDao(); //grab our dao
-			dao.insertEmployee(emp);
+			boolean success = dao.insertEmployee(emp);
+			
+			return success;
 		} else {
-			//TODO inform user that the username is taken
+			return false;
 		}
-
-
-
-		return false;
 	}
-
-
 }

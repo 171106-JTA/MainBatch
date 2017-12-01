@@ -31,10 +31,7 @@ public class MyFrontController extends HttpServlet {
 		
 		if (action.equals("login")) { //A user is logging in
 			login(request, response);
-		} else if (action.equals("registration")) { //A user is making a new account
-			System.out.println("we are in the servlet and registering a new user");
-			register(request, response);
-		} else if (action.equals("submit_tuition_request")) {
+		}  else if (action.equals("submit_tuition_request")) {
 			submitTuitionRequest(request, response);
 		}
 			
@@ -72,9 +69,9 @@ public class MyFrontController extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		if (successfully_registered) {
-			out.println("<h3>SUCCESS</h3>");
+			out.println("<h3>Registration Success. Your account is pending approval.</h3>");
 		} else {
-			out.println("<h3>FAIL</h3>");
+			out.println("<h3>There was an error creating your account.</h3>");
 		}
 		out.println(
 				"<hr>" +
@@ -87,6 +84,18 @@ public class MyFrontController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		final String url = request.getRequestURI();
+		final String[] url_parts = url.split("/");
+		final String action = url_parts[url_parts.length - 1].split("\\.")[0].toLowerCase(); //grab the action
+		
+		RequestDispatcher rd = null;
+		HttpSession session = null;
+		
+		if (action.equals("registration")) { //A user is making a new account
+			register(request, response);
+		} else {
+			response.sendError(404);
+		}
 		
 	}
 }

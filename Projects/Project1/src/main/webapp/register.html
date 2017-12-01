@@ -23,40 +23,58 @@
 					<i>Please enter your information below.</i>
 				</h5>
 				<div class="well">
-					<form action="Registration.do">
+					<form method="post" action="Registration.do">
 						<div class="next">
-							<label for="Username">Username</label> <input type="text"
-								id="regUsername" placeholder="Username" required> <i>
-								&nbspMust be between 5 and 15 characters</i>
+							<label for="Username">Username</label>
+						</div>
+						<div>
+							<input type="text" name="regUsername" placeholder="Username"
+								required> <i> &nbspMust be between 5 and 15
+								characters</i>
 						</div>
 						<div class="next">
-							<label for="registrationPassword">Password</label> <input
-								type="password" id="regPassword1" placeholder="Password"
-								required> <label for="confirmPassword">Confirm Password</label>
-							<input type="password" id="regPassword2"
-								placeholder="Password" required><i>&nbspMust
-								be between 5 and 15 characters</i>
+							<label for="registrationPassword">Password</label> <span
+								style="display: inline-block; width: 105px;"></span> <label
+								for="confirmPassword">Confirm Password</label>
+						</div>
+						<div>
+							<input type="password" name="regPassword1" placeholder="Password"
+								required> <input type="password" name="regPassword2"
+								placeholder="Password" required><i>&nbspMust be
+								between 5 and 15 characters</i>
 						</div>
 						<div class="next">
-							<label for="firstName">Name</label> <input type="text" id="fname"
-								placeholder="First" required> <input type="text"
-								id="lname" placeholder="Last" required>
+							<label for="firstName">Name</label>
+						</div>
+						<div>
+							<input type="text" name="fname" placeholder="First" required>
+							<input type="text" name="lname" placeholder="Last" required>
 						</div>
 						<div class="next">
-							<label for="telephoneNumber">Phone Number</label> <input
-								type="tel" id="phoneNumber" placeholder="Phone Number" required>
-							<label for="address">Address</label> <input type="text"
-								id="address" placeholder="Address" required>
+							<label for="telephoneNumber">Phone Number</label> <span
+								style="display: inline-block; width: 75px;"></span> <label
+								for="address">Address</label>
+						</div>
+						<div>
+							<input type="tel" name="phoneNumber" placeholder="Phone Number"
+								required> <input type="text" name="address"
+								placeholder="Address" required>
 						</div>
 						<div class="next">
-							<label for="zipcode">Zipcode</label> <input type="text"
-								id="zipcode" placeholder="Zip Code" required> <label
-								for="city">City</label> <input type="text" id="city"
-								placeholder="City" required> <label for="state">State</label>
-							<input type="text" id="state" placeholder="State" required>
+							<label for="zipcode">Zipcode</label><span
+								style="display: inline-block; width: 20px;"></span> <label
+								for="city">City</label> <span
+								style="display: inline-block; width: 140px;"></span> <label
+								for="state">State</label>
+						</div>
+						<div>
+							<input type="text" name="zipcode" placeholder="Zip Code" size=5
+								required> <input type="text" name="city"
+								placeholder="City" required> <input type="text"
+								name="state" placeholder="State" size=2 required>
 						</div>
 						<div class="next">
-							<input type="submit" id="submitRegistration" value="Submit">
+							<input type="submit" name="submitRegistration" value="Submit">
 						</div>
 					</form>
 				</div>
