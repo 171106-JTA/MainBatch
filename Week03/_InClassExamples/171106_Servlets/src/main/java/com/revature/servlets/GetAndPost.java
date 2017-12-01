@@ -32,10 +32,9 @@ public class GetAndPost extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		out.println("<h3>GET REQUEST</h3>");
-		out.println(
-					"<table border='2px'>"	+
-							"<tr><th>USERNAME</th><th>PASSWORD</th></tr>" +
-							"<tr><td>" + username + "</td><td>" + password + "</td></tr></table>"
+		out.println("<table border='2px'>"	+
+					"<tr><th>USERNAME</th><th>PASSWORD</th></tr>" +
+					"<tr><td>" + username + "</td><td>" + password + "</td></tr></table>"
 				);
 		out.println(
 				"<hr>" +

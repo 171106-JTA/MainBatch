@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<bookstore>
+   <book genre="fantasy">
+      <title language="english">The Lost Years of Merlin</title>
+      <author>T.A. Barron</author>
+      <year>1996</year>
+      <price>8.99</price>
+   </book>
+
+   <book genre="children's literature">
+      <title language="english">The Castle in the Attic</title>
+      <author>Elizabeth Winthrop</author>
+      <author>Trina Schart Hyman</author>
+      <year>1985</year>
+      <price>6.49</price>
+   </book>
+
+   <book genre="military science fiction">
+      <title language="english">Halo: The Fall of Reach</title>
+      <author>Eric Nylund</author>
+      <year>2001</year>
+      <price>8.99</price>
+   </book>
+</bookstore>

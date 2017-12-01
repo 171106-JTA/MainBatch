@@ -46,7 +46,7 @@ BEGIN --This keyword signifies a block for a transaction.
     IF :new.fc_id IS NULL THEN 
     SELECT fc_seq.nextval INTO :new.fc_id from dual;    
     END IF;
-END;    
+END;
 /
 
 /*
@@ -240,7 +240,7 @@ BEGIN
 END;
 
 
---EXCETION HANDLING EXAMPLE
+--EXCEPTION HANDLING EXAMPLE
 CREATE OR REPLACE PROCEDURE exceptionExample
 IS
     CURSOR badCurse IS
@@ -265,3 +265,61 @@ BEGIN
 END;
 
 call exceptionExample();
+
+DROP TABLE some_table;
+
+CREATE TABLE some_table (
+    money FLOAT,
+    anumber INTEGER,
+    username VARCHAR2(20)
+);
+INSERT INTO some_table
+VALUES (100.0652, 123);
+
+SELECT * FROM some_table;
+
+
+CREATE TABLE Users (
+    username VARCHAR2(15) PRIMARY KEY,
+    password VARCHAR2(20) NOT NULL,
+    isadmin NUMBER(1) NOT NULL,
+    islocked NUMBER(1) NOT NULL,
+    isapproved NUMBER(1) NOT NULL,
+    isdenied NUMBER(1) NOT NULL,
+    firstname VARCHAR2(20) NULL,
+    lastname VARCHAR2(20) NULL,
+    address VARCHAR2(50) NULL,
+    city VARCHAR2(20) NULL,
+    state VARCHAR2(10) NULL,
+    email VARCHAR2(50) NULL
+);
+
+CREATE TABLE Accounts (
+    accountnumber NUMBER(8) PRIMARY KEY,
+    username VARCHAR2(15) REFERENCES FOREIGN,
+    balance FLOAT NOT NULL,
+    islocked NUMBER(1) NOT NULL,
+    isclosed NUMBER(1) NOT NULL,
+    mydate VARCHAR2(10) NOT NULL,
+    mytime VARCHAR2(18) NOT NULL
+);
+
+CREATE TABLE Transactions (
+    accountnumber NUMBER(8) REFERENCES FOREIGN,
+    confirmation NUMBER(8) PRIMARY KEY,
+    amount FLOAT NOT NULL,
+	mydate VARCHAR2(10) NOT NULL,
+    mytime VARCHAR2(18) NOT NULL
+);
+
+CREATE TABLE Loans (
+    accountnumber NUMBER(8) REFERENCES FOREIGN,
+	loannumber NUMBER(8) PRIMARY KEY,
+    amount FLOAT NOT NULL,
+	interest FLOAT NULL,
+	isapproved NUMBER(1) NOT NULL,
+	isdenied NUMBER(1) NOT NULL,
+	approver VARCHAR2(15) REFERENCES FOREIGN,
+	mydate VARCHAR2(10) NOT NULL,
+    mytime VARCHAR2(18) NOT NULL
+);
