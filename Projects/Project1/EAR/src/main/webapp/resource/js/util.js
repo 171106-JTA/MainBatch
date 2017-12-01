@@ -192,6 +192,9 @@ var onClearForm = function (e) {
 	e.preventDefault();
 }
 
+
+
+
 ///
 //	HELPER FUNCTIONS
 ///

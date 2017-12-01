@@ -3,6 +3,7 @@ package com.revature.ear;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,16 +29,14 @@ public class Dashboard extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		RequestDispatcher rq;
 		PrintWriter out;
 		
 		if (session != null) {
-			response.setContentType("text/html");
-			out = response.getWriter();
-			
-			out.println("Welcome  " + session.getAttribute("username") + "!!!!<br>");
-			out.println("Your info = " + session.getAttribute("userinfo") + "<br>");
-			out.println("Your role = " + session.getAttribute("role") + "<br>");
-			
+			rq = request.getRequestDispatcher("./resource/html/dashboard.html");
+			rq.forward(request, response);
+		} else {
+			response.sendError(500);
 		}
 	}
 

@@ -1,0 +1,97 @@
+/* Updates color theme for nav bar for application */
+
+.navbar-default {
+    background-color: #0072ff;
+    border-color: #0050ff;
+    border-radius: 0;
+}
+
+.navbar-default .navbar-brand,
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: white;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: white;
+}
+
+/* When Dropdown menu selected change bg-color */
+.navbar-default .navbar-nav > li[class="dropdown open"] > a[aria-expanded="true"] {
+		background-color: #0050ff;
+	    color: #eeeeee;
+}
+
+/* GENERAL NAV COLORING */
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    background-color: #0050ff;
+    color: #cccccc;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #FFF;
+    background-color: #0050ff;
+}
+
+.navbar-default .navbar-text {
+    color: #FFF;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: #0050ff;
+}
+
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+    background-color: #0050ff;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #0050ff;
+}
+
+/* MOBILE NAV DROPDOWN */
+@media screen and (max-width:767px) {
+	/* MOBILE HAMBURGER ICON INTERACTION HANDLES */
+	.navbar-default .navbar-header > button[class~="navbar-toggle"]{
+	    border-color: white!important;
+	}
+	
+	.navbar-default .navbar-header > button[class~="navbar-toggle"]:hover{
+		border-color: #cccccc!important;	
+	}
+	
+	.navbar-default .navbar-header > button[class~="navbar-toggle"]:focus {
+	    border-color: #eeeeee!important;
+	}
+	
+	.navbar-default .navbar-header > button[class~="navbar-toggle"] > span[class="icon-bar"] {
+	    background-color: white!important;
+	}
+	.navbar-default .navbar-header > button[class~="navbar-toggle"]:hover > span[class="icon-bar"] {
+		background-color: #cccccc!important;	
+	}
+	.navbar-default .navbar-header > button[class~="navbar-toggle"]:focus > span[class="icon-bar"]:focus {
+	    background-color: #eeeeee!important;
+	}
+	
+	
+	/* MOBILE > HAMBURGER > SETTINGS DROPDOWN INTERACTION HANDLES  */
+	.navbar-default .navbar-nav > li[class="dropdown open"] > ul[class="dropdown-menu"] > li > a {
+		color: white;
+	}
+	
+	.navbar-default .navbar-nav > li[class="dropdown open"] > ul[class="dropdown-menu"] > li > a:hover {
+		color: #cccccc;
+		background-color: #0062ff;
+	}
+	
+	.navbar-default .navbar-nav > li[class="dropdown open"] > ul[class="dropdown-menu"] > li > a:active {
+		color: #eeeeee;
+		background-color: #0050ff;
+	}
+}
+

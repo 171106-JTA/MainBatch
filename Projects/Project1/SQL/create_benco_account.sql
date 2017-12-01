@@ -27,3 +27,6 @@ select * from ear_user e join ear_user_info i
     on e.id = i.userid;
     
 select * from company_employee;
+
+
+select * from trainer;
