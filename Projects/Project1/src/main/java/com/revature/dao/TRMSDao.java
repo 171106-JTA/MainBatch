@@ -40,11 +40,19 @@ public class TRMSDao {
 	 */
 	public void insertEmployee(Employee emp) {
 		PreparedStatement ps = null;
-		try(Connection conn = ConnectionUtil.getConnection();){
 
-			final String sql = "insert into trainer (emp_username, emp_password, emp_fname, "
-					+ 		   "emp_lname, emp_address, emp_zipcode, emp_city, emp_state)" + 
-					"VALUES(?,?,?,?,?,?,?,?)";
+		final String sql = "insert into trainer (emp_username, emp_password, emp_fname, "
+				+ 		   "emp_lname, emp_address, emp_zipcode, emp_city, emp_state)" + 
+				"VALUES(?,?,?,?,?,?,?,?)";
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		
+		try(Connection conn = ConnectionUtil.getConnection()){
+
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, emp.getUsername().toLowerCase());
 			ps.setInt(2, emp.getPassword());
@@ -57,7 +65,7 @@ public class TRMSDao {
 			ps.setString(9, emp.getTitle().toString());
 			
 			int affected = ps.executeUpdate();
-
+			
 			System.out.println(affected + " Rows affected");
 
 		} catch(SQLException e){

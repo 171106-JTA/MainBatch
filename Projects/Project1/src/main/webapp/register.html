@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="resources/css/StylingTRMS.css">
+<meta charset="UTF-8">
+<title>TRMS Registrations</title>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="col-lg-2"></div>
+		<div class="col-lg-8">
+			<div class="row">
+				<h2 align="center">Create your TRMS account.</h2>
+				<h5 align="center">
+					<i>Please enter your information below.</i>
+				</h5>
+				<div class="well">
+					<form action="Registration.do">
+						<div class="next">
+							<label for="Username">Username</label> <input type="text"
+								id="regUsername" placeholder="Username" required> <i>
+								&nbspMust be between 5 and 15 characters</i>
+						</div>
+						<div class="next">
+							<label for="registrationPassword">Password</label> <input
+								type="password" id="regPassword1" placeholder="Password"
+								required> <label for="confirmPassword">Confirm Password</label>
+							<input type="password" id="regPassword2"
+								placeholder="Password" required><i>&nbspMust
+								be between 5 and 15 characters</i>
+						</div>
+						<div class="next">
+							<label for="firstName">Name</label> <input type="text" id="fname"
+								placeholder="First" required> <input type="text"
+								id="lname" placeholder="Last" required>
+						</div>
+						<div class="next">
+							<label for="telephoneNumber">Phone Number</label> <input
+								type="tel" id="phoneNumber" placeholder="Phone Number" required>
+							<label for="address">Address</label> <input type="text"
+								id="address" placeholder="Address" required>
+						</div>
+						<div class="next">
+							<label for="zipcode">Zipcode</label> <input type="text"
+								id="zipcode" placeholder="Zip Code" required> <label
+								for="city">City</label> <input type="text" id="city"
+								placeholder="City" required> <label for="state">State</label>
+							<input type="text" id="state" placeholder="State" required>
+						</div>
+						<div class="next">
+							<input type="submit" id="submitRegistration" value="Submit">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

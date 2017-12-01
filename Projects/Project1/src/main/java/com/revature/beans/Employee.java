@@ -1,7 +1,7 @@
 package com.revature.beans;
 
 public class Employee {
-	private String username, fname, lname, address, city, state, zipcode;
+	private String username, fname, lname, phoneNumber, address, city, state, zipcode;
 	private Title title;
 	private int password;
 
@@ -14,12 +14,13 @@ public class Employee {
 	 * @param address
 	 * @param zipcode
 	 */
-	public Employee(String username, int password, String fname, String lname, Title title,
+	public Employee(String username, int password, String fname, String lname, String phoneNumber, Title title,
 			String address,	String zipcode, String city, String state) {
 		this.username = username;
 		this.password = password;
 		this.fname = fname;
 		this.lname = lname;
+		this.phoneNumber = phoneNumber;
 		this.title = title;
 		this.city = city;
 		this.address = address;

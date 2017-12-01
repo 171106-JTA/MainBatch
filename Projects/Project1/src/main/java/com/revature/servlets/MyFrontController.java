@@ -1,6 +1,7 @@
 package com.revature.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,7 +31,8 @@ public class MyFrontController extends HttpServlet {
 		
 		if (action.equals("login")) { //A user is logging in
 			login(request, response);
-		} else if (action.equals("register")) { //A user is making a new account
+		} else if (action.equals("registration")) { //A user is making a new account
+			System.out.println("we are in the servlet and registering a new user");
 			register(request, response);
 		} else if (action.equals("submit_tuition_request")) {
 			submitTuitionRequest(request, response);
@@ -61,17 +63,23 @@ public class MyFrontController extends HttpServlet {
 	 * 
 	 * @param request
 	 * @param response
+	 * @throws IOException 
 	 */
-	private void register(HttpServletRequest request, HttpServletResponse response) {
+	private void register(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		final boolean successfully_registered = RegisterEmployee.register(request);
 		
-		if (successfully_registered) {
-			
-		} else {
-			
-			
-		}
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
 		
+		if (successfully_registered) {
+			out.println("<h3>SUCCESS</h3>");
+		} else {
+			out.println("<h3>FAIL</h3>");
+		}
+		out.println(
+				"<hr>" +
+				"<a href='index.html'>BACK</a>"
+				);
 	}
 	
 	

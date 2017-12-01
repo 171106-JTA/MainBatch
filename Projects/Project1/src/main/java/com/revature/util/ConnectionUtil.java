@@ -8,6 +8,13 @@ public class ConnectionUtil {
 	private ConnectionUtil() {}
 	public static Connection getConnection() throws SQLException {
 		final String props[] = System.getenv("TRMSDB").split(";");
-		return DriverManager.getConnection(props[1], props[2], props[3]);
+		Connection conn = DriverManager.getConnection(props[1], props[2], props[3]);
+		
+		if (conn == null) {
+			System.out.println("error getting connection");
+		} else {
+			System.out.println("connection set up");
+		}
+		return conn;
 	}
 }
