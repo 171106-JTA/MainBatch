@@ -6,9 +6,6 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class ConnectionUtil {
-	private static Properties prop;
-	private final static String FILE_NAME = "DB.properties";
-
 	public static Connection getConnection() throws SQLException {
 		System.out.println("in the connection util!");
 
