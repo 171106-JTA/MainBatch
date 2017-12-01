@@ -2,8 +2,9 @@
 <div style="text-align:center">
   <nav-bar></nav-bar>
 
-<h1>My custom page</h1>
-<p>All of my angular examples can be found in this easy to run application</p>
-<div class="well">
-  <app-interpolation></app-interpolation>
-</div>
+  <h1>My custom page</h1>
+  <p>All of my angular examples can be found in this easy to run application</p>
+  <div class="well">
+    <!-- defualt tag used by the router module and will be used to inject different views. -->
+    <router-outlet></router-outlet>
+  </div>

@@ -1,0 +1,12 @@
+<div class="well">
+    <input ([ngModel])="pokeid"><input type="button" value="Submit" (click)="fetchData()">
+
+
+    <table border="2px">
+        <tr><th>POKEMON NAME</th><td>{{pkmn.name}}</td></tr>
+        <tr><th>POKEMON ID</th><td>{{pkmn.id}}</td></tr>
+        <tr><th>POKEMON WEIGHT</th><td>{{pkmn.weight}}</td></tr>
+        <tr><th>POKEMON SPRITE</th><td><img [src]="pkmn.sprite"></td></tr>
+        
+    </table>
+</div>
