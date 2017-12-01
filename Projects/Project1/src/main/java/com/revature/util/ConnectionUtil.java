@@ -12,46 +12,48 @@ public class ConnectionUtil {
 	private final static String FILE_NAME = "DB.properties";
 
 	public static Connection getConnection() throws SQLException {
-		// try {
-		// // Path currentRelativePath = Paths.get("");
-		// // String s = currentRelativePath.toAbsolutePath().toString();
-		// // System.out.println("Current relative path is: " + s);
-		//
-		// System.out.println(System.getProperty("user.dir"));
-		//
-		// prop = new Properties(); // Instantiate our property object
-		// prop.load(new FileInputStream(FILE_NAME)); // User a filestream to populate
-		// properties
-		//
-		// FileReader reader = new FileReader(FILE_NAME);
-		// prop.load(reader);
-		//
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
+		System.out.println("in the connection util!");
 
-		// String url = prop.getProperty("url");
-		// String username = prop.getProperty("username");
-		// String password = prop.getProperty("password");
-		// System.out.println("url " + url + "\nusername " + username + "\npassword "
-		// + password);
-		// String prop[] = System.getenv("DBProps").split(";");
-		// System.out.println("prop[1] " + prop[1] + "\nprop[2] " + prop[2] + "\nprop[3]
-		// "
-		// + prop[3]);
-		// return DriverManager.getConnection(url, username, password);
-		// return DriverManager.getConnection(prop[1], prop[2], prop[3]);
-		
-		//Remove URL --> for git
-		//Remove Username --> for git
-		//Remove Password --> for git
+		// Variables for establishing database connection
+		String dbName = null, userName = null, password = null, hostname = null, port = null;
+
+		// Get system variables, if they exist (used for local development)
+		if (System.getenv("RDS_HOSTNAME") != null) {
+			System.out.println("Fetching Environment Variables");
+			dbName = System.getenv("RDS_DB_NAME");
+			userName = System.getenv("RDS_USERNAME");
+			password = System.getenv("RDS_PASSWORD");
+			hostname = System.getenv("RDS_HOSTNAME");
+			port = System.getenv("RDS_PORT");
+		// Otherwise, get property variables, if they exist (used in Elastic Beanstalk deployment)
+		} else if (System.getProperty("RDS_HOSTNAME") != null) {
+			System.out.println("Fetching Property Variables");
+			dbName = System.getProperty("RDS_DB_NAME");
+			userName = System.getProperty("RDS_USERNAME");
+			password = System.getProperty("RDS_PASSWORD");
+			hostname = System.getProperty("RDS_HOSTNAME");
+			port = System.getProperty("RDS_PORT");
+		}
+		return getConnectionHelper(hostname, port, dbName, userName, password);
+	}
+
+	private static Connection getConnectionHelper(String hostname, String port, String dbName, String userName,
+			String password) {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
+			// logger.trace("Getting remote connection with connection string from
+			// environment variables.");
+			String url = "jdbc:oracle:thin:@" + hostname + ":" + port + ":" + dbName;
+			Connection con = DriverManager.getConnection(url, userName, password);
+			// logger.info("Remote connection successful.");
+			return con;
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Class.forName exception!!!");
+			// logger.warn(e.toString());
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// logger.warn(e.toString());
 			e.printStackTrace();
 		}
-		return DriverManager.getConnection(url, username, password);
+		return null;
 	}
 }
