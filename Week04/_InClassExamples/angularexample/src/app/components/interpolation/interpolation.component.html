@@ -1,0 +1,50 @@
+<h3>String interpolation</h3>
+<p>
+    Angluar uses a concept called data binding, this boils down to how we can connect our front end (view) to our backend (compenents).
+    Any data in our components needs a way to be transferred to the view (html file). 
+
+    One way to do this is to use string interpolation. 
+</p>
+
+<div>The value of componentVariable is: {{componentVariable}}</div>
+<p>The above example demonstrated pulling infromation from the component
+    and displaying it in the view. String interpolation essentially an expression
+    language, in that, it can also perform expressions within.
+</p>
+
+<div>The value of 2 + 7 = {{2 + 7}} </div> 
+ 
+<div>The author of this site is {{someObject.author}}</div> 
+<h3>Property binding</h3>
+<p>Property binding is yet another way to bind buisness logic to the 
+    view.
+</p>
+
+<p>By applying square brackets to a tag attribute, we bind it as a property</p>
+<p>Note: ngStyle is a directive provided by angular</p>
+<div [ngStyle] = styleObject> I am stylized</div>
+
+<p>ngstyle is the property bound to a variable on the backend. In this case,
+    ngStyle looks for an object that can change the css of whatever element it is 
+    applied.
+</p>
+
+<h3>Event binding</h3>
+<p>Used to pass infromation from the view to the backend. Events 
+    are designated with parentheticals. 
+</p>
+
+<div (click)='doubleNum()'>Click on me to double the number {{num}}</div>
+
+<h3>Two way data binding</h3>
+<p>Up to this point we have only seen one way data binding i.e. taking data from the view and passing it
+    to the component, or taking data from compontent and passing it to the view.
+    With two way data binding we provide a way to not ony change data from 
+    the component with interaction on the view, but also represent
+    the changed variable at the view level as well. 
+
+</p>
+
+<div>
+    <input [(ngModel)] = "input">{{input}}
+</div>
