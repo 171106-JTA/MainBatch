@@ -11,11 +11,19 @@
   </welcome-file-list>
   <servlet>
     <description></description>
+    <display-name>FrontController</display-name>
+    <servlet-name>FrontController</servlet-name>
+    <servlet-class>com.revature.servlets.FrontController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FrontController</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>Login</display-name>
     <servlet-name>Login</servlet-name>
-    <servlet-class>com.revature.service.Login</servlet-class>
-    <!-- Temporary reference to com.revature.service package until I get the 
-    Controller set up! -->
+    <servlet-class>com.revature.servlets.Login</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Login</servlet-name>

@@ -11,6 +11,7 @@ import com.revature.util.ConnectionUtil;
 
 public class TrmsDaoImplement implements TrmsDao{
 
+	@Override
 	public ArrayList<User> login(String username, String password) {
 		System.out.println("In the Login Dao");
 		
@@ -19,7 +20,6 @@ public class TrmsDaoImplement implements TrmsDao{
 		ResultSet rs = null;
 		ArrayList<User> allUsers = new ArrayList<User>();
 		try (Connection conn = ConnectionUtil.getConnection()) {
-			
 //			String sql = "SELECT status FROM evan.Login WHERE username=? AND password=?";
 			String sql = "SELECT * FROM Login";
 			ps = conn.prepareStatement(sql);
@@ -39,7 +39,6 @@ public class TrmsDaoImplement implements TrmsDao{
 				System.out.println(theUsername + "\t" + thePassword + "\t" + permission);
 				allUsers.add(new User(theUsername, thePassword, permission));
 			}
-
 		} catch (SQLException e) {
 			// To Do: This catch statement executes if user was not inserted into the
 			// database.
