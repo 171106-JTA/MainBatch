@@ -1,9 +1,9 @@
 package com.revature.service.util;
 
 import java.lang.reflect.Type;
+import java.util.List;
 
 import com.google.gson.Gson;
-import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.reflect.TypeToken;
 import com.revature.businessobject.BusinessObject;
 
@@ -30,8 +30,31 @@ public final class ServiceUtil {
 		return gson.fromJson(json, clazz);
 	}
 	
+	
+	/**
+	 * Converts object to JSON using Gson Library (Class must implement BusinessObject)
+	 * @param item - what to convert to json
+	 * @return json string representation of item 
+	 */
+	public static <T extends BusinessObject> String toJson(List<T> items) {
+		Type type = new TypeToken<List<T>>() {}.getType(); 
+		return gson.toJson(items, type);
+	}
+	
+	/**
+	 * Converts json to java object (Class must implement BusinessObject)
+	 * @param json - what to transform to java
+	 * @return Java representation of json
+	 */
+	public static <T extends BusinessObject> List<T> toJavaArray(String json, Class<List<T>> clazz) {
+		return gson.fromJson(json, clazz);
+	}
+	
 	public static boolean validateEmail(String email) {
 		return email != null && email.matches(regexEmail);
 	}
+	
+	
+	
 	
 }

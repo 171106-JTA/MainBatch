@@ -1,0 +1,73 @@
+.dashboard {
+  overflow-y: hidden;
+  height: 100%;
+  padding-right: 0px;
+  margin-right: 0px;
+}
+
+.draw-main {
+	overflow:hidden; 
+	height:100%;
+	border-right: 2px solid #0072ff;
+}
+
+/* The side navigation menu */
+.sidenav {
+    background-color: transparent; 
+    overflow-x: hidden; /* Disable horizontal scroll */
+}
+
+.drawer-content {
+  height: 100%; /* 100% Full-height */
+  padding-top: 10px;
+  width:100%;
+  overflow: hidden;
+}
+
+.drawer-dynamic-list {
+	overflow-y: auto;
+}
+
+/* sidenave labels */
+.sidenav label {
+  color: black;
+  padding: 0px!important;
+  margin: 0px!important;
+}
+
+.core-main  {
+  overflow-y: auto;
+  height: 100%;
+  padding-right: 0px;
+  margin-right: 0px;
+}
+
+.core-body {
+  width: 100%;
+}
+
+.core-content {
+  padding-top: 10px;
+  overflow: hidden;
+}
+
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+
+/* MOBILE NAV DROPDOWN */
+@media screen and (max-width:767px) {
+	.sidenav {
+		display: none;
+	}
+	.sidebar {
+		display: none;
+	}
+	.filter {
+		display: none;
+	 }
+}

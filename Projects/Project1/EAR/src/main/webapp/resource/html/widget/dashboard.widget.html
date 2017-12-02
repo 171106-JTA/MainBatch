@@ -1,0 +1,47 @@
+<body>
+	<div is-drawer>
+		<div class="row">
+			<div class="col-xs-12">
+				<label>Search: <span info-icon="Message Title"></span></label> <input
+					id="titleSearch" type="text" class="form-control"
+					aria-describedby="searchBtn" />
+			</div>
+		</div>
+		<!--  REQUEST TYPE FILTERING -->
+		<div class="row">
+			<div class="col-xs-12">
+				<div>
+					<label>Filter By: <span info-icon="Reimbursement status">
+					</span>
+					</label> <select id="optionFilter" class="form-control">
+						<option>None</option>
+						<option>New Requests</option>
+						<option>Pending Requests</option>
+						<option>Awarded Requests</option>
+						<option>Denied Requests</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div style="padding-bottom: 5px;"></div>
+		<div class="row">
+			<div class="col-sm-12">
+				<button id="btnSearch" class="form-control btn-primary">
+					<span class="fa fa-search"> </span> Search
+				</button>
+			</div>
+		</div>
+		<!-- SPLIT DYNAMIC CONTENT  -->
+		<div style="height: 5px; padding-top: 5px; padding-bottom: 5px;">
+			<hr class="hr-divider" style="margin: 0px;">
+		</div>
+		<div id="dynamicSearchContainer" class="row drawer-dynamic-list">
+			<div id="dynamicSearchItems" class="col-sm-12">
+				<!-- DYNAMIC ITEMS GO HERE -->
+			</div>
+		</div>
+	</div>
+	<div is-screen>
+
+	</div>
+</body>

@@ -18,6 +18,9 @@ function init() {
 	initUtil();
 	initEventHandlers();
 	initInfoIcons();
+	
+	// See app.draw.js
+	initializeDashboard();
 }
 
 /**
@@ -58,6 +61,16 @@ var initUtil = function () {
 				return found ? args.parent : null;
 			},
 			
+			send: function (options, done, fail) {
+				$.ajax({
+			        url:'Dashboard.do',
+			        data: options,
+			        type:'post',
+			        cache: false,
+			        success: typeof done === "function" ? done : function () {},
+			        error: typeof fail === "function" ? fail : function () {}
+			    });
+			},
 			
 			helper: {
 				/**
@@ -141,6 +154,7 @@ var initInfoIcons = function () {
 		options = { 
 			'title': title,
 			'placement': rect.top < 50 ? 'bottom' : 'top',
+		    'container':"body",
 			'trigger': 'click'
 		};
 

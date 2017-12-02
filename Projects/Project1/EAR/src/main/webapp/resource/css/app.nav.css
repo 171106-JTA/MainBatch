@@ -4,6 +4,8 @@
     background-color: #0072ff;
     border-color: #0050ff;
     border-radius: 0;
+    padding-bottom:0px;
+    margin-bottom:0px;
 }
 
 .navbar-default .navbar-brand,
@@ -94,4 +96,14 @@
 		background-color: #0050ff;
 	}
 }
+
+/* READ ONLY SHOW NATURAL/DEFAULT COLOR */
+.navbar-default .navbar-nav > li[class~="readonly"] > a,
+.navbar-default .navbar-nav > li[class~="readonly"] > a:hover,
+.navbar-default .navbar-nav > li[class~="readonly"] > a:active,
+.navbar-default .navbar-nav > li[class~="readonly"] > a:focus {
+		background-color: #0072ff;
+	    color: white;
+}
+
 

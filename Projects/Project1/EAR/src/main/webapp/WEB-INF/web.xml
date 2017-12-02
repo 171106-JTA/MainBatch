@@ -22,6 +22,10 @@
       <param-name>CreateAccount</param-name>
       <param-value>createAccount</param-value>
     </init-param>
+    <init-param>
+      <param-name>Dashboard</param-name>
+      <param-value>processDashboardRequest</param-value>
+    </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
