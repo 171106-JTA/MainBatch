@@ -2,6 +2,7 @@ package me.daxterix.trms.dao;
 
 import me.daxterix.trms.dao.exception.DuplicateIdException;
 import me.daxterix.trms.dao.exception.NonExistentIdException;
+import me.daxterix.trms.model.EventGrade;
 import me.daxterix.trms.model.ReimbursementRequest;
 import me.daxterix.trms.model.RequestFile;
 import org.hibernate.Session;
@@ -29,14 +30,24 @@ public class RequestFileDAOImpl extends ObjectDAO implements RequestFileDAO {
     @Override
     @Transactional(readOnly = true)
     public List<RequestFile> getFilesForRequest(long requestId) throws NonExistentIdException {
-        ReimbursementRequest request = getObject(ReimbursementRequest.class, requestId);
-        return request.getFiles();
+        try(Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            ReimbursementRequest request = session.get(ReimbursementRequest.class, requestId);
+            if (request == null)
+                throw new NonExistentIdException(String.format("Request %d does not exist", requestId));
+
+            List<RequestFile> files = request.getFiles();
+            files.size();   // force lazy fetching
+            session.getTransaction().commit();
+            return files;
+        }
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<RequestFile> getGradeFileForRequest(long requestId) throws NonExistentIdException {
         try(Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
             ReimbursementRequest request = session.get(ReimbursementRequest.class, requestId);
             if (request == null)
                 throw new NonExistentIdException(String.format("Request %d does not exist", requestId));
@@ -48,7 +59,9 @@ public class RequestFileDAOImpl extends ObjectDAO implements RequestFileDAO {
             Predicate requestPredicate = critBuild.equal(getRequestIdPath(requestRoot), requestId);
             critQuery.select(requestRoot).where(requestPredicate);
             TypedQuery<RequestFile> query = session.createQuery(critQuery);
-            return query.getResultList();
+            List<RequestFile> files = query.getResultList();
+            session.getTransaction().commit();
+            return files;
         }
     }
 
@@ -68,9 +81,18 @@ public class RequestFileDAOImpl extends ObjectDAO implements RequestFileDAO {
         updateObject(file, file.getId());
     }
 
-    @Override
+    @Override   // todo: test
     @Transactional
     public void deleteFile(long fileId) throws NonExistentIdException {
-        deleteObject(RequestFile.class, fileId);
+        try(Session session = sessionFactory.openSession()) {
+            RequestFile file = session.get(RequestFile.class, fileId);
+            if (file == null)
+                throw new NonExistentIdException("Request File does not exist");
+            EventGrade assocGrade = file.getEventGrade();
+            if (assocGrade != null)
+                assocGrade.setFile(null);
+
+            session.delete(file);
+        }
     }
 }

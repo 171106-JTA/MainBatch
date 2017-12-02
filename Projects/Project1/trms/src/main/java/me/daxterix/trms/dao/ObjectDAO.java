@@ -65,8 +65,9 @@ public class ObjectDAO {
 
             if(session.get(obj.getClass(), id) == null)
                 throw new NonExistentIdException();
+            else
+                session.merge(obj);
 
-            session.update(obj);
             session.getTransaction().commit();
         }
     }
@@ -74,7 +75,8 @@ public class ObjectDAO {
 
     /**
      * saves a generic hibernate annotated bean instance, returns the
-     * (potentially generated) id of the persisted object
+     * id of the persisted object; also sets the id of the passed in object
+     * (in case of generated ones)
      *
      * @param obj
      * @return

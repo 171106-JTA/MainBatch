@@ -32,6 +32,9 @@ public class RequestFile implements Serializable {
     @Column(name="file_content")
     private Byte[] content;
 
+    @OneToOne(mappedBy="file")
+    private EventGrade eventGrade;
+
 
     public long getId() {
         return id;
@@ -79,5 +82,13 @@ public class RequestFile implements Serializable {
 
     public void setMimeType(MimeType mimeType) {
         this.mimeType = mimeType;
+    }
+
+    public EventGrade getEventGrade() {
+        return eventGrade;
+    }
+
+    public void setEventGrade(EventGrade eventGrade) {
+        this.eventGrade = eventGrade;
     }
 }

@@ -14,11 +14,11 @@ public class Employee implements Serializable {
     private String email;
 
     @MapsId     // primary key (email) is also a foreign key
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="email", foreignKey=@ForeignKey(name="fk_emp_acc"), updatable=false)
     private EmployeeAccount account;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="dept_name", foreignKey=@ForeignKey(name="fk_emp_dept"))
     private Department department;
 

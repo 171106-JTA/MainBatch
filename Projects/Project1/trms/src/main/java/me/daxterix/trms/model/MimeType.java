@@ -10,6 +10,8 @@ import java.io.Serializable;
 @Table(name="mimetype")
 public class MimeType implements Serializable {
 
+    public static final String PNG = "image/png";
+
     @Id
     @Column(name="mime_type", length=50)
     private String mimeType;

@@ -1,14 +1,11 @@
 package me.daxterix.trms.dao;
 
-import me.daxterix.trms.model.Department;
-import me.daxterix.trms.model.Employee;
-import me.daxterix.trms.model.RequestStatus;
+import me.daxterix.trms.model.*;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import me.daxterix.trms.dao.exception.DuplicateIdException;
 import me.daxterix.trms.dao.exception.NonExistentIdException;
-import me.daxterix.trms.model.ReimbursementRequest;
 import org.hibernate.Session;
 
 import javax.persistence.TypedQuery;
@@ -28,9 +25,27 @@ public class RequestDAOImpl extends ObjectDAO implements RequestDAO {
     }
 
     @Override
-    @Transactional
+    @Transactional  // todo: test thoroughly; note order of deletion is (very) important
     public void deleteRequest(long requestId) throws NonExistentIdException {
-        deleteObject(ReimbursementRequest.class, requestId);
+        try(Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            ReimbursementRequest request = session.get(ReimbursementRequest.class, requestId);
+            if (request == null)
+                throw new NonExistentIdException("Request does not exist");
+
+            EventGrade grade = request.getGrade();
+            if (grade != null)
+                session.delete(grade);
+
+            for (RequestFile file : request.getFiles())
+                session.delete(file);
+
+            for (RequestHistory history : request.getHistory())
+                session.delete(history);
+
+            session.delete(request);
+            session.getTransaction().commit();
+        }
     }
 
     @Override
@@ -40,15 +55,28 @@ public class RequestDAOImpl extends ObjectDAO implements RequestDAO {
     }
 
     @Override
+    @Transactional(readOnly=true)
+    public ReimbursementRequest getRequestById(long id) throws NonExistentIdException {
+        return getObject(ReimbursementRequest.class, id);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public List<ReimbursementRequest> getFiledRequests(String email) throws NonExistentIdException {
         try(Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
             Employee emp = session.get(Employee.class, email);
             if (emp == null)
                 throw new NonExistentIdException("Request does not exist");
-            return emp.getRequests();
+            List<ReimbursementRequest> requests = emp.getRequests();
+            requests.size();    // force lazy loading
+            session.getTransaction().commit();
+            return requests;
         }
     }
+
+
+    // todo: enclose blow queries in transactions
 
     @Override
     @Transactional(readOnly = true)

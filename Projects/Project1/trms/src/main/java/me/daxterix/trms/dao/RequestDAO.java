@@ -8,9 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 public interface RequestDAO {
+
     long save(ReimbursementRequest request) throws DuplicateIdException;
     void deleteRequest(long requestId) throws NonExistentIdException;
     void update(ReimbursementRequest request) throws NonExistentIdException;
+
+    ReimbursementRequest getRequestById(long id) throws NonExistentIdException;
 
     List<ReimbursementRequest> getFiledRequests(String email) throws NonExistentIdException;
     List<ReimbursementRequest> getPendingFiledRequests(String email) throws NonExistentIdException;

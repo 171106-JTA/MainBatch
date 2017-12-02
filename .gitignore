@@ -12,6 +12,9 @@
 **/bin/
 **/META-INF/**
 
+#IDEs
+**/out
+
 #Eclipse
 **/.metadata
 **/.project
