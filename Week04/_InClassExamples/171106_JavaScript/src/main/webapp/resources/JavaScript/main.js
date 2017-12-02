@@ -120,8 +120,8 @@ function validateRegistration(){
 		error.innerHTML ="Passwords do not match";
 		return false;
 	}
-	if(password1.length <30){
-		error.innerHTML = "Passwords require at least 30 characters";
+	if(password1.length < 8){
+		error.innerHTML = "Passwords require at least 8 characters";
 		return false;
 	}
 	return true;
@@ -131,7 +131,7 @@ var idCount = 0;
 
 function sendAJAX(){
 	var input = document.getElementById("input").value;
-	var url = "http://pokeapi.co/api/v2/pokemon/" + input + "/";
+	var url = "GetUsers";
 	
 	var xhr = new XMLHttpRequest();
 	/*
@@ -150,8 +150,35 @@ function sendAJAX(){
 	 */
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){
-			console.log(xhr.responseText);
-		}else{
+			
+			var xmlText = xhr.responseXML;
+			
+			var response = xmlText.getElementsByTagName("trainer");
+			
+			var resultTable = document.getElementById("results");
+			
+			for(i in response){
+				var row = document.createElement("tr");
+				var td1 = document.createElement("td");
+				var td2 = document.createElement("td");
+				var td3 = document.createElement("td");
+				var td4 = document.createElement("td");
+				
+				td1.innerHTML = response[i].childNodes[0].innerHTML;	
+				td2.innerHTML = response[i].childNodes[1].innerHTML;
+				td3.innerHTML = response[i].childNodes[2].innerHTML;
+				td4.innerHTML = response[i].childNodes[3].innerHTML;
+				row.appendChild(td1);
+				row.appendChild(td2);
+				row.appendChild(td3);
+				row.appendChild(td4);
+				resultTable.appendChild(row);
+			}
+			
+
+			
+		}else if(xhr.readyState == 4 && xhr.status != 200){
+			console.log(xhr.status);
 			document.getElementById("AJAXError").innerHTML="Woops";
 		}
 	}
@@ -161,7 +188,8 @@ function sendAJAX(){
 	 * an asynchronous call (Why would you not use asynchronosity with AJAX?!)
 	 * .open("HTTPMETHOD", "endpoint", booleanForUsingAsynchronous)
 	 */
-	xhr.open("GET",url, true);
-	xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
-	xhr.send();
+	xhr.open("POST",url);
+	//Tell our xhr how to send the data to the endpoint.
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr.send("username=" + input);
 }
