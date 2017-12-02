@@ -31,7 +31,6 @@ var initUser = function () {
 		if (response != null) {
 			// Cache user information 
 			data.user = response[0];
-			data.info = response[1];
 			
 			$("#username").text(" " + data.user.username);
 		}
@@ -116,7 +115,7 @@ var onAccountClick = function () {
 	// Build widget if widget exists else send request for it
 	if (widget.account) {
 		assignWidget(widget.account);
-		widget.account.screenMethod({ "user": data.user, "info": data.info });
+		widget.account.screenMethod({ "user": data.user });
 	}else {
 		var options;
 		
@@ -131,7 +130,7 @@ var onAccountClick = function () {
 			// ensure non-null response
 			if (response != null) {
 				assignWidget(widget.account = parseWidgetData(response));		
-				widget.account.screenMethod({ "user": data.user, "info": data.info });
+				widget.account.screenMethod({ "user": data.user });
 			}
 		}, function (error){
 			console.log(error);

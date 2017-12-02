@@ -27,17 +27,20 @@
 		<script type="text/javascript">
 			 execute = function (params) { 
 				var user = params.user;
-				var info = params.info;
 				
+				// fill-fields 
 				$("#acctStatus").text(user.role);
 				$("#acctUserName").text(user.username);
-				$("#acctFirstName").text(info.firstName);
-				$("#acctLastName").text(info.lastName);
-				$("#acctState").text(info.state);
-				$("#acctCity").text(info.city);
-				$("#acctAddress").text(info.address);
-				$("#acctEmail").text(info.email);
-				$("#accPhoneNumber").text(info.phoneNumber);
+				$("#acctFirstName").text(user.firstName);
+				$("#acctLastName").text(user.lastName);
+				$("#acctState").text(user.state);
+				$("#acctCity").text(user.city);
+				$("#acctAddress").text(user.address);
+				$("#acctEmail").text(user.email);
+				$("#accPhoneNumber").text(user.phoneNumber);
+				
+				// assign 
+				
 			}
 		</script>
 		
