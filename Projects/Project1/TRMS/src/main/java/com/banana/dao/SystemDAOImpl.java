@@ -40,7 +40,7 @@ public class SystemDAOImpl implements SystemDAO{
 	
 	@Override
 	public int submitRequest(ReimburseRequest request) {
-		String sql = "{call submit_request(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
+		String sql = "{call submit_request(?, ?, ?, ?, ?, ?, ?)}";
 		CallableStatement cs = null;
 		
 		try(Connection conn = ConnectionUtil.getConnection()){
@@ -52,12 +52,11 @@ public class SystemDAOImpl implements SystemDAO{
 			cs.setString(5, request.getEventType());
 			cs.setString(6, request.getJustification());
 			cs.setInt(7, request.getEmpID());
-			cs.setString(8, request.getfName());
-			cs.setString(9, request.getlName());
 			
 			cs.executeQuery();
 			
 		}catch(SQLException e) {
+			e.printStackTrace();
 			return 0;
 		}finally {
 			close(cs);

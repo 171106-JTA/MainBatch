@@ -8,11 +8,9 @@ public class ReimburseRequest {
 	private String eventType;
 	private String justification;
 	private int empID;
-	private String fName;
-	private String lName;
-	
+
 	public ReimburseRequest(String location, String description, double cost, int gradingFormat, String eventType,
-			String justification, int empID, String fName, String lName) {
+			String justification, int empID) {
 		super();
 		this.location = location;
 		this.description = description;
@@ -21,10 +19,8 @@ public class ReimburseRequest {
 		this.eventType = eventType;
 		this.justification = justification;
 		this.empID = empID;
-		this.fName = fName;
-		this.lName = lName;
 	}
-
+	
 	public String getLocation() {
 		return location;
 	}
@@ -79,22 +75,6 @@ public class ReimburseRequest {
 
 	public void setEmpID(int empID) {
 		this.empID = empID;
-	}
-
-	public String getfName() {
-		return fName;
-	}
-
-	public void setfName(String fName) {
-		this.fName = fName;
-	}
-
-	public String getlName() {
-		return lName;
-	}
-
-	public void setlName(String lName) {
-		this.lName = lName;
 	}
 	
 	

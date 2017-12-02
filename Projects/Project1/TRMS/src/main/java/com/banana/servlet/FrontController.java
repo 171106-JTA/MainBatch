@@ -55,8 +55,12 @@ public class FrontController extends HttpServlet {
 	/*			out.println("success");
 				rd = request.getRequestDispatcher("index.html");
 				rd.include(request, response); */
-				rd = request.getRequestDispatcher("UserAuthentication");
+				rd = request.getRequestDispatcher("EmployeeLogin");
 				rd.forward(request, response);
+				break;
+			case "submit":
+				rd = request.getRequestDispatcher("SubmitRequest");
+				rd.include(request, response);
 				break;
 		default: 
 			response.sendError(404);

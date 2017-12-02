@@ -21,13 +21,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>UserAuthentication</display-name>
-    <servlet-name>UserAuthentication</servlet-name>
-    <servlet-class>com.banana.servlet.UserAuthentication</servlet-class>
+    <display-name>EmployeeLogin</display-name>
+    <servlet-name>EmployeeLogin</servlet-name>
+    <servlet-class>com.banana.servlet.EmployeeLogin</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>UserAuthentication</servlet-name>
-    <url-pattern>/UserAuthentication</url-pattern>
+    <servlet-name>EmployeeLogin</servlet-name>
+    <url-pattern>/EmployeeLogin</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>

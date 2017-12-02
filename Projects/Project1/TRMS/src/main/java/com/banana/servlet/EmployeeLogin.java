@@ -9,13 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.banana.bean.Employee;
-import com.banana.dao.SystemDAOImpl;
+import com.banana.service.ValidateUser;
 
 /**
  * Servlet implementation class UserAuthentication
  */
-public class UserAuthentication extends HttpServlet {
+public class EmployeeLogin extends HttpServlet {
 	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -29,27 +28,13 @@ public class UserAuthentication extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		UserAuthentication.validate(request, response);
-	}
-
-	private static void validate(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
-		SystemDAOImpl dao = new SystemDAOImpl();
-		String requestUsername = request.getParameter("username");
-		String requestPassword = request.getParameter("password");
 		RequestDispatcher rd = null;
-		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		
-		Employee emp = dao.getEmployeeByUsername(requestUsername);
-		System.out.println(emp);
-		if(emp != null) {
-			String realPassword = emp.getPassword(); 
-			if(requestPassword.equals(realPassword)) {
-				rd = request.getRequestDispatcher("employee.html");
-				rd.forward(request, response);
-			}
+		if(ValidateUser.validate(request, response)) {
+			rd = request.getRequestDispatcher("employee.html");
+			rd.forward(request, response);
 		}
 		else {
 			out.println("Try Again");
@@ -57,4 +42,6 @@ public class UserAuthentication extends HttpServlet {
 			rd.include(request, response);
 		}
 	}
+
+	
 }
