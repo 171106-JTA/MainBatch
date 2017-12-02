@@ -12,33 +12,35 @@ import com.revature.util.ConnectionUtil;
 public class TrmsDaoImplement implements TrmsDao{
 
 	@Override
-	public ArrayList<User> login(String username, String password) {
+	public String login(String username, String password) {
 		System.out.println("In the Login Dao");
 		
-		int status = -1;
+		String permission = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		ArrayList<User> allUsers = new ArrayList<User>();
 		try (Connection conn = ConnectionUtil.getConnection()) {
-//			String sql = "SELECT status FROM evan.Login WHERE username=? AND password=?";
-			String sql = "SELECT * FROM Login";
+			String sql = "SELECT * FROM Login WHERE username=? AND password=?";
+//			String sql = "SELECT * FROM Login";
 			ps = conn.prepareStatement(sql);
-//			ps.setString(1, username);
-//			ps.setString(2, password);
+			ps.setString(1, username);
+			ps.setString(2, password);
 			
 			rs = ps.executeQuery();
 			
-//			if(rs.next()) {
-//				status = rs.getInt("permission");
-//			}
-			System.out.println("Username\tPassword\tPermissions");
-			while(rs.next()) {
-				String theUsername = rs.getString("USERNAME");
-				String thePassword = rs.getString("PASSWORD");
-				int permission = rs.getInt("PERMISSION");
-				System.out.println(theUsername + "\t" + thePassword + "\t" + permission);
-				allUsers.add(new User(theUsername, thePassword, permission));
+			System.out.println("Testing Result");
+			if(rs.next()) {
+				System.out.println("At least 1 result!!!");
+				username = rs.getString("username");
+				password = rs.getString("password");
+				permission = rs.getString("permission");
+				System.out.println("username: " + username + ", password: " + password + ", permission: " + permission);
 			}
+//			 while(rs.next()) {
+//				 String theUsername = rs.getString("USERNAME");
+//				 String thePassword = rs.getString("PASSWORD");
+//				 permission = rs.getString("PERMISSION");
+//				 System.out.println(theUsername + "\t" + thePassword + "\t" + permission);
+//			 }
 		} catch (SQLException e) {
 			// To Do: This catch statement executes if user was not inserted into the
 			// database.
@@ -61,8 +63,7 @@ public class TrmsDaoImplement implements TrmsDao{
 			}
 		}
 
-//		return status;
-		return allUsers;
+		return permission;
 	}
 
 }

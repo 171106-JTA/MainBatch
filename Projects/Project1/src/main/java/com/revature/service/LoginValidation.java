@@ -25,9 +25,10 @@ public class LoginValidation {
 		dao = new TrmsDaoImplement();
 	}
 
-	public void validateLoginCredentials(String username, String password)
+	public String validateLoginCredentials(String username, String password)
 			throws ServletException, IOException {
 		
 		System.out.println(username + ", " + password);
+		return dao.login(username, password);
 	}
 }

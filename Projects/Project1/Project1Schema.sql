@@ -5,29 +5,39 @@
 --DROP TABLE benefits_coordinator;
 DROP TABLE Login;
 
+/*
+permission: 
+0 -> Logged in as standard user
+1 -> Logged in as BenCo
+2 -> Logged in as Direct Supervisor
+3 -> Logged in as Department Head
+
+*/
 CREATE TABLE Login (
     username VARCHAR(100),
     password VARCHAR(100),
-    permission number(1),
+    permission VARCHAR(100),
     CONSTRAINT PK_username primary key (username)
 )
 /
 
+
 INSERT INTO Login 
-values ('evan', 'password', 0);
+values ('evan', 'password', 'employee');
 INSERT INTO Login 
-values ('A', 'A', 0);
+values ('A', 'A', 'employee');
 INSERT INTO Login 
-values ('B', 'B', 0);
+values ('B', 'B', 'benco');
 INSERT INTO Login 
-values ('C', 'C', 0);
+values ('C', 'C', 'direct_supervisor');
 INSERT INTO Login 
-values ('D', 'D', 0);
+values ('D', 'D', 'department_head');
 INSERT INTO Login 
-values ('E', 'E', 0);
+values ('E', 'E', 'employee');
 
 
 SELECT * FROM Login; 
+SELECT upper(PERMISSION) FROM Login;
 --CREATE TABLE Employee_Info (
 --    employeeid NUMBER(7),
 --    email VARCHAR2(500),
