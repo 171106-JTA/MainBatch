@@ -18,7 +18,6 @@ public interface RequestDAO {
 
     List<ReimbursementRequest> getDeniedFiledRequests(String email) throws NonExistentIdException;
 
-    @Transactional(readOnly = true)
     List<ReimbursementRequest> getPendingGradeFiledRequests(String email) throws NonExistentIdException;
 
     List<ReimbursementRequest> getRequestsByDepartment(String department) throws NonExistentIdException;

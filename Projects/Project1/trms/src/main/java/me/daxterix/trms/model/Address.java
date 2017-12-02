@@ -65,4 +65,15 @@ public class Address implements Serializable{
     public void setZip(String zip) {
         this.zip = zip;
     }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", zip='" + zip + '\'' +
+                '}';
+    }
 }

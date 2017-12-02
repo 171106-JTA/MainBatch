@@ -7,6 +7,7 @@ import java.util.List;
 @Entity
 @Table(name="employee")
 public class Employee implements Serializable {
+    private static final long INITIAL_FUNDS = 1000;
 
     @Id
     @Column(name="email", length=50)
@@ -25,6 +26,9 @@ public class Employee implements Serializable {
     @JoinColumn(name="supe_email", foreignKey=@ForeignKey(name="fk_emp_supe"))
     private Employee supervisor;
 
+    @OneToMany(mappedBy="supervisor")
+    private List<Employee> supervisees;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="emp_rank", foreignKey=@ForeignKey(name="fk_emp_rank"))
     private EmployeeRank rank;
@@ -36,7 +40,7 @@ public class Employee implements Serializable {
     private String lastname;
 
     @Column(name="funds", nullable = false)
-    private float availableFunds;
+    private float availableFunds = INITIAL_FUNDS;
 
     @OneToMany(fetch=FetchType.LAZY, mappedBy="filer", cascade=CascadeType.ALL)
     private List<ReimbursementRequest> requests;
@@ -106,6 +110,14 @@ public class Employee implements Serializable {
 
     public void setSupervisor(Employee supervisor) {
         this.supervisor = supervisor;
+    }
+
+    public List<Employee> getSupervisees() {
+        return supervisees;
+    }
+
+    public void setSupervisees(List<Employee> supervisees) {
+        this.supervisees = supervisees;
     }
 
     public List<ReimbursementRequest> getRequests() {

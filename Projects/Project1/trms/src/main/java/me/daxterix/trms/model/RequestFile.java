@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="requestfile")
+@Table(name="reqfile")
 public class RequestFile implements Serializable {
 
     @Id

@@ -12,6 +12,13 @@ import java.io.Serializable;
 @Table(name="eventtype")
 public class EventType implements Serializable {
 
+    public static final String UNIVERSITY_COURSE = "University Course";
+    public static final String SEMINAR = "Seminars";
+    public static final String CERTIFICATION_PREP = "Certification Preparation Class";
+    public static final String CERTIFICATION = "Certification";
+    public static final String TECH_TRAINING = "Technical Training";
+    public static final String OTHER = "Other";
+
     @Id
     @Column(name="event_type", length=50)
     private String type;

@@ -3,6 +3,7 @@ package me.daxterix.trms.dao;
 import me.daxterix.trms.dao.exception.DuplicateIdException;
 import me.daxterix.trms.dao.exception.NonExistentIdException;
 import me.daxterix.trms.model.*;
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,8 +58,45 @@ public class EmployeeDAOImpl extends ObjectDAO implements EmployeeDAO {
     }
 
     @Override
-    @Transactional
+    @Transactional  // todo: test thoroughly; note order of deletion is (very) important
     public void deleteAccount(String email) throws NonExistentIdException {
-        deleteObject(EmployeeAccount.class, email);
+        try (Session session = sessionFactory.openSession()) {
+            session.getTransaction().begin();
+
+            EmployeeAccount acc = session.get(EmployeeAccount.class, email);
+            if (acc == null)
+                throw new NonExistentIdException("Account does not exist");
+
+            EmployeeInfo info = acc.getInfo();
+            if (info != null)
+                session.delete(info);
+
+            Employee emp = acc.getEmployee();
+            if (emp != null) {
+                for (Employee subject: emp.getSupervisees())
+                    subject.setSupervisor(null);
+
+                for (ReimbursementRequest request: emp.getRequests()) {
+                    EventGrade grade = request.getGrade();
+                    if (grade != null)
+                        session.delete(grade);
+
+                    for (RequestFile file: request.getFiles())
+                        session.delete(file);
+
+                    for (RequestHistory history: request.getHistory())
+                        session.delete(history);
+
+                    if (request.getStatus().getStatus().equals(RequestStatus.GRANTED) ||
+                            request.getStatus().getStatus().equals(RequestStatus.DENIED))
+                        request.setFiler(null); // leave these for auditing purposes
+                    else
+                        session.delete(request);
+                }
+                session.delete(emp);
+            }
+            session.delete(acc);
+            session.getTransaction().commit();
+        }
     }
 }

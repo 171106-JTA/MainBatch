@@ -14,6 +14,14 @@ public class EmployeeRank {
     public static final String DEPARTMENT_HEAD = "Department Head";
     public static final String BENCO = "Benefits Coordinator";
 
+    public String getRank() {
+        return rank;
+    }
+
+    public void setRank(String rank) {
+        this.rank = rank;
+    }
+
     @Id
     @Column(name="emp_rank", length=50)
     private String rank;
