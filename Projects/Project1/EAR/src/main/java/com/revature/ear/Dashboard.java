@@ -75,7 +75,7 @@ public class Dashboard extends HttpServlet {
 		String result = null;
 		RequestDispatcher rd = null;
 		String msg = "ok";
-		
+
 		try {
 			// Attempt to process request 
 			switch (transtype.toUpperCase()) {
@@ -85,7 +85,10 @@ public class Dashboard extends HttpServlet {
 					break;
 				case "GETWIDGET":
 					response.setContentType("text/html");
-				    result = GetWidget.getWidget(request.getParameter("widget"));
+
+					// Get appropriate widget 
+					if ((result = GetWidget.getWidgetPath((String)session.getAttribute("role"), request.getParameter("widget")) ) != null)
+						result = GetWidget.getWidget(getServletContext().getResourceAsStream(result));
 					break;
 				default:
 					response.setContentType("text/html");

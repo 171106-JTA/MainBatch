@@ -54,20 +54,6 @@ var initContent = function (){
 	}
 }
 
-
-///
-//	HELPERS
-///
-
-
-/**
- * @description Generates dynamic content based on json received from the server
- * @param {Json} json - response from server  
- */
-var buildNavigationFromJson = function (json) {
-	
-}
-
 ///
 //	EVENT HANDLERS
 ///
@@ -130,7 +116,7 @@ var onAccountClick = function () {
 	// Build widget if widget exists else send request for it
 	if (widget.account) {
 		assignWidget(widget.account);
-		assembleUserData({ "user": data.user, "info": data.info });
+		widget.account.screenMethod({ "user": data.user, "info": data.info });
 	}else {
 		var options;
 		
@@ -145,7 +131,7 @@ var onAccountClick = function () {
 			// ensure non-null response
 			if (response != null) {
 				assignWidget(widget.account = parseWidgetData(response));		
-				assembleUserData({ "user": data.user, "info": data.info });
+				widget.account.screenMethod({ "user": data.user, "info": data.info });
 			}
 		}, function (error){
 			console.log(error);
@@ -153,6 +139,17 @@ var onAccountClick = function () {
 	}
 }
 
+///
+//	HELPER METHODS 
+///
+
+/**
+ * @description Generates dynamic content based on json received from the server
+ * @param {Json} json - response from server  
+ */
+var buildNavigationFromJson = function (json) {
+	
+}
 
 var parseWidgetData = function (response) {
 	var parser = new DOMParser();
@@ -162,20 +159,22 @@ var parseWidgetData = function (response) {
 	// Extract widget data from response 
 	widget = {
 			drawer: $(html).find("div[is-drawer]"),
+			drawerMethod: function () {}, 
 			hideDrawer: $(html).find("div[hide-drawer]").length > 0,
 			screen: $(html).find("div[is-screen]"),
+			screenMethod: function () {}, 
 			hideScreen:  $(html).find("div[hide-screen]") > 0
 	};
 	
 	return widget;
 }
 
-
 var assignWidget = function (widget) {
 	var main = $("#main");
 	var drawer = $("#drawer");
 	var screen = $("#screen");
 	var pane = $("#drawer-pane");
+	var execute;
 	
 	// do we show the drawer?
 	if (widget.hideDrawer) {
@@ -198,7 +197,19 @@ var assignWidget = function (widget) {
 		screen.html(widget.screen);
 		main.show();
 	} 
+	
+	// Eval scripts 
+	if (pane.find("script").length > 0)  {
+		eval(pane.find("script")[0].innerHTML);
+		widget.drawerMethod = execute;
+	} 
+	
+	if (screen.find("script").length > 0) {
+		eval(screen.find("script")[0].innerHTML);
+		widget.screenMethod = execute;
+	}
 }
+
 
 
 
