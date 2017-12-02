@@ -108,6 +108,86 @@ public final class DAOBusinessObject {
 	}
 	
 	/**
+	 * Loads items which matches argument (null values ignored)
+	 * @param item - what to check records against
+	 * @param whereClause - for custom conditions
+	 * @return list of records which met the criteria specified by argument 
+	 */
+	public static List<BusinessObject> load(BusinessObject item, String whereClause) {
+		String sql = "SELECT * FROM " + map.get(item.getClass().getSimpleName()) + " " + whereClause;
+		List<String> params = prepareParameters(item, true);
+		List<BusinessObject> records = null;
+		PreparedStatement statement = null;
+		ResultSet res = null;
+		
+		logger.debug("preforming query " + sql + " ...");
+
+		// Attempt to load records from database
+		try (Connection conn = getConnection()) {
+			// Get handle to statement 
+			statement = conn.prepareStatement(sql);
+			
+			// Sanitize/Parameterize statement
+			assignClauseValues(statement, item, 1);
+			
+			// Perform query
+			res = statement.executeQuery();
+			
+			// Transform database records into Java Objects
+			records = factory.getBusinessObject(res, item.getClass());
+		} catch (SQLException | ClassCastException e) {
+			logger.debug("query failed " + sql + ", message=" + e);
+			e.printStackTrace();
+		} catch (Exception e){
+			logger.debug("query failed " + sql + ", message=" + e);
+			e.printStackTrace();
+		}finally {
+			close(statement);
+			close(res);
+		}
+
+		return records;
+	}
+	
+	/**
+	 * Loads items which matches argument (null values ignored)
+	 * @param clazz - what to check records against
+	 * @param whereClause - for custom conditions
+	 * @return list of records which met the criteria specified by argument 
+	 */
+	public static List<BusinessObject> load(Class<? extends BusinessObject> clazz, String whereClause) {
+		String sql = "SELECT * FROM " + map.get(clazz.getSimpleName()) + " " + whereClause;
+		List<BusinessObject> records = null;
+		PreparedStatement statement = null;
+		ResultSet res = null;
+		
+		logger.debug("preforming query " + sql + " ...");
+
+		// Attempt to load records from database
+		try (Connection conn = getConnection()) {
+			// Get handle to statement 
+			statement = conn.prepareStatement(sql);
+			
+			// Perform query
+			res = statement.executeQuery();
+			
+			// Transform database records into Java Objects
+			records = factory.getBusinessObject(res, clazz);
+		} catch (SQLException | ClassCastException e) {
+			logger.debug("query failed " + sql + ", message=" + e);
+			e.printStackTrace();
+		} catch (Exception e){
+			logger.debug("query failed " + sql + ", message=" + e);
+			e.printStackTrace();
+		}finally {
+			close(statement);
+			close(res);
+		}
+
+		return records;
+	}
+	
+	/**
 	 * Adds set of items to database
 	 * @param items - what to save in database
 	 * @return number of records created 

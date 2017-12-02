@@ -30,7 +30,7 @@ var initUser = function () {
 	Util.send({ 'transtype': "GETUSERINFO" }, function (response){
 		if (response != null) {
 			// Cache user information 
-			data.user = response[0];
+			data.user = response;
 			
 			$("#username").text(" " + data.user.username);
 		}
