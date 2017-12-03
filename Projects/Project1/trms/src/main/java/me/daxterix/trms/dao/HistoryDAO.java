@@ -11,5 +11,6 @@ public interface HistoryDAO {
     List<RequestHistory> getHistoryByRequest(long requestId) throws NonExistentIdException;
     List<RequestHistory> getHistoryByDepartment(String dept) throws NonExistentIdException;
     List<RequestHistory> getAllHistory();
-    List<RequestHistory> getHistoryByEmployee(String email) throws NonExistentIdException;
+    List<RequestHistory> getHistoryByFiler(String email) throws NonExistentIdException;
+    List<RequestHistory> getHistoryByApprover(String email) throws NonExistentIdException;
 }

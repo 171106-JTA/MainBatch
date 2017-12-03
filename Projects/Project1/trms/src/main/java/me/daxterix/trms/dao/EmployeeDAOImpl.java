@@ -64,8 +64,10 @@ public class EmployeeDAOImpl extends ObjectDAO implements EmployeeDAO {
             session.getTransaction().begin();
 
             EmployeeAccount acc = session.get(EmployeeAccount.class, email);
-            if (acc == null)
+            if (acc == null) {
+                session.getTransaction().rollback();
                 throw new NonExistentIdException("Account does not exist");
+            }
 
             EmployeeInfo info = acc.getInfo();
             if (info != null)

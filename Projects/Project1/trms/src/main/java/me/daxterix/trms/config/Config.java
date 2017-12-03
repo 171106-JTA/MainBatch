@@ -6,7 +6,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -101,8 +100,8 @@ public class Config {
     }
 
     @Bean
-    public RequestFileDAO fileDAO(SessionFactory sessionFactory) {
-        return new RequestFileDAOImpl(sessionFactory);
+    public RequestInfoDAO fileDAO(SessionFactory sessionFactory) {
+        return new RequestInfoDAOImpl(sessionFactory);
     }
 
     @Bean

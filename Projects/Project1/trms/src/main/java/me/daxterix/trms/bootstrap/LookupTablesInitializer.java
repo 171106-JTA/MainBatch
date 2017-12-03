@@ -10,6 +10,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import sun.misc.Request;
 
 import javax.persistence.PersistenceException;
 import java.util.Arrays;
@@ -39,12 +40,12 @@ public class LookupTablesInitializer {
     @Transactional
     void populateMimeTable() {
         String [] mimeTypes = {
-                "image/jpeg",
-                "image/png",
-                "text/plain",
-                "application/pdf",
-                "application/msword",
-                "application/vnd.ms-outlook"
+                MimeType.PNG,
+                MimeType.JPEG,
+                MimeType.TEXT_PLAIN,
+                MimeType.PDF,
+                MimeType.MS_OUTLOOK,
+                MimeType.MS_WORD,
         };
         try(Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
@@ -64,9 +65,9 @@ public class LookupTablesInitializer {
     @Transactional
     void populateFilePurposeTable() {
         String [] filePurposes = {
-                "Approval Email",
-                "Grade Document",
-                "Event information"
+                FilePurpose.APPROVAL_EMAIL,
+                FilePurpose.GRADE_DOCUMENT,
+                FilePurpose.EVENT_INFO
         };
         try(Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
@@ -86,10 +87,10 @@ public class LookupTablesInitializer {
     @Transactional
     void populateEmployeeRankTable() {
         String [] ranks = {
-                "Regular",
-                "Supervisor",
-                "Department Head",
-                "Benefits Coordinator"
+                EmployeeRank.REGULAR,
+                EmployeeRank.SUPERVISOR,
+                EmployeeRank.DEPARTMENT_HEAD,
+                EmployeeRank.BENCO
         };
         try(Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
@@ -110,13 +111,12 @@ public class LookupTablesInitializer {
     void populateRequestStatusTable() {
 
         String [] statuses = {
-                "Pending Direct Supervisor Approval",
-                "Approved by Direct Supervisor",
-                "Approved by Department Head",
-                "Approved by Benefits Coordinator",
-                "Pending Grade Review",  // should this be broken up?
-                "Granted",
-                "Denied"
+                RequestStatus.AWAITING_SUPERVISOR,
+                RequestStatus.AWAITING_DEPT_HEAD,
+                RequestStatus.AWAITING_BENCO,
+                RequestStatus.AWAITING_GRADE,
+                RequestStatus.DENIED,
+                RequestStatus.GRANTED,
         };
         try(Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
@@ -136,10 +136,10 @@ public class LookupTablesInitializer {
     @Transactional
     void populateDepartmentTable() {
         String [] departments = {
-                "Gryffindor",
-                "Hufflepuff",
-                "Ravenclaw",
-                "Slytherin"
+                Department.RAVENCLAW,
+                Department.HUFFLEPUFF,
+                Department.GYFFINDOR,
+                Department.SLYTHERIN
         };
         try(Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();
@@ -161,12 +161,12 @@ public class LookupTablesInitializer {
 
         // can't have generic arrays; who knew
         List<Pair<String, Float>> eventTypes = Arrays.asList(
-                new Pair<>("University Course", 80f),
-                new Pair<>("Seminars", 60f),
-                new Pair<>("Certification Preparation Class", 75f),
-                new Pair<>("Certification", 100f),
-                new Pair<>("Technical Training", 90f),
-                new Pair<>("Other", 30f)
+                new Pair<>(EventType.UNIVERSITY_COURSE, 80f),
+                new Pair<>(EventType.SEMINAR, 60f),
+                new Pair<>(EventType.CERTIFICATION_PREP, 75f),
+                new Pair<>(EventType.CERTIFICATION, 100f),
+                new Pair<>(EventType.TECH_TRAINING, 90f),
+                new Pair<>(EventType.OTHER, 30f)
         );
         try(Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();

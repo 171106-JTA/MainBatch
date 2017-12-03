@@ -86,10 +86,10 @@ public class ObjectDAO {
     @Transactional(readOnly = true)
     public <T> Serializable saveObject(T obj, IdGetter<T> getter) throws DuplicateIdException {
         try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
             Serializable providedId = getter.getId(obj);
             if (providedId != null && session.get(obj.getClass(), providedId) != null)
                 throw new DuplicateIdException("Given id already exists");
-            session.getTransaction().begin();
             Serializable persistedObjId = session.save(obj);
             session.getTransaction().commit();
             return persistedObjId;
@@ -99,7 +99,7 @@ public class ObjectDAO {
     @Transactional
     public <T> void deleteObject(Class<T> klass, Serializable id) throws NonExistentIdException {
         try (Session session = sessionFactory.openSession()) {
-            session.getTransaction().begin();
+            session.beginTransaction();
 
             Object obj = session.get(klass, id);
             if (obj == null) {
