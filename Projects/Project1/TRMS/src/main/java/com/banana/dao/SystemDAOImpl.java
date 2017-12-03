@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import com.banana.bean.Employee;
 import com.banana.bean.ReimburseRequest;
@@ -40,19 +41,21 @@ public class SystemDAOImpl implements SystemDAO{
 	
 	@Override
 	public int submitRequest(ReimburseRequest request) {
-		String sql = "{call submit_request(?, ?, ?, ?, ?, ?, ?)}";
+		String sql = "{call submit_request(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 		CallableStatement cs = null;
 		
 		try(Connection conn = ConnectionUtil.getConnection()){
 			cs = conn.prepareCall(sql);
-			cs.setString(1, request.getLocation());
-			cs.setString(2, request.getDescription());
-			cs.setDouble(3, request.getCost());
-			cs.setInt(4, request.getGradingFormat());
-			cs.setString(5, request.getEventType());
-			cs.setString(6, request.getJustification());
-			cs.setInt(7, request.getEmpID());
-			
+			cs.setInt(1, request.getEventType());
+			cs.setInt(2, request.getEmpID());
+			cs.setString(3, request.getFname());
+			cs.setString(4, request.getLname());
+			cs.setTimestamp(5, Timestamp.valueOf(request.getEventDate()));
+			cs.setString(6, request.getLocation());
+			cs.setString(7, request.getDescription());
+			cs.setDouble(8, request.getCost());
+			cs.setInt(9, request.getGradingFormat());
+			cs.setString(10, request.getJustification());
 			cs.executeQuery();
 			
 		}catch(SQLException e) {

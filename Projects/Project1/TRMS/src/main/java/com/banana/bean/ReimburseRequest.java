@@ -1,26 +1,59 @@
 package com.banana.bean;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 public class ReimburseRequest {
+	private int empID;
+	private String fname;
+	private String lname;
 	private String location;
 	private String description;
 	private double cost;
 	private int gradingFormat;
-	private String eventType;
+	private int eventType;
 	private String justification;
-	private int empID;
-
-	public ReimburseRequest(String location, String description, double cost, int gradingFormat, String eventType,
-			String justification, int empID) {
+	private LocalDateTime eventDate; 
+	
+	public ReimburseRequest(int empID, String fname, String lname, String location, String description, double cost,
+			int gradingFormat, int eventType, String justification, LocalDateTime eventDate) {
 		super();
+		this.empID = empID;
+		this.fname = fname;
+		this.lname = lname;
 		this.location = location;
 		this.description = description;
 		this.cost = cost;
 		this.gradingFormat = gradingFormat;
 		this.eventType = eventType;
 		this.justification = justification;
-		this.empID = empID;
+		this.eventDate = eventDate;
 	}
 	
+	public LocalDateTime getEventDate() {
+		return eventDate;
+	}
+
+	public void setEventDate(LocalDateTime eventDate) {
+		this.eventDate = eventDate;
+	}
+
+	public String getFname() {
+		return fname;
+	}
+
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+
+	public String getLname() {
+		return lname;
+	}
+
+	public void setLname(String lname) {
+		this.lname = lname;
+	}
+
 	public String getLocation() {
 		return location;
 	}
@@ -52,12 +85,12 @@ public class ReimburseRequest {
 	public void setGradingFormat(int gradingFormat) {
 		this.gradingFormat = gradingFormat;
 	}
-
-	public String getEventType() {
+	
+	public int getEventType() {
 		return eventType;
 	}
 
-	public void setEventType(String eventType) {
+	public void setEventType(int eventType) {
 		this.eventType = eventType;
 	}
 

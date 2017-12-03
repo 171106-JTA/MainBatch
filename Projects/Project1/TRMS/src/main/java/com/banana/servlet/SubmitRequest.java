@@ -35,12 +35,12 @@ public class SubmitRequest extends HttpServlet {
 		
 		if(InsertReimbursement.request(request, response)){
 			out.println("<h1>Success</h1>");
-			rd = request.getRequestDispatcher("employee.html");
+			rd = request.getRequestDispatcher("reimbursementForm.html");
 			rd.include(request, response);
 		}
 		else {
 			out.println("<h1 style:'color:red'>Fail</h1>");
-			rd = request.getRequestDispatcher("employee.html");
+			rd = request.getRequestDispatcher("reimbursementForm.html");
 			rd.include(request, response);
 		}
 	}
