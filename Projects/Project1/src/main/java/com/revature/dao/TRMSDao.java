@@ -1,5 +1,8 @@
 package com.revature.dao;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -9,9 +12,12 @@ import java.text.DateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import com.revature.beans.Employee;
+import com.revature.beans.Request;
 import com.revature.beans.Title;
 import com.revature.util.ConnectionUtil;
 
@@ -91,7 +97,7 @@ public class TRMSDao {
 	}
 	
 	public Title validateLogin(String username, int password) {
-
+		
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
@@ -113,7 +119,7 @@ public class TRMSDao {
 				int e_password = rs.getInt("emp_password");
 				String title = rs.getString("emp_title");
 				
-				if (e_username.equals(username) && e_password == password) {
+				if (e_username.toLowerCase().equals(username.toLowerCase()) && e_password == password) {
 					System.out.println("aha a match found");
 					return Title.getTitle(title);
 				}
@@ -125,6 +131,66 @@ public class TRMSDao {
 		} finally{
 			close(ps);
 		}
+		
+		return null;
+	}
+	
+	/**
+	 * 
+	 * @param req
+	 * @throws FileNotFoundException 
+	 */
+	public void insertRequest(Request req) throws FileNotFoundException {
+		PreparedStatement ps = null;
+
+		final String sql = "INSERT INTO REQUEST (emp_username, REQ_EVENT, REQ_DATE, "
+				+ 		   "REQ_LOCATION, REQ_COST, REQ_DESCRIPTION, REQ_GRADINGFORMAT, REQ_FILES" + 
+				"VALUES(?,?,?,?,?,?,?,?)";
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		
+		try(Connection conn = ConnectionUtil.getConnection()){
+
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, req.getUsername().toLowerCase());
+			ps.setString(2, req.getEvent());
+			
+			ps.setString(4, req.getLocation());
+			ps.setInt(5, req.getCost());
+			ps.setString(6, req.getDescription());
+			ps.setString(7, req.getGradingFormat());
+			
+			File file = req.getFile();
+			
+			if (file != null) {
+				FileInputStream  fis = new FileInputStream(file);
+				ps.setBinaryStream(8, fis, (int) file.getTotalSpace());
+			} else {
+				ps.setBinaryStream(8, null);
+			}
+			
+			java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+			ps.setDate(3, date);
+			req.setDate(date);
+			
+			int affected = ps.executeUpdate();
+			
+			System.out.println(affected + " Rows affected");
+
+		} catch(SQLException e){
+			e.printStackTrace();
+		} finally{
+			close(ps);
+		}
+	}
+	public List<Request> getRequests(String username) {
+		List<Request> requests = new ArrayList<Request>();
+		
+		
 		
 		return null;
 	}

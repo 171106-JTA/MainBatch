@@ -7,32 +7,65 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="resources/css/StylingTRMS.css">
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 	<h1>Welcome.</h1>
 	<div class="row">
-		<div class="col-lg-4">
-		
-		<div>
-		<input type="submit" name="submitRequest">
-	
-	</div>
-		
-		
+		<div class="col-lg-4" align="center">
+			<h4>Messages</h4>
 		</div>
+		<div class="col-lg-4" align="center">
+			<div class="well">
+				<h4>Submit a Tuition Reimbursement Request</h4>
+				<form action="SubmitRequest" method="post"
+					enctype="multipart/form-data">
+					<div class="next">
+						Event <select name="event" required>
+							<option value="Univeristy Course">University Course</option>
+							<option value="Seminar">Seminar</option>
+							<option value="Certification Preparation Class">Certification
+								Preparation Course</option>
+							<option value="Certification">Certification</option>
+							<option value="Technical Training">Technical Training</option>
+							<option value="Other">Other</option>
+						</select>
+					</div>
+					<div class="next">
+						Grading Format <select name="gradingFormat" required>
+							<option value="Pass/Fail">Pass/Fail</option>
+							<option value="Grade">Letter Grade</option>
+						</select>
+					</div>
+					<div class="next">
+						Cost <input type="number" name="eventCost" placeholder="Cost"
+							required>
+					</div><div class="next">
+						 <input type="text" name="test" placeholder="test"
+							required>
+					</div>
+					<div class="next">
+						Additional Files <input type="file" value="fileupload"
+							id="fileupload">
+					</div>
+					<div class="next">
+						<input type="Submit" value="Submit Request">
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="col-lg-4" align="center">
+			<h4>Not sure yet</h4>
+		</div>
+
+
 	</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
 </body>
 </html>

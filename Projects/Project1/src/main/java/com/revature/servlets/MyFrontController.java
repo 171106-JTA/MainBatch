@@ -61,9 +61,12 @@ public class MyFrontController extends HttpServlet {
 	 * @param request
 	 * @param response
 	 * @throws IOException 
+	 * @throws ServletException 
 	 */
-	private void register(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private void register(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		final boolean successfully_registered = RegisterEmployee.register(request);
+		
+		RequestDispatcher rd = null;
 		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
@@ -73,10 +76,9 @@ public class MyFrontController extends HttpServlet {
 		} else {
 			out.println("<h3>There was an error creating your account.</h3>");
 		}
-		out.println(
-				"<hr>" +
-				"<a href='index.html'>BACK</a>"
-				);
+		
+		rd = request.getRequestDispatcher("index.html");
+		rd.include(request, response);
 	}
 	
 	
