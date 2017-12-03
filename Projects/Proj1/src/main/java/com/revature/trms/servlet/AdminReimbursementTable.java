@@ -13,14 +13,14 @@ import com.revature.trms.services.ViewData;
 /**
  * Servlet implementation class ReimbursementTable
  */
-public class ReimbursementTable extends HttpServlet {
+public class AdminReimbursementTable extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("json/application/html");
-		ViewData.getReimbursementCases(response);
+		response.setContentType("json/application");
+		ViewData.getAllReimbursementCases(response);
 	}
 
 	/**

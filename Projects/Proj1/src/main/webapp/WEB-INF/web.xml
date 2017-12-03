@@ -73,4 +73,14 @@
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RequestReimbursement</display-name>
+    <servlet-name>RequestReimbursement</servlet-name>
+    <servlet-class>com.revature.trms.servlet.RequestReimbursement</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RequestReimbursement</servlet-name>
+    <url-pattern>/RequestReimbursement</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -1,11 +1,9 @@
 "use strict";
 
-
-
 // AJAX request call for cases
 (function callToTable(){
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'ReimbursementTable');
+	xhr.open('GET', 'AdminReimbursementTable');
 	xhr.onload = () => {
 		if (xhr.status === 200) {
 			var tableData = JSON.parse(xhr.responseText);

@@ -8,8 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.revature.trms.model.Employee;
-import com.revature.trms.model.ReimbursementCase;
 import com.revature.trms.util.ConnectionUtil;
 
 public class EmployeeDAO {
@@ -103,20 +103,6 @@ public class EmployeeDAO {
 		return emp;
 	}
 
-	public static void main(String[] args) {
-		EmployeeDAO test = new EmployeeDAO();
-		System.out.println("printing shit out");
-		for (ReimbursementCase reim : test.getAllCases()) {
-
-			System.out.println(reim);
-		}
-		EmployeeDAO test2 = new EmployeeDAO();
-		for(Employee emp : test2.getAllEmployees()) {
-			System.out.println(emp.getUsername());
-		}
-	}
-	
-
 	public List<Employee> getAllEmployees() {
 		List<Employee> emps = new ArrayList<>();
 		PreparedStatement ps = null;
@@ -136,41 +122,10 @@ public class EmployeeDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			close(ps);
 		}
 		return emps;
-	}
-
-	public List<ReimbursementCase> getAllCases() {
-		List<ReimbursementCase> reimbursemntCases = new ArrayList<>();
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		ReimbursementCase reimbursementCase = null;
-		
-		try (Connection conn = ConnectionUtil.getConnection()) {
-			String sql = "SELECT * FROM REIMBURSEMENT_CASE";
-			ps = conn.prepareStatement(sql);
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				// get employee object from userID
-				reimbursementCase = new ReimbursementCase();
-				reimbursementCase.setCase_id(rs.getString(1));
-				reimbursementCase.setEmployee(selectEmployeeById(rs.getInt("EMPLOYEE_ID")));
-				reimbursementCase.setEvent_date(rs.getDate("EVENT_DATE"));
-				reimbursementCase.setRequest_date(rs.getDate("REQUEST_DATE"));
-				reimbursementCase.setDuration_days(rs.getInt("CASE_DURATION"));
-				reimbursementCase.setLocation(rs.getString("CASE_LOCATION"));
-				reimbursementCase.setDescription(rs.getString("CASE_DESCRIPTION"));
-				reimbursementCase.setCost(rs.getDouble("CASE_COST"));
-				reimbursementCase.setGradingformat(rs.getString("CASE_GRADING_FORMAT"));
-				reimbursementCase.setEventType(rs.getString("CASE_EVENT_TYPE"));
-				reimbursementCase.setAttachment(rs.getBytes("CASE_ATTACHMENT"));
-				reimbursemntCases.add(reimbursementCase);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return reimbursemntCases;
 	}
 
 }

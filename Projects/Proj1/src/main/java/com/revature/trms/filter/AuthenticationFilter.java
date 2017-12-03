@@ -18,13 +18,10 @@ import com.revature.trms.dao.EmployeeDAO;
 import com.revature.trms.model.Employee;
 
 public class AuthenticationFilter implements Filter {
-	private FilterConfig config;
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 
-		System.out.println("Instance created of " + getClass().getName());
-		this.config = filterConfig;
 	}
 
 	@Override
@@ -37,25 +34,6 @@ public class AuthenticationFilter implements Filter {
 		Employee loginUser = ed.selectEmployeeByUsername(loginUsername);
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
-
-		HttpSession session = ((HttpServletRequest) request).getSession();
-		ServletContext context = config.getServletContext();
-
-		context.log("doFilter called in: " + config.getFilterName() + " on " + (new java.util.Date()));
-
-		// log the session ID
-		context.log("session ID: " + session.getId());
-
-		// Find out whether the logged-in session attribute is set
-		String logged = (String) session.getAttribute("logged-in");
-		if (logged == null)
-			session.setAttribute("logged-in", "no");
-
-		// log a message about the log-in status
-		context.log("log-in status: " + (String) session.getAttribute("logged-in"));
-		context.log("");
-		chain.doFilter(request, response);
-
 		
 		if (loginUser == null) {
 			out.println("<h3>User could not be found</h3>");
