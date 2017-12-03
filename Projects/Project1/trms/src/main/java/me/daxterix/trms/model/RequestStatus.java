@@ -8,11 +8,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name="reqstatus")
 public class RequestStatus {
-    public static final String AWAITING_SUPERVISOR = "Pending Direct Supervisor Approval";
-    public static final String APPROVED_SUPERVISOR = "Approved by Direct Supervisor";
-    public static final String APPROVED_DEPT_HEAD = "Approved by Department Head";
-    public static final String APPROVED_BENCO = "Approved by Benefits Coordinator";
-    public static final String PENDING_GRADE= "Pending Grade Review";   // should this be broken up?
+    public static final String AWAITING_SUPERVISOR = "Awaiting Direct Supervisor Approval";
+    public static final String AWAITING_DEPT_HEAD = "Approved by Direct Supervisor";
+    public static final String AWAITING_BENCO = "Approved by Department Head";
+    public static final String AWAITING_GRADE = "Approved by Benefits Coordinator";
     public static final String GRANTED = "Granted";
     public static final String DENIED = "Denied";
 

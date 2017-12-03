@@ -19,7 +19,7 @@ public class EventGrade implements Serializable {
     @JoinColumn(name="req_id", foreignKey=@ForeignKey(name="fk_file_req"), updatable=false)
     private ReimbursementRequest request;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(name="file_id", foreignKey=@ForeignKey(name="fk_grade_file"))
     private RequestFile file;       // should this be a one to many instead? would need a 'join' table
 

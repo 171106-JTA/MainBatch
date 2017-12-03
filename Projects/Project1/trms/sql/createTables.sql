@@ -114,8 +114,9 @@ CREATE TABLE request (
     addr_id NUMBER,
     event_cost FLOAT,
     funding FLOAT,
-    req_status VARCHAR2(50), -- 0: supervisor, department head, benefits coords
-    is_urgent CHAR(1) NOT NULL, -- Y: not urgent, N: urgent
+    req_status VARCHAR2(50),
+    is_urgent CHAR(1),
+    exceeds_status CHAR(1),
     date_filed DATE,
     event_start DATE,
     event_end DATE,
@@ -125,6 +126,7 @@ CREATE TABLE request (
     CONSTRAINT fk_req_type FOREIGN KEY (event_type) REFERENCES eventtype(event_type),
     CONSTRAINT fk_req_addr FOREIGN KEY (addr_id) REFERENCES address(addr_id),
     CONSTRAINT ck_is_urgent CHECK (is_urgent = 'Y' OR is_urgent = 'N'),
+    CONSTRAINT ck_exceeds_status CHECK (exceeds_status = 'Y' OR exceeds_status = 'N'),
     CONSTRAINT ck_dates CHECK (date_filed < event_start AND event_start <= event_end)
 );
 /

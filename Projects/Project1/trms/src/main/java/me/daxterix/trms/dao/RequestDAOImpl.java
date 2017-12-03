@@ -21,7 +21,7 @@ public class RequestDAOImpl extends ObjectDAO implements RequestDAO {
     @Override
     @Transactional
     public long save(ReimbursementRequest request) throws DuplicateIdException {
-        return (Long)saveObject(request);
+        return (Long)saveObject(request, req -> req.getId());
     }
 
     @Override
@@ -30,8 +30,10 @@ public class RequestDAOImpl extends ObjectDAO implements RequestDAO {
         try(Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             ReimbursementRequest request = session.get(ReimbursementRequest.class, requestId);
-            if (request == null)
+            if (request == null) {
+                session.getTransaction().rollback();
                 throw new NonExistentIdException("Request does not exist");
+            }
 
             EventGrade grade = request.getGrade();
             if (grade != null)
@@ -60,14 +62,19 @@ public class RequestDAOImpl extends ObjectDAO implements RequestDAO {
         return getObject(ReimbursementRequest.class, id);
     }
 
+
+
+
     @Override
     @Transactional(readOnly = true)
     public List<ReimbursementRequest> getFiledRequests(String email) throws NonExistentIdException {
         try(Session session = sessionFactory.openSession()) {
             session.beginTransaction();
             Employee emp = session.get(Employee.class, email);
-            if (emp == null)
+            if (emp == null) {
+                session.getTransaction().rollback();
                 throw new NonExistentIdException("Request does not exist");
+            }
             List<ReimbursementRequest> requests = emp.getRequests();
             requests.size();    // force lazy loading
             session.getTransaction().commit();
@@ -75,17 +82,16 @@ public class RequestDAOImpl extends ObjectDAO implements RequestDAO {
         }
     }
 
-
-    // todo: enclose blow queries in transactions
-
     @Override
     @Transactional(readOnly = true)
     public List<ReimbursementRequest> getPendingFiledRequests(String email) throws NonExistentIdException {
         try(Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
             Employee emp = session.get(Employee.class, email);
-            if (emp == null)
+            if (emp == null) {
+                session.getTransaction().rollback();
                 throw new NonExistentIdException("Request does not exist");
-
+            }
             CriteriaBuilder critBuild = session.getCriteriaBuilder();
             CriteriaQuery<ReimbursementRequest> critQuery = critBuild.createQuery(ReimbursementRequest.class);
             Root<ReimbursementRequest> requestRoot = critQuery.from(ReimbursementRequest.class);
@@ -97,35 +103,22 @@ public class RequestDAOImpl extends ObjectDAO implements RequestDAO {
 
             critQuery.select(requestRoot).where(allPredicates);
             TypedQuery<ReimbursementRequest> query = session.createQuery(critQuery);
-            return query.getResultList();
+            List<ReimbursementRequest> reqs = query.getResultList();
+            session.getTransaction().commit();
+            return reqs;
         }
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<ReimbursementRequest> getApprovedFiledRequests(String email) throws NonExistentIdException {
-        return getFiledRequestsByStatus(email, RequestStatus.GRANTED);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<ReimbursementRequest> getDeniedFiledRequests(String email) throws NonExistentIdException {
-        return getFiledRequestsByStatus(email, RequestStatus.DENIED);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<ReimbursementRequest> getPendingGradeFiledRequests(String email) throws NonExistentIdException {
-        return getFiledRequestsByStatus(email, RequestStatus.PENDING_GRADE);
-    }
-
-    @Transactional(readOnly = true)
-    List<ReimbursementRequest> getFiledRequestsByStatus(String email, String status) throws NonExistentIdException {
+    public List<ReimbursementRequest> getFiledRequestsByStatus(String email, String status) throws NonExistentIdException {
         try(Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
             Employee emp = session.get(Employee.class, email);
-            if (emp == null)
+            if (emp == null) {
+                session.getTransaction().rollback();
                 throw new NonExistentIdException("Request does not exist");
-
+            }
             CriteriaBuilder critBuild = session.getCriteriaBuilder();
             CriteriaQuery<ReimbursementRequest> critQuery = critBuild.createQuery(ReimbursementRequest.class);
             Root<ReimbursementRequest> requestRoot = critQuery.from(ReimbursementRequest.class);
@@ -136,9 +129,12 @@ public class RequestDAOImpl extends ObjectDAO implements RequestDAO {
 
             critQuery.select(requestRoot).where(allPredicates);
             TypedQuery<ReimbursementRequest> query = session.createQuery(critQuery);
-            return query.getResultList();
+            List<ReimbursementRequest> reqs = query.getResultList();
+            session.getTransaction().commit();
+            return reqs;
         }
     }
+
 
 
 
@@ -148,10 +144,12 @@ public class RequestDAOImpl extends ObjectDAO implements RequestDAO {
     @Transactional(readOnly = true)
     public List<ReimbursementRequest> getRequestsByDepartment(String department) throws NonExistentIdException {
         try(Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
             Department emp = session.get(Department.class, department);
-            if (emp == null)
+            if (emp == null) {
+                session.getTransaction().rollback();
                 throw new NonExistentIdException("Department does not exist");
-
+            }
             CriteriaBuilder critBuild = session.getCriteriaBuilder();
             CriteriaQuery<ReimbursementRequest> critQuery = critBuild.createQuery(ReimbursementRequest.class);
             Root<ReimbursementRequest> requestRoot = critQuery.from(ReimbursementRequest.class);
@@ -160,7 +158,9 @@ public class RequestDAOImpl extends ObjectDAO implements RequestDAO {
             critQuery.select(requestRoot).where(deptPredicate);
 
             TypedQuery<ReimbursementRequest> query = session.createQuery(critQuery);
-            return query.getResultList();
+            List<ReimbursementRequest> reqs = query.getResultList();
+            session.getTransaction().commit();
+            return reqs;
         }
     }
 
@@ -168,10 +168,12 @@ public class RequestDAOImpl extends ObjectDAO implements RequestDAO {
     @Transactional(readOnly = true)
     public List<ReimbursementRequest> getPendingRequestsByDepartment(String department) throws NonExistentIdException {
         try(Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
             Department dept = session.get(Department.class, department);
-            if (dept == null)
+            if (dept == null) {
+                session.getTransaction().rollback();
                 throw new NonExistentIdException(String.format("Department %s does not exist", department));
-
+            }
             CriteriaBuilder critBuild = session.getCriteriaBuilder();
             CriteriaQuery<ReimbursementRequest> critQuery = critBuild.createQuery(ReimbursementRequest.class);
             Root<ReimbursementRequest> requestRoot = critQuery.from(ReimbursementRequest.class);
@@ -183,29 +185,36 @@ public class RequestDAOImpl extends ObjectDAO implements RequestDAO {
 
             critQuery.select(requestRoot).where(allPredicates);
             TypedQuery<ReimbursementRequest> query = session.createQuery(critQuery);
-            return query.getResultList();
+            List<ReimbursementRequest> reqs = query.getResultList();
+            session.getTransaction().commit();
+            return reqs;
+
         }
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<ReimbursementRequest> getApprovedRequestsByDepartment(String department) throws NonExistentIdException {
+    public List<ReimbursementRequest> getDepartmentRequestsByStatus(String department, String status) throws NonExistentIdException {
         try(Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
             Department dept = session.get(Department.class, department);
-            if (dept == null)
+            if (dept == null) {
+                session.getTransaction().rollback();
                 throw new NonExistentIdException(String.format("Department %s does not exist", department));
-
+            }
             CriteriaBuilder critBuild = session.getCriteriaBuilder();
             CriteriaQuery<ReimbursementRequest> critQuery = critBuild.createQuery(ReimbursementRequest.class);
             Root<ReimbursementRequest> requestRoot = critQuery.from(ReimbursementRequest.class);
 
             Predicate deptPredicate = critBuild.equal(getDeptNamePath(requestRoot), department);
-            Predicate statusPredicate = critBuild.equal(getStatusNamePath(requestRoot), RequestStatus.GRANTED);
+            Predicate statusPredicate = critBuild.equal(getStatusNamePath(requestRoot), status);
             Predicate allPredicates = critBuild.and(deptPredicate, statusPredicate);
 
             critQuery.select(requestRoot).where(allPredicates);
             TypedQuery<ReimbursementRequest> query = session.createQuery(critQuery);
-            return query.getResultList();
+            List<ReimbursementRequest> reqs = query.getResultList();
+            session.getTransaction().commit();
+            return reqs;
         }
     }
 
@@ -222,8 +231,9 @@ public class RequestDAOImpl extends ObjectDAO implements RequestDAO {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ReimbursementRequest> getAllPendingRequests() {
+    public List<ReimbursementRequest> getPendingRequests() {
         try(Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
             CriteriaBuilder critBuild = session.getCriteriaBuilder();
             CriteriaQuery<ReimbursementRequest> critQuery = critBuild.createQuery(ReimbursementRequest.class);
             Root<ReimbursementRequest> requestRoot = critQuery.from(ReimbursementRequest.class);
@@ -234,23 +244,29 @@ public class RequestDAOImpl extends ObjectDAO implements RequestDAO {
 
             critQuery.select(requestRoot).where(allPredicates);
             TypedQuery<ReimbursementRequest> query = session.createQuery(critQuery);
-            return query.getResultList();
+            List<ReimbursementRequest> reqs = query.getResultList();
+            session.getTransaction().commit();
+            return reqs;
         }
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<ReimbursementRequest> getAllApprovedRequests() {
+    public List<ReimbursementRequest> getRequestsByStatus(String status) {
         try(Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
             CriteriaBuilder critBuild = session.getCriteriaBuilder();
             CriteriaQuery<ReimbursementRequest> critQuery = critBuild.createQuery(ReimbursementRequest.class);
             Root<ReimbursementRequest> requestRoot = critQuery.from(ReimbursementRequest.class);
 
-            Predicate statusPredicate = critBuild.equal(getStatusNamePath(requestRoot), RequestStatus.GRANTED);
+            Predicate statusPredicate = critBuild.equal(getStatusNamePath(requestRoot), status);
 
             critQuery.select(requestRoot).where(statusPredicate);
             TypedQuery<ReimbursementRequest> query = session.createQuery(critQuery);
-            return query.getResultList();
+
+            List<ReimbursementRequest> reqs = query.getResultList();
+            session.getTransaction().commit();
+            return reqs;
         }
     }
 
@@ -260,11 +276,11 @@ public class RequestDAOImpl extends ObjectDAO implements RequestDAO {
 
 
     private Path<String> getDeptNamePath(Root<ReimbursementRequest> requestRoot) {
-        return requestRoot.<Department>get("department").<String>get("name");
+        return requestRoot.<Employee>get("filer").<Department>get("department").<String>get("name");
     }
 
     private Path<String> getStatusNamePath(Root<ReimbursementRequest> requestRoot) {
-        return requestRoot.<RequestStatus>get("status").<String>get("name");
+        return requestRoot.<RequestStatus>get("status").<String>get("status");
     }
 
     private Path<String> getFilerEmailPath(Root<ReimbursementRequest> requestRoot) {

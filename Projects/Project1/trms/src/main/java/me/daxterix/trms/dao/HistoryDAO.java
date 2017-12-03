@@ -12,8 +12,4 @@ public interface HistoryDAO {
     List<RequestHistory> getHistoryByDepartment(String dept) throws NonExistentIdException;
     List<RequestHistory> getAllHistory();
     List<RequestHistory> getHistoryByEmployee(String email) throws NonExistentIdException;
-
-    /* todo
-    boolean save(EventGrade grade);
-     */
 }

@@ -11,6 +11,11 @@ import java.io.Serializable;
 public class MimeType implements Serializable {
 
     public static final String PNG = "image/png";
+    public static final String JPEG = "image/jpeg";
+    public static final String TEXT_PLAIN = "text/plain";
+    public static final String PDF = "application/pdf";
+    public static final String MS_WORD = "application/msword";
+    public static final String MS_OUTLOOK = "application/vnd.ms-outlook";
 
     @Id
     @Column(name="mime_type", length=50)

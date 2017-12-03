@@ -46,9 +46,14 @@ public class ReimbursementRequest implements Serializable {
     private float funding;
 
     @Convert(converter = BooleanToStringConverter.class)
-    @Column(name="is_urgent", nullable=false, length=1)
+    @Column(name="is_urgent", length=1)
     @Check(constraints="is_urgent = 'Y' OR is_urgent = 'N'")
-    private boolean isUrgent;
+    private Boolean isUrgent;
+
+    @Convert(converter = BooleanToStringConverter.class)
+    @Column(name="exceeds_funds", length=1)
+    @Check(constraints="exceeds_funds = 'Y' OR exceeds_funds = 'N'")
+    private Boolean exceedsFunds;
 
     @Column(name="date_filed")
     private LocalDateTime timeFiled;
@@ -62,7 +67,7 @@ public class ReimbursementRequest implements Serializable {
     @Column(name="description", length=300)
     private String description;
 
-    @OneToOne(mappedBy="request", fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+    @OneToOne(mappedBy="request", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
     private EventGrade grade;
 
     @OneToMany(mappedBy="request", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
@@ -112,8 +117,16 @@ public class ReimbursementRequest implements Serializable {
         this.funding = funding;
     }
 
-    public boolean isUrgent() {
+    public Boolean isUrgent() {
         return isUrgent;
+    }
+
+    public Boolean isExceedsFunds() {
+        return exceedsFunds;
+    }
+
+    public void setExceedsFunds(boolean exceedsFunds) {
+        this.exceedsFunds = exceedsFunds;
     }
 
     public void setUrgent(boolean urgent) {

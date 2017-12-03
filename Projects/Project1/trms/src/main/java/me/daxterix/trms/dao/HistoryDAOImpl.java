@@ -24,7 +24,7 @@ public class HistoryDAOImpl extends ObjectDAO implements HistoryDAO {
     @Override
     @Transactional
     public long save(RequestHistory hist) throws DuplicateIdException {
-        return (Long)saveObject(hist);
+        return (Long)saveObject(hist, RequestHistory::getId);
     }
 
     @Override

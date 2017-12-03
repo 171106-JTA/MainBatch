@@ -14,7 +14,7 @@ public class EmployeeDAOTest {
     public void tearDown() throws Exception {
     }
 
-    public void updateEmployee() {
+    public void deleteEmployee() {
 
     }
 

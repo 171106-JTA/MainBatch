@@ -6,12 +6,11 @@ import me.daxterix.trms.model.RequestFile;
 
 import java.util.List;
 
-public interface RequestFileDAO {
+public interface RequestInfoDAO {
     RequestFile getFile(long id) throws NonExistentIdException;
     List<RequestFile> getFilesForRequest(long requestId) throws NonExistentIdException;
-    List<RequestFile> getGradeFileForRequest(long requestId) throws NonExistentIdException;
 
-    long save(RequestFile file) throws DuplicateIdException;
+    long saveFile(RequestFile file) throws DuplicateIdException;
     void update(RequestFile file) throws NonExistentIdException;
     void deleteFile (long fileId) throws NonExistentIdException;
 }

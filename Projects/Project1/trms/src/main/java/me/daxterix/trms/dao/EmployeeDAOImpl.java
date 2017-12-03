@@ -12,19 +12,19 @@ public class EmployeeDAOImpl extends ObjectDAO implements EmployeeDAO {
     @Override
     @Transactional
     public String save(Employee emp) throws DuplicateIdException {
-        return (String)saveObject(emp);
+        return (String)saveObject(emp, Employee::getEmail);
     }
 
     @Override
     @Transactional
     public String save(EmployeeAccount acc) throws DuplicateIdException {
-        return (String)saveObject(acc);
+        return (String)saveObject(acc, EmployeeAccount::getEmail);
     }
 
     @Override
     @Transactional
     public String save(EmployeeInfo info) throws DuplicateIdException {
-        return (String)saveObject(info);
+        return (String)saveObject(info, EmployeeInfo::getEmail);
     }
 
     @Override

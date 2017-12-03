@@ -10,13 +10,11 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
 import java.util.List;
 
 @Repository
-public class RequestFileDAOImpl extends ObjectDAO implements RequestFileDAO {
-    public RequestFileDAOImpl(SessionFactory sf) {
+public class RequestInfoDAOImpl extends ObjectDAO implements RequestInfoDAO {
+    public RequestInfoDAOImpl(SessionFactory sf) {
         super(sf);
     }
 
@@ -44,35 +42,9 @@ public class RequestFileDAOImpl extends ObjectDAO implements RequestFileDAO {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public List<RequestFile> getGradeFileForRequest(long requestId) throws NonExistentIdException {
-        try(Session session = sessionFactory.openSession()) {
-            session.beginTransaction();
-            ReimbursementRequest request = session.get(ReimbursementRequest.class, requestId);
-            if (request == null)
-                throw new NonExistentIdException(String.format("Request %d does not exist", requestId));
-
-            CriteriaBuilder critBuild = session.getCriteriaBuilder();
-            CriteriaQuery<RequestFile> critQuery = critBuild.createQuery(RequestFile.class);
-            Root<RequestFile> requestRoot = critQuery.from(RequestFile.class);
-
-            Predicate requestPredicate = critBuild.equal(getRequestIdPath(requestRoot), requestId);
-            critQuery.select(requestRoot).where(requestPredicate);
-            TypedQuery<RequestFile> query = session.createQuery(critQuery);
-            List<RequestFile> files = query.getResultList();
-            session.getTransaction().commit();
-            return files;
-        }
-    }
-
-    private Path<Long> getRequestIdPath(Root<RequestFile> requestRoot) {
-        return requestRoot.<ReimbursementRequest>get("request").<Long>get("id");
-    }
-
-    @Override
     @Transactional
-    public long save(RequestFile file) throws DuplicateIdException {
-        return (Long)saveObject(file);
+    public long saveFile(RequestFile file) throws DuplicateIdException {
+        return (Long)saveObject(file, RequestFile::getId);
     }
 
     @Override
@@ -85,6 +57,7 @@ public class RequestFileDAOImpl extends ObjectDAO implements RequestFileDAO {
     @Transactional
     public void deleteFile(long fileId) throws NonExistentIdException {
         try(Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
             RequestFile file = session.get(RequestFile.class, fileId);
             if (file == null)
                 throw new NonExistentIdException("Request File does not exist");
@@ -93,6 +66,7 @@ public class RequestFileDAOImpl extends ObjectDAO implements RequestFileDAO {
                 assocGrade.setFile(null);
 
             session.delete(file);
+            session.getTransaction().commit();
         }
     }
 }

@@ -37,9 +37,10 @@ public class ObjectDAO {
             session.beginTransaction();
 
             T res = session.get(klass, id);
-            if (res == null)
+            if (res == null) {
+                session.getTransaction().rollback();
                 throw new NonExistentIdException();
-
+            }
             session.getTransaction().commit();
             return res;
         }
@@ -62,12 +63,12 @@ public class ObjectDAO {
     public void updateObject(Object obj, Serializable id) throws NonExistentIdException {
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-
-            if(session.get(obj.getClass(), id) == null)
+            if(session.get(obj.getClass(), id) == null) {
+                session.getTransaction().rollback();
                 throw new NonExistentIdException();
+            }
             else
                 session.merge(obj);
-
             session.getTransaction().commit();
         }
     }
@@ -83,8 +84,11 @@ public class ObjectDAO {
      * @throws DuplicateIdException
      */
     @Transactional(readOnly = true)
-    public Serializable saveObject(Object obj) throws DuplicateIdException {
+    public <T> Serializable saveObject(T obj, IdGetter<T> getter) throws DuplicateIdException {
         try (Session session = sessionFactory.openSession()) {
+            Serializable providedId = getter.getId(obj);
+            if (providedId != null && session.get(obj.getClass(), providedId) != null)
+                throw new DuplicateIdException("Given id already exists");
             session.getTransaction().begin();
             Serializable persistedObjId = session.save(obj);
             session.getTransaction().commit();
@@ -98,9 +102,10 @@ public class ObjectDAO {
             session.getTransaction().begin();
 
             Object obj = session.get(klass, id);
-            if (obj == null)
+            if (obj == null) {
+                session.getTransaction().rollback();
                 throw new NonExistentIdException();
-
+            }
             session.delete(obj);
             session.getTransaction().commit();
         }
