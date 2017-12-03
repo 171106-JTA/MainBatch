@@ -20,27 +20,15 @@ public class TrmsDaoImplement implements TrmsDao{
 		ResultSet rs = null;
 		try (Connection conn = ConnectionUtil.getConnection()) {
 			String sql = "SELECT * FROM Login WHERE username=? AND password=?";
-//			String sql = "SELECT * FROM Login";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, username);
 			ps.setString(2, password);
-			
 			rs = ps.executeQuery();
-			
-			System.out.println("Testing Result");
 			if(rs.next()) {
-				System.out.println("At least 1 result!!!");
 				username = rs.getString("username");
 				password = rs.getString("password");
 				permission = rs.getString("permission");
-				System.out.println("username: " + username + ", password: " + password + ", permission: " + permission);
 			}
-//			 while(rs.next()) {
-//				 String theUsername = rs.getString("USERNAME");
-//				 String thePassword = rs.getString("PASSWORD");
-//				 permission = rs.getString("PERMISSION");
-//				 System.out.println(theUsername + "\t" + thePassword + "\t" + permission);
-//			 }
 		} catch (SQLException e) {
 			// To Do: This catch statement executes if user was not inserted into the
 			// database.

@@ -52,7 +52,6 @@ public class FrontController extends HttpServlet {
 		System.out.println(action);
 		
 		RequestDispatcher rd = null;
-		HttpSession session = null;
 		
 		switch(action) {
 		case "login":
