@@ -19,7 +19,7 @@
 	integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT"
 	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="resources/css/myStyles.css">
-<script src="resources/js/main.js"></script>
+<script src="resources/js/register.js"></script>
 
 </head>
 
@@ -29,7 +29,8 @@
 
 
 		<h1>Register a user</h1>
-		<form name="registration" onsubmit="return validateRegistration()">
+		<div id = "error"></div>
+		<form method="post" action="UserRegistration" name="registration" onsubmit="return validateRegistration()">
 			<ul style="list-style-type: none">
 				<li>Name</li>
 				<li><input type="text" placeholder="First" name="fname"

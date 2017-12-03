@@ -1,12 +1,27 @@
 package com.revature.trms.model;
 
+import java.sql.Time;
+
 public class Employee {
+	private int userId;
 	private String username;
 	private String password;
 	private String email;
 	private String fname;
 	private String lname;
+	private Time creationTime;
 	
+	public Employee(int userId, String username, String password, String email, String fname, String lname,
+			Time creationTime) {
+		super();
+		this.userId = userId;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.fname = fname;
+		this.lname = lname;
+		this.creationTime = creationTime;
+	}
 	public Employee(String username, String password, String email, String fname, String lname) {
 		super();
 		this.username = username;
@@ -14,6 +29,15 @@ public class Employee {
 		this.email = email;
 		this.fname = fname;
 		this.lname = lname;
+	}
+	
+	@Override
+	public String toString() {
+		return "[userId=" + userId + ", username=" + username + ", password=" + password + ", email=" + email
+				+ ", fname=" + fname + ", lname=" + lname + ", creationTime=" + creationTime + "]";
+	}
+	public Employee() {
+		super();
 	}
 	public String getUsername() {
 		return username;
@@ -44,6 +68,18 @@ public class Employee {
 	}
 	public void setFname(String fname) {
 		this.fname = fname;
+	}
+	public int getUserId() {
+		return userId;
+	}
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+	public Time getCreationTime() {
+		return creationTime;
+	}
+	public void setCreationTime(Time creationTime) {
+		this.creationTime = creationTime;
 	}
 	
 }

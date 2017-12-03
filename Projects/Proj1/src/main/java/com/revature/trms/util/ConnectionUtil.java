@@ -4,9 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import javax.swing.plaf.synth.SynthStyle;
+
 public class ConnectionUtil {
 	public static Connection getConnection() throws SQLException {
+		String props[] = System.getenv("DBProps").split(";");
 
-		return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "polkaman", "polkaman");
+		return DriverManager.getConnection(props[1], props[2], props[3]);
 	}
 }

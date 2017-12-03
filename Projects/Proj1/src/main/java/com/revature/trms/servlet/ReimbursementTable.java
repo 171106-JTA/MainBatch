@@ -8,13 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.revature.trms.services.RegisterUser;
+import com.revature.trms.services.ViewData;
 
 /**
- * Servlet implementation class UserRegistration
+ * Servlet implementation class ReimbursementTable
  */
-public class UserRegistration extends HttpServlet {
+public class ReimbursementTable extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		response.setContentType("json/application/html");
+		ViewData.getReimbursementCases(response);
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -23,15 +30,7 @@ public class UserRegistration extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-
-		if (RegisterUser.register(request)) {
-			out.println("<h1>USER REGISTERED</h1><p> Thank you " + request.getParameter("fname") + "</p>");
-		} else {
-			out.println("<h1>REGISTRATION FAILED</h1>");
-		}
-		out.println("<hr>" + "<a href='index.html'>BACK</a>");
+		doGet(request, response);
 	}
 
 }

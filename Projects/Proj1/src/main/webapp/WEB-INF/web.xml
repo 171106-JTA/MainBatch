@@ -3,11 +3,6 @@
   <display-name>trms</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
     <description></description>
@@ -21,6 +16,35 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>UserDashboard</display-name>
+    <servlet-name>UserDashboard</servlet-name>
+    <servlet-class>com.revature.trms.servlet.UserDashboard</servlet-class>
+  </servlet>
+  <filter>
+    <display-name>AuthenticationFilter</display-name>
+    <filter-name>AuthenticationFilter</filter-name>
+    <filter-class>com.revature.trms.filter.AuthenticationFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AuthenticationFilter</filter-name>
+    <url-pattern>/LoginServlet</url-pattern>
+  </filter-mapping>
+  <servlet-mapping>
+    <servlet-name>UserDashboard</servlet-name>
+    <url-pattern>/UserDashboard</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CreateUserSession</display-name>
+    <servlet-name>CreateUserSession</servlet-name>
+    <servlet-class>com.revature.trms.services.CreateUserSession</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateUserSession</servlet-name>
+    <url-pattern>/CreateUserSession</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>GetUsers</display-name>
     <servlet-name>GetUsers</servlet-name>
     <servlet-class>com.revature.trms.servlet.GetUsers</servlet-class>
@@ -28,5 +52,25 @@
   <servlet-mapping>
     <servlet-name>GetUsers</servlet-name>
     <url-pattern>/GetUsers</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ReimbursementTable</display-name>
+    <servlet-name>ReimbursementTable</servlet-name>
+    <servlet-class>com.revature.trms.servlet.ReimbursementTable</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReimbursementTable</servlet-name>
+    <url-pattern>/ReimbursementTable</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LoginServlet</display-name>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>com.revature.trms.servlet.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/LoginServlet</url-pattern>
   </servlet-mapping>
 </web-app>
