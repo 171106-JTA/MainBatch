@@ -58,38 +58,26 @@ public class Login extends HttpServlet {
 		if(permission == null) {
 //			out.println("Login Failed!");
 			System.out.println("\tLogin Failed!");
-		} else {
-			System.out.println("\t else statment ");
-			System.out.println("\t permission: " + permission);
-			
+		} else {			
 			permission = permission.toLowerCase();
-			System.out.println("\t" + (permission == "employee"));
-			System.out.println("\t" + permission.equals("employee"));
+			String landingPage = null;
 			if (permission.equals("employee")) {
-				System.out.println("\temployee logged in!");
-//				out.println("Logged in as employee");
-				response.sendRedirect("employeeLandingPage.html"); 
-//				rd = request.getRequestDispatcher("employeeLandingPage.html"); 
-//				rd.forward(request, response);
+				landingPage = "employeeLandingPage.html";
 			} else if (permission.equals("benco")) {
-				System.out.println("\tbenco logged in!");
-//				out.println("Logged in as BenCo");
-				response.sendRedirect("benCoLandingPage.html"); 
+				landingPage = "benCoLandingPage.html";
 			} else if (permission.equals("direct_supervisor")) {
-				System.out.println("\tdirect_supervisor logged in!");
-//				out.println("Loggd in as Direct Supervisor");
-				response.sendRedirect("directSupervisorLandingPage.html");
+				landingPage = "directSupervisorLandingPage.html";
 			} else if (permission.equals("department_head")) {
-//				out.println("Loggd in as Benefits Coordinator");
-				System.out.println("\tdepartment_head logged in!");
-				response.sendRedirect("departmentHeadLandingPage.html");
+				landingPage = "departmentHeadLandingPage.html";
 			} else 
 			{
 				System.out.println("\t Should never see this! ");
 			}
+			
+			//Need something here to handle landingPage = null 
+			//(i.e. something went fatally wrong between reading database and the above permission test)
+			response.sendRedirect(landingPage); 
 		} 
-		
-//		out.println("<hr><a href='index.html'>Back</a>");
 	}
 
 }
