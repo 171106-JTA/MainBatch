@@ -23,11 +23,11 @@ public class CompanyEmployee implements BusinessObject {
 		this.stateCityId = stateCityId;
 		this.departmentId = departmentId;
 		this.employeeId = employeeId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address = address;
-		this.phoneNumber = phoneNumber;
-		this.email = email;
+		setFirstName(firstName);
+		setLastName(lastName);
+		setPhoneNumber(phoneNumber);
+		setAddress(address);
+		setEmail(email);
 	}
 
 	public Integer getId() {
@@ -67,7 +67,7 @@ public class CompanyEmployee implements BusinessObject {
 	}
 
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.firstName = BusinessObject.validateString(firstName);
 	}
 
 	public String getLastName() {
@@ -75,7 +75,7 @@ public class CompanyEmployee implements BusinessObject {
 	}
 
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.lastName = BusinessObject.validateString(lastName);
 	}
 
 	public String getAddress() {
@@ -83,15 +83,15 @@ public class CompanyEmployee implements BusinessObject {
 	}
 
 	public void setAddress(String address) {
-		this.address = address;
+		this.address = BusinessObject.validateString(address);
 	}
 
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
 
-	public void setPhoneNumber(String phonenumber) {
-		this.phoneNumber = phoneNumber;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = BusinessObject.validateString(phoneNumber);
 	}
 
 	public String getEmail() {
@@ -99,6 +99,6 @@ public class CompanyEmployee implements BusinessObject {
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		this.email = BusinessObject.validateString(email);
 	}
 }

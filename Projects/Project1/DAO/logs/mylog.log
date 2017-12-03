@@ -201,3 +201,90 @@
 2017-11-26 13:41:48 DEBUG ConnectionUtil:81 - opened connection to database
 2017-11-26 13:41:48 DEBUG ConnectionUtil:62 - attempting to clsoe stream
 2017-11-26 13:41:48 DEBUG ConnectionUtil:64 - closed stream
+2017-12-03 00:37:57 DEBUG DAOBusinessObject:314 - preforming delete DELETE FROM EAR_USER WHERE roleid=? AND password=? AND username=? ...
+2017-12-03 00:37:57 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-12-03 00:37:57 DEBUG ConnectionUtil:82 - opened connection to database
+2017-12-03 00:37:57 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-12-03 00:37:57 DEBUG ConnectionUtil:64 - closed stream
+2017-12-03 00:37:57 DEBUG DAOBusinessObject:314 - preforming delete DELETE FROM EAR_USER WHERE roleid=? AND password=? AND username=? ...
+2017-12-03 00:37:57 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-12-03 00:37:57 DEBUG ConnectionUtil:82 - opened connection to database
+2017-12-03 00:37:57 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-12-03 00:37:57 DEBUG ConnectionUtil:64 - closed stream
+2017-12-03 00:37:57 DEBUG DAOBusinessObject:220 - preforming insert INSERT INTO EAR_USER (roleid,password,username) VALUES(?,?,?) ...
+2017-12-03 00:37:57 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-12-03 00:37:57 DEBUG ConnectionUtil:82 - opened connection to database
+2017-12-03 00:37:57 DEBUG DAOBusinessObject:233 - insert failed INSERT INTO EAR_USER (roleid,password,username) VALUES(?,?,?), message=java.sql.SQLIntegrityConstraintViolationException: ORA-00001: unique constraint (LUIE.SYS_C0012080) violated
+
+2017-12-03 00:37:57 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-12-03 00:37:57 DEBUG ConnectionUtil:64 - closed stream
+2017-12-03 00:37:57 DEBUG DAOBusinessObject:81 - preforming query SELECT * FROM EAR_USER WHERE roleid=? AND password=? AND username=? ...
+2017-12-03 00:37:57 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-12-03 00:37:57 DEBUG ConnectionUtil:82 - opened connection to database
+2017-12-03 00:37:57 DEBUG BusinessObjectFactory:51 - converting resultset to Java objects
+2017-12-03 00:37:57 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-12-03 00:37:57 DEBUG ConnectionUtil:64 - closed stream
+2017-12-03 00:37:57 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-12-03 00:37:57 DEBUG ConnectionUtil:51 - closed stream
+2017-12-03 00:37:57 DEBUG DAOBusinessObject:314 - preforming delete DELETE FROM EAR_USER WHERE roleid=? AND password=? AND username=? ...
+2017-12-03 00:37:57 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-12-03 00:37:57 DEBUG ConnectionUtil:82 - opened connection to database
+2017-12-03 00:37:57 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-12-03 00:37:57 DEBUG ConnectionUtil:64 - closed stream
+2017-12-03 00:37:57 DEBUG DAOBusinessObject:314 - preforming delete DELETE FROM EAR_USER WHERE roleid=? AND password=? AND username=? ...
+2017-12-03 00:37:57 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-12-03 00:37:57 DEBUG ConnectionUtil:82 - opened connection to database
+2017-12-03 00:37:57 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-12-03 00:37:57 DEBUG ConnectionUtil:64 - closed stream
+2017-12-03 00:37:57 DEBUG DAOBusinessObject:220 - preforming insert INSERT INTO EAR_USER (roleid,password,username) VALUES(?,?,?) ...
+2017-12-03 00:37:57 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-12-03 00:37:57 DEBUG ConnectionUtil:82 - opened connection to database
+2017-12-03 00:37:57 DEBUG DAOBusinessObject:233 - insert failed INSERT INTO EAR_USER (roleid,password,username) VALUES(?,?,?), message=java.sql.SQLIntegrityConstraintViolationException: ORA-00001: unique constraint (LUIE.SYS_C0012080) violated
+
+2017-12-03 00:37:57 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-12-03 00:37:57 DEBUG ConnectionUtil:64 - closed stream
+2017-12-03 00:37:57 DEBUG DAOBusinessObject:314 - preforming delete DELETE FROM EAR_USER WHERE roleid=? AND password=? AND username=? ...
+2017-12-03 00:37:57 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-12-03 00:37:57 DEBUG ConnectionUtil:82 - opened connection to database
+2017-12-03 00:37:57 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-12-03 00:37:57 DEBUG ConnectionUtil:64 - closed stream
+2017-12-03 00:37:57 DEBUG DAOBusinessObject:314 - preforming delete DELETE FROM EAR_USER WHERE roleid=? AND password=? AND username=? ...
+2017-12-03 00:37:57 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-12-03 00:37:57 DEBUG ConnectionUtil:82 - opened connection to database
+2017-12-03 00:37:57 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-12-03 00:37:57 DEBUG ConnectionUtil:64 - closed stream
+2017-12-03 00:37:57 DEBUG DAOBusinessObject:42 - preforming query SELECT * FROM EAR_USER ...
+2017-12-03 00:37:57 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-12-03 00:37:57 DEBUG ConnectionUtil:82 - opened connection to database
+2017-12-03 00:37:57 DEBUG BusinessObjectFactory:51 - converting resultset to Java objects
+2017-12-03 00:37:57 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-12-03 00:37:57 DEBUG ConnectionUtil:64 - closed stream
+2017-12-03 00:37:57 DEBUG ConnectionUtil:49 - attempting to clsoe stream
+2017-12-03 00:37:57 DEBUG ConnectionUtil:51 - closed stream
+2017-12-03 00:37:57 DEBUG DAOBusinessObject:314 - preforming delete DELETE FROM EAR_USER WHERE roleid=? AND password=? AND username=? ...
+2017-12-03 00:37:57 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-12-03 00:37:57 DEBUG ConnectionUtil:82 - opened connection to database
+2017-12-03 00:37:57 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-12-03 00:37:57 DEBUG ConnectionUtil:64 - closed stream
+2017-12-03 00:37:57 DEBUG DAOBusinessObject:314 - preforming delete DELETE FROM EAR_USER WHERE roleid=? AND password=? AND username=? ...
+2017-12-03 00:37:57 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-12-03 00:37:57 DEBUG ConnectionUtil:82 - opened connection to database
+2017-12-03 00:37:57 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-12-03 00:37:57 DEBUG ConnectionUtil:64 - closed stream
+2017-12-03 00:37:57 DEBUG DAOBusinessObject:220 - preforming insert INSERT INTO EAR_USER (roleid,password,username) VALUES(?,?,?) ...
+2017-12-03 00:37:57 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-12-03 00:37:57 DEBUG ConnectionUtil:82 - opened connection to database
+2017-12-03 00:37:57 DEBUG DAOBusinessObject:233 - insert failed INSERT INTO EAR_USER (roleid,password,username) VALUES(?,?,?), message=java.sql.SQLIntegrityConstraintViolationException: ORA-00001: unique constraint (LUIE.SYS_C0012080) violated
+
+2017-12-03 00:37:57 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-12-03 00:37:57 DEBUG ConnectionUtil:64 - closed stream
+2017-12-03 00:37:57 DEBUG DAOBusinessObject:314 - preforming delete DELETE FROM EAR_USER WHERE roleid=? AND password=? AND username=? ...
+2017-12-03 00:37:57 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-12-03 00:37:57 DEBUG ConnectionUtil:82 - opened connection to database
+2017-12-03 00:37:57 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-12-03 00:37:57 DEBUG ConnectionUtil:64 - closed stream
+2017-12-03 00:37:57 DEBUG DAOBusinessObject:314 - preforming delete DELETE FROM EAR_USER WHERE roleid=? AND password=? AND username=? ...
+2017-12-03 00:37:57 DEBUG ConnectionUtil:76 - attempting to open connection to database
+2017-12-03 00:37:57 DEBUG ConnectionUtil:82 - opened connection to database
+2017-12-03 00:37:57 DEBUG ConnectionUtil:62 - attempting to clsoe stream
+2017-12-03 00:37:57 DEBUG ConnectionUtil:64 - closed stream

@@ -17,8 +17,8 @@ public class Message implements BusinessObject {
 		this.id = id;
 		this.formId = formId;
 		this.messagePriorityId = messagePriorityId;
-		this.title = title;
-		this.message = message;
+		setTitle(title);
+		setMessage(message);
 	}
 
 	public Integer getId() {
@@ -50,7 +50,7 @@ public class Message implements BusinessObject {
 	}
 
 	public void setTitle(String title) {
-		this.title = title;
+		this.title = BusinessObject.validateString(title);
 	}
 
 	public String getMessage() {
@@ -58,6 +58,6 @@ public class Message implements BusinessObject {
 	}
 
 	public void setMessage(String message) {
-		this.message = message;
+		this.message = BusinessObject.validateString(message);
 	}
 }

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import com.revature.businessobject.BusinessObject;
 import com.revature.service.GetUserInfo;
 import com.revature.service.GetWidget;
+import com.revature.service.UpdateUser;
 import com.revature.service.util.ServiceUtil;
 
 /**
@@ -93,6 +94,11 @@ public class Dashboard extends HttpServlet {
 					// Get appropriate widget 
 					if ((result = GetWidget.getWidgetPath((String)session.getAttribute("role"), request.getParameter("widget")) ) != null)
 						result = GetWidget.getWidget(getServletContext().getResourceAsStream(result));
+					break;
+				case "UPDATEACCOUNT":
+					response.setContentType("text/json");
+					UpdateUser.updateMyAccount(request);
+					result = ServiceUtil.toJson(GetUserInfo.getUserViewById((Integer)session.getAttribute("id")));
 					break;
 				case "SIGNOUT":
 					session.removeAttribute("id");

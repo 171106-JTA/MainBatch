@@ -40,7 +40,8 @@ var initUser = function () {
 		history.go(-backlen); 
 		
 		// reset URL
-		history.replaceState({}, null, window.location.href.substr(0, window.location.href.lastIndexOf("EAR/") + 4));
+		history.replaceState({}, null, "");
+		window.open(window.location.href.substr(0, window.location.href.lastIndexOf("EAR/") + 4), "_self");
 	});
 }
 
@@ -125,7 +126,8 @@ var onSignOut = function () {
 		history.go(-backlen); 
 		
 		// reset URL
-		history.replaceState({}, null, response);
+		history.replaceState({}, null, "");
+		window.open(response, "_self");
 	});
 }
 

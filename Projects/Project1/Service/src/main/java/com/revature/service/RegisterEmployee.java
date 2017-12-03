@@ -8,6 +8,7 @@ import com.revature.businessobject.CompanyEmployee;
 import com.revature.businessobject.User;
 import com.revature.businessobject.UserInfo;
 import com.revature.dao.DAOBusinessObject;
+import com.revature.service.util.ServiceUtil;
 
 public class RegisterEmployee {
 	
@@ -68,6 +69,9 @@ public class RegisterEmployee {
 			if ((records = DAOBusinessObject.load(user)).size() == 1) {
 				user = (User)records.get(0);
 				
+				// Set account email
+				employee.setEmail(email);
+				
 				// Create user Information, if failed then delete user record
 				if (!(result = DAOBusinessObject.insert(new UserInfo(user.getId(), employee)) == 1))
 					DAOBusinessObject.delete(user);
@@ -88,7 +92,7 @@ public class RegisterEmployee {
 		
 		result = result && username != null;
 		result = result && password != null;
-		result = result && email != null;
+		result = result && ServiceUtil.validateEmail(email);
 		
 		return result;
 	}

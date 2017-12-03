@@ -32,16 +32,16 @@ public class Form implements BusinessObject {
 		this.userId = userId;
 		this.departmentId = departmentId;
 		this.eventStateCityId = eventStateCityId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.phoneNumber = phoneNumber;
-		this.address = address;
-		this.email = email;
 		this.eventDateTime = eventDateTime;
 		this.eventCost = eventCost;
-		this.description = description;
 		this.timeOffBegin = timeOffBegin;
 		this.timeOffEnd = timeOffEnd;
+		setFirstName(firstName);
+		setLastName(lastName);
+		setPhoneNumber(phoneNumber);
+		setAddress(address);
+		setEmail(email);	
+		setDescription(description);
 	}
 
 	public Integer getId() {
@@ -81,7 +81,7 @@ public class Form implements BusinessObject {
 	}
 
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.firstName = BusinessObject.validateString(firstName);
 	}
 
 	public String getLastName() {
@@ -89,7 +89,7 @@ public class Form implements BusinessObject {
 	}
 
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.lastName = BusinessObject.validateString(lastName);
 	}
 
 	public String getPhoneNumber() {
@@ -97,7 +97,7 @@ public class Form implements BusinessObject {
 	}
 
 	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+		this.phoneNumber = BusinessObject.validateString(phoneNumber);
 	}
 
 	public String getAddress() {
@@ -105,7 +105,7 @@ public class Form implements BusinessObject {
 	}
 
 	public void setAddress(String address) {
-		this.address = address;
+		this.address = BusinessObject.validateString(address);
 	}
 
 	public String getEmail() {
@@ -113,7 +113,7 @@ public class Form implements BusinessObject {
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		this.email = BusinessObject.validateString(email);
 	}
 
 	public Date getEventDateTime() {
@@ -137,7 +137,7 @@ public class Form implements BusinessObject {
 	}
 
 	public void setDescription(String description) {
-		this.description = description;
+		this.description = BusinessObject.validateString(description);
 	}
 
 	public Date getTimeOffBegin() {

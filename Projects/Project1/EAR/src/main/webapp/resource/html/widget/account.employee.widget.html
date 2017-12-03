@@ -30,10 +30,10 @@
 			}
 		</style>
 		<script type="text/javascript">
-			 execute = function (params) { 
+			 execute = function () { 
 				 // Assign data to fields
 				 var assignData = function () {
-					var user = params.user;
+					var user = data.user;
 					
 					// fill-fields 
 					$("#acctStatus").text(user.role);
@@ -117,14 +117,20 @@
 							
 							// hide fields 
 							hideFields();
+							debugger;
 							
 							// send request
 							Util.send(options, function (response) {
-									// update account information
+									// Update client side information 
+									data.user = response;
+									
+									// update screen
+									assignData();
 								},  
 								function (error) {
 									console.log(error);
-							});
+								}
+							);
 						}
 					});
 				 }

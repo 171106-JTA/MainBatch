@@ -23,7 +23,7 @@ public class FormStatus implements BusinessObject {
 		this.statusId = statusId;
 		this.originalEstimate = originalEstimate;
 		this.reimbursement = reimbursement;
-		this.description = description;
+		setDescription(description);
 	}
 
 	public Integer getId() {
@@ -79,6 +79,6 @@ public class FormStatus implements BusinessObject {
 	}
 
 	public void setDescription(String description) {
-		this.description = description;
+		this.description = BusinessObject.validateString(description);
 	}
 }

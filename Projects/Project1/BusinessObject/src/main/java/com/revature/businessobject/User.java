@@ -14,8 +14,8 @@ public class User implements BusinessObject {
 		super();
 		this.id = id;
 		this.roleId = roleId;
-		this.username = username;
-		this.password = password;
+		setUsername(username);
+		setPassword(password);
 	}
 
 	public Integer getId() {
@@ -39,7 +39,7 @@ public class User implements BusinessObject {
 	}
 
 	public void setUsername(String username) {
-		this.username = username;
+		this.username = BusinessObject.validateString(username);
 	}
 
 	public String getPassword() {
@@ -47,7 +47,7 @@ public class User implements BusinessObject {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = BusinessObject.validateString(password);
 	}
 
 	@Override

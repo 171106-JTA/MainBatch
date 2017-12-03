@@ -20,9 +20,9 @@ public class CodeList implements BusinessObject {
 	public CodeList(Integer id, String code, String value, String description) {
 		super();
 		this.id = id;
-		this.code = code;
-		this.value = value;
-		this.description = description;
+		setCode(code);
+		setValue(value);
+		setDescription(description);
 	}
 
 	public Integer getId() {
@@ -38,7 +38,7 @@ public class CodeList implements BusinessObject {
 	}
 
 	public void setCode(String code) {
-		this.code = code;
+		this.code = BusinessObject.validateString(code);
 	}
 
 	public String getValue() {
@@ -46,7 +46,7 @@ public class CodeList implements BusinessObject {
 	}
 
 	public void setValue(String value) {
-		this.value = value;
+		this.value = BusinessObject.validateString(value);
 	}
 
 	public String getDescription() {
@@ -54,6 +54,6 @@ public class CodeList implements BusinessObject {
 	}
 
 	public void setDescription(String description) {
-		this.description = description;
+		this.description = BusinessObject.validateString(description);
 	}
 }

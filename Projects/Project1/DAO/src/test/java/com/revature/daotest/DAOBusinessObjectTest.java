@@ -1,7 +1,9 @@
 package com.revature.daotest;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 
 import java.util.List;
 
@@ -17,6 +19,8 @@ import com.revature.dao.DAOBusinessObject;
 public class DAOBusinessObjectTest {
 	User user1;
 	User user2;
+	User mockedUser;
+	
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -26,8 +30,14 @@ public class DAOBusinessObjectTest {
 	public void setUp() throws Exception {
 		user1 = new User(null,1,"billy", "bob");
 		user2 = new User(null,1,"brandy", "lill");	
+		mockedUser = mock(User.class);
 	}
 
+	@Test
+	public void mocksShouldNotBeNull() {
+		assertNotNull(mockedUser);
+	}
+	
 	@After
 	public void tearDown() throws Exception {
 		DAOBusinessObject.delete(user1);
@@ -81,5 +91,4 @@ public class DAOBusinessObjectTest {
 		assertEquals(updated.getId(), rec.getId());
 		assertEquals(updated.getRoleId(), rec.getRoleId());
 	}
-	
 }

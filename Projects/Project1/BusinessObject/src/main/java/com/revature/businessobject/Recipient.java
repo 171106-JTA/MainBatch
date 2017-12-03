@@ -13,7 +13,7 @@ public class Recipient implements BusinessObject {
 		super();
 		this.id = id;
 		this.messageId = messageId;
-		this.recipientEmail = recipientEmail;
+		setRecipientEmail(recipientEmail);
 	}
 
 	public Integer getId() {
@@ -37,6 +37,6 @@ public class Recipient implements BusinessObject {
 	}
 
 	public void setRecipientEmail(String recipientEmail) {
-		this.recipientEmail = recipientEmail;
+		this.recipientEmail = BusinessObject.validateString(recipientEmail);
 	}
 }

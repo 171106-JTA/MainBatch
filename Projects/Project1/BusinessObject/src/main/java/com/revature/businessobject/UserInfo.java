@@ -32,11 +32,11 @@ public class UserInfo implements BusinessObject {
 		this.id = id;
 		this.userId = userId;
 		this.stateCityId = stateCityId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.phoneNumber = phoneNumber;
-		this.address = address;
-		this.email = email;
+		setFirstName(firstName);
+		setLastName(lastName);
+		setPhoneNumber(phoneNumber);
+		setAddress(address);
+		setEmail(email);
 	}
 
 	public Integer getId() {
@@ -68,7 +68,7 @@ public class UserInfo implements BusinessObject {
 	}
 
 	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+		this.firstName = BusinessObject.validateString(firstName);
 	}
 
 	public String getLastName() {
@@ -76,7 +76,7 @@ public class UserInfo implements BusinessObject {
 	}
 
 	public void setLastName(String lastName) {
-		this.lastName = lastName;
+		this.lastName = BusinessObject.validateString(lastName);
 	}
 
 	public String getPhoneNumber() {
@@ -84,7 +84,7 @@ public class UserInfo implements BusinessObject {
 	}
 
 	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+		this.phoneNumber = BusinessObject.validateString(phoneNumber);
 	}
 
 	public String getAddress() {
@@ -92,7 +92,7 @@ public class UserInfo implements BusinessObject {
 	}
 
 	public void setAddress(String address) {
-		this.address = address;
+		this.address = BusinessObject.validateString(address);
 	}
 
 	public String getEmail() {
@@ -100,6 +100,6 @@ public class UserInfo implements BusinessObject {
 	}
 
 	public void setEmail(String email) {
-		this.email = email;
+		this.email = BusinessObject.validateString(email);
 	}
 }
