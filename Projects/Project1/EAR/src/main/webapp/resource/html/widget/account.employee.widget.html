@@ -37,6 +37,7 @@
 					
 					// fill-fields 
 					$("#acctStatus").text(user.role);
+					$("#acctDepartment").text(user.department);
 					$("#acctUserName").text(user.username);
 					$("#acctFirstName").text(user.firstName);
 					$("#acctLastName").text(user.lastName);
@@ -148,6 +149,10 @@
 					<tr>
 						<th>Status: </th>
 						<td><b><span id="acctStatus"></span></b></td>
+					</tr>
+					<tr>
+						<th>Department: </th>
+						<td><b><span id="acctDepartment"></span></b></td>
 					</tr>
 					<tr>
 						<th>Username: </th>

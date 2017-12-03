@@ -34,7 +34,13 @@ var initUser = function () {
 			$("#username").text(" " + data.user.username);
 		}
 	}, function (error) {
-		window.open(window.location.href.substr(0, window.location.href.lastIndexOf("EAR/") + 4));
+		var backlen = history.length - 1;  
+		
+		// Return at the beginning
+		history.go(-backlen); 
+		
+		// reset URL
+		history.replaceState({}, null, window.location.href.substr(0, window.location.href.lastIndexOf("EAR/") + 4));
 	});
 }
 
@@ -109,10 +115,17 @@ var onDashboardClick = function () {
 
 /**
  * Used to log user out of account
+ * Update backspace history to prevent reaccess of account
  */
 var onSignOut = function () {
 	Util.send({ "transtype": "SIGNOUT" }, function (response){
-		window.open(response)
+		var backlen = history.length - 1;  
+		
+		// Return to the beginning
+		history.go(-backlen); 
+		
+		// reset URL
+		history.replaceState({}, null, response);
 	});
 }
 
