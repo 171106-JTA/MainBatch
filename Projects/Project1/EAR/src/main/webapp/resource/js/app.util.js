@@ -98,6 +98,49 @@ var initUtil = function () {
 				});
 			},
 			
+			buildCodeList: function (params) {
+				var options;
+				
+				// Prepare request
+				options = {
+					"transtype": "GETCODELIST",
+					"code": params.code,
+					"value": params.value,
+					"description": params.description
+				};
+				
+				// ensure one display set
+				if (!params.display)
+					params.display = "description";
+				
+				// Send request for codelist
+				this.send(options, function (response){
+					var node = params.node;
+					var display = params.display;
+					var option;
+					var text = [];
+
+					// insert empty option
+					node.append($("<option></option>"));
+					
+					// Build node from response from server 
+					$.each(response, function (i, item){
+						text = [];
+						display.search("code") > -1 ? text.push(item.code) : 0;
+						display.search("value") > -1 ? text.push(item.value) : "";
+						display.search("description") > -1 ?  text.push(item.description) : "";
+						
+						// assemble option
+						option = $("<option code='" + item.code + "' value='" + item.value + "' desc='" + item.description + "'>" + text.join(" - ") + "</option>");
+						
+						// append option
+						node.append(option);
+					});
+				}, function (error){
+					console.log(error);s
+				});
+			},
+			
 			helper: {
 				/**
 				 * @description Determines if parent node is specified in params

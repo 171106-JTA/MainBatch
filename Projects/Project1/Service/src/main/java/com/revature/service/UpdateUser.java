@@ -34,7 +34,7 @@ public class UpdateUser {
 			total += updateUserInfo(request, userId);
 			
 			// Perform extra updates (if necessary).
-			if (request.getAttribute("role").equals("BENEFIT-COORDINATOR")) 
+			if (session.getAttribute("role").equals("BENEFIT-COORDINATOR")) 
 				total += updateBenefitCoordinator(request, userId);
 		}
 		
@@ -81,7 +81,7 @@ public class UpdateUser {
 		newValues.setPhoneNumber(request.getParameter("phonenumber"));
 		
 		// if Email
-		if ((value = (String)request.getAttribute("email")) != null && ServiceUtil.validateEmail(value))
+		if ((value = request.getParameter("email")) != null && ServiceUtil.validateEmail(value))
 			newValues.setEmail(value);
 		
 		// If has state city information
@@ -101,8 +101,9 @@ public class UpdateUser {
 	}
 	
 	private static int updateBenefitCoordinator(HttpServletRequest request, Integer userId) {
+		List<CodeList> records = GetCodeList.getCodeListByValue(request.getParameter("department"));
 		BenefitCoordinator toUpdate = new BenefitCoordinator(null, userId, null);
-		BenefitCoordinator newValues = new BenefitCoordinator(null, null, Integer.parseInt(request.getParameter("departmentid")));
+		BenefitCoordinator newValues = new BenefitCoordinator(null, null, records.get(0).getId());
 		
 		return DAOBusinessObject.update(toUpdate, newValues);
 	}

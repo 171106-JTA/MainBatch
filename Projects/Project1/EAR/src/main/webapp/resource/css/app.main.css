@@ -25,6 +25,28 @@
  	background-color: #004aff!important;
  }
  
+ /* Secondary button color */
+  .btn-secondary {
+ 	background-color: #aa3453!important;
+ 	color: white;
+ }
+ 
+  button[disabled].btn-secondary {
+  	 background-color: rgba(168, 64, 64, 0.7)!important;
+  	 border-color: rgba(168, 64, 64, 0.7)!important;
+  }
+ 
+ .btn-secondary:hover {
+ 	background-color: #ff3453!important;
+ 	border-color: #ff4455;
+ }
+ 
+ .btn-secondary:active {
+ 	background-color: #771243!important;
+ 	background-color: #551243!important;
+ }
+ 
+ 
  /* User for Dropdown divider */
  .hr-divider {
  	margin:1px;

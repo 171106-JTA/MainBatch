@@ -4,7 +4,11 @@
  *  @description Global reference to documented code
  */
 var data = {
-		widget: {}
+		user: {},
+		widget: {},
+		update: function () {
+			$("#username").text(" " + this.user.username);
+		}
 };
 
 /**
@@ -16,9 +20,6 @@ var initializeDashboard = function () {
   if ($("#dashboard").length > 0) {
 	  initUser();
 	  initContent();
-	  
-	  // default dashboard widget
-	  onDashboardClick();
   }
 }
 
@@ -31,33 +32,23 @@ var initUser = function () {
 		if (response != null) {
 			// Cache user information 
 			data.user = response;
-			$("#username").text(" " + data.user.username);
+			data.update();
 		}
 	}, function (error) {
-		var backlen = history.length - 1;  
-		
-		// Return at the beginning
-		history.go(-backlen); 
-		
-		// reset URL
-		history.replaceState({}, null, "");
 		window.open(window.location.href.substr(0, window.location.href.lastIndexOf("EAR/") + 4), "_self");
 	});
 }
 
 var initContent = function (){ 
 	var dashboard = $("#dashboard");
-	var screen = $("#screen");
-	var drawer = $("#drawer-pane");
-	var dsContainer = $("#dynamicSearchContainer");
 	  
 	// Ensure handle to node was acquired
-	if (drawer.length > 0 && dashboard.length > 0 && 
-			  screen.length > 0 && dsContainer.length > 0 ) {
+	if (dashboard.length > 0) {
 	    
 	    // For screen adjustment
 	    $(window).resize(onDashboardResize);
 	    onDashboardResize();
+	    onDashboardClick();
 	}
 }
 
@@ -69,18 +60,19 @@ var onDashboardResize = function () {
 	var dsContainer = $("#dynamicSearchContainer");
 	var dashboard = $("#dashboard");
 	var height = $(window).height();
+	var padding = 0;
 	var rect;
 	
 	// Resize dashboard
 	if (dashboard.length > 0) {
 		rect = dashboard[0].getBoundingClientRect();
-		dashboard.css("height", (height - rect.top) + "px");
+		dashboard.css("height", (height - (rect.top + padding)) + "px");
 	}
 	
 	// Resize left drawer dynamic content area
 	if (dsContainer.length > 0) {
 		rect = dsContainer[0].getBoundingClientRect();
-		dsContainer.css("height", (height - rect.top) + "px");
+		dsContainer.css("height", (height -  (rect.top + padding)) + "px");
 	}
 }
 
@@ -120,13 +112,6 @@ var onDashboardClick = function () {
  */
 var onSignOut = function () {
 	Util.send({ "transtype": "SIGNOUT" }, function (response){
-		var backlen = history.length - 1;  
-		
-		// Return to the beginning
-		history.go(-backlen); 
-		
-		// reset URL
-		history.replaceState({}, null, "");
 		window.open(response, "_self");
 	});
 }
@@ -233,9 +218,4 @@ var assignWidget = function (widget) {
 		widget.screenMethod = execute;
 	}
 }
-
-
-
-
-
 

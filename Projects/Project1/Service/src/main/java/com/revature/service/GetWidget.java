@@ -55,7 +55,7 @@ public class GetWidget {
 	private static String getEmployeeWidgetPath(String widget) {
 		switch (widget.toLowerCase()) {
 			case "dashboard":
-				return WIDGETPATH + "dashboard.widget.html";
+				return WIDGETPATH + "message.widget.html";
 			case "account":
 				return WIDGETPATH + "account.employee.widget.html";
 			default:
@@ -67,7 +67,7 @@ public class GetWidget {
 	private static String getBenefitCoordinatorPath(String widget) {
 		switch (widget.toLowerCase()) {
 			case "dashboard":
-				return WIDGETPATH + "dashboard.widget.html";
+				return WIDGETPATH + "message.widget.html";
 			case "account":
 				return WIDGETPATH + "account.admin.widget.html";
 			default:
@@ -78,7 +78,7 @@ public class GetWidget {
 	private static String getHeadSupervisorPath(String widget) {
 		switch (widget.toLowerCase()) {
 			case "dashboard":
-				return WIDGETPATH + "dashboard.widget.html";
+				return WIDGETPATH + "message.widget.html";
 			case "account":
 				return WIDGETPATH + "account.widget.html";
 			default:
@@ -89,7 +89,7 @@ public class GetWidget {
 	private static String getSupervisorPath(String widget) {
 		switch (widget.toLowerCase()) {
 			case "dashboard":
-				return WIDGETPATH + "dashboard.widget.html";
+				return WIDGETPATH + "message.widget.html";
 			case "account":
 				return WIDGETPATH + "account.widget.html";
 			default:

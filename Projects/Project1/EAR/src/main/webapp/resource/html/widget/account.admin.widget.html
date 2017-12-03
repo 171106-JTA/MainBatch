@@ -1,40 +1,39 @@
 <!--  ACCOUNT INFORMATION FOR EMPLOYEES  -->
 <body>
-	<div is-drawer hide-drawer>
-	</div>
+	<div is-drawer hide-drawer></div>
 	<div is-screen>
 		<style>
-			.account-block {
-				overflow-x: hidden;
-				padding-top: 25px;
-			}
-			
-			.info-table {
-				width: 100%;
-				border: 1px solid rgba(40,40,40,0.25);
-				margin-bottom: 5px;
-			}
-			
-			.info-table th {
-				background-color: #0082ff;
-				width: 125px;
-				color: #eeeeee;
-			}
-			
-			.info-table b {
-				padding-left: 5px;
-			}
-			
-			.info-table td {
-				border: 1px solid rgba(40,40,40,0.25);
-			}
-		</style>
+.account-block {
+	overflow-x: hidden;
+	padding-top: 25px;
+}
+
+.info-table {
+	width: 100%;
+	border: 1px solid rgba(40, 40, 40, 0.25);
+	margin-bottom: 5px;
+}
+
+.info-table th {
+	background-color: #0082ff;
+	width: 125px;
+	color: #eeeeee;
+}
+
+.info-table b {
+	padding-left: 5px;
+}
+
+.info-table td {
+	border: 1px solid rgba(40, 40, 40, 0.25);
+}
+</style>
 		<script type="text/javascript">
-			 execute = function (params) { 
-				 // Assign data to fields
-				 var assignData = function () {
-					var user = params.user;
-					
+			execute = function() {
+				// Assign data to fields
+				var assignData = function() {
+					var user = data.user;
+
 					// fill-fields 
 					$("#acctStatus").text(user.role);
 					$("#acctDepartment").text(user.department);
@@ -47,184 +46,308 @@
 					$("#acctEmail").text(user.email);
 					$("#accPhoneNumber").text(user.phoneNumber);
 				}
+
+				var fillSelects = function () {
+					// Build selects 
+					Util.buildCodeList({
+						"code" : "DEPARTMENT",
+						"node" : $("#acctDepartmentSelect"),
+						"display" : "value description"
+					});
+					Util.buildCodeList({
+						"code" : "US-STATE",
+						"node" : $("#acctStateSelect")
+					});
+					Util.buildCodeList({
+						"code" : "CITY-CODE",
+						"node" : $("#acctCitySelect")
+					});
+					Util.buildCodeList({
+						"code" : "CITY-CODE-GROUP",
+						"node" : $("#acctStateCityContainer")
+					});
+				}
 				
 				// assign btn event handles 
 				var assignButtonEventHandlers = function() {
 					var hideFields;
 					var showFields;
+					var validate;
 					
-					hideFields = function () {
+					hideFields = function() {
 						// Enable buttons
 						$("#acctEditBtn").prop('disabled', false);
-						
+
 						// show placeholder fields
 						$("#acctPasswordPlaceholder").show();
-						
+
 						// hide input fields 
-						$("#acctNewUserNameRow").hide();
-						$("#acctPasswordContainer").hide();
-						$("#acctRetypePasswordRow").hide();
-						$("#acctEmailRow").hide();
-						
+						$("tr[is-field]").hide();
+						$("div[is-field]").hide();
+
 						// clear input fields
 						$("#acctInfo").find("input").val("");
-						
+
 						// disable self and update btn
 						$("#acctCancelBtn").prop('disabled', true);
 						$("#acctUpdateBtn").prop('disabled', true);
 					};
-					
-					showFields = function () {
+
+					showFields = function() {
 						// Enable buttons
 						$("#acctCancelBtn").prop('disabled', false);
 						$("#acctUpdateBtn").prop('disabled', false);
-						
+
 						// hide placeholder fields
 						$("#acctPasswordPlaceholder").hide();
-						
+
 						// show hidden fields 
-						$("#acctNewUserNameRow").show();
-						$("#acctPasswordContainer").show();
-						$("#acctRetypePasswordRow").show();
-						$("#acctEmailRow").show();
-						
+						$("tr[is-field]").show();
+						$("div[is-field]").show();
+
 						// disable self
 						$("#acctEditBtn").prop('disabled', true);
+					}
+
+					validate = function () {
+						var codegroups = $("#acctStateCityContainer").find("option").toArray();
+						var pw = $("#acctPasswordInput").val().trim();
+						var stateIndex = $("#acctStateSelect").prop("selectedIndex");
+						var state = $("#acctStateSelect").children()[stateIndex];
+						var cityIndex = $("#acctCitySelect").prop("selectedIndex");
+						var city = $("#acctCitySelect").children()[cityIndex];
+						var message = "";
+						var cmp;
+						
+						// Check passwords 
+						if (pw !== $("#acctRetypePasswordInput").val().trim())
+							message += "Passwords must match!";1
+						
+						// Wrap with JQuery
+						state = $(state);
+						city = $(city);
+						
+						// Used to determine if valid selection made
+						cmp = function (option) {
+							option = $(option);
+							
+							// Check if values match
+							return option.attr("value") === state.attr("value") && 
+								option.attr("desc") === city.attr("value");
+						}
+						
+						// Check city/state
+						if (codegroups.findIndex(cmp) < 0)
+							message += "City must belong to selected state!"
+						
+						return message.length > 0 ? message : null;
 					}
 					
 					
 					$("#acctEditBtn").on("click", showFields);
 					$("#acctCancelBtn").on("click", hideFields);
-					$("#acctUpdateBtn").on("click", function (){
-						var pw = $("#acctPasswordInput").val().trim();
-						var error = $("#acctPasswordMismatch");
-						var options;
+					$("#acctUpdateBtn").on("click",
+							function() {
+								var pw = $("#acctPasswordInput").val().trim();
+								var error = $("#acctPasswordMismatch");
+								var options;
+								var message;
+								
+								// Ensure user entered the same input
+								if (message = validate()) {
+									error.text(message);
+								} else {
+									// Reset error message
+									error.text("");
 
-						// Ensure user entered the same input
-						if (pw !== $("#acctRetypePasswordInput").val().trim()) {
-							error.text("Paswords do not match");
-						} else {
-							// Reset error message
-							error.text("");
-							
-							// Perpare request options 
-							options = {
-									"transtype": "UPDATEACCOUNT",
-									"username": $("#acctNewUserNameInput").val().trim(),
-									"password": pw,
-									"email": $("#acctEmailInput").val().trim()
-							}
-							
-							// hide fields 
-							hideFields();
-							
-							// send request
-							Util.send(options, function (response) {
-									// update account information
-								},  
-								function (error) {
-									console.log(error);
+									// Perpare request options 
+									options = {
+										"transtype" : "UPDATEACCOUNT",
+										"username" : $("#acctNewUserNameInput").val().trim(),
+										"password" : pw,
+										"email" : $("#acctEmailInput").val().trim(),
+										"state": $("#acctStateSelect").val(),
+										"city": $("#acctCitySelect").val(),
+										"address": $("#acctAddressInput").val().trim(),
+										"phonenumber": $("#acctPhoneNumberInput").val().trim(),
+										"department": $("#acctDepartmentSelect").val(),
+										"firstname": $("#acctFirstNameInput").val().trim(),
+										"lastname": $("#acctLastNameInput").val().trim()
+									}
+
+									// hide fields 
+									hideFields();
+
+									// send request
+									Util.send(options, function(response) {
+										// Update client side information 
+										data.user = response;
+										debugger;
+										// update screen
+										assignData();
+										data.update();
+									}, function(error) {
+										console.log(error);
+									});
+								}
 							});
-						}
-					});
-				 }
-				
+				}
+
 				// Build info icons
 				Util.buildInfoIcons($("#acctInfo"));
-				
+
 				// execution of methods
 				assignData();
+				fillSelects();
 				assignButtonEventHandlers();
 			}
 		</script>
-		
+
 		<!-- USED TO DISPLAY ACCOUNT INFORMATION -->
 		<div class="account-block">
 			<div class="input-max-width center-block">
-				<div  class="text-center">
+				<div class="text-center">
 					<label style="font-size: 2.0em">Account Information</label>
 				</div>
-				<b><span id="acctPasswordMismatch" style="color:red;"></span></b>
+				<b><span id="acctPasswordMismatch" style="color: red;"></span></b>
 				<table id="acctInfo" class="info-table">
 					<tr>
-						<th>Status: </th>
+						<th>Status:</th>
 						<td><b><span id="acctStatus"></span></b></td>
 					</tr>
+
 					<tr>
-						<th>Department: </th>
+						<th>Department:</th>
 						<td><b><span id="acctDepartment"></span></b></td>
 					</tr>
+					<tr hidden is-field>
+						<th>Update Department:</th>
+						<td><select id="acctDepartmentSelect" class="form-control"></select></td>
+					</tr>
+
 					<tr>
-						<th>Username: </th>
+						<th>Username:</th>
 						<td><b><span id="acctUserName"></span></b></td>
 					</tr>
 					<!-- When user wishes to update account information  -->
-					<tr id="acctNewUserNameRow" hidden>
-						<th>New Username: <span info-icon="If left blank then ignored"></span></th>
-						<td><input id="acctNewUserNameInput" class="form-control" type="text"></td>
+					<tr hidden is-field>
+						<th>New Username: <span
+							info-icon="If left blank then ignored"></span></th>
+						<td><input id="acctNewUserNameInput" class="form-control"
+							type="text"></td>
 					</tr>
+
 					<tr>
-						<th>Password: </th>
-						<td>
-							<b id="acctPasswordPlaceholder">***************</b>
-							<div id="acctPasswordContainer" hidden>
-								<input id="acctPasswordInput" class="form-control" type="password">
-							</div>
-							
-						</td>
+						<th>Password:</th>
+						<td><b id="acctPasswordPlaceholder">***************</b>
+							<div id="acctPasswordContainer" hidden is-field>
+								<input id="acctPasswordInput" class="form-control"
+									type="password">
+							</div></td>
 					</tr>
 					<!-- When user wishes to update account information  -->
-					<tr id="acctRetypePasswordRow" hidden>
-						<th>Re-type: <span info-icon="If password and retype left blank then ignored"></span></th>
-						<td><input id="acctRetypePasswordInput" class="form-control" type="password"></td>
+					<tr hidden is-field>
+						<th>Re-type: <span
+							info-icon="If password and retype left blank then ignored"></span></th>
+						<td><input id="acctRetypePasswordInput" class="form-control"
+							type="password"></td>
 					</tr>
+
 					<tr>
-						<th>First Name: </th>
+						<th>First Name:</th>
 						<td><b><span id="acctFirstName"></span></b></td>
 					</tr>
+					<tr hidden is-field>
+						<th>Update First Name:</th>
+						<td><input id="acctFirstNameInput" class="form-control"></td>
+					</tr>
+
 					<tr>
-						<th>Last Name: </th>
+						<th>Last Name:</th>
 						<td><b><span id="acctLastName"></span></b></td>
 					</tr>
+					<tr hidden is-field>
+						<th>Update Last Name:</th>
+						<td><input id="acctLastNameInput" class="form-control"></td>
+					</tr>
+
 					<tr>
-						<th>State: </th>
+						<th>State:</th>
 						<td><b><span id="acctState"></span></b></td>
 					</tr>
+					<tr hidden is-field>
+						<th>Update State:</th>
+						<td><select id="acctStateSelect" class="form-control"></select></td>
+
+					</tr>
+
 					<tr>
-						<th>City: </th>
+						<th>City:</th>
 						<td><b><span id="acctCity"></span></b></td>
 					</tr>
+					<tr hidden is-field>
+						<th>Update City:</th>
+						<td><select id="acctCitySelect" class="form-control"></select></td>
+					</tr>
+
 					<tr>
-						<th>Address: </th>
+						<th>Address:</th>
 						<td><b><span id="acctAddress"></span></b></td>
 					</tr>
+					<tr hidden is-field>
+						<th>Update Address:</th>
+						<td><input id="acctAddressInput" class="form-control"></td>
+					</tr>
+
 					<tr>
-						<th>Email: </th>
+						<th>Email:</th>
 						<td><b><span id="acctEmail"></span></b></td>
 					</tr>
 					<!-- When user wishes to update account information  -->
-					<tr id="acctEmailRow" hidden>
+					<tr hidden is-field>
 						<th>New Email: <span info-icon="If left blank then ignored"></span></th>
-						<td><input id="acctEmailInput" class="form-control" type="email"></td>
+						<td><input id="acctEmailInput" class="form-control"
+							type="email"></td>
 					</tr>
 					<tr>
-						<th>Phone number: </th>
-						<td> <b><span id="accPhoneNumber"></span></b></td>
+						<th>Phone number:</th>
+						<td><b><span id="accPhoneNumber"></span></b></td>
+					</tr>
+					<tr hidden is-field>
+						<th>Update Phone number:</th>
+						<td><input id="acctPhoneNumberInput" class="form-control"></td>
 					</tr>
 				</table>
 				<!-- ENABLE INFORMATION EDITING  -->
-				<button id="acctEditBtn" class="form-control"><span class="fa fa-pencil-square-o"></span> Edit</button>
-				
+				<button id="acctEditBtn" class="form-control">
+					<span class="fa fa-pencil-square-o"></span> Edit
+				</button>
+
 				<!-- MOD-COMMIT/CANCELATION MECHANISMS  -->
 				<div class="input-max-group-adjust">
-					<div class="col-sm-4 input-max-group-adjust" style="padding-top: 5px;">
-						<button id="acctCancelBtn" class="form-control" type="reset" disabled><span class="fa fa-times" aria-hidden="true"></span>&nbsp;Cancel</button>
+					<div class="col-sm-4 input-max-group-adjust"
+						style="padding-top: 5px;">
+						<button id="acctCancelBtn" class="form-control" type="reset"
+							disabled>
+							<span class="fa fa-times" aria-hidden="true"></span>&nbsp;Cancel
+						</button>
 					</div>
-					<div class="col-sm-8 input-max-group-adjust" style="padding-top: 5px;">
-						<button id="acctUpdateBtn" class="form-control btn-primary" value="register" disabled><span class="fa fa-file-text-o" aria-hidden="true"></span>&nbsp;Update</button>
+					<div class="col-sm-8 input-max-group-adjust"
+						style="padding-top: 5px;">
+						<button id="acctUpdateBtn" class="form-control btn-primary"
+							value="register" disabled>
+							<span class="fa fa-file-text-o" aria-hidden="true"></span>&nbsp;Update
+						</button>
 					</div>
 				</div>
 			</div>
 		</div>
+		
+		
+		
+		
+		<!-- USED FOR STATE - CITY validation -->
+		<div id="acctStateCityContainer" hidden></div>
+		
 	</div>
 </body>

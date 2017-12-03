@@ -70,4 +70,8 @@
 	.filter {
 		display: none;
 	 }
+	 .draw-main {
+	 	display: none!important;
+	 }
+	 
 }
