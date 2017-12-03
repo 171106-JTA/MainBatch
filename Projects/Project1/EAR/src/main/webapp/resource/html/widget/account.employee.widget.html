@@ -1,0 +1,225 @@
+<!--  ACCOUNT INFORMATION FOR EMPLOYEES  -->
+<body>
+	<div is-drawer hide-drawer>
+	</div>
+	<div is-screen>
+		<style>
+			.account-block {
+				overflow-x: hidden;
+				padding-top: 25px;
+			}
+			
+			.info-table {
+				width: 100%;
+				border: 1px solid rgba(40,40,40,0.25);
+				margin-bottom: 5px;
+			}
+			
+			.info-table th {
+				background-color: #0082ff;
+				width: 125px;
+				color: #eeeeee;
+			}
+			
+			.info-table b {
+				padding-left: 5px;
+			}
+			
+			.info-table td {
+				border: 1px solid rgba(40,40,40,0.25);
+			}
+		</style>
+		<script type="text/javascript">
+			 execute = function (params) { 
+				 // Assign data to fields
+				 var assignData = function () {
+					var user = params.user;
+					
+					// fill-fields 
+					$("#acctStatus").text(user.role);
+					$("#acctUserName").text(user.username);
+					$("#acctFirstName").text(user.firstName);
+					$("#acctLastName").text(user.lastName);
+					$("#acctState").text(user.state);
+					$("#acctCity").text(user.city);
+					$("#acctAddress").text(user.address);
+					$("#acctEmail").text(user.email);
+					$("#accPhoneNumber").text(user.phoneNumber);
+				}
+				
+				// assign btn event handles 
+				var assignButtonEventHandlers = function() {
+					var hideFields;
+					var showFields;
+					
+					hideFields = function () {
+						// Enable buttons
+						$("#acctEditBtn").prop('disabled', false);
+						
+						// show placeholder fields
+						$("#acctPasswordPlaceholder").show();
+						
+						// hide input fields 
+						$("#acctNewUserNameRow").hide();
+						$("#acctPasswordContainer").hide();
+						$("#acctRetypePasswordRow").hide();
+						$("#acctEmailRow").hide();
+						
+						// clear input fields
+						$("#acctInfo").find("input").val("");
+						
+						// disable self and update btn
+						$("#acctCancelBtn").prop('disabled', true);
+						$("#acctUpdateBtn").prop('disabled', true);
+					};
+					
+					showFields = function () {
+						// Enable buttons
+						$("#acctCancelBtn").prop('disabled', false);
+						$("#acctUpdateBtn").prop('disabled', false);
+						
+						// hide placeholder fields
+						$("#acctPasswordPlaceholder").hide();
+						
+						// show hidden fields 
+						$("#acctNewUserNameRow").show();
+						$("#acctPasswordContainer").show();
+						$("#acctRetypePasswordRow").show();
+						$("#acctEmailRow").show();
+						
+						// disable self
+						$("#acctEditBtn").prop('disabled', true);
+					}
+					
+					
+					$("#acctEditBtn").on("click", showFields);
+					$("#acctCancelBtn").on("click", hideFields);
+					$("#acctUpdateBtn").on("click", function (){
+						var pw = $("#acctPasswordInput").val().trim();
+						var error = $("#acctPasswordMismatch");
+						var options;
+
+						// Ensure user entered the same input
+						if (pw !== $("#acctRetypePasswordInput").val().trim()) {
+							error.text("Paswords do not match");
+						} else {
+							// Reset error message
+							error.text("");
+							
+							// Perpare request options 
+							options = {
+									"transtype": "UPDATEACCOUNT",
+									"username": $("#acctNewUserNameInput").val().trim(),
+									"password": pw,
+									"email": $("#acctEmailInput").val().trim()
+							}
+							
+							// hide fields 
+							hideFields();
+							
+							// send request
+							Util.send(options, function (response) {
+									// update account information
+								},  
+								function (error) {
+									console.log(error);
+							});
+						}
+					});
+				 }
+				
+				// Build info icons
+				Util.buildInfoIcons($("#acctInfo"));
+				
+				// execution of methods
+				assignData();
+				assignButtonEventHandlers();
+			}
+		</script>
+		
+		<!-- USED TO DISPLAY ACCOUNT INFORMATION -->
+		<div class="account-block">
+			<div class="input-max-width center-block">
+				<div  class="text-center">
+					<label style="font-size: 2.0em">Account Information</label>
+				</div>
+				<b><span id="acctPasswordMismatch" style="color:red;"></span></b>
+				<table id="acctInfo" class="info-table">
+					<tr>
+						<th>Status: </th>
+						<td><b><span id="acctStatus"></span></b></td>
+					</tr>
+					<tr>
+						<th>Username: </th>
+						<td><b><span id="acctUserName"></span></b></td>
+					</tr>
+					<!-- When user wishes to update account information  -->
+					<tr id="acctNewUserNameRow" hidden>
+						<th>New Username: <span info-icon="If left blank then ignored"></span></th>
+						<td><input id="acctNewUserNameInput" class="form-control" type="text"></td>
+					</tr>
+					<tr>
+						<th>Password: </th>
+						<td>
+							<b id="acctPasswordPlaceholder">***************</b>
+							<div id="acctPasswordContainer" hidden>
+								<input id="acctPasswordInput" class="form-control" type="password">
+							</div>
+							
+						</td>
+					</tr>
+					<!-- When user wishes to update account information  -->
+					<tr id="acctRetypePasswordRow" hidden>
+						<th>Re-type: <span info-icon="If password and retype left blank then ignored"></span></th>
+						<td><input id="acctRetypePasswordInput" class="form-control" type="password"></td>
+					</tr>
+					<tr>
+						<th>First Name: </th>
+						<td><b><span id="acctFirstName"></span></b></td>
+					</tr>
+					<tr>
+						<th>Last Name: </th>
+						<td><b><span id="acctLastName"></span></b></td>
+					</tr>
+					<tr>
+						<th>State: </th>
+						<td><b><span id="acctState"></span></b></td>
+					</tr>
+					<tr>
+						<th>City: </th>
+						<td><b><span id="acctCity"></span></b></td>
+					</tr>
+					<tr>
+						<th>Address: </th>
+						<td><b><span id="acctAddress"></span></b></td>
+					</tr>
+					<tr>
+						<th>Email: </th>
+						<td><b><span id="acctEmail"></span></b></td>
+					</tr>
+					<!-- When user wishes to update account information  -->
+					<tr id="acctEmailRow" hidden>
+						<th>New Email: <span info-icon="If left blank then ignored"></span></th>
+						<td><input id="acctEmailInput" class="form-control" type="email"></td>
+					</tr>
+					<tr>
+						<th>Phone number: </th>
+						<td> <b><span id="accPhoneNumber"></span></b></td>
+					</tr>
+				</table>
+				<!-- ENABLE INFORMATION EDITING  -->
+				<button id="acctEditBtn" class="form-control"><span class="fa fa-pencil-square-o"></span> Edit</button>
+				
+				<!-- MOD-COMMIT/CANCELATION MECHANISMS  -->
+				<div class="input-max-group-adjust">
+					<div class="col-sm-4 input-max-group-adjust" style="padding-top: 5px;">
+						<button id="acctCancelBtn" class="form-control" type="reset" disabled><span class="fa fa-times" aria-hidden="true"></span>&nbsp;Cancel</button>
+					</div>
+					<div class="col-sm-8 input-max-group-adjust" style="padding-top: 5px;">
+						<button id="acctUpdateBtn" class="form-control btn-primary" value="register" disabled><span class="fa fa-file-text-o" aria-hidden="true"></span>&nbsp;Update</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>

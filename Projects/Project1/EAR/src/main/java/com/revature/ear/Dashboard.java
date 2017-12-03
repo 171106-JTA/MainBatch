@@ -37,17 +37,21 @@ public class Dashboard extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession(false);
 		RequestDispatcher rq;
-
+		
 		// If no session found
-		if (session == null)
+		if (session == null) {
 			response.sendError(500);
-		else {
+		} else {
 			// If user did not just logged into account
 			if (!session.getAttribute("status").equals("login")) 
 				handleDashboardRequest(request, response, session);
 			else {
 				// update status
 				session.setAttribute("status", "ok");
+				
+				// remove request info
+				request.removeAttribute("username");
+				request.removeAttribute("password");
 				
 				// If user logged into account 
 				rq = request.getRequestDispatcher("./resource/html/dashboard.html");
@@ -89,6 +93,12 @@ public class Dashboard extends HttpServlet {
 					// Get appropriate widget 
 					if ((result = GetWidget.getWidgetPath((String)session.getAttribute("role"), request.getParameter("widget")) ) != null)
 						result = GetWidget.getWidget(getServletContext().getResourceAsStream(result));
+					break;
+				case "SIGNOUT":
+					session.removeAttribute("id");
+					session.invalidate();
+					result = request.getRequestURL().toString();
+					result = result.substring(0, result.lastIndexOf("EAR/") + 4);
 					break;
 				default:
 					response.setContentType("text/html");

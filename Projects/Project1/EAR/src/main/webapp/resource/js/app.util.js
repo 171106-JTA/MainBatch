@@ -72,6 +72,32 @@ var initUtil = function () {
 			    });
 			},
 			
+			buildInfoIcons: function (node) {
+				var spans = node.find("span[info-icon]");
+				var options;
+				var title;
+				var rect
+
+				// Add fa-info-circle
+				spans.addClass("fa fa-info-circle");
+				
+				$.each(spans.toArray(), function (i, span) {
+					title = $(span).attr("info-icon");
+					rect = span.getBoundingClientRect();
+					
+					// Set options arguments for creating tooltip
+					options = { 
+						'title': title,
+						'placement': rect.top < 50 ? 'bottom' : 'top',
+					    'container':"body",
+						'trigger': 'click'
+					};
+
+					// create tooltip
+					$(span).tooltip(options);
+				});
+			},
+			
 			helper: {
 				/**
 				 * @description Determines if parent node is specified in params
@@ -138,29 +164,7 @@ var initEventHandlers = function () {
  * Generates information icons for all span tags with attribute info-icon
  */
 var initInfoIcons = function () {
-	var spans = $("span[info-icon]");
-	var options;
-	var title;
-	var rect
-
-	// Add fa-info-circle
-	spans.addClass("fa fa-info-circle");
-	
-	$.each(spans.toArray(), function (i, span) {
-		title = $(span).attr("info-icon");
-		rect = span.getBoundingClientRect();
-		
-		// Set options arguments for creating tooltip
-		options = { 
-			'title': title,
-			'placement': rect.top < 50 ? 'bottom' : 'top',
-		    'container':"body",
-			'trigger': 'click'
-		};
-
-		// create tooltip
-		$(span).tooltip(options);
-	});
+	Util.buildInfoIcons($("body"));
 }
 
 ///

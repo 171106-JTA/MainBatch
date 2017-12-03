@@ -57,7 +57,7 @@ public class GetWidget {
 			case "dashboard":
 				return WIDGETPATH + "dashboard.widget.html";
 			case "account":
-				return WIDGETPATH + "account.widget.html";
+				return WIDGETPATH + "account.employee.widget.html";
 			default:
 				return null;
 		}
@@ -69,7 +69,7 @@ public class GetWidget {
 			case "dashboard":
 				return WIDGETPATH + "dashboard.widget.html";
 			case "account":
-				return WIDGETPATH + "account.widget.html";
+				return WIDGETPATH + "account.admin.widget.html";
 			default:
 				return null;
 		}

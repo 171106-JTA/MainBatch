@@ -42,4 +42,14 @@
     <servlet-name>Dashboard</servlet-name>
     <url-pattern>/Dashboard</url-pattern>
   </servlet-mapping>
+  <filter>
+    <display-name>DashboardFilter</display-name>
+    <filter-name>DashboardFilter</filter-name>
+    <filter-class>com.revature.ear.filter.DashboardFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>DashboardFilter</filter-name>
+    <url-pattern>/LoginHome.do</url-pattern>
+    <url-pattern>/dashboard.html</url-pattern>
+  </filter-mapping>
 </web-app>

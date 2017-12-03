@@ -11,6 +11,7 @@ public class UserView implements BusinessObjectView {
 	private String email;
 	private String city;
 	private String state;
+	private String department;
 	
 	public UserView() {
 		// do nothing
@@ -18,7 +19,8 @@ public class UserView implements BusinessObjectView {
 
 	public UserView(String username, String password, String role,
 			String firstName, String lastName, String phoneNumber,
-			String address, String email, String city, String state) {
+			String address, String email, String city, String state,
+			String department) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -30,6 +32,7 @@ public class UserView implements BusinessObjectView {
 		this.email = email;
 		this.city = city;
 		this.state = state;
+		this.department = department;
 	}
 
 	public String getUsername() {
@@ -110,6 +113,14 @@ public class UserView implements BusinessObjectView {
 
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
 	}
 	
 	

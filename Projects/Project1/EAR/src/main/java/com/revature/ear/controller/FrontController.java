@@ -178,7 +178,7 @@ public class FrontController extends HttpServlet {
 			response.setContentType("text/html");
 			out = response.getWriter();
 			out.println("<div style='margin-top:1%;width:80%;height:35px;background-color:pink;color:red;position: absolute;;vertical-align:center;'>" + 
-					"				<label style=\"padding-top: 6px;padding-left: 5px;font-size:1.25em;\"><b>FAILED TO CREATE ACCOUNT</b></label>" + 
+					"				<label style=\"padding-top: 6px;padding-left: 5px;font-size:1.25em;\"><b>INVALID USERNAME OR PASSWORD</b></label>" + 
 					"		</div>");
 			rd = request.getRequestDispatcher("index.html");
 			rd.include(request, response);

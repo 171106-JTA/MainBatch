@@ -31,9 +31,10 @@ var initUser = function () {
 		if (response != null) {
 			// Cache user information 
 			data.user = response;
-			
 			$("#username").text(" " + data.user.username);
 		}
+	}, function (error) {
+		window.open(window.location.href.substr(0, window.location.href.lastIndexOf("EAR/") + 4));
 	});
 }
 
@@ -104,6 +105,15 @@ var onDashboardClick = function () {
 			console.log(error);
 		});
 	}
+}
+
+/**
+ * Used to log user out of account
+ */
+var onSignOut = function () {
+	Util.send({ "transtype": "SIGNOUT" }, function (response){
+		window.open(response)
+	});
 }
 
 /**

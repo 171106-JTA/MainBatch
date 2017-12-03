@@ -11,6 +11,11 @@
  	background-color: #0072ff!important;
  }
  
+  button[disabled].btn-primary {
+  	 background-color: rgba(0, 128, 255, 0.7)!important;
+  	 border-color: rgba(0, 128, 255, 0.7)!important;
+  }
+ 
  .btn-primary:hover {
  	background-color: #0099ff!important;
  	border-color: #00aaff;
@@ -46,7 +51,9 @@
 }
 
 /* Adjusts padding for inputs in a div */
-.input-max-group-adjust input {
+.input-max-group-adjust input, 
+.input-max-group-adjust button, 
+.input-max-group-adjust div {
 	padding-left: 2px; 
 	padding-right: 2px;
 }
