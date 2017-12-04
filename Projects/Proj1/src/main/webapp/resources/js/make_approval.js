@@ -7,6 +7,7 @@
 	xhr.onload = () => {
 		if (xhr.status === 200) {
 			var tableData = JSON.parse(xhr.responseText);
+			console.log(xhr.responseText);
 			var count = 0;
 			for(var data in tableData){
 			console.log(tableData[data]);
@@ -47,7 +48,7 @@
 			count++;
 			}
 		} else {
-			alert('Request failed.  Returned status of ' + xhr.status);
+			console.log('Request failed.  Returned status of ' + xhr.status);
 		}
 	};
 	xhr.send();	

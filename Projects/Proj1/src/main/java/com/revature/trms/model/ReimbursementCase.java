@@ -1,6 +1,5 @@
 package com.revature.trms.model;
 
-import java.util.Arrays;
 import java.util.Date;
 
 public class ReimbursementCase {
@@ -19,6 +18,13 @@ public class ReimbursementCase {
 	final long URGENT_TIMESPAN = 7;
 	
 	
+	@Override
+	public String toString() {
+		return "ReimbursementCase [case_id=" + case_id + ", employeeId=" + employeeId + ", event_date=" + event_date
+				+ ", request_date=" + request_date + ", duration_days=" + duration_days + ", location=" + location
+				+ ", description=" + description + ", cost=" + cost + ", gradingformat=" + gradingformat
+				+ ", eventType=" + eventType + "]";
+	}
 	public boolean caseIsUrgent() {
 		Date d1 = this.getEvent_date();
 		Date d2 =  this.getRequest_date();

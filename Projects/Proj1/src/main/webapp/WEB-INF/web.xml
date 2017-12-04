@@ -45,23 +45,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>GetUsers</display-name>
-    <servlet-name>GetUsers</servlet-name>
-    <servlet-class>com.revature.trms.servlet.GetUsers</servlet-class>
+    <display-name>AdminReimbursementTable</display-name>
+    <servlet-name>AdminReimbursementTable</servlet-name>
+    <servlet-class>com.revature.trms.servlet.AdminReimbursementTable</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>GetUsers</servlet-name>
-    <url-pattern>/GetUsers</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>ReimbursementTable</display-name>
-    <servlet-name>ReimbursementTable</servlet-name>
-    <servlet-class>com.revature.trms.servlet.ReimbursementTable</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ReimbursementTable</servlet-name>
-    <url-pattern>/ReimbursementTable</url-pattern>
+    <servlet-name>AdminReimbursementTable</servlet-name>
+    <url-pattern>/AdminReimbursementTable</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -92,5 +82,29 @@
   <servlet-mapping>
     <servlet-name>AddCaseRequest</servlet-name>
     <url-pattern>/AddCaseRequest</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RequesterTable</display-name>
+    <servlet-name>RequesterTable</servlet-name>
+    <servlet-class>com.revature.trms.servlet.RequesterTable</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RequesterTable</servlet-name>
+    <url-pattern>/RequesterTable</url-pattern>
+  </servlet-mapping>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/ErrorHandler</location>
+  </error-page>
+  <servlet>
+    <description></description>
+    <display-name>ErrorHandler</display-name>
+    <servlet-name>ErrorHandler</servlet-name>
+    <servlet-class>com.revature.trms.servlet.ErrorHandler</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ErrorHandler</servlet-name>
+    <url-pattern>/ErrorHandler</url-pattern>
   </servlet-mapping>
 </web-app>

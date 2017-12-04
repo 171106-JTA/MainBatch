@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.revature.trms.dao.EmployeeDAO;
 import com.revature.trms.dao.ReimCaseDAO;
 import com.revature.trms.model.ReimbursementCase;
 
@@ -29,7 +28,6 @@ public class ViewData {
 			String json = gson.toJson(reimCases, type);
 			out.println(json);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -38,10 +36,9 @@ public class ViewData {
 		ReimCaseDAO caseData = new ReimCaseDAO();
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
-		System.out.println(username);
+		
 		List<ReimbursementCase> reimCases = caseData.getAllCasesByUser(username);
 		response.setContentType("json/application");
-
 		try {
 			PrintWriter out = response.getWriter();
 			Gson gson = new Gson();
@@ -49,6 +46,7 @@ public class ViewData {
 			}.getType();
 			String json = gson.toJson(reimCases, type);
 			out.println(json);
+			System.out.println("this is " + username + " this is my json " +json);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

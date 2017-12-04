@@ -3,13 +3,13 @@ package com.revature.trms.dao;
 import static com.revature.trms.util.CloseStreams.close;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.revature.trms.model.Employee;
 import com.revature.trms.model.ReimbursementCase;
 import com.revature.trms.util.ConnectionUtil;
 
@@ -25,7 +25,7 @@ public class ReimCaseDAO {
 			String sql = "SELECT * FROM REIMBURSEMENT_CASE";
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-			EmployeeDAO emp = new EmployeeDAO();
+
 			while (rs.next()) {
 				// get employee object from userID
 				reimbursementCase = new ReimbursementCase();
@@ -47,6 +47,7 @@ public class ReimCaseDAO {
 			e.printStackTrace();
 		} finally {
 			close(ps);
+			close(rs);
 		}
 		return reimbursemntCases;
 	}
@@ -56,12 +57,15 @@ public class ReimCaseDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		ReimbursementCase reimCase = null;
+		EmployeeDAO empData = new EmployeeDAO();
+		Employee emp = empData.selectEmployeeByUsername(username);
+		int userId = emp.getUserId();
 		try (Connection conn = ConnectionUtil.getConnection()) {
-			String sql = "SELECT * FROM REIMBURSEMENT_CASE WHERE EMPLOYEE_USERNAME = ?";
+			String sql = "SELECT * FROM REIMBURSEMENT_CASE WHERE EMPLOYEE_ID = ?";
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, username);
+			ps.setInt(1, userId);
 			rs = ps.executeQuery();
-			EmployeeDAO emp = new EmployeeDAO();
+
 			while (rs.next()) {
 				// get employee object from userID
 				reimCase = new ReimbursementCase();
@@ -83,33 +87,41 @@ public class ReimCaseDAO {
 			e.printStackTrace();
 		} finally {
 			close(ps);
+			close(rs);
 		}
 		return reimCases;
 	}
 
-	public void insertNewReimCase(ReimbursementCase reimCase) {
+	public boolean insertNewReimCase(ReimbursementCase reimCase) {
 		PreparedStatement ps = null;
-		String sql = "INSERT INTO REIMBURSEMENT_CASE WHERE "
-				+ "(EMPLOYEE_ID, EVENT_DATE, CASE_DURATION, CASE_LOCATION, CASE_DESCRIPTION, CASE_GRADING, CASE_EVENT_TYPE, CASE_ATTACHEMENT) "
-				+ "VALUES(?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO REIMBURSEMENT_CASE "
+				+ "(EMPLOYEE_ID, EVENT_DATE, CASE_DURATION, CASE_LOCATION, CASE_DESCRIPTION, CASE_COST ,CASE_GRADING_FORMAT, CASE_EVENT_TYPE) "
+				+ "VALUES(?,?,?,?,?,?,?,?)";
+		System.out.println(sql);
+		java.util.Date utilDate = reimCase.getEvent_date();
+		java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
 		try (Connection conn = ConnectionUtil.getConnection()) {
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, Integer.parseInt(reimCase.getEmployeeId()));
-			ps.setDate(2, (Date) reimCase.getEvent_date());
+			ps.setString(1, reimCase.getEmployeeId());
+			ps.setDate(2, sqlDate);
 			ps.setInt(3, reimCase.getDuration_days());
 			ps.setString(4, reimCase.getLocation());
 			ps.setString(5, reimCase.getDescription());
-			ps.setString(6, reimCase.getGradingformat());
-			ps.setString(7, reimCase.getEventType());
+			ps.setDouble(6, reimCase.getCost());
+			ps.setString(7, reimCase.getGradingformat());
+			ps.setString(8, reimCase.getEventType());
 			// add setBlob
 			int affected = ps.executeUpdate();
 			System.out.println(affected + " rows updated");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return false;
 		} finally {
 			close(ps);
 		}
+		
+		return true;
 	}
 
 }

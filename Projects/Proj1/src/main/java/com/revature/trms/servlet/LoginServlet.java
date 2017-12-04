@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.revature.trms.dao.EmployeeDAO;
+import com.revature.trms.model.Employee;
+
 /**
  * Servlet implementation class LoginServlet
  */
@@ -23,11 +26,18 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
+		EmployeeDAO empData = new EmployeeDAO();
+		Employee emp = empData.selectEmployeeByUsername( request.getParameter("username"));
+		System.out.println(emp.getUserId());
 		if(session.isNew()){
 			out.println("SESSION CREATED FOR " + request.getParameter("username").toUpperCase());
 			session.setAttribute("username", request.getParameter("username"));
 			session.setAttribute("password", request.getParameter("password"));
-			session.setAttribute("visit", 0);
+			session.setAttribute("employeeid", emp.getUserId());
+			session.setAttribute("visit", 0);	
+		}
+		else {
+			out.println("no new session created");
 		}
 		
 		 RequestDispatcher rd = request.getRequestDispatcher("user_dashboard.html");

@@ -2,13 +2,13 @@
 
 (function callToTable(){
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', 'RequesterTable');
+	xhr.open('GET', 'RequesterTable');
 	xhr.onload = () => {
 		if (xhr.status === 200) {
 			var tableData = JSON.parse(xhr.responseText);
 			var count = 0;
 			for(var data in tableData){
-			console.log(tableData[data]);
+			console.log(tableData);
 			
 			var tableRow = document.createElement('tr');
 			var tableData1 = document.createElement('td'); 
