@@ -11,7 +11,7 @@ import com.revature.trms.services.ViewData;
 /**
  * Servlet implementation class RequestReimbursement
  */
-public class RequestReimbursement extends HttpServlet {
+public class RequesterTable extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	/**

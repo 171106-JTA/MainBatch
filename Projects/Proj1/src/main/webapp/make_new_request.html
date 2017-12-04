@@ -20,30 +20,38 @@
 	crossorigin="anonymous">
 <script src="resources/js/main.js"></script>
 <link rel="stylesheet" type="text/css" href="resources/css/myStyles.css">
-
+<link rel="stylesheet" type="text/css" href="resources/css/formPage.css">
 </head>
 <body>
-	<form>
-		<ul>
+	<form method="post" action="AddCaseRequest" name="addRequest" onsubmit="return validateNewRequest()" >
+		<ul style="list-style-type: none">
 			<li>Event Date (Start day of event)</li>
-			<li></li>
+			<li><input type="date" name="eventDate" required></li>
 			<li>Event Duration (Please enter in day))</li>
-			<li></li>
+			<li><input type="number" min="0.00" name="eventDuration" required></li>
 			<li>Event Location (Online; City, State; City, Country if
 				outside of U.S.)</li>
-			<li></li>
-			<li>Event Description (Provide purpose of this event)</li>
-			<li></li>
+			<li><input type="text" name="eventLocation" required></li>
 			<li>Event Type(Select from below)</li>
-			<li></li>
+			<li><select name="eventType">
+					<option value="univ">University</option>
+					<option value="seminar">Seminar</option>
+					<option value="certPrep">Cert. prep</option>
+					<option value="cert">Certification</option>
+					<option value="techTraining">Techinical training</option>
+					<option value="other">Other</option>
+
+			</select></li>
 			<li>Grading Format</li>
-			<li></li>
+			<li><select name="gradingFormat">
+					<option value="grade">Grade</option>
+					<option value="presentation">Presentation</option>
+			</select></li>
 			<li>Amount Cost in USD</li>
-			<li></li>
+			<li><input name="cost" type="number" min="0.00" max="10000.00" step="0.01" /></li>
 			<li>Event Description (Provide purpose of this event)</li>
-			<li></li>
-
-
+			<li><textarea name="eventDescription"></textarea></li>
+			<li><input class="btn btn-primary" type="submit"><input class="btn btn-danger" type="reset"></li>
 		</ul>
 	</form>
 

@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.revature.trms.dao.EmployeeDAO;
+import com.revature.trms.model.Employee;
+
 /**
  * Servlet implementation class CreateUserSession
  */
@@ -22,9 +25,13 @@ public class CreateUserSession extends HttpServlet {
 		HttpSession session = request.getSession();
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
+		EmployeeDAO empData = new EmployeeDAO();
+		Employee emp = empData.selectEmployeeByUsername("username");
+		
 		if(session.isNew()) {
 			out.println("Session Created for " + request.getParameter("username"));
 			session.setAttribute("username", request.getParameter("username"));
+			session.setAttribute("employeeId", emp.getUserId());
 			session.setAttribute("visit", 0);
 		}
 		else {

@@ -83,4 +83,14 @@
     <servlet-name>RequestReimbursement</servlet-name>
     <url-pattern>/RequestReimbursement</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddCaseRequest</display-name>
+    <servlet-name>AddCaseRequest</servlet-name>
+    <servlet-class>com.revature.trms.servlet.AddCaseRequest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddCaseRequest</servlet-name>
+    <url-pattern>/AddCaseRequest</url-pattern>
+  </servlet-mapping>
 </web-app>

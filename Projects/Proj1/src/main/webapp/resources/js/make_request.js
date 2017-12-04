@@ -2,7 +2,7 @@
 
 (function callToTable(){
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', 'RequestReimbursement');
+	xhr.open('POST', 'RequesterTable');
 	xhr.onload = () => {
 		if (xhr.status === 200) {
 			var tableData = JSON.parse(xhr.responseText);

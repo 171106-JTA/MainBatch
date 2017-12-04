@@ -14,6 +14,7 @@ import com.revature.trms.model.ReimbursementCase;
 import com.revature.trms.util.ConnectionUtil;
 
 public class ReimCaseDAO {
+
 	public List<ReimbursementCase> getAllCases() {
 		List<ReimbursementCase> reimbursemntCases = new ArrayList<>();
 		PreparedStatement ps = null;
@@ -29,7 +30,7 @@ public class ReimCaseDAO {
 				// get employee object from userID
 				reimbursementCase = new ReimbursementCase();
 				reimbursementCase.setCase_id(rs.getString(1));
-				reimbursementCase.setEmployee(emp.selectEmployeeById(rs.getInt("EMPLOYEE_ID")));
+				reimbursementCase.setEmployeeId(Integer.toString(rs.getInt("EMPLOYEE_ID")));
 				reimbursementCase.setEvent_date(rs.getDate("EVENT_DATE"));
 				reimbursementCase.setRequest_date(rs.getDate("REQUEST_DATE"));
 				reimbursementCase.setDuration_days(rs.getInt("CASE_DURATION"));
@@ -65,7 +66,7 @@ public class ReimCaseDAO {
 				// get employee object from userID
 				reimCase = new ReimbursementCase();
 				reimCase.setCase_id(rs.getString(1));
-				reimCase.setEmployee(emp.selectEmployeeById(rs.getInt("EMPLOYEE_ID")));
+				reimCase.setEmployeeId(Integer.toString(rs.getInt("EMPLOYEE_ID")));
 				reimCase.setEvent_date(rs.getDate("EVENT_DATE"));
 				reimCase.setRequest_date(rs.getDate("REQUEST_DATE"));
 				reimCase.setDuration_days(rs.getInt("CASE_DURATION"));
@@ -93,16 +94,16 @@ public class ReimCaseDAO {
 				+ "VALUES(?,?,?,?,?,?,?)";
 		try (Connection conn = ConnectionUtil.getConnection()) {
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, reimCase.getEmployee().getUserId());
+			ps.setInt(1, Integer.parseInt(reimCase.getEmployeeId()));
 			ps.setDate(2, (Date) reimCase.getEvent_date());
-			ps.setInt(3, reimCase.getDuration_days() );
+			ps.setInt(3, reimCase.getDuration_days());
 			ps.setString(4, reimCase.getLocation());
 			ps.setString(5, reimCase.getDescription());
 			ps.setString(6, reimCase.getGradingformat());
 			ps.setString(7, reimCase.getEventType());
 			// add setBlob
 			int affected = ps.executeUpdate();
-			System.out.println(affected+ " rows updated");
+			System.out.println(affected + " rows updated");
 
 		} catch (SQLException e) {
 			e.printStackTrace();

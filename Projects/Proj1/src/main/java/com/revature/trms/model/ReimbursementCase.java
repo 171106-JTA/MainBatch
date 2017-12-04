@@ -6,7 +6,7 @@ import java.util.Date;
 public class ReimbursementCase {
 	
 	private String case_id;
-	private Employee employee;
+	private String employeeId;
 	private Date event_date;
 	private Date request_date;
 	private int duration_days;
@@ -19,14 +19,6 @@ public class ReimbursementCase {
 	final long URGENT_TIMESPAN = 7;
 	
 	
-	
-	@Override
-	public String toString() {
-		return "[case_id=" + case_id + ", employee=" + employee + ", event_date=" + event_date
-				+ ", request_date=" + request_date + ", duration_days=" + duration_days + ", location=" + location
-				+ ", description=" + description + ", cost=" + cost + ", gradingformat=" + gradingformat
-				+ ", eventType=" + eventType + ", attachment=" + Arrays.toString(attachment) + "]";
-	}
 	public boolean caseIsUrgent() {
 		Date d1 = this.getEvent_date();
 		Date d2 =  this.getRequest_date();
@@ -38,12 +30,12 @@ public class ReimbursementCase {
 	public ReimbursementCase() {
 		super();
 	}
-	public ReimbursementCase(String case_id, Employee employee, Date event_date, Date request_date, int duration_days,
+	public ReimbursementCase(String case_id, String employeeId, Date event_date, Date request_date, int duration_days,
 			String location, String description, double cost, String gradingformat, String eventType,
 			byte[] attachment) {
 		super();
 		this.case_id = case_id;
-		this.employee = employee;
+		this.employeeId = employeeId;
 		this.event_date = event_date;
 		this.request_date = request_date;
 		this.duration_days = duration_days;
@@ -54,6 +46,17 @@ public class ReimbursementCase {
 		this.eventType = eventType;
 		this.attachment = attachment;
 	}
+	public ReimbursementCase(String employeeId, Date eventDate, int eventDuration, String eventLocation,
+			String eventType, String gradingFormat, double cost, String eventDescription) {
+		this.employeeId = employeeId;
+		this.event_date = eventDate;
+		this.duration_days = eventDuration;
+		this.location = eventLocation;
+		this.eventType = eventType;
+		this.gradingformat = gradingFormat;
+		this.cost = cost;
+		this.description = eventDescription;
+	}
 	
 	
 	public String getCase_id() {
@@ -62,11 +65,11 @@ public class ReimbursementCase {
 	public void setCase_id(String case_id) {
 		this.case_id = case_id;
 	}
-	public Employee getEmployee() {
-		return employee;
+	public String getEmployeeId() {
+		return employeeId;
 	}
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
+	public void setEmployeeId(String employee) {
+		this.employeeId = employee;
 	}
 	public Date getEvent_date() {
 		return event_date;
