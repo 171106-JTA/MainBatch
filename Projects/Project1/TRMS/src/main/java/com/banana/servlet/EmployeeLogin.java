@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.banana.bean.Employee;
 import com.banana.service.ValidateUser;
 
 /**
@@ -31,9 +32,16 @@ public class EmployeeLogin extends HttpServlet {
 		RequestDispatcher rd = null;
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
+		Employee emp = ValidateUser.validate(request, response);
 		
-		if(ValidateUser.validate(request, response)) {
-			rd = request.getRequestDispatcher("EmployeePage.html");
+		if(emp != null) {
+			if(emp.getRoleId() == 1) {
+				rd = request.getRequestDispatcher("EmployeePage.html");
+			}
+			else {
+				rd = request.getRequestDispatcher("AdminPage.html");
+			}
+			
 			rd.forward(request, response);
 		}
 		else {

@@ -5,26 +5,42 @@ public class Employee {
 	private String password;
 	private int empId;
 	private double currAmount;
+	private int roleId;
 	
-	public Employee(String username, String password) {
-		super();
-		this.username = username;
-		this.password = password;
-	}
-
-	public Employee(String username, String password, int empId) {
-		this.username = username;
-		this.password = password;
-		this.empId = empId;
-	}
-	
-	public Employee(String username, String password, int empId, double currAmount) {
+	public Employee(String username, String password, int empId, double currAmount, int roleId) {
 		this.username = username;
 		this.password = password;
 		this.empId = empId;
 		this.currAmount = currAmount;
+		this.roleId = roleId;
 	}
 	
+	
+	
+	public double getCurrAmount() {
+		return currAmount;
+	}
+
+
+
+	public void setCurrAmount(double currAmount) {
+		this.currAmount = currAmount;
+	}
+
+
+
+	public int getRoleId() {
+		return roleId;
+	}
+
+
+
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
+	}
+
+
+
 	public String getUsername() {
 		return username;
 	}
