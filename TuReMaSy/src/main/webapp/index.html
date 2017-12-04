@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>TRMS</title>
+<script src="resources/main.js"></script>
+<script src="resources/jquery.js"></script>
+<link type="text/css" rel="stylesheet" href="main.css"/>
+<link href="http://s3.amazonaws.com/codecademy-content/courses/ltp2/css/bootstrap.min.css" rel="stylesheet">
+<link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<!--<div class="container">
+	  <div id="myDiv">TRMS</div>
+	  <div class="wrapper">
+	    <div class="column">
+	      <div class="item"></div>
+	    </div>
+	    <div class="column">
+	      <div class="item"></div>
+	      <div class="item"></div>
+	    </div>
+	    <div class="column">
+	      <div class="item"></div>
+	      <div class="item"></div>
+	      <div class="item"></div>
+	    </div>
+	  </div>
+	</div>-->
+	<ul class='nav'>
+            <li><a class='active'>Home</a></li>
+            <li><a href='#'>Apply for Tuition Reimbursement</a></li>
+			<li><a href='#'>???</a></li>
+			<li><a href='#'>Log Out</a></li>
+		</ul>
+	<h1>Apply here</h1>
+	<form method="post" action="RegisterUser" name="registration" onsubmit="return validateRegistration()">
+		<b><p id="error" style="color:red"></p></b>
+		<ul style="list-style-type: none">
+			<li>Employee Id</li>
+			<li><input type="number" name="empID" required></li>
+			<li>Application Id</li>
+			<li><input type="number" name="appID" required></li>
+			<li>First name</li>
+			<li><input type="text" name="empFirst" required></li>
+			<li>Last name</li>
+			<li><input type="email" name="empLast" required></li>
+			<li>Location</li>
+			<li><input type="text" name="locus" required></li>
+			<li>
+				<div class="container">
+      				<form>
+        					<div class="form-group">
+          					<textarea class="form-control status-box" rows="25" placeholder="Describe the training you'll be undertaking. Conclude with the time off needed for this training."></textarea>
+        					</div>
+      				</form>
+     			 <div class="button-group pull-right">
+        				<p class="counter">2500</p>
+        				<a href="#" class="btn btn-primary">Post</a>
+        			</div>
+        			<input type="text" name="descrition" maxLength="2500" required>
+        		</li>
+			<li>Amount of Reimbursement applied for:</li>
+			<li><input type="number" name="expense" required></li>
+			<li>Enter grade received for presentation (might take this field out)</li>
+			<li><input type="number" name="grading" required></li>
+			<li>Talk about why training is necessary.</li>
+			<li>
+				<div class="container">
+      				<form>
+        					<div class="form-group">
+          					<textarea class="form-control status-box" rows="25" placeholder="Talk about why training is necessary."></textarea>
+        					</div>
+      				</form>
+     			 <div class="button-group pull-right">
+        				<p class="counter">2500</p>
+        				<a href="#" class="btn btn-primary">Post</a>
+        			</div>
+        			<input type="text" name="descrition" maxLength="2500" required>
+        		</li>
+			<li><input type="reset" value="reset"></li>
+			<li><input type="submit" value="submit"></li>
+		</ul>
+	</form>
+	<hr>
+	<h3>AJAX</h3>
+	<input type="text" id="input" placeholder="Input Application ID">
+	<input type=button onclick="sendAJAX()" value="SUBMIT">
+	<div>
+		<table border="2px" id=results>
+			<tr><th>USERNAME</th><th>FIRST NAME</th><th>MIDDLE NAME</th><th>LAST NAME</th></tr>
+		</table>
+		<p id=AJAXError></p>
+	</div>
+</body>
+</html>

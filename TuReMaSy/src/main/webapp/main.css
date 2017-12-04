@@ -1,0 +1,133 @@
+body {
+  margin: 20px;
+  font: normal 16px/1.4 sans-serif;
+  background: floralwhite;
+  color: #222;
+}
+
+.container {
+  border: 10px solid coral;
+}
+
+.wrapper {
+  overflow: hidden;
+  margin-left: -10px;
+}
+
+.column {
+  float: left;
+  box-sizing: border-box;
+  width: 33.333%;
+  padding-left: 10px;
+}
+
+.column .item {
+  margin-top: 10px;
+}
+
+.column .item:first-child {
+  margin-top: 0;
+}
+
+.column:nth-child(1) .item {
+  height: 290px;
+  background: turquoise;
+}
+
+.column:nth-child(2) .item {
+  height: 140px;
+  background: red;
+}
+
+.column:nth-child(3) .item {
+  height: 90px;
+  background: teal;
+}
+
+#myDiv{
+  text-align: center;
+  
+}
+
+.container {
+  width: 520px;
+  margin-top: 20px;
+}
+
+.button-group {
+  margin-bottom: 20px;
+}
+
+.counter {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 10px;
+}
+
+.posts {
+  clear: both;
+  list-style: none;
+  padding-left: 0;
+  width: 100%;
+}
+
+.posts li {
+  background-color: #7000ff;
+  border: 1px solid #00f8ff;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+  min-height: 42px;
+}
+
+ul.nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #ff9200;
+    position: relative;
+    height: auto;
+    overflow: auto;
+}
+ul.nav li a {
+    display: block;
+    color: turquoise;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+ul.nav li a:hover:not(.active) {
+    background-color: #555;
+    color: teal;
+}
+ul.nav li a.active {
+    background-color: #000;
+    color: teal;
+}
+div.content {
+    margin-left: 25%;
+    padding: 1px 16px;
+    height: 1000px;
+}
+@media screen and (max-width: 900px) {
+    ul.nav {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    ul.nav li a {
+        float: left;
+        padding: 15px;
+    }
+    div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+    ul.nav li a {
+        text-align: center;
+        float: none;
+    }
