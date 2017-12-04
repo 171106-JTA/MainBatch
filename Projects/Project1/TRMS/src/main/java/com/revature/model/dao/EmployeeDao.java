@@ -70,7 +70,7 @@ public class EmployeeDao implements Dao {
 	}
 
 	// delete
-	public EmployeeDao(String emp_id) {
+	public EmployeeDao(String empId) {
 		this.empId = empId;
 	}
 
