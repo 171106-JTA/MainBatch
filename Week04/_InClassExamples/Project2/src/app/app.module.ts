@@ -11,6 +11,8 @@ import { InterpolationComponent } from './components/interpolation/interpolation
 import { appRoutes } from './routing';
 import { HomeComponent } from './components/home/home.component';
 import { PokeapiComponent } from './components/pokeapi/pokeapi.component';
+import { DirectiveComponent} from './components/directives/directive.component'
+import { PipesComponent } from './components/pipes/pipes.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { PokeapiComponent } from './components/pokeapi/pokeapi.component';
     NavbarComponent,
     InterpolationComponent,
     HomeComponent,
-    PokeapiComponent
+    PokeapiComponent,
+    DirectiveComponent,
+    PipesComponent
 
   ],
   imports: [
