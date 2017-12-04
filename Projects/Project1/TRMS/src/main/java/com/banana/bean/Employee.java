@@ -4,6 +4,7 @@ public class Employee {
 	private String username;
 	private String password;
 	private int empId;
+	private double currAmount;
 	
 	public Employee(String username, String password) {
 		super();
@@ -11,6 +12,19 @@ public class Employee {
 		this.password = password;
 	}
 
+	public Employee(String username, String password, int empId) {
+		this.username = username;
+		this.password = password;
+		this.empId = empId;
+	}
+	
+	public Employee(String username, String password, int empId, double currAmount) {
+		this.username = username;
+		this.password = password;
+		this.empId = empId;
+		this.currAmount = currAmount;
+	}
+	
 	public String getUsername() {
 		return username;
 	}

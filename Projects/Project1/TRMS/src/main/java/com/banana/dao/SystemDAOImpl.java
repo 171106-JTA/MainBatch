@@ -28,7 +28,7 @@ public class SystemDAOImpl implements SystemDAO{
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				emp = new Employee(rs.getString(8), rs.getString(9));
+				emp = new Employee(rs.getString(8), rs.getString(9), rs.getInt(1), rs.getDouble(4));
 			}
 		}catch(SQLException e) {
 			

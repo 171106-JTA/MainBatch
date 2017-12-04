@@ -33,7 +33,7 @@ public class EmployeeLogin extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		if(ValidateUser.validate(request, response)) {
-			rd = request.getRequestDispatcher("reimbursementForm.html");
+			rd = request.getRequestDispatcher("EmployeePage.html");
 			rd.forward(request, response);
 		}
 		else {
