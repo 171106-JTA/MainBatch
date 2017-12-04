@@ -49,4 +49,14 @@
     <servlet-name>GetRequestsServlet</servlet-name>
     <url-pattern>/GetRequestsServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetUsernameServlet</display-name>
+    <servlet-name>GetUsernameServlet</servlet-name>
+    <servlet-class>com.revature.servlets.GetUsernameServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetUsernameServlet</servlet-name>
+    <url-pattern>/GetUsernameServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

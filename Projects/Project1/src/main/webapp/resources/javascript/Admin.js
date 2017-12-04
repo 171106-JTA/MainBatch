@@ -9,9 +9,9 @@ window.onload = function(){
 			
 			var xmlText = xhr.responseXML;
 			
-			var response = xmlText.getElementsByTagName("trainer"); //TODO
+			var response = xmlText.getElementsByTagName("request");
 			
-			var resultTable = document.getElementById("requestTable"); //TODO
+			var resultTable = document.getElementById("requestTable");
 			
 			for(i in response){
 				var row = document.createElement("tr");

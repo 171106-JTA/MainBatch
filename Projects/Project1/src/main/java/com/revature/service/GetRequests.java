@@ -17,12 +17,13 @@ public class GetRequests {
 		List<Request> requests = dao.getRequests(username);
 		response.setContentType("text/xml");
 		PrintWriter out = response.getWriter();
+		
 		if (requests != null) {
 			String myXml = "<root>";
 
 			for (Request r : requests) {
 				myXml += "<request><username>" + r.getUsername() + "</username>" + "<Event>" + r.getEvent() + "</Event>"
-						+ "<cost>" + r.getCost() + "</cost>" + "<Date>" + r.getDate() + "</Date>" + "</request>";
+						+ "<cost>" + r.getCost() + "</cost>" + "<Date>" + r.getDate().toString() + "</Date>" + "</request>";
 			}
 			myXml += "</root>";
 			

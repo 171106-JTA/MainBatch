@@ -22,8 +22,9 @@ public class SubmitRequest extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		
+		
 	}
 
 	/**
@@ -42,6 +43,7 @@ public class SubmitRequest extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		String username = (String) session.getAttribute("username");
+		System.out.println(username);
 		
 		Request req = new Request(username, eventName, location, description, cost, gradingFormat, file);
 		
