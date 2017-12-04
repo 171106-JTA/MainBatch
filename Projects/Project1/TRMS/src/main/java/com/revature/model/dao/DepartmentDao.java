@@ -1,10 +1,9 @@
 package com.revature.model.dao;
 
 import java.util.Collection;
+import com.google.gson.*;
 
-import com.revature.model.bean.Department;
-
-public class DepartmentDao implements Dao<Department> {
+public class DepartmentDao implements Dao<Gson> {
 
 	@Override
 	public boolean insert(boolean atomic) {
@@ -25,13 +24,13 @@ public class DepartmentDao implements Dao<Department> {
 	}
 
 	@Override
-	public Department fetch(boolean atomic) {
+	public Gson fetch(boolean atomic) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Collection<Department> fetchAll(boolean atomic) {
+	public Collection<Gson> fetchAll(boolean atomic) {
 		// TODO Auto-generated method stub
 		return null;
 	}

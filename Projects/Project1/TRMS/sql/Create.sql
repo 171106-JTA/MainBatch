@@ -93,8 +93,8 @@ CREATE TABLE EMPLOYEE (
 CREATE TABLE CREDENTIALS (
     EMP_ID number(6),
     USERNAME VARCHAR2(20) UNIQUE NOT NULL,
-    PASSWORDS VARCHAR2(64) NOT NULL,
-    SALT VARCHAR2(64) UNIQUE NOT NULL,
+    PASSWORDS VARCHAR2(32) NOT NULL,
+    SALT VARCHAR2(32) UNIQUE NOT NULL,
     CONSTRAINT PK_CRED_EMP PRIMARY KEY (EMP_ID),
     CONSTRAINT FK_CRED_EMP FOREIGN KEY (EMP_ID)
         REFERENCES EMPlOYEE (EMP_ID)
@@ -289,23 +289,33 @@ CREATE SEQUENCE blob_id_seq
 
 -- Create Procedures
 CREATE OR REPLACE PROCEDURE CREATE_EMPLOYEE
-(emp_type_id IN number, dept_id IN number, super_id IN number,
+(emp_type_id IN number, dpt_id IN number, super_id IN number,
 username IN VARCHAR2, pass IN VARCHAR2, salt IN VARCHAR2) AS
 BEGIN
     DECLARE
         e_id INT := emp_id_seq.nextVal;
+        row_count INT;
+        d_id INT;
         BEGIN
-            INSERT INTO EMPLOYEE VALUES(e_id, emp_type_id, dept_id, super_id, 0.00, 1, 1);
+            SELECT COUNT(*) INTO row_count FROM DEPARTMENT WHERE DEPT_ID = dpt_id;
+            IF (row_count = 0) THEN
+                SELECT DEPT_ID INTO d_id FROM DEPARTMENT NATURAL JOIN EMPLOYEE
+                    WHERE EMPLOYEE.EMP_ID = super_id;
+                    INSERT INTO EMPLOYEE VALUES(e_id, emp_type_id, d_id, super_id, 0.00, 1, 1);
+
+            END IF;
+            INSERT INTO EMPLOYEE VALUES(e_id, emp_type_id, dpt_id, super_id, 0.00, 1, 1);
             INSERT INTO CREDENTIALS VALUES(e_id, username, pass, salt);
         END;
 END;
 /
 
-CREATE OR REPLACE PROCEDURE UPDATE_EMPLOYEE
+CREATE OR REPLACE PROCEDURE UPDATE_EMPLOYEE_TYPE
 (emp_id IN number,  type_id IN NUMBER, d_id IN NUMBER,
 super_id IN NUMBER, stat_id IN NUMBER, permi_id IN NUMBER,
 amount IN NUMBER, usern IN VARCHAR2, pass IN VARCHAR2, sal IN VARCHAR2) AS
 BEGIN
+
     UPDATE EMPLOYEE SET
                     EMPLOYEE.EMP_TYPE_ID = type_id,
                     EMPLOYEE.DEPT_ID = d_id,
@@ -440,13 +450,12 @@ CALL CREATE_DEPT_HEAD(6, 8);
 
 -- set management to ok
 CALL UPDATE_EMPLOYEE(1, 1, 7, 1, 0, 2, 0.00, 'executive1', 'Pass1', 'salt1abc');
-SELECT * FROM EMPLOYEE;
-CALL UPDATE_EMPLOYEE(2, 1, 6, 1, 0, 2, 0.00, 'benCo1', 'Pass1', 'salt2def');
+CALL UPDATE_EMPLOYEE(2, 1, 7, 1, 0, 2, 0.00, 'benCo1', 'Pass1', 'salt2def');
 CALL UPDATE_EMPLOYEE(3, 1, 1, 1, 0, 2, 0.00, 'manager1', 'Pass1', 'salt3ghi');
 CALL UPDATE_EMPLOYEE(4, 1, 2, 1, 0, 2, 0.00, 'manager2', 'Pass1', 'salt4jkl');
-CALL UPDATE_EMPLOYEE(5, 2, 3, 1, 0, 2, 0.00, 'manager3', 'Pass1', 'salt5mno');
-CALL UPDATE_EMPLOYEE(6, 3, 4, 1, 0, 2, 0.00, 'manager4', 'Pass1', 'salt6pqr');
-CALL UPDATE_EMPLOYEE(7, 4, 5, 1, 0, 2, 0.00, 'manager5', 'Pass1', 'salt7stu');
-CALL UPDATE_EMPLOYEE(8, 5, 6, 1, 0, 2, 0.00, 'manager6', 'Pass1', 'salt8vwx');
+CALL UPDATE_EMPLOYEE(5, 1, 3, 1, 0, 2, 0.00, 'manager3', 'Pass1', 'salt5mno');
+CALL UPDATE_EMPLOYEE(6, 1, 4, 1, 0, 2, 0.00, 'manager4', 'Pass1', 'salt6pqr');
+CALL UPDATE_EMPLOYEE(7, 1, 5, 1, 0, 2, 0.00, 'manager5', 'Pass1', 'salt7stu');
+CALL UPDATE_EMPLOYEE(8, 1, 6, 1, 0, 2, 0.00, 'manager6', 'Pass1', 'salt8vwx');
 
 commit;

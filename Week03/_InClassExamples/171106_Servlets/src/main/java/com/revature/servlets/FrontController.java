@@ -66,9 +66,6 @@ public class FrontController extends HttpServlet {
 		default: 
 			response.sendError(404);
 		}
-		
-		
-		
 	}
 
 	/**

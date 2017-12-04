@@ -107,25 +107,30 @@ public class JDBC implements Pool<Connection> {
 		return open.isEmpty();
 	}
 
-	public boolean executeProcedure(String procStr, boolean atomic,
-			boolean blob, int blobIdx, String path) throws IOException {
+	public boolean executeProcedure(String procStr, boolean atomic, String[] values, boolean blob, int blobIdx,
+			String path) throws IOException {
 		FileInputStream fis = null;
 		Connection c = null;
 		File file = null;
 		try {
-			if (!preprocess(c, atomic))
+			if ((c = preprocess(c, atomic)) == null)
 				return false;
 
 			CallableStatement cs = c.prepareCall(procStr);
-			if(blob) {
-				file = new File(path);
-				fis = new FileInputStream(file);
-				cs.setBinaryStream(blobIdx, fis, file.length());
-			}
+			for (int i = 0; i < values.length; i++) {
+				if (blob && i == blobIdx) {
+					file = new File(path);
+					fis = new FileInputStream(file);
+					cs.setBinaryStream(blobIdx, fis, file.length());
+				}
+				else {
+					cs.setString(i, values[i]);
+				}
 
+			}
 			cs.executeQuery();
 
-			if(fis != null)
+			if (fis != null)
 				fis.close();
 			postprocess(c);
 			return true;
@@ -135,37 +140,34 @@ public class JDBC implements Pool<Connection> {
 		}
 	}
 
-	public Collection<String[]> fetch(String queryStr, boolean atomic, boolean blob, int blobIdx) {
-		Set<String[]> obs = new LinkedHashSet<String[]>();
+	public Collection<Map<String, String>> fetch(String queryStr, boolean atomic, boolean blob, int blobIdx) {
+		Collection<Map<String, String>> obs = new LinkedHashSet<Map<String, String>>();
+		Map<String, String> map = new LinkedHashMap<String, String>();
 		int size;
-		String[] arr;
 		ResultSet rs = null;
 		ResultSetMetaData rsmd = null;
 		Connection c = null;
 
 		try {
-			if (!preprocess(c, atomic))
+			if ((c = preprocess(c, atomic)) == null)
 				return null;
 
 			PreparedStatement ps = c.prepareStatement(queryStr);
 			rs = ps.executeQuery();
 			rsmd = rs.getMetaData();
 			size = rsmd.getColumnCount();
-			arr = new String[size];
 			for (int i = 0; i < size; i++) {
-				arr[i] = rsmd.getColumnName(i);
+				map.put(rsmd.getColumnName(i), rsmd.getColumnName(i));
 			}
-			obs.add(arr);
 			while (rs.next()) {
-				arr = new String[size];
 				for (int i = 0; i < size; i++) {
 					if (blob && blobIdx == i) {
 						Blob blobOb = rs.getBlob(i);
-						arr[i] = new String(blobOb.getBytes(1L, (int) blobOb.length()));
+						map.put(rsmd.getColumnName(i), new String(blobOb.getBytes(1L, (int) blobOb.length())));
 					} else
-						arr[i] = rs.getString(i);
+						map.put(rsmd.getColumnName(i), rs.getString(i));
 				}
-				obs.add(arr);
+				obs.add(map);
 			}
 
 			rs.close();
@@ -184,12 +186,12 @@ public class JDBC implements Pool<Connection> {
 		return obs;
 	}
 
-	private boolean preprocess(Connection c, boolean atomic) throws SQLException {
+	private Connection preprocess(Connection c, boolean atomic) throws SQLException {
 		c = borrowObject(atomic);
 		if (c == null)
-			return false;
+			return null;
 		c.setAutoCommit(false);
-		return true;
+		return c;
 	}
 
 	private void postprocess(Connection c) throws SQLException {

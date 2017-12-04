@@ -16,5 +16,6 @@ public class Constants {
 	public static final String FromFile = "FromFile";
 	public static final int BasicSession = 0;
 	public static final String RegFail = "Failed to register. Username already exists";
-	public static final int RegSuccess = 0;	
+	public static final int RegSuccess = 0;
+	public static final int MAX_PASS = 32;	
 }
