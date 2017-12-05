@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { CustomPipe } from '../../pipes/custom.pipe';
+
 
 @Component({
     selector: 'app-pipe',
@@ -6,17 +8,15 @@ import { Component } from '@angular/core';
 })
 
 export class PipesComponent{
+alterWords = "";
+
     public names = [ 
         "bobbert",
         "bobberta",
-        "ryan",
+        "ryanasd",
         "ryann",
         "Jack",
-        "Jill",
-        23,
-        false,
-        null,
-        undefined
+        "Jill"
 
     ]
 }
