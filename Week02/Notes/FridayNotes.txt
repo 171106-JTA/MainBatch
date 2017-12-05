@@ -1,0 +1,39 @@
+Why does interface need function signiture, when the function is implemented in the extending class? (something to do with method is used in main)
+
+====================================
+Statements
+====================================
+Statement
+- General purpose access to the database
+- Useful when using static sql statements
+- Allows sql injection
+
+Prepared Statements
+- More dynamic (than statements)
+- Paramterized
+- Accept input at runtime
+- prevents sql injection
+- Precompiled by java and sql. This helps run faster and detects SQL injection
+-- Checks if table exists
+-- Confirms parameter types
+-- Parses for correct syntax
+-- Caches the query for use later
+
+Callable Statement
+- Accesses stored procedures
+
+
+====================================
+SQL Injection
+====================================
+Malicous user input that can compromise a database
+
+Note: Good applications touch the database as few times as possible
+
+On Monday
+QC
+LMS Exams
+- Read the Questions Thouroughly!
+Interviews
+Project Due 
+- But the root folder under the "assignments" folder

@@ -1,0 +1,26 @@
+Pillars of Programming
+Shadowing
+Scopes
+Transient
+Try/Catch/Finally
+Exceptions vs Errors
+Logger Components
+Logger levels
+Threads
+Thread States*
+Deadlock, Livelock
+JUnit Annotation
+POM -> Project Object Model
+
+Maven
+validate 
+clean 
+compile
+test 
+package
+verify 
+install
+deploy
+
+Components of Java 8
+

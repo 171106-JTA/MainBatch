@@ -1,0 +1,118 @@
+======================================
+XML
+======================================
+XML -> eXtensible Markup Language
+Often used to distribute info over the internet
+Designed for to store and transport data
+The data should be Selfdescriptive
+- names should document code
+XML doesn't DO anything 
+XML carries data (where HTLM displays data)
+
+Syntax: 
+General 
+- Follows the same structure as HTML with elements and attributes
+- Attributes are reserved for metadata in XML 
+
+Hard Rules for Syntax
+- Must have one and only one Root Tag
+- If you have a Prologue, it must be the first line of the file
+- All elements must have a closing tag
+- Opening tags and closing tags, must match eachother in casing and spelling
+- Attributes must be quoted
+- Must use entity resource tags when referencing conditional operators
+	examples:
+	less than is represented by &lt;
+	greater than is represented by &gt;
+	Quote is &quot;
+	ect...
+- Note: All white space is preserved in XML
+- No overlapping tags incorrectly
+
+Well Formed XML: XML that meets all these requirements  
+Valid XML -> Well foremed xml that adheres to a DTD or XML Schema
+
+========
+Definitions
+========
+Prologue -> The language that the document is following
+metadata -> data about data
+****DOM -> Document Object Model. Know this! See the notepad. 
+		-> Object-oriented representation of a webpage
+		-> Used to access and modify Documents
+Be comfortable with DOM manipulation
+XPath - Direct path to an element in the DOM
+	example : root/book/title[@text()="bob"]
+Relative Xpath
+	example : //root[x]/book[2]/title[@innterHtml = "bob"]
+	arrays of arrays that uniquely identifies items
+Namespaces and Prefixes 
+To avoid name-clashing with other markup languages we can make use of namespaces and prefixes. 
+
+
+========
+URI
+========
+URI -> Uniform Resource Identifier
+<html xmlns:prefix="some.uri.com">
+	<prefix:head></head>
+	<prefix:body></body>
+</html>
+
+"prefix" can be whatever we want: 
+<html xmlns:MickeyMouse="some.uri.com">
+	<MickeyMouse:head></head>
+	<MickeyMouse:body></body>
+</html>
+
+
+========
+DTD
+========
+DTD -> Document Type Definition
+Goes after a prolog
+Grants and enforced structure and naming convention for an xml doc
+Sets a standard to be followed for xml docs
+Garentee of valid xml (any xml that is well formed and follows the rules of a DTD or XML Schema)
+<!DOCTYPE note system "note.dtd">
+<note> 
+	<to> bobbert </to>
+	<from> bobby </from>
+	<content> ... </content>
+</note>
+
+note.dtd
+<!DOCTYPE note>
+	<!Element note (to, from, content)>
+	<!Element to (#PCData)
+
+
+========
+XML Schema
+========
+Stronger than DTD
+Same use as a DTD
+Easier to describe conent
+Support for datatype inforcement 
+Supports namespaces
+Schemas are DoOMs in their own right, therefore, they can be parsed 
+
+
+PCData -> Parcible Computer Data
+======================================
+HTML
+======================================
+HTML -> HyperTex Markup Language
+HTLM displays data
+
+
+Assignment: 
+Homepage:
+- must have an about-me paragraph 
+- must have a picture of some kind
+- Must not use default color shemes
+- Must have a table, list, checkboxes, weblist, and radio buttions
+- Bonus: have multiple pages. 
+(i.e. proof that you are practicing HTML)
+Due some time after this week
+Not "important"

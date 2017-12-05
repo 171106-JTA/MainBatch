@@ -1,0 +1,53 @@
+What is SQL?
+What are database?
+What is an ERD?
+- example
+
+
+By the end of this week: Name off every sublanguage, everything that goes into a sub langauge and the commands
+Draw a sample ERD 
+Write various ORACLE  commands by hand
+
+What is an Aggregate function?
+Give examples, both verbally in code
+
+Where VS Having?
+
+What is the difference between Intersect and InnerJoin?
+
+What is the difference between Full Outer Join and a Union All (or Union)?
+
+Function VS Procedure
+
+==========================================
+Coding
+==========================================
+Views
+
+
+
+To Study
+normal forms 
+normalization definitio
+Joins
+Sets
+multiplicity vs cardinality
+Lookup Tables
+Index tables
+- Pros and cons
+Cluster Indexing
+Schema objects
+Transaction
+Poperties of a transaction (ACID)
+Transaction Isolation Types: 
+Dirty read, Uncommited reads, Phantom read
+Transaction Isolation Levels: (4 of them)
+
+OLAP
+- Star and Snowlake schema
+
+OLTP
+Layers 
+
+Glob
+Clob

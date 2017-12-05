@@ -1,0 +1,360 @@
+======================================
+XML
+======================================
+XML -> eXtensible Markup Language
+Often used to distribute info over the internet
+Designed for to store and transport data
+The data should be Selfdescriptive
+- names should document code
+XML doesn't DO anything 
+XML carries data (where HTLM displays data)
+
+Syntax: 
+General 
+- Follows the same structure as HTML with elements and attributes
+- Attributes are reserved for metadata in XML 
+
+Hard Rules for Syntax
+- Must have one and only one Root Tag
+- If you have a Prologue, it must be the first line of the file
+- All elements must have a closing tag
+- Opening tags and closing tags, must match eachother in casing and spelling
+- Attributes must be quoted
+- Must use entity resource tags when referencing conditional operators
+	examples:
+	less than is represented by &lt;
+	greater than is represented by &gt;
+	Quote is &quot;
+	ect...
+- Note: All white space is preserved in XML
+- No overlapping tags incorrectly
+
+Well Formed XML: XML that meets all these requirements  
+Valid XML -> Well foremed xml that adheres to a DTD or XML Schema
+
+
+======================================
+General Definitions
+======================================
+Prologue -> The language that the document is following
+metadata -> data about data. summarizes information about data that makes it easier to work with the data
+****DOM -> Document Object Model. Know this! See the notepad. 
+		-> Be comfortable with DOM manipulation
+		-> A Programming Interface for HTML and XML
+		-> Allows programs to change document struture
+XPath - Direct path to am element in the DOM
+	example : root/book/title[@text()="bob"]
+Relative Xpath
+	example : //root[x]/book[2]/title[@innterHtml = "bob"]
+	arrays of arrays that uniquely identifies items
+
+Deployment Descriptor -> In java, A configuration file describing how a component, module, or application should be deployed (web.xml for our projects)
+
+======================================
+Namespaces and Prefixes 
+======================================
+To avoid name-clashing with other markup languages we can make use of namespaces and prefixes. 
+Namespace 	-> a set of unique names
+			-> groupings of element and attribute names
+			-> defined in XML using the keyword: xmlns
+				<element xmlns:name = "URL">
+				- 'name' is the prefix
+				- 'url' is the unique identifier
+
+======================================
+URI
+======================================
+URI -> Uniform Resource Identifier
+	-> A String of characters used to identify a resource
+<html xmlns:prefix="some.uri.com">
+	<prefix:head></head>
+	<prefix:body></body>
+</html>
+
+"prefix" can be whatever we want: 
+<html xmlns:MickeyMouse="some.uri.com">
+	<MickeyMouse:head></head>
+	<MickeyMouse:body></body>
+</html>
+
+======================================
+DTD
+======================================
+DTD -> Document Type Definition
+Goes after a prolog
+Grants and enforced structure and naming convention for an xml doc
+Sets a standard to be followed for xml docs
+Garentee of valid xml (any xml that is well formed and follows the rules of a DTD or XML Schema)
+
+<!DOCTYPE note system "note.dtd">
+<note> 
+	<to> bobbert </to>
+	<from> bobby </from>
+	<content> ... </content>
+</note>
+
+note.dtd
+<!DOCTYPE note>
+	<!Element note (to, from, content)>
+	<!Element to (#PCData)
+
+========
+XML Schema
+========
+Stronger than DTD
+Same use as a DTD
+Easier to describe conent
+Support for datatype inforcement 
+Supports namespaces
+Schemas are DOMs in their own right, therefore, they can be parsed 
+
+PCData -> Parcible Computer Data
+======================================
+HTML
+======================================
+HTML -> HyperTex Markup Language
+HTLM displays data
+
+======================================
+Servlet
+======================================
+Servlet -> Java servelts are programs that run on a web/application server that act as a middle layer between a request
+from a client (browser) and databases or applications on the server
+ 		-> They come in JARs
+ 		-> Allows us to collect input from forms, present records from a database, or create web pages dynamically
+JAR -> Java Archive Files, which are a collection of class files
+
+======================================
+7 Layers of a Web Applciation 
+======================================
+Client -----> Http Server -----> Servlet Programms -----> Database >>>>>.....
+																			|
+Client <----- Http Server <----- Servlet Programms <----- Database <<<<<.....
+
+======================================
+Servlet Package
+======================================
+Classes on the Server run by java. 
+Most common: JavaX.servlet.Http
+
+======================================
+Servlet Tasks
+======================================
+Read explicit data from clients, which represents form data
+Read implicit data from client (metadata from the head of the request)
+Process data then generate results 
+Send back information through the HTTP response
+- Send Explicit data back in the Document
+- Send Implicit data back in the Meta Data
+
+======================================
+Lifecycle of an HTTP request with servlets
+======================================
+Client ---(1)---> HTTP Server ---(2)---> Web Container 	---(3)---> Web.xml (DD)
+													---(4)---> Server A/Server B
+													---(4.5)---> See PG 22 in notebook
+See PG 22 in notebook for rest of diagram!!!!!
+
+(1) A client sends a request to www.google.com
+A flat file representing all data related to the request is sent
+File is sent to the Http server. 
+
+(2) The HTTP server recieves a request and creates an empty response 
+class file. Sends both of them to the web container. 
+
+(3) Our Web Container checks the Deployment Descriptor (DD), web.xml in our case, 
+for informaiton on which servlet to send our data to
+
+(4) Wrap the flat files (request and response) in HTTP Objects (Http request and Http reponse)
+Sends our objects to the proper servlet as designated by our Deployment Descriptor.
+
+(4.5) Web Container checks is servlet is instantiated. If not, it calls the servlet's init() method.
+Webcontainer takes 1 or more request/responses and gives each set a thread and then users each thread
+to call the servlets service(), where business logic takes palce. 
+A thread pool is used to handle multiple requests. 
+After a set amount of inactivity, the web container calls the servlet's destroy() method, which shuts 
+down and cleans up the servlet
+
+(5) After the service() method performs needed logic, it sends back the request and newly populated response
+object to the web controller
+
+(6) Web container unwraps objects and sends them to the HTTP server
+
+(7) HTTP server sends the request and response back to the client (in this case, google's homepage)
+
+
+========================================================================================================================================================
+PERSONAL STUDYING
+========================================================================================================================================================
+======================================
+HTTP
+======================================
+HTTP 	-> Hypertext Transfer Protocol
+		-> Standardized method for computers to communicate
+		-> Application level. Establishes communication between client and server
+		-> TCP/IP based protocol. 
+		-> Default port: TCP 80
+		-> Request/Response based (GET and POST), based on a client/server architecture
+
+THREE fundamental features: 
+1) Media Independant -> Any content type can be transfered, assuming both Client and Server can handle is
+2) Connectionless -> Client (oftentimes browsers) send HTTP request and await response from servers. No direct connection needs to be established
+3) Stateless -> Information does not persist between requests. i.e. all information is forgotten after each request
+
+======================================
+Sessions
+======================================
+Sessions Tracking (a.k.a. Session Management) -> Method to remember information about a user. Maintains user state. 
+
+Used to temporarily persist user data
+Example: online shopping carts
+
+FOUR Techniques: 
+1) Cookies
+2) Hidden Form Field
+3) URL Rewriting
+4) HttpSession
+
+======================================
+Cookies
+======================================
+Small Text files containing data which is persisted across multiple client requests
+Contains: Name and a Single Value. Assigned a unique session ID so that requests from the web client can be recognized.
+Stored on Web Client
+
+Purpose: remember user information
+
+Non-persistent cookies: not retained when browser is closed
+Peristent cookies: valid across multiple sessions (i.e. can be accessed even is the browser is closed). Lost when user logs out
+
+Pros:
+Simplest implementation of session tracking
+Client responsible for cookie managment (less overhead/implementation on server side)
+
+Cons: 
+Browsers may have cookies disabled
+Only text files can be sent
+Security, and limited length in URL
+Lost on browser closing
+Dynamic IDs rely solely on the developer to generate
+
+
+======================================
+Hidden Form Fields
+======================================
+Hidden Form Field 	-> A hidden HTML form field with a unique session ID. 
+					-> When a form containing an HFF is submitted, the name and value are automaticaly included in futer GET and POST data fields
+
+Pros: 
+Client independant, maintained on server side
+Cons: 
+Can only send text data 
+Can only persist data if use "submits" to pass around
+If user clicks hyperlink, the session data is lost
+
+======================================
+URL Rewriting
+======================================
+Append information (like a session ID) to the end of URL
+
+Pros: works for session tracking even on browsers that don't support cookies
+	Servlets can use the Session interface to keep track of session infomation throughout multiple pages and connections 
+Cons: requires dynamic URL generation, even which dynamic generation would not be needed otherwise (i.e. like for static web pages)
+
+======================================
+HttpSession Interface
+======================================
+An interface provided by servlet. 
+Creates a session between an HTTP client and an HTTP server.
+Session persists for specified time
+Create an HttpSession obeject by calling the getSession() method
+
+======================================
+ServletConfig VS ServletContext
+======================================
+Both part of the Servlet API
+
+ServletConfig 	-> Parameters that are unique to each servlet. Used for Initialization
+				-> Available to all users who invoke a servlet
+				-> String name-value pairs in the Servlet section of the Web.xml file
+ServletContext 	-> Servlet parameters specified for use by all resources within an application
+				-> Global Scope
+				-> Used when data needs to be shared amongst all users of an application
+
+
+======================================
+WEB.xml
+======================================
+The Deployment Descriptor for a servlet based Java application
+- Specifies servlets and the URLs they handle
+
+======================================
+Custom Error Pages
+======================================
+In the WEB.xml we configure custom error message with the following element: 
+-> error-code - an integer value
+-> exception-type - a fully qualified class name of a Java Exception type
+-> location - location of the resource in the webapp relative to the root of the web application. Value should start with /.
+
+Can be static content, filter, or servlet
+
+======================================
+Front Controller
+======================================
+A Controller that handles all the requests for a website
+Sits at front of web application and delegates requests to sub-resourcess
+It is the interface to security, internationalization, and presenting user-specific views (i.e. dynamic behavior at runtime)
+
+A central controller dispatches requests to commands to trigger behavior associated with a request. 
+
+======================================
+GET VS POST
+======================================
+Get -> Data is encoded in the URL
+Post -> Data is included in the message body
+
+======================================
+BootStrap
+======================================
+Free Front-End framework for web-dev
+Built on CSS and HTML for a variety of common functionality (Typography, Buttons, tables, navigation, etc)
+Responsive Designs
+Mobile first (built-in mobile styles as part of the framework)
+Compatible with all modern browsers
+
+
+========================================================================================================================================================
+From Week 04 Monday 
+(finishing up Week 03 topics!)
+========================================================================================================================================================
+
+=================================
+Status Codes
+=================================
+First line of Response from Server
+
+5 Code Levels:
+100 series 	-> Informational (just provide information)
+			-> 100 - Continue. Server notifying Client of long processing time for request. Waiting for more packets from client
+200 series 	-> Success (notification of success)
+			-> 200 - OK. The request was processed correctly 
+			-> 201 - Created: Request fullfilled resulting in creation of a new resource
+			-> 202 - Accepted. Request fully received, waiting for processing
+300 series 	-> Redirection (moving request to somewhere else to fix a problem)
+			-> 301 - Page moved permantly
+			-> 302 - Temporarily moved
+400 series 	-> Client Error (The client found an error)
+			-> 400 - Bad request
+			-> 401 - Unauthorized. User messed up username or password. Usually a custom page is used, not the built-in error message
+			-> 403 - Forbidden
+			-> 404 - Server not found
+			-> 418 - I'm A Teapot
+500 series 	-> Server Error (The server found an error and sent it back to the client)
+			-> 500 - Server internal error. i.e. an exception occured on the server side
+			-> 503 - Server is down
+			
+=================================
+Filters
+=================================
+Apply Checks (conditional) on requests to resources (servlets or static rss), on replys from resources, or both. 
+doFilter() method 

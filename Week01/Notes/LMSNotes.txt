@@ -1,0 +1,59 @@
+Topic I Got Wrong On JAVA LMS
+
+
+Marker Interfaces
+Interfaces in general
+Try/Catch/Finally blocks 
+- Are catch blocks neccessary? No!
+FileReader
+- reads character streams
+FileInputStream 
+- reads raw bytes
+Default types: float b = 32.33 is invalid
+Arrays 
+- get size from .length
+Method Overriding
+- What is it? 
+
+=============================================================================
+==============================================
+Java Inner Classes and Nested Classes
+- See: https://www.javatpoint.com/java-inner-class
+==============================================
+Inner Classes: 
+- Inner classes have access to all data members and methods of outer class
+- Why Use them? 
+--- For development of readable and maintainable code
+--- Code optimization...less code to write
+
+Inner class vs Nested Class 
+-> Inner class is part of nested class. 
+-> Non static nested classes are inner classes
+
+Types of Inner Classes:
+Member Inner Class - a class created within class and outside method
+Anonymous Inner Class 
+- a class created for implementing interface or extending class. Its name is decided by the java compiler
+- Created in 2 ways: Using class with overloaded methods, using an interface and defining methods. See https://www.javatpoint.com/anonymous-inner-class
+(note: different than link above. example specific link)
+Local Inner Class - A class created within a method
+
+Type of Nested Classes: 
+Static Nested Class - A static class created within another class
+Nested Interface - An interface created within a class or interface
+=============================================================================
+
+Collection
+- Iterable children of Collection
+- Notation related to Collection types (List, Maps, Sets)
+- various children of collection (Maps, HashTable, HashSet, Dequeu, EntrySet, etc.)
+
+Threads 
+- Creating Threads
+- virtual machine states of threads
+Continue statements 
+- causes loops to jump to the next iteration
+Java 100% OOP? No, because it has primative datatypes
+
+String Builder and String Buffer
+- Thread Safe?

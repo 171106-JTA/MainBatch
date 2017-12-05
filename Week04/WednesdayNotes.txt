@@ -1,0 +1,122 @@
+=========================================
+Java Script
+=========================================
+Interpreted Runtime Language
+Originally Called Mocha, then Livescript, then released with Nescapte as JavaScript
+Created in 10 days
+Still Weakly Typed due to backward compatability issues
+
+undefined -> a datatype in JavaScript
+
+typeof() -> default function
+
+Javascript always expects something to be returned. 
+Example: var y = 'test' returns undefined
+
+primitive datatypes: number, string, boolean
+Nonthing datatypes: undefined and null
+Object datatypes
+
+2 ways to access elements of jsobject
+. notation
+for loops
+
+Additional notation
+bracket notation
+
+No function overloading
+- new function definitions of same name will replace old
+
+Any number of parameters are allowed
+
+Any datatype is true or false: Called Truthy Falsey in JS
+
+JavaScript is safe! It cannot access the files on your computer or save files to your computer
+
+
+=========================================
+Variable Hoisting and Scopes
+=========================================
+2 scope in JavaScript: Global and Function
+
+Research Scopes
+
+In class assignment: 
+order of input numbers does not matter. 2 19 and 19 2 should both generate same output
+Numbers divisible by both 3 and 5 should print fizzbuzz
+
+Hoisting
+All declarations are "hoisted" to the top of their scope and done first.
+Assignments are still done in the order they appear
+
+again: 	Declarations are performed at the top of their scope
+		Assignments are perfromed where they appear
+
+
+=========================================
+Constructors to make objects
+=========================================
+Objects are defined from their prototypes
+You can change objects by changing their prototypes
+
+To Do: ***Play with this at home!!!!
+
+=========================================
+Anonymous function
+=========================================
+Anonymous function -> Any function that does not have a name. A 1-time function (i.e. executes 1 time). Gets returned and executed once
+
+=========================================
+Closure
+=========================================
+Return an inner scope to users. The object itself has access to its entire scope, but the user only get's access to inner scopes
+
+=========================================
+Self-invoking functions
+=========================================
+Encapsulate funcitons in paranthesis so that it is executed automatically?
+
+
+General Example Function: 
+function addition(a,b) {
+    if(!b && b!=0) {
+		return function(c) {
+        	return a + c; 
+    	}
+    }
+	return a + b;
+}
+
+=========================================
+Error Handling
+=========================================
+See Code
+
+
+=========================================
+Floating Point Numbers
+=========================================
+accurate up to 15 digits
+
+If we do a 16th digit, things get weird
+If adding numbers together, keep floating points below 15 digits! JavaScript loses accuracy after that
+
+
+==================================================================================
+AJAX
+==================================================================================
+AJAX -> Asynchronous JavaScript and XML
+
+An Asynchronous Way to send requests
+i.e. Provides structure to communicate with web services asynchronously without leaving the current webpage
+
+NO wait times! User can continue using the site while waiting for the request 
+
+=======
+Synchronous and Ansynchrous
+=======
+Synchonous methods include sending info to a server and getting a new page. 
+Asynchronous can send a request and then perform other actions while waiting for a response.
+This is a Web Browser technology, NOT a web service
+
+

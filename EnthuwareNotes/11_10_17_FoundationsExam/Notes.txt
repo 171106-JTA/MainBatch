@@ -1,0 +1,71 @@
+Foundation Exam Notes: 
+
+Q4
+enhanced for loops
+
+Q6
+Date-Time API for Java 8
+
+Q7
+All related functions
+
+Q11
+Comparing References??? or values???
+if references then TRUE, if values then FALSE
+
+Q12
+6. implicit typcasting???
+
+Q16
+Need to know MAXINT and MAXFLOAT???
+
+Q26
+native keyword???
+
+Q28 
+default access modifiers in Java
+
+Q28
+2. Is that a vlid array declaration????
+if yes, then ArrayOutOfBoundsError
+if no, then Will Not Compile????
+
+Q31
+The Min value in int is 1 larger than the max value, so the integer will jump back to the MIN value???
+
+Q37
+First element of "args" in main method???
+
+Q38 
+Functional Interfaces???
+
+Q43
+Default accessiblity???
+(From Q53, I think Default is the same as Package, which is more restrictive than public but less restrictive than protected)
+
+Q44
+Break and Continue statements...related to labels and where they can occur
+
+Q47 
+Can a try statement have a finally statement and NO catch statement?
+
+Q55
+Check all the statements
+
+Q56 
+what do continue statements do???
+
+Q58
+java.util.function.Predicate???
+
+Q59
+Arrays of length 0 legal?
+
+Q60
+Interface to Class variable equivalency???? (i.e. interation between  classes and interfaces)
+
+Q65
+Try/catch/finally statements. Does System.exit(0) override finally execution? Is it legal for try statements to have a finally statement and not a catch statement?
+
+Q74 
+Go String method's edit the contained string or simply return the edited string???????
