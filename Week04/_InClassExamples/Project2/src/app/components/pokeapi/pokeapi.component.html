@@ -4,6 +4,6 @@
         <tr><th>NAME</th><td>{{pkmn.name}}</td></tr>
         <tr><th>ID</th><td>{{pkmn.id}}</td></tr>
         <tr><th>WEIGHT</th><td>{{pkmn.weight}}</td></tr>
-        <tr><th>SPRITE</th><td><img [src]="pkmn.sprite"></td></tr>
+        <tr><th>SPRITE</th><td><img [src]="pkmn.sprite" (click)="changePicture()"></td></tr>
     </table>
 </div>

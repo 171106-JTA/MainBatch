@@ -1,0 +1,66 @@
+=============================
+JavaScript Prototypes
+=============================
+Functions that instantiate a new object when called with the 'new' keyword
+
+Look into JavaScript Prototypes further! 
+
+Look up Jaxson 
+-> A dependency that allows us to sent information back to the servlet
+
+=============================
+JSON
+=============================
+JSON -> JavaScript Object Notation
+
+A lightlight data interchange format
+Language independant (when passed to browsers??? Look into this)
+Self Describing
+
+Syntax
+Same as JavaScript Objects:
+- Data is in name/value pairs
+- Data is separated by sommas
+- Curly braces hold objects
+- Square brackets hold arrays
+- On the JavaScript side, need to know 2 methods
+---JSON.stringify(JSON object)   --> Converts object to a string representation
+---JSON.parse(String str)   --> Takes a string represenation of a JSON object and parses it into a JSON object
+							--> Takes a string anc converts to JSON object
+example: 
+{
+	trainers: 
+	[]trainer: {
+		uname: ... 
+		fname: ...
+		mname: ...
+		lname: ...
+	},
+	{
+		unmae: ...
+		fname: ...
+		...
+	}, 
+	{
+		...
+	}
+}
+
+npm install --save bootstrap
+
+Compy new bootstrap install directory into the .angular-cli.json document unter the "styles" array
+
+=============================
+MVC
+=============================
+MVC -> Model View Controller
+
+In a web application we typical have "views" for the front end and "controllers" for back-end
+HTML -> view
+Business Logic -> controller
+
+But how transfer data between view and controller? 
+Why use a model and not just a text field? 
+Models have the ability to transport specific data fields between views and components
+
+ngModel in Angular supports this functionality from View to Component

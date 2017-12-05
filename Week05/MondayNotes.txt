@@ -1,0 +1,177 @@
+=========================================
+Component Lifecycle Hooks
+=========================================
+Component: 
+ngOnChanges -> Called first on any component's lifecycle. React to when a databound change is detected
+ngOnInit -> Occurs once the component is initialized. (i.e. initailized when we reach the portion of the page where the componenet is called???)
+ngDoCheck -> Reaction to any changes of elements of the component
+
+Content:
+ngAfterContentInit -> Reacts when data is pushed to the front end (view) (not to be confused with data be displayed on the front end)
+ngAfterContentChecked -> Reacts after checking for changes of pushed content. 
+
+View:
+ngAfterViewInit -> After the actual view has been generated. 
+ngAfterViewChecked -> After the actual DOM is changed
+
+Destroy:
+ngOnDestroy -> Cleanup. After the component is removed from view
+
+These are the different phases of a component. 
+Typically used for logging. 
+
+MVC 
+-> model is the binding. ngModel 
+
+Injector: 
+knows the whole picture
+Keeps track of which componenet needs instances of other components. 
+The application is made up of different modules and the injector controls communication among them
+
+
+=========================================
+Pipes
+=========================================
+Pipes transform data
+
+2 kinds of pipes
+Pure Pipes -> A pipe that reacts to changes on primitive values or object reference changes
+
+Impure Pipes -> A pipe that reacts to everything: 
+			Changes to an object
+			A user clicking anywhere
+			A key press
+			Moving the mouse (detects any mouse movement)
+
+=========================================
+Lifecycle of 
+=========================================
+Create Content
+	Content rendered
+		Children content created
+			children content rendered
+
+
+=========================================
+@input
+=========================================
+Whenever you designate a class variable as @input, you allow the state of that object to be a property bound for a view
+
+Allows creation of dynamic views
+
+Starting Tomorrow: 
+2-5 minute presentation 
+
+Interviews tomorrow: 
+- Show confidence!
+- If confidence is broken early, you fail!
+
+
+=========================================
+SDLC
+=========================================
+SDLC -> Software Development Lifecycle
+
+=====
+Waterfall -> good for small to medium projects
+=====
+
+Requirements -> usually involves Business Analyst
+	funding phase --> all projects need funding! :P
+		Design --> Involves developers and BAs
+			Code --> developers
+				Testing --> involves the testing team
+					Deploy --> deployment
+						Maintanence --> Fix bugs and problems. Customer support
+
+Usually, a rigorous "sign-off" phase is required for each step
+
+====
+Reverse Waterfall
+====
+kept overhead of switching phases, but allowed for going backwards
+Only good for static requirements
+
+V-Model -> partial design below. 
+Business Reqs
+	System Reqs
+	  	Highlevel design
+	  		Low Level Design
+	  			Code
+			Unit Testing
+		Integration Testing
+	System Testing
+VAT Testing
+
+See PG 28 for full figure
+Only feasible for static requirements
+
+====
+Spiral Model
+====
+Designed for large applicaiton
+Aims to evaluate and reduce risks
+More dynamic with requirements than the waterfall model
+
+====
+Iterative Model
+====
+See pg 28 for diagram
+Geared towards small to medium projects
+Great for dynamic requirements
+Risk that project will never finish
+
+====
+Agile Model
+====
+Max size of teams: 15-20 people
+- Preferrable less than 10
+Example of a Requirement: Admin shall login when correct username & password is submitted. 
+Requirement documents upward of 40 pages
+
+Example of User Story: 
+As an Admin User, when I click login after inputting a proper username and password
+I shall redirect to my user homepage
+
+Generic Example of User Story: 
+As <X> when I <Y>, <Z> happens
+
+i.e. Who does What, and What's the result
+
+Sprint Backlog: 
+What user stories can we complete in 1-4 weeks (a sprint is usually 1-4 weeks)
+
+Stand UP meetings: 
+- What you did yesterday
+- What you will do today
+- Blockers: What is blocking you that is out of your hands
+
+
+Goal: At the end of every sprint, have something to show your employers
+
+=========================================
+Agile Team
+=========================================
+Product Owner 	-> P.O.
+Core Team 		-> Developers, Testers, and Business Analysts
+Scrum Master 	-> S.C. 
+				-> Handles the standup for the team
+				-> Does not code
+
+=========================================
+Agile Project Lifecylce
+=========================================
+Kickoff meeing: Introduce project
+Project planning phase
+- Create all user stores. 
+- Project owner is there
+- Create product backlog
+User Story Scoring 
+- Assign value to each userstory based on how difficult they are to complete
+
+=========================================
+Levels of User Story
+=========================================
+Epics - collection of features
+Features - collection of user stories
+User Stores - unit of work

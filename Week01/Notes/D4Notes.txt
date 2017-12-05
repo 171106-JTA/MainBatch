@@ -1,0 +1,204 @@
+Week 1
+Day 4
+11/9/2107
+
+**** = lookup
+^^^^ = Ryan's note
+
+Array lists: 
+dynamic size. 
+When needed, size is increased by 50% rounding down
+
+=======================
+Collections
+=======================
+What are they? Data Structures
+Kinds: Lists, Sets, Queues, Maps, Stacks, Hash Table, binary trees
+
+Difference between Collections, Collection, collection
+
+Collections: data structure to house data. 
+Collection: interface that all collection come from
+collections: utility class, used for iteracting with collections, has .sort and other utlitiy functions. 
+
+****Look up definition of utility class
+
+^^^^Interfaces cannot inherit interfaces
+
+
+Collection extends Iterable
+
+Three major extensions from Collection (there are many the main three are): 
+Sets
+Lists
+Queue
+
+Others are: 
+Maps
+Hash Tables
+
+SEE PAGE #11 for graph we need to be able to draw from memory
+
+Hashtable are legacy objects. Most likely use Hashmap. Need specific case for Hashmap.
+
+Differenced among collections: 
+===================================
+
+List:
+- Ordered collection (put an order to the items in the collection. Index based (i.e. items have indices))
+- Supports random access. We can search for any element we want. Note: 0 index based
+- Dynamic size. That is: resizable, allows duplicates
+- Unsynchronized (Synchronized means Threadsafe. Threadsafe means multiple threads can't access a resource at the same time)
+
+Vector: 
+- Synchornized (i.e. threadsafe)
+
+Linked List: 
+- Note: linked lists are funny in Java (as opposed to C++)
+- Can be doubly linked
+- Don't have random access
+- Can insert/delete easily
+
+****What is the difference between array list and linked list? 
+- array list uses indices. linked list uses .next()
+- Pros/cons #1: Array list does not support inserting something into the middle of the list very well. Linked list does (i.e. just adjust the pointers in object for a linked list vs shifting everything to the left of the insert index for an array list)
+- Pros/cons #2: Array lists are much faster at finding items. 
+
+
+
+Sets: 
+- Do not allow dublicates
+- Automatically sorted
+- Store indices in a hash table. They store via hashing. Stored using information of the object. 
+
+Queue: 
+- FIFO: First In, First Out
+- Priority Queues: A queue with muiltiple buffers. Pops the highest priority object. Think Disneyland's normal and fastpass queues.
+
+
+****Reference vs object
+List<Integer> list = new ArrayList<Integer> ();
+The left hand side is the reference 
+The right hand side is the object
+
+^^^^Suggested to do one Enthuware per week
+
+
+HOUSING Program
+leaving: 
+let housing@revature.com know!
+Must leave by Friday or over weekend
+Must get key back to Palmer by Monday
+
+Option Day: 
+- Should have received option day documents from Palmer
+
+-------------------------------------------------------
+
+Comparable Vs Comparator
+
+****Need to know this!!!***
+Comparable
+- requires the compareTo() method
+- defines the natural order of an object. (where natural ordering is the natural way we order things. 1 before 2, 'a' before 'b', etc.)
+
+Comparator
+- required the comnpare() method
+- An object that can provide the user a way to sort a collection of something outside of its natural ording. 
+- (Take any object and allow the user to sort it any way you want to)
+
+
+
+---------------------------------------
+MAVEN
+- a project managment and build tool
+- used to manage everything about project development
+
+src/main folder: 
+java (code) files go into src/main/java
+property files and anything else not .java go into src/main/resources
+
+src/test folder: 
+Test files go into src/test/java
+other non .java files needed by tests go into src/test/java
+
+POM
+Potect Object Model
+POM.xml is the heart of MAVEN
+Use POM.xml to: 
+- define what is included in the project
+
+The java projects default to java 1.5. 
+
+Include the following below <version>... in the pom.xml file
+
+	<properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+This will ensure that we use Java 1.8 for our class
+
+
+go to project folder: 
+right click project in Spring --> show in --> system explorer --> click on package --> type 'mvn clean'
+
+****Know lifecycle of Maven***
+- see java_w1_MavenExample project
+
+MAVEN commands:
+mvn clean
+mvn compile
+mvn test
+mvn install
+mvn deploy
+
+most common command: 
+mvn clean install
+
+More Definitoin
+
+Maven Lifecycle
+0. Validation
+1. Clean
+2. Compile
+3. Test
+4. Package
+5. Verify (confirm test results, run verification tests)
+6. Install (install to local repository)
+7. Deploy (deploy to remote repository)
+
+POM - Project Objct Model
+- POM is a .xml file
+- Defines and manages your dependecies
+
+Dependecies: any external librarys required to execute your code
+Plugin: Any tool used during Exectuion
+
+MONDAY:
+(Note: Every Monday is a valuation day)
+-Presentation
+--Plug in laptop
+--Run through commands. Hopefully you hit some stretch goals
+--Walk through some code
+5 min demo
+2 min of walking through code
+3 min Q and A
+
+Ask questions!!!!
+
+QC 
+- Individual Questions
+- Survey
+
+Difference bewteen JVM, JRE, JDK 
+how to serialize a function
+run time/compile time
+List all annotations of Junit
+what is unit testing
+What is buffered ready, file reader, file input steam 
+what is log4J
+what are the logging levels
+
+Study assignment
+Reflects AVI - library that provides???

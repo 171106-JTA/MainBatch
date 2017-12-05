@@ -52,9 +52,12 @@
 	</form>
 	<hr>
 	<h3>AJAX</h3>
-	<input type="number" id="input" placeholder="Input number" required>
+	<input type="text" id="input" placeholder="Input Username">
 	<input type=button onclick="sendAJAX()" value="SUBMIT">
-	<div id=results>
+	<div>
+		<table border="2px" id=results>
+			<tr><th>USERNAME</th><th>FIRST NAME</th><th>MIDDLE NAME</th><th>LAST NAME</th></tr>
+		</table>
 		<p id=AJAXError></p>
 	</div>
 </body>

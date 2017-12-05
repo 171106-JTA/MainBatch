@@ -1,0 +1,12 @@
+QC Examples:
+What's the difference between compile time and run time?
+What happens at compile time?
+Difference between JVM, JRE, and JDK?
+How do you serialize an object?
+What is serializable? (a marker interface)
+AFter applying serializable to our iterface, what's next? 
+- object output stream and input stream 
+How to prevent a variable from being serialized? (transient)
+What's the difference between an array list and a vector? (memory for vector is segmented. Memory allocated for an array list is sequential??? or set)
+Difference bewteen hash table and hash map? 
+- (unoffical answer): hash table is legacy???

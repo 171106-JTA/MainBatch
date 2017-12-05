@@ -1,0 +1,111 @@
+======================================
+Servlet
+======================================
+Servlet -> Java servelts are programs that run on a web/application server that act as a middle layer between a request
+from a client (browser) and databases or applications on the server
+ 		-> They come in JARs
+ 		-> Allows us to collect input from forms, present records from a database, or create web pages dynamically
+JAR -> Java Archive Files, which are a collection of class files
+
+======================================
+7 Layers of a Web Applciation 
+======================================
+Client -----> Http Server -----> Servlet Programms -----> Database >>>>>.....
+																			|
+Client <----- Http Server <----- Servlet Programms <----- Database <<<<<.....
+
+======================================
+Servlet Package
+======================================
+Classes on the Server run by java. 
+Most common: JavaX.servlet.Http
+
+======================================
+Servlet Tasks
+======================================
+Read explicit data from clients, which represents form data
+Read implicit data from client (metadata from the head of the request)
+Process data then generate results 
+Send back information through the HTTP response
+- Send Explicit data back in the Document
+- Send Implicit data back in the Meta Data
+
+======================================
+Lifecycle of an HTTP request with servlets
+======================================
+Client ---(1)---> Server ---(2)---> Web Container 	---(3)---> Web.xml (DD)
+													---(4)---> Server A/Server B
+													---(4.5)---> See PG 22 in notebook
+See PG 22 in notebook for rest of diagram!!!!!
+
+(1) A client sends a request to www.google.com
+A flat file representing all data related tot he request is sent
+File is sent to the Http server. 
+
+(2) The HTTP server recieves a request and creates an empty response 
+class file. Sends both of them to the web container. 
+
+(3) Our Web Container checks the Deployment Descriptor (DD), web.xml in our case, 
+for informaiton on which servlet to send our data to
+
+(4) Wrap the flat files (request and response) in HTTP Objects (Http request and Http reponse)
+Sends our objects tot he proper servlet as designated by our dDployment Descriptor.
+
+(4.5) Web Container checks is servlet is instantiated. If not, it calls the servlet's init() method.
+Webcontainer takes 1 or more request/responses and gives each set a thread and then users each thread
+to call the servlets service(), where business logic takes palce. 
+A thread pool is used to handle multiple requests. 
+After a set amount of inactivity, the web container calls the servlet's destroy() method, which shuts 
+down and cleans up the servlet
+
+(5) After the service() method performs needed logic, it sends back the request and newly populated response
+object to the web controller
+
+(6) Web container unwraps objects and sends them to the HTTP server
+
+(7) HTTP server sends the request and response back to the client (in this case, google's homepage)
+
+======================================
+Process for creating project with MAVEN
+======================================
+--> Create New simple maven project 
+--> Change Packaging from JAR to WAR !!!!!!! 
+--> To get rid of error, right click on project: Go to Java EE Tools -> Generate Deployment Descriptor Stub
+--> The web.xml folder is generated in the folder: <project> -> src -> main -> webapp -> WEB-INF
+--> Know where this web.xml file is located!!!!!!!!!!!
+
+
+the web.xml has a list of "landing pages"
+Whichever file is found first, becomes the initial page for our application
+
+======================================
+HTTP Request
+======================================
+The following structure is what gets sent to a server in a post request
+
+Post  URL   HTTP//1.1
+Header=val
+Header1=val2
+...
+headerN=valn
+body {
+	username = bobbert
+	password = password
+	...
+}
+
+
+Get requests exclude the body. 
+
+Get vs Post
+
+Get: 
+Send encoded user information appended to the URL
+The URL separates info with a '?' (i.e. a question mark) 
+Passes information from browser as a long string in the url
+URL may only be 1024 bytes
+Stored in Query_String header parameter
+
+Post: 
+The same as Get, but stores data in the body
+Sent as a parsable string that lets Java read the data directly

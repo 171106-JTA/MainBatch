@@ -1,0 +1,158 @@
+Databases have tables
+Tables have records and columns
+Each cell in a table have a datatype 
+
+======================================
+Cardinality and Multiplicity
+======================================
+Cardinality -> the relationships amoung tables
+One to One -> (1,1), Only used when you want to split a table up 
+(i.e. in general is you see an FK, PK column, its a one to one relationship)
+One to Many -> (1, M)
+Many to One -> (M, 1)
+Many to Many -> (M, N), Use join tables to implement
+(In general, if you see 2 FK in a table, it might be a join table for a many-to-many relationship)
+
+Multiplicity -> the specific limitations on a relationship 
+Zero to 1 
+1 to M
+1 to 1
+
+Join Tables 
+Holds only foreign keys to relate one table to another. Use for many-to-many relationships
+
+Lookup Tables
+Used to abstract status-type information. 
+
+
+======================================
+Indices
+======================================
+
+CREATE INDEX <INDEX_NAME> ....
+
+INDEX is an object that can be used to index every record in a table based off your choice of column
+SQL will create an object that uses it's own system to index each record in a table
+
+Pros: 
+Indexing stops SQL from having to scan the entire table for whatever information it needs
+- i.e. drastically speed up scanning a table
+- in this case, we have a non-clustered index
+Indicies drastically reduce the time it takes to query a table
+
+Cons: 
+CRUD operations take longer with an index involved
+
+Clustered Index
+- An index which uses the actual values of a column to index the table
+- Primary keys are clustered indices by default
+
+
+======================================
+Transaction
+======================================
+An atomic unit of work on a table
+
+======================================
+ACID
+======================================
+Properties of a transaction
+
+A -> Atomicity
+- In short: All or nothing
+- If at any point during a transaction an issue occurs, the entire transaction is aborted
+
+C -> Consistency
+- Any one transaction should yeild the same result whenever it is executed
+
+I -> Isolation
+- Any 2 or more transactions must NOT affect eachother
+
+D -> Durability 
+- All data must be persisted
+- If a database crashes, no data should be lost
+
+======================================
+Risks Of Multiple Users
+======================================
+Dirty Read
+- Grabbing any uncommitted changes
+- Prevented by putting a READ LOCK on the table
+
+Non-Repeatable Reads
+- When you run the same query twice in one transaction and the results are different
+- Prevented by putting a WRITE LOCK
+
+Phantom Read
+- When you query a table multiple times in one transaction and the amount of records are different
+- Prevented by putting a TABLE LOCK on the table
+
+======================================
+Transaction Isolation Levels
+======================================
+
+						Dirty Reads 	| 	Non-Repeatable Reads 	| 	Phantom Reads
+________________________________________________________________________________________
+Read uncommitted 	|		X			|			X				|		X
+________________________________________________________________________________________
+*Read Committed		|					|			X				|		X
+________________________________________________________________________________________
+Repeatable Reads	|					|							|		X
+________________________________________________________________________________________
+*Serializable		|					|							|
+________________________________________________________________________________________
+
+Oracle only supports Read Committed and Serializable
+We can set the transaction level using the SET TRANSACTION from the TLC sub-language for ORACLE
+
+======================================
+Denormalization
+======================================
+Denormalizing our tables
+Used for data warehouses and data mining
+
+
+Online Analytical Processing (OLAP)
+- Denormalize
+- Designing database for analysis
+- Data warehousing
+- Slaes, Porfits, Business Patterns
+Online Transaction Processing (OLTP)
+- Use 3NF
+- Used for actual application structure
+- List choices, user credentials, etc. 
+- Star Schema and Snowflake schema (See pg 17 of notebooks for examples)
+
+
+======================================
+Project Notes: 
+Tables: 
+Users 
+Accounts
+Loans
+======================================
+
+======================================
+JDBC
+======================================
+JDBC -> Java Database Connectivity
+- Basically the DAO layer 
+
+Architecture -> See pg 18 of notebook
+
+Components of the JDBC: 6 of them
+DriverManager 			-> Manages a list of database drivers
+Driver 					-> Interface that handles communications with the DB
+Connection Interface	-> All communications with the database revolve around this component
+						-> The bridge between us and our database
+Statement 				-> Objects that are used to submit SQL Statements
+						-> Executes all CRUD operations
+ResultSet 				-> Results from querying a database.
+						-> Stores received data
+SQLException 			-> Translation of database errors to Java Exceptions
+
+======================================
+DAO 
+======================================
+Order of operations:
+-> 

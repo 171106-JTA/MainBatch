@@ -1,13 +1,16 @@
 package com.revature.dao;
 
+import static com.revature.util.CloseStreams.close;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.revature.beans.Trainer;
 import com.revature.util.ConnectionUtil;
-import static com.revature.util.CloseStreams.close;
 
 public class TrainerDao {
 	public void insertNewTrainer(Trainer t){
@@ -81,5 +84,54 @@ public class TrainerDao {
 		}
 		
 		return t;
+	}
+	
+	
+	public List<Trainer> selectTrainerByLikeUsername(String username){
+		Trainer t = null;
+		String sql = "SELECT * FROM trainer WHERE trainer_username = ?";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<Trainer> trainers = new ArrayList<>();
+	
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try(Connection conn = ConnectionUtil.getConnection()){
+			
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, username);
+			rs = ps.executeQuery();
+			
+			
+			while(rs.next()){
+				t = new Trainer(
+							rs.getInt(1),
+							rs.getString(2),
+							rs.getString(3),
+							rs.getString(4),
+							rs.getString(5),
+							rs.getString(6),
+							rs.getString(7),
+							rs.getDate(8)
+						);
+				trainers.add(t);
+			}
+
+			
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally{
+			close(ps);
+		}
+		
+		if(trainers.isEmpty()){
+			return null;
+		}
+		return trainers;
 	}
 }

@@ -1,0 +1,29 @@
+Angular
+Auto generate a component: 
+ng g c <component name>
+
+Angular Redirection
+- general
+- Empty routing path
+
+
+Interpolation and Property Binding
+Angular: Subscribe, Observable
+JavaScript: Promises
+
+Promise vs Observable: 
+Angular uses Observable ojects when making asynchronous calls
+A Promise is a type of object where when a user sends data, we 
+are gaurnateed to get something back. In the case o sending a request
+we either get back an object representing the data received, or an object 
+represeitng the rror we received
+Promises can only listen on one eent at a time, on top of which, a user
+cannot cancer the event one started. If I cannot halt a request to a server, I must wiat for some 
+king of reponse to come back
+
+Observalbe are the same as promises except with more featuers. Observables send the data back, essentially, as a stream. 
+With that, Observalbe cn provide support for 0 to many events at a time, Observale also supports canceling the event. 
+
+
+Over Weekend: 
+Setup AWS Account

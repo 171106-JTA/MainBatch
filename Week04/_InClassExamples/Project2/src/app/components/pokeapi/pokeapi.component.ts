@@ -11,7 +11,9 @@ export class PokeapiComponent{
         name: "",
         id: "",
         weight: "",
-        sprite: ""
+        sprite: "",
+        sprites: [],
+        spriteIndex: 0
     }
 
     //Constructor will execute upon instantiation of the class.
@@ -40,17 +42,60 @@ export class PokeapiComponent{
         canceling the event.
     */
     public fetchData(){
+        this.pkmn.name = "Pending";
+        this.pkmn.id = "Pending";
+        this.pkmn.weight = "Pending";
+        this.pkmn.sprite = "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif";
+
+        this.pkmn.sprites = [];
+        this.pkmn.spriteIndex = 0;
+ 
+        //Example of POST
+        /*
+        this.http.post("endpoint_url", {
+                                            key1: "value",
+                                            key2: "value",
+                                            etc : "value"
+                                        }).subscribe(
+                                            PASS => {}, 
+                                            FAIL => {})
+*/
         this.http.get('https://pokeapi.co/api/v2/pokemon/' + this.pokeId + '/').subscribe(
             data => { //data represents the object of a successful REST request
+                console.log("test");
                 this.pkmn.name = data["name"];
                 this.pkmn.id = data["id"];
                 this.pkmn.weight = data["weight"];
-                this.pkmn.sprite = data["sprites"]["front_default"];
+                
+                let dataSprites = data["sprites"];
+                for(let index in dataSprites){
+                    if(dataSprites[index]!=null){
+                        this.pkmn.sprites.push(dataSprites[index]);
+                        if(index=="front_default"){
+                            this.pkmn.sprite = dataSprites[index];
+                            this.pkmn.spriteIndex = this.pkmn.sprites.length-1;
+                        }
+                    }
+                }
             },
             err => {
-                console.log(err);
+                this.pkmn.name = "MissingNo";
+                this.pkmn.id = "-1";
+                this.pkmn.weight = "What?";
+                this.pkmn.sprite = "https://sites.google.com/a/sutamii.com/sutamii-shimeji/_/rsrc/1286733155717/shimeji/missingno.png";                
             }
         )
+    }
+    public changePicture(){
+        let sprites = this.pkmn.sprites;
+        let index = this.pkmn.spriteIndex;
+        if(sprites[index+1]==undefined){
+            this.pkmn.sprite = sprites[0];
+            this.pkmn.spriteIndex = 0;
+        }else{
+            this.pkmn.sprite = sprites[++index];
+            this.pkmn.spriteIndex = index;
+        }
     }
 
 }

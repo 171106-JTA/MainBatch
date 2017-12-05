@@ -1,0 +1,46 @@
+Virtual Method invocation
+Fail Fast vs Fail Safe
+Finalize
+
+libaries used with request gc()
+systym.gc
+and ????
+
+try with resources
+
+byte code - what actually is it
+
+Functional Interface: Declares one and only one method
+- runnable
+- comparable
+- comparative
+
+creating threads: Thread vs runnable
+
+illegal monitor state method
+- trying to release a lock/monitor when you don't have access to it
+
+sleep, wait, yeild (related to threads)
+Yeild: Yeilds its turn from the processor...not %100 yeild in Java (i.e. processor has precidence)
+
+Generics: 
+userd to enforce datatypes in any collections
+
+Generic collections and classes: ???
+
+Nested Class vs static class. like a static class but need to instantiate the outer class. Look this up
+
+Use static block to initial static variables
+
+When use a Singlton: a generalized functionality that doesn't change throughout execution. Something that usually takes awhile to setup
+
+factory class; a class whose purpose is to produce other objects
+- Used for loose coupling
+- just call getInstance() and will always get the correct class, even when class implemented 
+
+Java is pass by value...the references to objects are passed by value???
+- what happens when pass and edit an object in a function
+
+StringBuilder
+- mutable...can be edited and appended to
+- wheras Strings are not mutable (new string created when appended to)

@@ -1,0 +1,570 @@
+=================================================================================
+Slack Summary
+=================================================================================
+Javascript
+-DOM Selection
+-DOM Manipulation
+-Callback functions
+-bubbling/capturing
+-Event object
+-event handling
+-AJAX
+-AJAX ready states
+-Ajax with xml
+-Ajax with JSON (jackson or gson)
+-es6 features
+-closures
+-prototypical inheritance
+-object constructors
+
+Angular 4
+-Directives
+-Services
+-DOM manipulation with angular
+-Pipes
+-Components
+-Lifecycle of a component
+-Angular Architecture
+-Events
+-One way databinding
+-property binding, interpolation, 
+-two way data binding
+-decorators
+-modules
+-event binding
+-template literals
+-linting
+-event emitters
+-Angular cli/webpack
+
+=================================================================================
+Filled In Slack Summary
+=================================================================================
+
+==================================================================================
+Javascript
+==================================================================================
+Primative Datatypes: number, string, boolean, undefined, null
+Main Features: 
+- Interpreted Markup language
+- Currently, all main stream browsers support JavaScript
+- everything call returns something
+- Safe, in that is doesn't interact with files on the client's computer
+- 2 scopes: Global and Local (aka function)
+
+=========================================
+DOM Selection
+=========================================
+Represents html element in JavaScript
+document.getElementById(<element id>)
+Allows for the manipulation of elements from the document that calls the JavaScript Script
+
+=========================================
+DOM Manipulation
+=========================================
+Allows for dynamic manipulation of the HTLM
+
+createElement -- create a specific tag node
+createTextNode -- create a non parsed string
+.innerHTML -- change a nodes innerHTML
+.parentNode -- move your cursor up one level.
+.childNodes -- grab all children nodes, NOTE: this returns an array of nodes
+
+=========================================
+Callback functions
+=========================================
+Allow for asynchronous execution of code. Handles the end of an asynchronous call. 
+
+The Ability to pass functions as parameters so that they can be called at a later time. 
+In JavaScript callback functions are usually passed into and executed by an event handler
+
+A callback function is a function passed as a parameter to another function.
+
+=========================================
+bubbling/capturing
+=========================================
+Bubbling -> executing nested events from the inside out
+Capturing -> executing nested events from the outside in
+
+Set capturing in the JavaScript by sending True into the .addEventListener() function after the action and lambda function
+elem.addEventListener("click", e => alert(`Capturing: ${elem.tagName}`), true);
+
+=========================================
+Event object
+=========================================
+In JQuery, the object that holds all the data from an event. I.e. represents the event in JavaScript
+This is a single object whose properties get changed
+
+=========================================
+event handling
+=========================================
+Allows JavaScript to link a function to an event that occurs inside and html document(i.e. onclick, onmouseover, onload, etc.)
+
+We do this by registering event handler functions. 
+
+=========================================
+AJAX
+=========================================
+AJAX -> Asychronous JavaScript and XML
+An Asynchronous Way to send requests
+i.e. Provides structure to communicate with web services asynchronously without leaving the current webpage
+
+NO wait times! User can continue using the site while waiting for the request 
+
+=======
+Synchronous and Ansynchrous
+=======
+Synchonous methods include sending info to a server and getting a new page. 
+Asynchronous can send a request and then perform other actions while waiting for a response.
+This is a Web Browser technology, NOT a web service
+
+=========================================
+AJAX ready states
+=========================================
+(i.e. States of an XMLHttpRequest object.)
+There exists 5 states of an XMLHttpRequest object.
+0 - Request is not initialized
+		-We created out XMLHttpRequest Object, but have NOT called open() method
+1 - Server Connection Established (i.e. request set-up)
+		-We have called open(), but not send()
+2 - Request has been received
+		-We have called send()
+3 - Request is being processed
+		-Communication with the server has been established.
+		-Yet we have not received the full response yet.
+4 - Request is complete, and response ready
+		-We have received the response content.
+
+
+=========================================
+Ajax with xml
+=========================================
+???
+
+=========================================
+Ajax with JSON (jackson or gson)
+=========================================
+Fetch text with AJAX, then use JSON.parse() function to break the text into a useful JSON object!
+
+=========================================
+es6 features
+=========================================
+Know These:
+enhanced object literals -> shorthand property initialization
+iterators + for..of -> for..of loops fix problem of finding unwanted properties when iteration over objects
+promises -> This lets asynchronous methods return values like synchronous methods: 
+
+Other's Exist:
+arrows
+--classes
+
+template strings
+destructuring
+default + rest + spread
+--let + const
+
+generators
+unicode
+--modules
+module loaders
+map + set + weakmap + weakset
+proxies
+--symbols
+subclassable built-ins
+
+math + number + string + array + object APIs
+binary and octal literals
+--reflect api
+tail calls
+
+
+=========================================
+Closures
+=========================================
+-From http://javascriptissexy.com/understand-javascript-closures-with-ease/
+- Accessed 12/4/2017
+A closure is an inner function that has access to the outer (enclosing) function’s variables—scope chain. The closure has three scope chains: it has access to its own scope (variables defined between its curly brackets), it has access to the outer function’s variables, and it has access to the global variables.
+
+The inner function has access not only to the outer function’s variables, but also to the outer function’s parameters. Note that the inner function cannot call the outer function’s arguments object, however, even though it can call the outer function’s parameters directly.
+
+You create a closure by adding a function inside another function.
+
+Usually return an inner scope to users. The object itself has access to its entire scope, but the user only get's access to inner scopes
+
+=========================================
+Prototypical inheritance
+=========================================
+Objects in JavaScript have a hadden property called Prototype 
+Prototype is either null or references another object
+When a property is missing while reading an object, JavaScript automatically "looks" at the referenced object in Prototype
+
+2 main rules
+No circular references!
+__proto__ must be null or object type
+
+Use/Set by: 
+__proto__ property
+
+Fixes the Gorilla-Bananna problem of class inheritance. 
+An child object references its parant object rather than copying its properties
+
+=========================================
+Class Inheritance vs Prototypical Inheritance
+=========================================
+See The following link for an in-depth discussion
+https://medium.com/javascript-scene/master-the-javascript-interview-what-s-the-difference-between-class-prototypal-inheritance-e4cd0a7562e9
+
+=========================================
+Differential Inheritance
+=========================================
+children don't copy parent methods. Instead they have an 'invisible' link to the parent object
+
+=========================================
+Object constructors
+=========================================
+Functions defined that define properties for the current object (i.e. the current function) using the 'this' keyword
+This function can then be used to create objects using the 'new' keyword
+
+Example (from w3 schools): https://www.w3schools.com/js/js_object_constructors.asp
+function Person(first, last, age, eye) {
+    this.firstName = first;
+    this.lastName = last;
+    this.age = age;
+    this.eyeColor = eye;
+}
+var myFather = new Person("John", "Doe", 50, "blue");
+var myMother = new Person("Sally", "Rally", 48, "green");
+
+
+=========================================
+JavaScript Note:
+=========================================
+Great article on JavaScript inheritance and constructors: 
+https://medium.com/@kevincennis/prototypal-inheritance-781bccc97edb
+
+
+=========================================
+Creating JavaScript Objects
+=========================================
+Using object literals
+Using 'new' keyword
+Defining and using constructor functions
+
+==================================================================================
+Angular
+==================================================================================
+=========================================
+Directives
+=========================================
+Directives allow you to attach behavior to elements in the DOM..
+
+A directive must belong to an NgModule in order for it to be usable by another directive, component, or application. To specify that a directive is a member of an NgModule, you should list it in the declarations field of that NgModule.
+
+From: https://angular.io/guide/attribute-directives
+Accessed: 12/4/2017
+There are three kinds of directives in Angular:
+
+Components—directives with a template.
+Structural directives—change the DOM layout by adding and removing DOM elements.
+	ngIf
+	ngFor
+	ngSwitch
+	etc.	
+Attribute directives—change the appearance or behavior of an element, component, or another directive.
+	HighlightDirective
+
+=========================================
+Services
+=========================================
+From: https://docs.angularjs.org/guide/services
+Accessed: 12/4/2017
+AngularJS services are substitutable objects that are wired together using dependency injection (DI). You can use services to organize and share code across your app.
+
+AngularJS services are:
+Lazily instantiated – AngularJS only instantiates a service when an application component depends on it.
+Singletons – Each component dependent on a service gets a reference to the single instance generated by the service factory.
+
+=========================================
+DOM manipulation with angular
+=========================================
+ng-hide Directive
+ng-click
+
+=========================================
+Pipes
+=========================================
+Pipes transform data
+
+2 kinds of pipes
+Pure Pipes -> A pipe that reacts to changes on primitive values or object reference changes
+
+Impure Pipes -> A pipe that reacts to everything: 
+			Changes to an object
+			A user clicking anywhere
+			A key press
+			Moving the mouse (detects any mouse movement)
+
+=========================================
+Components
+=========================================
+
+
+=========================================
+Lifecycle of a component
+=========================================
+
+
+=========================================
+Angular Architecture
+=========================================
+
+
+=========================================
+Events
+=========================================
+
+
+=========================================
+One way databinding
+=========================================
+
+
+=========================================
+property binding, interpolation
+=========================================
+Property binding -> 
+
+=========================================
+two way data binding
+=========================================
+
+=========================================
+decorators
+=========================================
+
+=========================================
+modules
+=========================================
+
+=========================================
+event binding
+=========================================
+
+=========================================
+template literals
+=========================================
+
+=========================================
+linting
+=========================================
+
+=========================================
+event emitters
+=========================================
+
+=========================================
+Angular cli/webpack
+=========================================
+
+=========================================
+Asterics *
+=========================================
+From: https://angular.io/guide/structural-directives
+Accessed: 12/4/2017
+The asterisk (*) is a convenience notation and the string is a microsyntax rather than the usual template expression. Angular desugars this notation into a marked-up <ng-template> that surrounds the host element and its descendents. Each structural directive does something different with that template.
+Example of usage: 
+<div *ngIf="hero" class="name">{{hero.name}}</div>
+
+
+
+
+=================================================================================
+Copy of Class Notes
+=================================================================================
+
+=========================================
+Java Script
+=========================================
+Interpreted Runtime Language
+
+
+primitive datatypes: number, string, boolean
+Nonthing datatypes: undefined and null
+Object datatypes
+
+2 ways to access elements of jsobject
+. notation
+for loops
+
+Additional notation
+bracket notation
+
+No function overloading
+- new function definitions of same name will replace old
+
+Any number of parameters are allowed
+
+Any datatype is true or false: Called Truthy Falsey in JS
+
+JavaScript is safe! It cannot access the files on your computer or save files to your computer
+
+
+=========================================
+Variable Hoisting and Scopes
+=========================================
+2 scope in JavaScript: Global and Function
+
+Research Scopes
+
+In class assignment: 
+order of input numbers does not matter. 2 19 and 19 2 should both generate same output
+Numbers divisible by both 3 and 5 should print fizzbuzz
+
+Hoisting
+All declarations are "hoisted" to the top of their scope and done first.
+Assignments are still done in the order they appear
+
+again: 	Declarations are performed at the top of their scope
+		Assignments are perfromed where they appear
+
+
+=========================================
+Constructors to make objects
+=========================================
+Objects are defined from their prototypes
+You can change objects by changing their prototypes
+
+To Do: ***Play with this at home!!!!
+
+=========================================
+Anonymous function
+=========================================
+Anonymous function -> Any function that does not have a name. A 1-time function (i.e. executes 1 time). Gets returned and executed once
+
+
+
+=========================================
+Self-invoking functions
+=========================================
+Encapsulate funcitons in paranthesis so that it is executed automatically?
+
+
+General Example Function: 
+function addition(a,b) {
+    if(!b && b!=0) {
+		return function(c) {
+        	return a + c; 
+    	}
+    }
+	return a + b;
+}
+
+=========================================
+Error Handling
+=========================================
+Javascript does not have Exceptions, it has errors.
+There are 6 main errors in javascript:
+EvalError - this error is deprecated, and replaced with SyntaxError
+RangeError - Input is outside the declared range
+ReferenceError - Any time you reference an undeclared variable
+SyntaxError - 
+TypeError - TypeErrors occur whenever you try to do an illegal type conversion
+URIError - Having illegal characters in a URI
+
+=========================================
+Floating Point Numbers
+=========================================
+accurate up to 15 digits
+
+If we do a 16th digit, things get weird
+If adding numbers together, keep floating points below 15 digits! JavaScript loses accuracy after that
+
+
+
+
+==================================================================================
+Dom Manipulation
+==================================================================================
+DOM manipulation methods let use dynamically change our html on the spot.
+You can use these methods to traverse to any node in the dom.
+--For adding nodes:
+createElement -- create a specific tag node
+createTextNode -- create a non parsed string
+.innerHTML -- change a nodes innerHTML
+.parentNode -- move your cursor up one level.
+.childNodes -- grab all children nodes, NOTE: this returns an array of nodes
+
+
+
+
+=============================
+JavaScript Prototypes
+=============================
+Functions that instantiate a new object when called with the 'new' keyword
+
+Look into JavaScript Prototypes further! 
+
+Look up Jaxson 
+-> A dependency that allows us to sent information back to the servlet
+
+=============================
+JSON
+=============================
+JSON -> JavaScript Object Notation
+
+A lightlight data interchange format
+Language independant (when passed to browsers??? Look into this)
+Self Describing
+
+Syntax
+Same as JavaScript Objects:
+- Data is in name/value pairs
+- Data is separated by sommas
+- Curly braces hold objects
+- Square brackets hold arrays
+- On the JavaScript side, need to know 2 methods
+---JSON.stringify(JSON object)   --> Converts object to a string representation
+---JSON.parse(String str)   --> Takes a string represenation of a JSON object and parses it into a JSON object
+							--> Takes a string anc converts to JSON object
+=============================
+MVC
+=============================
+MVC -> Model View Controller
+
+In a web application we typical have "views" for the front end and "controllers" for back-end
+HTML -> view
+Business Logic -> controller
+
+But how transfer data between view and controller? 
+Why use a model and not just a text field? 
+Models have the ability to transport specific data fields between views and components
+
+
+***ngModel in Angular supports this functionality from View to Component***
+
+
+Angular
+Auto generate a component: 
+ng g c <component name>
+
+Angular Redirection
+- general
+- Empty routing path
+
+
+Interpolation and Property Binding
+Angular: Subscribe, Observable
+JavaScript: Promises
+
+Promise vs Observable: 
+Angular uses Observable ojects when making asynchronous calls
+A Promise is a type of object where when a user sends data, we 
+are gaurnateed to get something back. In the case o sending a request
+we either get back an object representing the data received, or an object 
+represeitng the rror we received
+Promises can only listen on one eent at a time, on top of which, a user
+cannot cancer the event one started. If I cannot halt a request to a server, I must wiat for some 
+king of reponse to come back
+
+Observalbe are the same as promises except with more featuers. Observables send the data back, essentially, as a stream. 
+With that, Observalbe cn provide support for 0 to many events at a time, Observale also supports canceling the event. 
