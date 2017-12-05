@@ -83,9 +83,11 @@ var onDashboardClick = function () {
 	var widget = data.widget;
 	
 	// Build widget if widget exists else send request for it
-	if (widget.dashboard)
-		assignWidget(widget.dashboard);
-	else {
+	if (widget.dashboard) {
+		assignWidget(widget.dashboard = parseWidgetData(widget.dashboard.response));	
+		widget.dashboard.drawerMethod();
+		widget.dashboard.screenMethod();
+	}else {
 		var options;
 		
 		// Build request options 
@@ -99,6 +101,8 @@ var onDashboardClick = function () {
 			// ensure non-null response
 			if (response != null) {
 				assignWidget(widget.dashboard = parseWidgetData(response));
+				widget.dashboard.drawerMethod();
+				widget.dashboard.screenMethod();
 			}
 		}, function (error){
 			console.log(error);
@@ -123,9 +127,10 @@ var onAccountClick = function () {
 	var widget = data.widget;
 	
 	// Build widget if widget exists else send request for it
-	if (widget.account) {
-		assignWidget(widget.account);
-		widget.account.screenMethod({ "user": data.user });
+	if (widget.account){
+		assignWidget(widget.account = parseWidgetData(widget.account.response));	
+		widget.account.drawerMethod();
+		widget.account.screenMethod();
 	}else {
 		var options;
 		
@@ -139,8 +144,9 @@ var onAccountClick = function () {
 		Util.send(options, function (response) {
 			// ensure non-null response
 			if (response != null) {
-				assignWidget(widget.account = parseWidgetData(response));		
-				widget.account.screenMethod({ "user": data.user });
+				assignWidget(widget.account = parseWidgetData(response));	
+				widget.account.drawerMethod();
+				widget.account.screenMethod();
 			}
 		}, function (error){
 			console.log(error);
@@ -167,6 +173,7 @@ var parseWidgetData = function (response) {
 	
 	// Extract widget data from response 
 	widget = {
+			response: response,
 			drawer: $(html).find("div[is-drawer]"),
 			drawerMethod: function () {}, 
 			hideDrawer: $(html).find("div[hide-drawer]").length > 0,

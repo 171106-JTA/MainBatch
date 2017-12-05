@@ -80,27 +80,252 @@
 				border: 1px solid #0099ff;
 			}
 			
-			
-			
 			/* For active element */
 			.message-list .active {
-				border: 1px solid #004aff!important;
+				border: 1px solid #004aff8f!important;
 			}
 			
 			/* List item content */
 			.message-brief {
-				margin-top: 5px;
-				margin-left: 5px;
-				display: inline-block;
+				margin-top: 0px;
+				margin-left: 0px;
+				width: 100%;
+				dispaly: block;
+				min-height: 34px;
+				overflow: hidden;
 			}
+			
+			/* Header display */
+			.message-brief .header {
+				padding-left: 5px;
+				margin-left: 5px;
+				margin-right: 0px;
+				padding-right: 0px;
+				align-items: center;
+				display: flex;
+				min-height: 34px;
+			}
+			
+			/* Left of header (checkbox) */
+			.message-brief .check {
+				max-width: 45px;
+				align-items: center;
+				display: flex;
+				min-height: 34px;
+				border-right: 1px solid rgba(40,40,40,0.25);
+			}
+			
+			/* Apply transform to checkbox on aligned checkbox*/
+			.message-brief .check > input {
+				transform: translate(1px, -2px);
+			}
+			
+			/* for active check box cells */
+			.message-brief > div[class~='check'].active {
+				background-color: rgba(168, 64, 64, 0.2);
+				border: 0px!important;
+			}
+			
+			/* Add padding to checkbox */
+			.message-brief > div[class~='check'] > input {
+				padding-top: 5px;
+			}
+			
+			/* MESSAGE PRIORITY LEVELS */
+			.high {
+				color: red;
+				border-right: 1px solid rgba(40,40,40,0.35);
+				padding-right: 10px;
+			}
+			
+			.medium {
+				color: orange;
+				border-right: 1px solid rgba(40,40,40,0.35);
+				padding-right: 10px;
+			}
+			
+			.low {
+				color: rgba(0,0,0,0.0);
+				border-right: 0px;
+				padding-right: 11px;
+			}
+			
+			/* MESSAGE MODULE */
+			.message-module {
+				min-height: 400px;
+				padding-left: 5px;
+				padding-right: 5px;
+				padding-bottom: 5px;
+			}
+			
+			.message-module textarea {
+				min-height: 150px;
+				resize: none;
+			}
+
+			.message-actions {
+				width: 100%;
+			}
+			
+			.btn-message {
+				padding-top: 5px;
+			}
+			
+			
 			
 		</style>
 	
 		<!-- JS -->
-	
 		<script type="text/javascript">
-			execute = function () {
+			/**
+			 *	Pulls all message records from server pertaining to user
+			 *	@param {Object} param - message wrapper
+			 *	@property {Array} param.messages - handle to messages from server
+			 */
+			var loadMessages = function (params) {
+				var options;
 				
+				// Build request messages sent
+				options = {
+					"transtype": "GETSENTMESSAGES"
+				};
+				
+				// Send request
+				Util.send(options, function (response) {
+					// TODO : build list
+				});
+				
+				// Builds request for messages recieved 
+				options = {
+					"transtype": "GETRECEIVEDMESSAGES"
+				}
+				
+				// Send request
+				Util.send(options, function (response) {
+					// TODO : build list
+				});
+			}
+		
+			 ///
+			 //	EVENT HANDLERS 
+			 ///
+			 
+			 /**
+			  *	Marks selected list item
+			  */
+			var onActivateBrief = function () {
+				var self = $(this);
+				var parent = self.parent();
+				var active = parent.find("li[class='active']");
+				
+				// remove active status 
+				active.removeClass("active");
+				
+				// assign new active status 
+				self.addClass("active");
+			}
+			 
+			/**
+			 * Opens selected message 
+			 */
+			var onOpenMessageModule = function () {
+				var self = $(this);
+				var li = Util.getParent({ "parentTagName": "li", "node": self });
+				var brief = li.find("div[class~='message-brief']");
+				var module = $("div[module-template]").find("div[msg-module]").clone(true);
+				
+				// hide brief
+				brief.hide();
+				
+				// assign module events 
+				
+				
+				// inject message module
+				li.append(module);
+				
+				// Make module visible
+				module.show();
+				
+			}
+			
+			/**
+			 *
+			 */
+			var onHeaderClick = function () {
+				var self = $(this);
+				var ul = $("ul[class~='message-list']");
+				var box = ul.find("div[class~='check']");
+				var input = box.find("input[type='checkbox']");
+				var parent = self.parent();
+				
+				// remove all styling
+				box.removeClass("active");
+				
+				// uncheck if checked
+				input.prop("checked", false);
+				
+				// get row box
+				box = parent.find("div[class~='check']");
+				
+				// get checkbox
+				input = box.find("input[type='checkbox']");
+				
+				// set active state
+				box.addClass("active");
+				input.prop("checked", true);
+			}
+			
+			/**
+			 * Marks/Unmarks single cell
+			 */
+			var onCheckCell = function (e) {
+				var self = $(this);
+				var box = Util.getParent({"parentTagName": "div", "node": self, "attributes": [{ key: "class", value: "check"}] });
+				
+				debugger;
+				
+				if (self.prop("checked")) 
+					box.addClass("active");
+				else 
+					box.removeClass("active");
+				
+				e.stopPropagation();	
+			}
+			
+			var onCheckCellBox = function () {
+				var self = $(this);
+				var input = self.find("input[type='checkbox']");
+				
+				if (input.prop("checked")) {
+					input.prop("checked", false);
+					self.removeClass("active");
+				}  else {
+					input.prop("checked", true);
+					self.addClass("active");
+				}	
+			}
+			
+			///
+			//	EXECUTION
+			///
+			
+			// Called when dashboard builds widget
+			execute = function () {
+				var messages = [];
+				var active = -1; 
+				var ul = $("ul[class~='message-list']");
+				var li = ul.find("li");
+				var box = ul.find("div[class~='check']");
+				var inputs = ul.find("input[type='checkbox']");
+				var header = ul.find("div[class~='header']");
+				
+				li.on("click", onActivateBrief);
+				box.on("click", onCheckCellBox);
+				inputs.on("click", onCheckCell);
+				header.on("click", onHeaderClick);
+				header.on("dblclick", onOpenMessageModule);
+				
+				loadMessages({ "messages": messages });
 			}
 		</script>
 	
@@ -110,21 +335,115 @@
 				<ul class="message-list">
 					<li>
 						<div class="message-brief">
-							<input type="checkbox"><label><b>Title</b> - brief description </label>
+							<div class="col-xs-1 check">
+								<input type="checkbox">
+							</div>
+							<div class="col-xs-10 header">
+								<label><span class="high fa fa-exclamation"></span> Title - brief description of something interesting</label>
+							</div>
 						</div>
 					</li>
 					<li>
 						<div class="message-brief">
-							<input type="checkbox"><label><b>Title</b> - brief description </label>
+							<div class="col-xs-1 check">
+								<input type="checkbox">
+							</div>
+							<div class="col-xs-10 header">
+								<label><span class="medium fa fa-exclamation"></span> Title - brief description</label>
+							</div>
 						</div>
 					</li>
 					<li>
 						<div class="message-brief">
-							<input type="checkbox"><label><b>Title</b> - brief description </label>
+							<div class="col-xs-1 check">
+								<input type="checkbox">
+							</div>
+							<div class="col-xs-10 header">
+								<label><span class="low fa fa-exclamation"></span> Title - brief description</label>
+							</div>
 						</div>
 					</li>
 				</ul>
 			</div>
 		</div>
+		
+		<!--  MESSAGE MODULE What's injected for viewing messages -->
+		<div module-template hidden>
+			<div class="message-module" msg-module hidden>
+				<div class="row">
+					<div class="col-xs-12">
+						<label>From:</label>
+						<input class="form-control" type="email" is-from-email></input>
+					</div>
+					<div class="col-xs-12">
+						<label>To:</label>
+						<input class="form-control" type="email" is-to-email></input>
+					</div>
+					<div class="col-xs-12">
+						<label>Title:</label>
+						<input class="form-control" type="text" is-title></input>
+					</div>
+					<div class="col-xs-12">
+						<label>Message:</label>
+						<textarea class="form-control" is-message></textarea>
+					</div>
+				</div>
+				<div class="message-actions">
+					<div class="btn-message col-sm-2" style="min-width: 150px;">
+						<button class="form-control btn-primary" is-send><span class="fa fa-send"></span> Send</button>
+					</div>
+					<div class="btn-message col-sm-3">
+						<button class="form-control btn-secondary" is-attachment><span class="fa fa-link"></span> Attachments</button>
+					</div>
+					<div class="btn-message col-sm-2" style="min-width: 150px;">
+						<button class="form-control" is-close><span class="fa fa-times"></span> Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
