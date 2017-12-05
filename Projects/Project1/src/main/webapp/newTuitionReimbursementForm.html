@@ -3,6 +3,11 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Creating New Reimbursement Form</title>
+<!-- To Do:
+Grab the list of Grading Formats and Event Types from the database and display
+Find a javascript library for date, time, address entry. 
+Validate all input with javascript
+-->
 </head>
 <body>
 	<h1>Creating New Reimbursement Form</h1>
@@ -16,20 +21,20 @@
 			<li>Event Description</li>
 			<li><input id="eventdescription" type="text">
 			<li>Cost</li>
-			<li><input id="eventcost" type="number"> 
+			<li><input id="eventcost" type="number">
 			<li>Grading Format</li>
 			<li><select>
-					<!-- To Do: Grab the list of grading formats from the database and display -->
+
 					<option value="Univerisity Courses">Univerisity Courses</option>
 					<option value="Seminars">Seminars</option>
-					<option value="Certification Preparation Classes">Certification Preparation Classes</option>
+					<option value="Certification Preparation Classes">Certification
+						Preparation Classes</option>
 					<option value="Certification">Certification</option>
 					<option value="Technical Training">Technical Training</option>
 					<option value="Other">Other</option>
 			</select></li>
 			<li>Event Type</li>
 			<li><select>
-					<!-- To Do: Grab the list of grading formats from the database and display -->
 					<option value="grade">Grade</option>
 					<option value="presentation">Presentation</option>
 			</select></li>
