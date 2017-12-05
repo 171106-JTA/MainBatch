@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CustomDirective } from '../../directives/custom.directive';
 
 @Component({
     selector: 'app-directive',
