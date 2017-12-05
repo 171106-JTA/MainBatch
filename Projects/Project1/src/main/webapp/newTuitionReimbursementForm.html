@@ -7,5 +7,44 @@
 <body>
 	<h1>Creating New Reimbursement Form</h1>
 
+	<form action="NewReimbursementForm.do" method="POST">
+		<ul style="list-style-type: none">
+			<li>Event Date</li>
+			<li><input id="eventdate" type="date"></li>
+			<li>Event Start Time</li>
+			<li><input id="eventtime" type="time"></li>
+			<li>Event Description</li>
+			<li><input id="eventdescription" type="text">
+			<li>Cost</li>
+			<li><input id="eventcost" type="number"> 
+			<li>Grading Format</li>
+			<li><select>
+					<!-- To Do: Grab the list of grading formats from the database and display -->
+					<option value="Univerisity Courses">Univerisity Courses</option>
+					<option value="Seminars">Seminars</option>
+					<option value="Certification Preparation Classes">Certification Preparation Classes</option>
+					<option value="Certification">Certification</option>
+					<option value="Technical Training">Technical Training</option>
+					<option value="Other">Other</option>
+			</select></li>
+			<li>Event Type</li>
+			<li><select>
+					<!-- To Do: Grab the list of grading formats from the database and display -->
+					<option value="grade">Grade</option>
+					<option value="presentation">Presentation</option>
+			</select></li>
+			<li><h3>Event Address</h3></li>
+			<li>Street and Number</li>
+			<li><input id="eventStreet" type="text">
+			<li>City</li>
+			<li><input id="eventCity" type="text">
+			<li>State</li>
+			<li><input id="eventState" type="text">
+			<li>Zip</li>
+			<li><input id="eventZip" type="number">
+			<li><input type="submit" value="Login"></li>
+		</ul>
+	</form>
+
 </body>
 </html>
