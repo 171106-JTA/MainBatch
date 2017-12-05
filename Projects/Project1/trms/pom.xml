@@ -51,6 +51,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- implementation javax.json api (from javaee-api) -->
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.json</artifactId>
+            <version>1.0.4</version>
+        </dependency>
+
         <!--
         <dependency>
             <groupId>javax.activation</groupId>

@@ -9,9 +9,9 @@ import javax.persistence.Table;
 @Table(name="reqstatus")
 public class RequestStatus {
     public static final String AWAITING_SUPERVISOR = "Awaiting Direct Supervisor Approval";
-    public static final String AWAITING_DEPT_HEAD = "Approved by Direct Supervisor";
-    public static final String AWAITING_BENCO = "Approved by Department Head";
-    public static final String AWAITING_GRADE = "Approved by Benefits Coordinator";
+    public static final String AWAITING_DEPT_HEAD = "Awaiting Department Head Approval";
+    public static final String AWAITING_BENCO = "Awaiting Benefits Coordinator Approval";
+    public static final String AWAITING_GRADE = "Awaiting Event Grade and Review";
     public static final String GRANTED = "Granted";
     public static final String DENIED = "Denied";
 

@@ -1,0 +1,87 @@
+<form class="form-horizontal" enctype="multipart/form-data" (ngSubmit)="submitNewRequest">
+
+    <fieldset>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-5">
+                <legend>Event Details</legend>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="eventType" class="control-label eventType col-sm-4">Type</label>
+            <div class="col-sm-5">
+                <select class="form-control" name="eventType" id="eventType" required>
+                    <option *ngFor="let evtType of eventTypes">{{evtType}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="eventAddress" class="col-sm-4 control-label">Address</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" id="eventAddress" name="eventAddress"/>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="form-group">
+        <label for="eventCity" class="col-sm-4 control-label">City</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" id="eventCity" name="eventCity"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="eventState" class="col-sm-4 control-label">State</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" id="eventState" name="eventState"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="eventPrice" class="col-sm-4 control-label">Price</label>
+        <div class="col-sm-5">
+            <input type="number" step="0.01" class="form-control" id="eventPrice" name="eventPrice" required/>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="eventStartDate" class="col-sm-4 control-label">Start Date</label>
+        <div class="col-sm-5">
+            <input type="date" class="form-control" id="eventStartDate" name="eventStartDate" required/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="eventEndDate" class="col-sm-4 control-label">End Date</label>
+        <div class="col-sm-5">
+            <input type="date" class="form-control" id="eventEndDate" name="eventEndDate" required/>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="eventDescription" class="col-sm-4 control-label">Description</label>
+        <div class="col-sm-5">
+            <textarea class="form-control" id="eventDescription" name="eventDescription" required></textarea>
+        </div>
+    </div>
+
+    <!--
+    <div class="form-group">
+        <label for="content" class="col-sm-4 control-label">Content</label>
+        <div class="col-sm-5">
+            <input type="file" class="form-control" id="content" name="content" placeholder="Content"
+                   required="required"/>
+        </div>
+    </div>
+    -->
+
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-5">
+            <button type="submit" class="btn btn-info btn-block">Submit</button>
+        </div>
+    </div>
+</form>
+
