@@ -64,8 +64,8 @@ DOM Manipulation
 =========================================
 Allows for dynamic manipulation of the HTLM
 
-createElement -- create a specific tag node
-createTextNode -- create a non parsed string
+document.createElement -- create a specific tag node
+document.createTextNode -- create a non parsed string
 .innerHTML -- change a nodes innerHTML
 .parentNode -- move your cursor up one level.
 .childNodes -- grab all children nodes, NOTE: this returns an array of nodes
@@ -93,7 +93,14 @@ elem.addEventListener("click", e => alert(`Capturing: ${elem.tagName}`), true);
 Event object
 =========================================
 In JQuery, the object that holds all the data from an event. I.e. represents the event in JavaScript
-This is a single object whose properties get changed
+This is a single object whose properties get changed.
+
+Obeject is automatically passed into javascript 
+
+SrcElement -> The element that fired the event
+type -> Type of event
+
+Event Object properties access: event.srcElement()
 
 =========================================
 event handling
@@ -253,6 +260,8 @@ Defining and using constructor functions
 ==================================================================================
 Angular
 ==================================================================================
+AngularJS is a structural framework for dynamic web apps. It lets you use HTML as your template language and lets you extend HTML's syntax to express your application's components clearly and succinctly. AngularJS's data binding and dependency injection eliminate much of the code you would otherwise have to write.
+
 =========================================
 Directives
 =========================================
@@ -305,9 +314,33 @@ Impure Pipes -> A pipe that reacts to everything:
 			Moving the mouse (detects any mouse movement)
 
 =========================================
+Data Binding
+=========================================
+Essentialling boils down to how we get data from front-end views to back-end controllers
+
+Property Binding: Changing component data and updating view
+Event Binding: Changing view data and updating component
+2-way Binding: Essentually Both above
+
+Property Binding: 3 methods
+String Interpolation -> {{}}, only works if the value we are defining is a string
+Brackets -> [<variable>]:<data>
+bind-<variable:<data>
+
+Event Binding: Used for capturing event from user
+When we want to capture an event from the view, wrap the event in paranthesis (in the HTML file)
+
+=========================================
+Dependancy Injection
+=========================================
+Software design pattern dealing with how components get their dependancies
+
+Dependency Injection is a software design pattern in which components are given their dependencies instead of hard coding them within the component. This relieves a component from locating the dependency and makes dependencies configurable. This helps in making components reusable, maintainable and testable.
+
+=========================================
 Components
 =========================================
-
+Angular 4 components are simply classes that are designated as a component with the help of a component decorator. Every component has a defined template which can communicate with the code defined in the component class.
 
 =========================================
 Lifecycle of a component
@@ -345,15 +378,21 @@ decorators
 =========================================
 modules
 =========================================
+Declared using ngModule
+A way to group directives, services, and components together
+
 
 =========================================
 event binding
 =========================================
+-> User paranthesis around event in html with the method to be called as the value
 
 =========================================
 template literals
 =========================================
-
+Template literals (code): multi-line string literals that support interpolation
+back-tick marks: `template
+					literal`
 =========================================
 linting
 =========================================
@@ -361,6 +400,7 @@ linting
 =========================================
 event emitters
 =========================================
+
 
 =========================================
 Angular cli/webpack
@@ -374,6 +414,11 @@ Accessed: 12/4/2017
 The asterisk (*) is a convenience notation and the string is a microsyntax rather than the usual template expression. Angular desugars this notation into a marked-up <ng-template> that surrounds the host element and its descendents. Each structural directive does something different with that template.
 Example of usage: 
 <div *ngIf="hero" class="name">{{hero.name}}</div>
+
+=========================================
+Brackets [] and Double Braces {{}}
+=========================================
+
 
 
 
