@@ -7,6 +7,7 @@ import { HomeComponent } from './components/home/home.component';
 import { PokeapiComponent } from './components/pokeapi/pokeapi.component';
 import { DirectiveComponent } from './components/directives/directive.component';
 import { PipesComponent } from './components/pipes/pipes.component';
+import { PostsComponent} from './components/posts/posts.component';
 
 //Here we create the different inject mappings for our routes
 export const appRoutes: Routes = [
@@ -29,6 +30,10 @@ export const appRoutes: Routes = [
     {
         path: 'pipes', //The url that will trigger the injection
         component: PipesComponent //the component to be injected.
+    },
+    {
+        path: 'posts', //The url that will trigger the injection
+        component: PostsComponent //the component to be injected.
     },
     {
         path: '',
