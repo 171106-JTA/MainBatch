@@ -29,4 +29,14 @@
     <servlet-name>Login</servlet-name>
     <url-pattern>/Login</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>newReimbursementForm</display-name>
+    <servlet-name>newReimbursementForm</servlet-name>
+    <servlet-class>com.revature.servlets.newReimbursementForm</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>newReimbursementForm</servlet-name>
+    <url-pattern>/newReimbursementForm</url-pattern>
+  </servlet-mapping>
 </web-app>
