@@ -2,6 +2,7 @@ package com.revature.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.revature.businessobject.BusinessObject;
 import com.revature.businessobject.CodeList;
@@ -24,6 +25,12 @@ public class GetCodeList {
 		return findCodeList(new CodeList(null, null, null, description));
 	}
 	
+	public static CodeList findCodeListNyId(List<CodeList> list, Integer id) {
+		List<CodeList> result = list.stream().filter(codelist -> codelist.getId().equals(id)).collect(Collectors.toList());
+		return result.size() > 0 ? result.get(0) : null;
+	}
+	
+	
 	///
 	//	PRIVATE METHODS
 	///
@@ -38,5 +45,7 @@ public class GetCodeList {
 		
 		return list;
 	}
+	
+	
 	
 }

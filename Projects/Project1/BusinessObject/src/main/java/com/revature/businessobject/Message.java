@@ -2,7 +2,7 @@ package com.revature.businessobject;
 
 public class Message implements BusinessObject {
 	private Integer id;
-	private Integer formId;
+	private Integer fromId;
 	private Integer messagePriorityId;
 	private Integer statusId;
 	private String title;
@@ -12,11 +12,11 @@ public class Message implements BusinessObject {
 		// do nothing
 	}
 
-	public Message(Integer id, Integer formId, Integer messagePriorityId, Integer statusId,
+	public Message(Integer id, Integer fromId, Integer messagePriorityId, Integer statusId,
 			String title, String message) {
 		super();
 		this.id = id;
-		this.formId = formId;
+		this.fromId = fromId;
 		this.messagePriorityId = messagePriorityId;
 		this.statusId = statusId;
 		setTitle(title);
@@ -31,12 +31,12 @@ public class Message implements BusinessObject {
 		this.id = id;
 	}
 
-	public Integer getFormId() {
-		return formId;
+	public Integer getFromId() {
+		return fromId;
 	}
 
-	public void setFormId(Integer formId) {
-		this.formId = formId;
+	public void setFromId(Integer fromId) {
+		this.fromId = fromId;
 	}
 
 	public Integer getMessagePriorityId() {

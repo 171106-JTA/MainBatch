@@ -189,10 +189,12 @@
 			 *	@param {Object} param - message wrapper
 			 *	@property {Array} param.messages - handle to messages from server
 			 */
-			var loadMessages = function (params) {
+			var loadMessages = function () {
+				var ul = $("ul[class~='message-list']");
+				var template = $("div[header-template]").children();
 				var options;
-				
-				debugger;
+				var li;
+				var header;
 				
 				// Build request messages sent
 				options = {
@@ -201,10 +203,67 @@
 				
 				// Send request
 				Util.send(options, function (response) {
-					params.message = response;
+					// Cache messages on list element 
+					ul[0].messages = response;
+					
+					// build message list from response 
+					$.each(response, function (i, item) {
+						// create new nodes 
+						header = template.clone(true);
+						li = $("<li></li>");
+						
+						// prepare header information 
+						setMessageHeaderData({"header": header, "data": item, "index": i});
+						
+						// assign header to list item
+						li.append(header);
+						li.on("click", onActivateBrief);
+						
+						// assign list item to message list
+						ul.append(li);
+					});
 				});
 			}
 		
+			var setMessageHeaderData = function (params) {
+				var header = params.header;
+				var data = params.data;
+				var title;
+				var node;
+				
+				// add header index used to map back to record in un-ordered list 
+				header.attr("responseIndex", params.index);
+				
+				// set message title
+				title = header.find("span[message]");
+				title.text(data.title);
+				
+				// if status of message is new 
+				if (data.status === "NEW")
+					title.css('font-weight', 'bold');
+				
+				
+				// set message priority notification
+				header.find("span[priority-flag]").addClass(data.priority.toLowerCase());
+				
+				// if attachments found set attment flag
+				if (data.attachments && data.attachments.length > 0) 
+					header.find("span[attachment-flag]").addClass("fa fa-link");	
+				
+				// assign event handlers 
+				node = header.find("div[class!='header']");
+				node.on("click", onHeaderClick);
+				node.on("dblclick", onOpenMessageModule);
+				
+				// Input box container event handle assignment
+				node = header.find("div[class~='check']");
+				node.on("click", onCheckCellBox);
+				
+				// Input box event handle assignment
+				node = header.find("input[type='checkbox']");
+				node.on("click", onCheckCell);
+			}
+			 
 			 ///
 			 //	EVENT HANDLERS 
 			 ///
@@ -257,8 +316,6 @@
 			var onCheckCell = function (e) {
 				var self = $(this);
 				var box = Util.getParent({"parentTagName": "div", "node": self, "attributes": [{ key: "class", value: "check"}] });
-				
-				debugger;
 				
 				if (self.prop("checked")) 
 					box.addClass("active");
@@ -336,8 +393,6 @@
 			
 			// Called when dashboard builds widget
 			execute = function () {
-				var messages = [];
-				var active = -1; 
 				var ul = $("ul[class~='message-list']");
 				var li = ul.find("li");
 				var box = ul.find("div[class~='check']");
@@ -350,7 +405,8 @@
 				header.on("click", onHeaderClick);
 				header.on("dblclick", onOpenMessageModule);
 				
-				loadMessages({ "messages": messages });
+				// Load message data from server 
+				loadMessages();
 			}
 		</script>
 	
@@ -358,36 +414,7 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<ul class="message-list">
-					<li>
-						<div class="message-brief">
-							<div class="col-xs-1 check">
-								<input type="checkbox">
-							</div>
-							<div class="col-xs-10 header">
-								<label><span class="high fa fa-exclamation"></span> Title - brief description of something interesting</label>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="message-brief">
-							<div class="col-xs-1 check">
-								<input type="checkbox">
-							</div>
-							<div class="col-xs-10 header">
-								<label><span class="medium fa fa-exclamation"></span> Title - brief description</label>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="message-brief">
-							<div class="col-xs-1 check">
-								<input type="checkbox">
-							</div>
-							<div class="col-xs-10 header">
-								<label><span class="low fa fa-exclamation"></span> Title - brief description</label>
-							</div>
-						</div>
-					</li>
+					<!-- MESSAGES GENERATED GO HERE -->
 				</ul>
 			</div>
 		</div>

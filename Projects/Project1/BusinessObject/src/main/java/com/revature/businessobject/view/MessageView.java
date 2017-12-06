@@ -1,13 +1,15 @@
 package com.revature.businessobject.view;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MessageView {
+public class MessageView implements BusinessObjectView {
 	private String fromUserName;
 	private String fromEmail;
 	private String priority;
 	private String status;
 	private String title;
+	private String message;
 	private List<String> attachments;
 	private List<String> recipientUserNames;
 	private List<String> recipientEmails;
@@ -17,7 +19,7 @@ public class MessageView {
 	}
 	
 	public MessageView(String fromUserName, String fromEmail, String priority,
-			String status, String title, List<String> attachments,
+			String status, String title, String message, List<String> attachments,
 			List<String> recipientUserNames, List<String> recipientEmails) {
 		super();
 		this.fromUserName = fromUserName;
@@ -25,11 +27,20 @@ public class MessageView {
 		this.priority = priority;
 		this.status = status;
 		this.title = title;
+		this.message = message;
 		this.attachments = attachments;
 		this.recipientUserNames = recipientUserNames;
 		this.recipientEmails = recipientEmails;
 	}
 	
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 	public String getFromUserName() {
 		return fromUserName;
 	}
@@ -66,12 +77,30 @@ public class MessageView {
 	public void setAttachments(List<String> attachments) {
 		this.attachments = attachments;
 	}
+	public void addAttachment(String attachment) {
+		if (attachments == null)
+			attachments = new ArrayList<>();
+		
+		attachments.add(attachment);
+	}
+	
 	public List<String> getRecipientUserNames() {
 		return recipientUserNames;
 	}
 	public void setRecipientUserNames(List<String> recipientUserNames) {
 		this.recipientUserNames = recipientUserNames;
 	}
+	public void addRecipientInfo(String name, String email) {
+		if (recipientUserNames == null)
+			recipientUserNames = new ArrayList<>();
+		
+		if (recipientEmails == null)
+			recipientEmails = new ArrayList<>();
+		
+		recipientUserNames.add(name);
+		recipientEmails.add(email);
+	}
+	
 	public List<String> getRecipientEmails() {
 		return recipientEmails;
 	}

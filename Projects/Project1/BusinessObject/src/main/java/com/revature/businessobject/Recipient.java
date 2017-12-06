@@ -32,11 +32,11 @@ public class Recipient implements BusinessObject {
 		this.messageId = messageId;
 	}
 
-	public Integer getRecipientEmail() {
+	public Integer getRecipientId() {
 		return recipientId;
 	}
 
-	public void setRecipientEmail(Integer recipientId) {
+	public void setRecipientId(Integer recipientId) {
 		this.recipientId = recipientId;
 	}
 }

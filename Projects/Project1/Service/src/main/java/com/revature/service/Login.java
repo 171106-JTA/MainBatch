@@ -31,30 +31,4 @@ public class Login {
 		
 		return account;
 	}
-	
-	/**
-	 * Acquire user information from database
-	 * @param user - valid user instance 
-	 * @return Information pertaining to user 
-	 */
-	public static UserInfo getUserInfo(User user) {
-		List<BusinessObject> records;
-		UserInfo info = null;
-		
-		// If we have a valid user handle
-		if (user != null) {
-			// Prepare request
-			info = new UserInfo();
-			info.setUserId(user.getId());
-			
-			// Did we acquire user information from user data?
-			if ((records = DAOBusinessObject.load(info)).size() == 1) 
-				info = (UserInfo)records.get(0);
-			else
-				info = null;
-		}
-		
-		return info;
-	}
-	
 }

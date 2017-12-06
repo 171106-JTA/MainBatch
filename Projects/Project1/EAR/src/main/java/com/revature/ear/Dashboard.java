@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import com.revature.businessobject.BusinessObject;
 import com.revature.businessobject.CodeList;
 import com.revature.service.GetCodeList;
+import com.revature.service.GetMessage;
 import com.revature.service.GetUserInfo;
 import com.revature.service.GetWidget;
 import com.revature.service.UpdateUser;
@@ -106,6 +107,10 @@ public class Dashboard extends HttpServlet {
 					response.setContentType("text/json");
 					result = ServiceUtil.toJson(GetCodeList.getCodeList(new CodeList(null, request.getParameter("code"),
 							request.getParameter("value"), request.getParameter("description"))));
+					break;
+				case "GETMESSAGES":
+					response.setContentType("text/json");
+					result = ServiceUtil.toJson(GetMessage.getMessages((Integer)session.getAttribute("id"), GetUserInfo.getUserViewById((Integer)session.getAttribute("id"))));
 					break;
 				case "SIGNOUT":
 					session.removeAttribute("id");
