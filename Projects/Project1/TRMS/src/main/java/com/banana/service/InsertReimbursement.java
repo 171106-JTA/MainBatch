@@ -40,9 +40,11 @@ public class InsertReimbursement {
 		
 		rr = new ReimburseRequest(empId, fname, lname, location, descript, cost, grading, event, justify, ldt);
 		
-		dao.submitRequest(rr);
+		if(dao.submitRequest(rr)) {
+			return true;
+		}
 		
-		return true;
+		return false;
 	
 	}
 }

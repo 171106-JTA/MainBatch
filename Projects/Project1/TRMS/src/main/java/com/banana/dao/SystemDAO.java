@@ -1,9 +1,12 @@
 package com.banana.dao;
 
+import java.util.List;
+
 import com.banana.bean.Employee;
 import com.banana.bean.ReimburseRequest;
 
 public interface SystemDAO {
 	public Employee getEmployeeByUsername(String username);
-	public int submitRequest(ReimburseRequest request);
+	public boolean submitRequest(ReimburseRequest request);
+	public List<ReimburseRequest> getEmployeeRequests(int empId);
 }

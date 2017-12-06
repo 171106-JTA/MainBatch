@@ -1,10 +1,11 @@
 package com.banana.bean;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class ReimburseRequest {
 	private int empID;
+	private int rrID;
 	private String fname;
 	private String lname;
 	private String location;
@@ -14,6 +15,8 @@ public class ReimburseRequest {
 	private int eventType;
 	private String justification;
 	private LocalDateTime eventDate; 
+	private String eventName;
+	private LocalDate date;
 	
 	public ReimburseRequest(int empID, String fname, String lname, String location, String description, double cost,
 			int gradingFormat, int eventType, String justification, LocalDateTime eventDate) {
@@ -30,6 +33,30 @@ public class ReimburseRequest {
 		this.eventDate = eventDate;
 	}
 	
+	public ReimburseRequest(int rrID, double cost, String eventName, LocalDate date) {
+		super();
+		this.rrID = rrID;
+		this.cost = cost;
+		this.eventName = eventName;
+		this.date = date;
+	}
+	
+	public String getEventName() {
+		return eventName;
+	}
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public int getRrID() {
+		return rrID;
+	}
+
+	public void setRrID(int rrID) {
+		this.rrID = rrID;
+	}
+
 	public LocalDateTime getEventDate() {
 		return eventDate;
 	}

@@ -39,4 +39,14 @@
     <servlet-name>SubmitRequest</servlet-name>
     <url-pattern>/SubmitRequest</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetEmployeeRequest</display-name>
+    <servlet-name>GetEmployeeRequest</servlet-name>
+    <servlet-class>com.banana.servlet.GetEmployeeRequest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetEmployeeRequest</servlet-name>
+    <url-pattern>/GetEmployeeRequest</url-pattern>
+  </servlet-mapping>
 </web-app>
