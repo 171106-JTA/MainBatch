@@ -9,7 +9,7 @@ public class Recipient implements BusinessObject {
 		// do nothing
 	}
 
-	public Recipient(Integer id, Integer messageId, String recipientEmail) {
+	public Recipient(Integer id, Integer messageId, Integer recipientId) {
 		super();
 		this.id = id;
 		this.messageId = messageId;
