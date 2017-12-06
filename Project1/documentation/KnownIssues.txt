@@ -1,0 +1,10 @@
+Known issues 
+============
+
+On user registration page: 
+🗸 error tool tips don't work properly after user submits invalid form
+🗸 there are no initial managers in the system, so new users cannot set themselves under anyone
+🗸 no indication that bad form is bad; /* should have some way to report to end user that form is invalid */
+	🗸 possible fix: anyone who isn't reported to someone is a manager
+
+On login: 

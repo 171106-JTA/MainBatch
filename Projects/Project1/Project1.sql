@@ -222,7 +222,16 @@ CREATE OR REPLACE TRIGGER p1_gs_trigger
 /	
 
 --create other triggers here
-
+--a trigger to make sure that passwords that hit here are hashed
+CREATE OR REPLACE TRIGGER p1_auto_hash_passwords_trigger
+    BEFORE INSERT ON p1_employees
+    FOR EACH ROW
+    BEGIN
+        IF length(:new.employee_pass) <> 64 THEN
+            :new.employee_pass := sha256.encrypt(:new.employee_pass);
+        END IF;
+    END;
+/
 
 --define our views here
 --a view for getting everything about the employee
@@ -282,6 +291,27 @@ CREATE OR REPLACE VIEW p1_rr_view AS
 			
 ;
 
+CREATE OR REPLACE VIEW p1_department_roles_view AS
+    SELECT dr.department_role_id,
+        d.department_name,
+        dr.department_role_name
+        
+        FROM p1_department_roles dr
+            INNER JOIN p1_departments d USING (department_id)
+;
+
+CREATE OR REPLACE VIEW p1_department_managers_view AS
+    SELECT dr.department_role_name,
+        d.department_name,
+        m.employee_id AS manager_id,
+        (m.employee_first_name || ' ' || m.employee_last_name) AS manager_name
+        
+        
+        FROM p1_department_roles dr
+            INNER JOIN p1_employees m USING (department_role_id)
+            INNER JOIN p1_departments d USING (department_id)
+            JOIN p1_employees e ON m.employee_id = e.manager_id
+;
 --do default inserts here
 INSERT INTO p1_states values ('AL', 'Alabama');
 INSERT INTO p1_states VALUES ('AK', 'Alaska');
@@ -360,6 +390,17 @@ INSERT INTO p1_department_roles(department_id, department_role_name) VALUES (8, 
 INSERT INTO p1_department_roles(department_id, department_role_name) VALUES (8, 'Software Engineer');
 INSERT INTO p1_department_roles(department_id, department_role_name) VALUES (8, 'Web Administrator');
 INSERT INTO p1_department_roles(department_id, department_role_name) VALUES (8, 'Senior Software Engineer');
+
+
+INSERT INTO p1_employees(employee_first_name, employee_last_name, department_role_id, manager_id, employee_salary, employee_email,
+    employee_pass) VALUES (
+    'Michael',
+    'Warren',
+    14, -- the department id of 'Software Engineer'
+    NULL,
+    NULL,
+    'mwarren04011990@gmail.com',
+    'P2ss3o45');
 /
 --create our functions and procedures here
 --the procedure to be used by the user that initializes the accounts.
@@ -381,6 +422,31 @@ BEGIN
 			email,
 			(SELECT dr.department_role_id FROM p1_department_roles dr WHERE dr.department_id = (SELECT d.department_id FROM p1_departments d WHERE d.department_name = department) 
                 AND dr.department_role_name = department_role)
+        );
+	commit;
+END;
+/
+
+--to be used by the user that registers accounts
+CREATE OR REPLACE PROCEDURE register_new_user(first_name IN p1_employees.Employee_First_Name%TYPE,
+	last_name IN p1_employees.Employee_Last_Name%TYPE,	
+	department IN p1_departments.Department_Name%TYPE,
+    department_role IN p1_department_roles.Department_Role_Name%TYPE,
+    manager_id IN p1_employees.Manager_ID%TYPE DEFAULT NULL, -- change to 
+    email IN p1_employees.Employee_Email%TYPE,
+    pass IN p1_employees.Employee_Pass%TYPE)
+IS
+BEGIN
+--    prob should do some exception handling here
+	INSERT INTO p1_employees(employee_first_name, employee_last_name,  department_role_id, manager_id, employee_email, employee_pass)
+		VALUES (
+			first_name,
+			last_name, 
+			(SELECT dr.department_role_id FROM p1_department_roles dr WHERE dr.department_id = (SELECT d.department_id FROM p1_departments d WHERE d.department_name = department) 
+                AND dr.department_role_name = department_role),
+            manager_id,
+            email,
+            pass
         );
 	commit;
 END;
@@ -431,4 +497,16 @@ BEGIN
     return isManager;   
 END;
 /
+
+CREATE OR REPLACE FUNCTION p1_authenticate_user(user IN p1_employees.Employee_Email%TYPE,
+    pass IN p1_employees.Employee_Pass%TYPE)
+RETURN NUMBER
+IS 
+    user_exists NUMBER(1,0) := 0;
+BEGIN
+    SELECT count(*) INTO user_exists FROM p1_employees WHERE employee_email = user AND employee_pass = sha256.encrypt(pass);
+    return user_exists;
+END;
+/
+
 COMMIT;

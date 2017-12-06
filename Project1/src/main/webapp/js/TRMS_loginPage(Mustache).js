@@ -111,44 +111,6 @@ function login() {
 		username : {},
 		password : {}
 	};
-	/*var validCredentials = false;
-	try
-	{
-		validCredentials = validUsername();
-		console.log('validCredentials == ' + validCredentials);
-	}
-	catch (customException)
-	{
-		validCredentials = false;
-		errorObj[customException.field] = customException;
-		console.log(JSON.stringify(errorObj, null, '\t'));
-	}
-	finally
-	{
-		try 
-		{
-			validCredentials &= validPassword();
-			console.log('validCredentials == ' + validCredentials);
-		}
-		catch (otherException)
-		{
-			validCredentials = false;
-			errorObj[otherException.field] = otherException;
-			console.log(JSON.stringify(errorObj, null, '\t'));
-		}
-		finally
-		{
-			if (validCredentials)
-			{
-				// page redirect logic goes here
-				console.log('You have entered valid credentials!');
-			}
-			else
-			{
-				renderErrors(errorObj);
-			}
-		}
-	}*/
 	// callback hell!
 	validateUsername({}, 
 		function (err) 
@@ -160,9 +122,35 @@ function login() {
 					// render the tool tips here
 					renderErrors(e);
 				}
-				// TODO: AJAX logic to send to the server
+				// deactivate the button
+				$('input[type="submit"]').val('Logging in....')
+					.attr('disabled', 'disabled');
+				// AJAX logic to send to the server
+				$.post('login',
+					{
+						user : $('#username').val(),
+						pass : $('#password').val()
+					},
+					// on success, redirect to dashboard
+					function (response)
+					{	
+						// let's console.log() for right now
+						console.log(response);
+						if (response.authenticated)
+						{
+							window.location.href = response.redirect_url;
+						}
+					}
+				)
 				// TODO: on error, re-render errors or if allotted login attempts exceeded, redirect to locked out screen
-				// TODO: on success, redirect to dashboard
+				.fail(function(err) { 
+					console.error('Authentication failed');
+					console.error(JSON.stringify(err, null, '\t'));	
+				})
+				// reactivate the button
+				.always(function(data) { 
+					$('input[type="submit"]').val('login').removeAttr('disabled');
+				});
 			})
 		}
 	);
@@ -219,7 +207,6 @@ $(function() {
 	});
 	// validation of input fields
 	$('input[type="text"],input[type="password"]').keyup(function(event) {
-		console.log('value of this field: ' + $(this).val());
 		// if the field is empty
 		if ($(this).val().trim() === '')
 		{

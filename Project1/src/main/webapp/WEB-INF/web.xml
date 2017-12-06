@@ -9,4 +9,24 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>RegisterUser</display-name>
+    <servlet-name>RegisterUser</servlet-name>
+    <servlet-class>p1.revature.servlets.UserRegistration</servlet-class>
+  </servlet>
+	<!-- <servlet>
+	  	<description></description>
+	  	<display-name>FetchDepartments</display-name>
+	  	<servlet-name>FetchDepartments</servlet-name>
+	  	<servlet-class>p1.revature.servlets.FetchDepartments</servlet-class>
+  </servlet>  -->
+  <servlet-mapping>
+    <servlet-name>RegisterUser</servlet-name>
+    <url-pattern>/RegisterUser</url-pattern>
+  </servlet-mapping>
+<!-- <servlet-mapping>
+    <servlet-name>FetchDepartments</servlet-name>
+    <url-pattern>/FetchDepartments</url-pattern>
+  </servlet-mapping> --> 
 </web-app>

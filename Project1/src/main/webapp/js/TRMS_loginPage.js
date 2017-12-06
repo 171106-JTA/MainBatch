@@ -90,8 +90,8 @@ function login() {
 		$('#password').removeClass('ng-invalid');
 	}
 	// TODO: AJAX logic to send to the server
-	// TODO: on error, re-render errors or if allotted login attempts exceeded, redirect to locked out screen
 	// TODO: on success, redirect to dashboard
+	// TODO: on error, re-render errors or if allotted login attempts exceeded, redirect to locked out screen
 }
 
 
@@ -117,7 +117,6 @@ $(function() {
 	});
 	// validation of input fields
 	$('input[type="text"],input[type="password"]').keyup(function(event) {
-		console.log('value of this field: ' + $(this).val());
 		// if the field is empty
 		if ($(this).val().trim() === '')
 		{
