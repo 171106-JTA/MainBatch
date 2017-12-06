@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="resources/JavaScript/apply.js"></script>
+<title>Reimbursement Application</title>
+</head>
+<body>
+	<form action="ApplicationSubmit">
+		<p>First Name</p>
+		<input id="fname" name="fname" type="text" required>
+		<p>Last Name</p>
+		<input id="lname" name="lname" type="text" required>
+		<p>Email</p>
+		<input id="email" name="email" type="email" required>
+		<p>Amount to be Repayed</p>
+		<input id="cost" name="cost" onchange="update()" type="number" required><span> Projected Repayment: $<span  id="repayment"></span></span>
+		<p>&#42;&#42;Maximum to be repayed: &#36;<span id="repay"></span></p>
+		<p>Date of Event</p>
+		<input id="eventDate" name="eventDate" type="date" required>
+		<p>Time of Event</p>
+		<input id="eventTime" name="eventTime" type="time" required>
+		<p>Name of Event</p>
+		<input id="eventName" name="eventName" type="text" required>
+		<p>Form of Event</p>
+		<select id="eventType" onchange="update()" name="eventType">
+			<option value="1">University Course</option>
+			<option value="2">Seminar</option>
+			<option value="3">Certification Prep Class</option>
+			<option value="4">Certification</option>
+			<option value="5">Technical Training</option>
+			<option value="6">Other</option>
+		</select>
+		<p>Grading of Event</p>
+		<select id="gradeType" name="gradeType">
+			<option value="1">School grading - 65%</option>
+			<option value="2">Pass/Fail</option>
+			<option value="3">Attendance</option>
+		</select>
+		<input type="submit" id="submitApp">
+	</form>
+</body>
+</html>

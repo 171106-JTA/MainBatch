@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Review Requests</title>
+<script src="resources/JavaScript/approve.js"></script>
+</head>
+<body>
+	<h1>Approvals</h1>
+	<p id="empty">Empty</p>
+	<form method="post">
+		<span>
+			<input type="number" name="activeID" required>
+			<button type="submit" formaction="ApproveID">Approve</button>
+			<span>           Reason to Reject:</span>
+			<input type="text" name="reason">
+			<button type="submit" formaction="RejectID">Reject</button>
+		</span>
+	</form>
+	<table id="requests" name="requests" border="1">
+	<tr>
+		<th>Request ID</th><th>First Name</th><th>Last Name</th><th>Event Name</th><th>Event Cost</th><th>Event Type</th><th>Repayment Left</th><th>Normal Repayment</th><th>Other</th><th>Approve</th><th>Revoke</th>
+	</tr>
+	</table>
+</body>
+</html>
