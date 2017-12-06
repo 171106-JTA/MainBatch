@@ -73,7 +73,7 @@ END;
 --Default values for event types.
 INSERT INTO eventTypes (evenTypeName, reimbursementPercentage) values('Univerisity Courses', .80);
 INSERT INTO eventTypes (evenTypeName, reimbursementPercentage) values('Seminars', .60);
-INSERT INTO eventTypes (evenTypeName, reimbursementPercentage) values('certification Preparation Classes', .75);
+INSERT INTO eventTypes (evenTypeName, reimbursementPercentage) values('Certification Preparation Classes', .75);
 INSERT INTO eventTypes (evenTypeName, reimbursementPercentage) values('Certification', 1.00);
 INSERT INTO eventTypes (evenTypeName, reimbursementPercentage) values('Technical Training', .90);
 INSERT INTO eventTypes (evenTypeName, reimbursementPercentage) values('Other', .30);
@@ -156,11 +156,11 @@ CREATE TABLE ReimbursementForm (
     reimbursementID NUMBER(9),
     username VARCHAR(100), 
     eventDateAndTime TIMESTAMP(0), 
-    eventLocation number(9), --Foreign key to address table
+    eventLocation number(9),    --Foreign key to address table
     eventDescription CLOB, 
-    eventCost NUMBER(11,2), --Allow maxmimum event cost to be $100,000,000.00
-    gradingFormatID number(2),
-    eventTypeID number(2),
+    eventCost NUMBER(11,2),     --Allow maxmimum event cost to be $100,000,000.00
+    gradingFormatID number(2),  --Foreign key to grading format table
+    eventTypeID number(2),      --Foreign key to event type table
     CONSTRAINT PK_reimbursementID PRIMARY KEY (reimbursementID),
     CONSTRAINT FK_Reimbursement_Username FOREIGN KEY (username) REFERENCES Login(username),
     CONSTRAINT FK_eventLocation FOREIGN KEY (eventLocation) REFERENCES Address(addressID),
