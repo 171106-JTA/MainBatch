@@ -4,6 +4,7 @@ public class Message implements BusinessObject {
 	private Integer id;
 	private Integer formId;
 	private Integer messagePriorityId;
+	private Integer statusId;
 	private String title;
 	private String message;
 	
@@ -11,12 +12,13 @@ public class Message implements BusinessObject {
 		// do nothing
 	}
 
-	public Message(Integer id, Integer formId, Integer messagePriorityId,
+	public Message(Integer id, Integer formId, Integer messagePriorityId, Integer statusId,
 			String title, String message) {
 		super();
 		this.id = id;
 		this.formId = formId;
 		this.messagePriorityId = messagePriorityId;
+		this.statusId = statusId;
 		setTitle(title);
 		setMessage(message);
 	}
@@ -60,4 +62,13 @@ public class Message implements BusinessObject {
 	public void setMessage(String message) {
 		this.message = BusinessObject.validateString(message);
 	}
+
+	public Integer getStatusId() {
+		return statusId;
+	}
+
+	public void setStatusId(Integer statusId) {
+		this.statusId = statusId;
+	}
+	
 }

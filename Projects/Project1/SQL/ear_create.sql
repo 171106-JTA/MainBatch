@@ -88,11 +88,13 @@ CREATE TABLE EAR_MESSAGE (
     id INTEGER,
     fromid INTEGER,
     messagepriorityid INTEGER,
+    statusid INTEGER,
     title VARCHAR2(64),
     message VARCHAR2(4000) NULL,
     CONSTRAINT pk_message_id PRIMARY KEY (id),
     CONSTRAINT fk_sender_id FOREIGN KEY (fromid) REFERENCES EAR_USER(id),
-    CONSTRAINT fk_messagepriority_id FOREIGN KEY (messagepriorityid) REFERENCES CODE_LIST(id)
+    CONSTRAINT fk_messagepriority_id FOREIGN KEY (messagepriorityid) REFERENCES CODE_LIST(id),
+    CONSTRAINT fk_message_status_id FOREIGN KEY (statusid) REFERENCES CODE_LIST(id)
 );
 
 CREATE TABLE EAR_MESSAGE_ATTACHMENT (
@@ -107,9 +109,10 @@ CREATE TABLE EAR_MESSAGE_ATTACHMENT (
 CREATE TABLE EAR_RECIPIENT (
     id INTEGER,
     messageid INTEGER,
-    recipientemail VARCHAR2(50) NOT NULL,
+    recipientid INTEGER,
     CONSTRAINT pk_recipient_id PRIMARY KEY (id),
-    CONSTRAINT fk_recip_message_id FOREIGN KEY (messageid) REFERENCES EAR_MESSAGE(id)
+    CONSTRAINT fk_recip_message_id FOREIGN KEY (messageid) REFERENCES EAR_MESSAGE(id),
+    CONSTRAINT fk_recip_user_id FOREIGN KEY (recipientid) REFERENCES EAR_USER(id)
 );
 
 CREATE TABLE EAR_FORM (

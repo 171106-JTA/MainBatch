@@ -3,7 +3,7 @@ package com.revature.businessobject;
 public class Recipient implements BusinessObject {
 	private Integer id;
 	private Integer messageId;
-	private String recipientEmail;
+	private Integer recipientId;
 	
 	public Recipient() {
 		// do nothing
@@ -13,7 +13,7 @@ public class Recipient implements BusinessObject {
 		super();
 		this.id = id;
 		this.messageId = messageId;
-		setRecipientEmail(recipientEmail);
+		this.recipientId = recipientId;
 	}
 
 	public Integer getId() {
@@ -32,11 +32,11 @@ public class Recipient implements BusinessObject {
 		this.messageId = messageId;
 	}
 
-	public String getRecipientEmail() {
-		return recipientEmail;
+	public Integer getRecipientEmail() {
+		return recipientId;
 	}
 
-	public void setRecipientEmail(String recipientEmail) {
-		this.recipientEmail = BusinessObject.validateString(recipientEmail);
+	public void setRecipientEmail(Integer recipientId) {
+		this.recipientId = recipientId;
 	}
 }

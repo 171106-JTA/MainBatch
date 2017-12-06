@@ -6,6 +6,7 @@ import com.revature.businessobject.BusinessObject;
 import com.revature.businessobject.User;
 import com.revature.businessobject.UserInfo;
 import com.revature.dao.DAOBusinessObject;
+import com.revature.service.util.ServiceUtil;
 
 public class Login {
 	
@@ -20,7 +21,7 @@ public class Login {
 		User account = null;
 		
 		// Login attempt must have user name and password
-		if (username != null && password != null) {
+		if (!ServiceUtil.isNullOrEmpty(username) && !ServiceUtil.isNullOrEmpty(password)) {
 			records = DAOBusinessObject.load(new User(null,null, username, password));
 			
 			// check if user found

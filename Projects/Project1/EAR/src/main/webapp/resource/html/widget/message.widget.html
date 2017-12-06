@@ -3,13 +3,24 @@
 		<!-- JS -->
 		<script type="text/javascript">
 			execute = function () {
+
+
+				// Build info icons
+				Util.buildInfoIcons($("div[is-drawer]"));
 				
+				
+				// Build select message status filter 
+				Util.buildCodeList({
+					"code" : "STATUS",
+					"node" : $("#optionFilter"),
+					"display" : "value description"
+				});
 			}
 		</script>
 	
 		<div class="row">
 			<div class="col-xs-12">
-				<label>Search: <span info-icon="Message Title"></span></label> <input
+				<label>Search: <span info-icon="Search by Message Title"></span></label> <input
 					id="titleSearch" type="text" class="form-control"
 					aria-describedby="searchBtn" />
 			</div>
@@ -18,15 +29,8 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<div>
-					<label>Filter By: <span info-icon="Reimbursement status">
-					</span>
-					</label> <select id="optionFilter" class="form-control">
-						<option>None</option>
-						<option>New Requests</option>
-						<option>Pending Requests</option>
-						<option>Awarded Requests</option>
-						<option>Denied Requests</option>
-					</select>
+					<label>Filter By: <span info-icon="Reimbursement status"></span></label>
+					<select id="optionFilter" class="form-control"></select>
 				</div>
 			</div>
 		</div>
@@ -134,13 +138,11 @@
 			/* MESSAGE PRIORITY LEVELS */
 			.high {
 				color: red;
-				border-right: 1px solid rgba(40,40,40,0.35);
 				padding-right: 10px;
 			}
 			
 			.medium {
 				color: orange;
-				border-right: 1px solid rgba(40,40,40,0.35);
 				padding-right: 10px;
 			}
 			
@@ -148,6 +150,11 @@
 				color: rgba(0,0,0,0.0);
 				border-right: 0px;
 				padding-right: 11px;
+			}
+			
+			.header .high,
+			.header .medium {
+				border-right: 1px solid rgba(40,40,40,0.35);
 			}
 			
 			/* MESSAGE MODULE */
@@ -185,24 +192,16 @@
 			var loadMessages = function (params) {
 				var options;
 				
+				debugger;
+				
 				// Build request messages sent
 				options = {
-					"transtype": "GETSENTMESSAGES"
+					"transtype": "GETMESSAGES"
 				};
 				
 				// Send request
 				Util.send(options, function (response) {
-					// TODO : build list
-				});
-				
-				// Builds request for messages recieved 
-				options = {
-					"transtype": "GETRECEIVEDMESSAGES"
-				}
-				
-				// Send request
-				Util.send(options, function (response) {
-					// TODO : build list
+					params.message = response;
 				});
 			}
 		
@@ -226,30 +225,7 @@
 			}
 			 
 			/**
-			 * Opens selected message 
-			 */
-			var onOpenMessageModule = function () {
-				var self = $(this);
-				var li = Util.getParent({ "parentTagName": "li", "node": self });
-				var brief = li.find("div[class~='message-brief']");
-				var module = $("div[module-template]").find("div[msg-module]").clone(true);
-				
-				// hide brief
-				brief.hide();
-				
-				// assign module events 
-				
-				
-				// inject message module
-				li.append(module);
-				
-				// Make module visible
-				module.show();
-				
-			}
-			
-			/**
-			 *
+			 *	Update header row when clicked
 			 */
 			var onHeaderClick = function () {
 				var self = $(this);
@@ -292,6 +268,9 @@
 				e.stopPropagation();	
 			}
 			
+			/**
+			 * Handles checkbox container interaction
+			 */
 			var onCheckCellBox = function () {
 				var self = $(this);
 				var input = self.find("input[type='checkbox']");
@@ -303,6 +282,52 @@
 					input.prop("checked", true);
 					self.addClass("active");
 				}	
+			}
+			
+			/**
+			 * Opens selected header row by injecting message module
+			 */
+			var onOpenMessageModule = function () {
+				var self = $(this);
+				var li = Util.getParent({ "parentTagName": "li", "node": self });
+				var brief = li.find("div[class~='message-brief']");
+				var module = $("div[module-template]").find("div[msg-module]").clone(true);
+				
+				// hide brief
+				brief.hide();
+				
+				// assign module events 
+				module.find("button[is-send]").on("click", onMessageModuleSend);
+				module.find("button[is-attachment]").on("click", onMessageModuleAttachment);
+				module.find("button[is-close]").on("click", onMessageModuleClose);
+				
+				// inject message module
+				li.append(module);
+				
+				// Make module visible
+				module.show();
+				
+			}
+			
+			var onMessageModuleSend = function () {
+				
+			}
+			
+			var onMessageModuleAttachment = function () {
+				
+			}
+			
+			var onMessageModuleClose = function () {
+				var self = $(this);
+				var li = Util.getParent({ "parentTagName": "li", "node": self });
+				var brief = li.find("div[class~='message-brief']");
+				var module = li.find("div[msg-module]");
+				
+				// destroy module
+				module.remove();
+				
+				// show brief
+				brief.show();
 			}
 			
 			///
@@ -367,13 +392,39 @@
 			</div>
 		</div>
 		
+		<!--  MESSAGE HEADER message brief  -->
+		<div header-template hidden>
+			<div class="message-brief">
+				<div class="col-xs-1 check">
+					<input type="checkbox">
+				</div>
+				<div class="col-xs-10 header">
+					<label>
+						<span attachment-flag></span>
+						<span priority-flag class="fa fa-exclamation"></span>
+						<span message></span>
+					</label>
+				</div>
+			</div>
+		</div>
+		
 		<!--  MESSAGE MODULE What's injected for viewing messages -->
 		<div module-template hidden>
 			<div class="message-module" msg-module hidden>
 				<div class="row">
-					<div class="col-xs-12">
-						<label>From:</label>
-						<input class="form-control" type="email" is-from-email></input>
+					<div>
+						<div class="col-xs-6">
+							<label>From: </label>
+							<input class="form-control" style="border: 0px;" type="text" disabled is-from-username></input>
+						</div>
+						<div class="col-xs-3">
+							<label>Priority:</label>
+							<select class="form-control" is-priority-level></select>
+						</div>
+						<div class="col-xs-3">
+							<label>Notifications: </label>
+							<label class="form-control" style="border:0px;">[&nbsp; <span class="high fa fa-exclamation" priority-flag></span> , <span class="fa fa-link" attachment-flag></span> &nbsp;]</label>
+						</div>
 					</div>
 					<div class="col-xs-12">
 						<label>To:</label>
