@@ -225,6 +225,12 @@
 				});
 			}
 		
+			 /**
+			  * Assigns data to header from data from server 
+			  *	@param {Object} params - [in,out] data from server 
+			  *	@property {JQuery} params.header - new message header information
+			  *	@property {Object} params.data - [in] data from server representing a message
+			  */
 			var setMessageHeaderData = function (params) {
 				var header = params.header;
 				var data = params.data;
@@ -251,10 +257,11 @@
 					header.find("span[attachment-flag]").addClass("fa fa-link");	
 				
 				// assign event handlers 
-				node = header.find("div[class!='header']");
+				node = header.find("div[class~='header']");
 				node.on("click", onHeaderClick);
 				node.on("dblclick", onOpenMessageModule);
 				
+				debugger;
 				// Input box container event handle assignment
 				node = header.find("div[class~='check']");
 				node.on("click", onCheckCellBox);
@@ -346,17 +353,33 @@
 			 */
 			var onOpenMessageModule = function () {
 				var self = $(this);
+				var ul = Util.getParent({ "parentTagName": "ul", "node": self });
 				var li = Util.getParent({ "parentTagName": "li", "node": self });
 				var brief = li.find("div[class~='message-brief']");
 				var module = $("div[module-template]").find("div[msg-module]").clone(true);
+				var data = ul[0].messages[brief.attr("responseIndex")];
+				var select = module.find("select[is-priority-level]");
 				
 				// hide brief
 				brief.hide();
 				
 				// assign module events 
 				module.find("button[is-send]").on("click", onMessageModuleSend);
-				module.find("button[is-attachment]").on("click", onMessageModuleAttachment);
 				module.find("button[is-close]").on("click", onMessageModuleClose);
+
+				// build select
+				$.each($("#msgPriority").children().toArray(), function (i, option){
+					select.append($(option).clone(true));
+				});
+				
+				// Assign content to module 
+				module.find("input[is-from-username]").val(data.fromUserName);
+				module.find("input[is-to-username]").val(data.recipientUserNames.join());
+				module.find("input[is-title]").val(data.title);
+				module.find("input[is-title]").prop("disabled", true)
+				module.find("textarea[is-message]").val(data.message);
+				select.val(data.priority);
+				select.prop("disabled", true);
 				
 				// inject message module
 				li.append(module);
@@ -393,17 +416,12 @@
 			
 			// Called when dashboard builds widget
 			execute = function () {
-				var ul = $("ul[class~='message-list']");
-				var li = ul.find("li");
-				var box = ul.find("div[class~='check']");
-				var inputs = ul.find("input[type='checkbox']");
-				var header = ul.find("div[class~='header']");
-				
-				li.on("click", onActivateBrief);
-				box.on("click", onCheckCellBox);
-				inputs.on("click", onCheckCell);
-				header.on("click", onHeaderClick);
-				header.on("dblclick", onOpenMessageModule);
+				// Load priorities
+				Util.buildCodeList({
+					"code" : "PRIORITY",
+					"node" : $("#msgPriority"),
+					"display" : "value"
+				});
 				
 				// Load message data from server 
 				loadMessages();
@@ -448,14 +466,10 @@
 							<label>Priority:</label>
 							<select class="form-control" is-priority-level></select>
 						</div>
-						<div class="col-xs-3">
-							<label>Notifications: </label>
-							<label class="form-control" style="border:0px;">[&nbsp; <span class="high fa fa-exclamation" priority-flag></span> , <span class="fa fa-link" attachment-flag></span> &nbsp;]</label>
-						</div>
 					</div>
 					<div class="col-xs-12">
 						<label>To:</label>
-						<input class="form-control" type="email" is-to-email></input>
+						<input class="form-control" type="email" is-to-username></input>
 					</div>
 					<div class="col-xs-12">
 						<label>Title:</label>
@@ -471,13 +485,39 @@
 						<button class="form-control btn-primary" is-send><span class="fa fa-send"></span> Send</button>
 					</div>
 					<div class="btn-message col-sm-3">
-						<button class="form-control btn-secondary" is-attachment><span class="fa fa-link"></span> Attachments</button>
+						<button class="form-control btn-secondary" is-attachment data-toggle="modal" data-target="#attachmentModal"><span class="fa fa-link"></span> Attachments</button>
 					</div>
 					<div class="btn-message col-sm-2" style="min-width: 150px;">
 						<button class="form-control" is-close><span class="fa fa-times"></span> Close</button>
 					</div>
 				</div>
 			</div>
+		</div>
+		
+		<!-- CONTENT USED BY MESSAGES  -->
+		<div hidden>
+			<select id="msgPriority"></select>
+		</div>
+		
+		<!-- Modal -->
+		<div class="modal fade" id="attachmentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="attachmentModalLabel">Attachments</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        ...
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
 		</div>
 	</div>
 </body>
