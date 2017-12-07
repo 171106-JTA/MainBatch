@@ -11,16 +11,6 @@
   </welcome-file-list>
   <servlet>
     <description></description>
-    <display-name>MyFrontController</display-name>
-    <servlet-name>MyFrontController</servlet-name>
-    <servlet-class>com.revature.servlets.MyFrontController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MyFrontController</servlet-name>
-    <url-pattern>*.do</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
     <display-name>SubmitRequest</display-name>
     <servlet-name>SubmitRequest</servlet-name>
     <servlet-class>com.revature.servlets.SubmitRequest</servlet-class>

@@ -10,8 +10,8 @@
 <link rel="stylesheet" type="text/css"
 	href="resources/css/StylingTRMS.css">
 <meta charset="UTF-8">
-<script src="C:\Users\Alex\Documents\Alex\Revature_Peterson\Project1\src\main\webapp\resources\javascript\Employee.js"></script>
-<title>Insert title here</title>
+<script src="resources\javascript\Employee.js"></script>
+<title>Employee Home</title>
 </head>
 <body>
 	<h2 id="welcome">Welcome.</h2>
@@ -45,16 +45,24 @@
 						</select>
 					</div>
 					<div class="next">
-						Cost <input type="number" name="eventCost" placeholder="Cost"
+						Cost <input type="number" name="eventCost" placeholder="Cost" step="0.01"
 							required>
 					</div>
-					<!-- <div class="next">
-						Additional Files <input type="file" value="fileupload"
-							id="fileupload">
-					</div> -->
 					<div class="next">
-						Date of Event <input type="date" placeholder="Date"
-							min="2017-12-06" max="2018-06-30" required>
+						Date of Event <input type="date" name="dateOfEvent"
+							placeholder="Date" min="2017-12-06" max="2018-12-30" required>
+					</div>
+					<div class="next">
+						Location <input type="text" name="location" placeholder="Location"
+							required>
+					</div>
+					<div class="next">
+						<textarea name="description" cols="30" rows="4"
+							placeholder="Please provide a description of the event" required></textarea>
+					</div>
+					<div class="next">
+						Additional Files <input name="fileUpload" type="file" value="fileupload"
+							id="fileupload">
 					</div>
 					<div class="next">
 						<input type="Submit" value="Submit Request">

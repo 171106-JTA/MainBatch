@@ -4,6 +4,7 @@ public class Employee {
 	private String username, fname, lname, phoneNumber, address, city, state, zipcode;
 	private Title title;
 	private int password;
+	private double moneyReimbursed = 0;
 	
 	public Employee(String username, String fname, String lname) {
 		this.username = username;
@@ -122,6 +123,12 @@ public class Employee {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	
-	
+
+	public double getMoneyReimbursed() {
+		return moneyReimbursed;
+	}
+
+	public void setMoneyReimbursed(double moneyReimbursed) {
+		this.moneyReimbursed = moneyReimbursed;
+	}
 }

@@ -39,7 +39,6 @@ public class GetUsernameServlet extends HttpServlet {
 		myXml += "<username>" + username + "</username>";
 		myXml += "</root>";
 
-		System.out.println(myXml);
 		out.println(myXml);
 	}
 

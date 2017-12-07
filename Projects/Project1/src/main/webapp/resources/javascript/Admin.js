@@ -1,9 +1,9 @@
 window.onload = function(){
 
-	//getRequests();
 	showUnverifiedUsers();
 	displayUsername();
 	displayApproveOrAssignEmployee();
+	//getRequests();
 }
 
 username = ""; admintitle = "";

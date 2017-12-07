@@ -17,16 +17,11 @@ function displayUsername() {
 			var xmlText = xhr.responseXML;
 			var response = xmlText.getElementsByTagName("root");
 			
-//			console.log(response);
-			console.log(response[0]);
-
 			var fname = response[0].childNodes[0].innerHTML;
 			var lname = response[0].childNodes[1].innerHTML;
 			var title = response[0].childNodes[2].innerHTML;
 			
 			welcome.innerHTML = "Welcome " + fname + " " + lname + " (" + title + ")";
-
-
 		} else if(xhr.readyState == 4 && xhr.status != 200){
 			console.log(xhr.status);
 			welcome.innerHTML="Unable to fetch username";

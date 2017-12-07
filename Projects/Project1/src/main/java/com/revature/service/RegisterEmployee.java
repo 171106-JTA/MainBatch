@@ -21,9 +21,10 @@ public class RegisterEmployee {
 		
 		final Employee emp = new Employee(username, password, fname, lname, phoneNumber, Title.UNVERIFIED, address, zipcode,
 				city, state);
+		
+		final TRMSDao dao = TRMSDao.getDao();
 
-		if (TRMSDao.getEmployeeByUsername(username) == null) {
-			TRMSDao dao = TRMSDao.getDao(); //grab our dao
+		if (dao.getEmployeeByUsername(username) == null) {
 			boolean success = dao.insertEmployee(emp);
 			
 			return success;

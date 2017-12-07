@@ -3,6 +3,7 @@ package com.revature.dao;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -32,12 +33,42 @@ public class TRMSDao {
 	 * @param username
 	 * @return
 	 */
-	public static Employee getEmployeeByUsername(String username) {
+	public Employee getEmployeeByUsername(String username) {
 		Employee emp = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 
-		//TODO search database for an employee with username
+		final String sql = "SELECT * FROM EMPLOYEE WHERE EMP_USERNAME = ?";
 
-		return emp;
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+
+		try(Connection conn = ConnectionUtil.getConnection()){
+
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, username);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				emp = new Employee(rs.getString("emp_username"), rs.getInt("emp_password"), rs.getString("emp_fname"), 
+						rs.getString("emp_lname"), rs.getString("emp_phonenumber"), Title.getTitle(rs.getString("emp_title")),
+						rs.getString("emp_address"), rs.getString("zipcode"), rs.getString("city"),  
+						rs.getString("state"));
+				
+				return emp;
+			}
+
+		} catch(SQLException e){
+			e.printStackTrace();
+			return null;
+		} finally{
+			close(ps);
+		}
+
+		return null;
 	}
 
 	public static TRMSDao getDao() {
@@ -140,11 +171,12 @@ public class TRMSDao {
 	 * @param req
 	 * @throws FileNotFoundException 
 	 */
-	public void insertRequest(Request req) throws FileNotFoundException {
+	public void insertRequest(Request req, InputStream inputStream) throws FileNotFoundException {
+		System.out.println("insertRequest");
 		PreparedStatement ps = null;
 
-		final String sql = "INSERT INTO REQUEST (emp_username, REQ_EVENT, REQ_DATE, "
-				+ 		   "REQ_LOCATION, REQ_COST, REQ_DESCRIPTION, REQ_GRADINGFORMAT, REQ_FILES" + 
+		final String sql = "INSERT INTO REQUEST (EMP_USERNAME, REQ_EVENT, REQ_DATE, "
+				+ 		   "REQ_LOCATION, REQ_COST, REQ_DESCRIPTION, REQ_GRADINGFORMAT, REQ_FILES) " + 
 				"VALUES(?,?,?,?,?,?,?,?)";
 
 		try {
@@ -158,24 +190,17 @@ public class TRMSDao {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, req.getUsername().toLowerCase());
 			ps.setString(2, req.getEvent());
-
-			ps.setString(4, req.getLocation());
-			ps.setInt(5, req.getCost());
-			ps.setString(6, req.getDescription());
-			ps.setString(7, req.getGradingFormat());
-
-			File file = req.getFile();
-
-			if (file != null) {
-				FileInputStream  fis = new FileInputStream(file);
-				ps.setBinaryStream(8, fis, (int) file.getTotalSpace());
-			} else {
-				ps.setBinaryStream(8, null);
-			}
-
 			java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 			ps.setDate(3, date);
 			req.setSubmissionDate(date);
+			ps.setString(4, req.getLocation());
+			ps.setDouble(5, req.getCost());
+			ps.setString(6, req.getDescription());
+			ps.setString(7, req.getGradingFormat());
+			ps.setBlob(8, inputStream);
+			
+			ps.executeUpdate();
+
 		} catch(SQLException e){
 			e.printStackTrace();
 		} finally{
@@ -184,7 +209,7 @@ public class TRMSDao {
 	}
 	public List<Request> getRequests(String username) {
 		List<Request> requests = new ArrayList<Request>();
-		
+
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
@@ -208,10 +233,10 @@ public class TRMSDao {
 				String eventLocation = rs.getString("REQ_LOCATION");
 				int eventCost = rs.getInt("REQ_COST");
 				String gradingFormat = rs.getString("REQ_GRADINGFORMAT");
-				
+
 				//TODO FILES
-				
-				
+
+
 			}
 
 		} catch(SQLException e){
@@ -261,7 +286,7 @@ public class TRMSDao {
 
 		return unvEmps;
 	}
-	
+
 	public List<Employee> getDirectSupervisors() {
 		List<Employee> unvEmps = new ArrayList<Employee>();
 
@@ -299,7 +324,7 @@ public class TRMSDao {
 
 		return unvEmps;
 	}
-	
+
 	/**
 	 * 
 	 * @param empUsername
@@ -324,12 +349,12 @@ public class TRMSDao {
 			String dirSup = dirSupUsername.toLowerCase();
 			String title = Title.EMPLOYEE.toString().toUpperCase();
 			System.out.println("dirSup: " + dirSup + " title: " + title + " empUsername: " + empUsername.toLowerCase());
-			
+
 			ps.setString(1, dirSup);
 			ps.setString(2, title);
 			ps.setString(3, empUsername.toLowerCase());
 			int affected = ps.executeUpdate();
-			
+
 			System.out.println("rows affected from adding a supervisor to employee " + empUsername.toLowerCase() + " is " + affected);
 
 		} catch(SQLException e) {

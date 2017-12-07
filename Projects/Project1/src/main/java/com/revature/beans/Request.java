@@ -1,16 +1,16 @@
 package com.revature.beans;
 
-import java.io.File;
+import java.io.InputStream;
 import java.sql.Date;
 
 public class Request {
 	private String username, event, location, description, gradingFormat;
-	private int cost;
-	private File file;
+	private double cost;
 	private Date submissionDate, dateOfEvent;
+	private InputStream inputStream;
 	
 	public Request(String empUsername, String event, String location, String description,
-			int cost, String gradingFormat, Date dateOfEvent, File file) {
+			double cost, String gradingFormat, Date dateOfEvent, InputStream inputStream) {
 		this.username = empUsername;
 		this.event = event;
 		this.location = location;
@@ -18,7 +18,7 @@ public class Request {
 		this.cost = cost;
 		this.gradingFormat = gradingFormat;
 		this.dateOfEvent = dateOfEvent;
-		this.file = file;
+		this.inputStream = inputStream;
 	}
 
 	public String getUsername() {
@@ -61,20 +61,12 @@ public class Request {
 		this.gradingFormat = gradingFormat;
 	}
 
-	public int getCost() {
+	public double getCost() {
 		return cost;
 	}
 
-	public void setCost(int cost) {
+	public void setCost(double cost) {
 		this.cost = cost;
-	}
-
-	public File getFile() {
-		return file;
-	}
-
-	public void setFile(File file) {
-		this.file = file;
 	}
 
 	public Date getSubmissionDate() {
@@ -92,6 +84,19 @@ public class Request {
 	public void setDateOfEvent(Date dateOfEvent) {
 		this.dateOfEvent = dateOfEvent;
 	}
-	
-	
+
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+
+	public void setInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
+	}
+
+	@Override
+	public String toString() {
+		return "Request [username=" + username + ", event=" + event + ", location=" + location + ", description="
+				+ description + ", gradingFormat=" + gradingFormat + ", cost=" + cost + ", submissionDate="
+				+ submissionDate + ", dateOfEvent=" + dateOfEvent + ", inputStream=" + inputStream + "]";
+	}
 }
