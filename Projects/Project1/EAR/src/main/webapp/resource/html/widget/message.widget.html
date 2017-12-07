@@ -1,10 +1,367 @@
 <body>
-	<div is-drawer>
-		<!-- JS -->
+	<!-- JS -->
 		<script type="text/javascript">
-			execute = function () {
+			///
+			//	INITIALIZERS
+			///
+		
+			var initDrawerEventHandlers = function () {
+				var drawer = $("div[is-drawer]");
+				
+				// assign event handlers
+				drawer.find("#btnCreate").on('click', onMessageCreate);
+				
+			}
+			
+			/**
+			 *	Pulls all message records from server pertaining to user
+			 *	@param {Object} param - message wrapper
+			 *	@property {Array} param.messages - handle to messages from server
+			 */
+			var loadMessages = function () {
+				var ul = $("ul[class~='message-list']");
+				var options;
+				var li;
+				var brief;
+				
+				// Build request messages sent
+				options = {
+					"transtype": "GETMESSAGES"
+				};
+				
+				// Send request
+				Util.send(options, function (response) {
+					// Cache messages on list element 
+					ul[0].messages = response;
+					
+					// build message list from response 
+					$.each(response, function (i, item) {
+						// create new nodes 
+						brief = initBrief();
+						li = $("<li></li>");
+						
+						// prepare header information 
+						updateMessageBriefData({"brief": brief, "data": item, "index": i});
+						
+						// assign header to list item
+						li.append(brief);
+						li.on("click", onActivateBrief);
+						
+						// assign list item to message list
+						ul.append(li);
+					});
+				});
+			}
+				  
+			var initModule = function () {
+				var module = $("div[module-template]").find("div[msg-module]").clone(true);
+				var select = module.find("select[is-priority-level]");
+				
+				// bind events 
+				// assign module events 
+				module.find("button[is-send]").on("click", onMessageModuleSend);
+				module.find("button[is-attachment]").on("click", onMessageModuleAttachment);
+				module.find("button[is-close]").on("click", onMessageModuleClose);
 
-
+				// build select
+				select.append($("#msgPriority").children().clone(true));
+		
+				return module;
+			}
+			  
+			var initBrief = function () {
+				var template = $("div[header-template]").children();
+				var brief = template.clone(true);
+				var node;
+				
+				// assign event handlers 
+				node = brief.find("div[class~='header']");
+				node.on("click", onHeaderClick);
+				node.on("dblclick", onOpenMessageModule);
+				
+				// Input box container event handle assignment
+				node = brief.find("div[class~='check']");
+				node.on("click", onCheckCellBox);
+				
+				// Input box event handle assignment
+				node = brief.find("input[type='checkbox']");
+				node.on("click", onCheckCell);
+				
+				return brief;
+			}
+			
+			///
+			//	HELPER METHODS 
+			///
+			
+			 /**
+			  * Assigns data to header from data from server 
+			  *	@param {Object} params - [in,out] data from server 
+			  *	@property {JQuery} params.header - new message header information
+			  *	@property {Object} params.data - [in] data from server representing a message
+			  */
+			var updateMessageBriefData = function (params) {
+				var brief = params.brief;
+				var data = params.data;
+				var title;
+				var node;
+				
+				// add header index used to map back to record in un-ordered list 
+				brief.attr("responseIndex", params.index);
+				
+				// set message title
+				title = brief.find("span[message]");
+				title.text(data.title);
+				
+				// if status of message is new 
+				if (data.status === "NEW")
+					title.css('font-weight', 'bold');
+				
+				// set message priority notification
+				brief.find("span[priority-flag]").addClass(data.priority.toLowerCase());
+				
+				// if attachments found set attment flag
+				if (data.attachments && data.attachments.length > 0) 
+					brief.find("span[attachment-flag]").addClass("fa fa-link");	
+			}
+			  
+			var updateMessageFromModule = function (params) {
+				var messages = params.messages;
+				var brief = params.brief;
+				var data = getModuleData(params.module);
+				var index;
+				
+				// if not defined then update
+				if ((index = brief.attr("responseIndex")) !== undefined) 
+					messages[index] = data;
+				else {
+					messages.push(data);
+					
+					// prepare header information 
+					updateMessageBriefData({"brief": brief, "data": data, "index": messages.length - 1});
+				}
+			}
+			
+			
+			var getModuleData = function (module) {
+				var data;
+				
+				data = {
+					fromUserName: module.find("input[is-from-username]").val(),
+					priority: module.find("select[is-priority-level]").val() || "LOW",
+					recipientUserNames: module.find("input[is-to-username]").val().split(","),
+					title: module.find("input[is-title]").val(),
+					message: module.find("textarea[is-message]").val()
+				}
+				
+				return data;
+			}
+			
+			var assignModuleData = function (params) {
+				var module = params.module;
+				var data = params.data;
+				
+				// Assign content to module 
+				module.find("input[is-from-username]").val(data.fromUserName);
+				module.find("input[is-to-username]").val(data.recipientUserNames.join());
+				module.find("input[is-title]").val(data.title);
+				module.find("textarea[is-message]").val(data.message);
+				module.find("select[is-priority-level]").val(data.priority);
+			}
+			
+			///
+			//	EVENT HANDLERS 
+			///
+			
+			/**
+			 *	Generates a new message module 
+			 */
+			var onMessageCreate = function () {
+				var screen = $("div[is-screen]");
+				var ul = screen.find("ul[class~='message-list']");
+				var li = $("<li></li>");
+				var module = initModule();
+				var brief = initBrief();
+				
+				// hide brief
+				brief.hide();
+				
+				// Bind header breif
+				li.append(brief);
+				
+				// inject message module
+				li.append(module);
+				
+				// assign new message to list 
+				ul.append(li);		
+		
+				// assign user name to module as sender
+				module.find("input[is-from-username]").val(data.user.username);
+				
+				// Make module visible
+				module.show();
+			}
+		
+			/**
+			  *	Marks selected list item
+			  */
+			var onActivateBrief = function () {
+				var self = $(this);
+				var parent = self.parent();
+				var active = parent.find("li[class='active']");
+				
+				// remove active status 
+				active.removeClass("active");
+				
+				// assign new active status 
+				self.addClass("active");
+			}
+			 
+			/**
+			 *	Update header row when clicked
+			 */
+			var onHeaderClick = function () {
+				var self = $(this);
+				var ul = $("ul[class~='message-list']");
+				var box = ul.find("div[class~='check']");
+				var input = box.find("input[type='checkbox']");
+				var parent = self.parent();
+				
+				// remove all styling
+				box.removeClass("active");
+				
+				// uncheck if checked
+				input.prop("checked", false);
+				
+				// get row box
+				box = parent.find("div[class~='check']");
+				
+				// get checkbox
+				input = box.find("input[type='checkbox']");
+				
+				// set active state
+				box.addClass("active");
+				input.prop("checked", true);
+			}
+			
+			/**
+			 * Marks/Unmarks single cell
+			 */
+			var onCheckCell = function (e) {
+				var self = $(this);
+				var box = Util.getParent({"parentTagName": "div", "node": self, "attributes": [{ key: "class", value: "check"}] });
+				
+				if (self.prop("checked")) 
+					box.addClass("active");
+				else 
+					box.removeClass("active");
+				
+				e.stopPropagation();	
+			}
+			
+			/**
+			 * Handles checkbox container interaction
+			 */
+			var onCheckCellBox = function () {
+				var self = $(this);
+				var input = self.find("input[type='checkbox']");
+				
+				if (input.prop("checked")) {
+					input.prop("checked", false);
+					self.removeClass("active");
+				}  else {
+					input.prop("checked", true);
+					self.addClass("active");
+				}	
+			}
+			
+			/**
+			 * Opens selected header row by injecting message module
+			 */
+			var onOpenMessageModule = function () {
+				var self = $(this);
+				var ul = Util.getParent({ "parentTagName": "ul", "node": self });
+				var li = Util.getParent({ "parentTagName": "li", "node": self });
+				var brief = li.find("div[class~='message-brief']");
+				var module = initModule();
+				var data = ul[0].messages[brief.attr("responseIndex")];
+				var select = module.find("select[is-priority-level]");
+				
+				// hide brief
+				brief.hide();
+				
+				// Assign content to module 
+				assignModuleData({ "module": module, "data": data });
+				select.prop("disabled", true);
+				
+				// inject message module
+				li.append(module);
+				
+				// Make module visible
+				module.show();
+				
+			}
+			
+			var onMessageModuleSend = function () {
+				// TODO : Get message data and send to server 
+	
+			}
+			
+			var onMessageModuleAttachment = function () {
+				
+				$('#attachmentModal').modal({ "show": true });
+			}
+			
+			var onMessageModuleClose = function () {
+				var self = $(this);
+				var ul = Util.getParent({ "parentTagName": "ul", "node": self });
+				var li = Util.getParent({ "parentTagName": "li", "node": self });
+				var brief = li.find("div[class~='message-brief']");
+				var module = li.find("div[msg-module]");
+				var messages = ul[0].messages;
+				var args;
+				
+				// prepare update arguments 
+				args = {
+					 "module": module, 
+					 "brief": brief,
+					 "messages": messages
+				};
+				
+				
+				// update message info based on input
+				updateMessageFromModule(args);
+				
+				// prepare brief update
+				args = {
+					"brief": brief,
+					"data": messages[brief.attr("responseIndex")], 
+					"index": brief.attr("responseIndex")
+				};
+				
+				// Update header 
+				updateMessageBriefData(args);
+				
+				// destroy module
+				module.remove();
+				
+				// show brief
+				brief.show();
+			}
+			
+			var onAttachmentSave = function () {
+				
+				// TODO : update attachment list 
+				
+				$('#attachmentModal').modal('hide');
+			}
+			
+			///
+			//	EXECUTION 
+			///
+			
+			var executeDrawer = function () {
+				
 				// Build info icons
 				Util.buildInfoIcons($("div[is-drawer]"));
 				
@@ -15,8 +372,35 @@
 					"node" : $("#optionFilter"),
 					"display" : "value description"
 				});
+
+				initDrawerEventHandlers();
 			}
+		
+			var executeScreen = function () {
+				// Load priorities
+				Util.buildCodeList({
+					"code" : "PRIORITY",
+					"node" : $("#msgPriority"),
+					"display" : "value"
+				});
+				
+				// Load message data from server 
+				loadMessages();
+				
+				$("#attachmentModal").find("button[data-save]").on("click", onAttachmentSave);
+			}
+			
+			execute = function (type) {
+				if (type === "drawer") 
+					executeDrawer();
+				else if (type === "screen")
+					executeScreen();
+			}
+			
 		</script>
+
+	<div is-drawer>
+		
 	
 		<div class="row">
 			<div class="col-xs-12">
@@ -49,7 +433,7 @@
 		
 		<div class="row">
 			<div class="col-sm-12">
-				<button class="btn-secondary form-control"><span class="fa fa-plus"></span> Create</button>
+				<button id="btnCreate" class="btn-secondary form-control"><span class="fa fa-plus"></span> Create</button>
 			</div>
 		</div>
 		
@@ -182,252 +566,6 @@
 			
 		</style>
 	
-		<!-- JS -->
-		<script type="text/javascript">
-			/**
-			 *	Pulls all message records from server pertaining to user
-			 *	@param {Object} param - message wrapper
-			 *	@property {Array} param.messages - handle to messages from server
-			 */
-			var loadMessages = function () {
-				var ul = $("ul[class~='message-list']");
-				var template = $("div[header-template]").children();
-				var options;
-				var li;
-				var header;
-				
-				// Build request messages sent
-				options = {
-					"transtype": "GETMESSAGES"
-				};
-				
-				// Send request
-				Util.send(options, function (response) {
-					// Cache messages on list element 
-					ul[0].messages = response;
-					
-					// build message list from response 
-					$.each(response, function (i, item) {
-						// create new nodes 
-						header = template.clone(true);
-						li = $("<li></li>");
-						
-						// prepare header information 
-						setMessageHeaderData({"header": header, "data": item, "index": i});
-						
-						// assign header to list item
-						li.append(header);
-						li.on("click", onActivateBrief);
-						
-						// assign list item to message list
-						ul.append(li);
-					});
-				});
-			}
-		
-			 /**
-			  * Assigns data to header from data from server 
-			  *	@param {Object} params - [in,out] data from server 
-			  *	@property {JQuery} params.header - new message header information
-			  *	@property {Object} params.data - [in] data from server representing a message
-			  */
-			var setMessageHeaderData = function (params) {
-				var header = params.header;
-				var data = params.data;
-				var title;
-				var node;
-				
-				// add header index used to map back to record in un-ordered list 
-				header.attr("responseIndex", params.index);
-				
-				// set message title
-				title = header.find("span[message]");
-				title.text(data.title);
-				
-				// if status of message is new 
-				if (data.status === "NEW")
-					title.css('font-weight', 'bold');
-				
-				
-				// set message priority notification
-				header.find("span[priority-flag]").addClass(data.priority.toLowerCase());
-				
-				// if attachments found set attment flag
-				if (data.attachments && data.attachments.length > 0) 
-					header.find("span[attachment-flag]").addClass("fa fa-link");	
-				
-				// assign event handlers 
-				node = header.find("div[class~='header']");
-				node.on("click", onHeaderClick);
-				node.on("dblclick", onOpenMessageModule);
-				
-				debugger;
-				// Input box container event handle assignment
-				node = header.find("div[class~='check']");
-				node.on("click", onCheckCellBox);
-				
-				// Input box event handle assignment
-				node = header.find("input[type='checkbox']");
-				node.on("click", onCheckCell);
-			}
-			 
-			 ///
-			 //	EVENT HANDLERS 
-			 ///
-			 
-			 /**
-			  *	Marks selected list item
-			  */
-			var onActivateBrief = function () {
-				var self = $(this);
-				var parent = self.parent();
-				var active = parent.find("li[class='active']");
-				
-				// remove active status 
-				active.removeClass("active");
-				
-				// assign new active status 
-				self.addClass("active");
-			}
-			 
-			/**
-			 *	Update header row when clicked
-			 */
-			var onHeaderClick = function () {
-				var self = $(this);
-				var ul = $("ul[class~='message-list']");
-				var box = ul.find("div[class~='check']");
-				var input = box.find("input[type='checkbox']");
-				var parent = self.parent();
-				
-				// remove all styling
-				box.removeClass("active");
-				
-				// uncheck if checked
-				input.prop("checked", false);
-				
-				// get row box
-				box = parent.find("div[class~='check']");
-				
-				// get checkbox
-				input = box.find("input[type='checkbox']");
-				
-				// set active state
-				box.addClass("active");
-				input.prop("checked", true);
-			}
-			
-			/**
-			 * Marks/Unmarks single cell
-			 */
-			var onCheckCell = function (e) {
-				var self = $(this);
-				var box = Util.getParent({"parentTagName": "div", "node": self, "attributes": [{ key: "class", value: "check"}] });
-				
-				if (self.prop("checked")) 
-					box.addClass("active");
-				else 
-					box.removeClass("active");
-				
-				e.stopPropagation();	
-			}
-			
-			/**
-			 * Handles checkbox container interaction
-			 */
-			var onCheckCellBox = function () {
-				var self = $(this);
-				var input = self.find("input[type='checkbox']");
-				
-				if (input.prop("checked")) {
-					input.prop("checked", false);
-					self.removeClass("active");
-				}  else {
-					input.prop("checked", true);
-					self.addClass("active");
-				}	
-			}
-			
-			/**
-			 * Opens selected header row by injecting message module
-			 */
-			var onOpenMessageModule = function () {
-				var self = $(this);
-				var ul = Util.getParent({ "parentTagName": "ul", "node": self });
-				var li = Util.getParent({ "parentTagName": "li", "node": self });
-				var brief = li.find("div[class~='message-brief']");
-				var module = $("div[module-template]").find("div[msg-module]").clone(true);
-				var data = ul[0].messages[brief.attr("responseIndex")];
-				var select = module.find("select[is-priority-level]");
-				
-				// hide brief
-				brief.hide();
-				
-				// assign module events 
-				module.find("button[is-send]").on("click", onMessageModuleSend);
-				module.find("button[is-close]").on("click", onMessageModuleClose);
-
-				// build select
-				$.each($("#msgPriority").children().toArray(), function (i, option){
-					select.append($(option).clone(true));
-				});
-				
-				// Assign content to module 
-				module.find("input[is-from-username]").val(data.fromUserName);
-				module.find("input[is-to-username]").val(data.recipientUserNames.join());
-				module.find("input[is-title]").val(data.title);
-				module.find("input[is-title]").prop("disabled", true)
-				module.find("textarea[is-message]").val(data.message);
-				select.val(data.priority);
-				select.prop("disabled", true);
-				
-				// inject message module
-				li.append(module);
-				
-				// Make module visible
-				module.show();
-				
-			}
-			
-			var onMessageModuleSend = function () {
-				
-			}
-			
-			var onMessageModuleAttachment = function () {
-				
-			}
-			
-			var onMessageModuleClose = function () {
-				var self = $(this);
-				var li = Util.getParent({ "parentTagName": "li", "node": self });
-				var brief = li.find("div[class~='message-brief']");
-				var module = li.find("div[msg-module]");
-				
-				// destroy module
-				module.remove();
-				
-				// show brief
-				brief.show();
-			}
-			
-			///
-			//	EXECUTION
-			///
-			
-			// Called when dashboard builds widget
-			execute = function () {
-				// Load priorities
-				Util.buildCodeList({
-					"code" : "PRIORITY",
-					"node" : $("#msgPriority"),
-					"display" : "value"
-				});
-				
-				// Load message data from server 
-				loadMessages();
-			}
-		</script>
-	
 		<!-- HTML -->
 		<div class="row">
 			<div class="col-sm-12">
@@ -485,7 +623,7 @@
 						<button class="form-control btn-primary" is-send><span class="fa fa-send"></span> Send</button>
 					</div>
 					<div class="btn-message col-sm-3">
-						<button class="form-control btn-secondary" is-attachment data-toggle="modal" data-target="#attachmentModal"><span class="fa fa-link"></span> Attachments</button>
+						<button class="form-control btn-secondary" is-attachment><span class="fa fa-link"></span> Attachments</button>
 					</div>
 					<div class="btn-message col-sm-2" style="min-width: 150px;">
 						<button class="form-control" is-close><span class="fa fa-times"></span> Close</button>
@@ -500,7 +638,7 @@
 		</div>
 		
 		<!-- Modal -->
-		<div class="modal fade" id="attachmentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal fade" id="attachmentModal" tabindex="-1" role="dialog" aria-labelledby="attachmentModalLabel" aria-hidden="true">
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
@@ -514,7 +652,7 @@
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary">Save changes</button>
+		        <button type="button" class="btn btn-primary" data-save>Save changes</button>
 		      </div>
 		    </div>
 		  </div>

@@ -85,8 +85,8 @@ var onDashboardClick = function () {
 	// Build widget if widget exists else send request for it
 	if (widget.dashboard) {
 		assignWidget(widget.dashboard = parseWidgetData(widget.dashboard.response));	
-		widget.dashboard.drawerMethod();
-		widget.dashboard.screenMethod();
+		widget.dashboard.execute("drawer");
+		widget.dashboard.execute("screen");
 	}else {
 		var options;
 		
@@ -101,8 +101,8 @@ var onDashboardClick = function () {
 			// ensure non-null response
 			if (response != null) {
 				assignWidget(widget.dashboard = parseWidgetData(response));
-				widget.dashboard.drawerMethod();
-				widget.dashboard.screenMethod();
+				widget.dashboard.execute("drawer");
+				widget.dashboard.execute("screen");
 			}
 		}, function (error){
 			console.log(error);
@@ -129,8 +129,8 @@ var onAccountClick = function () {
 	// Build widget if widget exists else send request for it
 	if (widget.account){
 		assignWidget(widget.account = parseWidgetData(widget.account.response));	
-		widget.account.drawerMethod();
-		widget.account.screenMethod();
+		widget.account.execute("drawer");
+		widget.account.execute("screen");
 	}else {
 		var options;
 		
@@ -145,8 +145,8 @@ var onAccountClick = function () {
 			// ensure non-null response
 			if (response != null) {
 				assignWidget(widget.account = parseWidgetData(response));	
-				widget.account.drawerMethod();
-				widget.account.screenMethod();
+				widget.account.execute("drawer");
+				widget.account.execute("screen");
 			}
 		}, function (error){
 			console.log(error);
@@ -168,18 +168,18 @@ var buildNavigationFromJson = function (json) {
 
 var parseWidgetData = function (response) {
 	var parser = new DOMParser();
-	var html = parser.parseFromString(response,"text/html");
+	var html = $(parser.parseFromString(response,"text/html"));
 	var widget;
 	
 	// Extract widget data from response 
 	widget = {
 			response: response,
-			drawer: $(html).find("div[is-drawer]"),
-			drawerMethod: function () {}, 
-			hideDrawer: $(html).find("div[hide-drawer]").length > 0,
-			screen: $(html).find("div[is-screen]"),
-			screenMethod: function () {}, 
-			hideScreen:  $(html).find("div[hide-screen]") > 0
+			script: html.find("script[type='text/javascript']")[0].innerHTML,
+			execute: function () { /* do nothing */ },
+			drawer: html.find("div[is-drawer]"),
+			hideDrawer: html.find("div[hide-drawer]").length > 0,
+			screen: html.find("div[is-screen]"),
+			hideScreen:  html.find("div[hide-screen]") > 0
 	};
 	
 	return widget;
@@ -215,14 +215,8 @@ var assignWidget = function (widget) {
 	} 
 	
 	// Eval scripts 
-	if (pane.find("script").length > 0)  {
-		eval(pane.find("script")[0].innerHTML);
-		widget.drawerMethod = execute;
-	} 
-	
-	if (screen.find("script").length > 0) {
-		eval(screen.find("script")[0].innerHTML);
-		widget.screenMethod = execute;
+	if (widget.script)  {
+		widget.execute = eval(widget.script);
 	}
 }
 
