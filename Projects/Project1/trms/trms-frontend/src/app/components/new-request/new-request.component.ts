@@ -14,9 +14,9 @@ export class NewRequestComponent {
     eventTypes: string[];
     validMimeTypes: string[];
 
-    eventFile: Blob;
-    eventFileName: string;
-    eventFileMimeType: string;
+    eventFile: Blob = null;
+    eventFileName: string = null;
+    eventFileMimeType: string = null;
 
 
     newRequestForm: FormGroup = new FormGroup({
@@ -57,12 +57,16 @@ export class NewRequestComponent {
         let formData = new FormData();
 
         for (let formControlKey in this.newRequestForm.controls) {
-            formData.append(formControlKey, this.newRequestForm.get(formControlKey).value);
-            console.log(formControlKey, this.newRequestForm.get(formControlKey).value); // todo: remove
+            if (formControlKey != "eventFile") {
+                formData.append(formControlKey, this.newRequestForm.get(formControlKey).value);
+                console.log(formControlKey, this.newRequestForm.get(formControlKey).value); // todo: remove
+            }
         }
-        formData.append('eventFile', this.eventFile, this.eventFileName);
-        formData.append('eventFileName', this.eventFileName);
-        formData.append('eventFileMimeType', this.eventFileMimeType);
+        if (this.eventFile != null) {
+            formData.append('eventFile', this.eventFile, this.eventFileName);
+            formData.append('eventFileName', this.eventFileName);
+            formData.append('eventFileMimeType', this.eventFileMimeType);
+        }
 
 
         let xhr = new XMLHttpRequest();
@@ -83,15 +87,19 @@ export class NewRequestComponent {
 
     public onFileChange($event) {
         let rawFile: any = $event.target.files[0];
-
-        /* todo: validate file mime type
-        if (!(rawFile.mimeType in this.lookups.getMimeTypes()))
-            console.error('invalid file type');
-        */
-
-        this.eventFile = rawFile;
-        this.eventFileName = rawFile.name;
-        this.eventFileMimeType = rawFile.type;
+        if (rawFile != undefined) {
+            /* todo: validate file mime type
+            if (!(rawFile.mimeType in this.lookups.getMimeTypes()))
+                console.error('invalid file type');
+            */
+            this.eventFile = rawFile;
+            this.eventFileName = rawFile.name;
+            this.eventFileMimeType = rawFile.type;
+        }
+        else {
+            this.eventFile = null;
+            this.eventFileName = this.eventFileMimeType = null;
+        }
     }
 }
 

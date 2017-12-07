@@ -200,7 +200,7 @@ CREATE TABLE reqhistory (
     CONSTRAINT fk_hist_emp FOREIGN KEY (approver_email) REFERENCES employee(email),
     CONSTRAINT fk_hist_file FOREIGN KEY (approval_file) REFERENCES reqfile(file_id),
     CONSTRAINT fk_hist_status FOREIGN KEY (post_status) REFERENCES reqstatus(req_status),
-    CONSTRAINT ck_approver_or_file CHECK ((approval_file IS NULL AND approver_email IS NOT NULL) OR (approval_file IS NOT NULL AND approver_email IS NULL))
+    CONSTRAINT ck_approver_or_file CHECK ((approval_file IS NULL AND approver_email IS NULL) OR (approval_file IS NOT NULL AND approver_email IS NOT NULL))
 );
 /
 DROP SEQUENCE seq_hist;

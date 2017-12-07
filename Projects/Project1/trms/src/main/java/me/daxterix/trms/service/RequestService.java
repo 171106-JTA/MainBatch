@@ -22,7 +22,7 @@ public class RequestService {
      * @return
      */
     public static void addRequestFile(ReimbursementRequest request, RequestFile requestFile) throws DuplicateIdException {
-        // todo: update request status if a request email
+        // todo: update request status if a request email, and log history
         requestFile.setRequest(request);
         infoDao.saveFile(requestFile);
     }
@@ -56,8 +56,8 @@ public class RequestService {
         else
             return false;
 
-        addHistForRequest(newReq, newReq.getTimeFiled(), RequestStatus.AWAITING_SUPERVISOR, null, null);
         reqDao.save(newReq);
+        addHistForRequest(newReq, newReq.getTimeFiled(), RequestStatus.AWAITING_SUPERVISOR, null, null);
         return true;
     }
 
@@ -76,11 +76,8 @@ public class RequestService {
                                           Employee approver, RequestFile approvingEmail) throws DuplicateIdException {
 
         RequestHistory creationHist = new RequestHistory();
-        if (approver != null)
-            creationHist.setApprover(approver);
-        if (approvingEmail != null)
-            creationHist.setFile(approvingEmail);
-
+        creationHist.setApprover(approver);
+        creationHist.setFile(approvingEmail);
         creationHist.setRequest(request);
         creationHist.setPostStatus(new RequestStatus(postStatus));
         creationHist.setTime(time);

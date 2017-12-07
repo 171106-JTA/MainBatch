@@ -50,27 +50,27 @@ public class NewRequestServlet extends HttpServlet {
         newRequest.setAddress(addr);
         newRequest.setTimeFiled(LocalDateTime.now());
         newRequest.setDescription(description);
-
         newRequest.setEventType(new EventType(type));
-
 
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
-
         try {
             newRequest.setEventCost(Float.parseFloat(priceStr));
             newRequest.setEventStart(LocalDate.parse(startDateStr));
             newRequest.setEventEnd(LocalDate.parse(endDateStr));
             if (RequestService.addRequest(newRequest)) {
-                out.print("<div>request ok</div>");
+                out.print("request ok");
                 Part filePart = request.getPart("eventFile");
-                String fileName = request.getParameter("eventFileName");
-                String mimeType = request.getParameter("eventFileMimeType");
+                if (filePart != null) {
+                    String fileName = request.getParameter("eventFileName");
+                    String mimeType = request.getParameter("eventFileMimeType");
 
-                RequestFile requestFile = readUploadIntoRequestFile(filePart, fileName, mimeType, FilePurpose.EVENT_INFO);
-                RequestService.addRequestFile(newRequest, requestFile);
-                out.print("<div>file ok</div>");
+                    RequestFile requestFile = ServletUtils.readUploadIntoRequestFile(filePart, fileName, mimeType, FilePurpose.EVENT_INFO);
+                    RequestService.addRequestFile(newRequest, requestFile);
+                    out.print("file ok");
+                }
             }
+            return;
         }
         catch (NumberFormatException | DateTimeParseException e) {
             out.print("<div>invalid date or price</div>");
@@ -79,52 +79,6 @@ public class NewRequestServlet extends HttpServlet {
             e.printStackTrace();
             out.print("<div>Oops! Duplicate or nonexistent id encountered.</div>");
         }
-        out.println("request ok??");
-    }
-
-
-    /**
-     *
-     * @param filePart
-     * @param fileName
-     * @param mimeType
-     * @param filePurpose
-     * @return
-     * @throws IOException
-     */
-    RequestFile readUploadIntoRequestFile(Part filePart, String fileName, String mimeType, String filePurpose) throws IOException {
-        if (filePart == null)
-            return null;
-
-        RequestFile reqFile = new RequestFile();
-
-        InputStream is = null;
-        ByteArrayOutputStream os = null;
-        try {
-            is = filePart.getInputStream();
-            os = new ByteArrayOutputStream();
-
-            // taken from PUBHUB project code
-            byte[] buffer = new byte[1024];  // read in 1KB chunks
-            while (is.read(buffer) != -1) {
-                os.write(buffer);
-            }
-            reqFile.setContent(os.toByteArray());
-
-            reqFile.setMimeType(new MimeType(mimeType));
-            reqFile.setPurpose(new FilePurpose(filePurpose));
-            reqFile.setName(fileName);
-            return reqFile;
-
-        } catch (IOException e) {
-            System.out.println("Could not upload file!");
-            e.printStackTrace();
-        } finally {
-            if (is != null)
-                is.close();
-            if (os != null)
-                os.close();
-        }
-        return null;
+        out.print("error adding new request");
     }
 }

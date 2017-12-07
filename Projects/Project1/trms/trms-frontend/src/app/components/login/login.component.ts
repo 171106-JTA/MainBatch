@@ -29,6 +29,7 @@ export class LoginComponent {
 
         // can't set response type unless we remove the type parameter
         // this.http.post<any>(loginUrl, formData,{responseType: 'text'})   // doesn't work
+        console.log("logging in");
         this.http.post(loginUrl, formData,{withCredentials: true, responseType: 'text'})
             .subscribe(
                 data => {

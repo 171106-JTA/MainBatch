@@ -8,8 +8,8 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name="reqhistory")
-@Check(constraints="(approval_file IS NULL AND approver_email IS NOT NULL) OR " +
-                   "(approval_file IS NOT NULL AND approver_email IS NULL)")
+@Check(constraints="(approval_file IS NULL) OR " +
+                   "(approval_file IS NOT NULL AND approver_email IS NOT NULL)")
 public class RequestHistory implements Serializable{
 
     @Id
