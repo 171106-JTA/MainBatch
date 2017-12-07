@@ -91,6 +91,10 @@ public class Dashboard extends HttpServlet {
 					response.setContentType("text/json");
 					result = ServiceUtil.toJson(GetUserInfo.getUserViewById((Integer)session.getAttribute("id")));
 					break;
+				case "GETALLUSERS":
+					response.setContentType("text/json");
+					result = ServiceUtil.toJson(GetUserInfo.getUserViews((String)session.getAttribute("role")));
+					break;
 				case "GETWIDGET":
 					response.setContentType("text/html");
 

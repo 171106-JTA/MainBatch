@@ -1,16 +1,46 @@
 package com.revature.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.businessobject.BusinessObject;
 import com.revature.businessobject.CodeList;
-import com.revature.businessobject.CompanyEmployee;
 import com.revature.businessobject.User;
 import com.revature.businessobject.UserInfo;
 import com.revature.businessobject.view.UserView;
 import com.revature.dao.DAOBusinessObject;
 
 public class GetUserInfo {
+	
+	public static List<UserView> getUserViews(String role) {
+		List<BusinessObject> records = DAOBusinessObject.loadAll(User.class);
+		List<UserView> views = new ArrayList<>();
+		UserView temp;
+		UserView view;
+		UserInfo info;
+		User user;
+		
+		// Build view list
+		for (BusinessObject record : records) {
+			user = (User)record;
+			temp = getUserViewById(user.getId());
+			
+			if (!role.toUpperCase().equals("EMPLOYEE")) 
+				view = temp;
+			else {
+				view = new UserView();
+				view.setUsername(temp.getUsername());
+				view.setFirstName(temp.getFirstName());
+				view.setEmail(temp.getEmail());
+				view.setRole(temp.getRole());
+			}
+		
+			views.add(view);
+		}
+		
+		return views;
+	}
+	
 	public static UserView getUserViewById(Integer userId) {
 		UserView view = new UserView();
 		List<BusinessObject> records = null;
