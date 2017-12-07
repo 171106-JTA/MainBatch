@@ -77,6 +77,8 @@ public class SystemDAOImpl implements SystemDAO{
 		String sql = "SELECT * FROM All_Request_Data WHERE EID = ?";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		int rrId = 0;
+		String status = "PENDING";
 	
 		try(Connection conn = ConnectionUtil.getConnection()){
 			ps = conn.prepareStatement(sql);
@@ -85,7 +87,9 @@ public class SystemDAOImpl implements SystemDAO{
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				rr = new ReimburseRequest(rs.getInt("RRID"), rs.getDouble("PRICE"), rs.getString("EVENTNAME"), rs.getDate("EVENT_DATETIME").toLocalDate());
+				rrId = rs.getInt("RRID");
+				status = this.getStatus(rrId);
+				rr = new ReimburseRequest(rrId, rs.getDouble("PRICE"), rs.getString("EVENTNAME"), rs.getDate("EVENT_DATETIME").toLocalDate(), status);
 				rrList.add(rr);
 			}
 		}catch(SQLException e) {
@@ -125,5 +129,43 @@ public class SystemDAOImpl implements SystemDAO{
 		}
 		
 		return percent;
+	}
+	
+	private String getStatus(int rrId) {
+		String status = "PENDING";
+		String sql = "SELECT * FROM Reimburse_Request WHERE RRID = ?";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int benCo = 0;
+		int deptHead = 0;
+		int dirSup = 0;
+		
+		try(Connection conn = ConnectionUtil.getConnection()){
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, rrId);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				benCo = rs.getInt(14);
+				deptHead = rs.getInt(12);
+				dirSup = rs.getInt(12);
+				
+				if(benCo == -1 || deptHead == -1 || dirSup == -1) {
+					status = "DENIED";
+				}
+				
+				if(benCo == 1) {
+					status = "APPROVED";
+				}
+			}
+			
+		}catch(SQLException e) {
+			
+		}finally {
+			close(ps);
+		}
+		
+		return status;
 	}
 }

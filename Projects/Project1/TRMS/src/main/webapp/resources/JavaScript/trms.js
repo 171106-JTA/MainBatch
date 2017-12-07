@@ -72,7 +72,7 @@ function getEmployeeRequests(){
 				var resultTable = document.getElementById("pendingTable");
 				
 				clearTable(resultTable);
-				
+				//TODO fix typeError
 				for(i in response){
 					var row = document.createElement("tr");
 					var td1 = document.createElement("td");

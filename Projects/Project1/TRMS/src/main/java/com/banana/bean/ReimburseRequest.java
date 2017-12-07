@@ -17,6 +17,7 @@ public class ReimburseRequest {
 	private LocalDateTime eventDate; 
 	private String eventName;
 	private LocalDate date;
+	private String status;
 	
 	
 	public ReimburseRequest(int empID, String fname, String lname, String location, String description, double cost,
@@ -34,14 +35,25 @@ public class ReimburseRequest {
 		this.eventDate = eventDate;
 	}
 	
-	public ReimburseRequest(int rrID, double cost, String eventName, LocalDate date) {
+	public ReimburseRequest(int rrID, double cost, String eventName, LocalDate date, String status) {
 		super();
 		this.rrID = rrID;
 		this.cost = cost;
 		this.eventName = eventName;
 		this.date = date;
+		this.status = status;
 	}
 	
+	
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public String getEventName() {
 		return eventName;
 	}

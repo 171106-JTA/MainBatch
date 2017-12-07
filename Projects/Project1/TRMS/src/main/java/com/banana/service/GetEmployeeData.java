@@ -24,7 +24,7 @@ public class GetEmployeeData {
 			
 			for(ReimburseRequest r: rrList) {
 				responseXML += "<emp><id>" + r.getRrID() + "</id><date>" + r.getDate() + "</date><event>" +
-						r.getEventName() + "</event><cost>" + r.getCost() + "</cost><projected-reimburse>" + 5 + "</projected-reimburse></emp>";
+						r.getEventName() + "</event><projected-reimburse>" + r.getCost() + "</projected-reimburse><status>" + r.getStatus() + "</status></emp>";
 			}
 			
 			responseXML += "</root>";
