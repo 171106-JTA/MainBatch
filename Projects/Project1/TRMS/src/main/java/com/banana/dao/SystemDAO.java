@@ -9,4 +9,5 @@ public interface SystemDAO {
 	public Employee getEmployeeByUsername(String username);
 	public boolean submitRequest(ReimburseRequest request);
 	public List<ReimburseRequest> getEmployeeRequests(int empId);
+	public double getPercentage(int eventId);
 }

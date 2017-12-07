@@ -101,4 +101,29 @@ public class SystemDAOImpl implements SystemDAO{
 		
 		return rrList;
 	}
+	
+	@Override
+	public double getPercentage(int eventId) {
+		String sql = "SELECT * FROM Event_Type WHERE EVENTID = ?";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		double percent = 0;
+	
+		try(Connection conn = ConnectionUtil.getConnection()){
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, eventId);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				percent = rs.getDouble(2);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(ps);
+		}
+		
+		return percent;
+	}
 }

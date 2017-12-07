@@ -28,8 +28,13 @@ public class InsertReimbursement {
 		String location = request.getParameter("location");
 		String descript = request.getParameter("description");
 		double cost = Double.parseDouble(request.getParameter("cost"));
+		
+		
 		int grading = Integer.parseInt(request.getParameter("grading"));
 		int event = Integer.parseInt(request.getParameter("event"));
+		
+		double actualCost = calcActualCost(cost, dao, event);
+		
 		String justify = request.getParameter("justification");
 		LocalDateTime ldt = StringToLocalDateTime.convert((String)request.getParameter("datetime"));
 		
@@ -38,7 +43,7 @@ public class InsertReimbursement {
 		}
 		
 		
-		rr = new ReimburseRequest(empId, fname, lname, location, descript, cost, grading, event, justify, ldt);
+		rr = new ReimburseRequest(empId, fname, lname, location, descript, actualCost, grading, event, justify, ldt);
 		
 		if(dao.submitRequest(rr)) {
 			return true;
@@ -46,6 +51,14 @@ public class InsertReimbursement {
 		
 		return false;
 	
+	}
+	
+	private static double calcActualCost(double cost, SystemDAOImpl dao, int event) {
+		double percent = dao.getPercentage(event);
+		
+		double result = cost * percent;
+		
+		return result;
 	}
 }
 

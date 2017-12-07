@@ -18,6 +18,7 @@ public class ReimburseRequest {
 	private String eventName;
 	private LocalDate date;
 	
+	
 	public ReimburseRequest(int empID, String fname, String lname, String location, String description, double cost,
 			int gradingFormat, int eventType, String justification, LocalDateTime eventDate) {
 		super();

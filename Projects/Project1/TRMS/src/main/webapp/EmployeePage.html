@@ -22,10 +22,30 @@
 				<li><input type="text" name="description" required></li>
 				<li>Cost</li>
 				<li><input type="text" name="cost" required></li>
+				
+				<li>
+					Event Type<br>
+					<select name="event">
+						<option value="1">University Course</option>
+						<option value="2">Seminars</option>
+						<option value="3">Certification Prep Class</option>
+						<option value="4">Certification</option>
+						<option value="5">Technical Training</option>
+						<option value="6" selected>Other</option>
+					</select>
+				</li>
+				<li>
+					Grading Format<br>
+					<input type="radio" name="grading" value="1">Letter
+					<input type="radio" name="grading" value="2">P/F
+				</li>
+				<li>TODO Passing grade</li>
+				<!-- 
 				<li>Grading Format</li>
 				<li><input type="text" name="grading" required></li>
 				<li>Type of Event</li>
-				<li><input type="text" name="event" required></li>
+				<li><input type="radio" name="event" required></li>
+				-->
 				<li>Work-Related Justification</li>
 				<li><input type="text" name="justification" required></li>
 				<li><input type="submit" name="submit"></li>
