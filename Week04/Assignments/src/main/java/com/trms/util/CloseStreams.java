@@ -1,5 +1,6 @@
 package com.trms.util;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,6 +36,15 @@ public class CloseStreams {
 				e.printStackTrace();
 			} 
 	}
-	
+
+	public static void close(CallableStatement cs) {
+		if(cs != null)
+			try {
+				cs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+	}
 
 }

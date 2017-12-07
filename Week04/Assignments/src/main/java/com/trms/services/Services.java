@@ -16,7 +16,7 @@ public class Services {
 			return 0; 
 	}
 		
-		public static int insertEmployee(Employee e) {
+		public static boolean insertEmployee(Employee e) {
 			Dao dao = new DaoImpl();
 			return dao.insertEmployee(e); 
 		}

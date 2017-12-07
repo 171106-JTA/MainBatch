@@ -9,7 +9,7 @@ public interface Dao {
 
 	public boolean loginIdAvailable(String loginUserId);
 	public boolean emailAvailable(String email); 
-	public int insertEmployee(Employee e); 
+	public boolean insertEmployee(Employee e); 
 	
 	
 	

@@ -3,9 +3,8 @@ package com.trms.obj;
 public class ContactInformation {
 	private String firstName;
 	private String lastName; 
-	private String phone;
-	private String altPhone; 
 	private String email;
+	private String phone;
 	private String streetAddr;
 	private String city;
 	private String state;
@@ -14,13 +13,12 @@ public class ContactInformation {
 	
 	
 	
-	public ContactInformation(String firstName, String lastName, String phone, String altPhone, String email,
+	public ContactInformation(String firstName, String lastName, String email, String phone, 
 			String streetAddr, String city, String state, String zipCode) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.phone = phone;
-		this.altPhone = altPhone;
 		this.email = email;
+		this.phone = phone;
 		this.streetAddr = streetAddr;
 		this.city = city;
 		this.state = state;
@@ -30,7 +28,6 @@ public class ContactInformation {
 		firstName = "N/A"; 
 		lastName = "N/A";
 		phone = "N/A"; 
-		altPhone = "N/A";
 		email = "N/A"; 
 		streetAddr = "N/A";
 		city = "N/A"; 
@@ -56,12 +53,6 @@ public class ContactInformation {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}
-	public String getAltPhone() {
-		return altPhone;
-	}
-	public void setAltPhone(String altPhone) {
-		this.altPhone = altPhone;
 	}
 	public String getEmail() {
 		return email;
@@ -96,7 +87,7 @@ public class ContactInformation {
 	@Override
 	public String toString() {
 		return "ContactInformation [Name=" + firstName + " " + lastName + ", phone: " + phone
-				+ ", altPhone: " + altPhone + ", email: " + email + "; Address: " + streetAddr + ", " + city
+				+ ", email: " + email + "; Address: " + streetAddr + ", " + city
 				+ ", " + state + ", zip code: " + zipCode + "]";
 	}
 	

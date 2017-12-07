@@ -1,0 +1,295 @@
+DROP SEQUENCE Empl_Id_Seq;
+DROP SEQUENCE Cont_Index_Incr_Seq;
+DROP SEQUENCE Contact_Info_Index_Seq;
+DROP SEQUENCE TRR_Tracking_Number_Seq;
+
+DROP TRIGGER Empl_Default_Trg; 
+DROP TRIGGER Contact_Info_Default_Trg;
+/
+DROP TABLE TuitionReimbursmentRequest CASCADE CONSTRAINTS; 
+DROP TABLE EventTypes CASCADE CONSTRAINTS;
+DROP TABLE Grades CASCADE CONSTRAINTS;
+DROP TABLE GradingFormats CASCADE CONSTRAINTS;
+DROP TABLE ReimbursementStatus CASCADE CONSTRAINTS;
+DROP TABLE Positions CASCADE CONSTRAINTS;
+DROP TABLE Department CASCADE CONSTRAINTS;
+DROP TABLE Employee CASCADE CONSTRAINTS;
+DROP TABLE ContactInformation CASCADE CONSTRAINTS; 
+
+    
+ /   
+create table ContactInformation (
+    contact_index number(3) NOT NULL,
+    firstname varchar2(30),
+    lastname varchar2(30), 
+    phoneNumber varchar2(15),
+    email varchar2(80),
+    streetAddress varchar2(80),
+    city varchar2(40),
+    state varchar2(20),
+    zipcode varchar2(10),
+    CONSTRAINT PK_index PRIMARY KEY (contact_index)
+);
+/
+create table Employee(
+    employeeID number(3) NOT NULL,
+    firstname varchar2(30) NOT NULL,
+    lastname varchar2(30) NOT NULL,
+    loginUserId varchar2(32) NOT NULL unique,
+    loginPassword varchar2(32) NOT NULL,
+    contactInformationKey number(3) NOT NULL,
+    emergencyContactKey number(3),
+    deptID number(3),
+    supervisorEmpID number(3), 
+    positionID number(3),
+    CONSTRAINT PK_EmpID PRIMARY KEY (employeeID), 
+    CONSTRAINT FK_EMP_Contact_Info FOREIGN KEY (contactInformationKey) REFERENCES ContactInformation(contact_index),
+    CONSTRAINT FK_EMP_Emerg_Contact FOREIGN KEY (emergencyContactKey) REFERENCES ContactInformation(contact_index)
+);
+
+/
+create table Department (
+    deptID number(3),
+    name varchar2(80)  NOT NULL,
+    departmentHeadID number(3),
+    CONSTRAINT PK_deptID PRIMARY KEY (deptID),
+    CONSTRAINT FK_DEP_deptHead FOREIGN KEY (departmentHeadID) REFERENCES Employee(employeeID)
+);
+/
+create table Positions (
+    positionID number(3),
+    title varchar2(50),
+    deptID number(3),
+    CONSTRAINT PK_positionID PRIMARY KEY (positionID),
+    CONSTRAINT FK_POS_department FOREIGN KEY (deptID) REFERENCES Department(deptID)
+);
+/
+create table ReimbursementStatus (
+    employeeID number(3) NOT NULL, 
+    availableReimbursement number(8,2) NOT NULL,
+    pendingReimbursement number(8,2),
+    CONSTRAINT FK_RS_empID FOREIGN KEY (employeeID) REFERENCES Employee(employeeID)
+);
+/
+create table GradingFormats (
+    code varchar2(15),
+    description varchar2(30) unique,
+    CONSTRAINT PK_code PRIMARY KEY (code)
+);
+/
+create table Grades ( 
+    gradingFormat varchar2(30),
+    grade varchar2(20) unique,
+    passes varchar2(1), 
+    CONSTRAINT FK_Grade_Grading_Format_Code FOREIGN KEY (gradingFormat) REFERENCES GradingFormats(code)
+);
+/
+create table EventTypes (
+    eventType varchar2(80),
+    reimbursementCoverage number(4,2),
+    gradingFormat varchar2(15),
+    CONSTRAINT PK_eventType PRIMARY KEY (eventType),
+    CONSTRAINT FK_Event_Grading_Format_Code FOREIGN KEY (gradingFormat) REFERENCES GradingFormats(code)
+); 
+/
+create table TuitionReimbursmentRequest (
+    trackingNumber number(5), 
+    employeeID number(3),
+    eventName varchar2(60),
+    eventDate DATE,
+    eventTime TIMESTAMP,
+    eventAddress varchar2(60),
+    eventCity varchar2(40),
+    eventState varchar2(20),
+    eventZip varchar2(10),
+    eventType varchar2(80),
+    eventDescription varchar2(140),
+    unmodifiedCost number(6,2),
+    gradingFormat varchar2(15),
+    justification varchar2(80),
+    workHoursMissing number,
+    supervisorApproved number,
+    deptHeadApproved number,
+    benCoApproved number,
+    CONSTRAINT PK_trackingNumber PRIMARY KEY (trackingNumber),
+    CONSTRAINT FK_TRR_EmpID FOREIGN KEY (employeeID) REFERENCES Employee(employeeID),
+    CONSTRAINT FK_TRR_eventType FOREIGN KEY (eventType) REFERENCES EventTypes(eventType),
+    CONSTRAINT FK_TRR_gradingFormat FOREIGN KEY (gradingFormat) REFERENCES GradingFormats(code)
+);
+/
+CREATE SEQUENCE Empl_Id_Seq start with 1 increment by 1;
+CREATE SEQUENCE Cont_Index_Incr_Seq start with 1 increment by 1; 
+CREATE SEQUENCE TRR_Tracking_Number_Seq start with 1 increment by 1; 
+CREATE SEQUENCE Contact_Info_Index_Seq start with 1 increment by 1; 
+/
+--Increment ID and default information on employee
+CREATE OR REPLACE TRIGGER Empl_Default_Trg
+BEFORE INSERT ON Employee
+FOR EACH ROW
+DECLARE 
+    newEmpId number;
+    newIndex number; 
+BEGIN
+    newEmpId := 0; 
+    if :new.employeeid is null then
+        newEmpId := Empl_Id_Seq.nextval; 
+        :new.employeeId := newEmpId; 
+    end if; 
+    if :new.contactInformationKey is null then 
+        newIndex := Contact_Info_Index_Seq.nextval; 
+        :new.contactInformationKey :=newIndex;
+        INSERT INTO ContactInformation(firstname, lastname, contact_index) 
+            values(:new.firstname, :new.lastname, newIndex); 
+    end if; 
+    if :new.emergencyContactKey is null then 
+        newIndex := Contact_Info_Index_Seq.nextval; 
+        :new.emergencyContactKey :=newIndex;
+        INSERT INTO ContactInformation(contact_index) values(newIndex); 
+    end if; 
+    if newEmpId = 0 then
+        newEmpId := Empl_Id_Seq.nextval;
+    end if; 
+    
+    --INSERT INTO ReimbursementStatus values(newEmpid, 1000.00, 0.00); 
+    
+END; 
+/
+--Increment Index and set default info for contact information. 
+CREATE OR REPLACE TRIGGER Contact_Info_Default_Trg
+BEFORE INSERT ON ContactInformation
+FOR EACH ROW
+BEGIN
+    if :new.firstname is null then
+        select 'N/A' into :new.firstname from dual;
+    end if; 
+    if :new.lastname is null then
+        select 'N/A' into :new.lastname from dual; 
+    end if; 
+    if :new.phoneNumber is null then
+        select 'N/A' into :new.phoneNumber from dual; 
+    end if; 
+    if :new.email is null then
+        select 'N/A' into :new.email from dual; 
+    end if; 
+    if :new.streetAddress is null then
+        select 'N/A' into :new.streetAddress from dual; 
+    end if; 
+    if :new.city is null then
+        select 'N/A' into :new.city from dual; 
+    end if; 
+    if :new.state is null then
+        select 'N/A' into :new.state from dual; 
+    end if; 
+    if :new.zipcode is null then
+        select 'N/A' into :new.zipcode from dual; 
+    end if; 
+END; 
+/
+
+CREATE OR REPLACE TRIGGER On_Position_Create 
+BEFORE INSERT ON Positions
+FOR EACH ROW
+DECLARE
+    newPosId number;
+    newDepId number; 
+BEGIN
+    if :new.positionId is null and :new.deptId is not null then
+        select max(positionId) into newPosId from Positions 
+            where deptId = :new.deptId order by Positions.positionID desc;
+        if newPosId is null then
+            newPosId := :new.deptId*100;
+        end if;
+        :new.positionId := newPosId + 1;
+    end if;
+END;
+/
+
+CREATE OR REPLACE TRIGGER On_Employee_Delete 
+BEFORE DELETE ON Employee
+FOR EACH ROW
+DECLARE 
+    
+BEGIN
+    DELETE FROM ContactInformation where contact_index = :old.contactInformationKey;
+    DELETE FROM ContactInformation where contact_index = :old.emergencyContactKey;
+END;
+/
+CREATE OR REPLACE PROCEDURE Assign_Department_Head( loginId IN varchar2, 
+    department_name IN varchar2)
+IS
+    eId number;
+    dId number; 
+BEGIN
+    select employeeId into eId from employee 
+        where loginUserId = loginId; 
+    select deptId into dId from department
+        where name = department_name; 
+        
+    update Employee set deptId = dId
+        where loginUserId = loginId;
+    
+    update Department set departmentHeadID = eId
+        where name = department_name; 
+END;
+/
+
+--CREATE OR REPLACE PROCEDURE 
+
+
+
+CREATE OR REPLACE PROCEDURE Create_Employee_Full (
+    firstname IN varchar2, lastname IN varchar2, username IN varchar2, password IN varchar2,
+    department IN varchar2, position IN varchar2, supervisor IN varchar2, 
+    email IN varchar2, phone IN varchar2,
+    streetAddr IN varchar2, city IN varchar2, state IN varchar2, zipcode IN varchar2)
+IS
+BEGIN
+    commit; 
+    SET TRANSACTION NAME 'inserting_new_employee';  
+    
+    insert into Employee(firstname, lastname, loginUserId, loginPassword,
+        deptId, positionId, supervisorEmpId) 
+        values(
+        Create_Employee_Full.firstname, 
+        Create_Employee_Full.lastname,
+        Create_Employee_Full.username,
+        Create_Employee_Full.password,
+        (select Department.deptId from Department where Department.name = Create_Employee_Full.department),
+        (select positionId from Positions where Positions.title = Create_Employee_Full.position),
+        (select EmployeeId from Employee where Employee.loginUserId = supervisor));
+
+    SAVEPOINT after_insert; 
+        
+    --update contact info on new employee
+    UPDATE ContactInformation set
+        ContactInformation.phoneNumber = Create_Employee_Full.phone,
+        ContactInformation.email = Create_Employee_Full.email,
+        ContactInformation.streetAddress = Create_Employee_Full.streetAddr,
+        ContactInformation.city = Create_Employee_Full.city,
+        ContactInformation.state = Create_Employee_Full.state,
+        ContactInformation.zipcode = Create_Employee_Full.zipcode
+        where contact_index = 
+            (select contactInformationKey from Employee where loginUserId = username);
+    
+    SAVEPOINT after_update_contact_info;
+    
+    commit; 
+END;
+/
+
+CREATE OR REPLACE PROCEDURE Create_Position(positionName IN varchar2, deptId IN number)
+IS
+BEGIN
+    INSERT INTO Positions(title, deptId) VALUES(
+        Create_Position.positionName, Create_Position.deptId);
+END;
+/
+
+
+--CREATE OR REPLACE PROCEDURE Record_Emergency_Contact(username IN varchar2, 
+    
+
+
+
+
+

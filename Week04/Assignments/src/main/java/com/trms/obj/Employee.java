@@ -7,6 +7,7 @@ public class Employee {
 	private String lastName;
 	private String department;
 	private String position; 
+	private String supervisor;
 	private String loginUserId;
 	private String loginPassword;
 	private ContactInformation contactInfo;
@@ -39,7 +40,18 @@ public class Employee {
 		
 		this.emergencyContact = new ContactInformation(); 		
 	}
-
+	public Employee(String firstName, String lastName, String loginUserId, String loginPassword, 
+			String department, String position, String supervisor, ContactInformation contactInformation) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.loginUserId = loginUserId;
+		this.loginPassword = loginPassword; 
+		this.department = department; 
+		this.position = position;
+		this.supervisor = supervisor;
+		this.contactInfo = contactInformation; 
+		
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -56,18 +68,6 @@ public class Employee {
 	public String getFullName() {
 		return (firstName + " " + lastName); 
 	}
-	public String getPosition() {
-		return position; 
-	}
-	public void setPosition(String position) {
-		this.position = position; 
-	}
-	public String getDepartment() {
-		return department;
-	}
-	public void setDepartment(String department) {
-		this.department = department;
-	}
 	public String getLoginUserId() {
 		return loginUserId;
 	}
@@ -79,6 +79,24 @@ public class Employee {
 	}
 	public void setLoginPassword(String loginPassword) {
 		this.loginPassword = loginPassword;
+	}
+	public String getDepartment() {
+		return department;
+	}
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+	public String getPosition() {
+		return position; 
+	}
+	public void setPosition(String position) {
+		this.position = position; 
+	}
+	public String getSupervisor() {
+		return supervisor; 
+	}
+	public void setSupervisor(String supervisor) {
+		this.supervisor = supervisor; 
 	}
 	
 	public ContactInformation getContactInfo() {
@@ -98,17 +116,15 @@ public class Employee {
 		this.emergencyContact = emergencyContact;
 	}
 
-
+	@Override
 	public String toString() {
-		return toString(false); 
+		return "Employee [firstName=" + firstName + ", lastName=" + lastName + ", department=" + department
+				+ ", position=" + position + ", supervisor=" + supervisor + ", loginUserId=" + loginUserId
+				+ ", loginPassword=" + loginPassword + ", contactInfo=" + contactInfo;
 	}
-	public String toString(boolean showCredentials) {
-		String str = "Employee: " + lastName + ", " + firstName + "; ";
-		if(showCredentials)
-			str += "Username: " + loginUserId + "; Password: " + loginPassword + "; "; 
-		str += position + " in " + department + "; ";
-		return str;
-	}
+
+
+
 	
 	
 	
