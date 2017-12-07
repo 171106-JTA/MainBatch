@@ -1,111 +1,97 @@
 import {Component} from '@angular/core';
 import {LookupsService} from '../../services/lookups.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+
+
+const newRequestUrl = 'http://localhost:8085/trms/employee/newRequest';
 
 @Component({
     selector: 'app-new-request',
     templateUrl: './new-request.component.html',
     styleUrls: ['./new-request.component.css']
 })
-
-
 export class NewRequestComponent {
-    private _eventTypes: string[];
-    private _filePurposes: string[];
-    private _departments: string[];
-    private _employeeRanks: string[];
-    private _mimeTypes: string[];
-    private _requestStatuses: string[];
+    eventTypes: string[];
+    validMimeTypes: string[];
 
+    eventFile: Blob;
+    eventFileName: string;
+    eventFileMimeType: string;
+
+
+    newRequestForm: FormGroup = new FormGroup({
+        eventType: new FormControl('', Validators.required),
+        eventStartDate: new FormControl('', Validators.required),
+        eventEndDate: new FormControl('', Validators.required),
+        eventAddress: new FormControl('', Validators.required),
+        eventCity: new FormControl('', Validators.required),
+        eventState: new FormControl('', Validators.required),
+        eventZip: new FormControl('', Validators.required),
+        eventPrice: new FormControl('', Validators.required),
+        eventDescription: new FormControl(),
+        eventFile: new FormControl() // doesn't work for file inputs, here for posterity
+    });
 
     constructor(private lookups: LookupsService) {
         this.lookups.getEventTypes().subscribe(
             data => {
-                this._eventTypes = data;
+                this.eventTypes = data;
             },
             err => {
                 console.error(err);
             },
-            () => {
-            }
-        );
-
-        this.lookups.getFilePurposes().subscribe(
-            data => {
-                this._filePurposes = data;
-            },
-            err => {
-                console.error(err);
-            },
-            () => {
-            }
-        );
-
-         this.lookups.getDepartments().subscribe(
-            data => {
-                this._departments = data;
-            },
-            err => {
-                console.error(err);
-            },
-            () => {
-            }
-        );
-
-        this.lookups.getEmployeeRanks().subscribe(
-            data => {
-                this._employeeRanks = data;
-            },
-            err => {
-                console.error(err);
-            },
-            () => {
-            }
+            () => {}
         );
 
         this.lookups.getMimeTypes().subscribe(
             data => {
-                this._mimeTypes = data;
+                this.validMimeTypes = data;
             },
             err => {
                 console.error(err);
             },
-            () => {
-            }
-        );
-
-        this.lookups.getRequestStatuses().subscribe(
-            data => {
-                this._requestStatuses = data;
-            },
-            err => {
-                console.error(err);
-            },
-            () => {
-            }
         );
     }
 
-    get eventTypes(): string[] {
-        return this._eventTypes;
+    public submitNewRequest() {
+        let formData = new FormData();
+
+        for (let formControlKey in this.newRequestForm.controls) {
+            formData.append(formControlKey, this.newRequestForm.get(formControlKey).value);
+            console.log(formControlKey, this.newRequestForm.get(formControlKey).value); // todo: remove
+        }
+        formData.append('eventFile', this.eventFile, this.eventFileName);
+        formData.append('eventFileName', this.eventFileName);
+        formData.append('eventFileNameMimeType', this.eventFileMimeType);
+
+
+        let xhr = new XMLHttpRequest();
+        xhr.withCredentials = true;
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(xhr.response);
+            }
+            else
+                console.warn(xhr.response);
+        };
+        xhr.upload.onprogress = (event) => {
+            let progress = Math.round(event.loaded / event.total * 100);
+        };
+        xhr.open('POST', newRequestUrl, true);
+        xhr.send(formData);
     }
 
-    get filePurposes(): string[] {
-        return this._filePurposes;
-    }
+    public onFileChange($event) {
+        let rawFile: any = $event.target.files[0];
 
-    get departments(): string[] {
-        return this._departments;
-    }
+        /* todo: validate file mime type
+        if (!(rawFile.mimeType in this.lookups.getMimeTypes()))
+            console.error('invalid file type');
+        */
 
-    get employeeRanks(): string[] {
-        return this._employeeRanks;
-    }
-
-    get mimeTypes(): string[] {
-        return this._mimeTypes;
-    }
-
-    get requestStatuses(): string[] {
-        return this._requestStatuses;
+        this.eventFile = rawFile;
+        this.eventFileName = rawFile.name;
+        this.eventFileMimeType = rawFile.type;
     }
 }
+

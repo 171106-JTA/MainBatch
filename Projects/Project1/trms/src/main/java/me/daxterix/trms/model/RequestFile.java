@@ -30,7 +30,7 @@ public class RequestFile implements Serializable {
 
     @Lob
     @Column(name="file_content")
-    private Byte[] content;
+    private byte[] content;
 
     @OneToOne(mappedBy="file")
     private EventGrade eventGrade;
@@ -68,11 +68,11 @@ public class RequestFile implements Serializable {
         this.name = name;
     }
 
-    public Byte[] getContent() {
+    public byte[] getContent() {
         return content;
     }
 
-    public void setContent(Byte[] content) {
+    public void setContent(byte[] content) {
         this.content = content;
     }
 

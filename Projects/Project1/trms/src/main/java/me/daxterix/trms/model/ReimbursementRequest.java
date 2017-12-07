@@ -14,7 +14,7 @@ import java.util.List;
 
 @Entity
 @Table(name="request")
-@Check(constraints="date_filed < event_start AND event_start <= event_end")
+@Check(constraints="date_filed <= (event_start - 14) AND event_start <= event_end")
 public class ReimbursementRequest implements Serializable {
 
     @Id
@@ -31,7 +31,7 @@ public class ReimbursementRequest implements Serializable {
     @JoinColumn(name="event_type",foreignKey=@ForeignKey(name="fk_req_type"))
     private EventType eventType;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     @JoinColumn(name="addr_id", foreignKey=@ForeignKey(name="fk_req_addr"))
     private Address address;
 

@@ -127,7 +127,7 @@ CREATE TABLE request (
     CONSTRAINT fk_req_addr FOREIGN KEY (addr_id) REFERENCES address(addr_id),
     CONSTRAINT ck_is_urgent CHECK (is_urgent = 'Y' OR is_urgent = 'N'),
     CONSTRAINT ck_exceeds_status CHECK (exceeds_status = 'Y' OR exceeds_status = 'N'),
-    CONSTRAINT ck_dates CHECK (date_filed < event_start AND event_start <= event_end)
+    CONSTRAINT ck_dates CHECK (date_filed <= (event_start - 14) AND event_start <= event_end)   /* subtracting is done by day increments */
 );
 /
 DROP SEQUENCE seq_req;

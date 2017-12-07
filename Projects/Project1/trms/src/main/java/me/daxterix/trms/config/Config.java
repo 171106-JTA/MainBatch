@@ -41,7 +41,7 @@ public class Config {
         factoryBean.setPackagesToScan("daxterix.pubhub.model"); // varargs method
 
         Properties props = new Properties();
-        props.setProperty("hibernate.hbm2ddl.auto", "update");
+        props.setProperty("hibernate.hbm2ddl.auto", "validate");
         props.setProperty("hibernate.show_sql", "true");
         props.setProperty("hibernate.dialect", "org.hibernate.dialect.Oracle10gDialect");
         props.setProperty("hibernate.connection.isolation", String.valueOf(Connection.TRANSACTION_READ_COMMITTED));
@@ -100,7 +100,7 @@ public class Config {
     }
 
     @Bean
-    public RequestInfoDAO fileDAO(SessionFactory sessionFactory) {
+    public RequestInfoDAO requestInfoDAO(SessionFactory sessionFactory) {
         return new RequestInfoDAOImpl(sessionFactory);
     }
 

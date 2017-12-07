@@ -10,7 +10,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import sun.misc.Request;
 
 import javax.persistence.PersistenceException;
 import java.util.Arrays;
@@ -29,7 +28,7 @@ public class LookupTablesInitializer {
     public static void main(String[] args) {
         LookupTablesInitializer pop = new LookupTablesInitializer();
 
-        pop.populateMimeTable();
+        pop.createAccount();
         pop.populateFilePurposeTable();
         pop.populateEmployeeRankTable();
         pop.populateRequestStatusTable();
@@ -38,7 +37,7 @@ public class LookupTablesInitializer {
     }
 
     @Transactional
-    void populateMimeTable() {
+    void createAccount() {
         String [] mimeTypes = {
                 MimeType.PNG,
                 MimeType.JPEG,
@@ -54,7 +53,7 @@ public class LookupTablesInitializer {
                 session.save(new MimeType(mType));
 
             session.getTransaction().commit();
-            System.out.println("[PopulateLookupTables] Error populating MimeType table");
+            System.out.println("[PopulateLookupTables] Successfully populated MimeType table");
         }
         catch(PersistenceException e) {
             e.printStackTrace();

@@ -14,17 +14,6 @@
             <welcome-file>default.jsp</welcome-file>
         </welcome-file-list>
 
-    <servlet>
-        <description></description>
-        <display-name></display-name>
-        <servlet-name>test</servlet-name>
-        <servlet-class>me.daxterix.trms.servlet.TestServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>test</servlet-name>
-        <url-pattern>/test</url-pattern>
-    </servlet-mapping>
-
     <filter>
         <filter-name>corsFilter</filter-name>
         <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>

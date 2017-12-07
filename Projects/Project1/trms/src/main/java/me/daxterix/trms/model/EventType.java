@@ -34,6 +34,10 @@ public class EventType implements Serializable {
 
     public EventType() {}
 
+    public EventType(String type) {
+        this.type = type;
+    }
+
     public String getType() {
         return type;
     }

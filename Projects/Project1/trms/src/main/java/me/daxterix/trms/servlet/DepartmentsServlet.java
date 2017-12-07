@@ -1,5 +1,7 @@
 package me.daxterix.trms.servlet;
 
+import me.daxterix.trms.dao.DAOUtils;
+import me.daxterix.trms.dao.ObjectDAO;
 import me.daxterix.trms.model.Department;
 
 import javax.servlet.ServletException;
@@ -12,7 +14,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @WebServlet(name = "DepartmentsServlet", urlPatterns="/lookups/departments")
-public class DepartmentsServlet extends StockHttpServlet {
+public class DepartmentsServlet extends HttpServlet {
+    ObjectDAO objectDao = DAOUtils.getObjectDAO();
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         List<String> departments = objectDao.getAllObjects(Department.class).stream()

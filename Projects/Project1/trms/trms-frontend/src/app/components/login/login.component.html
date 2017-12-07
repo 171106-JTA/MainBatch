@@ -1,3 +1,37 @@
-<p>
-  login works!
-</p>
+<form [formGroup]="loginForm" (ngSubmit)="login($event)" class="form-horizontal" enctype="multipart/form-data">
+    <fieldset>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-5">
+                <legend>Enter Credentials</legend>
+            </div>
+        </div>
+
+        <div class="form-group" *ngIf="loginFailed">
+            <div class="col-sm-offset-4 col-sm-5">
+                <div class="alert-danger">Invalid Credentials</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="email" class="control-label eventType col-sm-4">Email</label>
+            <div class="col-sm-5">
+                <input class="form-control" id="email" type="email" step="0.01" formControlName="email" required/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="password" class="col-sm-4 control-label">Password</label>
+            <div class="col-sm-5">
+                <input class="form-control" id="password" type="password" step="0.01" formControlName="password"
+                       required/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-5">
+                <button type="submit" class="btn btn-info btn-block">Submit</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+

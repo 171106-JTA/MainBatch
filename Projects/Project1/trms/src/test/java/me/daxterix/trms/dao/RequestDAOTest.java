@@ -5,6 +5,7 @@ import me.daxterix.trms.dao.exception.NonExistentIdException;
 import me.daxterix.trms.model.*;
 
 import org.junit.Test;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +24,11 @@ public class RequestDAOTest extends ObjectDAOTest {
     @Test(expected=DuplicateIdException.class)
     public void saveDuplicate() throws Exception {
         requestDao.save(request1);
+    }
+
+    @Test(expected=DataIntegrityViolationException.class)
+    public void saveWithInvalidEventType() throws Exception {
+        persistRequest(emp1, RequestStatus.GRANTED, "Invalid EventType");
     }
 
     @Test(expected=NonExistentIdException.class)

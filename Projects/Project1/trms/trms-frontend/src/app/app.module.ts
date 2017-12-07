@@ -1,8 +1,8 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import { FormsModule }    from '@angular/forms';
-import { HttpClientModule }    from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 
 import {appRoutes} from './routing';
@@ -11,7 +11,7 @@ import {RegisterComponent} from './components/register/register.component';
 import {HomeComponent} from './components/home/home.component';
 import {NavComponent} from './components/nav/nav.component';
 import {LoginComponent} from './components/login/login.component';
-import { NewRequestComponent } from './components/new-request/new-request.component';
+import {NewRequestComponent} from './components/new-request/new-request.component';
 import {LookupsService} from './services/lookups.service';
 
 
@@ -22,13 +22,14 @@ import {LookupsService} from './services/lookups.service';
         HomeComponent,
         NavComponent,
         LoginComponent,
-        NewRequestComponent
+        NewRequestComponent,
     ],
     imports: [
         BrowserModule,
         RouterModule.forRoot(appRoutes),
         FormsModule,
-        HttpClientModule
+        ReactiveFormsModule,
+        HttpClientModule,
     ],
     providers: [
         LookupsService

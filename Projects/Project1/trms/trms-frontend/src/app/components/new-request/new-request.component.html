@@ -1,4 +1,4 @@
-<form class="form-horizontal" enctype="multipart/form-data" (ngSubmit)="submitNewRequest">
+<form [formGroup]="newRequestForm" (ngSubmit)="submitNewRequest()" class="form-horizontal" enctype="multipart/form-data">
 
     <fieldset>
         <div class="form-group">
@@ -10,16 +10,23 @@
         <div class="form-group">
             <label for="eventType" class="control-label eventType col-sm-4">Type</label>
             <div class="col-sm-5">
-                <select class="form-control" name="eventType" id="eventType" required>
+                <select class="form-control" formControlName="eventType" id="eventType" required>
                     <option *ngFor="let evtType of eventTypes">{{evtType}}</option>
                 </select>
             </div>
         </div>
 
         <div class="form-group">
+            <label for="eventPrice" class="col-sm-4 control-label">Price</label>
+            <div class="col-sm-5">
+                <input type="number" step="0.01" class="form-control" id="eventPrice" formControlName="eventPrice" required/>
+            </div>
+        </div>
+
+        <div class="form-group">
             <label for="eventAddress" class="col-sm-4 control-label">Address</label>
             <div class="col-sm-5">
-                <input type="text" class="form-control" id="eventAddress" name="eventAddress"/>
+                <input type="text" class="form-control" id="eventAddress" formControlName="eventAddress"/>
             </div>
         </div>
     </fieldset>
@@ -27,36 +34,35 @@
     <div class="form-group">
         <label for="eventCity" class="col-sm-4 control-label">City</label>
         <div class="col-sm-5">
-            <input type="text" class="form-control" id="eventCity" name="eventCity"/>
+            <input type="text" class="form-control" id="eventCity" formControlName="eventCity"/>
         </div>
     </div>
 
     <div class="form-group">
         <label for="eventState" class="col-sm-4 control-label">State</label>
         <div class="col-sm-5">
-            <input type="text" class="form-control" id="eventState" name="eventState"/>
+            <input type="text" class="form-control" id="eventState" formControlName="eventState"/>
         </div>
     </div>
 
     <div class="form-group">
-        <label for="eventPrice" class="col-sm-4 control-label">Price</label>
+        <label for="eventZip" class="col-sm-4 control-label">Zip Code</label>
         <div class="col-sm-5">
-            <input type="number" step="0.01" class="form-control" id="eventPrice" name="eventPrice" required/>
+            <input type="number" class="form-control" id="eventZip" formControlName="eventZip"/>
         </div>
     </div>
-
 
     <div class="form-group">
         <label for="eventStartDate" class="col-sm-4 control-label">Start Date</label>
         <div class="col-sm-5">
-            <input type="date" class="form-control" id="eventStartDate" name="eventStartDate" required/>
+            <input type="date" class="form-control" id="eventStartDate" formControlName="eventStartDate" required/>
         </div>
     </div>
 
     <div class="form-group">
         <label for="eventEndDate" class="col-sm-4 control-label">End Date</label>
         <div class="col-sm-5">
-            <input type="date" class="form-control" id="eventEndDate" name="eventEndDate" required/>
+            <input type="date" class="form-control" id="eventEndDate" formControlName="eventEndDate" required/>
         </div>
     </div>
 
@@ -64,19 +70,16 @@
     <div class="form-group">
         <label for="eventDescription" class="col-sm-4 control-label">Description</label>
         <div class="col-sm-5">
-            <textarea class="form-control" id="eventDescription" name="eventDescription" required></textarea>
+            <textarea class="form-control" id="eventDescription" formControlName="eventDescription" required></textarea>
         </div>
     </div>
 
-    <!--
     <div class="form-group">
-        <label for="content" class="col-sm-4 control-label">Content</label>
+        <label for="eventFile" class="col-sm-4 control-label">Informational Files</label>
         <div class="col-sm-5">
-            <input type="file" class="form-control" id="content" name="content" placeholder="Content"
-                   required="required"/>
+            <input type="file" class="form-control" id="eventFile" (change)="onFileChange($event)" formControlName="eventFile" required/>
         </div>
     </div>
-    -->
 
     <div class="form-group">
         <div class="col-sm-offset-4 col-sm-5">
