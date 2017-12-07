@@ -10,14 +10,17 @@
 <link rel="stylesheet" type="text/css"
 	href="resources/css/StylingTRMS.css">
 <meta charset="UTF-8">
-<script src="resources/javascript/Employee.js"></script>
+<script src="C:\Users\Alex\Documents\Alex\Revature_Peterson\Project1\src\main\webapp\resources\javascript\Employee.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
-	<h1 id="welcome">Welcome.</h1>
+	<h2 id="welcome">Welcome.</h2>
 	<div class="row">
 		<div class="col-lg-4" align="center">
 			<h4>Messages</h4>
+		</div>
+		<div>
+			<h1 id="AJAXError"></h1>
 		</div>
 		<div class="col-lg-4" align="center">
 			<div class="well">
@@ -45,12 +48,13 @@
 						Cost <input type="number" name="eventCost" placeholder="Cost"
 							required>
 					</div>
-					<div class="next">
-						<input type="text" name="test" placeholder="test" required>
-					</div>
-					<div class="next">
+					<!-- <div class="next">
 						Additional Files <input type="file" value="fileupload"
 							id="fileupload">
+					</div> -->
+					<div class="next">
+						Date of Event <input type="date" placeholder="Date"
+							min="2017-12-06" max="2018-06-30" required>
 					</div>
 					<div class="next">
 						<input type="Submit" value="Submit Request">

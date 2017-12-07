@@ -2,45 +2,49 @@ package com.revature.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.beans.Employee;
+import com.revature.beans.Request;
+import com.revature.dao.TRMSDao;
 
 /**
- * Servlet implementation class GetUsernameServlet
+ * Servlet implementation class GetUnverifiedUsers
  */
-public class GetUsernameServlet extends HttpServlet {
+public class GetUnverifiedEmployeesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("GetUsernameServlet");
-		
-		HttpSession session = request.getSession();
-		String fname = (String) session.getAttribute("fname");
-		String lname = (String) session.getAttribute("lname");
-		String title = (String) session.getAttribute("title");
-		String username = (String) session.getAttribute("username");
-		
+		System.out.println("GetUnverifiedEmployees");
+		TRMSDao dao = TRMSDao.getDao();
+		List<Employee> unvEmps = dao.getUnverifiedEmployees();
 		response.setContentType("text/xml");
 		PrintWriter out = response.getWriter();
-		String myXml = "<root>";
 
-		myXml += "<fname>" + fname + "</fname>";
-		myXml += "<lname>" + lname + "</lname>";
-		myXml += "<title>" + title + "</title>";
-		myXml += "<username>" + username + "</username>";
-		myXml += "</root>";
+		if (!unvEmps.isEmpty()) {
+			String myXml = "<root>";
 
-		System.out.println(myXml);
-		out.println(myXml);
+			for (Employee e : unvEmps) {
+				myXml += "<employee><username>" + e.getUsername() + "</username>" + "<FName>" + e.getFname() + "</FName>"
+						+ "<LName>" + e.getLname() + "</LName></employee>";
+			}
+			myXml += "</root>";
+
+			out.println(myXml);
+		}
+		else{
+			out.println("<root><employee><username>None</username><FName>None</FName>"
+					+ "<LName>None</LName></employee></root>");
+		}
 	}
 
 	/**
@@ -50,4 +54,5 @@ public class GetUsernameServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

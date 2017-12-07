@@ -13,10 +13,32 @@
 <title>TRMS Admin</title>
 </head>
 <body>
-	<h1>Admin page</h1>
-	<div class="col-lg-4" align="center"></div>
+	<h2 id="welcome">Welcome.</h2>
 	<div class="col-lg-4" align="center">
-		<div>Employee Tuition Request Forms.</div>
+		<h3>Unverified Employees</h3>
+		<table border='2px' id="unvEmployeeTable">
+			<thead>
+				<tr>
+					<th>Username</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+				</tr>
+			</thead>
+			<tbody id='unvTbody'>
+			</tbody>
+		</table>
+		<br>
+		<h3 id="directSupervisorsHeader"></h3>
+		<table border='2px' id="dirSups">
+		</table>
+		<br>
+		<div class="well" id="assignEmployee"></div>
+
+	</div>
+	<div class="col-lg-4" align="center">
+		<div>
+			<h3>Employee Tuition Request Forms.</h3>
+		</div>
 		<div>
 			<table id="requestTable">
 

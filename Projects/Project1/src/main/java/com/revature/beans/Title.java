@@ -3,7 +3,7 @@ package com.revature.beans;
 public enum Title {
 	UNVERIFIED,
 	EMPLOYEE,
-	EMP_MANAGER,
+	DIRECT_SUPERVISOR,
 	DEPARTMENTHEAD,
 	BENCO,
 	BENCO_MANAGER,
@@ -15,8 +15,8 @@ public enum Title {
 			return Title.UNVERIFIED;
 		} else if (title.equals(Title.EMPLOYEE.toString())) {
 			return Title.EMPLOYEE;
-		} else if (title.equals(Title.EMP_MANAGER.toString())) {
-			return Title.EMP_MANAGER;
+		} else if (title.equals(Title.DIRECT_SUPERVISOR.toString())) {
+			return Title.DIRECT_SUPERVISOR;
 		} else if (title.equals(Title.DEPARTMENTHEAD.toString())) {
 			return Title.DEPARTMENTHEAD;
 		} else if (title.equals(Title.BENCO_MANAGER.toString())) {

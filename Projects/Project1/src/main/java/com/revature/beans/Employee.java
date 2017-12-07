@@ -4,6 +4,19 @@ public class Employee {
 	private String username, fname, lname, phoneNumber, address, city, state, zipcode;
 	private Title title;
 	private int password;
+	
+	public Employee(String username, String fname, String lname) {
+		this.username = username;
+		this.fname = fname;
+		this.lname = lname;
+	}
+	
+	public Employee(String username, String fname, String lname, String title) {
+		this.username = username;
+		this.fname = fname;
+		this.lname = lname;
+		this.title = Title.getTitle(title);
+	}
 
 	/**
 	 * 

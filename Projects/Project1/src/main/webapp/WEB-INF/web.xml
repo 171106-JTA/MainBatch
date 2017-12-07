@@ -51,6 +51,26 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+    <display-name>GetUnverifiedEmployeesServlet</display-name>
+    <servlet-name>GetUnverifiedEmployeesServlet</servlet-name>
+    <servlet-class>com.revature.servlets.GetUnverifiedEmployeesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetUnverifiedEmployeesServlet</servlet-name>
+    <url-pattern>/GetUnverifiedEmployeesServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetUnverifiedUsers</display-name>
+    <servlet-name>GetUnverifiedUsers</servlet-name>
+    <servlet-class>com.revature.servlets.GetUnverifiedUsers</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetUnverifiedUsers</servlet-name>
+    <url-pattern>/GetUnverifiedUsers</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
     <display-name>GetUsernameServlet</display-name>
     <servlet-name>GetUsernameServlet</servlet-name>
     <servlet-class>com.revature.servlets.GetUsernameServlet</servlet-class>
@@ -58,5 +78,35 @@
   <servlet-mapping>
     <servlet-name>GetUsernameServlet</servlet-name>
     <url-pattern>/GetUsernameServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetAdminTitle</display-name>
+    <servlet-name>GetAdminTitle</servlet-name>
+    <servlet-class>com.revature.servlets.GetAdminTitle</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetAdminTitle</servlet-name>
+    <url-pattern>/GetAdminTitle</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetDirectSupervisors</display-name>
+    <servlet-name>GetDirectSupervisors</servlet-name>
+    <servlet-class>com.revature.servlets.GetDirectSupervisors</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetDirectSupervisors</servlet-name>
+    <url-pattern>/GetDirectSupervisors</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AssignEmployeeToDirectSupervisor</display-name>
+    <servlet-name>AssignEmployeeToDirectSupervisor</servlet-name>
+    <servlet-class>com.revature.servlets.AssignEmployeeToDirectSupervisor</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AssignEmployeeToDirectSupervisor</servlet-name>
+    <url-pattern>/AssignEmployeeToDirectSupervisor</url-pattern>
   </servlet-mapping>
 </web-app>

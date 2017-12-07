@@ -17,25 +17,21 @@ public class GetRequests {
 		List<Request> requests = dao.getRequests(username);
 		response.setContentType("text/xml");
 		PrintWriter out = response.getWriter();
-		
+
 		if (requests != null) {
 			String myXml = "<root>";
 
 			for (Request r : requests) {
 				myXml += "<request><username>" + r.getUsername() + "</username>" + "<Event>" + r.getEvent() + "</Event>"
-						+ "<cost>" + r.getCost() + "</cost>" + "<Date>" + r.getDate().toString() + "</Date>" + "</request>";
+						+ "<cost>" + r.getCost() + "</cost>" + "<submissionDate>" + r.getSubmissionDate().toString() + "</submissionDate>" 
+						+ "<dateOfEvent>" + r.getDateOfEvent().toString() + "</dateOfEvent>" + "</request>";
 			}
 			myXml += "</root>";
-			
-			for (Request r : requests){
-				ObjectMapper mapper = new ObjectMapper();
-				System.out.println(mapper.writeValueAsString(r));
-			}
-			
 			out.println(myXml);
-		}
-		else{
-			out.println("<root></root>");
+		} else {
+			out.println("<root><request><username>none</username><Event>none</Event>"
+					+ "<cost>none</cost><submissionDate>none</submissionDate>" 
+					+ "<dateOfEvent>none</dateOfEvent></request></root>");
 		}
 	}
 }
