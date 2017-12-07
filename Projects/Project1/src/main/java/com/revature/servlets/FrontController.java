@@ -55,14 +55,13 @@ public class FrontController extends HttpServlet {
 		
 		switch(action) {
 		case "login":
-			System.out.println("Calling Login Servlet");
 			rd = request.getRequestDispatcher("Login"); 
 			rd.forward(request, response);
 			break;
 		case "newreimbursementform": 
-			System.out.println("Calling Reimbursement Servelet");
 			rd = request.getRequestDispatcher("newReimbursementForm");
 			rd.forward(request, response);
+			break;
 			
 		}
 	}

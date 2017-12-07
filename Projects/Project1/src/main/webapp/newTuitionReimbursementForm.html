@@ -15,15 +15,15 @@ Validate all input with javascript
 	<form action="NewReimbursementForm.do" method="POST">
 		<ul style="list-style-type: none">
 			<li>Event Date</li>
-			<li><input id="eventdate" type="date"></li>
+			<li><input name="eventdate" type="date"></li>
 			<li>Event Start Time</li>
-			<li><input id="eventtime" type="time"></li>
+			<li><input name="eventtime" type="time"></li>
 			<li>Event Description</li>
-			<li><input id="eventdescription" type="text">
+			<li><input name="eventdescription" type="text" value="A Random Description">
 			<li>Cost</li>
-			<li><input id="eventcost" type="number">
+			<li><input name="eventcost" type="number" value=50>
 			<li>Grading Format</li>
-			<li><select>
+			<li><select name=eventType>
 					<option value="Univerisity Courses">Univerisity Courses</option>
 					<option value="Seminars">Seminars</option>
 					<option value="Certification Preparation Classes">Certification
@@ -31,21 +31,21 @@ Validate all input with javascript
 					<option value="Certification">Certification</option>
 					<option value="Technical Training">Technical Training</option>
 					<option value="Other">Other</option>
-			</select></li>
+			</select></li>			
 			<li>Event Type</li>
-			<li><select>
+			<li><select name="eventGradingFormat">
 					<option value="grade">Grade</option>
 					<option value="presentation">Presentation</option>
 			</select></li>
 			<li><h3>Event Address</h3></li>
 			<li>Street and Number</li>
-			<li><input id="eventStreet" type="text">
+			<li><input name="eventStreet" type="text" value="123 NotAStreet">
 			<li>City</li>
-			<li><input id="eventCity" type="text">
+			<li><input name="eventCity" type="text" value="NotACity">
 			<li>State</li>
-			<li><input id="eventState" type="text">
+			<li><input name="eventState" type="text" value="NotAState">
 			<li>Zip</li>
-			<li><input id="eventZip" type="number">
+			<li><input name="eventZip" type="number" value=12345678>
 			<li><input type="submit" value="NewReimbursementForm"></li>
 		</ul>
 	</form>

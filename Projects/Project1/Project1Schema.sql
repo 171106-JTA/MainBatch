@@ -13,10 +13,10 @@ DROP TABLE Address CASCADE CONSTRAINTS;
 
 /*
 permission: 
-0 -> Logged in as standard user
-1 -> Logged in as BenCo
-2 -> Logged in as Direct Supervisor
-3 -> Logged in as Department Head
+employee -> Logged in as standard user
+benco -> Logged in as BenCo
+direct_supervisor -> Logged in as Direct Supervisor
+department_head -> Logged in as Department Head
 */
 CREATE TABLE Login (
     username VARCHAR(100),
@@ -56,7 +56,7 @@ CREATE SEQUENCE EventType_ID_SEQ
 --TABLE  for Event Types
 CREATE TABLE eventTypes (
     eventTypeID NUMBER(9),
-    evenTypeName VARCHAR(100),
+    eventTypeName VARCHAR(100),
     reimbursementPercentage NUMBER(3,2), --Allow three digits for 1.00 (i.e. %100)
     CONSTRAINT PK_eventTypeID PRIMARY KEY (eventTypeID)
 );
@@ -71,12 +71,12 @@ BEGIN
 END;
 /
 --Default values for event types.
-INSERT INTO eventTypes (evenTypeName, reimbursementPercentage) values('Univerisity Courses', .80);
-INSERT INTO eventTypes (evenTypeName, reimbursementPercentage) values('Seminars', .60);
-INSERT INTO eventTypes (evenTypeName, reimbursementPercentage) values('Certification Preparation Classes', .75);
-INSERT INTO eventTypes (evenTypeName, reimbursementPercentage) values('Certification', 1.00);
-INSERT INTO eventTypes (evenTypeName, reimbursementPercentage) values('Technical Training', .90);
-INSERT INTO eventTypes (evenTypeName, reimbursementPercentage) values('Other', .30);
+INSERT INTO eventTypes (eventTypeName, reimbursementPercentage) values('Univerisity Courses', .80);
+INSERT INTO eventTypes (eventTypeName, reimbursementPercentage) values('Seminars', .60);
+INSERT INTO eventTypes (eventTypeName, reimbursementPercentage) values('Certification Preparation Classes', .75);
+INSERT INTO eventTypes (eventTypeName, reimbursementPercentage) values('Certification', 1.00);
+INSERT INTO eventTypes (eventTypeName, reimbursementPercentage) values('Technical Training', .90);
+INSERT INTO eventTypes (eventTypeName, reimbursementPercentage) values('Other', .30);
 /
 SELECT * FROM eventTypes;
 
@@ -138,9 +138,12 @@ BEGIN
 END;
 /
 --Test INSERT for Address TABLE
---INSERT INTO Address (numberAndStreet, city, state, zip, aptNumber)
---VALUES('11730 Plaza America Dr.', 'Reston', 'VA', 20190, 2);
---SELECT * FROM Address;
+INSERT INTO Address (numberAndStreet, city, state, zip, aptNumber)
+VALUES('11730 Plaza America Dr.', 'Reston', 'VA', 20190, 2);
+SELECT * FROM Address;
+--DELETE FROM Address
+--WHERE AddressID = 1;
+SELECT LAST_INSERT_ID FROM ADDRESS;
 /
 
 --------------------------------
@@ -186,7 +189,7 @@ END;
 --    gradingFormatID, 
 --    eventTypeID)
 --VALUES (
---    'TestUser', 
+--    'A', 
 --    TO_TIMESTAMP ('3-Dec-17 14:10', 'DD-Mon-RR HH24:MI'), 
 --    1, --Assume test code for Address table was run
 --    'This is an event description', 
@@ -195,7 +198,59 @@ END;
 --    3  --event type
 --    );
 --SELECT * FROM ReimbursementForm;
+--DELETE FROM ReimbursementForm
+--WHERE REIMBURSEMENTID = 3;
+/
 
+--------------------------------
+-- Stored Procedures
+--------------------------------
+CREATE OR REPLACE PROCEDURE newReimbursementForm(
+    username IN VARCHAR,
+    event_street IN VARCHAR,
+    event_city IN VARCHAR,
+    event_state IN VARCHAR,
+    event_zip IN VARCHAR,
+    event_apt IN VARCHAR,
+    date_and_time IN VARCHAR,
+    description IN VARCHAR,
+    eventcost IN VARCHAR,
+    grading_format IN VARCHAR,
+    event_type IN VARCHAR
+    )
+IS
+    new_address_id NUMBER;
+    grading_format_id NUMBER;
+    event_type_id NUMBER;
+BEGIN
+    INSERT INTO Address (numberAndStreet, city, state, zip, aptNumber)
+        VALUES(event_street, event_city, event_state, event_zip, event_apt);
+    new_address_id := Address_ID_SEQ.CURRVAL;
+    SELECT gradingFormatID INTO grading_format_id FROM gradingFormats  
+    WHERE gradingFormatName = grading_format;
+    SELECT eventTypeID INTO event_type_id FROM eventTypes  
+    WHERE eventTypeName = event_type;
+
+    INSERT INTO ReimbursementForm (
+        username,
+        eventDateAndTime,
+        eventLocation, 
+        eventDescription, 
+        eventCost,
+        gradingFormatID,
+        eventTypeID
+        )
+    VALUES (
+        username,
+        TO_TIMESTAMP (date_and_time, 'DD-Mon-YYYY HH24:MI'),
+        new_address_id,
+        description, 
+        eventcost,
+        grading_format_id,
+        event_type_id 
+        );
+END;
+/
 
 INSERT INTO Login 
 values ('evan', 'password', 'employee');
@@ -209,26 +264,3 @@ INSERT INTO Login
 values ('D', 'D', 'department_head');
 INSERT INTO Login 
 values ('E', 'E', 'employee');
-
-
-SELECT * FROM Login; 
-SELECT upper(PERMISSION) FROM Login;
---CREATE TABLE Employee_Info (
---    employeeid NUMBER(7),
---    email VARCHAR2(500),
-----    funds number(6,2),
---    firstname VARCHAR2(150), 
---    lastname VARCHAR2(150), 
---    CONSTRAINT PK_employeeid PRIMARY KEY(employeeid)
---);
---
---CREATE TABLE Reimbursment (
---    ReimbursementID NUMBER(7),
---    Amount number(6,2),
---    --Holds status of reimbursement. 
---    --0 = waiting approval, 1 = pending, 2 = awaiting confirmation, 3 = confirmed
---    status NUMBER(1), 
---    employeeID NUMBER(7),
---    CONSTRAINT PK_reimbursementID PRIMARY KEY(ReimbursementID),
---    constraint employeeID FOREIGN KEY (employeeID) REFERENCES Employee_Info(employeeID)
---);
