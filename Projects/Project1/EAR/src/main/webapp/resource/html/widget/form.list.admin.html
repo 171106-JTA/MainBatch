@@ -1,0 +1,127 @@
+<!--  ACCOUNT INFORMATION FOR EMPLOYEES  -->
+<body>
+	<script type="text/javascript">
+			var loadFormData = function () {
+				var options;
+				
+				options = {
+					"transtype": "GETALLFORMS"
+				}
+		
+				Util.send(options, function (response) {
+					var table = $("#userformTable");
+					var row;
+					
+					// build user list 
+					$.each(response, function (i, form){
+						// Assemble data
+						row = $("<tr></tr>");
+						row.append($("<td>" + form.id + "</td>"));
+						row.append($("<td>" + form.statusid + "</td>"));
+						
+						// Append work done to table 
+						table.append(row);
+					});
+				});
+			}
+	
+			
+			var loadFilterData = function () {
+				// Build select filter 
+				Util.buildCodeList({
+					"code" : "STATUS",
+					"node" : $("#applicationStatus"),
+					"display" : "value description"
+				});
+				
+				// Build select filter 
+				Util.buildCodeList({
+					"code" : "DEPARTMENT",
+					"node" : $("#applicationDepartment"),
+					"display" : "value description"
+				});
+			}
+	
+			execute = function(type) {
+				if (type === "screen") {
+					loadFormData();
+					loadFilterData();
+				}
+			}
+		</script>
+		
+	<div is-drawer>
+		<div class="row">
+			<div class="col-xs-12">
+				<label>Status:<span info-icon="Filter by application status"></span></label>
+				<select id="applicationStatus" class="form-control"></select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<label>Department:<span info-icon="Filter by application by department"></span></label>
+				<select id="applicationDepartment" class="form-control"></select>
+			</div>
+		</div>
+			
+		<!-- SPLIT  -->
+		<div style="height: 5px; padding-top: 5px; padding-bottom: 5px;">
+			<hr class="hr-divider" style="margin: 0px;">
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-12">
+				<button class="btn-primary form-control"><span class="fa fa-search"></span> Search</button>
+			</div>
+		</div>
+	</div>
+	
+
+	<div is-screen>
+		<style>
+			.user-info-block {
+				overflow-x: hidden;
+				padding-top: 25px;
+			}
+			
+			.info-table-max-width {
+				max-width: 600px;
+			}
+			
+			.info-table {
+				width: 100%;
+				border: 1px solid rgba(40, 40, 40, 0.25);
+				margin-bottom: 5px;
+			}
+			
+			.info-table th {
+				background-color: #0082ff;
+				width: 125px;
+				color: #eeeeee;
+			}
+			
+			.info-table b {
+				padding-left: 5px;
+			}
+			
+			.info-table td {
+				border: 1px solid rgba(40, 40, 40, 0.25);
+			}
+		</style>
+
+		<!-- USED TO DISPLAY ACCOUNT INFORMATION -->
+		<div class="user-info-block">
+			<div class="info-table-max-width center-block">
+				<div class="text-center">
+					<label style="font-size: 2.0em">Submitted Forms</label>
+				</div>
+				
+				<table id="userFormTable" class="info-table">
+					<tr>
+						<th>Form ID</th><th>STATUS</th>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import com.revature.businessobject.BusinessObject;
 import com.revature.businessobject.CodeList;
 import com.revature.service.GetCodeList;
+import com.revature.service.GetForm;
 import com.revature.service.GetMessage;
 import com.revature.service.GetUserInfo;
 import com.revature.service.GetWidget;
@@ -119,8 +120,12 @@ public class Dashboard extends HttpServlet {
 				case "CREATEUSER":
 					response.setContentType("text/json");
 					break;
-				case "DELETEUSERs":
+				case "DELETEUSERS":
 					response.setContentType("text/json");
+					break;
+				case "GETSUBMITTEDFORMS":
+					response.setContentType("text/json");
+					result = ServiceUtil.toJson(GetForm.getFormsById((Integer)session.getAttribute("id")));
 					break;
 				case "SIGNOUT":
 					session.removeAttribute("id");

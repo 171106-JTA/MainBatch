@@ -1,0 +1,79 @@
+<!--  ACCOUNT INFORMATION FOR EMPLOYEES  -->
+<body>
+	<script type="text/javascript">
+			execute = function(type) {
+				if (type === "screen") {
+					var options;
+					
+					options = {
+						"transtype": "GETSUBMITTEDFORMS"
+					}
+			
+					Util.send(options, function (response) {
+						var table = $("#userformTable");
+						var row;
+						
+						// build user list 
+						$.each(response, function (i, form){
+							// Assemble data
+							row = $("<tr></tr>");
+							row.append($("<td>" + form.id + "</td>"));
+							row.append($("<td>" + form.statusid + "</td>"));
+							
+							// Append work done to table 
+							table.append(row);
+						});
+					});
+				}
+			}
+		</script>
+		
+	<div is-drawer hide-drawer></div>
+	<div is-screen>
+		<style>
+			.user-info-block {
+				overflow-x: hidden;
+				padding-top: 25px;
+			}
+			
+			.info-table-max-width {
+				max-width: 600px;
+			}
+			
+			.info-table {
+				width: 100%;
+				border: 1px solid rgba(40, 40, 40, 0.25);
+				margin-bottom: 5px;
+			}
+			
+			.info-table th {
+				background-color: #0082ff;
+				width: 125px;
+				color: #eeeeee;
+			}
+			
+			.info-table b {
+				padding-left: 5px;
+			}
+			
+			.info-table td {
+				border: 1px solid rgba(40, 40, 40, 0.25);
+			}
+		</style>
+
+		<!-- USED TO DISPLAY ACCOUNT INFORMATION -->
+		<div class="user-info-block">
+			<div class="info-table-max-width center-block">
+				<div class="text-center">
+					<label style="font-size: 2.0em">Submitted Forms</label>
+				</div>
+				
+				<table id="userFormTable" class="info-table">
+					<tr>
+						<th>Form ID</th><th>STATUS</th>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>

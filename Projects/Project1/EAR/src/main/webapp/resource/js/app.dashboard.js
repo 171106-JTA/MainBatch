@@ -141,6 +141,38 @@ var onFormsClick = function () {
 	}
 }
 
+var onFormsListClick = function () {
+	var widget = data.widget;
+	
+	// Build widget if widget exists else send request for it
+	if (widget.formslist) {
+		assignWidget(widget.formslist = parseWidgetData(widget.formslist.response));	
+		widget.formslist.execute("drawer");
+		widget.formslist.execute("screen");
+	}else {
+		var options;
+		
+		// Build request options 
+		options = {
+			"transtype": "GETWIDGET",
+			"widget": "formslist" 
+		}
+		
+		// send request
+		Util.send(options, function (response) {
+			// ensure non-null response
+			if (response != null) {
+				assignWidget(widget.formslist = parseWidgetData(response));
+				widget.formslist.execute("drawer");
+				widget.formslist.execute("screen");
+			}
+		}, function (error){
+			console.log(error);
+		});
+	}
+}
+
+
 /**
  * Used to log user out of account
  * Update backspace history to prevent reaccess of account
