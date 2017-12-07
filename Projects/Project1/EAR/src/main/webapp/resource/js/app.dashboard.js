@@ -110,6 +110,37 @@ var onDashboardClick = function () {
 	}
 }
 
+var onFormsClick = function () {
+	var widget = data.widget;
+	
+	// Build widget if widget exists else send request for it
+	if (widget.forms) {
+		assignWidget(widget.forms = parseWidgetData(widget.forms.response));	
+		widget.forms.execute("drawer");
+		widget.forms.execute("screen");
+	}else {
+		var options;
+		
+		// Build request options 
+		options = {
+			"transtype": "GETWIDGET",
+			"widget": "forms" 
+		}
+		
+		// send request
+		Util.send(options, function (response) {
+			// ensure non-null response
+			if (response != null) {
+				assignWidget(widget.forms = parseWidgetData(response));
+				widget.forms.execute("drawer");
+				widget.forms.execute("screen");
+			}
+		}, function (error){
+			console.log(error);
+		});
+	}
+}
+
 /**
  * Used to log user out of account
  * Update backspace history to prevent reaccess of account
@@ -129,8 +160,7 @@ var onAccountClick = function () {
 	// Build widget if widget exists else send request for it
 	if (widget.account){
 		assignWidget(widget.account = parseWidgetData(widget.account.response));	
-		widget.account.execute("drawer");
-		widget.account.execute("screen");
+		widget.account.execute();
 	}else {
 		var options;
 		
@@ -145,8 +175,7 @@ var onAccountClick = function () {
 			// ensure non-null response
 			if (response != null) {
 				assignWidget(widget.account = parseWidgetData(response));	
-				widget.account.execute("drawer");
-				widget.account.execute("screen");
+				widget.account.execute();
 			}
 		}, function (error){
 			console.log(error);
@@ -154,17 +183,44 @@ var onAccountClick = function () {
 	}
 }
 
+/**
+ * Acquire user-base list and show contents according to there privileges 
+ */
+var onUsersClick = function () {
+	var widget = data.widget;
+	
+	// Build widget if widget exists else send request for it
+	if (widget.users){
+		assignWidget(widget.users = parseWidgetData(widget.users.response));	
+		widget.users.execute("drawer");
+		widget.users.execute("screen");
+	}else {
+		var options;
+		
+		// Build request options 
+		options = {
+			"transtype": "GETWIDGET",
+			"widget": "users" 
+		}
+		
+		// send request
+		Util.send(options, function (response) {
+			// ensure non-null response
+			if (response != null) {
+				assignWidget(widget.users = parseWidgetData(response));	
+				widget.users.execute("drawer");
+				widget.users.execute("screen");
+			}
+		}, function (error){
+			console.log(error);
+		});
+	}
+}
+
+
 ///
 //	HELPER METHODS 
 ///
-
-/**
- * @description Generates dynamic content based on json received from the server
- * @param {Json} json - response from server  
- */
-var buildNavigationFromJson = function (json) {
-	
-}
 
 var parseWidgetData = function (response) {
 	var parser = new DOMParser();

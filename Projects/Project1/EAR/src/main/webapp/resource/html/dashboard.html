@@ -46,6 +46,7 @@
 			<div id="navbarCollapse" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li><a onclick="onDashboardClick()">Dashboard</a></li>
+					<li><a onclick="onFormsClick()">Forms</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li class="readonly"><a id="username"
@@ -56,9 +57,12 @@
 					 <span class="caret"></span>
 					</a>
 						<ul class="dropdown-menu">
-							<li><a onclick="onSignOut()">Sign out</a>
-								<hr class="hr-divider"></li>
 							<li><a onclick="onAccountClick()">Account</a></li>
+							<li>
+								<a onclick="onUsersClick()">Users</a>
+								<hr class="hr-divider">	
+							</li>
+							<li><a onclick="onSignOut()">Sign out</a></li>		
 						</ul>
 					</li>
 				</ul>
