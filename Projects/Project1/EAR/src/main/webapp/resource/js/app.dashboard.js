@@ -114,26 +114,26 @@ var onFormsClick = function () {
 	var widget = data.widget;
 	
 	// Build widget if widget exists else send request for it
-	if (widget.forms) {
-		assignWidget(widget.forms = parseWidgetData(widget.forms.response));	
-		widget.forms.execute("drawer");
-		widget.forms.execute("screen");
+	if (widget.form) {
+		assignWidget(widget.form = parseWidgetData(widget.form.response));	
+		widget.form.execute("drawer");
+		widget.form.execute("screen");
 	}else {
 		var options;
 		
 		// Build request options 
 		options = {
 			"transtype": "GETWIDGET",
-			"widget": "forms" 
+			"widget": "form" 
 		}
 		
 		// send request
 		Util.send(options, function (response) {
 			// ensure non-null response
 			if (response != null) {
-				assignWidget(widget.forms = parseWidgetData(response));
-				widget.forms.execute("drawer");
-				widget.forms.execute("screen");
+				assignWidget(widget.form = parseWidgetData(response));
+				widget.form.execute("drawer");
+				widget.form.execute("screen");
 			}
 		}, function (error){
 			console.log(error);

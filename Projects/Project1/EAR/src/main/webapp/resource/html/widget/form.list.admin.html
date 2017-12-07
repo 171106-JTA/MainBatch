@@ -46,6 +46,11 @@
 				if (type === "screen") {
 					loadFormData();
 					loadFilterData();
+					
+					
+					// Build info icons
+					Util.buildInfoIcons($("div[is-drawer]"));
+					Util.buildInfoIcons($("div[is-screen]"));
 				}
 			}
 		</script>
@@ -59,7 +64,7 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
-				<label>Department:<span info-icon="Filter by application by department"></span></label>
+				<label>Department:<span info-icon="Filter application by department"></span></label>
 				<select id="applicationDepartment" class="form-control"></select>
 			</div>
 		</div>

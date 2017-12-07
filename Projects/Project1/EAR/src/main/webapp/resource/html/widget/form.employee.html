@@ -1,0 +1,175 @@
+<!--  ACCOUNT INFORMATION FOR EMPLOYEES  -->
+<body>
+	<script type="text/javascript">
+			var loadFormData = function () {
+				var options;
+				
+				options = {
+					"transtype": "GETFORM"
+				}
+		
+				Util.send(options, function (response) {
+				});
+			}
+	
+			
+			var loadFilterData = function () {
+				// Build select filter 
+				Util.buildCodeList({
+					"code" : "STATUS",
+					"node" : $("#applicationStatus"),
+					"display" : "value description"
+				});
+				 
+				Util.buildCodeList({
+					"code" : "DEPARTMENT",
+					"node" : $("#applicationDepartment"),
+					"display" : "value description"
+				});
+				
+				Util.buildCodeList({
+					"code" : "REIMBURSEMENT-RATE",
+					"node" : $("#reimbursementType"),
+					"display" : "value"
+				});
+				
+				Util.buildCodeList({
+					"code" : "US-STATE",
+					"node" : $("#applicationState"),
+					"display" : "value"
+				});
+				
+				Util.buildCodeList({
+					"code" : "CITY-CODE",
+					"node" : $("#applicationCity"),
+					"display" : "description"
+				});
+			}
+	
+			execute = function(type) {
+				if (type === "screen") {
+					loadFilterData();
+					
+					
+					// Build info icons
+					Util.buildInfoIcons($("div[is-drawer]"));
+					Util.buildInfoIcons($("div[is-screen]"));
+				}
+			}
+		</script>
+		
+	<div is-drawer>
+		<div class="row">
+			<div class="col-xs-12">
+				<label>Form: <span info-icon="Pull existing form from server"></span></label>
+				<input class="form-control" type="number">
+			</div>
+		</div>
+		<div style="padding-bottom: 5px;"></div>
+		<div class="row">
+			<div class="col-xs-12">
+				<button class="btn-primary form-control"><span class="fa fa-search"></span> Search</button>
+			</div>
+		</div>
+
+		<!-- SPLIT  -->
+		<div style="height: 5px; padding-top: 5px; padding-bottom: 5px;">
+			<hr class="hr-divider" style="margin: 0px;">
+		</div>
+		
+		<div class="row">
+			<div class="col-xs-12">
+				<button class="btn-secondary form-control"><span class="fa fa-plus"></span> Create</button>
+			</div>
+		</div>
+	</div>
+	
+
+	<div is-screen>
+		<style>
+			.form-max-width {
+				max-width: 600px;
+			}
+		</style>
+
+		<!-- USED TO DISPLAY ACCOUNT INFORMATION -->
+		<div class="user-info-block">
+			<div class="form-max-width center-block">
+				<div class="text-center">
+					<label style="font-size: 2.0em">Form <span id="formIdHeader"></span></label>
+				</div>
+				<label>Employee Information:</label>
+				<hr class="hr-divider">
+				<form>
+					<div class="row">
+						<div class="col-sm-6">
+							<label>First Name:</label>
+							<input id="frmFirstName" class="form-control" disabled>
+						</div>
+						<div class="col-sm-6">
+							<label>Last Name:</label>
+							<input id="frmLastName" class="form-control" disabled>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<label>Email:</label>
+							<input id="frmEmail" type="email" class="form-control" disabled>
+						</div>
+						<div class="col-sm-6">
+							<label>Phone number:</label>
+							<input id="frmFirstName" class="form-control" disabled>
+						</div>
+					</div>
+					
+					<div style="padding-bottom: 5px;"></div>
+					<label>Reimbursement Information: <span info-icon="All fields are **REQUIRED**"></span></label>
+					<hr class="hr-divider">
+					
+					<div class="row">
+						<div class="col-sm-4">
+							<label>Status:</label>
+							<select id="applicationStatus" class="form-control"></select>
+						</div>
+						<div class="col-sm-4">
+							<label>Department:</label>
+							<select id="applicationDepartment" class="form-control"></select>
+						</div>
+						<div class="col-sm-4">
+							<label>Type:</label>
+							<select id="reimbursementType" class="form-control"></select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<label>Address:</label>
+							<input id="applicationAddress" class="form-control"></select>
+						</div>
+						<div class="col-sm-4">
+							<label>State:</label>
+							<select id="applicationState" class="form-control"></select>
+						</div>
+						<div class="col-sm-4">
+							<label>City:</label>
+							<select id="applicationCity" class="form-control"></select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<label>Address:</label>
+							<input id="applicationAddress" class="form-control"></select>
+						</div>
+						<div class="col-sm-4">
+							<label>State:</label>
+							<select id="applicationState" class="form-control"></select>
+						</div>
+						<div class="col-sm-4">
+							<label>City:</label>
+							<select id="applicationCity" class="form-control"></select>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>

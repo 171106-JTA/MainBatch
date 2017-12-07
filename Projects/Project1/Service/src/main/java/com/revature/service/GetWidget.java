@@ -60,6 +60,8 @@ public class GetWidget {
 				return WIDGETPATH + "account.employee.widget.html";
 			case "users":
 				return WIDGETPATH + "user.base.employee.html";
+			case "form":
+				return WIDGETPATH + "form.employee.html";
 			case "formslist":
 				return WIDGETPATH + "form.list.employee.html";
 				
@@ -77,6 +79,8 @@ public class GetWidget {
 				return WIDGETPATH + "account.admin.widget.html";
 			case "users":
 				return WIDGETPATH + "user.base.master.html";
+			case "form":
+				return WIDGETPATH + "form.admin.html";
 			case "formslist":
 				return WIDGETPATH + "form.list.admin.html";
 			default:
@@ -92,6 +96,8 @@ public class GetWidget {
 				return WIDGETPATH + "account.widget.html";
 			case "users":
 				return WIDGETPATH + "user.base.admin.html";
+			case "form":
+				return WIDGETPATH + "form.admin.html";
 			case "formslist":
 				return WIDGETPATH + "form.list.admin.html";
 			default:
@@ -107,6 +113,8 @@ public class GetWidget {
 				return WIDGETPATH + "account.widget.html";
 			case "users":
 				return WIDGETPATH + "user.base.admin.html";
+			case "form":
+				return WIDGETPATH + "form.admin.html";
 			case "formslist":
 				return WIDGETPATH + "form.list.admin.html";
 			default:
