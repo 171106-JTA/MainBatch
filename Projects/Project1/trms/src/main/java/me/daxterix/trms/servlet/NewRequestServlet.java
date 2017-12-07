@@ -45,8 +45,8 @@ public class NewRequestServlet extends HttpServlet {
         Address addr = new Address();
         addr.setAddress(address);
         addr.setCity(city);
-        addr.setCity(state);
-        addr.setCity(zip);
+        addr.setState(state);
+        addr.setZip(zip);
         newRequest.setAddress(addr);
         newRequest.setTimeFiled(LocalDateTime.now());
         newRequest.setDescription(description);

@@ -62,7 +62,7 @@ export class NewRequestComponent {
         }
         formData.append('eventFile', this.eventFile, this.eventFileName);
         formData.append('eventFileName', this.eventFileName);
-        formData.append('eventFileNameMimeType', this.eventFileMimeType);
+        formData.append('eventFileMimeType', this.eventFileMimeType);
 
 
         let xhr = new XMLHttpRequest();

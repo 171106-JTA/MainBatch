@@ -107,7 +107,7 @@ public class RequestInfoDAOTest extends ObjectDAOTest {
         file.setMimeType(new MimeType(mimeType));
         file.setPurpose(new FilePurpose(filePurpose));
         file.setRequest(req);
-        objectDao.saveObject(file, RequestFile::getId);
+        reqInfoDao.saveFile(file);
         return file;
     }
 }
