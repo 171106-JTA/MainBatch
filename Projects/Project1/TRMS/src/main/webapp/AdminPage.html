@@ -5,14 +5,25 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div id="approvalDiv">
+		<input type="text" placeholder="Request Id">
+		<select name="event">
+			<option value="1">Approve</option>
+			<option value="0">Still Pending</option>
+			<option value="-1">Deny</option>
+		</select>
+		<input type="button" value="submit">
+	</div>
+
+	<div id="allRequestDiv">
+		<p id="AJAXError"></p>
+		<input type="button" value="Show PendRequests" onclick="getEmployeeRequests()">
+		<table id="pendingTable" border="2px">
+			<tr><th>ID</th><th>Date-Time</th><th>Event</th><th>Projected Reimbursement</th><th>Status</th></tr>
+		</table>
+	</div>
+	<div id="askInfoRequest">
 	
-	<input type="text" id="input" placeholder="name" name="username" required>
-	<input type="button" onclick="sendAJAX()" value="Get Employee Requests">
-	<div>
-	<table id="results" border="2px">
-		<tr><th>User</th><th>F</th><th>M</th><th>L</th>
-	</table>
-	<p id="AJAXError"></p>
 	</div>
 </body>
 </html>

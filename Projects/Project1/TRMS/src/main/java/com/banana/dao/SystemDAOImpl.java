@@ -107,6 +107,42 @@ public class SystemDAOImpl implements SystemDAO{
 	}
 	
 	@Override
+	public List<ReimburseRequest> getAllRequests() {
+		List<ReimburseRequest> rrList = new ArrayList<>();
+		ReimburseRequest rr = null;
+		String sql = "SELECT * FROM All_Request_Data";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int rrId = 0;
+		String status = "PENDING";
+	
+		try(Connection conn = ConnectionUtil.getConnection()){
+			ps = conn.prepareStatement(sql);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				rr = new ReimburseRequest(rs.getInt("RRID"), rs.getInt("EID"), rs.getString("FNAME"), rs.getString("LNAME"), 
+						rs.getString("EVENT_PLACE"), rs.getString("EVENTNAME"), rs.getDate("EVENT_DATETIME").toLocalDate(), 
+						rs.getString("EVENT_PLACE"), rs.getDouble("PRICE"), rs.getString("JUSTIFY"), 
+						rs.getInt("DS_APPROVAL"), rs.getInt("DH_APPROVAL"), rs.getInt("BC_APPROVAL"));
+				rrList.add(rr);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			close(ps);
+		}
+		
+		if(rrList.isEmpty()) {
+			return null;
+		}
+		
+		return rrList;
+	}
+	
+	@Override
 	public double getPercentage(int eventId) {
 		String sql = "SELECT * FROM Event_Type WHERE EVENTID = ?";
 		PreparedStatement ps = null;

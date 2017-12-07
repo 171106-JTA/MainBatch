@@ -18,6 +18,9 @@ public class ReimburseRequest {
 	private String eventName;
 	private LocalDate date;
 	private String status;
+	private int dsApproval;
+	private int dhApproval;
+	private int bcApproval;
 	
 	
 	public ReimburseRequest(int empID, String fname, String lname, String location, String description, double cost,
@@ -44,8 +47,13 @@ public class ReimburseRequest {
 		this.status = status;
 	}
 	
-	
-	
+	public ReimburseRequest(int RRID, int EID, String fname, String lname, String string3, String string4,
+			LocalDate localDate, String string5, double double1, String string6, int int3, int int4, int int5) {
+		this.rrID = RRID;
+		this.empID = EID;
+		this.
+	}
+
 	public String getStatus() {
 		return status;
 	}
