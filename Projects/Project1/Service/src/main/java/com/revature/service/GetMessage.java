@@ -58,8 +58,8 @@ public class GetMessage {
 			view.setFromUserName(userView.getUsername());
 			view.setTitle(message.getTitle());
 			view.setMessage(message.getMessage());
-			view.setPriority(GetCodeList.findCodeListNyId(priority, message.getMessagePriorityId()).getValue());
-			view.setStatus(GetCodeList.findCodeListNyId(status, message.getStatusId()).getValue());
+			view.setPriority(GetCodeList.findCodeListById(priority, message.getMessagePriorityId()).getValue());
+			view.setStatus(GetCodeList.findCodeListById(status, message.getStatusId()).getValue());
 			
 			// Assign recipient data 
 			for (BusinessObject record : records) {

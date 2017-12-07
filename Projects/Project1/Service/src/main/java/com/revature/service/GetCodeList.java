@@ -25,11 +25,20 @@ public class GetCodeList {
 		return findCodeList(new CodeList(null, null, null, description));
 	}
 	
-	public static CodeList findCodeListNyId(List<CodeList> list, Integer id) {
+	public static CodeList findCodeListById(List<CodeList> list, Integer id) {
 		List<CodeList> result = list.stream().filter(codelist -> codelist.getId().equals(id)).collect(Collectors.toList());
 		return result.size() > 0 ? result.get(0) : null;
 	}
 	
+	public static CodeList findCodeListByValue(List<CodeList> list, String value) {
+		List<CodeList> result = list.stream().filter(codelist -> codelist.getValue().equals(value)).collect(Collectors.toList());
+		return result.size() > 0 ? result.get(0) : null;
+	}
+	
+	public static CodeList findCodeListByDescription(List<CodeList> list, String description) {
+		List<CodeList> result = list.stream().filter(codelist -> codelist.getDescription().equals(description)).collect(Collectors.toList());
+		return result.size() > 0 ? result.get(0) : null;
+	}
 	
 	///
 	//	PRIVATE METHODS

@@ -1,0 +1,272 @@
+<!--  ACCOUNT INFORMATION FOR EMPLOYEES  -->
+<body>
+	<script type="text/javascript">
+			var loadUsers = function () {
+				var options;
+				
+				options = {
+					"transtype": "GETALLUSERS"
+				}
+		
+				
+				Util.send(options, function (response) {
+					var table = $("#userInfoTable");
+					var keys = Object.keys(response[0]);
+					var row;
+					
+					// create header row
+					row = $("<tr></tr>");;
+					row.append($("<th style='width:50px;'>X</th>"));
+					
+					// build header row content
+					$.each(keys, function (i, key) {
+						row.append($("<th>" + key.toUpperCase() + "</th>"));
+					});
+					
+					// assign to table 
+					table.append(row);
+					
+					// build user list 
+					$.each(response, function (i, user){
+						// Assemble data
+						row = $("<tr></tr>");
+						row.append($("<td><div class='check'><input type='checkbox'></div></td>"));
+						// build header row content
+						$.each(keys, function (i, key) {
+							row.append($("<td>" + user[key] + "</td>"));
+						});
+						
+						// Append work done to table 
+						table.append(row);
+					});
+				});
+			}
+			
+			var loadSelectData = function () {
+				var options;
+				
+				
+				// Build select message status filter 
+				Util.buildCodeList({
+					"code" : "US-STATE",
+					"node" : $("#stateSelect"),
+					"display" : "value"
+				});
+				
+				// Build select message status filter 
+				Util.buildCodeList({
+					"code" : "CITY-CODE",
+					"node" : $("#citySelect"),
+					"display" : "description"
+				});
+				
+				// Build select message status filter 
+				Util.buildCodeList({
+					"code" : "USER-ROLE",
+					"node" : $("#roleSelect"),
+					"display" : "value description"
+				});
+			}
+	
+	
+			var assignEventHandlers = function () {
+				$("#btnCreate").on("click", onCreateClick);
+				$("#btnDelete").on("click", onDeleteClick);
+				$("button[data-create]").on("click", onCreateUserClick);
+				$("button[data-dismiss]").on("click", onCloseUserModal);
+				$("#roleSelect").on("change", onRoleChange)
+			}
+			
+			///
+			//	EVENT HANDLERS
+			///
+			
+			var onCreateClick = function () {
+				$("#createModal").modal({ "show": true });
+			}
+			
+			var onDeleteClick = function () {
+				var options;
+				
+			}
+			
+			var onCreateUserClick = function () {
+				$("#createUserForm").submit();
+			}
+			
+			var onRoleChange = function () {
+				var username = $("#newUsername");
+				
+				if ($(this).val() === "EMPLOYEE")
+					username.prop("disabled", false);
+				else {
+					username.prop("disabled", true);
+					username.val("");
+				}
+			}
+			
+			var onCloseUserModal = function () {
+				var modal = $("#createModal");
+				
+				// Clear all input
+				modal.find("input").val("");
+				modal.find("select").val("");
+				
+				modal.find("input[name='transtype']").val("CREATEUSER");
+				$("#roleSelect").change();
+				modal.modal("hide");
+			}
+			
+			///
+			//	EXECUTION
+			///
+			
+			execute = function(type) {
+				if (type === "screen") {
+					loadUsers();
+					loadSelectData();
+					assignEventHandlers();
+				}
+			}
+		</script>
+		
+	<div is-drawer>
+		<div class="row">
+			<div class="col-sm-12">
+				<button id="btnCreate" class="form-control btn-primary">
+					<span class="fa fa-plus"> </span> Create
+				</button>
+			</div>
+		</div>
+		<!-- SPLIT DYNAMIC CONTENT  -->
+		<div style="height: 5px; padding-top: 5px; padding-bottom: 5px;">
+			<hr class="hr-divider" style="margin: 0px;">
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-12">
+				<button id="btnDelete" class="btn-secondary form-control"><span class="fa fa-plus"></span> Delete</button>
+			</div>
+		</div>
+	</div>
+	<div is-screen>
+		<style>
+			.user-info-block {
+				overflow-x: auto;
+				padding-top: 25px;
+			}
+			
+			.info-table-max-width {
+				max-width: 600px;
+			}
+			
+			.info-table {
+				width: 100%;
+				border: 1px solid rgba(40, 40, 40, 0.25);
+				margin-bottom: 5px;
+			}
+			
+			.info-table th {
+				background-color: #0082ff;
+				width: 125px;
+				color: #eeeeee;
+			}
+			
+			.info-table b {
+				padding-left: 5px;
+			}
+			
+			.info-table td {
+				border: 1px solid rgba(40, 40, 40, 0.25);
+			}
+			
+			.check {
+				align-items: center;
+				display: flex;
+			}
+			
+			.check > input {
+				margin-left: auto;
+				margin-right: auto;
+			}
+			
+		</style>
+
+		<!-- USED TO DISPLAY ACCOUNT INFORMATION -->
+		<div class="user-info-block col-xs-12">
+				<div class="text-center">
+					<label style="font-size: 2.0em">Application Users</label>
+				</div>
+				
+				<table id="userInfoTable" class="info-table">
+				</table>
+		</div>
+		
+		<!-- Modal -->
+		<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h3 class="modal-title id="createModalLabel">Create User</h3>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		       	<form id="createUserForm" method="post" action="Dashboard" >
+		       		<div class="row">
+		       			<div class="col-sm-4">
+		       				<label>First Name:</label>
+		       				<input class="form-control" type="text" name="firstName" required>
+		       			</div>
+		       			<div class="col-sm-4">
+		       				<label>Last Name:</label>
+		       				<input class="form-control" type="text" name="lastName" required>
+		       			</div>
+		       			<div class="col-sm-4">
+		       				<label>Email:</label>
+		       				<input class="form-control" type="email" name="email" required>
+		       			</div>
+		       		</div>
+		       		<div class="row">
+		       			<div class="col-sm-4">
+		       				<label>Role:</label>
+		       				<select class="form-control" id="roleSelect" name="role" required></select>
+		       			</div>
+		       			<div class="col-sm-4">
+		       				<label>State:</label>
+		       				<select class="form-control" id="stateSelect" name="state" required></select>
+		       			</div>
+		       			<div class="col-sm-4">
+		       				<label>City:</label>
+		       				<select class="form-control" id="citySelect" name="city" required></select>
+		       			</div>
+		       		</div>
+		       		<div class="row">
+		       			<div class="col-sm-4">
+		       				<label>Address:</label>
+		       				<input class="form-control" type="text" name="address"required>
+		       			</div>
+		       			<div class="col-sm-4">
+		       				<label>Phone number:</label>
+		       				<input class="form-control" type="text" name="phonenumber" required>
+		       			</div>
+		       			<div class="col-sm-4">
+		       				<label>Username:</label>
+		       				<input id="newUsername" class="form-control" type="text" name="username" disabled>
+		       			</div>
+		       		</div>
+		       		<div hidden>
+		       			<input name="transtype" value="CREATEUSER" required>
+		       		</div>
+		       	</form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss>Cancel</button>
+		        <button type="button" class="btn btn-primary" data-create>Create</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+	</div>
+</body>

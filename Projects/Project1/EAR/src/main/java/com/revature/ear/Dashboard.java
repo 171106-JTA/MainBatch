@@ -116,6 +116,12 @@ public class Dashboard extends HttpServlet {
 					response.setContentType("text/json");
 					result = ServiceUtil.toJson(GetMessage.getMessages((Integer)session.getAttribute("id"), GetUserInfo.getUserViewById((Integer)session.getAttribute("id"))));
 					break;
+				case "CREATEUSER":
+					response.setContentType("text/json");
+					break;
+				case "DELETEUSERs":
+					response.setContentType("text/json");
+					break;
 				case "SIGNOUT":
 					session.removeAttribute("id");
 					session.invalidate();
