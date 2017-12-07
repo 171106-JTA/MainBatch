@@ -29,6 +29,7 @@ public class InsertReimbursement {
 		String descript = request.getParameter("description");
 		double cost = Double.parseDouble(request.getParameter("cost"));
 		
+		System.out.println(request.getParameter("grading") + " mid " + request.getParameter("event"));
 		
 		int grading = Integer.parseInt(request.getParameter("grading"));
 		int event = Integer.parseInt(request.getParameter("event"));
