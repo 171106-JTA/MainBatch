@@ -14,7 +14,7 @@ import java.util.List;
 
 @Entity
 @Table(name="request")
-@Check(constraints="date_filed <= (event_start - 14) AND event_start <= event_end")
+@Check(constraints="date_filed <= (event_start - 7) AND event_start <= event_end")
 public class ReimbursementRequest implements Serializable {
 
     @Id

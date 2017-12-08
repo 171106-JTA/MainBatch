@@ -1,0 +1,42 @@
+
+<form [formGroup]="newRequestForm" (ngSubmit)="submitNewRequest()" class="form-horizontal" enctype="multipart/form-data">
+    <fieldset>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-5">
+                <legend>Browse Requests</legend>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="filerEmail" class="col-sm-4 control-label">Filer's Email</label>
+            <div class="col-sm-5">
+                <input type="email" class="form-control" id="filerEmail" formControlName="filerEmail" required/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="requestStatus" class="control-label requestStatus col-sm-4">Status</label>
+            <div class="col-sm-5">
+                <select class="form-control" formControlName="requestStatus" id="requestStatus" required>
+                    <option *ngFor="let evtType of requestStatuss">{{evtType}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="requestDepartment" class="control-label department col-sm-4">Department</label>
+            <div class="col-sm-5">
+                <select class="form-control" formControlName="department" id="requestDepartment" required>
+                    <option *ngFor="let evtType of departments">{{evtType}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-5">
+                <button type="buttom" (click)="searchRequests($event)" class="btn btn-info btn-block">Search</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+

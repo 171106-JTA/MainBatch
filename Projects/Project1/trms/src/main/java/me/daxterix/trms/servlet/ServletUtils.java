@@ -35,11 +35,17 @@ public class ServletUtils {
         builder.add("description", req.getDescription());
 
         EventGrade grade = req.getGrade();
-        builder.add("passed",
+        if (grade == null)
+            builder.addNull("passed");
+        else builder.add("passed",
                 (grade.getPassedFailed() != null && grade.getPassedFailed()) ||
                         (grade.getGradePercent() >= grade.getCutoffPercent())
-        );
-        builder.add("isUrgent", req.isUrgent());
+                );
+        if (req.isUrgent() != null)
+            builder.add("isUrgent", req.isUrgent());
+        else
+            builder.addNull("isUrgent");
+
         builder.add("timeFiled", req.getTimeFiled().toString());
         builder.add("eventStart", req.getEventStart().toString());
         builder.add("eventEnd", req.getEventEnd().toString());

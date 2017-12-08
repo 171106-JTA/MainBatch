@@ -5,6 +5,7 @@ import me.daxterix.trms.dao.exception.DuplicateIdException;
 import me.daxterix.trms.dao.exception.NonExistentIdException;
 import me.daxterix.trms.model.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -53,6 +54,13 @@ public class RequestService {
             newReq.setFunding(subsidizedCost);
         else if (remainingFunds > 0)
             newReq.setFunding(remainingFunds);
+
+        LocalDate dateFiled = newReq.getTimeFiled().toLocalDate();
+        LocalDate eventStartDate = newReq.getEventStart();
+        if (eventStartDate.isAfter(dateFiled.plusDays(13)))
+            newReq.setUrgent(false);
+        else if (eventStartDate.isAfter(dateFiled.plusDays(6)))
+            newReq.setUrgent(true);
         else
             return false;
 
