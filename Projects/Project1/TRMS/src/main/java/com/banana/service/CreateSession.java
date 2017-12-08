@@ -12,6 +12,8 @@ public class CreateSession {
 		if(session.isNew()) {
 			//session.setAttribute("username", emp.getUsername());
 			session.setAttribute("empId", emp.getEmpId());
+			session.setAttribute("role", emp.getRoleId());
+			System.out.println(emp.getRoleId());
 		}
 	}
 }

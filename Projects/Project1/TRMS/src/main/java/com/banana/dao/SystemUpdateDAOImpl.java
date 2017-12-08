@@ -12,22 +12,22 @@ import com.banana.util.ConnectionUtil;
 public class SystemUpdateDAOImpl implements SystemUpdateDAO{
 	
 	@Override
-	public void updateRequestApproval(int roleId, int rrId, int decision) {
+	public boolean updateRequestApproval(int roleId, int rrId, int decision) {
 		String sql = null;
 		
 		if(roleId == 1) {
-			sql = "UPDATE Reimburse_Request SET DS_APPROVAL = ? WHERE RRID = ?";
+			sql = "UPDATE Reimbursement_Request SET DS_APPROVAL = ? WHERE RRID = ?";
 		}
 		else if(roleId == 2) {
-			sql = "UPDATE Reimburse_Request SET DH_APPROVAL = ? WHERE RRID = ?";
+			sql = "UPDATE Reimbursement_Request SET DH_APPROVAL = ? WHERE RRID = ?";
 		}
 		else if(roleId == 3) {
-			sql = "UPDATE Reimburse_Request SET BC_APPROVAL = ? WHERE RRID = ?";
+			sql = "UPDATE Reimbursement_Request SET BC_APPROVAL = ? WHERE RRID = ?";
 		}
 		else {
-			return;
+			return false;
 		}
-		
+		System.out.println("here");
 		PreparedStatement ps = null;
 		
 		try(Connection conn = ConnectionUtil.getConnection()){
@@ -38,9 +38,11 @@ public class SystemUpdateDAOImpl implements SystemUpdateDAO{
 			ps.executeQuery();
 			
 		}catch(SQLException e) {
-			
+			e.printStackTrace();
+			return false;
 		}finally {
 			close(ps);
 		}
+		return true;
 	}
 }

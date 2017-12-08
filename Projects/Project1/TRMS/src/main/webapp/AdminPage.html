@@ -7,13 +7,15 @@
 </head>
 <body>
 	<div id="approvalDiv">
-		<input type="text" placeholder="Request Id">
-		<select name="event">
-			<option value="1">Approve</option>
-			<option value="0">Still Pending</option>
-			<option value="-1">Deny</option>
-		</select>
-		<input type="button" value="submit" action="approval.do" method="POST">
+		<form action="approval.act" method="POST">
+			<input type="text" placeholder="Request Id" name="rrId">
+			<select name="decision">
+				<option value="1">Approve</option>
+				<option value="0" selected>Still Pending</option>
+				<option value="-1">Deny</option>
+			</select>
+		<input type="submit" value="submit">
+		</form>
 	</div>
 
 	<div id="allRequestDiv">

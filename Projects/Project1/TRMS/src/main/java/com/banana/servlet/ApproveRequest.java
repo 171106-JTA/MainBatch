@@ -1,10 +1,16 @@
 package com.banana.servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.banana.service.ApproveReimbursement;
 
 /**
  * Servlet implementation class ApproveRequest
@@ -23,8 +29,27 @@ public class ApproveRequest extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
 		System.out.println("Hello FROm Approve");
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		RequestDispatcher rd = request.getRequestDispatcher("AdminPage.html");
+		
+		if(!session.isNew()) {
+			System.out.println(session.getAttribute("role"));
+			int roleId = (Integer)session.getAttribute("role");
+			int rrId = Integer.parseInt(request.getParameter("rrId"));
+			int decision = Integer.parseInt(request.getParameter("decision"));
+			
+			if(ApproveReimbursement.approve(roleId, rrId, decision)) {
+				out.println("Changed");
+			}
+			else {
+				out.println("Unchanged");
+			}
+			
+			rd.include(request, response);
+		}
 	}
 
 }
