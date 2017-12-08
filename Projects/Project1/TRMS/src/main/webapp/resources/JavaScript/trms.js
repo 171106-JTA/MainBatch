@@ -56,6 +56,24 @@ function clearTable(table){
 	}
 }
 
+function createTableData(numOfRows){
+	var arr = [];
+	for(var i = 0; i < numOfRows;i++){
+		arr[i] = document.createElement("td");
+	}
+	return arr;
+}
+
+function populateData(arr, i, row, table, response){
+	let n = 0;
+	for(td of arr){
+		td.innerHTML = response[i].childNodes[n].innerHTML;
+		row.appendChild(td);
+		n++;
+	}
+	table.appendChild(row);
+}
+
 function getEmployeeRequests(){
 		var url = "GetEmployeeRequest";
 		
@@ -75,23 +93,8 @@ function getEmployeeRequests(){
 				//TODO fix typeError
 				for(i in response){
 					var row = document.createElement("tr");
-					var td1 = document.createElement("td");
-					var td2 = document.createElement("td");
-					var td3 = document.createElement("td");
-					var td4 = document.createElement("td");
-					var td5 = document.createElement("td");
-					
-					td1.innerHTML = response[i].childNodes[0].innerHTML;	
-					td2.innerHTML = response[i].childNodes[1].innerHTML;
-					td3.innerHTML = response[i].childNodes[2].innerHTML;
-					td4.innerHTML = response[i].childNodes[3].innerHTML;
-					td5.innerHTML = response[i].childNodes[4].innerHTML;
-					row.appendChild(td1);
-					row.appendChild(td2);
-					row.appendChild(td3);
-					row.appendChild(td4);
-					row.appendChild(td5);
-					resultTable.appendChild(row);
+					var tDatas = createTableData(5); 
+					populateData(tDatas, i, row, resultTable, response);
 				}
 				
 
