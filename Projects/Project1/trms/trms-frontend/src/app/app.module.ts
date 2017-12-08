@@ -13,6 +13,8 @@ import {NavComponent} from './components/nav/nav.component';
 import {LoginComponent} from './components/login/login.component';
 import {NewRequestComponent} from './components/new-request/new-request.component';
 import {LookupsService} from './services/lookups.service';
+import {RequestService} from './services/request.service';
+import {CredentialsService} from './services/credentials.service';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import {LookupsService} from './services/lookups.service';
         HttpClientModule,
     ],
     providers: [
-        LookupsService
+        LookupsService,
+        RequestService,
+        CredentialsService
     ],
     bootstrap: [AppComponent]
 })

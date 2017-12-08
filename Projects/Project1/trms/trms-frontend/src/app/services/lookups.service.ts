@@ -4,101 +4,122 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/empty';
+import 'rxjs/add/observable/of';
 import {catchError, map, tap} from 'rxjs/operators';
 
 type EventType = { type: string, percentOff: number }
 
+
+const baseUrl = 'http://localhost:8085/trms/lookups';
+const eventTypesUrl = `${baseUrl}/eventTypes`;
+const filePurposesUrl = `${baseUrl}/filePurposes`;
+const departmentsUrl = `${baseUrl}/departments`;
+const ranksUrl = `${baseUrl}/employeeRanks`;
+const mimesUrl = `${baseUrl}/mimeTypes`;
+const statusesUrl = `${baseUrl}/requestStatuses`;
+
+const httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'}),
+    withCredentials: true
+};
+
+
 @Injectable()
 export class LookupsService {
-    private _eventTypes: Observable<string[]>;
-    private _filePurposes: Observable<string[]>;
-    private _departments: Observable<string[]>;
-    private _employeeRanks: Observable<string[]>;
-    private _mimeTypes: Observable<string[]>;
-    private _requestStatuses: Observable<string[]>;
+
+    eventTypes: string[];
+    filePurposes: string[];
+    departments: string[];
+    ranks: string[];
+    mimeTypes: string[];
+    statuses: string[];
 
     constructor(private http: HttpClient) {
-        const baseUrl = 'http://localhost:8085/trms/lookups';
-        const eventTypesUrl = `${baseUrl}/eventTypes`;
-        const filePurposesUrl = `${baseUrl}/filePurposes`;
-        const departmentsUrl = `${baseUrl}/departments`;
-        const ranksUrl = `${baseUrl}/employeeRanks`;
-        const mimesUrl = `${baseUrl}/mimeTypes`;
-        const statusesUrl = `${baseUrl}/requestStatuses`;
-
-        const httpOptions = {
-            headers: new HttpHeaders({'Content-Type': 'application/json'}),
-            withCredentials: true
-        };
-
-        this._eventTypes = this.http.get<EventType[]>(eventTypesUrl, httpOptions)
-            .pipe(
-                map((eTypes: EventType[]) => {
-                    return eTypes.map(evt => evt.type);
-                }),
-                tap(types => {
-                }),
-                catchError(this.handleError<any>('get event types'))
-            );
-
-        this._filePurposes = this.http.get<string[]>(filePurposesUrl, httpOptions)
-            .pipe(
-                tap(purposes => {
-                }),
-                catchError(this.handleError<any>('get file purposes'))
-            );
-
-        this._departments = this.http.get<string[]>(departmentsUrl, httpOptions)
-            .pipe(
-                tap(departments => {
-                }),
-                catchError(this.handleError<any>('get departments'))
-            );
-
-        this._employeeRanks = this.http.get<string[]>(ranksUrl, httpOptions)
-            .pipe(
-                tap(rank => {
-                }),
-                catchError(this.handleError<any>('get employee ranks'))
-            );
-
-        this._mimeTypes = this.http.get<string[]>(mimesUrl, httpOptions)
-            .pipe(
-                tap(mimeType => {
-                }),
-                catchError(this.handleError<any>('get mime types'))
-            );
-
-        this._requestStatuses = this.http.get<string[]>(statusesUrl, httpOptions)
-            .pipe(
-                tap(status => {
-                }),
-                catchError(this.handleError<any>('get statusesUrl'))
-            );
     };
 
+    /**
+     * the first time we fetch will be from db; the fetched values are cached for subsequent calls
+     * @returns {Observable<string[]>}
+     */
     getRequestStatuses(): Observable<string []> {
-        return this._requestStatuses;
+        if (this.statuses === undefined) {
+            return this.http.get<string[]>(statusesUrl, httpOptions)
+                .pipe(
+                    tap(statuses => {
+                        this.statuses = statuses;
+                        return statuses;
+                    }),
+                    catchError(this.handleError<any>('get statusesUrl'))
+                );
+        }
+        return Observable.of(this.statuses);
     }
 
     getMimeTypes(): Observable<string[]> {
-        return this._mimeTypes;
+        if (this.mimeTypes === undefined)
+            return this.http.get<string[]>(mimesUrl, httpOptions)
+                .pipe(
+                    tap(mimeTypes => {
+                        this.mimeTypes = mimeTypes;
+                        return mimeTypes;
+                    }),
+                    catchError(this.handleError<any>('get mime types'))
+                );
+        return Observable.of(this.mimeTypes);
     }
 
     getEmployeeRanks(): Observable<string[]> {
-        return this._employeeRanks;
+        if (this.ranks === undefined)
+            return this.http.get<string[]>(ranksUrl, httpOptions)
+                .pipe(
+                    tap(ranks => {
+                        this.ranks = ranks;
+                        return ranks;
+                    }),
+                    catchError(this.handleError<any>('get employee ranks'))
+                );
+        return Observable.of(this.ranks);
     }
 
     getDepartments(): Observable<string[]> {
-        return this._departments;
+        if (this.departments === undefined)
+            return this.http.get<string[]>(departmentsUrl, httpOptions)
+                .pipe(
+                    tap(depts => {
+                        this.departments = depts;
+                        return depts;
+                    }),
+                    catchError(this.handleError<any>('get departments'))
+                );
+        return Observable.of(this.departments);
     }
 
     getFilePurposes(): Observable<string[]> {
-        return this._filePurposes;
+        if (this.filePurposes === undefined)
+            return this.http.get<string[]>(filePurposesUrl, httpOptions)
+                .pipe(
+                    tap(purposes => {
+                        this.filePurposes = purposes;
+                        return purposes;
+                    }),
+                    catchError(this.handleError<any>('get file purposes'))
+                );
+        return Observable.of(this.filePurposes);
     }
 
     getEventTypes(): Observable<string[]> {
-        return this._eventTypes;
+        if (this.eventTypes === undefined)
+            return this.http.get<EventType[]>(eventTypesUrl, httpOptions)
+                .pipe(
+                    map((eTypes: EventType[]) => {
+                        this.eventTypes = eTypes.map(evt => evt.type);
+                        return this.eventTypes;
+                    }),
+                    tap(types => {
+                    }),
+                    catchError(this.handleError<any>('get event types'))
+                );
+        return Observable.of(this.eventTypes);
     }
 
     /**

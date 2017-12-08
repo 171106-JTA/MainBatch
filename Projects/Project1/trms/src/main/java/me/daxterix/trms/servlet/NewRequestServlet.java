@@ -1,7 +1,5 @@
 package me.daxterix.trms.servlet;
 
-import me.daxterix.trms.dao.DAOUtils;
-import me.daxterix.trms.dao.ObjectDAO;
 import me.daxterix.trms.dao.exception.DuplicateIdException;
 import me.daxterix.trms.dao.exception.NonExistentIdException;
 import me.daxterix.trms.model.*;
@@ -11,9 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,7 +19,6 @@ import java.time.format.DateTimeParseException;
 @WebServlet(name = "NewRequestServlet", urlPatterns="/employee/newRequest")
 public class NewRequestServlet extends HttpServlet {
     private static final long serialVersionUID = 1957120628249070345L;
-    ObjectDAO objectDao = DAOUtils.getObjectDAO();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String type = request.getParameter("eventType");

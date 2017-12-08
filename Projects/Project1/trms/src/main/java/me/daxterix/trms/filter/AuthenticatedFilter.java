@@ -25,7 +25,8 @@ public class AuthenticatedFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
+                                                        throws IOException, ServletException {
         System.out.println("Login in filter triggered");
         HttpServletRequest httpRequest = (HttpServletRequest)request;
         HttpSession session = httpRequest.getSession();
@@ -45,7 +46,7 @@ public class AuthenticatedFilter implements Filter {
             session.invalidate();
             httpResponse.getWriter().println("Please log in and try again.");
         }
-        else {
+        else {  // TODO: how to chain filters
             request.setAttribute("employee", emp);
             filterChain.doFilter(request, response);
         }

@@ -1,15 +1,52 @@
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a routerLink="/home" class="navbar-brand"><img src="../../../favicon.ico"></a>
+
+<!-- Note: a lot of this styling is taken from the Revature Pubhub project -->
+
+<nav class="navbar navbar-default navbar-fixed-top">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <a routerLink="home" class="navbar-brand"><img src="../../../favicon.ico"></a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#my-nav-collapse-pane">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
         </div>
-        <ul class="nav navbar-nav">
-            <li><a routerLink="/home">Home</a></li>
-            <li><a routerLink="/register">Register</a></li>
-            <li><a routerLink="/login">Login</a></li>
-            <li><a routerLink="/new-request">New Request</a></li>
-            <li><a routerLink="/reactive-form">Reactive Form</a></li>
-        </ul>
-    </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="my-nav-collapse-pane">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Options <b
+                        class="glyphicon glyphicon-cog"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a routerLink="edit-account">Edit account</a></li>
+                        <li class="divider"></li>
+                        <li><a routerLink="logout">Logout</a></li>
+                        <li class="divider"></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Requests<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a routerLink="new-request">File New Request</a></li>
+                        <li class="divider"></li>
+                        <li><a routerLink="home">Filed Requests</a></li>
+                        <li class="divider"></li>
+                        <li><a routerLink="home">Request Activity</a></li>
+                        <li class="divider"></li>
+                    </ul>
+                </li>
+
+                <li><a routerLink="/home">Home</a></li>
+                <li><a routerLink="/register">Register</a></li>
+                <li><a routerLink="/login">Login</a></li>
+                <li><a routerLink="/new-request">New Request</a></li>
+
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
 </nav>
 
