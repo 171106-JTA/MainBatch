@@ -39,4 +39,14 @@
     <servlet-name>newReimbursementForm</servlet-name>
     <url-pattern>/newReimbursementForm</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>getUserForms</display-name>
+    <servlet-name>getUserForms</servlet-name>
+    <servlet-class>com.revature.servlets.getUserForms</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getUserForms</servlet-name>
+    <url-pattern>/getUserForms</url-pattern>
+  </servlet-mapping>
 </web-app>

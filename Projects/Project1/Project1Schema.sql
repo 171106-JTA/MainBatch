@@ -138,12 +138,12 @@ BEGIN
 END;
 /
 --Test INSERT for Address TABLE
-INSERT INTO Address (numberAndStreet, city, state, zip, aptNumber)
-VALUES('11730 Plaza America Dr.', 'Reston', 'VA', 20190, 2);
-SELECT * FROM Address;
+--INSERT INTO Address (numberAndStreet, city, state, zip, aptNumber)
+--VALUES('11730 Plaza America Dr.', 'Reston', 'VA', 20190, 2);
+--SELECT * FROM Address;
 --DELETE FROM Address
 --WHERE AddressID = 1;
-SELECT LAST_INSERT_ID FROM ADDRESS;
+--SELECT LAST_INSERT_ID FROM ADDRESS;
 /
 
 --------------------------------
@@ -159,11 +159,13 @@ CREATE TABLE ReimbursementForm (
     reimbursementID NUMBER(9),
     username VARCHAR(100), 
     eventDateAndTime TIMESTAMP(0), 
-    eventLocation number(9),    --Foreign key to address table
+    eventLocation NUMBER(9),    --Foreign key to address table
     eventDescription CLOB, 
     eventCost NUMBER(11,2),     --Allow maxmimum event cost to be $100,000,000.00
-    gradingFormatID number(2),  --Foreign key to grading format table
-    eventTypeID number(2),      --Foreign key to event type table
+    gradingFormatID NUMBER(2),  --Foreign key to grading format table
+    eventTypeID NUMBER(2),      --Foreign key to event type table
+    status NUMBER(2),           --0 -> pending, 1 -> 
+    exceeds_funds NUMBER(1),      --0 -> not exceeding funds, 1 -> Exceeds available funds
     CONSTRAINT PK_reimbursementID PRIMARY KEY (reimbursementID),
     CONSTRAINT FK_Reimbursement_Username FOREIGN KEY (username) REFERENCES Login(username),
     CONSTRAINT FK_eventLocation FOREIGN KEY (eventLocation) REFERENCES Address(addressID),
@@ -180,6 +182,9 @@ BEGIN
 END;
 /
 --Test INSERT for ReimbursementForm
+--INSERT INTO Address (numberAndStreet, city, state, zip, aptNumber)
+--VALUES('11730 Plaza America Dr.', 'Reston', 'VA', 20190, 2);
+--SELECT * FROM ADDRESS;
 --INSERT INTO ReimbursementForm (
 --    username, 
 --    eventDateAndTime, 
@@ -191,8 +196,8 @@ END;
 --VALUES (
 --    'A', 
 --    TO_TIMESTAMP ('3-Dec-17 14:10', 'DD-Mon-RR HH24:MI'), 
---    1, --Assume test code for Address table was run
---    'This is an event description', 
+--    13, --Assume test code for Address table was run
+--    'This is an event description #2', 
 --    50.04, 
 --    1, --grading format
 --    3  --event type
@@ -238,7 +243,9 @@ BEGIN
         eventDescription, 
         eventCost,
         gradingFormatID,
-        eventTypeID
+        eventTypeID, 
+        status, 
+        exceeds_funds
         )
     VALUES (
         username,
@@ -247,7 +254,9 @@ BEGIN
         description, 
         eventcost,
         grading_format_id,
-        event_type_id 
+        event_type_id,
+        0,                  --Default is pending status
+        0                   --Default is not exceeding available funds
         );
 END;
 /

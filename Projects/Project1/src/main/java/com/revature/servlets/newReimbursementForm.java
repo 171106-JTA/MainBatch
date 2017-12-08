@@ -70,7 +70,7 @@ public class newReimbursementForm extends HttpServlet {
 			}
 		}
 
-		out.println("<hr>" + "<a href='index.html'>BACK</a>");
+		out.println("<hr>" + "<a href='employeeLandingPage.html'>BACK</a>");
 	}
 	
 }

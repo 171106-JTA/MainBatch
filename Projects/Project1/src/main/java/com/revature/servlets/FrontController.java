@@ -62,7 +62,10 @@ public class FrontController extends HttpServlet {
 			rd = request.getRequestDispatcher("newReimbursementForm");
 			rd.forward(request, response);
 			break;
-			
+		case "getuserforms":
+			System.out.println("in Front Controller, getUserForms");
+			rd = request.getRequestDispatcher("getUserForms");
+			rd.forward(request, response);
 		}
 	}
 
