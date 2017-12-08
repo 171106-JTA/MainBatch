@@ -68,6 +68,55 @@ public class SystemDAOImpl implements SystemDAO{
 	}
 	
 	@Override
+	public int getEmployeeIdFromRequest(int rrId) {
+		int empId = 0;
+		String sql = "SELECT EID FROM All_Request_Data WHERE RRID = ?";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try(Connection conn = ConnectionUtil.getConnection()){
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, rrId);
+			
+			rs = ps.executeQuery();
+			
+			empId = Integer.parseInt(rs.getString("EID"));
+		}catch(SQLException e) {
+			
+		}finally {
+			close(ps);
+		}
+		
+		return empId;
+	}
+	
+	@Override
+	public ReimburseRequest getSingleRequest(int rrId) {
+		ReimburseRequest rr = null;
+		String sql = "SELECT * FROM Reimbursement_Request WHERE RRID = ?";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+	
+		try(Connection conn = ConnectionUtil.getConnection()){
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, rrId);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				rr = new ReimburseRequest(rrId, rs.getDouble("PRICE"), rs.getString("EVENTNAME"), rs.getDate("EVENT_DATETIME").toLocalDate(), this.getStatus(rrId));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			close(ps);
+		}
+		
+		return rr;
+	}
+	
+	@Override
 	public List<ReimburseRequest> getEmployeeRequests(int empId) {
 		List<ReimburseRequest> rrList = new ArrayList<>();
 		ReimburseRequest rr = null;

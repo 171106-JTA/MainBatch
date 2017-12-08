@@ -10,7 +10,6 @@ public class CreateSession {
 		HttpSession session = request.getSession();
 		
 		if(session.isNew()) {
-			//session.setAttribute("username", emp.getUsername());
 			session.setAttribute("empId", emp.getEmpId());
 			session.setAttribute("role", emp.getRoleId());
 			session.setAttribute("username", emp.getUsername());

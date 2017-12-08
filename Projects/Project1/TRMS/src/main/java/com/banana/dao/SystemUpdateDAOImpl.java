@@ -105,8 +105,23 @@ public class SystemUpdateDAOImpl implements SystemUpdateDAO{
 		return percent;
 	}
 	
-	public void setNewAmount(int empId, double newAmount) {
-		
+	public boolean setNewAmount(int empId, double newAmount) {
+		String sql = "UPDATE Employee SET Avail_Amount = ? WHERE EID = ?";
+		PreparedStatement ps = null;
+	
+		try(Connection conn = ConnectionUtil.getConnection()){
+			ps = conn.prepareStatement(sql);
+			ps.setDouble(1, newAmount);
+			ps.setInt(2, empId);
+			
+			ps.executeQuery();
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			close(ps);
+		}
+		return true;
 	}
 	
 	private void commitChanges() {

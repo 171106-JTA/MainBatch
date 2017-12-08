@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.banana.service.ApproveReimbursement;
+import com.banana.service.UpdateEmployeeAmount;
 
 /**
  * Servlet implementation class ApproveRequest
@@ -30,18 +31,25 @@ public class ApproveRequest extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		System.out.println("Hello FROm Approve");
+		
+		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		RequestDispatcher rd = request.getRequestDispatcher("AdminPage.html");
 		
+		
+		
 		if(!session.isNew()) {
-			System.out.println(session.getAttribute("role"));
 			int roleId = (Integer)session.getAttribute("role");
 			int rrId = Integer.parseInt(request.getParameter("rrId"));
 			int decision = Integer.parseInt(request.getParameter("decision"));
 			
 			if(ApproveReimbursement.approve(roleId, rrId, decision)) {
+				if(roleId == 3) {
+					if(!UpdateEmployeeAmount.updateAmount(rrId)) {
+						out.println("Issue updating");
+					}
+				}
 				out.println("Changed");
 			}
 			else {
