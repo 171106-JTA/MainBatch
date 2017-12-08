@@ -104,5 +104,6 @@ function getEmployeeRequests(){
 	
 		xhr.open("POST",url);
 		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		xhr.send();	
+		//xhr.send("datachoice=single");
+		xhr.send();
 }

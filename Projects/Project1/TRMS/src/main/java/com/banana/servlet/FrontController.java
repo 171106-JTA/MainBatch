@@ -62,6 +62,10 @@ public class FrontController extends HttpServlet {
 				rd = request.getRequestDispatcher("SubmitRequest");
 				rd.include(request, response);
 				break;
+			case "approval":
+				rd = request.getRequestDispatcher("ApproveRequest");
+				rd.include(request, response);
+				break;
 		default: 
 			response.sendError(404);
 		}

@@ -3,6 +3,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<script src="resources/JavaScript/admin.js"></script>
 </head>
 <body>
 	<div id="approvalDiv">
@@ -12,12 +13,12 @@
 			<option value="0">Still Pending</option>
 			<option value="-1">Deny</option>
 		</select>
-		<input type="button" value="submit">
+		<input type="button" value="submit" action="approval.do" method="POST">
 	</div>
 
 	<div id="allRequestDiv">
 		<p id="AJAXError"></p>
-		<input type="button" value="Show PendRequests" onclick="getEmployeeRequests()">
+		<input type="button" value="Show PendRequests" onclick="getAllRequests()">
 		<table id="pendingTable" border="2px">
 			<tr><th>ID</th><th>Date-Time</th><th>Event</th><th>Projected Reimbursement</th><th>Status</th></tr>
 		</table>

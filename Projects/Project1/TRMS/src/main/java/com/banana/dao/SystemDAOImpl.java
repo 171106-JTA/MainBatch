@@ -79,7 +79,7 @@ public class SystemDAOImpl implements SystemDAO{
 		ResultSet rs = null;
 		int rrId = 0;
 		String status = "PENDING";
-	
+		System.out.println(empId + "emp");
 		try(Connection conn = ConnectionUtil.getConnection()){
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, empId);
@@ -113,8 +113,6 @@ public class SystemDAOImpl implements SystemDAO{
 		String sql = "SELECT * FROM All_Request_Data";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		int rrId = 0;
-		String status = "PENDING";
 	
 		try(Connection conn = ConnectionUtil.getConnection()){
 			ps = conn.prepareStatement(sql);
@@ -124,7 +122,7 @@ public class SystemDAOImpl implements SystemDAO{
 			while(rs.next()) {
 				rr = new ReimburseRequest(rs.getInt("RRID"), rs.getInt("EID"), rs.getString("FNAME"), rs.getString("LNAME"), 
 						rs.getString("EVENT_PLACE"), rs.getString("EVENTNAME"), rs.getDate("EVENT_DATETIME").toLocalDate(), 
-						rs.getString("EVENT_PLACE"), rs.getDouble("PRICE"), rs.getString("JUSTIFY"), 
+						rs.getDouble("PRICE"), rs.getString("JUSTIFY"), 
 						rs.getInt("DS_APPROVAL"), rs.getInt("DH_APPROVAL"), rs.getInt("BC_APPROVAL"));
 				rrList.add(rr);
 			}

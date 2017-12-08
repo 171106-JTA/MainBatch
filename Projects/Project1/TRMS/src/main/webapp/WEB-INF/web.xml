@@ -49,4 +49,14 @@
     <servlet-name>GetEmployeeRequest</servlet-name>
     <url-pattern>/GetEmployeeRequest</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ApproveRequest</display-name>
+    <servlet-name>ApproveRequest</servlet-name>
+    <servlet-class>com.banana.servlet.ApproveRequest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApproveRequest</servlet-name>
+    <url-pattern>/ApproveRequest</url-pattern>
+  </servlet-mapping>
 </web-app>

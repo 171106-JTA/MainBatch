@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import com.banana.bean.ReimburseRequest;
 import com.banana.dao.SystemDAOImpl;
 
-public class GetEmployeeData {
+public class GetAllData {
 	
-	public static void getEmployeeData(HttpServletResponse response, int empId) throws IOException{
+	public static void getAllData(HttpServletResponse response) throws IOException{
 		SystemDAOImpl dao = new SystemDAOImpl();
-		List<ReimburseRequest> rrList = dao.getEmployeeRequests(empId);
+		List<ReimburseRequest> rrList = dao.getAllRequests();
 		String responseXML = null;
 		
 		response.setContentType("text/xml");
@@ -32,7 +32,6 @@ public class GetEmployeeData {
 			out.println(responseXML);
 		}
 		else {
-			System.out.println("Empty");
 			out.println("<root></root>");
 		}
 		

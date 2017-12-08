@@ -47,11 +47,20 @@ public class ReimburseRequest {
 		this.status = status;
 	}
 	
-	public ReimburseRequest(int RRID, int EID, String fname, String lname, String string3, String string4,
-			LocalDate localDate, String string5, double double1, String string6, int int3, int int4, int int5) {
+	public ReimburseRequest(int RRID, int EID, String fname, String lname, String eventPlace, String eventName,
+			LocalDate localDate, double cost, String justify, int dsApproval, int dhApproval, int bcApproval) {
 		this.rrID = RRID;
 		this.empID = EID;
-		this.
+		this.fname = fname;
+		this.lname = lname;
+		this.location = eventPlace;
+		this.eventName = eventName;
+		this.date = localDate;
+		this.cost = cost;
+		this.justification = justify;
+		this.dsApproval = dsApproval;
+		this.dhApproval = dhApproval;
+		this.bcApproval = bcApproval;
 	}
 
 	public String getStatus() {
