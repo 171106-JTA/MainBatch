@@ -81,13 +81,14 @@ public class UpdateDAOImpl implements UpdateDAO{
 	}
 	
 	@Override
-	public void insertInfoRequest(int rrId) {
-		String sql = "INSERT INTO Info_Request (RRID) VALUES (?)";
+	public void insertInfoRequest(int rrId, int empId) {
+		String sql = "INSERT INTO Info_Request (RRID, REQUESTEEID) VALUES (?, ?)";
 		PreparedStatement ps = null;
 	
 		try(Connection conn = ConnectionUtil.getConnection()){
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, rrId);
+			ps.setInt(2, empId);
 			
 			ps.executeQuery();
 			commitChanges();

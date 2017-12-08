@@ -110,3 +110,39 @@ function getEmployeeRequests(){
 		//xhr.send("datachoice=single");
 		xhr.send();
 }
+
+function getInfoRequests(){
+	var url = "GetInfoRequest";
+	
+	var xhr = new XMLHttpRequest();
+
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4 && xhr.status == 200){
+			var xmlText = xhr.responseXML;
+			if(xmlText === null){
+				return;
+			}
+			
+			var response = xmlText.getElementsByTagName("req");
+			var resultTable = document.getElementById("infoTable");
+			
+			clearTable(resultTable);
+			//TODO fix typeError
+			for(i in response){
+				var row = document.createElement("tr");
+				var tDatas = createTableData(2); 
+				populateData(tDatas, i, row, resultTable, response);
+			}
+			
+
+			
+		}else if(xhr.readyState == 4 && xhr.status != 200){
+			console.log(xhr.status);
+			document.getElementById("AJAXError").innerHTML="Woops";
+		}
+	}
+
+	xhr.open("GET", url);
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr.send();	
+}

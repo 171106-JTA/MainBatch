@@ -7,6 +7,6 @@ public interface UpdateDAO {
 	public boolean submitRequest(ReimburseRequest request);
 	public double getPercentage(int eventId);
 	public boolean setNewAmount(int empId, double newAmount);
-	public void insertInfoRequest(int rrId);
+	public void insertInfoRequest(int rrId, int empId);
 	public void UpdateInfoRequest();
 }

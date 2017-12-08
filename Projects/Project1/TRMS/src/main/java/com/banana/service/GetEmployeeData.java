@@ -13,7 +13,7 @@ import com.banana.dao.ReimbursementDAOImpl;
 public class GetEmployeeData {
 	
 	public static void getEmployeeData(HttpServletResponse response, int empId) throws IOException{
-		EmployeeDAOImpl empdao = new EmployeeDAOImpl();
+		
 		ReimbursementDAOImpl rdao = new ReimbursementDAOImpl();
 		List<ReimburseRequest> rrList = rdao.getEmployeeRequests(empId);
 		String responseXML = null;
@@ -41,7 +41,7 @@ public class GetEmployeeData {
 	}
 	
 	public static void getAllData(HttpServletResponse response) throws IOException{
-		EmployeeDAOImpl empdao = new EmployeeDAOImpl();
+		
 		ReimbursementDAOImpl rdao = new ReimbursementDAOImpl();
 		List<ReimburseRequest> rrList = rdao.getAllRequests();
 		String responseXML = null;

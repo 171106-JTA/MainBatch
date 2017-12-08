@@ -61,12 +61,12 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>InfoRequest</display-name>
-    <servlet-name>InfoRequest</servlet-name>
-    <servlet-class>com.banana.servlet.InfoRequest</servlet-class>
+    <display-name>GetInfoRequest</display-name>
+    <servlet-name>GetInfoRequest</servlet-name>
+    <servlet-class>com.banana.servlet.GetInfoRequest</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>InfoRequest</servlet-name>
-    <url-pattern>/InfoRequest</url-pattern>
+    <servlet-name>GetInfoRequest</servlet-name>
+    <url-pattern>/GetInfoRequest</url-pattern>
   </servlet-mapping>
 </web-app>

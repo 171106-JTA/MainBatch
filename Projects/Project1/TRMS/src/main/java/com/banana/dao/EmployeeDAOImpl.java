@@ -2,16 +2,15 @@ package com.banana.dao;
 
 import static com.banana.util.CloseStreams.close;
 
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.banana.bean.Employee;
+import com.banana.bean.InfoRequest;
 import com.banana.bean.ReimburseRequest;
 import com.banana.util.ConnectionUtil;
 
@@ -90,5 +89,37 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 		}
 		
 		return empId;
+	}
+	
+	@Override
+	public List<InfoRequest> getInfoRequests(int requesteeId) {
+		List<InfoRequest> irList = new ArrayList<>();
+		InfoRequest ir = null;
+		String sql = "SELECT * FROM Info_Request WHERE REQUESTEEID = ?";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try(Connection conn = ConnectionUtil.getConnection()){
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, requesteeId);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				ir = new InfoRequest(rs.getInt(1), rs.getInt(2));
+				irList.add(ir);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			close(ps);
+		}
+		
+		if(irList.isEmpty()) {
+			return null;
+		}
+		
+		return irList;
 	}
 }

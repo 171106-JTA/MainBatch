@@ -16,13 +16,19 @@ import com.banana.service.InfoRequestManipulation;
 /**
  * Servlet implementation class InfoRequest
  */
-public class InfoRequest extends HttpServlet {
+public class GetInfoRequest extends HttpServlet {
 	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		int requesteeId = (Integer)session.getAttribute("empId");
+	
+		if(!session.isNew()) {
+			InfoRequestManipulation.getInfoRequests(response, requesteeId);
+		}
 		
 	}
 

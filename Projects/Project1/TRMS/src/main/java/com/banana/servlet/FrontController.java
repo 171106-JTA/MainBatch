@@ -59,7 +59,7 @@ public class FrontController extends HttpServlet {
 				rd.include(request, response);
 				break;
 			case "info_request":
-				rd = request.getRequestDispatcher("InfoRequest");
+				rd = request.getRequestDispatcher("GetInfoRequest");
 				rd.include(request, response);
 				break;
 			default: 

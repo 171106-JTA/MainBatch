@@ -1,10 +1,48 @@
 package com.banana.service;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
+import com.banana.bean.InfoRequest;
+import com.banana.bean.ReimburseRequest;
+import com.banana.dao.EmployeeDAOImpl;
 import com.banana.dao.UpdateDAOImpl;
 
 public class InfoRequestManipulation {
 	public static void insert(int rrId) {
 		UpdateDAOImpl udao = new UpdateDAOImpl();
-		udao.insertInfoRequest(rrId);
+		EmployeeDAOImpl dao = new EmployeeDAOImpl();
+		int empId = dao.getEmployeeIdFromRequest(rrId);
+		udao.insertInfoRequest(rrId, empId);
+	}
+	
+	public static void getInfoRequests(HttpServletResponse response, int requesteeId) throws IOException{
+		
+		EmployeeDAOImpl dao = new EmployeeDAOImpl();
+		List<InfoRequest> irList = dao.getInfoRequests(requesteeId);
+		String responseXML = null;
+		
+		response.setContentType("text/xml");
+		PrintWriter out = response.getWriter();
+		
+		if(irList != null) {
+			responseXML = "<root>";
+			
+			for(InfoRequest ir: irList) {
+				responseXML += "<req><ird>" + ir.getIrId() + "</ird><rrid>" + ir.getRrId()+ "</rrid></req>";
+			}
+			
+			responseXML += "</root>";
+			
+			out.println(responseXML);
+		}
+		else {
+			System.out.println("Empty");
+			out.println("<root></root>");
+		}
+		
 	}
 }
