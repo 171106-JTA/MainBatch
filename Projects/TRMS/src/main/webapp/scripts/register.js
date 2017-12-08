@@ -1,19 +1,79 @@
-function register() {
-    var element = document.getElementById("content");
-    element.innerHTML = displayRegistration(); 
-    var verifypassword = document.getElementById("verifypassword");
-    verifypassword.addEventListener("focusout", () => {
-    	var password = document.getElementById("password");
-    	if(verifypassword.value != password.value){
-    		verifypassword.style.color = "red";
-    	} else if(verifypassword.style.color != "black"){
-    		verifypassword.style.color = "black";
+function validate(form) {
+	console.log("In validate()");
+    var passed = true;
+    for(let input of form) {
+    	if(!check(input)) {
+    		passed = false;
     	}
-    })
+    }
+    return passed;
+}
+function check(input) {
+	console.log("In check()");
+	switch(input.id){
+		case "password":
+			if((document.getElementById("verifypassword").value != input.value) || (input.value == "")) {
+				input.style.color = "red";
+				console.log(input.id + " red");
+				return false;
+			} else if(input.style.color == "red") {
+				input.style.color = "black";
+			}
+			return true;
+		case "verifypassword":
+			if((document.getElementById("password").value != input.value) || (input.value == "")) {
+				input.style.color = "red";
+				console.log(input.id + " red");
+				return false;
+			} else if(input.style.color == "red") {
+				input.style.color = "black";
+			}
+			return true;
+		case "middlename":
+			return true;
+		default:
+			if(input.value == "") {
+				input.style.color = "red";
+				return false;
+			} else if(input.style.color == "red"){
+				input.style.color = "red";
+			}
+			return true;
+	}
+}
+function submitForm(){
+	console.log("In submitForm()");
+	var form = document.getElementsByTagName("input");
+	if(!validate(form)){
+		return;
+	}
+	
+	var request = "";
+	for(let input of form){
+		request += input.id + ":" + input.value + "&";
+	}
+	console.log(request);
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = () => {
+		var response = "";
+		if(this.readyState == 4){
+			if(this.status == 200){
+				welcome();
+			} else if (this.status == 204){
+				displayExistsError();
+			} else {
+				displayServerError();
+			}
+		}
+	}
+	
+	xhr.open("POST", "CreateEmployeeAccountServlet");
+	xhr.send(request);
 }
 function displayRegistration(){
-	return	"<h1>Register</h1>" +
-			"<form id='registration' action='submitForm()' method='POST' onsubmit='return validateRegistration()'>" +
+	document.getElementById("content").innerHTML = 
+		"<h1>Register</h1>" +
+		"<div id='registration'>" +
 			"<ul style='list-style-type: none;'>" +
 				"<li><h2>account information</h2></li>" +
 		        "<li><input id='username' type='text' placeholder='new username' maxlength='20'></li>" +
@@ -31,32 +91,19 @@ function displayRegistration(){
 		        "<li><input id='positionid' type='number' placeholder='position id'></li>" +
 		        "<li><input id='reportsto' type='number' placeholder='supervisor id'></li>" +
 		        "<li><input id='facilityid' type='number' placeholder='facility id'></li>" +
-		        "<li><input id='submitbutton' type='submit' value='submit'></li>" +
+		        "<li><button id='submitbutton' onclick='submitForm()'>submit</button></li>" +
 		    "</ul>" +
-		"</form>";   
+		"</div>";
 }
-function submitForm(){
-	var forms = document.getElementsByTagName("input");
-	var request = "";
-	var response = "";
-	for(let form of forms){
-		if(form.id != "submitbutton"){
-			request += form.id + ":" + form.value + "&";
-		}
-	}
-	var xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = () => {
-		if(this.readyState == 4){
-			if(this.status == 200){
-				response = this.responseText;
-			} else if (this.status == 204){
-				
-			} else {
-				
-			}
-		}
-	}
-	xhr.open("POST", "CreateEmployeeAccountServlet");
-	xhr.send(request);
-	return response;
+function displayExistsError() {
+	document.getElementById("content").innerHTML =
+		"<h1>Account Already Exists</h1>" +
+			"<button onclick='displayRegistration()'>back</button>" +
+			"<button onclick='login()'>login</button>";
+}
+function displayServerError() {
+	document.getElementById("content").innerHTML =
+		"<h1>Could Not Create Account</h1>" +
+			"<button onclick='displayRegistration()'>back</button>" +
+			"<button onclick='welcome()'>home</button>";
 }

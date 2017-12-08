@@ -1,4 +1,4 @@
-function login() {
+function displayLogin() {
 	document.getElementById("content").innerHTML =
 		"<h1>Login</h1>" +
 		"<form action='LoginServlet' method='POST'>" +

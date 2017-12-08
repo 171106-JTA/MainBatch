@@ -22,7 +22,7 @@ public class DataConnectionUtility {
 	public static DataConnectionUtility getDataConnection() throws IOException {
 		if(dataconnection == null) {
 			try {
-				propertiesfile = new FileInputStream("database.properties");
+				propertiesfile = new FileInputStream("C:\\Users\\Jeff\\Documents\\Revature\\Projects\\TRMS\\database.properties");
 			} catch(IOException e) {
 				System.err.println("Could not load properties file.");
 				throw e;
