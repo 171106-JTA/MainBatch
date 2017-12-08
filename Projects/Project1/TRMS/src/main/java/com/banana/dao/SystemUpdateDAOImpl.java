@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import com.banana.util.ConnectionUtil;
 
@@ -37,6 +38,7 @@ public class SystemUpdateDAOImpl implements SystemUpdateDAO{
 			
 			ps.executeQuery();
 			
+			commitChanges();
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -44,5 +46,19 @@ public class SystemUpdateDAOImpl implements SystemUpdateDAO{
 			close(ps);
 		}
 		return true;
+	}
+	
+	private void commitChanges() {
+		Statement stmt = null;
+		
+		try(Connection conn = ConnectionUtil.getConnection()){
+			String sql = "COMMIT";
+			stmt = conn.createStatement();
+			stmt.executeUpdate(sql);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+		}
 	}
 }

@@ -122,7 +122,7 @@ public class SystemDAOImpl implements SystemDAO{
 			while(rs.next()) {
 				rr = new ReimburseRequest(rs.getInt("RRID"), rs.getInt("EID"), rs.getString("FNAME"), rs.getString("LNAME"), 
 						rs.getString("EVENT_PLACE"), rs.getString("EVENTNAME"), rs.getDate("EVENT_DATETIME").toLocalDate(), 
-						rs.getDouble("PRICE"), rs.getString("JUSTIFY"), 
+						rs.getDouble("PRICE"), rs.getString("JUSTIFY"), rs.getString("Description"),
 						rs.getInt("DS_APPROVAL"), rs.getInt("DH_APPROVAL"), rs.getInt("BC_APPROVAL"));
 				rrList.add(rr);
 			}

@@ -48,7 +48,7 @@ public class ReimburseRequest {
 	}
 	
 	public ReimburseRequest(int RRID, int EID, String fname, String lname, String eventPlace, String eventName,
-			LocalDate localDate, double cost, String justify, int dsApproval, int dhApproval, int bcApproval) {
+			LocalDate localDate, double cost, String justify, String description, int dsApproval, int dhApproval, int bcApproval) {
 		this.rrID = RRID;
 		this.empID = EID;
 		this.fname = fname;
@@ -58,8 +58,34 @@ public class ReimburseRequest {
 		this.date = localDate;
 		this.cost = cost;
 		this.justification = justify;
+		this.description = description;
 		this.dsApproval = dsApproval;
 		this.dhApproval = dhApproval;
+		this.bcApproval = bcApproval;
+	}
+
+	
+	public int getDsApproval() {
+		return dsApproval;
+	}
+
+	public void setDsApproval(int dsApproval) {
+		this.dsApproval = dsApproval;
+	}
+
+	public int getDhApproval() {
+		return dhApproval;
+	}
+
+	public void setDhApproval(int dhApproval) {
+		this.dhApproval = dhApproval;
+	}
+
+	public int getBcApproval() {
+		return bcApproval;
+	}
+
+	public void setBcApproval(int bcApproval) {
 		this.bcApproval = bcApproval;
 	}
 
