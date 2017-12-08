@@ -11,8 +11,18 @@ import { InterpolationComponent } from './components/interpolation/interpolation
 import { appRoutes } from './routing';
 import { HomeComponent } from './components/home/home.component';
 import { PokeapiComponent } from './components/pokeapi/pokeapi.component';
+import { DirectiveComponent} from './components/directives/directive.component'
+import { PipesComponent } from './components/pipes/pipes.component';
+import { PostsComponent} from './components/posts/posts.component';
 
+//Services
+import { PostsService } from './services/posts.service';
 
+//Pipes
+import { CustomPipe } from './pipes/custom.pipe';
+
+//Directives
+import { CustomDirective } from './directives/custom.directive';
 @NgModule({
   //Have angular declare all classes to be used
   declarations: [
@@ -20,7 +30,16 @@ import { PokeapiComponent } from './components/pokeapi/pokeapi.component';
     NavbarComponent,
     InterpolationComponent,
     HomeComponent,
-    PokeapiComponent
+    PokeapiComponent,
+    DirectiveComponent,
+    PipesComponent,
+    PostsComponent,
+
+    //Pipes
+    CustomPipe,
+
+    //Directives
+    CustomDirective
 
   ],
   imports: [
@@ -30,7 +49,16 @@ import { PokeapiComponent } from './components/pokeapi/pokeapi.component';
     HttpClientModule
     
   ],
-  providers: [],
+  /*
+    Services typically are classes that supply data a services. 
+    Therefore, they are considered providers. Any providers brought in
+    can be considered singletons since there will ever only be 1 instance
+    of each.
+    Note: Anything inside the app,module provider sections is visible to the entire
+    application. Should you want to only provide the provider to a specific scope more nested into
+    the application, then you would have to create an inner module and provide it there.
+  */
+  providers: [PostsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

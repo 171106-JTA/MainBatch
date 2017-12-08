@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<!-- The hbm (Hibernate Map file) file name must match the persistant class 
+		it represents in both name and casing. -->
+
+	<!-- Tell hibernate which class will be used to map to the table -->
+	<class name="com.revature.beans.Employee" table="EMPLOYEE">
+		<meta attribute="class-description">
+			This table houses all the employees.
+		</meta>
+
+		<!-- Match 'name' to the same name as the instance varibale represented 
+			in the persistent class. Match 'type' to the java datatype you want to use. 
+			Have 'column' = the column name of the table. -->
+		<id name="id" type="int" column="e_id">
+			<generator class="native"></generator>
+		</id>
+
+		<property name="firstName" type="string" column="f_name"></property>
+		<property name="lastName" type="string" column="l_name"></property>
+		<property name="email" type="string" column="email"></property>
+		<property name="salary" type="int" column="salary"></property>
+	</class>
+	
+    <!-- Generator types:
+            -assigned (Default if not assigned a type): id assigned manually
+            -increment: generates an int/short/long starting with 1
+            -sequence: will create a sequence to generate an id
+                when using sequence. defaults to HIBERNATE_SEQUENCE.
+                can use a custom name with <param name="sequence">SEQUENCE_NAME</param>
+            -hilo: uses hilo algorithm to generate id
+            -native: decides between identity, sequence, or hilo depending on vendor
+            -identity:    for Sybase, MySQL, SQLServer,DB2 or HypersonicSQL
+            -seqhilo: use hilo alogroithm with sequence object
+            -uuid: uses uui algorithm
+            -guid:
+            -select: use a primary key returned by aa database trigger
+            -foreign: use id of anotehr associated object, typically for one-to-one relationships
+            -sequence-identity: special sequence generation strategy, for oracle10g only
+            -->
+	
+</hibernate-mapping>
