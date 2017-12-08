@@ -1,18 +1,23 @@
 window.onload = function() {
-
-	document.getElementById("regPassword1").addEventListener("keyup", checkPasswordLength);
+	document.getElementById("regPassword1").addEventListener("focusout", checkPasswordLength);
+	document.getElementById("regPassword1").addEventListener("focusout", checkPasswords);
 	document.getElementById("regPassword2").addEventListener("keyup", checkPasswords);
 	document.getElementById("regUsername").addEventListener("focusout", checkNameIsTaken);
-	
-	//document.getElementById("regForm").addEventListener("submit", submit, false);
+	document.getElementById("regForm").addEventListener("submit", submit, false);
 }
 
 goodUsername = false; passwordsMatch = false; passwordsLength = false;
 
-function submit() {
+function submit(event) {
+	var submitRequestErrorMessage = document.getElementById("submitError");
 	
-	
-	
+	if (!goodUsername || !passwordsMatch || !passwordsLength) {
+		event.preventDefault();
+		submitRequestErrorMessage.innerHTML = "Please fix displayed mistakes."
+	} else {
+		submitRequestErrorMessage.innerHTML="";
+		submitNewUser();
+	}
 }
 
 function checkPasswordLength() {
@@ -21,9 +26,10 @@ function checkPasswordLength() {
 	
 	if (pass1.length < 5 || pass1.length > 15) {
 		alertMessage.innerHTML = "Your password must be between 5 and 15 characters."
-		return false;
+			passwordsLength =  false;
 	} else {
-		return true;
+		alertMessage.innerHTML = ""
+		passwordsLength = true;
 	}
 }
 
@@ -34,16 +40,14 @@ function checkPasswords(event) {
 	var alertMessage = document.getElementById("regPasswordEqualityCheck");
 	var pass1 = document.getElementById("regPassword1").value;
 	var pass2 = document.getElementById("regPassword2").value;
-	console.log(pass1);
-	console.log(pass2);
 	
 	//passwords must be equal
 	if (pass1 !== pass2) {
 		alertMessage.innerHTML = "These paswords do not match. ";
-		return false;
+		passwordsMatch = false;
 	} else {
 		alertMessage.innerHTML = "";
-		return true;
+		passwordsMatch = true;
 	}
 }
 
@@ -61,13 +65,14 @@ function checkNameIsTaken(username) {
 
 			var xmlText = xhr.responseXML;
 			var response = xmlText.getElementsByTagName("root");
-			
 			var result = response[0].childNodes[0].nodeValue;
 			
 			if (result !== "usernameIsNew") {
 				infoMessage.innerHTML="This username has been taken";
+				goodUsername = false;
 			} else {
 				infoMessage.innerHTML="";
+				goodUsername = true;
 			}
 		} else if(xhr.readyState == 4 && xhr.status != 200){
 			console.log(xhr.status);
@@ -80,3 +85,4 @@ function checkNameIsTaken(username) {
 	xhr.open("POST", url);
 	xhr.send(fd);
 }
+

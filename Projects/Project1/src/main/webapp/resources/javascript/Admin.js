@@ -10,6 +10,7 @@ username = ""; admintitle = "";
 
 function displayUsername() {
 	var welcome = document.getElementById("welcome");
+	var adminTitle = documnet.getElementById("adminTitle");
 	var url = "GetUsernameServlet";
 
 	var xhr = new XMLHttpRequest();
@@ -27,7 +28,8 @@ function displayUsername() {
 			console.log("we found username: " + username);
 			admintitle = title;
 
-			welcome.innerHTML = "Welcome " + fname + " " + lname + " (" +	title + ")";
+			welcome.innerHTML = "Welcome " + fname + " " + lname;
+			adminTitle.innerHTML = "(" +	title + ")";
 		} else if(xhr.readyState == 4 && xhr.status != 200){
 			console.log(xhr.status);
 			document.getElementById("AJAXError").innerHTML="Unable to fetch username";

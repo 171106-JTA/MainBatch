@@ -24,7 +24,7 @@
 					<i>Please enter your information below.</i>
 				</h5>
 				<div class="well">
-					<form method="post" id="regForm">
+					<form method="post" action="Registration" id="regForm">
 						<div class="next">
 							<label for="Username" id="regUsernameLabel">Username <span
 								id="regUsernameSpan" style="color: red"></span>
@@ -39,13 +39,13 @@
 							<label for="registrationPassword">Password</label> <span
 								style="display: inline-block; width: 105px;"></span> <label
 								for="confirmPassword">Confirm Password </label>
-							
 						</div>
 						<div>
 							<input type="password" name="regPassword1" id="regPassword1"
 								placeholder="Password" required> <input type="password"
 								name="regPassword2" id="regPassword2" placeholder="Password"
-								required><span id="regPasswordEqualityCheck" style="color: red"></span>
+								required><span id="regPasswordEqualityCheck"
+								style="color: red"></span>
 
 						</div>
 						<div>
@@ -83,6 +83,9 @@
 						</div>
 						<div class="next">
 							<input type="submit" name="submitRegistration" value="Submit">
+						</div>
+						<div>
+							<p id="submitError" style="color:red"></p>
 						</div>
 					</form>
 				</div>
