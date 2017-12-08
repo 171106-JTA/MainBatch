@@ -81,6 +81,12 @@ public class UpdateDAOImpl implements UpdateDAO{
 	}
 	
 	@Override
+	public void insertInfoRequest() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
 	public double getPercentage(int eventId) {
 		String sql = "SELECT * FROM Event_Type WHERE EVENTID = ?";
 		PreparedStatement ps = null;

@@ -47,6 +47,14 @@ public class ReimburseRequest {
 		this.status = status;
 	}
 	
+	public ReimburseRequest(int rrID, double cost, LocalDate date, String status) {
+		super();
+		this.rrID = rrID;
+		this.cost = cost;
+		this.date = date;
+		this.status = status;
+	}
+	
 	public ReimburseRequest(int RRID, int EID, String fname, String lname, String eventPlace, String eventName,
 			LocalDate localDate, double cost, String justify, String description, int dsApproval, int dhApproval, int bcApproval) {
 		this.rrID = RRID;

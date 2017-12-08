@@ -4,6 +4,26 @@ function clearTable(table){
 		table.deleteRow(1);
 	}
 }
+
+function createTableData(numOfRows){
+	var arr = [];
+	for(var i = 0; i < numOfRows;i++){
+		arr[i] = document.createElement("td");
+	}
+	return arr;
+}
+
+function populateData(arr, i, row, table, response){
+	let n = 0;
+	for(td of arr){
+		td.innerHTML = response[i].childNodes[n].innerHTML;
+		row.appendChild(td);
+		n++;
+	}
+	table.appendChild(row);
+}
+
+
 function getAllRequests(){
 	var url = "GetEmployeeRequest";
 	
@@ -23,47 +43,8 @@ function getAllRequests(){
 			//TODO fix typeError
 			for(i in response){
 				var row = document.createElement("tr");
-				var td1 = document.createElement("td");
-				var td2 = document.createElement("td");
-				var td3 = document.createElement("td");
-				var td4 = document.createElement("td");
-				var td5 = document.createElement("td");
-				var td6 = document.createElement("td");
-				var td7 = document.createElement("td");
-				var td8 = document.createElement("td");
-				var td9 = document.createElement("td");
-				var td10 = document.createElement("td");
-				var td11 = document.createElement("td");
-				var td12 = document.createElement("td");
-				var td13 = document.createElement("td");
-				
-				td1.innerHTML = response[i].childNodes[0].innerHTML;	
-				td2.innerHTML = response[i].childNodes[1].innerHTML;
-				td3.innerHTML = response[i].childNodes[2].innerHTML;
-				td4.innerHTML = response[i].childNodes[3].innerHTML;
-				td5.innerHTML = response[i].childNodes[4].innerHTML;
-				td6.innerHTML = response[i].childNodes[5].innerHTML;
-				td7.innerHTML = response[i].childNodes[6].innerHTML;
-				td8.innerHTML = response[i].childNodes[7].innerHTML;
-				td9.innerHTML = response[i].childNodes[8].innerHTML;
-				td10.innerHTML = response[i].childNodes[9].innerHTML;
-				td11.innerHTML = response[i].childNodes[10].innerHTML;
-				td12.innerHTML = response[i].childNodes[11].innerHTML;
-				td13.innerHTML = response[i].childNodes[12].innerHTML;
-				row.appendChild(td1);
-				row.appendChild(td2);
-				row.appendChild(td3);
-				row.appendChild(td4);
-				row.appendChild(td5);
-				row.appendChild(td6);
-				row.appendChild(td7);
-				row.appendChild(td8);
-				row.appendChild(td9);
-				row.appendChild(td10);
-				row.appendChild(td11);
-				row.appendChild(td12);
-				row.appendChild(td13);
-				resultTable.appendChild(row);
+				var tDatas = createTableData(13); 
+				populateData(tDatas, i, row, resultTable, response);
 			}
 			
 

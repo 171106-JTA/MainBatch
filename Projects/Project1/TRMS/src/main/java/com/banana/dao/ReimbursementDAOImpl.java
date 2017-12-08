@@ -28,7 +28,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				rr = new ReimburseRequest(rrId, rs.getDouble("PRICE"), rs.getString("EVENTNAME"), rs.getDate("EVENT_DATETIME").toLocalDate(), this.getStatus(rrId));
+				rr = new ReimburseRequest(rrId, rs.getDouble("PRICE"), rs.getDate("EVENT_DATETIME").toLocalDate(), this.getStatus(rrId));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

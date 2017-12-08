@@ -14,14 +14,15 @@ public class UpdateEmployeeAmount {
 		boolean status = false;
 		
 		int empId = empdao.getEmployeeIdFromRequest(rrId);
-		
+		System.out.println(rrId + "rrdid");
 		Employee emp = empdao.getEmployeeById(empId);
-		
+		System.out.println(empId + "epmd");
 		ReimburseRequest rr = rdao.getSingleRequest(rrId);
-		
+		System.out.println(emp + " updfa");
 		if(emp != null) {
 			double amount = emp.getCurrAmount();
 			double newAmount = amount - rr.getCost();
+			System.out.println(newAmount);
 			if(newAmount < 0) {
 				return false;
 			}

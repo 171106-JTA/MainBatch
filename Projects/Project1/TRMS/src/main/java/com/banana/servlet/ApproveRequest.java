@@ -47,7 +47,7 @@ public class ApproveRequest extends HttpServlet {
 			if(ApproveReimbursement.approve(roleId, rrId, decision)) {
 				if(roleId == 3) {
 					if(!UpdateEmployeeAmount.updateAmount(rrId)) {
-						out.println("Issue updating");
+						out.println("Problem updating");
 					}
 				}
 				out.println("Changed");

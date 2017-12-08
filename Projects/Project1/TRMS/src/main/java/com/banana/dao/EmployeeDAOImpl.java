@@ -79,10 +79,12 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 			ps.setInt(1, rrId);
 			
 			rs = ps.executeQuery();
+			while(rs.next()) {
+				empId = Integer.parseInt(rs.getString("EID"));
+			}
 			
-			empId = Integer.parseInt(rs.getString("EID"));
 		}catch(SQLException e) {
-			
+			e.printStackTrace();
 		}finally {
 			close(ps);
 		}
