@@ -17,7 +17,7 @@ public class GetRequests {
 		response.setContentType("text/xml");
 		PrintWriter out = response.getWriter();
 
-		if (requests != null) {
+		if (requests != null && !requests.isEmpty()) {
 			String myXml = "<root>";
 
 			for (Request r : requests) {

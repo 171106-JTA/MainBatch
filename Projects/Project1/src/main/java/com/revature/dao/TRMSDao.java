@@ -52,7 +52,7 @@ public class TRMSDao {
 						rs.getString("emp_lname"), rs.getString("emp_phonenumber"), Title.getTitle(rs.getString("emp_title")),
 						rs.getString("emp_address"), rs.getString("zipcode"), rs.getString("city"),  
 						rs.getString("state"));
-				
+
 				return emp;
 			}
 
@@ -170,9 +170,10 @@ public class TRMSDao {
 		System.out.println("insertRequest");
 		PreparedStatement ps = null;
 
-		final String sql = "INSERT INTO REQUEST (EMP_USERNAME, REQ_EVENT, REQ_DATE, "
-				+ 		   "REQ_LOCATION, REQ_COST, REQ_DESCRIPTION, REQ_GRADINGFORMAT, REQ_FILES) " + 
-				"VALUES(?,?,?,?,?,?,?,?)";
+		final String sql = "INSERT INTO REQUEST (EMP_USERNAME, REQ_EVENTNAME, REQ_EVENTDATE, "
+				+ 		   "REQ_LOCATION, REQ_COST, REQ_DESCRIPTION, REQ_GRADINGFORMAT, REQ_FILES"
+				+ ", REQ_SUBMISSIONDATE) " + 
+				"VALUES(?,?,?,?,?,?,?,?,?)";
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -186,14 +187,15 @@ public class TRMSDao {
 			ps.setString(1, req.getUsername().toLowerCase());
 			ps.setString(2, req.getEvent());
 			java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-			ps.setDate(3, date);
+			ps.setDate(9, date);
 			req.setSubmissionDate(date);
 			ps.setString(4, req.getLocation());
 			ps.setDouble(5, req.getCost());
 			ps.setString(6, req.getDescription());
 			ps.setString(7, req.getGradingFormat());
 			ps.setBlob(8, req.getInputStream());
-			
+			ps.setDate(3, req.getDateOfEvent());
+
 			ps.executeUpdate();
 
 			return true;
@@ -206,7 +208,7 @@ public class TRMSDao {
 	}
 	public List<Request> getRequests(String username) {
 		List<Request> requests = new ArrayList<Request>();
-		
+
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
@@ -226,25 +228,27 @@ public class TRMSDao {
 
 			while (rs.next()) {
 				final int id = rs.getInt("REQ_ID");
-				final 	String eventName = rs.getString("REQ_EVENT");
-				final 	Date eventDate = rs.getDate("REQ_DATE");
-				final 	String eventLocation = rs.getString("REQ_LOCATION");
-				final 	int eventCost = rs.getInt("REQ_COST");
-				final 	String gradingFormat = rs.getString("REQ_GRADINGFORMAT");
+				final String eventName = rs.getString("REQ_EVENTNAME");
+				final Date eventDate = rs.getDate("REQ_EVENTDATE");
+				final Date submissionDate = rs.getDate("REQ_SUBMISSIONDATE");
+				final String eventLocation = rs.getString("REQ_LOCATION");
+				final int eventCost = rs.getInt("REQ_COST");
+				final String gradingFormat = rs.getString("REQ_GRADINGFORMAT");
 				final String eventDescription = rs.getString("REQ_DESCRIPTION");
-				
+
 				final Blob data = rs.getBlob("REQ_FILES");
 				final InputStream reqFile = data.getBinaryStream();
-				
+
 				final Request req = new Request(id, username, eventName, eventLocation,
-						eventDescription, eventCost,  gradingFormat, eventDate, reqFile);
-				System.out.println(req);
+						eventDescription, eventCost, gradingFormat, submissionDate, eventDate, reqFile);
+				System.out.println("pulling this request from the DB: " + req);
 				requests.add(req);
 			}
-			
+
 			return requests;
 		} catch(SQLException e){
 			e.printStackTrace();
+			System.out.println("an error?");
 			return null;
 		} finally {
 			close(ps);

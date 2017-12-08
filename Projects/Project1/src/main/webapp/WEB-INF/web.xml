@@ -31,13 +31,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>GetRequestsServlet</display-name>
-    <servlet-name>GetRequestsServlet</servlet-name>
-    <servlet-class>com.revature.servlets.GetRequestsServlet</servlet-class>
+    <display-name>GetRequestServlet</display-name>
+    <servlet-name>GetRequestServlet</servlet-name>
+    <servlet-class>com.revature.servlets.GetRequestServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>GetRequestsServlet</servlet-name>
-    <url-pattern>/GetRequestsServlet</url-pattern>
+    <servlet-name>GetRequestServlet</servlet-name>
+    <url-pattern>/GetRequestServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>

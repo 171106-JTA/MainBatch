@@ -10,6 +10,18 @@ public class Request {
 	private InputStream inputStream;
 	private int id;
 	
+	/**
+	 * A constructor used when a user submits a request.
+	 * The submission date is excluded in the parameters as well as the request id excluded.
+	 * @param empUsername
+	 * @param event
+	 * @param location
+	 * @param description
+	 * @param cost
+	 * @param gradingFormat
+	 * @param dateOfEvent
+	 * @param inputStream
+	 */
 	public Request(String empUsername, String event, String location, String description,
 			double cost, String gradingFormat, Date dateOfEvent, InputStream inputStream) {
 		this.username = empUsername;
@@ -22,8 +34,22 @@ public class Request {
 		this.inputStream = inputStream;
 	}
 	
+	/**
+	 * A constructor with all parameters. All field data will be set.
+	 * Used when the DAO pulls requests from the DB and stores all data in a request bean.
+	 * @param id
+	 * @param empUsername
+	 * @param event
+	 * @param location
+	 * @param description
+	 * @param cost
+	 * @param gradingFormat
+	 * @param submissionDate
+	 * @param dateOfEvent
+	 * @param inputStream
+	 */
 	public Request(int id, String empUsername, String event, String location, String description,
-			double cost, String gradingFormat, Date dateOfEvent, InputStream inputStream) {
+			double cost, String gradingFormat, Date submissionDate, Date dateOfEvent, InputStream inputStream) {
 		this.username = empUsername;
 		this.event = event;
 		this.location = location;
@@ -33,6 +59,7 @@ public class Request {
 		this.dateOfEvent = dateOfEvent;
 		this.inputStream = inputStream;
 		this.id = id;
+		this.submissionDate = submissionDate;
 	}
 
 	public String getUsername() {

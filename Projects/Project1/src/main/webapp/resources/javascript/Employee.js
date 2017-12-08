@@ -13,7 +13,7 @@ function displayUsername() {
 
 	xhr.onreadystatechange = function() {
 		if(xhr.readyState == 4 && xhr.status == 200){
-
+			
 			var xmlText = xhr.responseXML;
 			var response = xmlText.getElementsByTagName("root");
 			
@@ -27,7 +27,7 @@ function displayUsername() {
 			welcome.innerHTML="Unable to fetch username";
 		}
 	}
-
+	
 	xhr.open("GET", url);
 	xhr.send();
 }
