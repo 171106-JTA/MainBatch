@@ -14,6 +14,7 @@ public class CreateSession {
 			session.setAttribute("empId", emp.getEmpId());
 			session.setAttribute("role", emp.getRoleId());
 			session.setAttribute("username", emp.getUsername());
+			session.setAttribute("currAmount", emp.getCurrAmount());
 		}
 	}
 }
