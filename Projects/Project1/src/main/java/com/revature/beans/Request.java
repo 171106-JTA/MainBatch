@@ -8,6 +8,7 @@ public class Request {
 	private double cost;
 	private Date submissionDate, dateOfEvent;
 	private InputStream inputStream;
+	private int id;
 	
 	public Request(String empUsername, String event, String location, String description,
 			double cost, String gradingFormat, Date dateOfEvent, InputStream inputStream) {
@@ -19,6 +20,19 @@ public class Request {
 		this.gradingFormat = gradingFormat;
 		this.dateOfEvent = dateOfEvent;
 		this.inputStream = inputStream;
+	}
+	
+	public Request(int id, String empUsername, String event, String location, String description,
+			double cost, String gradingFormat, Date dateOfEvent, InputStream inputStream) {
+		this.username = empUsername;
+		this.event = event;
+		this.location = location;
+		this.description = description;
+		this.cost = cost;
+		this.gradingFormat = gradingFormat;
+		this.dateOfEvent = dateOfEvent;
+		this.inputStream = inputStream;
+		this.id = id;
 	}
 
 	public String getUsername() {
@@ -91,6 +105,14 @@ public class Request {
 
 	public void setInputStream(InputStream inputStream) {
 		this.inputStream = inputStream;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 window.onload = function() {
 
 	displayUsername();
-
+	displayRequests();
 
 }
 
@@ -32,6 +32,31 @@ function displayUsername() {
 	xhr.send();
 }
 
+function displayRequests() {
+	var url = "GetRequestServlet";
+
+	var xhr = new XMLHttpRequest();
+
+	xhr.onreadystatechange = function() {
+		if(xhr.readyState == 4 && xhr.status == 200){
+
+//			var xmlText = xhr.responseXML;
+//			var response = xmlText.getElementsByTagName("root");
+//			
+//			var fname = response[0].childNodes[0].innerHTML;
+//			var lname = response[0].childNodes[1].innerHTML;
+//			var title = response[0].childNodes[2].innerHTML;
+			
+//			welcome.innerHTML = "Welcome " + fname + " " + lname + " (" + title + ")";
+		} else if(xhr.readyState == 4 && xhr.status != 200){
+			console.log(xhr.status);
+			welcome.innerHTML="Unable to fetch username";
+		}
+	}
+
+	xhr.open("GET", url);
+	xhr.send();
+}
 
 
 

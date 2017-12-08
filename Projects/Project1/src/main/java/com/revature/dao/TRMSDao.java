@@ -1,18 +1,13 @@
 package com.revature.dao;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -211,7 +206,7 @@ public class TRMSDao {
 	}
 	public List<Request> getRequests(String username) {
 		List<Request> requests = new ArrayList<Request>();
-
+		
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
@@ -223,32 +218,37 @@ public class TRMSDao {
 			e1.printStackTrace();
 		}
 
-		try(Connection conn = ConnectionUtil.getConnection()){
+		try(Connection conn = ConnectionUtil.getConnection()) {
 
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, username.toLowerCase());
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				String eventName = rs.getString("REQ_EVENT");
-				Date eventDate = rs.getDate("REQ_DATE");
-				String eventLocation = rs.getString("REQ_LOCATION");
-				int eventCost = rs.getInt("REQ_COST");
-				String gradingFormat = rs.getString("REQ_GRADINGFORMAT");
-
-				//TODO FILES
-
-
+				final int id = rs.getInt("REQ_ID");
+				final 	String eventName = rs.getString("REQ_EVENT");
+				final 	Date eventDate = rs.getDate("REQ_DATE");
+				final 	String eventLocation = rs.getString("REQ_LOCATION");
+				final 	int eventCost = rs.getInt("REQ_COST");
+				final 	String gradingFormat = rs.getString("REQ_GRADINGFORMAT");
+				final String eventDescription = rs.getString("REQ_DESCRIPTION");
+				
+				final Blob data = rs.getBlob("REQ_FILES");
+				final InputStream reqFile = data.getBinaryStream();
+				
+				final Request req = new Request(id, username, eventName, eventLocation,
+						eventDescription, eventCost,  gradingFormat, eventDate, reqFile);
+				System.out.println(req);
+				requests.add(req);
 			}
-
+			
+			return requests;
 		} catch(SQLException e){
 			e.printStackTrace();
 			return null;
-		} finally{
+		} finally {
 			close(ps);
 		}
-
-		return null;
 	}
 
 	public List<Employee> getUnverifiedEmployees() {
