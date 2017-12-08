@@ -7,6 +7,7 @@ import java.io.ObjectInputStream.GetField;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -30,8 +31,9 @@ public class SubmitRequest extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("We are inserting a request");
-
+		System.out.println("We are inserting a request new print");
+		RequestDispatcher rd = null;
+		
 		final TRMSDao dao = TRMSDao.getDao(); //grab our dao
 		final HttpSession session = request.getSession();
 		final String username = (String) session.getAttribute("username");
@@ -57,20 +59,27 @@ public class SubmitRequest extends HttpServlet {
 		final int[] dateints = new int[3];
 		for (int i = 0; i < datesplit.length; i++) {
 			dateints[i] = Integer.parseInt(datesplit[i]);
-			System.out.println("dateints[" + i + "]: " + dateints[i]);
 		}
 		final Date date = new Date(dateints[0], dateints[1], dateints[2]);
 
 		final Request req = new Request(username, eventName, location, description, cost, gradingFormat, date, inputStream);
-
-		System.out.println("Insert the following request to the DB:\n" + req);
-		dao.insertRequest(req, inputStream);
+		boolean success = dao.insertRequest(req);
+		
+		if (success) {
+			System.out.println("going to request submitted success page");
+			response.sendRedirect("RequestSuccessfullySubmitted.html");
+		} else {
+			System.out.println("going to request submitted unsuccess page");
+			response.sendRedirect("RequestUnsuccessfullySubmitted.html");
+		}
 	}
 
 	/**
-	 * 
+	 * This code is used to grab the file name of the file.
+	 * Source for this code belongs to: http://o7planning.org/en/10839/uploading-and-downloading-files-from-database-using-java-servlet#a3594170
+	 * That reference provided useful information to store files to my database.
 	 * @param part
-	 * @return
+	 * @return the filename
 	 */
 	private String extractFileName(Part part) {
 		String contentDisp = part.getHeader("content-disposition");

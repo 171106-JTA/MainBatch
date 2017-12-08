@@ -171,7 +171,7 @@ public class TRMSDao {
 	 * @param req
 	 * @throws FileNotFoundException 
 	 */
-	public void insertRequest(Request req, InputStream inputStream) throws FileNotFoundException {
+	public boolean insertRequest(Request req) throws FileNotFoundException {
 		System.out.println("insertRequest");
 		PreparedStatement ps = null;
 
@@ -197,12 +197,14 @@ public class TRMSDao {
 			ps.setDouble(5, req.getCost());
 			ps.setString(6, req.getDescription());
 			ps.setString(7, req.getGradingFormat());
-			ps.setBlob(8, inputStream);
+			ps.setBlob(8, req.getInputStream());
 			
 			ps.executeUpdate();
 
+			return true;
 		} catch(SQLException e){
 			e.printStackTrace();
+			return false;
 		} finally{
 			close(ps);
 		}
