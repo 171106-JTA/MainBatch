@@ -4,8 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import javax.swing.plaf.synth.SynthStyle;
-
 public class ConnectionUtil {
 	public static Connection getConnection() throws SQLException {
 		String props[] = System.getenv("DBProps").split(";");

@@ -20,10 +20,10 @@
 			 -->
 		</property>
 		<property name="hibernate.connection.username">
-			hibernate
+			agni
 		</property>
 		<property name="hibernate.connection.password">
-			hibernate
+			passwd
 		</property>
 		
 		<property name="hibernate.connection.pool_size">10</property>
@@ -36,8 +36,17 @@
 		create: wipe any existing database tables, and create from scratch
 		validate: Creates the schema, destroying old data
 		create-drop: database is cleared and emptied upon server shutdown -->
-
+		
+		<!-- L2 Caching configuration -->
+		<!-- <property name="net.sf.ehcache.configurationResourceName">/ehcache.xml</property>
+		<property name="hibernate.cache.region.factory_class">net.sf.ehcache.hibernate.EhCacheRegionFactory</property>
+		<property name="hibernate.cache.use_second_level_cache">true</property>
+		<property name="hibernate.cache.use_query_cache">true</property> -->
+		<!-- MAPPINGS -->
 		<mapping resource="Employee.hbm.xml"></mapping>
-
+		<mapping class="com.revature.beans.Employee"/>
+		<mapping class="com.revature.beans.Bear"/>
+		<mapping class="com.revature.beans.Cave"/>
+		<mapping class="com.revature.beans.HoneyPot"/>
 	</session-factory>
 </hibernate-configuration>

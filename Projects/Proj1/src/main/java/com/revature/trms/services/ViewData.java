@@ -26,6 +26,7 @@ public class ViewData {
 			Type type = new TypeToken<List<ReimbursementCase>>() {
 			}.getType();
 			String json = gson.toJson(reimCases, type);
+			System.out.println(json);
 			out.println(json);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -45,8 +46,8 @@ public class ViewData {
 			Type type = new TypeToken<List<ReimbursementCase>>() {
 			}.getType();
 			String json = gson.toJson(reimCases, type);
+			System.out.println(json);
 			out.println(json);
-			System.out.println("this is " + username + " this is my json " +json);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

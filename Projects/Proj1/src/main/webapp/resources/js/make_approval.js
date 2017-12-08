@@ -7,10 +7,8 @@
 	xhr.onload = () => {
 		if (xhr.status === 200) {
 			var tableData = JSON.parse(xhr.responseText);
-			console.log(xhr.responseText);
 			var count = 0;
 			for(var data in tableData){
-			console.log(tableData[data]);
 			
 			var tableRow = document.createElement('tr');
 			var tableData1 = document.createElement('td'); 
@@ -23,9 +21,9 @@
 			
 			var td1 = document.createTextNode(tableData[data].case_id);
 			var td2 = document.createTextNode(tableData[data].request_date);
-			var td3 = document.createTextNode(tableData[data].eventType);
+			var td3 = document.createTextNode(tableData[data].case_status);
 			var td4 = document.createTextNode(tableData[data].gradingformat);
-			var td5 = document.createTextNode(tableData[data].case_id);
+			var td5 = document.createTextNode(tableData[data].supervisorId);
 			var td6 = document.createTextNode(tableData[data].event_date);
 			tableData7.innerHTML="<button data-toggle='collapse' data-target='#accordion"+ count +"' class='btn btn-info btn-xs'>View Detail</button>"
 			
@@ -35,8 +33,7 @@
 			tableData4.appendChild(td4);
 			tableData5.appendChild(td5);
 			tableData6.appendChild(td6);
-
-			
+	
 			tableRow.appendChild(tableData1);
 			tableRow.appendChild(tableData2);
 			tableRow.appendChild(tableData3);
@@ -45,6 +42,24 @@
 			tableRow.appendChild(tableData6);
 			tableRow.appendChild(tableData7);
 			document.getElementById("caseDataTable").appendChild(tableRow);
+			
+			var detailTableRow = document.createElement('tr');
+			detailTableRow.innerHTML="<td colspan='12'>" +
+					"<div id='accordion"+count+"' class='collapse'>" +
+						"<form action='ApproveCase' method='POST'>" +
+						"<table><tbody>" +
+						"<tr><th>Data</th><th>Details</th></tr>" +
+						"<tr><td><b>Employee ID</b></td><td>"+tableData[data].employeeId+"</td></tr>" +
+						"<tr><td><b>Supervisor ID</b></td><td>"+tableData[data].supervisorId+"</td></tr>"+
+						"<tr><td><b>Description</b></td><td>"+tableData[data].description+"</td></tr>"+
+						"<tr><td><b>Grading Format</b></td><td>"+tableData[data].gradingFormat+"</td></tr>"+		
+						"<tr><input type='hidden' name='status' value='"+tableData[data].case_status+"'></tr>"+
+						"<tr><input type='hidden' name='caseId' value='"+tableData[data].case_id+"'></tr>"+
+						"<tr><td><input class='btn btn-primary' type='submit' name='decision' value='Approve'></td>" +
+						"<td><input class='btn btn-danger' type='submit' name='decision' value='Disapprove'></td></tr>" +
+						"</tbody></table>"+
+						"</form>"+"</div></td>"
+			document.getElementById("caseDataTable").appendChild(detailTableRow);
 			count++;
 			}
 		} else {

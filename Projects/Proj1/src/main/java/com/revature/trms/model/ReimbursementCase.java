@@ -1,41 +1,45 @@
 package com.revature.trms.model;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class ReimbursementCase {
-	
+
 	private String case_id;
 	private String employeeId;
 	private Date event_date;
 	private Date request_date;
 	private int duration_days;
-	private String location; 
+	private String case_status;
+	private String location;
 	private String description;
 	private double cost;
 	private String gradingformat;
 	private String eventType;
 	private byte[] attachment;
 	final long URGENT_TIMESPAN = 7;
-	
-	
+
 	@Override
 	public String toString() {
 		return "ReimbursementCase [case_id=" + case_id + ", employeeId=" + employeeId + ", event_date=" + event_date
-				+ ", request_date=" + request_date + ", duration_days=" + duration_days + ", location=" + location
-				+ ", description=" + description + ", cost=" + cost + ", gradingformat=" + gradingformat
-				+ ", eventType=" + eventType + "]";
+				+ ", request_date=" + request_date + ", duration_days=" + duration_days + ", case_status=" + case_status
+				+ ", location=" + location + ", description=" + description + ", cost=" + cost + ", gradingformat="
+				+ gradingformat + ", eventType=" + eventType + ", attachment=" + Arrays.toString(attachment) + "]";
 	}
+
 	public boolean caseIsUrgent() {
 		Date d1 = this.getEvent_date();
-		Date d2 =  this.getRequest_date();
+		Date d2 = this.getRequest_date();
 		long diff = Math.abs(d1.getTime() - d2.getTime());
 		long diffDays = diff / (24 * 60 * 60 * 1000); // convert milliseconds to days
 		return diffDays < URGENT_TIMESPAN ? true : false;
-		
+
 	}
+
 	public ReimbursementCase() {
 		super();
 	}
+
 	public ReimbursementCase(String case_id, String employeeId, Date event_date, Date request_date, int duration_days,
 			String location, String description, double cost, String gradingformat, String eventType,
 			byte[] attachment) {
@@ -52,6 +56,7 @@ public class ReimbursementCase {
 		this.eventType = eventType;
 		this.attachment = attachment;
 	}
+
 	public ReimbursementCase(String employeeId, Date eventDate, int eventDuration, String eventLocation,
 			String eventType, String gradingFormat, double cost, String eventDescription) {
 		this.employeeId = employeeId;
@@ -63,74 +68,129 @@ public class ReimbursementCase {
 		this.cost = cost;
 		this.description = eventDescription;
 	}
-	
-	
+
 	public String getCase_id() {
 		return case_id;
 	}
+
 	public void setCase_id(String case_id) {
 		this.case_id = case_id;
 	}
+
 	public String getEmployeeId() {
 		return employeeId;
 	}
+
 	public void setEmployeeId(String employee) {
 		this.employeeId = employee;
 	}
+
 	public Date getEvent_date() {
 		return event_date;
 	}
+
 	public void setEvent_date(Date event_date) {
 		this.event_date = event_date;
 	}
+
 	public Date getRequest_date() {
 		return request_date;
 	}
+
 	public void setRequest_date(Date request_date) {
 		this.request_date = request_date;
 	}
+
 	public int getDuration_days() {
 		return duration_days;
 	}
+
 	public void setDuration_days(int duration_days) {
 		this.duration_days = duration_days;
 	}
+
 	public String getLocation() {
 		return location;
 	}
+
 	public void setLocation(String location) {
 		this.location = location;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public double getCost() {
 		return cost;
 	}
+
 	public void setCost(double cost) {
 		this.cost = cost;
 	}
+
 	public String getGradingformat() {
 		return gradingformat;
 	}
+
 	public void setGradingformat(String gradingformat) {
 		this.gradingformat = gradingformat;
 	}
+
 	public String getEventType() {
 		return eventType;
 	}
+
 	public void setEventType(String eventType) {
 		this.eventType = eventType;
 	}
+
 	public byte[] getAttachment() {
 		return attachment;
 	}
+
 	public void setAttachment(byte[] attachment) {
 		this.attachment = attachment;
 	}
-	
-	
+
+	public String getCase_status() {
+		return case_status;
+	}
+
+	public void setCase_status(int case_status) {
+		switch (case_status) {
+		case 2:
+			this.case_status = "Supervisor Approved";
+			break;
+		case 3:
+			this.case_status = "Department Head Approved";
+			break;
+		case 4:
+			this.case_status = "Fully Approved";
+			break;
+		case 5:
+			this.case_status = "Denied";
+			break;
+		default:
+			this.case_status = "Pending";
+		}
+	}
+
+	public static int caseStatus2Int(String caseStatus) {
+		if (caseStatus.equals("Supervisor Approved")) {
+			return 2;
+		} else if (caseStatus.equals("Department Head Approved")) {
+			return 3;
+		} else if (caseStatus.equals("Fully Approved")) {
+			return 4;
+		} else if (caseStatus.equals("Denied")) {
+			return 5;
+		} else
+			return 1;
+	}
+
 }

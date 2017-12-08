@@ -23,7 +23,7 @@
 </head>
 <body>
 	<header>
-		<nav class="navbar navbar-inverse">
+		<nav class="navbar navbar-default">
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle collapsed"
@@ -41,16 +41,22 @@
 						<li><a href="make_approval.html">Approval Reimbursement</a></li>
 
 					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#"><span class="glyphicon glyphicon-user"></span>
+								Settings</a></li>
+						<li><a href="LogoutServlet"><span
+								class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
+					</ul>
 				</div>
 			</div>
 		</nav>
 	</header>
 	<div class="container">
 		<h1>HOME PAGE</h1>
-		<form action="AdminReimbursementTable">
-		<input type="submit">
+		<form action="RequesterTable">
+			<input type="submit">
 		</form>
 	</div>
-	
+
 </body>
 </html>

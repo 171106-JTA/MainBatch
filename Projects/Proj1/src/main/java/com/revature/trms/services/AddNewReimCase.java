@@ -16,7 +16,7 @@ import com.revature.trms.model.ReimbursementCase;
 public class AddNewReimCase {
 	public static void addReimCase(HttpServletRequest request, HttpServletResponse response) {
 		String eventDatestr = request.getParameter("eventDate");
-		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 		Date eventDate = null;
 		try {
