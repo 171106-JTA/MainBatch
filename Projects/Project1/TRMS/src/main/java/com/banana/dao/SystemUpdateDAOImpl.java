@@ -105,6 +105,10 @@ public class SystemUpdateDAOImpl implements SystemUpdateDAO{
 		return percent;
 	}
 	
+	public void setNewAmount(int empId, double newAmount) {
+		
+	}
+	
 	private void commitChanges() {
 		Statement stmt = null;
 		

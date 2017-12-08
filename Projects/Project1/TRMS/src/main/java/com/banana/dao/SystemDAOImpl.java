@@ -43,6 +43,31 @@ public class SystemDAOImpl implements SystemDAO{
 	}
 	
 	@Override
+	public Employee getEmployeeById(int empId) {
+		Employee emp = null;
+		String sql = "SELECT * FROM Employee WHERE EID = ?";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try(Connection conn = ConnectionUtil.getConnection()){
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, empId);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				emp = new Employee(rs.getString(8), rs.getString(9), rs.getInt(1), rs.getDouble(4), rs.getInt(2));
+			}
+		}catch(SQLException e) {
+			
+		}finally {
+			close(ps);
+		}
+		
+		return emp;
+	}
+	
+	@Override
 	public List<ReimburseRequest> getEmployeeRequests(int empId) {
 		List<ReimburseRequest> rrList = new ArrayList<>();
 		ReimburseRequest rr = null;
