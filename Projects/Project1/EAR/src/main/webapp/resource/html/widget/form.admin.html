@@ -11,7 +11,7 @@
 				
 				// Build info icons
 				Util.buildInfoIcons($("div[is-drawer]"));
-				Util.buildInfoIcons(screen);
+				Util.buildInfoIcons($("#frmPageForm"));
 				
 				// init datepickers
 				picker.datetimepicker();
@@ -23,6 +23,19 @@
 				// assign pill events 
 				$("#frmPills").find("li").on("click", onPillClick);
 				
+				// When Admin wants to create account 
+				$("#frmCreateFormStatusUpdate").on("click", onCreateFormStatus);
+				$("#frmSubmitStatusUpdate").on("click", onSendStatusUpdateRequest);
+			}
+			
+			var initUpdateStatusModule = function () {
+				var template = $("div[update-form-module-template]");
+				var module = template.children().clone(true);
+				
+				// update status select
+				module.find("#frmStatus").append($("#frmStatusData").children().clone(true));
+				module.find("#frmStatusTimeStamp").val(moment(new Date()).format("MM/DD/YYYY hh:mm:ss a"))
+				return module;
 			}
 			
 			///
@@ -45,7 +58,7 @@
 				// Build select filter 
 				Util.buildCodeList({
 					"code" : "STATUS",
-					"node" : $("#frmApplicationStatus"),
+					"node" : $("#frmStatusData"),
 					"display" : "value description"
 				});
 				
@@ -66,6 +79,17 @@
 					"node" : $("#frmApplicationCity"),
 					"display" : "description"
 				});
+			}
+			
+			var extractStatusData = function (node) {
+				// TODO : build data object
+			}
+			
+			var disableStatusBlock = function (node) {
+				node.removeClass("new-status");
+				node.find("input").prop("disabled", true);
+				node.find("select").prop("disabled", true);
+				node.find("textarea").prop("disabled", true);
 			}
 			
 			///
@@ -89,6 +113,58 @@
 				 $("#" + self.attr("page")).fadeIn("normal");
 			}
 			
+			/**
+			 *	When admin wants to update form
+			 */
+			var onCreateFormStatus = function () {
+				var self = $(this);
+				var screen = $("div[is-screen]");
+				var drawer = $("div[is-drawer]");
+				var update = drawer.find("#frmSubmitStatusUpdate");
+				var ul = screen.find("#frmStatusList");
+				var module = initUpdateStatusModule();
+				
+				// disable until status update submitted
+				self.prop("disabled", true);
+				
+				// Enable button to send update request
+				update.prop("disabled", false);
+				
+				// Inject new templated module
+				ul.prepend(module);
+				Util.buildInfoIcons(module);
+				// Invoke pill click to page
+				screen.find("li[page='frmPageStatus']").click();
+			}
+			
+			/**
+			 * Invoked when admin wants to submit status update 
+			 */
+			var onSendStatusUpdateRequest = function () {
+				var self = $(this);
+				var screen = $("div[is-screen]");
+				var drawer = $("div[is-drawer]");
+				var create = drawer.find("#frmCreateFormStatusUpdate");
+				var ul = screen.find("#frmStatusList");
+				var div = ul.find("div[class~='new-status']");
+				var options;
+				
+				
+				// disable until status update submitted
+				self.prop("disabled", true);
+				
+				// Enable button to send update request
+				create.prop("disabled", false);
+				
+				// Update module
+				disableStatusBlock(div);
+				
+				// Send update request
+				Util.send(buildStatusUpdateOptions(extractStatusData(div)), function (response) {
+					// TODO : Disaply result
+				});
+			}
+			
 			///
 			//	EXECUTE
 			///
@@ -105,13 +181,13 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<label>Form: <span info-icon="Pull existing form from server"></span></label>
-				<input class="form-control" type="number">
+				<input id="frmFormIdInput" class="form-control" type="number">
 			</div>
 		</div>
 		<div style="padding-bottom: 5px;"></div>
 		<div class="row">
 			<div class="col-xs-12">
-				<button class="btn-primary form-control"><span class="fa fa-search"></span> Search</button>
+				<button id="frmFormIdSearch" class="btn-primary form-control"><span class="fa fa-search"></span> Search</button>
 			</div>
 		</div>
 
@@ -122,7 +198,13 @@
 		
 		<div class="row">
 			<div class="col-xs-12">
-				<button class="form-control"><span class="fa fa-pencil-square-o"></span> Edit</button>
+				<button id="frmCreateFormStatusUpdate" class="form-control btn-secondary"><span class="fa fa-plus"></span> Create</button>
+			</div>
+		</div>
+		<div style="height: 5px; padding-top: 5px; padding-bottom: 5px;"></div>
+		<div class="row">
+			<div class="col-xs-12">
+				<button id="frmSubmitStatusUpdate" class="form-control" disabled><span class="fa fa-send"></span> Update Status</button>
 			</div>
 		</div>
 	</div>
@@ -155,7 +237,7 @@
 			
 		</style>
 
-		<!-- USED TO DISPLAY ACCOUNT INFORMATION -->
+		<!-- FORM -->
 		<div class="user-info-block">
 			<div class="form-max-width center-block">
 				<div class="text-center">
@@ -208,25 +290,25 @@
 					<div class="row">
 						<div class="col-sm-6">
 							<label>Status:</label>
-							<select id="frmApplicationStatus" class="form-control"></select>
+							<select id="frmApplicationStatus" class="form-control" disabled></select>
 						</div>
 						<div class="col-sm-6">
 							<label>Type:</label>
-							<select id="frmReimbursementType" class="form-control"></select>
+							<select id="frmReimbursementType" class="form-control" disabled></select>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-4">
 							<label>Address:</label>
-							<input id="frmApplicationAddress" class="form-control"></select>
+							<input id="frmApplicationAddress" class="form-control" disabled></select>
 						</div>
 						<div class="col-sm-4">
 							<label>State:</label>
-							<select id="frmApplicationState" class="form-control"></select>
+							<select id="frmApplicationState" class="form-control" disabled></select>
 						</div>
 						<div class="col-sm-4">
 							<label>City:</label>
-							<select id="frmApplicationCity" class="form-control"></select>
+							<select id="frmApplicationCity" class="form-control" disabled></select>
 						</div>
 					</div>
 					<div class="row">
@@ -234,9 +316,9 @@
 							<label>Event Start Date: <span info-icon="When does the event begin?"></span></label>
 							 <div class="form-group">
 				                <div class='input-group date' id='frmEventStartDTP'>
-				                    <input type='text' class="form-control" />
+				                    <input type='text' class="form-control" disabled />
 				                    <span class="input-group-addon">
-				                        <span class="glyphicon glyphicon-calendar"></span>
+				                        <span class="glyphicon glyphicon-calendar" disabled></span>
 				                    </span>
 				                </div>
 				            </div>
@@ -245,8 +327,8 @@
 							<label>To: <span info-icon="When does the event end?"></span></label>
 							 <div class="form-group">
 				                <div class='input-group date' id='frmEventEndDTP'>
-				                    <input type='text' class="form-control" />
-				                    <span class="input-group-addon">
+				                    <input type='text' class="form-control" disabled />
+				                    <span class="input-group-addon" disabled>
 				                        <span class="glyphicon glyphicon-calendar"></span>
 				                    </span>
 				                </div>
@@ -258,8 +340,8 @@
 							<label>Time-off Start: <span info-icon="Start day, when you will not be able to come to work?"></span></label>
 							 <div class="form-group">
 				                <div class='input-group date' id='frmWorkOffStartDTP'>
-				                    <input type='text' class="form-control" />
-				                    <span class="input-group-addon">
+				                    <input type='text' class="form-control" disabled />
+				                    <span class="input-group-addon" disabled>
 				                        <span class="glyphicon glyphicon-calendar"></span>
 				                    </span>
 				                </div>
@@ -269,8 +351,8 @@
 							<label>Time-off end: <span info-icon="Last day off from work (You will go to work during the next work-day)"></span></label>
 							 <div class="form-group">
 				                <div class='input-group date' id='frmWorkOffEndDTP'>
-				                    <input type='text' class="form-control" />
-				                    <span class="input-group-addon">
+				                    <input type='text' class="form-control" disabled />
+				                    <span class="input-group-addon" disabled>
 				                        <span class="glyphicon glyphicon-calendar"></span>
 				                    </span>
 				                </div>
@@ -280,7 +362,7 @@
 					<div class="row">
 						<div class="col-sm-6">
 							<label>Grading: <span info-icon="Grading template used by organization"></span></label>
-							<select id="frmApplicationAddress" class="form-control"></select>
+							<select id="frmApplicationAddress" class="form-control" disabled></select>
 						</div>
 						<div class="col-sm-6">
 							<label style="padding-bottom: 5px;"><p></p></label>
@@ -290,7 +372,7 @@
 					<div class="row">
 						<div class="col-sm-6">
 							<label>Cost: <span info-icon="Total cost for event"></span></label>
-							<input id="frmApplicationCost" class="form-control">
+							<input id="frmApplicationCost" class="form-control" disabled>
 						</div>
 						<div class="col-sm-6">
 							<label>Estimate: <span info-icon="Estimated reimbursement value based on form data and remaining balance"></span></label>
@@ -301,7 +383,7 @@
 					<div class="row">
 						<div class="col-sm-12">
 							<label>Description: <span info-icon="Work related description why you should be reimburset for specified amount"></span></label>
-							<textarea class="form-control form-description"></textarea>
+							<textarea class="form-control form-description" disabled></textarea>
 						</div>
 					</div>
 					
@@ -310,17 +392,8 @@
 					<div style="padding-bottom: 5px;"></div>
 					
 					<div class="row">
-						<div class="col-sm-6">
-							<button id="frmClear" class="form-control"><span class="fa fa-times"></span> Clear</button>
-						</div>
-						<div class="col-sm-6">
-							<button id="frmOtherAttachments" class="form-control btn-secondary"><span class="fa fa-link"></span> Other Attachments</button>
-						</div>
-					</div>
-					<div class="row">
 						<div class="col-sm-12">
-							<label> </label>
-							<button id="frmSubmit" class="form-control btn-primary"><span class="fa fa-send"></span> Submit</button>
+							<button id="frmOtherAttachments" class="form-control btn-secondary"><span class="fa fa-link"></span> Other Attachments</button>
 						</div>
 					</div>
 				</div>
@@ -328,82 +401,55 @@
 				<div id="frmPageStatus" hidden>
 					<label>Application Status - Most recent change is placed on-top</label>
 					<hr class="hr-divider">
-					<ul class="form-status-list"> 
-						<li>
-							<div>
-								<div class="row">
-									<div class="col-sm-4">
-										<label>Processed By: <span info-icon="Who processed/updated application status"></span></label>
-										<input class="form-control" disabled>
-									</div>
-									<div class="col-sm-4">
-										<label>Status: <span info-icon="Application status"></span></label>
-										<select class="form-control" disabled></select>
-									</div>
-									<div class="col-sm-4">
-										<label>Timestamp: <span info-icon="Time when application was updated"></span></label>
-										<input class="form-control" disabled>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-6">
-										<label>Original Estimate: <span info-icon="What was originally calculated on form"></span></label>
-										<input class="form-control" disabled>
-									</div>
-									<div class="col-sm-6">
-										<label>Actual Price: <span info-icon="Price adjusted by admin"></span></label>
-										<input class="form-control" disabled>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-12">
-										<label>Description: <span info-icon="Reasoning behind admin. decision"></span></label>
-										<textarea class="form-control form-description" disabled></textarea>
-									</div>
-								</div>
-								<div style="padding-top:5px;"></div>
-								<hr class="hr-divider">
-							</div>
-						</li>
-						<li>
-							<div>
-								<div class="row">
-									<div class="col-sm-4">
-										<label>Processed By: <span info-icon="Who processed/updated application status"></span></label>
-										<input class="form-control" disabled>
-									</div>
-									<div class="col-sm-4">
-										<label>Status: <span info-icon="Application status"></span></label>
-										<select class="form-control" disabled></select>
-									</div>
-									<div class="col-sm-4">
-										<label>Timestamp: <span info-icon="Time when application was updated"></span></label>
-										<input class="form-control" disabled>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-6">
-										<label>Original Estimate: <span info-icon="What was originally calculated on form"></span></label>
-										<input class="form-control" disabled>
-									</div>
-									<div class="col-sm-6">
-										<label>Actual Price: <span info-icon="Price adjusted by admin"></span></label>
-										<input class="form-control" disabled>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-12">
-										<label>Description: <span info-icon="Reasoning behind admin. decision"></span></label>
-										<textarea class="form-control form-description" disabled></textarea>
-									</div>
-								</div>
-								<div style="padding-top:5px;"></div>
-								<hr class="hr-divider">
-							</div>
-						</li>
+					<ul id="frmStatusList" class="form-status-list"> 
+						<!-- STATUS UPDATES FOR FORMS GO HERE  -->
 					</ul>
 				</div>
 			</div>
+			
+			<!-- TEMPLATE USED TO REPRESENT STATUS UPDATES -->
+			<div update-form-module-template hidden>
+				<div class="new-status">
+					<div class="row">
+						<div class="col-sm-4">
+							<label>Processed By: <span info-icon="Who processed/updated application status"></span></label>
+							<input class="form-control">
+						</div>
+						<div class="col-sm-4">
+							<label>Status: <span info-icon="Application status"></span></label>
+							<select id="frmStatus" class="form-control"></select>
+						</div>
+						<div class="col-sm-4">
+							<label>Timestamp: <span info-icon="Time when application was updated"></span></label>
+							<input id="frmStatusTimeStamp" class="form-control" disabled>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<label>Original Estimate: <span info-icon="What was originally calculated on form"></span></label>
+							<input class="form-control" disabled>
+						</div>
+						<div class="col-sm-6">
+							<label>Actual Price: <span info-icon="Price adjusted by admin"></span></label>
+							<input class="form-control">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<label>Description: <span info-icon="Reasoning behind admin. decision"></span></label>
+							<textarea class="form-control form-description"></textarea>
+						</div>
+					</div>
+					<div style="padding-top:5px;"></div>
+					<hr class="hr-divider">
+				</div>
+			</div>
+			
+			<!-- HIDDEN SELECTS USED TO CACHE IMPORTANT DATA -->
+			<div hidden>
+				<select id="frmStatusData"></select>
+			</div>
 		</div>
 	</div>
+	
 </body>

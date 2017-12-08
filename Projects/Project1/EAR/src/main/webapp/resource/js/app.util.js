@@ -93,6 +93,7 @@ var initUtil = function () {
 						'trigger': 'click'
 					};
 
+					$(span).tooltip('destroy');
 					// create tooltip
 					$(span).tooltip(options);
 				});

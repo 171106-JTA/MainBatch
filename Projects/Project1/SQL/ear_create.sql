@@ -165,6 +165,7 @@ CREATE TABLE EAR_FORM_STATUS (
     originalestimate NUMBER(8,2) NOT NULL,
     reimbursement NUMBER(8,2) NULL,
     description VARCHAR(1024) NULL,
+    timestamp DATE NOT NULL,
     CONSTRAINT pk_form_status_id PRIMARY KEY (id),
     CONSTRAINT fk_form_processedby_id FOREIGN KEY (processedby) REFERENCES EAR_USER(id),
     CONSTRAINT fk_form_status_id FOREIGN KEY (statusid) REFERENCES CODE_LIST(id),
