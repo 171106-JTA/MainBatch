@@ -104,6 +104,8 @@ call Create_Employee_Full('Billy', 'Bobson', 'billybob', 'passwordbob',
 /
 select * from employee e join contactinformation c on e.contactinformationkey = c.contact_index;
 select * from contactInformation;
+update Employee set loginpassword = 'passwordbigg' where loginUserId = 'MrBigg';
+commit;
 
 select * from department natural join positions;
 
@@ -111,4 +113,21 @@ call Create_Employee_Full('Hafferly', 'Fafferson', 'luckylucky', 'passwordlucky'
     'Training', 'Associate', 'rlessley', 
     'thereallyluckycharms@gmail.com', '+1-777-777-7777', '101 Washer Ln', 'Herndon', 'VA', '20192'); 
 
---delete from employee where loginuserid = 'sjgillet';
+
+
+    
+
+
+--call Create_New_TR_Request('MrBigg', 'How to Fill Your Swimming Pool with Cash',
+--    '02152018', '11:00', '101 Baltimore ln, Baltimore, MD, 20021', 
+--    'Seminar', 'A lecture on how best to invest to make lots of money',
+--    '50', 'Because I can', 'lessOneDay');
+--    
+--insert into tuitionreimbursmentrequest values(
+--    null, 
+--    (select employeeid from employee where loginuserid = 'MrBigg'),
+--    'Vault Stuff', TO_DATE(('02162017' || ' ' || '01:00'), 'MM/DD/YYYY HH:MI:SS'),
+--    'An address', 'Seminar', 'How to make money', 50, null, 'because I can', 'lessOneDay',
+--    0, 0, 0);
+--    
+/

@@ -36,4 +36,14 @@
     <servlet-name>Login</servlet-name>
     <url-pattern>/Login</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ReimbursementRequest</display-name>
+    <servlet-name>ReimbursementRequest</servlet-name>
+    <servlet-class>com.trms.servlets.ReimbursementRequest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReimbursementRequest</servlet-name>
+    <url-pattern>/ReimbursementRequest</url-pattern>
+  </servlet-mapping>
 </web-app>

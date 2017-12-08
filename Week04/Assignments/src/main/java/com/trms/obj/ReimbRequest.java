@@ -1,31 +1,28 @@
 package com.trms.obj;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.util.HashMap;
 
 public class ReimbRequest {
-	private String reqesterLoginId; 
+	private String requesterLoginId; 
 	private int trackingNumber;
-	private Date eventDate; 
-	private Timestamp eventTime; 
+	private String eventDate; 
+	private String eventTime; 
 	private String eventName; 
 	private String eventType; 
 	private String description; 
 	private double unmodifiedCost; 
 	private String gradingFormat; 
 	private String justification; 
-	private double workHoursMissing; 
+	private String workHoursMissing; 
 	private boolean supervisorApproved;
 	private boolean deptHeadApproved;
 	private boolean bennCoApproved;
-	private HashMap<String,String> location; 
+	private String location; 
 	
-	public ReimbRequest(String reqesterLoginId, int trackingNumber, Date eventDate, Timestamp eventTime,
+	public ReimbRequest(String requesterLoginId, int trackingNumber, String eventDate, String eventTime,
 			String eventName, String eventType, String description, double unmodifiedCost, String gradingFormat,
-			String justification, double workHoursMissing, boolean supervisorApproved, boolean deptHeadApproved,
+			String justification, String workHoursMissing, boolean supervisorApproved, boolean deptHeadApproved,
 			boolean bennCoApproved) {
-		this.reqesterLoginId = reqesterLoginId;
+		this.requesterLoginId = requesterLoginId;
 		this.trackingNumber = trackingNumber;
 		this.eventDate = eventDate;
 		this.eventTime = eventTime;
@@ -40,20 +37,35 @@ public class ReimbRequest {
 		this.deptHeadApproved = deptHeadApproved;
 		this.bennCoApproved = bennCoApproved;
 	} 
+	public ReimbRequest(String requesterLoginId, String eventDate, String eventTime, String eventName, 
+			String eventType, String description, 
+			String justification, double cost, String workHoursToMiss) {
+		this.trackingNumber = 0; 
+		this.requesterLoginId = requesterLoginId;
+		this.eventDate = eventDate;
+		this.eventTime = eventTime;
+		this.eventName = eventName;
+		this.eventType = eventType;
+		this.description = description;
+		this.justification = justification;
+		this.unmodifiedCost = cost;
+		this.workHoursMissing = workHoursToMiss;
+		this.supervisorApproved = false;
+		this.deptHeadApproved = false;
+		this.bennCoApproved = false;	}
 	
-	public void putLocation(String type, String value) {
-		location.put(type, value);
-	}
-	public HashMap<String,String> getLocation() {
+	public String getLocation() {
 		return location; 
 	}
-
+	public void setLocation(String location) {
+		this.location = location; 
+	}
 	public String getReqesterLoginId() {
-		return reqesterLoginId;
+		return requesterLoginId;
 	}
 
-	public void setReqesterLoginId(String reqesterLoginId) {
-		this.reqesterLoginId = reqesterLoginId;
+	public void setReqesterLoginId(String requesterLoginId) {
+		this.requesterLoginId = requesterLoginId;
 	}
 
 	public int getTrackingNumber() {
@@ -64,19 +76,19 @@ public class ReimbRequest {
 		this.trackingNumber = trackingNumber;
 	}
 
-	public Date getEventDate() {
+	public String getEventDate() {
 		return eventDate;
 	}
 
-	public void setEventDate(Date eventDate) {
+	public void setEventDate(String eventDate) {
 		this.eventDate = eventDate;
 	}
 
-	public Timestamp getEventTime() {
+	public String getEventTime() {
 		return eventTime;
 	}
 
-	public void setEventTime(Timestamp eventTime) {
+	public void setEventTime(String eventTime) {
 		this.eventTime = eventTime;
 	}
 
@@ -128,11 +140,11 @@ public class ReimbRequest {
 		this.justification = justification;
 	}
 
-	public double getWorkHoursMissing() {
+	public String getWorkHoursMissing() {
 		return workHoursMissing;
 	}
 
-	public void setWorkHoursMissing(double workHoursMissing) {
+	public void setWorkHoursMissing(String workHoursMissing) {
 		this.workHoursMissing = workHoursMissing;
 	}
 

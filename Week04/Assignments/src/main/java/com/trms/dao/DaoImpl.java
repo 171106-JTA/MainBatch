@@ -11,14 +11,10 @@ import java.sql.SQLException;
 
 import com.trms.obj.ContactInformation;
 import com.trms.obj.Employee;
+import com.trms.obj.ReimbRequest;
+import com.trms.util.ConnectionUtil;
 
 public class DaoImpl implements Dao {
-
-
-	public boolean verifyCredentials(String username, String password) {
-
-		return false;
-	}
 
 	public boolean loginIdAvailable(String loginUserId) {
 		ResultSet rs = null;
@@ -81,6 +77,8 @@ public class DaoImpl implements Dao {
 
 	public boolean insertEmployee(Employee e) {
 		CallableStatement cs = null;
+		PreparedStatement ps = null; 
+		ResultSet rs = null; 
 		boolean result = false; 
 		ContactInformation c = e.getContactInfo();
 
@@ -95,7 +93,6 @@ public class DaoImpl implements Dao {
 			cs.setString(2, e.getLastName());
 			cs.setString(3, e.getLoginUserId());
 			cs.setString(4, e.getLoginPassword());
-			System.out.println(e.getDepartment() + " " + e.getPosition() + " " + e.getSupervisor());
 			cs.setString(5, e.getDepartment());
 			cs.setString(6, e.getPosition());
 			cs.setString(7, e.getSupervisor());
@@ -107,20 +104,129 @@ public class DaoImpl implements Dao {
 			cs.setString(12, c.getState());
 			cs.setString(13, c.getZipCode());
 			
-			result = cs.execute(); 
+			cs.execute();		
 			
-			return result; 
+			
+			sql = "select * from Employee E join ContactInformation C on E.contactInformationKey = C.Contact_Index "
+					+ "where loginUserId = ?"; 
+			ps = conn.prepareStatement(sql); 
+			ps.setString(1, e.getLoginUserId());
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				result = true; 
+				if(!(e.getFirstName().equals(rs.getString("firstName")))) {
+					System.out.println("Failed on firstName");
+					result = false; 
+				}
+				if(!(e.getLastName().equals(rs.getString("lastName")))) {
+					System.out.println("Failed on lastName");
+					result = false; 
+				}
+				if(!(e.getLoginUserId().equals(rs.getString("loginUserId")))) {
+					System.out.println("Failed on loginUserId");
+					result = false; 
+				}
+				if(!(e.getLoginPassword().equals(rs.getString("loginPassword")))) {
+					System.out.println("Failed on loginPassword");
+					result = false; 
+				}
+				if(rs.getInt("deptId") == 0) {
+					System.out.println("Failed on department");
+					result = false; 
+				}
+				if(rs.getInt("positionId") == 0) {
+					System.out.println("Failed on position");
+					result = false; 
+				}
+				if(rs.getInt("supervisorEmpId") == 0) {
+					System.out.println("Failed on supervisor");
+					result = false; 
+				}
+				if(!(c.getEmail().equals(rs.getString("email")))) {
+					System.out.println("Failed on email");
+					result = false; 
+				}
+				if(!(c.getPhone().equals(rs.getString("phoneNumber")))) {
+					System.out.println("Failed on phone");
+					result = false; 
+				}
+				if(!(c.getStreetAddr().equals(rs.getString("streetAddress")))) {
+					System.out.println("Failed on streetAddress");
+					result = false; 
+				}
+				if(!(c.getCity().equals(rs.getString("city")))) {
+					System.out.println("Failed on city");
+					result = false; 
+				}
+				if(!(c.getState().equals(rs.getString("state")))) {
+					System.out.println("Failed on state");
+					result = false; 
+				}
+				if(!(c.getZipCode().equals(rs.getString("zipCode")))) {
+					System.out.println("Failed on zipCode");
+					result = false; 
+				}
+				
+					
+			}
+			
 
 		}catch(SQLException s) {
 			s.printStackTrace();
 		}
 		finally {
 			close(cs); 
+			close(rs); 
+			close(ps); 
 		}		
-		return false; 
+		return result; 
  
 	}
 
+	
+	public boolean verifyCredentials(String loginUserId, String loginPassword) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			Class.forName ("oracle.jdbc.OracleDriver");
+			String sql = "SELECT * from Employee where loginUserId = ? and loginPassword = ?"; 
+			ps = conn.prepareStatement(sql);
+			ps.setString(1,  loginUserId);
+			ps.setString(2, loginPassword);
+			rs = ps.executeQuery();
+			return rs.next();
+		}
+		catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(ps); 
+			close(rs); 
+		}
+		
+		return false; 
+	}
+	
+	public void submitReimbursementRequestForm(ReimbRequest trr) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			String sql = "";
+			
+			
+			
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(ps); 
+			close(rs); 
+		}
+		
+	}
 
 
 }

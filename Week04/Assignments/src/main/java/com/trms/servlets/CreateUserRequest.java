@@ -68,13 +68,13 @@ public class CreateUserRequest extends HttpServlet {
 			out.println("<div>Username and email available, attempted to insert your information into our database...</div><br>");
 			boolean successful = Services.insertEmployee(e); 
 			if(successful) {
-				out.println("<h2>Success</h2>");
+				out.println("<h2>Registered!</h2><p>Please return to the TRMS login page.</p>");
 			}
 			else {
 				out.println("<h2>Username/Email available; Error on Insert/Update</h2>"); 
 			}
 		}
-		out.println("<a href='registeruser.html'>BACK</a>"); 
+		out.println("<a href='index.html'>Back to Homepage</a>    <a href='registeruser.html'>Register another user</a>"); 
 		
 		e = null; 
 		

@@ -12,8 +12,15 @@ public class ConnectionUtil {
 		String user = "trms_app";
 		String password = "password_trms"; 
 		
-		
-		return DriverManager.getConnection(url, user, password);
+
+		try {
+			Class.forName ("oracle.jdbc.OracleDriver");
+			return DriverManager.getConnection(url, user, password);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null; 
 	}
 	
 	

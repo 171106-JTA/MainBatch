@@ -97,17 +97,13 @@ create table TuitionReimbursmentRequest (
     employeeID number(3),
     eventName varchar2(60),
     eventDate DATE,
-    eventTime TIMESTAMP,
-    eventAddress varchar2(60),
-    eventCity varchar2(40),
-    eventState varchar2(20),
-    eventZip varchar2(10),
+    eventAddress varchar2(140),
     eventType varchar2(80),
     eventDescription varchar2(140),
     unmodifiedCost number(6,2),
     gradingFormat varchar2(15),
-    justification varchar2(80),
-    workHoursMissing number,
+    justification varchar2(140),
+    workHoursMissing varchar2(15),
     supervisorApproved number,
     deptHeadApproved number,
     benCoApproved number,
@@ -154,6 +150,7 @@ BEGIN
     
 END; 
 /
+
 --Increment Index and set default info for contact information. 
 CREATE OR REPLACE TRIGGER Contact_Info_Default_Trg
 BEFORE INSERT ON ContactInformation
@@ -185,6 +182,34 @@ BEGIN
     end if; 
 END; 
 /
+
+CREATE OR REPLACE TRIGGER TR_Request_Default_Trg
+BEFORE INSERT ON TuitionReimbursmentRequest
+FOR EACH ROW
+BEGIN
+    if :new.trackingNumber is null then 
+        :new.trackingNumber := TRR_Tracking_Number_Seq.nextval;
+    end if; 
+    
+   
+    if :new.gradingFormat is null then
+        select EventTypes.gradingFormat into :new.gradingFormat 
+            from EventTypes where EventTypes.eventType = :new.eventType;
+    end if; 
+    
+    
+    if :new.supervisorApproved is null then 
+        :new.supervisorApproved := 0; 
+    end if; 
+    if :new.deptHeadApproved is null then 
+        :new.deptHeadApproved := 0; 
+    end if; 
+    if :new.benCoApproved is null then 
+        :new.benCoApproved := 0; 
+    end if;     
+END;
+/
+
 
 CREATE OR REPLACE TRIGGER On_Position_Create 
 BEFORE INSERT ON Positions
@@ -282,6 +307,43 @@ IS
 BEGIN
     INSERT INTO Positions(title, deptId) VALUES(
         Create_Position.positionName, Create_Position.deptId);
+END;
+/
+
+CREATE OR REPLACE PROCEDURE Create_New_TR_Request(
+    employeeLoginUserId IN varchar2, eventName varchar2,
+    date_String IN varchar2, time_String IN varchar2, address IN varchar2,
+    eventType IN varchar2, description IN varchar2, cost IN varchar2, 
+    justification IN varchar2, workHoursMissing IN varchar2)
+IS
+    empID number;
+    evt_Date DATE; 
+    gradeFormat varchar2(15);
+BEGIN
+    commit;
+    SET TRANSACTION NAME 'Create_TR_Request';
+    
+    select employeeId into empID from Employee where loginUserId = employeeLoginUserId; 
+    evt_Date := TO_DATE((date_String || ' ' || time_String), 'MM/DD/YYYY HH:MI:SS');
+    select EventTypes.gradingFormat into gradeFormat from EventTypes where EventTypes.eventType = 
+        Create_New_TR_Request.eventType; 
+        
+    SAVEPOINT after_set_vars;
+    
+    INSERT INTO TuitionReimbursmentRequest Values(
+        null,
+        empID,
+        Create_New_TR_Request.eventName,
+        evt_Date,
+        Create_New_TR_Request.address,
+        Create_New_TR_Request.eventType,
+        Create_New_TR_Request.description,
+        Create_New_TR_Request.cost,
+        gradeFormat,
+        Create_New_TR_Request.justification,
+        Create_New_TR_Request.workHoursMissing,
+        0, 0, 0);    
+    commit; 
 END;
 /
 

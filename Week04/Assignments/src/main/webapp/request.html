@@ -6,12 +6,95 @@
 </head>
 <body>
 	<h2>Reimbursement Request Form</h2>
-
-	<ul style="list-style-type: none">
-		<li>(Confirm and Submit)</li>
-		<li></li>
-		<li><a href="index.html">Back</a></li>
-
-	</ul>
+	<form action="submitRequest.fc" method="post">
+		<table>
+			<tr><td>Event Date:</td><td>
+				<select name = "EventMonth">
+					<option value = "">Month</option>
+					<option value = "01">January</option>
+					<option value = "02">February</option>
+					<option value = "03">March</option>
+					<option value = "04">April</option>
+					<option value = "05">May</option>
+					<option value = "06">June</option>
+					<option value = "07">July</option>
+					<option value = "08">August</option>
+					<option value = "09">September</option>
+					<option value = "10">October</option>
+					<option value = "11">November</option>
+					<option value = "12">December</option>				
+				</select> - <select name = "EventDay">
+					<option value = "">Day</option>
+					<option value = "01">01</option>
+					<option value = "02">02</option>
+					<option value = "03">03</option>
+					<option value = "04">04</option>
+					<option value = "05">05</option>
+					<option value = "06">06</option>
+					<option value = "07">07</option>
+					<option value = "08">08</option>
+					<option value = "09">09</option>
+					<option value = "10">10</option>
+					<option value = "11">11</option>
+					<option value = "12">12</option>
+					<option value = "13">13</option>
+					<option value = "14">14</option>
+					<option value = "15">15</option>
+					<option value = "16">16</option>
+					<option value = "17">17</option>
+					<option value = "18">18</option>
+					<option value = "19">19</option>
+					<option value = "20">20</option>
+					<option value = "21">21</option>
+					<option value = "22">22</option>
+					<option value = "23">23</option>
+					<option value = "24">24</option>
+					<option value = "25">25</option>
+					<option value = "26">26</option>
+					<option value = "27">27</option>
+					<option value = "28">28</option>
+					<option value = "29">29</option>
+					<option value = "30">30</option>
+					<option value = "31">31</option>
+				</select> - <select name = "EventYear">
+					<option value = "">Year</option>
+					<option value = "2017">2017</option>
+					<option value = "2018">2018</option>
+					<option value = "2019">2019</option>
+					<option value = "2020">2020</option>
+					<option value = "2021">2021</option>
+				</select>
+			</td></tr>
+			<tr><td>Event Time: </td><td><input type = "text" name = "eventTime"></td></tr>
+			<tr><td>Title of Event</td><td><input type = "text" name = "eventName"></td></tr>
+			<tr><td>Type of Event</td><td><select name = "eventType">
+				<option value = "">Select an option</option>
+				<option value = "uniCourse">University Course</option>
+				<option value = "seminar">Seminar</option>
+				<option value = "certPrep">Certification Prep Class</option>
+				<option value = "cert">Certification</option>
+				<option value = "techTraining">Technical Training</option>
+				<option value = "other">Other</option>
+				</select></td></tr>
+			<tr><td>Cost, Unmodified</td><td><input type = "text" name = "costUnmodified"></td></tr>
+			<tr><td>Provide a summary of the event: </td><td><input type = "text" name = "description"></td></tr>
+			<tr><td>Describe the reason for your attending this event: </td><td><input type = "text" name = "justification"></td></tr>
+			<tr><td>State the number of work hours you expect to miss as a result of this event:</td><td>
+				<select name = "workHoursToMiss">
+					<option value = "">Select an option</option>
+					<option value = "lessOneDay">1 - 4 hours</option>
+					<option value = "mostFullDay">4 - 8 hours</option>
+					<option value = "oneDay">1 work day</option>
+					<option value = "severalDays">2 - 4 work days</option>
+					<option value = "oneWeek">1 week</option>
+					<option value = "severalWeeks">More than 1 week</option>					
+				</select></td></tr>
+			<tr><td>Address of Event: </td><td><input type = "text" name = "eventAddr"></td></tr>
+			<tr><td><input type = "submit" value = "Submit Tuition Reimbursement Request"></td></tr>
+		</table>
+	</form>
+	<form action="home.fc">
+		<input type="submit" value="Back">
+	</form>
 </body>
 </html>

@@ -10,6 +10,8 @@ public interface Dao {
 	public boolean loginIdAvailable(String loginUserId);
 	public boolean emailAvailable(String email); 
 	public boolean insertEmployee(Employee e); 
+	public boolean verifyCredentials(String loginUserId, String loginPassword); 
+	public void submitReimbursementRequestForm(ReimbRequest trr);
 	
 	
 	
