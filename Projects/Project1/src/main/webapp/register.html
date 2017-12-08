@@ -10,7 +10,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="resources/css/StylingTRMS.css">
-	<script src="resources\javascript\Register.js"></script>
+<script src="resources/javascript/Register.js"></script>
 <meta charset="UTF-8">
 <title>TRMS Registrations</title>
 </head>
@@ -23,29 +23,33 @@
 				<h5 align="center">
 					<i>Please enter your information below.</i>
 				</h5>
-				<div>
-					<p id="infoMessage"></p>
-				</div>
 				<div class="well">
-					<form method="post" onClick="submit()">
+					<form method="post" id="regForm">
 						<div class="next">
-							<label for="Username">Username</label>
+							<label for="Username" id="regUsernameLabel">Username <span
+								id="regUsernameSpan" style="color: red"></span>
+							</label>
 						</div>
 						<div>
-							<input type="text" name="regUsername" id="regUsername" placeholder="Username"
-								required> <i> &nbspMust be between 5 and 15
-								characters</i>
+							<input type="text" name="regUsername" id="regUsername"
+								placeholder="Username" required> <i> &nbspMust be
+								between 5 and 15 characters</i>
 						</div>
 						<div class="next">
 							<label for="registrationPassword">Password</label> <span
 								style="display: inline-block; width: 105px;"></span> <label
-								for="confirmPassword">Confirm Password</label>
+								for="confirmPassword">Confirm Password </label>
+							
 						</div>
 						<div>
-							<input type="password" name="regPassword1" id="regRassword1" placeholder="Password"
-								required> <input type="password" name="regPassword2"
-								id="regRassword2" placeholder="Password" required><i>&nbspMust be
-								between 5 and 15 characters</i>
+							<input type="password" name="regPassword1" id="regPassword1"
+								placeholder="Password" required> <input type="password"
+								name="regPassword2" id="regPassword2" placeholder="Password"
+								required><span id="regPasswordEqualityCheck" style="color: red"></span>
+
+						</div>
+						<div>
+							<span id="regPasswordLengthCheck" style="color: red"></span>
 						</div>
 						<div class="next">
 							<label for="firstName">Name</label>

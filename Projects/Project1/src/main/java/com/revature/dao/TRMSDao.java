@@ -23,6 +23,46 @@ public class TRMSDao {
 	private static TRMSDao dao;
 
 	private TRMSDao() {}
+	
+	/**
+	 * 
+	 * @param username
+	 * @return
+	 */
+	public boolean doesEmployeeExist(String username) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		final String sql = "SELECT * FROM EMPLOYEE WHERE EMP_USERNAME = ?";
+
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+
+		try(Connection conn = ConnectionUtil.getConnection()){
+
+			ps = conn.prepareStatement(sql);
+			System.out.println("the username searching for is: " + username);
+			ps.setString(1, username);
+			rs = ps.executeQuery();
+
+			if (rs.next() == false) {
+				return false;
+			} else {
+				return true;
+			}
+
+		} catch(SQLException e){
+			e.printStackTrace();
+			return false;
+		} finally{
+			close(ps);
+		}
+	}
+
+	
 	/**
 	 * 
 	 * @param username
@@ -44,14 +84,15 @@ public class TRMSDao {
 		try(Connection conn = ConnectionUtil.getConnection()){
 
 			ps = conn.prepareStatement(sql);
+			System.out.println("the username searching for is: " + username);
 			ps.setString(1, username);
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				emp = new Employee(rs.getString("emp_username"), rs.getInt("emp_password"), rs.getString("emp_fname"), 
 						rs.getString("emp_lname"), rs.getString("emp_phonenumber"), Title.getTitle(rs.getString("emp_title")),
-						rs.getString("emp_address"), rs.getString("zipcode"), rs.getString("city"),  
-						rs.getString("state"));
+						rs.getString("emp_address"), rs.getString("emp_zipcode"), rs.getString("emp_city"),  
+						rs.getString("emp_state"));
 
 				return emp;
 			}
