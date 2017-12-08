@@ -23,7 +23,9 @@ public interface RequestDAO {
     List<ReimbursementRequest> getPendingRequestsByDepartment(String department) throws NonExistentIdException;
     List<ReimbursementRequest> getDepartmentRequestsByStatus(String department, String status) throws NonExistentIdException;
 
+    List<ReimbursementRequest> getWaitingOnSupervisor(String supervisorEmail) throws NonExistentIdException;
+
     List<ReimbursementRequest> getAllRequests();
     List<ReimbursementRequest> getPendingRequests();
-    List<ReimbursementRequest> getRequestsByStatus(String status);
+    List<ReimbursementRequest> getRequestsByStatus(String status) throws NonExistentIdException;
 }

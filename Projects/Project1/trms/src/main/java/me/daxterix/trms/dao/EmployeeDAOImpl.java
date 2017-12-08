@@ -83,17 +83,16 @@ public class EmployeeDAOImpl extends ObjectDAO implements EmployeeDAO {
                     if (grade != null)
                         session.delete(grade);
 
-                    for (RequestFile file: request.getFiles())
-                        session.delete(file);
-
-                    for (RequestHistory history: request.getHistory())
-                        session.delete(history);
-
                     if (request.getStatus().getStatus().equals(RequestStatus.GRANTED) ||
                             request.getStatus().getStatus().equals(RequestStatus.DENIED))
                         request.setFiler(null); // leave these for auditing purposes
-                    else
+                    else {
+                        for (RequestHistory history: request.getHistory())
+                            session.delete(history);
+                        for (RequestFile file : request.getFiles())
+                            session.delete(file);
                         session.delete(request);
+                    }
                 }
                 session.delete(emp);
             }

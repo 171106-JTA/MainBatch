@@ -24,6 +24,6 @@ public class MimeTypesServlet extends HttpServlet {
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(ServletUtils.stringsToJsonArrayString(mimeTypes));
+        response.getWriter().print(ServletUtils.stringsToJsonArrayString(mimeTypes));
     }
 }

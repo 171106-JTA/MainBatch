@@ -37,6 +37,9 @@ public class RequestHistory implements Serializable{
     @Column(name="approval_time")
     private LocalDateTime time;
 
+    @Column(name="approval_reason", length=255)
+    private String reason;
+
     public long getId() {
         return id;
     }
@@ -83,5 +86,13 @@ public class RequestHistory implements Serializable{
 
     public void setTime(LocalDateTime time) {
         this.time = time;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
     }
 }

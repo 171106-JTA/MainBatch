@@ -31,9 +31,9 @@ public class ObjectDAOTest {
 
     void cleanup() {
         try {
+            requestDao.deleteRequest(request1.getId());
             empDao.deleteAccount(acc1.getEmail());
             empDao.deleteAccount(acc2.getEmail());
-            requestDao.deleteRequest(request1.getId());
         }
         catch (NonExistentIdException e) {
             //
@@ -60,37 +60,37 @@ public class ObjectDAOTest {
         return req;
     }
 
-    void createAccounts() throws DuplicateIdException {
-        acc1 = new EmployeeAccount();
-        acc1.setEmail("test");
-        acc1.setPassword("test");
-        empDao.save(acc1);
+    EmployeeAccount persistAccount(String email, String pass) throws DuplicateIdException {
+        EmployeeAccount acc = new EmployeeAccount();
+        acc.setEmail(email);
+        acc.setPassword(pass);
+        empDao.save(acc);
+        return acc;
+    }
 
-        acc2 = new EmployeeAccount();
-        acc2.setEmail("test2");
-        acc2.setPassword("test2");
-        empDao.save(acc2);
+    void createAccounts() throws DuplicateIdException {
+        acc1 =  persistAccount("test", "test");
+        acc2 = persistAccount("test2", "test2");
+    }
+
+    Employee persistEmployee(EmployeeAccount account, Employee supervisor, String department, String rank) throws DuplicateIdException {
+        Employee emp = new Employee();
+        emp.setAccount(account);
+        emp.setFirstname("first_name");
+        emp.setLastname("last_name");
+        emp.setAvailableFunds(1000);
+        emp.setDepartment(new Department(department));
+        emp.setRank(new EmployeeRank(rank));
+        emp.setSupervisor(supervisor);
+        empDao.save(emp);
+        return emp;
     }
 
     void createEmployees() throws DuplicateIdException {
-        emp1 = new Employee();
-        emp1.setAccount(acc1);
-        emp1.setDepartment(new Department(Department.RAVENCLAW));
-        emp1.setFirstname("first_name");
-        emp1.setLastname("last_name");
-        emp1.setAvailableFunds(1000);
-        emp1.setRank(new EmployeeRank(EmployeeRank.BENCO));
-        empDao.save(emp1);
+        emp1 = persistEmployee(acc1, null, Department.RAVENCLAW, EmployeeRank.BENCO);
 
-        emp2 = new Employee();
-        emp2.setAccount(acc2);
-        emp2.setSupervisor(emp1);
-        emp2.setDepartment(new Department(Department.SLYTHERIN));
-        emp2.setFirstname("first_name2");
-        emp2.setLastname("last_name2");
-        emp2.setAvailableFunds(1000);
-        emp2.setRank(new EmployeeRank(EmployeeRank.REGULAR));
-        empDao.save(emp2);
+        // don't think BENCOs have departments, but doesn't matter for the tests below
+        emp2 = persistEmployee(acc2, emp1, Department.SLYTHERIN, EmployeeRank.REGULAR);
     }
 
     public void setup() throws DuplicateIdException {
@@ -98,6 +98,16 @@ public class ObjectDAOTest {
         createAccounts();
         createEmployees();
         request1 = persistRequest(emp1, RequestStatus.AWAITING_SUPERVISOR, EventType.UNIVERSITY_COURSE);
+    }
+
+
+    RequestFile persistFile(String filePurpose, String mimeType, ReimbursementRequest req) throws DuplicateIdException {
+        RequestFile file = new RequestFile();
+        file.setMimeType(new MimeType(mimeType));
+        file.setPurpose(new FilePurpose(filePurpose));
+        file.setRequest(req);
+        reqInfoDao.saveFile(file);
+        return file;
     }
 
     public void tearDown() {

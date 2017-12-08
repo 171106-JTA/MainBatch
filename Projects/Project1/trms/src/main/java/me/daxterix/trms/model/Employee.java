@@ -42,7 +42,7 @@ public class Employee implements Serializable {
     @Column(name="funds", nullable = false)
     private float availableFunds = INITIAL_FUNDS;
 
-    @OneToMany(fetch=FetchType.LAZY, mappedBy="filer", cascade=CascadeType.ALL)
+    @OneToMany(fetch=FetchType.LAZY, mappedBy="filer")
     private List<ReimbursementRequest> requests;
 
     @OneToMany(fetch=FetchType.LAZY, mappedBy="approver", cascade=CascadeType.ALL)

@@ -97,8 +97,8 @@ public class RequestDAOImpl extends ObjectDAO implements RequestDAO {
             Root<ReimbursementRequest> requestRoot = critQuery.from(ReimbursementRequest.class);
 
             Predicate emailPredicate = critBuild.equal(getFilerEmailPath(requestRoot), email);
-            Predicate statuspredicate1 = critBuild.notEqual(getStatusNamePath(requestRoot), RequestStatus.GRANTED);
-            Predicate statusPredicate2 = critBuild.notEqual(getStatusNamePath(requestRoot), RequestStatus.DENIED);
+            Predicate statuspredicate1 = critBuild.notEqual(getReqStatusNamePath(requestRoot), RequestStatus.GRANTED);
+            Predicate statusPredicate2 = critBuild.notEqual(getReqStatusNamePath(requestRoot), RequestStatus.DENIED);
             Predicate allPredicates = critBuild.and(emailPredicate, statuspredicate1, statusPredicate2);
 
             critQuery.select(requestRoot).where(allPredicates);
@@ -124,7 +124,7 @@ public class RequestDAOImpl extends ObjectDAO implements RequestDAO {
             Root<ReimbursementRequest> requestRoot = critQuery.from(ReimbursementRequest.class);
 
             Predicate emailPredicate = critBuild.equal(getFilerEmailPath(requestRoot), email);
-            Predicate statusPredicate = critBuild.equal(getStatusNamePath(requestRoot), status);
+            Predicate statusPredicate = critBuild.equal(getReqStatusNamePath(requestRoot), status);
             Predicate allPredicates = critBuild.and(emailPredicate, statusPredicate);
 
             critQuery.select(requestRoot).where(allPredicates);
@@ -154,7 +154,7 @@ public class RequestDAOImpl extends ObjectDAO implements RequestDAO {
             CriteriaQuery<ReimbursementRequest> critQuery = critBuild.createQuery(ReimbursementRequest.class);
             Root<ReimbursementRequest> requestRoot = critQuery.from(ReimbursementRequest.class);
 
-            Predicate deptPredicate = critBuild.equal(getDeptNamePath(requestRoot), department);
+            Predicate deptPredicate = critBuild.equal(getFilerDeptNamePath(requestRoot), department);
             critQuery.select(requestRoot).where(deptPredicate);
 
             TypedQuery<ReimbursementRequest> query = session.createQuery(critQuery);
@@ -178,9 +178,9 @@ public class RequestDAOImpl extends ObjectDAO implements RequestDAO {
             CriteriaQuery<ReimbursementRequest> critQuery = critBuild.createQuery(ReimbursementRequest.class);
             Root<ReimbursementRequest> requestRoot = critQuery.from(ReimbursementRequest.class);
 
-            Predicate deptPredicate = critBuild.equal(getDeptNamePath(requestRoot), department);
-            Predicate statusPredicate1 = critBuild.notEqual(getStatusNamePath(requestRoot), RequestStatus.GRANTED);
-            Predicate statusPredicate2 = critBuild.notEqual(getStatusNamePath(requestRoot), RequestStatus.DENIED);
+            Predicate deptPredicate = critBuild.equal(getFilerDeptNamePath(requestRoot), department);
+            Predicate statusPredicate1 = critBuild.notEqual(getReqStatusNamePath(requestRoot), RequestStatus.GRANTED);
+            Predicate statusPredicate2 = critBuild.notEqual(getReqStatusNamePath(requestRoot), RequestStatus.DENIED);
             Predicate allPredicates = critBuild.and(deptPredicate, statusPredicate1, statusPredicate2);
 
             critQuery.select(requestRoot).where(allPredicates);
@@ -202,12 +202,17 @@ public class RequestDAOImpl extends ObjectDAO implements RequestDAO {
                 session.getTransaction().rollback();
                 throw new NonExistentIdException(String.format("Department %s does not exist", department));
             }
+            RequestStatus rStatus = session.get(RequestStatus.class, status);
+            if (rStatus == null) {
+                session.getTransaction().commit();
+                throw new NonExistentIdException("invalid status");
+            }
             CriteriaBuilder critBuild = session.getCriteriaBuilder();
             CriteriaQuery<ReimbursementRequest> critQuery = critBuild.createQuery(ReimbursementRequest.class);
             Root<ReimbursementRequest> requestRoot = critQuery.from(ReimbursementRequest.class);
 
-            Predicate deptPredicate = critBuild.equal(getDeptNamePath(requestRoot), department);
-            Predicate statusPredicate = critBuild.equal(getStatusNamePath(requestRoot), status);
+            Predicate deptPredicate = critBuild.equal(getFilerDeptNamePath(requestRoot), department);
+            Predicate statusPredicate = critBuild.equal(getReqStatusNamePath(requestRoot), status);
             Predicate allPredicates = critBuild.and(deptPredicate, statusPredicate);
 
             critQuery.select(requestRoot).where(allPredicates);
@@ -217,6 +222,33 @@ public class RequestDAOImpl extends ObjectDAO implements RequestDAO {
             return reqs;
         }
     }
+
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ReimbursementRequest> getWaitingOnSupervisor(String supervisorEmail) throws NonExistentIdException {
+        try(Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            if (session.get(Employee.class, supervisorEmail) == null) {
+                session.getTransaction().rollback();
+                throw new NonExistentIdException("No such supervisor");
+            }
+            CriteriaBuilder critBuild = session.getCriteriaBuilder();
+            CriteriaQuery<ReimbursementRequest> critQuery = critBuild.createQuery(ReimbursementRequest.class);
+            Root<ReimbursementRequest> requestRoot = critQuery.from(ReimbursementRequest.class);
+
+            Predicate supePredicate = critBuild.equal(getFilerSupeEmailPath(requestRoot), supervisorEmail);
+            Predicate statusPredicate = critBuild.equal(getReqStatusNamePath(requestRoot), RequestStatus.AWAITING_SUPERVISOR);
+            Predicate allPredicates = critBuild.and(supePredicate, statusPredicate);
+
+            critQuery.select(requestRoot).where(allPredicates);
+            TypedQuery<ReimbursementRequest> query = session.createQuery(critQuery);
+            List<ReimbursementRequest> reqs = query.getResultList();
+            session.getTransaction().commit();
+            return reqs;
+        }
+    }
+
 
 
 
@@ -238,8 +270,8 @@ public class RequestDAOImpl extends ObjectDAO implements RequestDAO {
             CriteriaQuery<ReimbursementRequest> critQuery = critBuild.createQuery(ReimbursementRequest.class);
             Root<ReimbursementRequest> requestRoot = critQuery.from(ReimbursementRequest.class);
 
-            Predicate statusPredicate1 = critBuild.notEqual(getStatusNamePath(requestRoot), RequestStatus.DENIED);
-            Predicate statusPredicate2 = critBuild.notEqual(getStatusNamePath(requestRoot), RequestStatus.GRANTED);
+            Predicate statusPredicate1 = critBuild.notEqual(getReqStatusNamePath(requestRoot), RequestStatus.DENIED);
+            Predicate statusPredicate2 = critBuild.notEqual(getReqStatusNamePath(requestRoot), RequestStatus.GRANTED);
             Predicate allPredicates = critBuild.and(statusPredicate1, statusPredicate2);
 
             critQuery.select(requestRoot).where(allPredicates);
@@ -252,14 +284,18 @@ public class RequestDAOImpl extends ObjectDAO implements RequestDAO {
 
     @Override
     @Transactional(readOnly = true)
-    public List<ReimbursementRequest> getRequestsByStatus(String status) {
+    public List<ReimbursementRequest> getRequestsByStatus(String status) throws NonExistentIdException {
         try(Session session = sessionFactory.openSession()) {
             session.beginTransaction();
+            if (session.get(RequestStatus.class, status) == null) {
+                session.getTransaction().rollback();
+                throw new NonExistentIdException("invalid request status");
+            }
             CriteriaBuilder critBuild = session.getCriteriaBuilder();
             CriteriaQuery<ReimbursementRequest> critQuery = critBuild.createQuery(ReimbursementRequest.class);
             Root<ReimbursementRequest> requestRoot = critQuery.from(ReimbursementRequest.class);
 
-            Predicate statusPredicate = critBuild.equal(getStatusNamePath(requestRoot), status);
+            Predicate statusPredicate = critBuild.equal(getReqStatusNamePath(requestRoot), status);
 
             critQuery.select(requestRoot).where(statusPredicate);
             TypedQuery<ReimbursementRequest> query = session.createQuery(critQuery);
@@ -275,12 +311,16 @@ public class RequestDAOImpl extends ObjectDAO implements RequestDAO {
 
 
 
-    private Path<String> getDeptNamePath(Root<ReimbursementRequest> requestRoot) {
+    private Path<String> getFilerDeptNamePath(Root<ReimbursementRequest> requestRoot) {
         return requestRoot.<Employee>get("filer").<Department>get("department").<String>get("name");
     }
 
-    private Path<String> getStatusNamePath(Root<ReimbursementRequest> requestRoot) {
+    private Path<String> getReqStatusNamePath(Root<ReimbursementRequest> requestRoot) {
         return requestRoot.<RequestStatus>get("status").<String>get("status");
+    }
+
+    private Path<String> getFilerSupeEmailPath(Root<ReimbursementRequest> requestRoot) {
+        return requestRoot.<Employee>get("filer").<Employee>get("supervisor").<String>get("email");
     }
 
     private Path<String> getFilerEmailPath(Root<ReimbursementRequest> requestRoot) {

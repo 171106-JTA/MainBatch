@@ -4,9 +4,12 @@ import me.daxterix.trms.dao.exception.DuplicateIdException;
 import me.daxterix.trms.dao.exception.NonExistentIdException;
 import me.daxterix.trms.model.*;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,6 +17,20 @@ import java.util.stream.Collectors;
 import static org.junit.Assert.*;
 
 public class RequestDAOTest extends ObjectDAOTest {
+    List<Long> requestsToDelete;
+
+    @Before
+    public void setup() throws DuplicateIdException {
+        super.setup();
+        requestsToDelete = new ArrayList<>();
+    }
+
+    @After
+    public void tearDown() {
+        super.tearDown();
+        for (Long id: requestsToDelete)
+            try { requestDao.deleteRequest(id); } catch (NonExistentIdException ignored){}
+    }
 
     @Test
     public void saveAndGet() throws Exception {
@@ -325,6 +342,90 @@ public class RequestDAOTest extends ObjectDAOTest {
 
         for (long id : mapReqsToIds(Arrays.asList(deniedFor1))) assertFalse(ravenGrade.contains(id));
         for (long id : mapReqsToIds(Arrays.asList(grantedFor2))) assertFalse(ravenGrade.contains(id));
+    }
+
+    @Test
+    public void getWaitingOnSupervisor() throws Exception {
+        String acc3Email = "supe";
+        try {
+            EmployeeAccount acc3 = persistAccount(acc3Email, "supe");
+            Employee emp3 = persistEmployee(acc3, emp2, Department.SLYTHERIN, EmployeeRank.SUPERVISOR);
+
+            int size = 2;
+            ReimbursementRequest[] awitingEmp1Benco = new ReimbursementRequest[size];
+            ReimbursementRequest[] grantedFor2 = new ReimbursementRequest[size];
+            ReimbursementRequest[] awaitingEmp1Supe = new ReimbursementRequest[size];
+            ReimbursementRequest[] awaitingEmp2Supe = new ReimbursementRequest[size];
+
+            for (int i = 0; i < size; ++i) {
+                grantedFor2[i] = persistRequest(emp1, RequestStatus.GRANTED, EventType.OTHER);  // irrelevant for test
+                // emp1 has two requests waiting on him as a BENCO
+                awitingEmp1Benco[i] = persistRequest(emp1, RequestStatus.AWAITING_BENCO, EventType.SEMINAR);
+                // emp1 has two requests waiting on him as a direct supervisor
+                awaitingEmp1Supe[i] = persistRequest(emp2, RequestStatus.AWAITING_SUPERVISOR, EventType.OTHER);
+                // emp2 now has two requests waiting on him
+                awaitingEmp2Supe[i] = persistRequest(emp3, RequestStatus.AWAITING_SUPERVISOR, EventType.TECH_TRAINING);
+            }
+
+            List<Long> waitingOn1Supe = mapReqsToIds(requestDao.getWaitingOnSupervisor(emp1.getEmail()));
+            assertEquals(awaitingEmp1Supe.length, waitingOn1Supe.size());  // +1 for request1 in ObjectDAOTest
+            assertTrue(waitingOn1Supe.containsAll(mapReqsToIds(Arrays.asList(awaitingEmp1Supe))));
+            for (long id : mapReqsToIds(Arrays.asList(awitingEmp1Benco))) assertFalse(waitingOn1Supe.contains(id));
+            for (long id : mapReqsToIds(Arrays.asList(grantedFor2))) assertFalse(waitingOn1Supe.contains(id));
+            for (long id : mapReqsToIds(Arrays.asList(awaitingEmp2Supe))) assertFalse(waitingOn1Supe.contains(id));
+
+            List<Long> waitingOn2Supe = mapReqsToIds(requestDao.getWaitingOnSupervisor(emp2.getEmail()));
+            assertEquals(awaitingEmp2Supe.length, waitingOn2Supe.size());
+            assertTrue(waitingOn1Supe.containsAll(mapReqsToIds(Arrays.asList(awaitingEmp1Supe))));
+            for (long id : mapReqsToIds(Arrays.asList(grantedFor2))) assertFalse(waitingOn2Supe.contains(id));
+            for (long id : mapReqsToIds(Arrays.asList(awitingEmp1Benco))) assertFalse(waitingOn2Supe.contains(id));
+            for (long id : mapReqsToIds(Arrays.asList(awaitingEmp1Supe))) assertFalse(waitingOn2Supe.contains(id));
+        }
+        finally {
+            empDao.deleteAccount(acc3Email);
+        }
+    }
+
+    @Test
+    public void getWaitingOnDepartmentHead() throws Exception {
+        String acc3Email = "supe";
+        try {
+            EmployeeAccount acc3 = persistAccount(acc3Email, "supe");
+            Employee emp3 = persistEmployee(acc3, emp2, Department.SLYTHERIN, EmployeeRank.DEPARTMENT_HEAD);
+
+            int size = 2;
+            ReimbursementRequest[] awitingEmp1Benco = new ReimbursementRequest[size];
+            ReimbursementRequest[] grantedFor2 = new ReimbursementRequest[size];
+            ReimbursementRequest[] awaitingEmp1Supe = new ReimbursementRequest[size];
+            ReimbursementRequest[] awaitingEmp2Supe = new ReimbursementRequest[size];
+
+            for (int i = 0; i < size; ++i) {
+                grantedFor2[i] = persistRequest(emp1, RequestStatus.GRANTED, EventType.OTHER);  // irrelevant for test
+                // emp1 has two requests waiting on him as a BENCO
+                awitingEmp1Benco[i] = persistRequest(emp1, RequestStatus.AWAITING_DEPT_HEAD, EventType.SEMINAR);
+                // emp1 has two requests waiting on him as a direct supervisor
+                awaitingEmp1Supe[i] = persistRequest(emp2, RequestStatus.AWAITING_SUPERVISOR, EventType.OTHER);
+                // emp2 now has two requests waiting on him
+                awaitingEmp2Supe[i] = persistRequest(emp3, RequestStatus.AWAITING_SUPERVISOR, EventType.TECH_TRAINING);
+            }
+
+            List<Long> waitingOn1Supe = mapReqsToIds(requestDao.getWaitingOnSupervisor(emp1.getEmail()));
+            assertEquals(awaitingEmp1Supe.length, waitingOn1Supe.size());  // +1 for request1 in ObjectDAOTest
+            assertTrue(waitingOn1Supe.containsAll(mapReqsToIds(Arrays.asList(awaitingEmp1Supe))));
+            for (long id : mapReqsToIds(Arrays.asList(awitingEmp1Benco))) assertFalse(waitingOn1Supe.contains(id));
+            for (long id : mapReqsToIds(Arrays.asList(grantedFor2))) assertFalse(waitingOn1Supe.contains(id));
+            for (long id : mapReqsToIds(Arrays.asList(awaitingEmp2Supe))) assertFalse(waitingOn1Supe.contains(id));
+
+            List<Long> waitingOn2Supe = mapReqsToIds(requestDao.getWaitingOnSupervisor(emp2.getEmail()));
+            assertEquals(awaitingEmp2Supe.length, waitingOn2Supe.size());
+            assertTrue(waitingOn1Supe.containsAll(mapReqsToIds(Arrays.asList(awaitingEmp1Supe))));
+            for (long id : mapReqsToIds(Arrays.asList(grantedFor2))) assertFalse(waitingOn2Supe.contains(id));
+            for (long id : mapReqsToIds(Arrays.asList(awitingEmp1Benco))) assertFalse(waitingOn2Supe.contains(id));
+            for (long id : mapReqsToIds(Arrays.asList(awaitingEmp1Supe))) assertFalse(waitingOn2Supe.contains(id));
+        }
+        finally {
+            empDao.deleteAccount(acc3Email);
+        }
     }
 
 

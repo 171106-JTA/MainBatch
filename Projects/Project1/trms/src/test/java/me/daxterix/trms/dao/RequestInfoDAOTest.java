@@ -100,14 +100,4 @@ public class RequestInfoDAOTest extends ObjectDAOTest {
     List<Long> filesToIds(List<RequestFile> files) {
         return files.stream().map(RequestFile::getId).collect(Collectors.toList());
     }
-
-
-    RequestFile persistFile(String filePurpose, String mimeType, ReimbursementRequest req) throws DuplicateIdException {
-        RequestFile file = new RequestFile();
-        file.setMimeType(new MimeType(mimeType));
-        file.setPurpose(new FilePurpose(filePurpose));
-        file.setRequest(req);
-        reqInfoDao.saveFile(file);
-        return file;
-    }
 }

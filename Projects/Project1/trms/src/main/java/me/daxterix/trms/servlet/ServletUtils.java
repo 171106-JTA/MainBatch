@@ -1,12 +1,8 @@
 package me.daxterix.trms.servlet;
 
-import me.daxterix.trms.model.FilePurpose;
-import me.daxterix.trms.model.MimeType;
-import me.daxterix.trms.model.RequestFile;
+import me.daxterix.trms.model.*;
 
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonArrayBuilder;
+import javax.json.*;
 import javax.servlet.http.Part;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -14,12 +10,45 @@ import java.io.InputStream;
 import java.util.List;
 
 public class ServletUtils {
-    public static String stringsToJsonArrayString(List<String> strings) {
+    public static JsonArray stringsToJsonArrayString(List<String> strings) {
         JsonArrayBuilder arrBuilder = Json.createArrayBuilder();
         for (String s : strings)
             arrBuilder.add(s);
         JsonArray arr = arrBuilder.build();
-        return arr.toString();
+        return arr;
+    }
+
+    public static JsonArray requestsToJsonArray(List<ReimbursementRequest> requests) {
+        JsonArrayBuilder arrBuilder = Json.createArrayBuilder();
+        for (ReimbursementRequest req: requests)
+            arrBuilder.add(requestToJson(req));
+        return arrBuilder.build();
+    }
+
+    public static JsonObject requestToJson(ReimbursementRequest req) {
+        JsonObjectBuilder builder = Json.createObjectBuilder();
+        builder.add("id", req.getId());
+        builder.add("filerEmail", req.getFiler().getEmail());
+        builder.add("status", req.getStatus().getStatus());
+        builder.add("cost", req.getEventCost());
+        builder.add("funding", req.getFunding());
+        builder.add("description", req.getDescription());
+
+        EventGrade grade = req.getGrade();
+        builder.add("passed",
+                (grade.getPassedFailed() != null && grade.getPassedFailed()) ||
+                        (grade.getGradePercent() >= grade.getCutoffPercent())
+        );
+        builder.add("isUrgent", req.isUrgent());
+        builder.add("timeFiled", req.getTimeFiled().toString());
+        builder.add("eventStart", req.getEventStart().toString());
+        builder.add("eventEnd", req.getEventEnd().toString());
+
+        builder.add("exceedsFunds", req.isExceedsFunds());
+        builder.add("eventType", req.getEventType().getType());
+        builder.addNull("history");  // empty user to match expected type
+        builder.addNull("files");
+        return builder.build();
     }
 
 

@@ -25,6 +25,6 @@ public class EmployeeRanksServlet extends HttpServlet {
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(ServletUtils.stringsToJsonArrayString(ranks));
+        response.getWriter().print(ServletUtils.stringsToJsonArrayString(ranks));
     }
 }

@@ -26,6 +26,6 @@ public class FilePurposeServlet extends HttpServlet {
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(ServletUtils.stringsToJsonArrayString(purposes));
+        response.getWriter().print(ServletUtils.stringsToJsonArrayString(purposes));
     }
 }

@@ -60,7 +60,8 @@ public class Config {
                 RequestStatus.class,
                 EventGrade.class,
                 MimeType.class,
-                RequestHistory.class
+                RequestHistory.class,
+                AccountRequest.class
         );
         return factoryBean;
     }
