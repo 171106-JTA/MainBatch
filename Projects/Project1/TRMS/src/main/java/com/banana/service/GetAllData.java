@@ -7,13 +7,15 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import com.banana.bean.ReimburseRequest;
-import com.banana.dao.SystemDAOImpl;
+import com.banana.dao.EmployeeDAOImpl;
+import com.banana.dao.ReimbursementDAOImpl;
 
 public class GetAllData {
 	
 	public static void getAllData(HttpServletResponse response) throws IOException{
-		SystemDAOImpl dao = new SystemDAOImpl();
-		List<ReimburseRequest> rrList = dao.getAllRequests();
+		EmployeeDAOImpl empdao = new EmployeeDAOImpl();
+		ReimbursementDAOImpl rdao = new ReimbursementDAOImpl();
+		List<ReimburseRequest> rrList = rdao.getAllRequests();
 		String responseXML = null;
 		
 		response.setContentType("text/xml");

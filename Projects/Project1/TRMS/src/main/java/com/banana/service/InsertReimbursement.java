@@ -10,13 +10,13 @@ import javax.servlet.http.HttpSession;
 
 import com.banana.bean.Employee;
 import com.banana.bean.ReimburseRequest;
-import com.banana.dao.SystemDAOImpl;
-import com.banana.dao.SystemUpdateDAOImpl;
+import com.banana.dao.EmployeeDAOImpl;
+import com.banana.dao.UpdateDAOImpl;
 
 public class InsertReimbursement {
 	
 	public static boolean request(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SystemUpdateDAOImpl udao = new SystemUpdateDAOImpl();
+		UpdateDAOImpl udao = new UpdateDAOImpl();
 		HttpSession session = request.getSession();
 		ReimburseRequest rr = null;
 		double actualCost = 0;
@@ -60,7 +60,7 @@ public class InsertReimbursement {
 	
 	}
 	
-	private static double calcActualCost(double cost, SystemUpdateDAOImpl udao, int event, double currAmount) {
+	private static double calcActualCost(double cost, UpdateDAOImpl udao, int event, double currAmount) {
 		double percent = udao.getPercentage(event);
 		
 		double result = cost * percent;

@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 import com.banana.bean.ReimburseRequest;
 import com.banana.util.ConnectionUtil;
 
-public class SystemUpdateDAOImpl implements SystemUpdateDAO{
+public class UpdateDAOImpl implements UpdateDAO{
 	
 	@Override
 	public boolean submitRequest(ReimburseRequest request) {

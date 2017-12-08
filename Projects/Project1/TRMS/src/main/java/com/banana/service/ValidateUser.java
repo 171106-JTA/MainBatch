@@ -7,15 +7,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.banana.bean.Employee;
-import com.banana.dao.SystemDAOImpl;
+import com.banana.dao.EmployeeDAOImpl;
 
 public class ValidateUser {
 	public static Employee validate(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
-		SystemDAOImpl dao = new SystemDAOImpl();
+		EmployeeDAOImpl empdao = new EmployeeDAOImpl();
 		String requestUsername = request.getParameter("username");
 		String requestPassword = request.getParameter("password");
 
-		Employee emp = dao.getEmployeeByUsername(requestUsername);
+		Employee emp = empdao.getEmployeeByUsername(requestUsername);
 		System.out.println(emp);
 		if(emp != null) {
 			String realPassword = emp.getPassword(); 
