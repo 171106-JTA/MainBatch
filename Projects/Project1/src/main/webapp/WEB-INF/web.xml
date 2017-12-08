@@ -99,4 +99,24 @@
     <servlet-name>AssignEmployeeToDirectSupervisor</servlet-name>
     <url-pattern>/AssignEmployeeToDirectSupervisor</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Registration</display-name>
+    <servlet-name>Registration</servlet-name>
+    <servlet-class>com.revature.servlets.Registration</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Registration</servlet-name>
+    <url-pattern>/Registration</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DoesEmployeeExist</display-name>
+    <servlet-name>DoesEmployeeExist</servlet-name>
+    <servlet-class>com.revature.servlets.DoesEmployeeExist</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DoesEmployeeExist</servlet-name>
+    <url-pattern>/DoesEmployeeExist</url-pattern>
+  </servlet-mapping>
 </web-app>

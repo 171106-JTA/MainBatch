@@ -10,6 +10,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="resources/css/StylingTRMS.css">
+	<script src="resources\javascript\Register.js"></script>
 <meta charset="UTF-8">
 <title>TRMS Registrations</title>
 </head>
@@ -22,13 +23,16 @@
 				<h5 align="center">
 					<i>Please enter your information below.</i>
 				</h5>
+				<div>
+					<p id="infoMessage"></p>
+				</div>
 				<div class="well">
-					<form method="post" action="Registration.do">
+					<form method="post" onClick="submit()">
 						<div class="next">
 							<label for="Username">Username</label>
 						</div>
 						<div>
-							<input type="text" name="regUsername" placeholder="Username"
+							<input type="text" name="regUsername" id="regUsername" placeholder="Username"
 								required> <i> &nbspMust be between 5 and 15
 								characters</i>
 						</div>
@@ -38,9 +42,9 @@
 								for="confirmPassword">Confirm Password</label>
 						</div>
 						<div>
-							<input type="password" name="regPassword1" placeholder="Password"
+							<input type="password" name="regPassword1" id="regRassword1" placeholder="Password"
 								required> <input type="password" name="regPassword2"
-								placeholder="Password" required><i>&nbspMust be
+								id="regRassword2" placeholder="Password" required><i>&nbspMust be
 								between 5 and 15 characters</i>
 						</div>
 						<div class="next">
