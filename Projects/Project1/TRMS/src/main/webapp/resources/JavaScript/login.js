@@ -1,4 +1,4 @@
-/* REMOVE WHEN DONE
+
 window.onload = function(){
 	var url = "DateCheck";
 	var xhr = new XMLHttpRequest();
@@ -17,4 +17,3 @@ window.onload = function(){
 function get(s){
 	return document.getElementById(s);
 }
-*/

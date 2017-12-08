@@ -7,15 +7,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.dao.TRMSDao;
 
 public class Service {
@@ -368,8 +364,69 @@ public class Service {
 	    return difference;
 	}
 
-	public static void yearCheck() {
-		// TODO Auto-generated method stub
-		
+	public static void getUserApps(HttpServletResponse response, int id) {
+		System.out.println("GET USER APPS");
+		ArrayList<Integer> apps= dao.getUserApps(id);
+		response.setContentType("text/xml");
+		PrintWriter out;
+		try {
+			out = response.getWriter();
+			if(apps.size()!=0)			
+			{
+				String myXml = "<root>";
+				
+				for (int app : apps) {
+					String[] appInfo= dao.getAppUserInfo(app);
+					System.out.println("appInfo: "+appInfo);
+					myXml += "<application><app_id>" + appInfo[0] + "</app_id>" + "<ev_descr>" + appInfo[1] + "</ev_descr>"
+							+ "<ev_date>" + appInfo[2] + "</ev_date>" + "<ev_cost>" + appInfo[3] + "</ev_cost>"
+							+ "<ev_type>" + appInfo[4] + "</ev_type>"+ "<sup_apr>" + appInfo[5] + "</sup_apr>"
+							+ "<chair_apr>" + appInfo[6] + "</chair_apr>" + "<benco_apr>" + appInfo[7] + "</benco_apr>"
+							+ "<passed>"+appInfo[8]+"</passed><recent_date>"+appInfo[9]+"</recent_date></application>";
+				}
+				myXml += "</root>";
+				out.println(myXml);
+			}
+			else {
+				System.out.println("hello");
+				out.println("<root></root>");
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public static void appFileSetup(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session= request.getSession();
+		int id= (int)session.getAttribute("id");
+		ArrayList<Integer> appIDs= dao.getUserApps(id);//get all app id's of users apps
+		response.setContentType("text/xml");
+		PrintWriter out;
+		try {
+			out = response.getWriter();
+			if(appIDs.size()!=0)			
+			{
+				String myXml = "<root>";			
+				for (int appID : appIDs) {//for each app id
+					ArrayList<String[]> files=dao.getAppFiles(appID);//get all files attached to app id
+					for(String[] file:files)
+					{
+						myXml += "<file><id>" + file[0] + "</id><name>" + file[1] + "</name><desc>" + file[2] + "</desc></file>";
+					}
+				}
+				myXml += "</root>";
+				out.println(myXml);
+			}
+			else {
+				System.out.println("hello");
+				out.println("<root></root>");
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 }

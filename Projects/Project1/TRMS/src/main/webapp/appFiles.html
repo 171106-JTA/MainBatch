@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="resources/JavaScript/appFiles.js"></script>
+</head>
+<body>
+	<h1>Approvals</h1>
+	<p id="empty">Empty</p>
+	<form method="post">
+		<span>
+			<input type="number" name="activeID" required>
+			<button type="submit" formaction="GetFile">Download</button>
+		</span>
+	</form>
+	
+	<table id="files" name="files" border="1">
+	<tr>
+		<th>File ID</th><th>Title</th><th>Description</th>
+	</tr>
+	</table>
+</body>
+</html>

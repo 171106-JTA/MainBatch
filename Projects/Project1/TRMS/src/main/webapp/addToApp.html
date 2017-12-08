@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>addToApp</title>
+<script src="resources/JavaScript/addToApp.js"></script>
+</head>
+<body>
+	<h1>Approvals</h1>
+	<p id="empty">Empty</p>
+	<form method="POST" enctype="multipart/form-data" >
+		<span>
+			
+			<span>App#</span>
+			<input type="number" name="activeID" required>
+			<span>File to add:</span>
+			<input type="file" name="appFile">
+			<button type="submit" formaction="UploadFile">Submit</button>
+		</span>
+	</form>
+	<form action="appFiles.html"><input type="submit" value="files"></form>
+	
+	<table id="requests" name="requests" border="1">
+	<tr>
+		<th>Request ID</th><th>Event Descr</th><th>Event Date</th><th>Event Cost</th><th>Event Type</th><th>Normal Repayment</th>
+		<th>Sup Approval</th><th>Chair Approval</th><th>BenCo Approval</th><th>Passed</th><th>Latest Change</th>
+	</tr>
+	</table>
+</body>
+</html>

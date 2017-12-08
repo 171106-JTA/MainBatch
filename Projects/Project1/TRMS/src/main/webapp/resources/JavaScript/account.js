@@ -32,8 +32,9 @@ function RepayLeft(award, pend){
 	
 	var x=parseInt(award);
 	var y=parseInt(pend);
-	console.log(x + " || " + y);
 	var z= 1000-x-y;
+	if(z<0)
+		return 0;
 	return z;
 }
 

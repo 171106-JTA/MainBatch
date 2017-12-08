@@ -51,6 +51,8 @@ function RepayLeft(award, pend){
 	var x=parseInt(award);
 	var y=parseInt(pend);
 	var z= 1000-x-y;
+	if(z<0)
+		return 0;
 	return z;
 }
 

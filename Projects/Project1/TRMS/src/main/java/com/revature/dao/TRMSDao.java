@@ -555,6 +555,46 @@ public class TRMSDao {
 		
 	}
 
+	public String[] getAppUserInfo(int app_id) {
+		PreparedStatement ps =null;
+		ResultSet rs = null;
+		String[] info= new String[10];
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		try(Connection conn = ConnectionUtil.getConnection();){
+			String sql ="SELECT * FROM user_app where app_id=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, app_id);
+			rs= ps.executeQuery();		
+			while(rs.next())
+			{
+				info[0]=rs.getString(1);//app_id
+				info[1]=rs.getString(2);//ev_descr
+				info[2]=rs.getString(3);//ev_date
+				info[3]=rs.getString(4);//ev_cost
+				info[4]=rs.getString(5);//ev_type
+				info[5]=rs.getString(6);//sup_apr
+				info[6]=rs.getString(7);//chair_apr
+				info[7]=rs.getString(8);//benco_apr
+				info[8]=rs.getString(9);//passed
+				info[9]=rs.getString(10);//recent_date
+				
+			}			
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			close(ps);
+			close(rs);
+		}
+		return info;
+		
+	}
+	
 	public void supApprove(int approved_id) {
 		PreparedStatement ps =null;
 		try {
@@ -731,6 +771,71 @@ public class TRMSDao {
 			close(ps);
 		}
 		
+	}
+
+	public ArrayList<Integer> getUserApps(int emp_id) {
+		PreparedStatement ps =null;
+		ResultSet rs = null;
+		ArrayList<Integer> apps= new ArrayList<>();
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		try(Connection conn = ConnectionUtil.getConnection();){
+			String sql ="SELECT app_id FROM repay_app where emp_id=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, emp_id);
+			rs= ps.executeQuery();		
+			while(rs.next())
+			{
+				int app_id=rs.getInt(1);
+				apps.add(app_id);
+			}
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			close(ps);
+			close(rs);
+		}
+		return apps;
+	}
+
+	public ArrayList<String[]> getAppFiles(int appID) {
+		PreparedStatement ps =null;
+		ResultSet rs = null;
+		ArrayList<String[]> files= new ArrayList<>();
+		String[] file= new String[3];
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		try(Connection conn = ConnectionUtil.getConnection();){
+			String sql ="SELECT file_id,file_name, file_description FROM app_files where app_id=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, appID);
+			rs= ps.executeQuery();		
+			while(rs.next())
+			{
+				file=new String[3];
+				file[0]=rs.getString(1);
+				file[1]=rs.getString(2);
+				file[2]=rs.getString(3);
+				files.add(file);
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			close(ps);
+			close(rs);
+		}
+		return files;
 	}
 }
 

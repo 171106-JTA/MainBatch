@@ -1,5 +1,5 @@
 window.onload = function(){
-	var url = "ApprovalSetup";
+	var url = "SubmitFile";
 	var xhr = new XMLHttpRequest();
 
 	xhr.onreadystatechange = function(){
@@ -21,14 +21,19 @@ window.onload = function(){
 					var td7 = document.createElement("td");
 					var td8 = document.createElement("td");
 					var td9 = document.createElement("td");
+					var td10 = document.createElement("td");
+					var td11 = document.createElement("td");
 					td1.innerHTML = response[i].childNodes[0].innerHTML;	
-					td2.innerHTML = response[i].childNodes[2].innerHTML;
-					td3.innerHTML = response[i].childNodes[3].innerHTML;
-					td4.innerHTML = response[i].childNodes[4].innerHTML;
-					td5.innerHTML = response[i].childNodes[5].innerHTML;
-					td6.innerHTML = response[i].childNodes[6].innerHTML;
-					td7.innerHTML = RepayLeft(response[i].childNodes[7].innerHTML,response[i].childNodes[8].innerHTML);
-					td8.innerHTML = getAppRepay(response[i].childNodes[5].innerHTML, response[i].childNodes[6].innerHTML)
+					td2.innerHTML = response[i].childNodes[1].innerHTML;
+					td3.innerHTML = response[i].childNodes[2].innerHTML;
+					td4.innerHTML = response[i].childNodes[3].innerHTML;
+					td5.innerHTML = response[i].childNodes[4].innerHTML;
+					td6.innerHTML = getAppRepay(response[i].childNodes[3].innerHTML, response[i].childNodes[4].innerHTML);
+					td7.innerHTML = response[i].childNodes[5].innerHTML;	
+					td8.innerHTML = response[i].childNodes[6].innerHTML;
+					td9.innerHTML = response[i].childNodes[7].innerHTML;
+					td10.innerHTML = response[i].childNodes[8].innerHTML;
+					td11innerHTML = response[i].childNodes[9].innerHTML;
 					row.appendChild(td1);
 					row.appendChild(td2);
 					row.appendChild(td3);
@@ -38,6 +43,8 @@ window.onload = function(){
 					row.appendChild(td7);
 					row.appendChild(td8);
 					row.appendChild(td9);
+					row.appendChild(td10);
+					row.appendChild(td11);
 					resultTable.appendChild(row);
 				}
 			}

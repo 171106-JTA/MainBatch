@@ -106,4 +106,44 @@
     <servlet-name>DateCheck</servlet-name>
     <url-pattern>/DateCheck</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SubmitFile</display-name>
+    <servlet-name>SubmitFile</servlet-name>
+    <servlet-class>com.revature.servlets.SubmitFile</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubmitFile</servlet-name>
+    <url-pattern>/SubmitFile</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UploadFile</display-name>
+    <servlet-name>UploadFile</servlet-name>
+    <servlet-class>com.revature.servlets.UploadFile</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UploadFile</servlet-name>
+    <url-pattern>/UploadFile</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetFile</display-name>
+    <servlet-name>GetFile</servlet-name>
+    <servlet-class>com.revature.servlets.GetFile</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetFile</servlet-name>
+    <url-pattern>/GetFile</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>appFileSetup</display-name>
+    <servlet-name>appFileSetup</servlet-name>
+    <servlet-class>com.revature.servlets.appFileSetup</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>appFileSetup</servlet-name>
+    <url-pattern>/appFileSetup</url-pattern>
+  </servlet-mapping>
 </web-app>
