@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.banana.service.GetAllData;
 import com.banana.service.GetEmployeeData;
 
 /**
@@ -25,7 +24,7 @@ public class GetEmployeeRequest extends HttpServlet {
 		HttpSession session = request.getSession();
 		System.out.println("get");
 		if(!session.isNew()) {
-			GetAllData.getAllData(response);
+			GetEmployeeData.getAllData(response);
 		}
 	}
 

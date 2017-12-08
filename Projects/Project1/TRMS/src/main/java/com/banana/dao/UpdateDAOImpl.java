@@ -81,7 +81,26 @@ public class UpdateDAOImpl implements UpdateDAO{
 	}
 	
 	@Override
-	public void insertInfoRequest() {
+	public void insertInfoRequest(int rrId) {
+		String sql = "INSERT INTO Info_Request (RRID) VALUES (?)";
+		PreparedStatement ps = null;
+	
+		try(Connection conn = ConnectionUtil.getConnection()){
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, rrId);
+			
+			ps.executeQuery();
+			commitChanges();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(ps);
+		}
+		
+	}
+	
+	@Override
+	public void UpdateInfoRequest() {
 		// TODO Auto-generated method stub
 		
 	}

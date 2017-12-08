@@ -2,6 +2,8 @@ package com.banana.service;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +45,7 @@ public class InsertReimbursement {
 		actualCost = calcActualCost(cost, udao, event, currAmount);
 		
 		String justify = request.getParameter("justification");
-		LocalDateTime ldt = StringToLocalDateTime.convert((String)request.getParameter("datetime"));
+		LocalDateTime ldt = InsertReimbursement.convert((String)request.getParameter("datetime"));
 		
 		if(ldt == null || actualCost == -1) {
 			return false;
@@ -53,6 +55,7 @@ public class InsertReimbursement {
 		rr = new ReimburseRequest(empId, fname, lname, location, descript, actualCost, grading, event, justify, ldt);
 		
 		if(udao.submitRequest(rr)) {
+			UpdateEmployeeAmount.updateAmount(empId, cost);
 			return true;
 		}
 		
@@ -70,6 +73,19 @@ public class InsertReimbursement {
 		}
 		
 		return result;
+	}
+	
+	public static LocalDateTime convert(String s) {
+		DateTimeFormatter format = DateTimeFormatter.ofPattern(("MM-dd-yyyy HH:mm"));
+		LocalDateTime ldt = null;
+		try {
+			ldt = LocalDateTime.parse(s, format);
+		}catch(DateTimeParseException e) {
+			return null;
+		}
+		
+		
+		return ldt;
 	}
 }
 

@@ -20,7 +20,7 @@ public class FrontController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
 	/**
@@ -36,25 +36,17 @@ public class FrontController extends HttpServlet {
 
 		System.out.println(split[split.length-1]);
 
-
 		String action = split[split.length-1].substring(0, split[split.length-1].length()-4).toLowerCase();
 
 		System.out.println(action);
 
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-
 		RequestDispatcher rd = null;
-
-		HttpSession session = null;
 
 		
 
 		switch(action){
 			case "login":
-	/*			out.println("success");
-				rd = request.getRequestDispatcher("index.html");
-				rd.include(request, response); */
 				rd = request.getRequestDispatcher("EmployeeLogin");
 				rd.forward(request, response);
 				break;
@@ -66,8 +58,12 @@ public class FrontController extends HttpServlet {
 				rd = request.getRequestDispatcher("ApproveRequest");
 				rd.include(request, response);
 				break;
-		default: 
-			response.sendError(404);
+			case "info_request":
+				rd = request.getRequestDispatcher("InfoRequest");
+				rd.include(request, response);
+				break;
+			default: 
+				response.sendError(404);
 		}
 	}
 	
