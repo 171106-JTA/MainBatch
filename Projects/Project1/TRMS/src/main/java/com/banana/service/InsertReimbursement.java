@@ -10,11 +10,12 @@ import javax.servlet.http.HttpSession;
 
 import com.banana.bean.ReimburseRequest;
 import com.banana.dao.SystemDAOImpl;
+import com.banana.dao.SystemUpdateDAOImpl;
 
 public class InsertReimbursement {
 	
 	public static boolean request(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SystemDAOImpl dao = new SystemDAOImpl();
+		SystemUpdateDAOImpl udao = new SystemUpdateDAOImpl();
 		HttpSession session = request.getSession();
 		ReimburseRequest rr = null;
 		
@@ -34,7 +35,7 @@ public class InsertReimbursement {
 		int grading = Integer.parseInt(request.getParameter("grading"));
 		int event = Integer.parseInt(request.getParameter("event"));
 		
-		double actualCost = calcActualCost(cost, dao, event);
+		double actualCost = calcActualCost(cost, udao, event);
 		
 		String justify = request.getParameter("justification");
 		LocalDateTime ldt = StringToLocalDateTime.convert((String)request.getParameter("datetime"));
@@ -46,7 +47,7 @@ public class InsertReimbursement {
 		
 		rr = new ReimburseRequest(empId, fname, lname, location, descript, actualCost, grading, event, justify, ldt);
 		
-		if(dao.submitRequest(rr)) {
+		if(udao.submitRequest(rr)) {
 			return true;
 		}
 		
@@ -54,8 +55,8 @@ public class InsertReimbursement {
 	
 	}
 	
-	private static double calcActualCost(double cost, SystemDAOImpl dao, int event) {
-		double percent = dao.getPercentage(event);
+	private static double calcActualCost(double cost, SystemUpdateDAOImpl udao, int event) {
+		double percent = udao.getPercentage(event);
 		
 		double result = cost * percent;
 		
