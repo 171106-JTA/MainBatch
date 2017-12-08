@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class PokeapiComponent {
-    public pokeid
+    public pokeid; 
     public pkmn = {
         name:"",
         id:"",
@@ -29,25 +29,28 @@ export class PokeapiComponent {
     // we either get back an objecy representing the data received
     // or an object representing the error we reieved
     // promises can only liste on one evenet at a time, on top of which, a user
-    //cannot cancel the event once started. IE, I cant halt a request sent to 
+    // cannot cancel the event once started. IE, I cant halt a request sent to 
     // aa server, I must wait for somoe kindof response to come back
     // Observables are the same as promises exceto with more feautres.
-    //obseravbles send the data back, essentially, as a stream. with that,
-    //obserables can provide support for 0-many events ata time.
+    // obseravbles send the data back, essentially, as a stream. with that,
+    // obserables can provide support for 0-many events ata time.
     // observable also supports canceling the event
 
     public fetchData(){
         
-        this.http.get('https://pokeapi.co/api/v2/pokemon/' + this.pkmn.id + '/').subscribe(
+        this.http.get('https://pokeapi.co/api/v2/pokemon/' + this.pokeid + '/').subscribe(
             data => { // represents the object of a successfull REST request
                 this.pkmn.name = data["name"];
                 this.pkmn.id = data["id"];
                 this.pkmn.weight = data["weight"];
-                this.pkmn.sprite= data["sprite"]["front_default"]; 
+                this.pkmn.sprite= data["sprites"]["front_default"]; 
 
             }, 
             err => {
-                console.log(err); 
+                this.pkmn.name = "MissingNo"; 
+                this.pkmn.id = "-1"; 
+                this.pkmn.weight = ""; 
+                this.pkmn.sprite= ""; 
             }
         )
     }
