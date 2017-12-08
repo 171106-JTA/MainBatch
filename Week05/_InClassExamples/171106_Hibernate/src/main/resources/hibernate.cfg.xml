@@ -38,6 +38,10 @@
 		create-drop: database is cleared and emptied upon server shutdown -->
 
 		<mapping resource="Employee.hbm.xml"></mapping>
+		
+		<mapping class="com.revature.beans.Bear"/>
+		<mapping class="com.revature.beans.Cave"/>
+		<mapping class="com.revature.beans.HoneyPot"/>
 
 	</session-factory>
 </hibernate-configuration>
