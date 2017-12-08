@@ -59,4 +59,14 @@
     <servlet-name>ApproveRequest</servlet-name>
     <url-pattern>/ApproveRequest</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>InfoRequest</display-name>
+    <servlet-name>InfoRequest</servlet-name>
+    <servlet-class>com.banana.servlet.InfoRequest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InfoRequest</servlet-name>
+    <url-pattern>/InfoRequest</url-pattern>
+  </servlet-mapping>
 </web-app>

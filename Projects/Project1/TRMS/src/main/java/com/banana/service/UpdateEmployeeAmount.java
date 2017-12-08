@@ -20,6 +20,9 @@ public class UpdateEmployeeAmount {
 		if(emp != null) {
 			double amount = emp.getCurrAmount();
 			double newAmount = amount - rr.getCost();
+			if(newAmount < 0) {
+				return false;
+			}
 			status = udao.setNewAmount(empId, newAmount);
 		}
 		
