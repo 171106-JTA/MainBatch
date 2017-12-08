@@ -14,4 +14,9 @@
     <p>In the above example, we take a collection of names,
         and pass it through a pipe that converts the Strings to upper case.
     </p>
+    <p>My Custom pipe incoming!</p>
+    <div>
+        <input [(ngModel)]="alterWords"><br>
+        {{alterWords | custompipe}}
+    </div>
 </div>
