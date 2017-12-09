@@ -15,6 +15,8 @@ import {NewRequestComponent} from './components/new-request/new-request.componen
 import {LookupsService} from './services/lookups.service';
 import {RequestService} from './services/request.service';
 import {CredentialsService} from './services/credentials.service';
+import {RequestsComponent} from './components/requests/requests.component';
+import {UserRequestsComponent} from './components/user-requests/user-requests.component';
 
 
 @NgModule({
@@ -25,6 +27,8 @@ import {CredentialsService} from './services/credentials.service';
         NavComponent,
         LoginComponent,
         NewRequestComponent,
+        RequestsComponent,
+        UserRequestsComponent
     ],
     imports: [
         BrowserModule,

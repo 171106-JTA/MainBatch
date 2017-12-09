@@ -1,0 +1,20 @@
+<ul>
+    <li *ngFor="let req of requests">
+        <div>{{req.id}}</div>
+        <div>{{req.filerEmail}}</div>
+        <div>{{req.status}}</div>
+        <div>{{req.cost}}</div>
+        <div>{{req.funding}}</div>
+        <div>{{req.description}}</div>
+        <div>{{req.passed}}</div>
+        <div>{{req.isUrgent}}</div>
+        <div>{{req.timeFiled}}</div>
+        <div>{{req.eventStart}}</div>
+        <div>{{req.eventEnd}}</div>
+        <div>{{req.exceedsFunds}}</div>
+        <div>{{req.eventType}}</div>
+        <div><a routerLink="requests/files">attached-files</a></div>
+        <div><a routerLink="requests/history">attached-files</a></div>
+    </li>
+</ul>
+

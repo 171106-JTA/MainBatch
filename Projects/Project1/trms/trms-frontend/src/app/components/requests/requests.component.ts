@@ -1,13 +1,20 @@
-import {Component} from '@angular/core';
-import {RequestService} from '../../services/request.service';
+import {Component, Input} from '@angular/core';
+import {ReimbursementRequest} from '../../models/reimbursement-request';
 
 
 @Component ({
     selector: 'app-requests',
+    inputs: ['requests'],
     templateUrl: 'requests.component.html',
-    styleUrls: []
+    styleUrls: [],
 })
+
 export class RequestsComponent {
-    constructor(private requestsService: RequestService) {
+    public isHidden = false;
+
+    @Input()
+    requests: ReimbursementRequest[];
+
+    constructor() {
     }
 }

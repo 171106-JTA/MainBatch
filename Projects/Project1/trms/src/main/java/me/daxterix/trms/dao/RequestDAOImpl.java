@@ -8,8 +8,12 @@ import me.daxterix.trms.dao.exception.DuplicateIdException;
 import me.daxterix.trms.dao.exception.NonExistentIdException;
 import org.hibernate.Session;
 
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Repository
@@ -307,9 +311,35 @@ public class RequestDAOImpl extends ObjectDAO implements RequestDAO {
     }
 
 
+    @Override
+    @Transactional
+    public void updateOlderToUrgent(LocalDate earliestFileDate) {
+        try(Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+
+            final CriteriaBuilder critBuilder = session.getCriteriaBuilder();
+            final CriteriaUpdate<ReimbursementRequest> critUpdateQuery = critBuilder.createCriteriaUpdate(ReimbursementRequest.class);
+            final Root<ReimbursementRequest> root = critUpdateQuery.from(ReimbursementRequest.class);
+
+            // update request filed before the given creation time
+            Predicate fileTimePredicate = critBuilder.lessThan(getReqTimeFiledPath(root), LocalDateTime.of(earliestFileDate, LocalTime.MIN));
+            critUpdateQuery.where(fileTimePredicate)
+                            .set(getReqUrgencyPath(root), true);
+            Query query = session.createQuery(critUpdateQuery);
+            query.executeUpdate();
+            session.getTransaction().commit();
+        }
+    }
 
 
 
+    private Path<Boolean> getReqUrgencyPath(Root<ReimbursementRequest> requestRoot) {
+        return requestRoot.<Boolean>get("isUrgent");
+    }
+
+    private Path<LocalDateTime> getReqTimeFiledPath(Root<ReimbursementRequest> requestRoot) {
+        return requestRoot.<LocalDateTime>get("timeFiled");
+    }
 
     private Path<String> getFilerDeptNamePath(Root<ReimbursementRequest> requestRoot) {
         return requestRoot.<Employee>get("filer").<Department>get("department").<String>get("name");

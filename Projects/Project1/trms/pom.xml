@@ -25,10 +25,10 @@
         </dependency>
 
         <dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-		</dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
 
         <dependency>
             <groupId>com.oracle</groupId>
@@ -57,27 +57,25 @@
             <artifactId>javax.json</artifactId>
             <version>1.0.4</version>
         </dependency>
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
 
-        <!--
-        <dependency>
-            <groupId>javax.activation</groupId>
-            <artifactId>activation</artifactId>
-            <version>1.1.1</version>
-        </dependency>
 
-        <dependency>
-            <groupId>jstl</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
-        </dependency>
-        -->
-
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>5.2.12.Final</version>
         </dependency>
 
+        <!-- c3p0 thread pool for hibernate -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-c3p0</artifactId>
+            <version>5.2.12.Final</version>
+        </dependency>
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
+
+        <!-- - - - - - - - - - - - - - - - - - - - - - - - - - - - -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-crypto</artifactId>
@@ -99,9 +97,8 @@
     </dependencies>
 
 
-
     <build>
-		<plugins>
+        <plugins>
             <plugin>
 
                 <groupId>org.apache.maven.plugins</groupId>
@@ -142,5 +139,5 @@
             </plugin>
 
         </plugins>
-	</build>
+    </build>
 </project>

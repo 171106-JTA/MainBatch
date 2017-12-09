@@ -9,6 +9,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -28,8 +31,11 @@ public class RequestDAOTest extends ObjectDAOTest {
     @After
     public void tearDown() {
         super.tearDown();
-        for (Long id: requestsToDelete)
-            try { requestDao.deleteRequest(id); } catch (NonExistentIdException ignored){}
+        for (Long id : requestsToDelete)
+            try {
+                requestDao.deleteRequest(id);
+            } catch (NonExistentIdException ignored) {
+            }
     }
 
     @Test
@@ -38,17 +44,17 @@ public class RequestDAOTest extends ObjectDAOTest {
         assertEquals(request1.getId(), persisted.getId());
     }
 
-    @Test(expected=DuplicateIdException.class)
+    @Test(expected = DuplicateIdException.class)
     public void saveDuplicate() throws Exception {
         requestDao.save(request1);
     }
 
-    @Test(expected=DataIntegrityViolationException.class)
+    @Test(expected = DataIntegrityViolationException.class)
     public void saveWithInvalidEventType() throws Exception {
         persistRequest(emp1, RequestStatus.GRANTED, "Invalid EventType");
     }
 
-    @Test(expected=NonExistentIdException.class)
+    @Test(expected = NonExistentIdException.class)
     public void deleteRequest() throws Exception {
         ReimbursementRequest request2 = persistRequest(emp1, RequestStatus.GRANTED, EventType.UNIVERSITY_COURSE);
 
@@ -59,7 +65,7 @@ public class RequestDAOTest extends ObjectDAOTest {
         requestDao.getRequestById(request2.getId());     // NonExistentIdException
     }
 
-    @Test(expected=NonExistentIdException.class)
+    @Test(expected = NonExistentIdException.class)
     public void deleteRequestCheckFiles() throws Exception {
         ReimbursementRequest request2 = persistRequest(emp1, RequestStatus.GRANTED, EventType.UNIVERSITY_COURSE);
 
@@ -90,7 +96,7 @@ public class RequestDAOTest extends ObjectDAOTest {
         assertEquals(request1.getFunding(), persisted.getFunding(), delta);
     }
 
-    @Test(expected=NonExistentIdException.class)
+    @Test(expected = NonExistentIdException.class)
     public void updateNonExistent() throws Exception {
         ReimbursementRequest example = new ReimbursementRequest();
         example.setId(-1);
@@ -279,7 +285,7 @@ public class RequestDAOTest extends ObjectDAOTest {
         }
 
         List<Long> saved = mapReqsToIds(requestDao.getAllRequests());
-        assertTrue(gradeFor1.length + grantedFor2.length + supeFor2.length +1 <= saved.size());
+        assertTrue(gradeFor1.length + grantedFor2.length + supeFor2.length + 1 <= saved.size());
         assertTrue(saved.containsAll(mapReqsToIds(Arrays.asList(gradeFor1))));
         assertTrue(saved.containsAll(mapReqsToIds(Arrays.asList(supeFor2))));
         assertTrue(saved.containsAll(mapReqsToIds(Arrays.asList(grantedFor2))));
@@ -380,8 +386,7 @@ public class RequestDAOTest extends ObjectDAOTest {
             for (long id : mapReqsToIds(Arrays.asList(grantedFor2))) assertFalse(waitingOn2Supe.contains(id));
             for (long id : mapReqsToIds(Arrays.asList(awitingEmp1Benco))) assertFalse(waitingOn2Supe.contains(id));
             for (long id : mapReqsToIds(Arrays.asList(awaitingEmp1Supe))) assertFalse(waitingOn2Supe.contains(id));
-        }
-        finally {
+        } finally {
             empDao.deleteAccount(acc3Email);
         }
     }
@@ -422,10 +427,34 @@ public class RequestDAOTest extends ObjectDAOTest {
             for (long id : mapReqsToIds(Arrays.asList(grantedFor2))) assertFalse(waitingOn2Supe.contains(id));
             for (long id : mapReqsToIds(Arrays.asList(awitingEmp1Benco))) assertFalse(waitingOn2Supe.contains(id));
             for (long id : mapReqsToIds(Arrays.asList(awaitingEmp1Supe))) assertFalse(waitingOn2Supe.contains(id));
-        }
-        finally {
+        } finally {
             empDao.deleteAccount(acc3Email);
         }
+    }
+
+
+    @Test
+    public void testUpdateOldToUrgent() throws Exception {
+        ReimbursementRequest shouldBeUpdated = persistRequest(emp1, RequestStatus.AWAITING_DEPT_HEAD, EventType.OTHER);  // irrelevant for test
+        shouldBeUpdated.setTimeFiled(LocalDateTime.of(LocalDate.of(2017, 2, 1), LocalTime.of(12, 0, 0)));
+        shouldBeUpdated.setEventStart(LocalDate.of(2017, 12, 1));
+        shouldBeUpdated.setEventEnd(LocalDate.of(2017, 12, 1));
+        shouldBeUpdated.setUrgent(false);
+        requestDao.update(shouldBeUpdated);
+
+        ReimbursementRequest shouldNotBeUpdated = persistRequest(emp1, RequestStatus.AWAITING_SUPERVISOR, EventType.UNIVERSITY_COURSE);
+        shouldNotBeUpdated.setTimeFiled(LocalDateTime.now());
+        shouldNotBeUpdated.setUrgent(false);
+        shouldNotBeUpdated.setTimeFiled(LocalDateTime.of(LocalDate.of(2017, 3, 1), LocalTime.of(12, 0, 0)));
+        shouldNotBeUpdated.setEventStart(LocalDate.of(2017, 12, 1));
+        shouldNotBeUpdated.setEventEnd(LocalDate.of(2017, 12, 1));
+        requestDao.update(shouldNotBeUpdated);
+
+        requestDao.updateOlderToUrgent(LocalDate.of(2017, 2, 28));
+
+        assertTrue(requestDao.getRequestById(shouldBeUpdated.getId()).isUrgent());
+        assertFalse(requestDao.getRequestById(shouldNotBeUpdated.getId()).isUrgent());
+        // these are deleted when accounts are deleted
     }
 
 

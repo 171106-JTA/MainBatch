@@ -3,8 +3,8 @@ package me.daxterix.trms.dao;
 import me.daxterix.trms.dao.exception.DuplicateIdException;
 import me.daxterix.trms.dao.exception.NonExistentIdException;
 import me.daxterix.trms.model.ReimbursementRequest;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface RequestDAO {
@@ -28,4 +28,6 @@ public interface RequestDAO {
     List<ReimbursementRequest> getAllRequests();
     List<ReimbursementRequest> getPendingRequests();
     List<ReimbursementRequest> getRequestsByStatus(String status) throws NonExistentIdException;
+
+    void updateOlderToUrgent(LocalDate earliestFileDate);
 }

@@ -16,9 +16,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-@WebServlet(name = "GetRequestsServlet", urlPatterns = "/employee/requests")
-public class GetRequestsServlet extends HttpServlet {
+@WebServlet(name = "RequestsServlet", urlPatterns = "/employee/requests")
+public class RequestsServlet extends HttpServlet {
     private RequestDAO requestDao = DAOUtils.getRequestDAO();
+
+    protected void doPost(HttpServletRequest req, HttpServletResponse response) throws ServletException {
+        
+    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String status = request.getParameter("status");

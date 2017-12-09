@@ -37,7 +37,7 @@ export class LoginComponent {
             .subscribe(
                 data => {
                     this.loginFailed = false;
-                    this.credentialsService.setEmail(this.email);      // set the email for the credentials service
+                    this.credentialsService.login(this.email);      // set the email for the credentials service
                     console.log(data);
                 },
                 err => {

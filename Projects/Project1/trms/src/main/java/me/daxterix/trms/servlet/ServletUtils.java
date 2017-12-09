@@ -52,8 +52,6 @@ public class ServletUtils {
 
         builder.add("exceedsFunds", req.isExceedsFunds());
         builder.add("eventType", req.getEventType().getType());
-        builder.addNull("history");  // empty user to match expected type
-        builder.addNull("files");
         return builder.build();
     }
 

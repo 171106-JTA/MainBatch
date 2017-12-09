@@ -4,12 +4,11 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/empty';
+import 'rxjs/add/operator/map';
 import {ReimbursementRequest} from '../models/reimbursement-request';
-import {catchError, tap} from 'rxjs/operators';
-import {map} from 'rxjs/operator/map';
 import {CredentialsService} from './credentials.service';
 
-const requestsUrl = 'http://localhost:8085/trms/requests';
+const requestsUrl = 'http://localhost:8085/trms/employee/requests';
 
 @Injectable()
 export class RequestService {
@@ -29,10 +28,11 @@ export class RequestService {
             withCredentials: true,
             params: params
         };
-        return this.http.get<ReimbursementRequest[]>(requestsUrl, httpOptions);
+        return this.http.get<ReimbursementRequest[]>(requestsUrl, httpOptions)
+            .map((data:any[]) => data.map(reqJson => new ReimbursementRequest(reqJson)));
     }
 
-    public getRequestByDepartment(department: string): Observable<ReimbursementRequest[]> {
+    public getRequestsByDepartment(department: string): Observable<ReimbursementRequest[]> {
         let params = new HttpParams();
         params.append("department", department);
         params.append("status", "pending");
@@ -41,7 +41,8 @@ export class RequestService {
             withCredentials: true,
             params: params
         };
-        return this.http.get<ReimbursementRequest[]>(requestsUrl, httpOptions);
+        return this.http.get<ReimbursementRequest[]>(requestsUrl, httpOptions)
+            .map((data:any[]) => data.map(reqJson => new ReimbursementRequest(reqJson)));
     }
 
     public getAllRequests(status: string): Observable<ReimbursementRequest[]> {
@@ -49,7 +50,9 @@ export class RequestService {
             headers: new HttpHeaders({'Content-Type': 'application/json'}),
             withCredentials: true
         };
-        return this.http.get<ReimbursementRequest[]>(requestsUrl, httpOptions);
+        return this.http.get<ReimbursementRequest[]>(requestsUrl, httpOptions)
+            .map((data:any[]) => data.map(reqJson => new ReimbursementRequest(reqJson)));
     }
+
 }
 

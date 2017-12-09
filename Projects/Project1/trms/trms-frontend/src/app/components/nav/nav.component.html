@@ -17,6 +17,27 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="my-nav-collapse-pane">
             <ul class="nav navbar-nav navbar-right">
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Requests<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a routerLink="requests">Filed</a></li>
+                        <li class="divider"></li>
+                        <li><a routerLink="new-request">File New</a></li>
+                        <li class="divider"></li>
+                        <li><a routerLink="requests-pending-on-me">Pending on Me</a></li>
+                        <li class="divider"></li>
+                        <li><a routerLink="home">Activity</a></li>
+                        <li class="divider"></li>
+                    </ul>
+                </li>
+
+                <li><a routerLink="/home">Home</a></li>
+                <li><a routerLink="/register">Register</a></li>
+                <li><a routerLink="/login">Login</a></li>
+                <li><a routerLink="/new-request">New Request</a></li>
+
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Options <b
                         class="glyphicon glyphicon-cog"></b></a>
@@ -27,24 +48,6 @@
                         <li class="divider"></li>
                     </ul>
                 </li>
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Requests<b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a routerLink="new-request">File New Request</a></li>
-                        <li class="divider"></li>
-                        <li><a routerLink="home">Filed Requests</a></li>
-                        <li class="divider"></li>
-                        <li><a routerLink="home">Request Activity</a></li>
-                        <li class="divider"></li>
-                    </ul>
-                </li>
-
-                <li><a routerLink="/home">Home</a></li>
-                <li><a routerLink="/register">Register</a></li>
-                <li><a routerLink="/login">Login</a></li>
-                <li><a routerLink="/new-request">New Request</a></li>
-
             </ul>
         </div>
         <!-- /.navbar-collapse -->
