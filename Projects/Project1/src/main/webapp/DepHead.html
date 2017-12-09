@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css"
+	href="resources/css/StylingTRMS.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta charset="UTF-8">
+<meta charset="UTF-8">
+<script src="resources/javascript/DepHead.js"></script>
+<title>TRMS Admin</title>
+</head>
+<body>
+	<h3 id="welcome" style="margin-left: 10px">Welcome.</h3>
+	<h5 id="adminTitle" style="margin-left: 10px"></h5>
+
+	<div class="col-lg-12" align="center">
+		<div class="next">
+			<select name="actionType" id="actionType">
+				<option value="Request more information">Assign an Employee
+					to a Direct Supervisor</option>
+				<option value="ViewEmployeeRequests">Approve/Deny a Request</option>
+			</select>
+		</div>
+
+		<div id="requests"></div>
+
+		<div id="assignEmployeeDiv">
+			<div id="unvEmps">
+				<h3>Unverified Employees</h3>
+				<table border='2px' id="unvEmployeeTable" class="table-bordered">
+					<thead>
+						<tr>
+							<th>Username</th>
+							<th>First Name</th>
+							<th>Last Name</th>
+						</tr>
+					</thead>
+					<tbody id='unvTbody'>
+					</tbody>
+				</table>
+
+				<h3>Direct Supervisors</h3>
+				<p id="dirAjaxError" style="color: red"></p>
+				<table style="border: 2px" id="dirSupTable" class="table-bordered">
+					<tr>
+						<th>Username</th>
+						<th>First Name</th>
+						<th>Last Name</th>
+					</tr>
+				</table>
+			</div>
+			<h3 id="directSupervisorsHeader"></h3>
+			<div class="well" id="assignEmployee">
+				<form  action="AssignEmployeeToDirectSupervisor" method="post" id="assignEmpForm">
+				<div class="next">
+						<span>Employee Username</span>
+						<span>Direct Supervisor Username</span>
+					</div>
+					<div class="next">
+						<input type="text" name="pickEmployee" id="pickEmployee"
+							placeholder="Employee Username" required> <input
+							type="text" name="pickDirSup" id="pickDirSup"
+							placeholder="Direct Supervisor Username" style="width:200px"required>
+					</div>
+					<div class="next">
+						<input type="submit" value="submit" name="submitEmployee">
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

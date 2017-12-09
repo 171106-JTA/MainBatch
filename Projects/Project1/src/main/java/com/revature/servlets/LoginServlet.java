@@ -21,13 +21,6 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,28 +43,37 @@ public class LoginServlet extends HttpServlet {
 		}
 		
 		Title title = emp.getTitle();
-		String fname = emp.getFname();
-		String lname = emp.getLname();
 		
-		if (title == Title.BENCO || title == Title.BENCO_MANAGER ||
-				title == Title.CEO || title == Title.DIRECT_SUPERVISOR || title == Title.DEPARTMENTHEAD) {
-			rd = request.getRequestDispatcher("Admin.html");
-			session.setAttribute("username", username);
-			session.setAttribute("title", title.toString());
-			session.setAttribute("fname", fname);
-			session.setAttribute("lname", lname);
-			rd.include(request, response);
-		} else if (title == Title.EMPLOYEE) {
-			rd = request.getRequestDispatcher("Employee.html");
-			rd.include(request, response);
-			session.setAttribute("username", username);
-			session.setAttribute("title", title.toString());
-			session.setAttribute("fname", fname);
-			session.setAttribute("lname", lname);
-		} else if (title == Title.UNVERIFIED) {
+		if (title == Title.UNVERIFIED) {
 			response.setContentType("text/html");
 			PrintWriter out = response.getWriter();
 			out.println("<h2 style='color:red'>Your account has not yet been approved.<h2>");
+			return;
 		}
+		
+		String fname = emp.getFname();
+		String lname = emp.getLname();
+		
+		if ( title == Title.DEPARTMENTHEAD) {
+			rd = request.getRequestDispatcher("DepHead.html");
+
+		} else if (title == Title.BENCO_MANAGER ||
+				title == Title.CEO || title == Title.BENCO) {
+			
+			
+		} else if (title == Title.DIRECT_SUPERVISOR) {
+			rd = request.getRequestDispatcher("DirSup.html");
+		} 
+		
+		
+		else if (title == Title.EMPLOYEE) {
+			rd = request.getRequestDispatcher("Employee.html");
+		} 
+		
+		session.setAttribute("username", username);
+		session.setAttribute("title", title.toString());
+		session.setAttribute("fname", fname);
+		session.setAttribute("lname", lname);
+		rd.include(request, response);
 	}
 }

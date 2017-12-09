@@ -1,8 +1,8 @@
 package com.revature.servlets;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,10 +32,13 @@ public class AssignEmployeeToDirectSupervisor extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("AssignEmployeeToDirectSupervisorServlet");
 		
-		String dirSupUsername = (String) request.getParameter("dirSup");
-		String empUsername = (String) request.getParameter("empUsername");
+		RequestDispatcher rd = null;
+		String dirSupUsername = (String) request.getParameter("pickDirSup");
+		String empUsername = (String) request.getParameter("pickEmployee");
 		
 		TRMSDao dao = TRMSDao.getDao();
 		dao.assignDirectSupervisor(empUsername, dirSupUsername);
+		rd = request.getRequestDispatcher("DepHead.html");
+		rd.include(request, response);
 	}
 }

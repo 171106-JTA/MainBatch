@@ -1,6 +1,43 @@
-window.onload = function(){
-
+window.onload = function() {
+	displayUsername();
 	getRequests();
+	document.getElementById("approveOption").addEventListener("change", checkDescription);
+	document.getElementById("actionType").addEventListener("change", displayAction);
+}
+
+function displayAction() {
+	
+	var action = document.getElementById("actionType").value;
+	
+	if (action === "Approve") {
+		var infoDiv = document.getElementById("requestInfoDiv");
+		var reqForm = document.getElementById("approveRequestForm");
+		infoDiv.setAttribute("style", "display:none");
+		reqForm.setAttribute("style", "visibility:visible");
+	} else {
+		var infoDiv = document.getElementById("requestInfoDiv");
+		var reqForm = document.getElementById("approveRequestForm");
+		infoDiv.setAttribute("style", "visibility:visible");
+		reqForm.setAttribute("style", "display:none");
+	}
+	
+}
+
+function checkDescription() {
+	var approveOption = document.getElementById("approveOption");
+	var option = approveOption.value;
+	
+	var denyReasonDiv = document.getElementById("denyReasonDiv");
+	var denyReasonInput = document.getElementById("denyReasonInput");
+	
+	if (option === "Deny") {
+		denyReasonDiv.setAttribute("style", "visibility:visible");
+		denyReasonInput.required = true;
+		
+	} else {
+		denyReasonDiv.setAttribute("style", "visibility:hidden");
+		denyReasonInput.required = false;
+	}
 }
 
 /**
@@ -72,6 +109,39 @@ function getRequests() {
 			document.getElementById("AJAXErrorRequests").innerHTML="Unable to display requests.";
 		}
 	}
+	xhr.open("GET", url);
+	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+	xhr.send();
+}
+
+function displayUsername() {
+	var welcome = document.getElementById("welcome");
+	var adminTitle = document.getElementById("adminTitle");
+	var url = "GetUsernameServlet";
+
+	var xhr = new XMLHttpRequest();
+
+	xhr.onreadystatechange = function() {
+		if(xhr.readyState == 4 && xhr.status == 200){
+
+			var xmlText = xhr.responseXML;
+			var response = xmlText.getElementsByTagName("root");
+
+			var fname = response[0].childNodes[0].innerHTML;
+			var lname = response[0].childNodes[1].innerHTML;
+			var title = response[0].childNodes[2].innerHTML;
+			username = response[0].childNodes[3].innerHTML;
+			console.log("we found username: " + username);
+			admintitle = title;
+
+			welcome.innerHTML = "Welcome " + fname + " " + lname;
+			adminTitle.innerHTML = "(" +	title + ")";
+		} else if(xhr.readyState == 4 && xhr.status != 200){
+			console.log(xhr.status);
+			document.getElementById("AJAXError").innerHTML="Unable to fetch username";
+		}
+	}
+
 	xhr.open("GET", url);
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhr.send();

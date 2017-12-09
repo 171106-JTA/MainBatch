@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<meta charset="UTF-8">
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css"
+	href="resources/css/StylingTRMS.css">
+<script src="resources/javascript/DirSup.js"></script>
+<!-- <script src="resources/javascript/DisplayUsername.js"></script> -->
+<title>Employee Requests</title>
+</head>
+<body>
+	<h3 id="welcome">Welcome.</h3>
+	<h5 id="adminTitle"></h5>
+	<div class="col-lg-12" align="center">
+		<div>
+			<h3>Employee Tuition Request Forms</h3>
+		</div>
+		<div class="next" >
+			<select name="actionType" id="actionType">
+				<option value="Approve">Approve/Deny a Request</option>
+				<option value="Request more information">Request more
+					Information</option>
+			</select>
+		</div>
+		<div class="next" style="display: none" id="requestInfoDiv">
+			<input type="text" name="messageToEmployee" style="width:300px; height:100px" placeholder="Message">
+			<input type="submit" name="sendMessage" id="sendMessageToEmployee" value="Send">
+		</div>
+		<div id="approveRequestForm">
+			<form>
+				<div class="next">
+					<span>Select an ID</span> <input type="number" id="reqIDInput"
+						name="reqIDInput" style="Width: 50px" placeholder="ID">
+				</div>
+				<div class="next">
+					<select name="approve" id="approveOption" required>
+						<option value="Approve">Approve</option>
+						<option value="Deny">Deny</option>
+					</select> <span><input type="submit" name="submitApproval"
+						id="submitApproval" value="Submit"></span>
+				</div>
+				<div class="next" style="visibility: hidden" id="denyReasonDiv">
+					<input type="text" id="denyReasonInput" name="denyReason"
+						placeholder="Reason for denial">
+				</div>
+			</form>
+		</div>
+		<div>
+			<p id="AJAXErrorRequests" style="color: red"></p>
+			<table id="requestTable" class="active table-bordered">
+				<tr>
+					<th width="40px">Id</th>
+					<th width="100px">Employee Username</th>
+					<th width="100px">Employee First Name</th>
+					<th width="100px">Employee Last Name</th>
+					<th width="100px">Event</th>
+					<th width="100px">Location</th>
+					<th width="100px">Cost</th>
+					<th width="100px">Description</th>
+					<th width="100px">Grading Format</th>
+					<th width="100px">Request Submission Date</th>
+					<th width="100px">Date of Event</th>
+					<th width="10px">File</th>
+				</tr>
+			</table>
+		</div>
+	</div>
+</body>
+</html>
