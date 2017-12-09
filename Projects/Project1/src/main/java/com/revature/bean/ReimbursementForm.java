@@ -428,11 +428,27 @@ public class ReimbursementForm {
 
 	@Override
 	public String toString() {
-		return "ReimbursementForm [username=" + username + ", year=" + year + ", month=" + month + ", day=" + day
-				+ ", hour=" + hour + ", minute=" + minute + ", description=" + description + ", cost=" + cost
+		return "ReimbursementForm [reimbursementID=" + reimbursementID + ", username=" + username + ", year=" + year
+				+ ", month=" + month + ", day=" + day + ", hour=" + hour + ", minute=" + minute + ", submitYear="
+				+ submitYear + ", submitMonth=" + submitMonth + ", submitDay=" + submitDay + ", submitHour="
+				+ submitHour + ", submitMinute=" + submitMinute + ", description=" + description + ", cost=" + cost
 				+ ", gradingFormat=" + gradingFormat + ", eventType=" + eventType + ", street=" + street + ", city="
-				+ city + ", state=" + state + ", zip=" + zip + "]";
+				+ city + ", state=" + state + ", zip=" + zip + ", workRelatedJustification=" + workRelatedJustification
+				+ ", passingGrade=" + passingGrade + ", status=" + status + ", exceedsFundsFlag=" + exceedsFundsFlag
+				+ ", reason_for_excess_funds=" + reason_for_excess_funds + ", reason_for_denial=" + reason_for_denial
+				+ ", approvalByDirectSupervisor=" + approvalByDirectSupervisor + ", approvalByDepartmentHead="
+				+ approvalByDepartmentHead + ", approvalByBenCo=" + approvalByBenCo + ", urgency=" + urgency + "]";
 	}
+
+//	@Override
+//	public String toString() {
+//		return "ReimbursementForm [username=" + username + ", year=" + year + ", month=" + month + ", day=" + day
+//				+ ", hour=" + hour + ", minute=" + minute + ", description=" + description + ", cost=" + cost
+//				+ ", gradingFormat=" + gradingFormat + ", eventType=" + eventType + ", street=" + street + ", city="
+//				+ city + ", state=" + state + ", zip=" + zip + "]";
+//	}
+	
+	
 
 	
 }

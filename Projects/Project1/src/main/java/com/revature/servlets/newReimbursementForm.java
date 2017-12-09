@@ -66,6 +66,8 @@ public class newReimbursementForm extends HttpServlet {
 				
 				TrmsDaoImplement dao = new TrmsDaoImplement();
 				dao.insertNewReimbursementForm(RF);
+				
+				//To-Do: Change this message to an HTML page
 				out.println("Reimbursement Form Submitted");
 			}
 		}

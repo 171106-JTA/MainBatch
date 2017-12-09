@@ -31,6 +31,7 @@ public class getUserForms extends HttpServlet {
 		if (session.isNew()) {
 			response.setContentType("text/html");
 			out = response.getWriter();
+			//To-Do: Convert this error message to an html page 
 			out.println("You are not logged in!");
 			out.println("<hr>" + "<a href='index.html'>BACK</a>");
 			session.invalidate(); // Clears the session entirely

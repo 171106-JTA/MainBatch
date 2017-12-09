@@ -59,4 +59,14 @@
     <servlet-name>getFormsNeedingApproval</servlet-name>
     <url-pattern>/getFormsNeedingApproval</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateFormApproval</display-name>
+    <servlet-name>UpdateFormApproval</servlet-name>
+    <servlet-class>com.revature.servlets.UpdateFormApproval</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateFormApproval</servlet-name>
+    <url-pattern>/UpdateFormApproval</url-pattern>
+  </servlet-mapping>
 </web-app>

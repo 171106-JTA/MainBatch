@@ -176,9 +176,11 @@ public class TrmsDaoImplement implements TrmsDao {
 
 		try (Connection conn = ConnectionUtil.getConnection()) {
 			// String sql = "{call getUserForms(?)}";\
-			String sql = "SELECT * FROM ReimbursementForm WHERE status = ?";
+			String sql = "SELECT * FROM ReimbursementForm WHERE status = ? AND " 
+					+ approval_column_name + " = ?";
 			ps = conn.prepareCall(sql);
 			ps.setInt(1, form_status);
+			ps.setInt(2, 0); //Forms that the Department Head has approved yet
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				int reimbursementID = rs.getInt("reimbursementID");
@@ -226,7 +228,6 @@ public class TrmsDaoImplement implements TrmsDao {
 				int approvalByBenCo = rs.getInt("approval_by_benco");
 				int urgency = rs.getInt("urgency");
 				
-				
 //				Forms.add(new ReimbursementForm(form_username, year, month, day, hour, minute, description, cost,
 //						gradingFormat, eventType, street, city, state, zip));
 				
@@ -252,6 +253,7 @@ public class TrmsDaoImplement implements TrmsDao {
 				}
 			}
 		}
+		
 		return Forms;
 	}
 
@@ -370,5 +372,44 @@ public class TrmsDaoImplement implements TrmsDao {
 			}
 		}
 		return eventType;
+	}
+	
+	public void updateFormApproval(
+			int reimbursementID, 
+			int directSupervisorApproval,
+			int departmentHeadApproval,
+			int benCoApproval) {
+		PreparedStatement ps = null;
+		int rows_updated = -1;
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			String sql = "UPDATE ReimbursementForm "
+					+ "SET approval_by_direct_supervisor= ?, "
+					+ "approval_by_department_head= ?, "
+					+ "approval_by_benco= ?"
+					+ "WHERE reimbursementID = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, directSupervisorApproval);
+			ps.setInt(2, departmentHeadApproval);
+			ps.setInt(3, benCoApproval);
+			ps.setInt(4, reimbursementID);
+			
+			rows_updated = ps.executeUpdate();
+			if (rows_updated == 0) {
+				throw new SQLException("Reimbursement Form Update Failed!");
+			}
+		} catch (SQLException e) {
+			// To Do: This catch statement executes if user was not inserted into the
+			// database.
+			// How to return the stacktrace to Driver to be logged???
+			e.printStackTrace();
+		} finally {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 }
