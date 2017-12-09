@@ -32,7 +32,8 @@ public class GetRequests {
 						"<cost>" + r.getCost() + "</cost><description>" + r.getDescription() + "</description>" +
 						"<gradingFormat>" + r.getGradingFormat() + "</gradingFormat>" +
 						"<submissionDate>" + r.getSubmissionDate().toString() + "</submissionDate>" +
-						"<dateOfEvent>" + r.getDateOfEvent().toString() + "</dateOfEvent></request>";
+						"<dateOfEvent>" + r.getDateOfEvent().toString() + "</dateOfEvent>" +
+						"<file>" + r.getInputStream() + "</file></request>";
 			}
 			myXml += "</root>";
 			out.println(myXml);
