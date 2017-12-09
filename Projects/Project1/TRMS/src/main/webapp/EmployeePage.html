@@ -27,10 +27,7 @@ body {
         <a class="nav-link" href="#info_requests">Info Requests</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Pricing</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Disabled</a>
+        <a class="nav-link" href="#cancel_requests">Cancel Requests</a>
       </li>
     </ul>
   </div>
@@ -160,7 +157,7 @@ body {
 			<div id="additionalinfo" class="card col-sm-6" style="width:40rem">
 				<div class="card-block">
 					<form action="submit_info.act" method="POST">
-						<div class="form-group row">
+						<div class="form-group">
 							<label for="info_id">InfoRequest Id</label>
 							<div class="col-5">
 								<input type="text" class="form-control" name="infoid" required>
@@ -184,15 +181,21 @@ body {
 	</div>
 	
 		
-	
-	
-	
-	<div id="cancel" class="well">
-		<form action="cancel.act">
-			<input type="text" placeholder="Request Id" name="rrId">
-			
-			<input type="submit" value="submit">
-		</form>
+	<div class="container col-sm-11" id="cancel_requests">
+		<div class="card">
+			<div class="card-block">
+				<h3 class="card-title">Cancel Requests</h3>
+				<form action="cancel.act">
+					<div class="form-group">
+						<label for="cancel_id">Enter Request Id</label>
+						<div class="col-2">
+							<input type="text" class="form-control" placeholder="Request Id" name="cancelId">
+						</div>
+					</div>
+					<button class="btn btn-danger" value="submit">Cancel</button>
+				</form>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
