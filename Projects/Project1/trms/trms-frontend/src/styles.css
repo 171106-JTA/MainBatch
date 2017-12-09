@@ -8,6 +8,8 @@
 
 .section-below-nav{
     margin-top: 150px;
+    margin-bottom: 150px;
+    min-height: 100%;
 }
 
 html {
@@ -24,7 +26,7 @@ body {
 
 .footer-section {
     width: 100%;
-    background-color: #2222;
+    background-color: #222222;
     color: white;
     position: absolute;
     bottom: 0;

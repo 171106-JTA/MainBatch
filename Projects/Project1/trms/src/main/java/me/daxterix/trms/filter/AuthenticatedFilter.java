@@ -16,13 +16,8 @@ import java.io.IOException;
  * ie the request has a session.
  *
  */
-@WebFilter(filterName="authenticatedFilter", urlPatterns="/employee/*")
+@WebFilter("/employee/*")
 public class AuthenticatedFilter implements Filter {
-
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-
-    }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
@@ -46,14 +41,10 @@ public class AuthenticatedFilter implements Filter {
             session.invalidate();
             httpResponse.getWriter().println("Please log in and try again.");
         }
-        else {  // TODO: how to chain filters
+        else {
             request.setAttribute("employee", emp);
             filterChain.doFilter(request, response);
         }
     }
 
-    @Override
-    public void destroy() {
-
-    }
 }

@@ -4,6 +4,7 @@ import me.daxterix.trms.dao.DAOUtils;
 import me.daxterix.trms.dao.RequestDAO;
 import me.daxterix.trms.dao.exception.NonExistentIdException;
 import me.daxterix.trms.model.Employee;
+import me.daxterix.trms.model.EmployeeRank;
 import me.daxterix.trms.model.ReimbursementRequest;
 
 import javax.json.JsonArray;
@@ -16,67 +17,68 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-@WebServlet(name = "RequestsServlet", urlPatterns = "/employee/requests")
+@WebServlet("/employee/requests")
 public class RequestsServlet extends HttpServlet {
     private RequestDAO requestDao = DAOUtils.getRequestDAO();
 
-    protected void doPost(HttpServletRequest req, HttpServletResponse response) throws ServletException {
-        
-    }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String status = request.getParameter("status");
-        String email = request.getParameter("email");
+        String wantsFiled = request.getParameter("wantsFiledRequests");
+        boolean wantsFiledReqs = (wantsFiled != null);
         String department = request.getParameter("department");
-        String requestId = request.getParameter("requestId");
 
-        // assume this employee exists and has the right security because of the filters
-        Employee emp = (Employee) request.getSession().getAttribute("employee");
-        if (email != null)
-            email = emp.getEmail();     // value of request paramter email is ignored
+        // assume this employee exists because of the filter
+        Employee emp = (Employee) request.getAttribute("employee");
 
         PrintWriter out = response.getWriter();
         response.setContentType("text/plan");
 
         try {
-            if (requestId != null) {
-                ReimbursementRequest res = requestDao.getRequestById(Long.parseLong(requestId));
-                out.println(ServletUtils.requestToJson(res));
-                return;
+            if (hasAccessToRequests(emp, wantsFiledReqs, department)) {
+                List<ReimbursementRequest> result = filterRequests(emp, wantsFiledReqs, department, status);
+                if (result == null) {
+                    response.setStatus(404);
+                    out.println("Invalid options");
+                } else {
+                    JsonArray jArr = ServletUtils.requestsToJsonArray(result);
+                    response.setContentType("application/json");
+                    out.print(jArr.toString());
+                }
+            } else {
+                out.print("Access denied");
             }
-            List<ReimbursementRequest> result;
-            result = filterRequests(email, department, status);
-            if (result == null) {
-                response.setStatus(404);
-                out.println("Invalid options");
-            }
-            JsonArray jArr = ServletUtils.requestsToJsonArray(result);
-            response.setContentType("application/json");
-            out.print(jArr.toString());
-        }
-        catch (NumberFormatException e) {
-            response.setStatus(400);
-            out.println("Invalid request id");
-        }
-        catch (NonExistentIdException e) {
+        } catch (NonExistentIdException e) {
             response.setStatus(404);
-            out.println("Nonexistent request, depratment, or status");
+            out.println("Nonexistent depratment, or status");
         }
+    }
+
+    boolean hasAccessToRequests(Employee emp, boolean wantsFiledReqs, String department) {
+        String rank = emp.getRank().getRank();
+        if (wantsFiledReqs) {
+            return true;
+        } else if (department != null)
+            return (rank.equals(EmployeeRank.DEPARTMENT_HEAD) || rank.equals(EmployeeRank.BENCO));
+
+        else
+            return rank.equals(EmployeeRank.BENCO);
     }
 
     /**
      * filtering requests based on request department, email, and request status
      *
-     * @param email
+     * @param emp
+     * @param wantFiledReqs
      * @param department
      * @param status
      * @return
+     * @throws NonExistentIdException
      */
-    private List<ReimbursementRequest> filterRequests(String email, String department, String status) throws NonExistentIdException {
-        if (email == null && department == null && status == null)    // 1. all requests
+    private List<ReimbursementRequest> filterRequests(Employee emp, boolean wantFiledReqs, String department, String status) throws NonExistentIdException {
+        if (!wantFiledReqs && department == null && status == null)    // 1. all requests
             return requestDao.getAllRequests();
 
-        else if (email == null && department == null) {               // 2. all requests by status
+        else if (!wantFiledReqs && department == null) {               // 2. all requests by status
             switch (status) {
                 case "all":
                     return requestDao.getAllRequests();
@@ -85,24 +87,22 @@ public class RequestsServlet extends HttpServlet {
                 default:
                     return requestDao.getRequestsByStatus(status);
             }
-        }
-        else if (email == null && status == null)                     // 3, by departments
+        } else if (!wantFiledReqs && status == null)                  // 3. by departments
             return requestDao.getRequestsByDepartment(department);
 
         else if (department == null && status == null)                // 4. filed requests
-            return requestDao.getFiledRequests(email);
+            return requestDao.getFiledRequests(emp.getEmail());
 
-        else if (department == null) {                                  // 5. filed by status
+        else if (department == null) {                                // 5. filed by status
             switch (status) {
                 case "all":
-                    return requestDao.getFiledRequests(email);
+                    return requestDao.getFiledRequests(emp.getEmail());
                 case "pending":
-                    return requestDao.getPendingFiledRequests(email);
+                    return requestDao.getPendingFiledRequests(emp.getEmail());
                 default:
-                    return requestDao.getFiledRequestsByStatus(email, status);
+                    return requestDao.getFiledRequestsByStatus(emp.getEmail(), status);
             }
-        }
-        else if (email == null)                                        // 6. by departments and status
+        } else if (!wantFiledReqs)                                        // 6. by departments and status
             return requestDao.getDepartmentRequestsByStatus(department, status);
 
         return null;

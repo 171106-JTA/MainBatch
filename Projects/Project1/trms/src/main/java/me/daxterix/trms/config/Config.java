@@ -33,14 +33,15 @@ public class Config {
     public static final int msecsToWait = 1000 * 60;    // every minute
 
     /**
-     * todo: recurring task never fires
      * update requests filed than 2 weeks ago or earlier to urgent status every secsToWait seconds
      */
+    /*
     @Scheduled(fixedRate=msecsToWait)
     public void updateRequestUrgency() {
         DAOUtils.getRequestDAO().updateOlderToUrgent(LocalDate.now().minusWeeks(2));
         System.out.println("Doing recurring task!");
     }
+    */
 
     @Bean
     public DataSource dataSource() {
@@ -66,12 +67,7 @@ public class Config {
         props.setProperty("hibernate.connection.isolation", String.valueOf(Connection.TRANSACTION_READ_COMMITTED));
 
         // user hibernate default connection pool; not for production
-        // props.setProperty("hibernate.connection.pool_size", "10");
-        // c3po connection pool
-        props.setProperty("hibernate.c3p0.min_size", "3");
-        props.setProperty("hibernate.c3p0.max_size", "20");
-        props.setProperty("hibernate.c3p0.timeout", "300");
-        props.setProperty("hibernate.c3p0.max_statements", "500");
+        props.setProperty("hibernate.connection.pool_size", "10");
 
         factoryBean.setHibernateProperties(props);
         factoryBean.setAnnotatedClasses(    // register @Entity classes

@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {LookupsService} from '../../services/lookups.service';
 import {HttpClient} from '@angular/common/http';
 import {CredentialsService} from '../../services/credentials.service';
+import {Router} from '@angular/router';
 
 
 const loginUrl = 'http://localhost:8085/trms/login';
@@ -18,7 +19,7 @@ export class LoginComponent {
         password: new FormControl('', Validators.required),
     });
 
-    constructor(private lookups: LookupsService, private http: HttpClient, private credentialsService: CredentialsService) {
+    constructor(private router: Router, private lookups: LookupsService, private http: HttpClient, private credentialsService: CredentialsService) {
     }
 
     private email: string;
@@ -38,7 +39,7 @@ export class LoginComponent {
                 data => {
                     this.loginFailed = false;
                     this.credentialsService.login(this.email);      // set the email for the credentials service
-                    console.log(data);
+                    this.router.navigate(['/requests']);
                 },
                 err => {
                     this.loginFailed = true;

@@ -21,7 +21,7 @@ export class RequestService {
      */
     public getFiledRequests(status: string): Observable<ReimbursementRequest[]> {
         let params = new HttpParams();
-        params.append("email", "true"); // value is ignored, for the email field
+        params.append("wantsFiledRequests", "true"); // value is ignored, for the email field
         params.append("status", status);
         const httpOptions = {
             headers: new HttpHeaders({'Content-Type': 'application/json'}),

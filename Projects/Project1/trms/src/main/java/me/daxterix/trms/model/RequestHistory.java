@@ -30,15 +30,33 @@ public class RequestHistory implements Serializable{
     @JoinColumn(name="approval_file", foreignKey=@ForeignKey(name="fk_hist_file"))
     private RequestFile file;   // null if not approved by file (approval email)
 
-    @ManyToOne(fetch = FetchType.LAZY)      // or should this be one to one
-    @JoinColumn(name="post_status", foreignKey=@ForeignKey(name="fk_hist_status"))
+    @ManyToOne(fetch = FetchType.EAGER)      // or should this be one to one
+    @JoinColumn(name="post_status", foreignKey=@ForeignKey(name="fk_hist_pre_status"))
     private RequestStatus postStatus;
+
+    @ManyToOne(fetch = FetchType.EAGER)      // or should this be one to one
+    @JoinColumn(name="pre_status", foreignKey=@ForeignKey(name="fk_hist_post_status"))
+    private RequestStatus preStatus;
 
     @Column(name="approval_time")
     private LocalDateTime time;
 
-    @Column(name="approval_reason", length=255)
+    @Column(name="approval_reason")
     private String reason;
+
+    public RequestHistory(ReimbursementRequest request, Employee approver, RequestFile file, RequestStatus preStatus,
+                          RequestStatus postStatus, LocalDateTime time, String reason) {
+        this.request = request;
+        this.approver = approver;
+        this.file = file;
+        this.postStatus = postStatus;
+        this.preStatus = preStatus;
+        this.time = time;
+        this.reason = reason;
+    }
+
+    public RequestHistory() {
+    }
 
     public long getId() {
         return id;

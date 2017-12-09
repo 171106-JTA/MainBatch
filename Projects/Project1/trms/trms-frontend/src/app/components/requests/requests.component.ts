@@ -4,9 +4,9 @@ import {ReimbursementRequest} from '../../models/reimbursement-request';
 
 @Component ({
     selector: 'app-requests',
-    inputs: ['requests'],
     templateUrl: 'requests.component.html',
-    styleUrls: [],
+    styleUrls: ['requests.component.css'],
+    inputs: ['requests']
 })
 
 export class RequestsComponent {

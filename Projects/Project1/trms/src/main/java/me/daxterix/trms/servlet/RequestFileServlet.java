@@ -18,10 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 
 
 /**
- * Servlet implementation class DownloadFileServlet
+ * Servlet implementation class RequestFileServlet
  */
-@WebServlet("/employee/downloadFile")
-public class DownloadFileServlet extends HttpServlet {
+@WebServlet("/employee/requests/file")
+public class RequestFileServlet extends HttpServlet {
 	ObjectDAO objectDao = DAOUtils.getObjectDAO();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException {
@@ -51,8 +51,15 @@ public class DownloadFileServlet extends HttpServlet {
             e.printStackTrace();
         }
         catch (IOException e) {
-
         }
 	}
+
+	protected void doPost() {
+
+    }
+
+	void hasAccessToFile() {
+
+    }
 
 }
