@@ -37,7 +37,17 @@
 		validate: Creates the schema, destroying old data
 		create-drop: database is cleared and emptied upon server shutdown -->
 
-		<mapping resource="Employee.hbm.xml"></mapping>
+		<!-- L2 Caching Configuration -->
+<!-- 		<property name="net.sf.ehcache.configurationResourceName">/ehcache.xml</property>
+		<property name="hibernate.cache.region.factory_class">net.sf.ehcache.hibernate.EhCacheRegionFactory</property>
+		<property name="hibernate.cache.use_second_level_cache">true</property>
+		<property name="hibernate.cache.use_query_cache">true</property>
+ -->		<!-- MAPPINGS -->
+<!-- 		<mapping resource="Employee.hbm.xml"></mapping> -->
+		<mapping class="com.revature.beans.Employee"/>	
+		<mapping class="com.revature.beans.Bear"/>
+		<mapping class="com.revature.beans.Cave"/>
+		<mapping class="com.revature.beans.HoneyPot"/>
 
 	</session-factory>
 </hibernate-configuration>

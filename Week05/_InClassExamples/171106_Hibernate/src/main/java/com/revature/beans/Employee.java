@@ -1,15 +1,39 @@
 package com.revature.beans;
 
+import javax.persistence.Cacheable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /*
  * this bean can also be called a persistent class.
  * (It is used to persist data obviously)
  */
+@Entity
+@Table(name="Employee")
+/*@Cache(usage=CacheConcurrencyStrategy.READ_ONLY)
+@Cacheable*/
 public class Employee {
+	
+	@Id
+	@Column(name="EMP_ID")
+	@SequenceGenerator(sequenceName="EMP_SEQ", name="EMP_SEQ")
+	@GeneratedValue(generator="EMP_SEQ", strategy=GenerationType.SEQUENCE)
 	private Integer id;
+	@Column
 	private String firstName;
+	@Column
 	private String lastName;
+	@Column
 	private String email;
+	@Column
 	private Integer salary;
 	public Integer getId() {
 		return id;
