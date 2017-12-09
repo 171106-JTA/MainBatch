@@ -19,11 +19,11 @@ import javax.servlet.http.Part;
  */
 @MultipartConfig
 public class SubmitAdditionalInfo extends HttpServlet {
-	/*
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//TODO get info
-	} */
+	} 
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
