@@ -60,8 +60,8 @@ function getAllRequests(){
 	xhr.send();	
 }
 
-function getInfoRequests(){
-	var url = "InfoRequest";
+function getAllInfoRequests(){
+	var url = "GetInfoRequest";
 	
 	var xhr = new XMLHttpRequest();
 
@@ -73,13 +73,13 @@ function getInfoRequests(){
 			}
 			
 			var response = xmlText.getElementsByTagName("req");
-			var resultTable = document.getElementById("pendingTable");
+			var resultTable = document.getElementById("infoTable");
 			
 			clearTable(resultTable);
 			//TODO fix typeError
 			for(i in response){
 				var row = document.createElement("tr");
-				var tDatas = createTableData(4); 
+				var tDatas = createTableData(6); 
 				populateData(tDatas, i, row, resultTable, response);
 			}
 			
@@ -91,7 +91,7 @@ function getInfoRequests(){
 		}
 	}
 
-	xhr.open("GET", url);
+	xhr.open("GET", url + "?from=admin");
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhr.send();	
 }

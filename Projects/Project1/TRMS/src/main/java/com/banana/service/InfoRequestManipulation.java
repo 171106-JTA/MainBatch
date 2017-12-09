@@ -45,4 +45,34 @@ public class InfoRequestManipulation {
 		}
 		
 	}
+	
+
+	public static void getAllInfoRequests(HttpServletResponse response) throws IOException{
+		
+		EmployeeDAOImpl dao = new EmployeeDAOImpl();
+		List<InfoRequest> irList = dao.getAllInfoRequests();
+		String responseXML = null;
+		
+		response.setContentType("text/xml");
+		PrintWriter out = response.getWriter();
+		
+		if(irList != null) {
+			responseXML = "<root>";
+			
+			for(InfoRequest ir: irList) {
+				responseXML += "<req><ird>" + ir.getIrId() + "</ird><rrid>" + ir.getRrId()+ "</rrid><requesteeid>" +
+						ir.getRequesteeId() + "</requesteeid><info>" + ir.getInfo() + "</info><filename>" + ir.getFileName() +
+						"</filename><blob>" + ir.getBlob() + "</blob></req>";
+			}
+			
+			responseXML += "</root>";
+			
+			out.println(responseXML);
+		}
+		else {
+			System.out.println("Empty");
+			out.println("<root></root>");
+		}
+		
+	}
 }

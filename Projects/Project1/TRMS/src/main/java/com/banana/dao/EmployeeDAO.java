@@ -10,4 +10,5 @@ public interface EmployeeDAO {
 	public Employee getEmployeeById(int empId);
 	public int getEmployeeIdFromRequest(int rrId);
 	public List<InfoRequest> getInfoRequests(int requesteeId);
+	public List<InfoRequest> getAllInfoRequests();
 }

@@ -122,4 +122,35 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 		
 		return irList;
 	}
+	
+	@Override
+	public List<InfoRequest> getAllInfoRequests() {
+		List<InfoRequest> irList = new ArrayList<>();
+		InfoRequest ir = null;
+		String sql = "SELECT * FROM Info_Request";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try(Connection conn = ConnectionUtil.getConnection()){
+			ps = conn.prepareStatement(sql);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				ir = new InfoRequest(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getBlob(6));
+				irList.add(ir);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			close(ps);
+		}
+		
+		if(irList.isEmpty()) {
+			return null;
+		}
+		
+		return irList;
+	}
 }

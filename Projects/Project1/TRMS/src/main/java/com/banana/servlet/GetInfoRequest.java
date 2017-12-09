@@ -25,9 +25,15 @@ public class GetInfoRequest extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		int requesteeId = (Integer)session.getAttribute("empId");
+		String who = request.getParameter("from");
 	
 		if(!session.isNew()) {
-			InfoRequestManipulation.getInfoRequests(response, requesteeId);
+			if(who.equals("emp")) {
+				InfoRequestManipulation.getInfoRequests(response, requesteeId);
+			}
+			else {
+				InfoRequestManipulation.getAllInfoRequests(response);
+			}
 		}
 		
 	}

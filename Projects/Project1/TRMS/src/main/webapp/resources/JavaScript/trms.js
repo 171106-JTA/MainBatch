@@ -142,7 +142,7 @@ function getInfoRequests(){
 		}
 	}
 
-	xhr.open("GET", url);
+	xhr.open("GET", url + "?from=emp");
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhr.send();	
 }

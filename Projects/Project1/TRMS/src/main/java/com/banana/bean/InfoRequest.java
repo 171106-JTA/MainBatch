@@ -8,6 +8,7 @@ public class InfoRequest {
 	private int rrId;
 	private int requesteeId;
 	private String info;
+	private String fileName;
 	private Blob blob;
 	
 	public InfoRequest(int irId, int rrId) {
@@ -16,16 +17,23 @@ public class InfoRequest {
 		this.rrId = rrId;
 	}
 
-	public InfoRequest(int irId, int rrId, int requesteeId, String info, Blob blob) {
+	public InfoRequest(int irId, int rrId, int requesteeId, String info, String fileName, Blob blob) {
 		super();
 		this.irId = irId;
 		this.rrId = rrId;
 		this.requesteeId = requesteeId;
 		this.info = info;
+		this.fileName = fileName;
 		this.blob = blob;
 	}
 
+	public String getFileName() {
+		return fileName;
+	}
 
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 
 	public int getIrId() {
 		return irId;
