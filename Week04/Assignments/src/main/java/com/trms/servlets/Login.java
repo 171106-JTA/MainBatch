@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.trms.obj.PrivilegesSummary;
 import com.trms.services.Services;
 
 /**
@@ -41,8 +42,17 @@ public class Login extends HttpServlet {
 		if(Services.verifyCredentials(loginUserId,  loginPassword)) {
 			session.setAttribute("username", loginUserId);
 			session.setAttribute("password", loginPassword);
-			rd = request.getRequestDispatcher("home.html"); 
+			PrivilegesSummary privs = Services.getPrivilegesByUserId(loginUserId);
+
+			session.setAttribute("firstName", privs.getFirstName());
+			session.setAttribute("lastName", privs.getLastName());
+			session.setAttribute("isSupervisor", privs.isSupervisor() ? new Boolean(true) : new Boolean(false));
+			session.setAttribute("isDeptHead", privs.isDeptHead() ? new Boolean(true) : new Boolean(false));
+			session.setAttribute("isBenCo", privs.isBenCo() ? new Boolean(true) : new Boolean(false));
+			session.setAttribute("department", privs.isDeptHead() ? privs.getDepartment() : "N/A");		
+			if((boolean) session.getAttribute("isSupervisor"))
 			
+			rd = request.getRequestDispatcher("home.html"); 
 			rd.include(request, response);
 		}
 		else {

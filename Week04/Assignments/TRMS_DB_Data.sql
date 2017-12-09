@@ -45,6 +45,7 @@ call Create_Position('CFO', 1);
 
 call Create_Position('Manager, Human Resources', 2); 
 call Create_Position('HR Coordinator', 2); 
+call Create_Position('Benefits Coordinator',2); 
 
 call Create_Position('Manager, Sales', 3); 
 call Create_Position('Salesman', 3); 
@@ -104,11 +105,14 @@ call Create_Employee_Full('Billy', 'Bobson', 'billybob', 'passwordbob',
 call Create_Employee_Full('Hafferly', 'Fafferson', 'luckylucky', 'passwordlucky',
     'Training', 'Associate', 'rlessley', 
     'thereallyluckycharms@gmail.com', '+1-777-777-7777', '101 Washer Ln', 'Herndon', 'VA', '20192'); 
+call Create_Employee_Full('Adam', 'Jefferson', 'aljeffer', 'passwordal',
+    'Human Resources', 'Benefits Coordinator', 'N/A',
+    'aljeffer@gmail.com', '+1-425-555-7421', '2330 Washington Ln', 'Herndon', 'VA', '20192'); 
+
 call Create_New_TR_Request('MrBigg', 'How to Fill Your Swimming Pool with Cash',
     '02152018', '11:00', '101 Baltimore ln, Baltimore, MD, 20021', 
     'Seminar', 'A lecture on how best to invest to make lots of money',
     '50', 'Because I can', 'lessOneDay');
-    
 insert into tuitionreimbursmentrequest values(
     null, 
     'MrBigg',
@@ -116,6 +120,8 @@ insert into tuitionreimbursmentrequest values(
     'An address', 'Seminar', 'How to make money', 50, null, 'because I can', 'lessOneDay',
     0, 0, 0, null);
 insert into tuitionreimbursmentrequest(requesterloginid) values ('MrBigg');
+insert into tuitionreimbursmentrequest(requesterloginid) values ('aljeffer');
 insert into tuitionreimbursmentrequest(requesterLoginId, eventName, eventAddress,eventType)
     values('MrBigg', 'an event', 'an address', 'University Course');
 /
+commit;

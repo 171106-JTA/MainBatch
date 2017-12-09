@@ -13,6 +13,7 @@ import java.util.List;
 
 import com.trms.obj.ContactInformation;
 import com.trms.obj.Employee;
+import com.trms.obj.PrivilegesSummary;
 import com.trms.obj.ReimbRequest;
 import com.trms.util.ConnectionUtil;
 
@@ -282,6 +283,70 @@ public class DaoImpl implements Dao {
 			close(rs); 
 		}
 		return requests; 
+	}
+	
+
+	public PrivilegesSummary getPrivilegesByUserId(String loginUserId) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		PrivilegesSummary priv; 
+		
+		try(Connection conn = ConnectionUtil.getConnection()) {
+			String sql = "select firstName, lastName, loginUserId, supervisorEmpId, "
+					+ "name as department, Positions.title as position, departmentHeadId "
+					+ "from Employee natural join Department natural join Positions "
+					+ "where loginUserId = ?"; 
+					
+			ps = conn.prepareStatement(sql); 
+			ps.setString(1, loginUserId);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				priv = new PrivilegesSummary(
+					rs.getString("firstName"),
+					rs.getString("lastName"),
+					rs.getInt("supervisorEmpId") == 0,
+					(rs.getString("departmentHeadId") != null) && (rs.getString("departmentHeadId").equals(loginUserId)),
+					rs.getString("department"),
+					rs.getString("position").equals("Benefits Coordinator")
+				);
+				return priv; 
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(ps);
+			close(rs); 
+		}
+		
+		
+		return null; 
+	}
+	
+
+	public int approveOrDeny(int trackingNumber, String approvalType, int value) {
+		PreparedStatement ps = null;
+		int rslt = 0; 
+		
+		try(Connection conn = ConnectionUtil.getConnection()) {
+			String sql = "update tuitionreimbursmentrequest set tuitionreimbursmentrequest.benCoApproved = 1 where trackingNumber = 5";
+			ps = conn.prepareStatement(sql); 
+//			ps.setString(1, approvalType);
+//			ps.setInt(2, value);
+//			ps.setInt(3, trackingNumber);
+			System.out.println("update tuitionreimbursmentrequest set " + approvalType + " = " + value + " where trackingNumber = " + trackingNumber);
+			rslt = ps.executeUpdate();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			close(ps);
+		}
+		
+		return rslt; 
 	}
 
 

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,14 +35,25 @@ public class ViewRequests extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 		HttpSession session = request.getSession(); 
-		List<ReimbRequest> requests = Services.getRequests((String) session.getAttribute("username")); 
+		
+		String username = (String)session.getAttribute("username"); 
+		List<ReimbRequest> requests = Services.getRequests(username); 
+		
+		System.out.println("Session vars: ");
+		System.out.println("isSuper:" + session.getAttribute("isSupervisor") + "\tIsBenCo: " + session.getAttribute("isBenCo"));
+		
 		System.out.println("Requests:");
+		
+		RequestDispatcher rd = request.getRequestDispatcher("viewrequests.html"); 
+		rd.include(request, response);
+		
 		out.println("<table border='2px'>");
-		out.println("<tr><th>EVENT</th><th>Date of Event</th><th>Location</th><th>Category</th><th>Description</th><th>GradingFormat</th>"
+		out.println("<tr><th>#</th><th>EVENT</th><th>Date of Event</th><th>Location</th><th>Category</th><th>Description</th><th>GradingFormat</th>"
 				+ "<th>Reason for Attending</th><th>Anticipated Work Missed</th><th>Supervisor Approval</th><th>Departmental Approval</th><th>BenCo Approval</th>");
 		for(ReimbRequest trr : requests) {
 			System.out.println(trr);
 			out.println("<tr>");
+			out.println("<td>" + trr.getTrackingNumber() + "</td>"); 
 			out.println("<td>" + trr.getEventName() + "</td>");
 			out.println("<td>" + trr.getDateAndTime() + "</td>");
 			out.println("<td>" + trr.getLocation() + "</td>");
@@ -50,9 +62,22 @@ public class ViewRequests extends HttpServlet {
 			out.println("<td>" + trr.getGradingFormat() + "</td>");
 			out.println("<td>" + trr.getJustification() + "</td>");
 			out.println("<td>" + trr.getWorkHoursMissing() + "</td>");
-			out.println("<td>" + (trr.isSupervisorApproved() ? "Y" : "N") + "</td>");
-			out.println("<td>" + (trr.isDeptHeadApproved() ? "Y" : "N") + "</td>");
-			out.println("<td>" + (trr.isBennCoApproved() ? "Y" : "N") + "</td>");
+			
+			out.println("<td>" + ( ((boolean)(session.getAttribute("isSupervisor")) && !trr.getReqesterLoginId().equals(username)) 
+					? "<form action = 'approve.S" + trr.getTrackingNumber() + ".fc' method = 'post'><input type='submit' value='Approve'></form>"
+						+"<form action = 'deny.S" + trr.getTrackingNumber() + ".fc' method = 'post'><input type='submit' value='Deny'></form>" 
+					: "") + (trr.isSupervisorApproved() ? "Y" : "N") + "</td>");	
+			
+			out.println("<td>" + ( (boolean)(session.getAttribute("isDeptHead")) 
+					? "<form action = 'approve.D" + trr.getTrackingNumber() + ".fc' method = 'post'><input type='submit' value='Approve'></form>"
+						+"<form action = 'deny.D" + trr.getTrackingNumber() + ".fc' method = 'post'><input type='submit' value='Deny'></form>" 
+					: "") + (trr.isDeptHeadApproved() ? "Y" : "N") + "</td>");
+			
+			out.println("<td>" + ( (boolean)(session.getAttribute("isBenCo")) 
+					? "<form action = 'approve.B" + trr.getTrackingNumber() + ".fc' method = 'post'><input type='submit' value='Approve'></form>"
+						+"<form action = 'deny.B" + trr.getTrackingNumber() + ".fc' method = 'post'><input type='submit' value='Deny'></form>" 
+					: "") + (trr.isBennCoApproved() ? "Y" : "N") + "</td>");
+			
 			out.println("</tr>");
 		}
 		out.println("</table>");

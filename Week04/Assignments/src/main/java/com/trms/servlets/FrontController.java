@@ -24,8 +24,14 @@ public class FrontController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = request.getRequestURI();
 		String splits[] = url.split("/");
-		String action = splits[splits.length - 1];
-		action = action.substring(0, action.indexOf('.'));
+		String servletCmd = splits[splits.length - 1];
+		
+		String action = servletCmd.substring(0, servletCmd.indexOf('.'));
+		
+		String remainder = servletCmd.substring(servletCmd.indexOf('.'),servletCmd.indexOf(".fc"));
+		if(!remainder.equals(""))
+			remainder = remainder.substring(1);
+		System.out.println("action=" + action + "\t remainder=" + remainder);
 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter(); 
@@ -69,9 +75,14 @@ public class FrontController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = request.getRequestURI();
 		String splits[] = url.split("/");
-		String action = splits[splits.length - 1];
-		action = action.substring(0, action.indexOf('.'));
-		System.out.println("action = " + action); 
+		String servletCmd = splits[splits.length - 1];
+		
+		String action = servletCmd.substring(0, servletCmd.indexOf('.'));
+		
+		String remainder = servletCmd.substring(servletCmd.indexOf('.'),servletCmd.indexOf(".fc"));
+		if(!remainder.equals(""))
+			remainder = remainder.substring(1);
+		System.out.println("action=" + action + "\t remainder=" + remainder);
 
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter(); 
@@ -86,6 +97,16 @@ public class FrontController extends HttpServlet {
 				rd = request.getRequestDispatcher("ReimbursementRequest");
 				rd.include(request, response);
 			}
+		}
+		else if(action.equals("approve")) {
+			System.out.println(Services.approve(remainder));
+			rd = request.getRequestDispatcher("ViewRequests");
+			rd.include(request, response);	
+		}
+		else if(action.equals("deny")) {
+			System.out.println(Services.deny(remainder));
+			rd = request.getRequestDispatcher("ViewRequests");
+			rd.include(request, response);	
 		}
 
 
