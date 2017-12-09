@@ -3,16 +3,17 @@ window.onload = function(){
 	showUnverifiedUsers();
 	displaySupervisors();
 	
-	document.getElementById("actionType").addEventListener("change", displayAction);
+	document.getElementById("actionTypeDep").addEventListener("change", displayAction);
 }
 
 function displayAction() {
 	
-	var action = document.getElementById("actionType").value;
+	var action = document.getElementById("actionTypeDep").value;
 	var assignEmpDiv = document.getElementById("assignEmployeeDiv");
 	var requests = document.getElementById("requests");
 	
-	if (action == "Approve/Deny a Request") {
+	console.log(action);
+	if (action !== "Approve/Deny a Request") {
 		requests.setAttribute("style", "display:none");
 		assignEmpDiv.setAttribute("style", "visibility:visible");
 	} else {

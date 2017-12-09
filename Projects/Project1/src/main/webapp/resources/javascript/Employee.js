@@ -3,6 +3,41 @@ window.onload = function() {
 	displayUsername();
 	displayRequests();
 
+	document.getElementById("eventName").addEventListener("change", showProjectedCost);
+	document.getElementById("eventCost").addEventListener("keyup", showProjectedCost);
+	console.log("hello");
+}
+
+function showProjectedCost() {
+	console.log("this changed");
+	var eventName = document.getElementById("eventName").value;
+	var eventCost = document.getElementById("eventCost").value;
+	
+	if (eventName == null || eventCost == null)
+		return;
+	
+	var url = "GetProjectedCost";
+	var xhr = new XMLHttpRequest();
+	
+	var fd = new FormData();
+	fd.append("eventName", eventName);
+	fd.append("eventCost", eventCost);
+
+	xhr.onreadystatechange = function() {
+		if(xhr.readyState == 4 && xhr.status == 200){
+
+			var xmlText = xhr.responseXML;
+			var response = xmlText.getElementsByTagName("root");
+			var projectedResult = document.getElementById("projectedResult");
+			
+			projectedResult.innerHTML = "$" + response[0].childNode[0].innerHTML
+		} else if(xhr.readyState == 4 && xhr.status != 200){
+			console.log(xhr.status);
+		}
+	}
+
+	xhr.open("POST", url);
+	xhr.send(fd);
 }
 
 function displayUsername() {

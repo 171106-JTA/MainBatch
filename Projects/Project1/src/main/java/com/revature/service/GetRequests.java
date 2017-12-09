@@ -31,7 +31,8 @@ public class GetRequests {
 						"<gradingFormat>" + r.getGradingFormat() + "</gradingFormat>" +
 						"<submissionDate>" + r.getSubmissionDate().toString() + "</submissionDate>" +
 						"<dateOfEvent>" + r.getDateOfEvent().toString() + "</dateOfEvent>" +
-						"<file>" + r.getInputStream() + "</file><id>" + r.getId() + "</id></request>";
+						"<file>" + r.getInputStream() + "</file><id>" + r.getId() + "</id>"
+								+ "<status>" + r.getStatus() + "</status></request>";
 			}
 			myXml += "</root>";
 			out.println(myXml);

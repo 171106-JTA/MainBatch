@@ -16,13 +16,13 @@
 <title>Employee Requests</title>
 </head>
 <body>
-	<h3 id="welcome">Welcome.</h3>
-	<h5 id="adminTitle"></h5>
+	<h3 id="welcome" style="margin-left: 10px">Welcome.</h3>
+	<h5 id="adminTitle" style="margin-left: 10px"></h5>
 	<div class="col-lg-12" align="center">
 		<div>
 			<h3>Employee Tuition Request Forms</h3>
 		</div>
-		<div class="next" >
+		<div class="next">
 			<select name="actionType" id="actionType">
 				<option value="Approve">Approve/Deny a Request</option>
 				<option value="Request more information">Request more
@@ -30,17 +30,20 @@
 			</select>
 		</div>
 		<div class="next" style="display: none" id="requestInfoDiv">
-			<input type="text" name="messageToEmployee" style="width:300px; height:100px" placeholder="Message">
-			<input type="submit" name="sendMessage" id="sendMessageToEmployee" value="Send">
+			<input type="text" name="messageToEmployee"
+				style="width: 300px; height: 100px" placeholder="Message"> <input
+				type="submit" name="sendMessage" id="sendMessageToEmployee"
+				value="Send">
 		</div>
 		<div id="approveRequestForm">
-			<form>
+			<form method="post" action="RequestResponse">
 				<div class="next">
 					<span>Select an ID</span> <input type="number" id="reqIDInput"
 						name="reqIDInput" style="Width: 50px" placeholder="ID">
 				</div>
 				<div class="next">
-					<select name="approve" id="approveOption" required>
+					<select name="approveDenyRequest"
+						onsubmit="requestResponseSubmit()" id="approveOption" required>
 						<option value="Approve">Approve</option>
 						<option value="Deny">Deny</option>
 					</select> <span><input type="submit" name="submitApproval"
@@ -54,21 +57,27 @@
 		</div>
 		<div>
 			<p id="AJAXErrorRequests" style="color: red"></p>
-			<table id="requestTable" class="active table-bordered">
-				<tr>
-					<th width="40px">Id</th>
-					<th width="100px">Employee Username</th>
-					<th width="100px">Employee First Name</th>
-					<th width="100px">Employee Last Name</th>
-					<th width="100px">Event</th>
-					<th width="100px">Location</th>
-					<th width="100px">Cost</th>
-					<th width="100px">Description</th>
-					<th width="100px">Grading Format</th>
-					<th width="100px">Request Submission Date</th>
-					<th width="100px">Date of Event</th>
-					<th width="10px">File</th>
-				</tr>
+			<table id="requestTable" class="table table-bordered">
+				<thead>
+					<tr>
+						<th width="40px">Id</th>
+						<th width="100px">Employee Username</th>
+						<th width="100px">Employee First Name</th>
+						<th width="100px">Employee Last Name</th>
+						<th width="75px">Event</th>
+						<th width="100px">Location</th>
+						<th width="50px">Cost</th>
+						<th width="150px">Description</th>
+						<th width="100px">Grading Format</th>
+						<th width="100px">Request Submission Date</th>
+						<th width="100px">Date of Event</th>
+						<th width="10px">File</th>
+						<th width="10px">Status</th>
+					</tr>
+				</thead>
+				<tbody id="requestTableBody">
+				
+				</tbody>
 			</table>
 		</div>
 	</div>

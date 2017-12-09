@@ -119,4 +119,24 @@
     <servlet-name>DoesEmployeeExist</servlet-name>
     <url-pattern>/DoesEmployeeExist</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RequestResponse</display-name>
+    <servlet-name>RequestResponse</servlet-name>
+    <servlet-class>com.revature.servlets.RequestResponse</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RequestResponse</servlet-name>
+    <url-pattern>/RequestResponse</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetProjectedCost</display-name>
+    <servlet-name>GetProjectedCost</servlet-name>
+    <servlet-class>com.revature.servlets.GetProjectedCost</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetProjectedCost</servlet-name>
+    <url-pattern>/GetProjectedCost</url-pattern>
+  </servlet-mapping>
 </web-app>

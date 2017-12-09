@@ -23,7 +23,7 @@ public class TRMSDao {
 	private static TRMSDao dao;
 
 	private TRMSDao() {}
-	
+
 	/**
 	 * 
 	 * @param username
@@ -62,7 +62,7 @@ public class TRMSDao {
 		}
 	}
 
-	
+
 	/**
 	 * 
 	 * @param username
@@ -223,7 +223,7 @@ public class TRMSDao {
 		}
 
 		try(Connection conn = ConnectionUtil.getConnection()){
-			
+
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, req.getEmp().getUsername().toLowerCase());
 			ps.setString(2, req.getEvent());
@@ -247,7 +247,7 @@ public class TRMSDao {
 			close(ps);
 		}
 	}
-	
+
 	public List<Request> getRequests(String username) {
 		List<Request> requests = new ArrayList<Request>();
 
@@ -277,13 +277,13 @@ public class TRMSDao {
 				final int eventCost = rs.getInt("REQ_COST");
 				final String gradingFormat = rs.getString("REQ_GRADINGFORMAT");
 				final String eventDescription = rs.getString("REQ_DESCRIPTION");
+				final String status = rs.getString("REQ_STATUS");
 
 				final Blob data = rs.getBlob("REQ_FILES");
 				final InputStream reqFile = data.getBinaryStream();
 
 				final Request req = new Request(id, username, eventName, eventLocation,
-						eventDescription, eventCost, gradingFormat, submissionDate, eventDate, reqFile);
-				System.out.println("pulling this request from the DB: " + req);
+						eventDescription, eventCost, gradingFormat, submissionDate, eventDate, reqFile, status);
 				requests.add(req);
 			}
 
@@ -296,11 +296,11 @@ public class TRMSDao {
 			close(ps);
 		}
 	}
-	
+
 	/**
 	 * Pull every request from an employee whose direct supervisor = x
 	 * @param dirSupName of direct supervisor
- 	 * @return
+	 * @return
 	 */
 	public List<Request> getRequestsAsDirectSupervisor(String dirSupName) {
 		List<Request> requests = new ArrayList<Request>();
@@ -337,7 +337,7 @@ public class TRMSDao {
 				final int eventCost = rs.getInt("REQ_COST");
 				final String gradingFormat = rs.getString("REQ_GRADINGFORMAT");
 				final String eventDescription = rs.getString("REQ_DESCRIPTION");
-				
+
 				Employee emp = new Employee(empUsername, fname, lname);
 
 				final Blob data = rs.getBlob("REQ_FILES");
@@ -466,6 +466,33 @@ public class TRMSDao {
 
 			System.out.println("rows affected from adding a supervisor to employee " + empUsername.toLowerCase() + " is " + affected);
 
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally{
+			close(ps);
+		}
+	}
+
+	public void approveDenyRequest(int reqIDInput, String reqResponse) {
+
+		PreparedStatement ps = null;
+
+		final String sql = "UPDATE REQUEST "
+				+ "SET STATUS = upper(?) "
+				+ "WHERE REQ_ID = ?";
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
+		try(Connection conn = ConnectionUtil.getConnection()){
+
+			ps = conn.prepareStatement(sql);
+
+			ps.setString(1, reqResponse);
+			ps.setInt(2, reqIDInput);
+			ps.executeUpdate();
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally{

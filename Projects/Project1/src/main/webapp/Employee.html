@@ -11,7 +11,6 @@
 	href="resources/css/StylingTRMS.css">
 <meta charset="UTF-8">
 <script src="resources\javascript\Employee.js"></script>
-<script src="resources/javascript/DisplayUsername.js"></script>
 <title>Employee Home</title>
 </head>
 <body>
@@ -29,7 +28,7 @@
 				<form action="SubmitRequest" method="post"
 					enctype="multipart/form-data">
 					<div class="next">
-						Event <select name="event" required>
+						Event <select id="eventName" name="event" required>
 							<option value="Univeristy Course">University Course</option>
 							<option value="Seminar">Seminar</option>
 							<option value="Certification Preparation Class">Certification
@@ -46,8 +45,8 @@
 						</select>
 					</div>
 					<div class="next">
-						Cost <input type="number" name="eventCost" placeholder="Cost" step="0.01"
-							required>
+						Cost <input type="number" id="eventCost" name="eventCost" placeholder="Cost"
+							step="0.01" required>
 					</div>
 					<div class="next">
 						Date of Event <input type="date" name="dateOfEvent"
@@ -62,8 +61,8 @@
 							placeholder="Please provide a description of the event" required></textarea>
 					</div>
 					<div class="next">
-						Additional Files <input name="fileUpload" type="file" value="fileupload"
-							id="fileupload">
+						Additional Files <input name="fileUpload" type="file"
+							value="fileupload" id="fileupload">
 					</div>
 					<div class="next">
 						<input type="Submit" value="Submit Request">
@@ -73,6 +72,9 @@
 					<p id="requestResult"></p>
 				</div>
 			</div>
+		</div>
+		<div class="next">
+			<p id="projectedResult" style="color:green"></p>
 		</div>
 		<div class="col-lg-4" align="center">
 			<h4>Not sure yet</h4>

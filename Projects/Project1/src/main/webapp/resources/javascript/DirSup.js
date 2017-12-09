@@ -5,6 +5,10 @@ window.onload = function() {
 	document.getElementById("actionType").addEventListener("change", displayAction);
 }
 
+function requestResponseSubmit() {
+	window.location.reload(false);
+}
+
 function displayAction() {
 	
 	var action = document.getElementById("actionType").value;
@@ -54,10 +58,9 @@ function getRequests() {
 		if(xhr.readyState == 4 && xhr.status == 200){
 
 			var xmlText = xhr.responseXML;
-
 			var response = xmlText.getElementsByTagName("request");
-
 			var resultTable = document.getElementById("requestTable");
+			var resultTableBody = document.getElementById("requestTableBody");
 
 			for (var i = 0; i < response.length; i++) {
 				
@@ -74,6 +77,7 @@ function getRequests() {
 				var td10 = document.createElement("td");
 				var td11 = document.createElement("td");
 				var id = document.createElement("td");
+				var status = document.createElement("td");
 				
 				td1.innerHTML = response[i].childNodes[0].innerHTML;
 				td2.innerHTML = response[i].childNodes[1].innerHTML;
@@ -85,8 +89,9 @@ function getRequests() {
 				td8.innerHTML = response[i].childNodes[7].innerHTML;
 				td9.innerHTML = response[i].childNodes[8].innerHTML;
 				td10.innerHTML = response[i].childNodes[9].innerHTML;
-				td11.innerHTML = response[i].childNodes[10].innerHTML;
+				td11.innerHTML = "<a href='ViewFile.html'>View File</a>";
 				id.innerHTML = response[i].childNodes[11].innerHTML;
+				status.innerHTML = response[i].childNodes[12].innerHTML;
 				
 				row.appendChild(id);
 				row.appendChild(td1);
@@ -100,7 +105,9 @@ function getRequests() {
 				row.appendChild(td9);
 				row.appendChild(td10);
 				row.appendChild(td11);
-				resultTable.appendChild(row);
+				row.appendChild(status);
+				resultTableBody.appendChild(row);
+				resultTable.append(resultTableBody);
 			}
  		
 

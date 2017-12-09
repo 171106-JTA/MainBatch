@@ -10,6 +10,7 @@ public class Request {
 	private InputStream inputStream;
 	private int id;
 	private Employee emp;
+	private String status;
 	
 	/**
 	 * A constructor used when a user submits a request.
@@ -24,7 +25,7 @@ public class Request {
 	 * @param inputStream
 	 */
 	public Request(Employee emp, String event, String location, String description,
-			double cost, String gradingFormat, Date dateOfEvent, InputStream inputStream) {
+			double cost, String gradingFormat, Date dateOfEvent, InputStream inputStream, String status) {
 		this.event = event;
 		this.location = location;
 		this.description = description;
@@ -32,8 +33,22 @@ public class Request {
 		this.gradingFormat = gradingFormat;
 		this.dateOfEvent = dateOfEvent;
 		this.inputStream = inputStream;
+		this.status = status;
 	}
 	
+	/**
+	 * 
+	 * @param id
+	 * @param emp
+	 * @param event
+	 * @param location
+	 * @param description
+	 * @param cost
+	 * @param gradingFormat
+	 * @param submissionDate
+	 * @param dateOfEvent
+	 * @param inputStream
+	 */
 	public Request(int id, Employee emp, String event, String location, String description,
 			double cost, String gradingFormat, Date submissionDate, Date dateOfEvent, InputStream inputStream) {
 		this.id = id;
@@ -63,7 +78,7 @@ public class Request {
 	 * @param inputStream
 	 */
 	public Request(int id, String empUsername, String event, String location, String description,
-			double cost, String gradingFormat, Date submissionDate, Date dateOfEvent, InputStream inputStream) {
+			double cost, String gradingFormat, Date submissionDate, Date dateOfEvent, InputStream inputStream, String status) {
 		this.event = event;
 		this.location = location;
 		this.description = description;
@@ -73,6 +88,7 @@ public class Request {
 		this.inputStream = inputStream;
 		this.id = id;
 		this.submissionDate = submissionDate;
+		this.status = status;
 	}
 	
 	public Employee getEmp() {
@@ -109,6 +125,15 @@ public class Request {
 
 	public String getGradingFormat() {
 		return gradingFormat;
+	}
+
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public void setGradingFormat(String gradingFormat) {
