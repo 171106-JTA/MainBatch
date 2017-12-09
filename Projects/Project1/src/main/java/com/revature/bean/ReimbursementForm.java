@@ -48,6 +48,7 @@ public class ReimbursementForm {
 	private int approvalByBenCo;
 	private int urgency;
 
+	//Legacy constructor
 	public ReimbursementForm(String username, String year, String month, String day, String hour, String minute,
 			String description, String cost, String gradingFormat, String eventType, String street, String city,
 			String state, String zip) {
@@ -67,7 +68,8 @@ public class ReimbursementForm {
 		this.state = state;
 		this.zip = zip;
 	}
-
+	
+	//Constructor with default values
 	public ReimbursementForm(String username, String year, String month, String day, String hour, String minute,
 			String submitYear, String submitMonth, String submitDay, String submitHour, String submitMinute,
 			String description, String cost, String gradingFormat, String eventType, String street, String city,
@@ -105,7 +107,8 @@ public class ReimbursementForm {
 
 		this.urgency = urgency;
 	}
-
+	
+	//All feilds except reimbursementID
 	public ReimbursementForm(String username, String year, String month, String day, String hour, String minute,
 			String submitYear, String submitMonth, String submitDay, String submitHour, String submitMinute,
 			String description, String cost, String gradingFormat, String eventType, String street, String city,
@@ -123,6 +126,46 @@ public class ReimbursementForm {
 		this.submitMonth = submitMonth;
 		this.submitDay = submitDay;
 		this.submitHour = submitHour;
+		this.description = description;
+		this.cost = cost;
+		this.gradingFormat = gradingFormat;
+		this.eventType = eventType;
+		this.street = street;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
+		this.workRelatedJustification = workRelatedJustification;
+		this.passingGrade = passingGrade;
+		this.status = status;
+		this.exceedsFundsFlag = exceedsFundsFlag;
+		this.reason_for_excess_funds = reason_for_excess_funds;
+		this.reason_for_denial = reason_for_denial;
+		this.approvalByDirectSupervisor = approvalByDirectSupervisor;
+		this.approvalByDepartmentHead = approvalByDepartmentHead;
+		this.approvalByBenCo = approvalByBenCo;
+		this.urgency = urgency;
+	}
+	
+	//All Fields
+	public ReimbursementForm(int reimbursementID, String username, String year, String month, String day, String hour,
+			String minute, String submitYear, String submitMonth, String submitDay, String submitHour,
+			String submitMinute, String description, String cost, String gradingFormat, String eventType, String street,
+			String city, String state, String zip, String workRelatedJustification, int passingGrade, int status,
+			int exceedsFundsFlag, String reason_for_excess_funds, String reason_for_denial,
+			int approvalByDirectSupervisor, int approvalByDepartmentHead, int approvalByBenCo, int urgency) {
+		super();
+		this.reimbursementID = reimbursementID;
+		this.username = username;
+		this.year = year;
+		this.month = month;
+		this.day = day;
+		this.hour = hour;
+		this.minute = minute;
+		this.submitYear = submitYear;
+		this.submitMonth = submitMonth;
+		this.submitDay = submitDay;
+		this.submitHour = submitHour;
+		this.submitMinute = submitMinute;
 		this.description = description;
 		this.cost = cost;
 		this.gradingFormat = gradingFormat;

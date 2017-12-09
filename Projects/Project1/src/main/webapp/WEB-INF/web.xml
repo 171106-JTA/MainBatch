@@ -49,4 +49,14 @@
     <servlet-name>getUserForms</servlet-name>
     <url-pattern>/getUserForms</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>getFormsNeedingApproval</display-name>
+    <servlet-name>getFormsNeedingApproval</servlet-name>
+    <servlet-class>com.revature.servlets.getFormsNeedingApproval</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>getFormsNeedingApproval</servlet-name>
+    <url-pattern>/getFormsNeedingApproval</url-pattern>
+  </servlet-mapping>
 </web-app>

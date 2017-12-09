@@ -227,6 +227,7 @@ CREATE OR REPLACE PROCEDURE newReimbursementForm(
     event_zip IN VARCHAR,
     event_apt IN VARCHAR,
     date_and_time IN VARCHAR,
+    submit_date_and_time IN VARCHAR,
     description IN VARCHAR,
     eventcost IN VARCHAR,
     grading_format IN VARCHAR,
@@ -270,7 +271,7 @@ BEGIN
     VALUES (
         username,
         TO_TIMESTAMP (date_and_time, 'DD-Mon-YYYY HH24:MI'),
-        to_date('2005/03/01 10:05:13','YYYY/MM/DD HH:MI:SS'),
+        TO_TIMESTAMP (submit_date_and_time, 'DD-Mon-YYYY HH24:MI'),
         new_address_id,
         description, 
         eventcost,

@@ -8,6 +8,7 @@ public interface TrmsDao {
 	public String login(String username, String password);
 	public void insertNewReimbursementForm(ReimbursementForm newForm);
 	public List<ReimbursementForm> getUserForms(String username);
+	public List<ReimbursementForm> getFormsByApprovalStatus(int form_status, String permission);
 	public List<String> getAddress(int addressID);
 	public String getGradingFormat(int gradingFormatID);
 	public String getEventType(int eventTypeID);

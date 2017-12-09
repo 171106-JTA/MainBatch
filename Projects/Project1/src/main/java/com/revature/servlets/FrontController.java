@@ -71,7 +71,13 @@ public class FrontController extends HttpServlet {
 			rd = request.getRequestDispatcher("getUserForms");
 			rd.forward(request, response);
 			break;
+		case "getformsneedingapproval":
+			System.out.println("In FrontController: getFormsNeedingApproval");
+			rd = request.getRequestDispatcher("getFormsNeedingApproval");
+			rd.forward(request, response);
+			break;
 		}
+		System.out.println("After Switch Statement");
 	}
 
 }

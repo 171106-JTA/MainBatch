@@ -57,11 +57,14 @@ public class TrmsDaoImplement implements TrmsDao {
 	public void insertNewReimbursementForm(ReimbursementForm newForm) {
 		CallableStatement cs1 = null;
 		try (Connection conn = ConnectionUtil.getConnection()) {
-			String sql = "{call newReimbursementForm(?, ?, ?, " + "?, ?, ?, " + "?, ?, ?, " + "?, ?, ?, " + "?)}";
+			String sql = "{call newReimbursementForm(?, ?, ?, " + "?, ?, ?, " + "?, ?, ?, " + "?, ?, ?, " + "?, ?)}";
 			String username = newForm.getUsername();
 			String[] months = { "Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec" };
 			String DateAndTime = newForm.getDay() + "-" + months[Integer.parseInt(newForm.getMonth()) - 1] + "-"
 					+ newForm.getYear() + " " + newForm.getHour() + ":" + newForm.getMinute();
+			String SubmitDateAndTime = null;
+			
+			
 			cs1 = conn.prepareCall(sql);
 			cs1.setString(1, username);
 			cs1.setString(2, newForm.getStreet());
@@ -70,12 +73,13 @@ public class TrmsDaoImplement implements TrmsDao {
 			cs1.setString(5, newForm.getZip());
 			cs1.setString(6, "-1"); // Ignore apt numbers for now.
 			cs1.setString(7, DateAndTime);
-			cs1.setString(8, newForm.getDescription());
-			cs1.setString(9, newForm.getCost());
-			cs1.setString(10, newForm.getGradingFormat());
-			cs1.setString(11, newForm.getEventType());
-			cs1.setString(12, null);
-			cs1.setInt(13, 70);
+			cs1.setString(8, SubmitDateAndTime);
+			cs1.setString(9, newForm.getDescription());
+			cs1.setString(10, newForm.getCost());
+			cs1.setString(11, newForm.getGradingFormat());
+			cs1.setString(12, newForm.getEventType());
+			cs1.setString(13, null);
+			cs1.setInt(14, 70);
 
 			int rows_changed = cs1.executeUpdate();
 			if (rows_changed == 0) {
@@ -109,10 +113,8 @@ public class TrmsDaoImplement implements TrmsDao {
 			ps.setString(1, username);
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				// String[] months = { "Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug",
-				// "Sept", "Oct", "Nov",
-				// "Dec" };
-
+				//Get and use the form's username (rather than the existing 'username' variable from the session)
+				String form_username = rs.getString("username"); 
 				String DateAndTime = rs.getString("eventDateAndTime");
 				String[] splitDateAndTime = DateAndTime.split("-| |:");
 				System.out.println(splitDateAndTime[0]);
@@ -134,8 +136,106 @@ public class TrmsDaoImplement implements TrmsDao {
 				String state = address.get(2);
 				String zip = address.get(3);
 
-				Forms.add(new ReimbursementForm(username, year, month, day, hour, minute, description, cost,
+				Forms.add(new ReimbursementForm(form_username, year, month, day, hour, minute, description, cost,
 						gradingFormat, eventType, street, city, state, zip));
+				System.out.println(Forms.get(Forms.size() - 1));
+			}
+		} catch (SQLException e) {
+			// To Do: This catch statement executes if user was not inserted into the
+			// database.
+			// How to return the stacktrace to Driver to be logged???
+			e.printStackTrace();
+		} finally {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return Forms;
+	}
+
+	public List<ReimbursementForm> getFormsByApprovalStatus(int form_status, String permission) {
+		System.out.println("Inside dao: getFormsByApprovalStatus");
+
+		String approval_column_name = null;
+		if (permission.equals("department_head")) {
+			approval_column_name = "approval_by_department_head";
+		} else if (permission.equals("direct_supervisor")) {
+			approval_column_name = "approval_by_direct_supervisor";
+		} else if (permission.equals("benco")) {
+			approval_column_name = "approval_by_benco";
+		}
+		System.out.println("approval column name: " + approval_column_name);
+
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<ReimbursementForm> Forms = new ArrayList<ReimbursementForm>();
+
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			// String sql = "{call getUserForms(?)}";\
+			String sql = "SELECT * FROM ReimbursementForm WHERE status = ?";
+			ps = conn.prepareCall(sql);
+			ps.setInt(1, form_status);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				int reimbursementID = rs.getInt("reimbursementID");
+				String form_username = rs.getString("username");
+				
+				//Event Date and Time
+				String DateAndTime = rs.getString("eventDateAndTime");
+				String[] splitDateAndTime = DateAndTime.split("-| |:");
+				System.out.println(splitDateAndTime[0]);
+				String year = splitDateAndTime[0];
+				String month = splitDateAndTime[1];
+				String day = splitDateAndTime[2];
+				String hour = splitDateAndTime[3];
+				String minute = splitDateAndTime[4];
+				
+				//Submission Date and Time
+//				String submitDataAndTime = rs.getString("submissionDateAndTime");
+//				String splitDateAndTime = DateAndTime.split("-| |:");
+				String submitYear = null;
+				String submitMonth = null;
+				String submitDay = null;
+				String submitHour = null;
+				String submitMinute = null;
+				
+				String description = rs.getString("eventDescription");
+				String cost = rs.getString("eventCost");
+				String gradingFormat = getGradingFormat(rs.getInt("gradingFormatID"));
+				String eventType = getEventType(rs.getInt("eventTypeID"));
+
+				List<String> address = getAddress(rs.getInt("eventLocation"));
+
+				String street = address.get(0);
+				String city = address.get(1);
+				String state = address.get(2);
+				String zip = address.get(3);
+				
+				String workRelatedJustification = rs.getString("work_related_justification");
+				int passingGrade = rs.getInt("passing_grade");
+				int status = rs.getInt("status");
+				int exceedsFundsFlag = rs.getInt("exceeds_funds");
+				String reason_for_excess_funds = rs.getString("reason_for_excess_funds");
+				String reason_for_denial = rs.getString("reason_for_denial");
+				int approvalByDirectSupervisor = rs.getInt("approval_by_direct_supervisor");
+				int approvalByDepartmentHead = rs.getInt("approval_by_department_head");
+				int approvalByBenCo = rs.getInt("approval_by_benco");
+				int urgency = rs.getInt("urgency");
+				
+				
+//				Forms.add(new ReimbursementForm(form_username, year, month, day, hour, minute, description, cost,
+//						gradingFormat, eventType, street, city, state, zip));
+				
+				Forms.add(new ReimbursementForm(reimbursementID, form_username, year, month, day, hour,
+						minute, submitYear, submitMonth, submitDay, submitHour,
+						submitMinute, description, cost, gradingFormat, eventType, street,
+						city, state, zip, workRelatedJustification, passingGrade, status,
+						exceedsFundsFlag, reason_for_excess_funds, reason_for_denial,
+						approvalByDirectSupervisor, approvalByDepartmentHead, approvalByBenCo, urgency));
 				System.out.println(Forms.get(Forms.size() - 1));
 			}
 		} catch (SQLException e) {
