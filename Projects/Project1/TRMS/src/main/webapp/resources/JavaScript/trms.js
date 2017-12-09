@@ -1,30 +1,27 @@
-window.onload = function(){
-	var d3 = document.getElementById("d3");
-	d3.addEventListener("click", showPendingRequestDiv, true);
+function checkDashesAndColon(str){
+	var dashes = str.match(/-/g);
+	var colon = str.match(/:/g);
+	if(dashes !== null && dashes.length === 2){
+		if(colon !== null && colon.length === 1){
+			return true;
+		}
+	}
+	
+	return false;
 }
 
-function showPendRequestDiv(){
-	var x = document.getElementById("requestForm");
-	hide(x);
-	x = document.getElementById("additionalinfo");
-	hide(x);
-	x = document.getElementById("InfoRequests");
-	hide(x);
-}
 
-function hide(x){
-	    if (x.style.display === "none") {
-	        x.style.display = "block";
-	    } else {
-	        x.style.display = "none";
-	    }
-}
 
 function validateRequestForm(){
 	var form = document.forms["reimburserequest"];
 	var cost = form["cost"].value;
 	var date = form["datetime"].value;
 	var error = document.getElementById("formError");
+	
+	if(!checkDashesAndColon(date)){
+		error.innerHTML = "Invalid Date: Wrong Separators";
+		return false;
+	}
 	
 	var splitDateTime = date.split(" ");
 	

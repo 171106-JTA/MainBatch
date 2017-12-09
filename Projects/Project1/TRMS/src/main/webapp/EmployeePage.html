@@ -1,69 +1,122 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<meta charset="UTF-8">
+<title>Employee Page</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 <script src="resources/JavaScript/trms.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSiteName</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#" id="d3">Pending Table</a></li>
-      <li><a href="#">Page 2</a></li>
-      <li><a href="#">Page 3</a></li>
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#requestForm">TRMS</a>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Disabled</a>
+      </li>
     </ul>
   </div>
 </nav>
 
 
-	<div id="requestForm" class="well">
-		<h1>Reimbursement Form</h1>
+	<div id="requestForm" class="card" style="width:40rem">
+		<div class="card-block">
+			<h3 class="card-title">Reimbursement Form</h3>
+		
 		<form method="post" action="submit.act" name="reimburserequest" onsubmit="return validateRequestForm()">
-			<p id="formError"></p>
-			<ul style="list-style-type:none">
-				<li>First Name</li>
-				<li><input type="text" name="fname" required></li>
-				<li>Last Name</li>
-				<li><input type="text" name="lname" required></li>
-				<li>Date-Time</li>
-				<li><input type="text" name="datetime" required></li>
-				<li>Location</li>
-				<li><input type="text" name="location" required></li>
-				<li>Description</li>
-				<li><input type="text" name="description" required></li>
-				<li>Cost</li>
-				<li><input type="text" name="cost" required></li>
+				<div class="form-group row">
+					<label for="first_name">First Name</label>
+					<div class="col-5">
+						<input type="text" class="form-control" name="fname" required>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="last_name">Last Name</label>
+					<div class="col-5">
+						<input type="text" class="form-control" name="lname" required>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="date_time">Date and Time</label>
+					<div class="col-5">
+						<input type="text" class= "form-control" name="datetime" placeholder="MM/DD/YYYY HH:MM" required>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="location">Location</label>
+					<div class="col-5">
+						<input type="text" class="form-control" name="location" required>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="description">Description</label>
+					<textarea class="form-control" name="description" required></textarea>
+				</div>
+				<div class="form-group row">
+					<label for="cost">Cost</label>
+					<div class="col-5">
+						<input type="text" class="form-control" name="cost" min="1" max="1000" required>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="event_type">Event Type</label>
+					<div class="col-5">
+						<select name="event" class="form-control">
+							<option value="1">University Course</option>
+							<option value="2">Seminars</option>
+							<option value="3">Certification Prep Class</option>
+							<option value="4">Certification</option>
+							<option value="5">Technical Training</option>
+							<option value="6" selected>Other</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="grading_format">Grade Format</label>
+				</div>
+				<div class="form-check">
+					<div>
+						<input type="radio" name="grading" value="1" checked>Letter
+					</div>
+					<div>
+						<input type="radio" name="grading" value="2">P/F
+					</div>
+				</div>
 				
-				<li>
-					Event Type<br>
-					<select name="event">
-						<option value="1">University Course</option>
-						<option value="2">Seminars</option>
-						<option value="3">Certification Prep Class</option>
-						<option value="4">Certification</option>
-						<option value="5">Technical Training</option>
-						<option value="6" selected>Other</option>
-					</select>
-				</li>
-				<li>
-					Grading Format<br>
-					<input type="radio" name="grading" value="1" checked>Letter
-					<input type="radio" name="grading" value="2">P/F
-				</li>
-				<li>TODO Passing grade</li>
-				<li>Work-Related Justification</li>
-				<li><input type="text" name="justification" required></li>
-			 	<li><input type="file" name="pic" accept="image/*"></li>
-	
-				<li><input type="submit" name="submit"></li>
-			</ul>
+				<div class="form-group row">
+					<label for="grade">Grade Received</label>
+					<div class="col-3">
+						<input type="text" class="form-control" name="grade" required>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="justification">Work-Related Justification</label>
+					<textarea class="form-control" name="justification" required></textarea>
+				</div>
+				<div class="form-group row">
+					<label for="inputfile">Additional Files</label>
+					<input type="file" name="file">
+				</div>
+				<div class="row">
+					<button class="btn btn-info" type="submit" name="submit">Submit</button>		
+					<div class="col-5">
+						<p id="formError" style="color:red"></p>
+					</div>
+					
+				</div>
+				
 		</form>
+	</div>
 	</div>
 	
 	<div id="pendingRequestDiv" class="well">
