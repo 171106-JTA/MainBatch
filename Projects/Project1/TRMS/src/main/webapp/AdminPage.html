@@ -4,9 +4,11 @@
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
 <script src="resources/JavaScript/admin.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 </head>
 <body>
-	<div id="approvalDiv">
+	<div id="approvalDiv" class="well">
 		<form action="approval.act" method="POST">
 			<input type="text" placeholder="Request Id" name="rrId">
 			<select name="decision">
@@ -18,7 +20,7 @@
 		</form>
 	</div>
 
-	<div id="allRequestDiv">
+	<div id="allRequestDiv" class="well">
 		<p id="AJAXError"></p>
 		<input type="button" value="Show PendRequests" onclick="getAllRequests()">
 		<table id="pendingTable" border="2px">
@@ -27,14 +29,14 @@
 			<th>Direct Supervisor</th><th>Dept Head</th><th>BenCo</th></tr>
 		</table>
 	</div>
-	<div id="askInfoRequest">
+	<div id="askInfoRequest" class="well">
 		<form action="info_request.act" method="POST">
 			<input type="text" placeholder="Request Id" name="rrId">
 			<input type="submit" value="submit">
 		</form>
 	</div>
 	
-	<div id="InfoRequests">
+	<div id="InfoRequests" class="well">
 		<input type="button" value="Show InfoRequests" onclick="getAllInfoRequests()">
 		<table id="infoTable">
 		<tr><td>Info Request ID</td><td>Request ID</td><td>Requestee Id</td><td>Info</td><td>file Name</td><td>Blob</td></tr>

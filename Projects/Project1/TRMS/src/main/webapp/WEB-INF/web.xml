@@ -69,4 +69,14 @@
     <servlet-name>GetInfoRequest</servlet-name>
     <url-pattern>/GetInfoRequest</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SubmitAdditionalInfo</display-name>
+    <servlet-name>SubmitAdditionalInfo</servlet-name>
+    <servlet-class>com.banana.servlet.SubmitAdditionalInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubmitAdditionalInfo</servlet-name>
+    <url-pattern>/SubmitAdditionalInfo</url-pattern>
+  </servlet-mapping>
 </web-app>

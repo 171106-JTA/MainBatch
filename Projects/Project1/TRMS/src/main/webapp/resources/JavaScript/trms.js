@@ -1,3 +1,24 @@
+window.onload = function(){
+	var d3 = document.getElementById("d3");
+	d3.addEventListener("click", showPendingRequestDiv, true);
+}
+
+function showPendRequestDiv(){
+	var x = document.getElementById("requestForm");
+	hide(x);
+	x = document.getElementById("additionalinfo");
+	hide(x);
+	x = document.getElementById("InfoRequests");
+	hide(x);
+}
+
+function hide(x){
+	    if (x.style.display === "none") {
+	        x.style.display = "block";
+	    } else {
+	        x.style.display = "none";
+	    }
+}
 
 function validateRequestForm(){
 	var form = document.forms["reimburserequest"];

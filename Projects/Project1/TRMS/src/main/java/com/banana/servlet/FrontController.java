@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.banana.service.LogOut;
+
 /**
  * Servlet implementation class FrontController
  */
@@ -61,6 +63,15 @@ public class FrontController extends HttpServlet {
 			case "info_request":
 				rd = request.getRequestDispatcher("GetInfoRequest");
 				rd.include(request, response);
+				break;
+			case "submit_info":
+				rd = request.getRequestDispatcher("SubmitAdditionalInfo");
+				rd.include(request, response);
+				break;
+			case "logout":
+				LogOut.logout(request);
+				rd = request.getRequestDispatcher("index.html");
+				rd.forward(request, response);
 				break;
 			default: 
 				response.sendError(404);

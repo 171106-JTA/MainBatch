@@ -2,6 +2,7 @@ package com.banana.dao;
 
 import static com.banana.util.CloseStreams.close;
 
+import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+
+import javax.servlet.http.Part;
 
 import com.banana.bean.ReimburseRequest;
 import com.banana.util.ConnectionUtil;
@@ -101,8 +104,30 @@ public class UpdateDAOImpl implements UpdateDAO{
 	}
 	
 	@Override
-	public void UpdateInfoRequest() {
-		// TODO Auto-generated method stub
+	public void updateInfoRequest(int irId, String additionInfo, Part file) {
+		String sql = "Update Info_Request SET  ADDITIONAL_INFO = ?, MEDIA = ?, FILENAME = ?" +
+				"WHERE irId = ?";
+		PreparedStatement ps = null;
+	
+		try(Connection conn = ConnectionUtil.getConnection()){
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, additionInfo);
+			try {
+				ps.setBlob(2, file.getInputStream());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			ps.setString(3, file.getName());
+			ps.setInt(4,  irId);
+			
+			ps.executeQuery();
+			commitChanges();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(ps);
+		}
 		
 	}
 	

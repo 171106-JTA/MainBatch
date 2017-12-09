@@ -1,5 +1,7 @@
 package com.banana.dao;
 
+import javax.servlet.http.Part;
+
 import com.banana.bean.ReimburseRequest;
 
 public interface UpdateDAO {
@@ -8,5 +10,5 @@ public interface UpdateDAO {
 	public double getPercentage(int eventId);
 	public boolean setNewAmount(int empId, double newAmount);
 	public void insertInfoRequest(int rrId, int empId);
-	public void UpdateInfoRequest();
+	public void updateInfoRequest(int irId, String additionInfo, Part file);
 }
