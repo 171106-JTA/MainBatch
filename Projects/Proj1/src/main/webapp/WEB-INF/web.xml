@@ -107,4 +107,34 @@
     <servlet-name>ErrorHandler</servlet-name>
     <url-pattern>/ErrorHandler</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ApproveCase</display-name>
+    <servlet-name>ApproveCase</servlet-name>
+    <servlet-class>com.revature.trms.servlet.ApproveCase</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ApproveCase</servlet-name>
+    <url-pattern>/ApproveCase</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LogoutServlet</display-name>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>com.revature.trms.servlet.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/LogoutServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SettingChange</display-name>
+    <servlet-name>SettingChange</servlet-name>
+    <servlet-class>com.revature.trms.servlet.SettingChange</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SettingChange</servlet-name>
+    <url-pattern>/SettingChange</url-pattern>
+  </servlet-mapping>
 </web-app>

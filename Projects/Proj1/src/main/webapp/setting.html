@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>TRMS- User Dashboard</title>
+<title>TRMS</title>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -18,9 +18,8 @@
 	rel="stylesheet"
 	integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT"
 	crossorigin="anonymous">
+<script src="resources/js/main.js"></script>
 <link rel="stylesheet" type="text/css" href="resources/css/myStyles.css">
-<script src="resources/js/index.js"></script> 
-
 </head>
 <body>
 	<header>
@@ -37,14 +36,14 @@
 				</div>
 				<div class="collapse navbar-collapse" id="navbar-toggle">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="user_dashboard.html">Home</a></li>
+						<li><a href="user_dashboard.html">Home</a></li>
 						<li><a href="make_request.html">Request Reimbursement</a></li>
 						<li><a href="make_approval.html">Approval Reimbursement</a></li>
 
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="setting.html"><span class="glyphicon glyphicon-user"></span>
-								Settings</a></li>
+						<li class="active"><a href="setting.html"><span
+								class="glyphicon glyphicon-user"></span> Settings</a></li>
 						<li><a href="LogoutServlet"><span
 								class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
 					</ul>
@@ -52,12 +51,23 @@
 			</div>
 		</nav>
 	</header>
-	<div class="container">
-		<h1>HOME PAGE</h1>
-		<form action="RequesterTable">
-			<input type="submit">
-		</form>
-	</div>
+	<form method="post" action="SettingChange" name="settingChange">
+		<ul style="list-style-type: none">
+			<li>User Type</li>
+			<li><select name="userType">
+					<option value="default">Default</option>
+					<option value="supervisor">Supervisor</option>
+					<option value="dept_head">Dept. Head</option>
+					<option value="admin">BenCo</option>
+			</select></li>
+			<li>User Type Change Code</li>
+			<li><input type="text" name="changeCode"></li>
+			<li>Supervisor ID</li>
+			<li><input type="number" name="supervisorId"></li>
+			<li><input class="btn btn-primary" type="submit"><input
+				class="btn btn-danger" type="reset"></li>
+		</ul>
+	</form>
 
 </body>
 </html>

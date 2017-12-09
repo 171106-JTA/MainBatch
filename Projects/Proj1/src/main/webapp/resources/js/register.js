@@ -9,8 +9,8 @@ function validateRegistration(){
 		error.innerHTML ="Passwords do not match";
 		return false;
 	}
-	else if(pw.length < 8){
-		error.innerHTML = "Passwords require at least 8 characters";
+	else if(pw.length < 3){
+		error.innerHTML = "Passwords require at least 4 characters";
 		return false;
 	}
 	return true;

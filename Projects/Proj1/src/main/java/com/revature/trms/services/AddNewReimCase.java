@@ -10,14 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.revature.trms.dao.EmployeeDAO;
 import com.revature.trms.dao.ReimCaseDAO;
+import com.revature.trms.model.Employee;
 import com.revature.trms.model.ReimbursementCase;
 
 public class AddNewReimCase {
 	public static void addReimCase(HttpServletRequest request, HttpServletResponse response) {
 		String eventDatestr = request.getParameter("eventDate");
-		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
-		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		EmployeeDAO ed = new EmployeeDAO();
 		Date eventDate = null;
 		try {
 			eventDate = sdf.parse(eventDatestr);
@@ -27,7 +29,7 @@ public class AddNewReimCase {
 		}
 		HttpSession session = request.getSession(true);
 		String employeeId = String.valueOf((session.getAttribute("employeeid")));
-		
+		Employee emp = ed.selectEmployeeById(Integer.parseInt(employeeId));
 		ReimCaseDAO reimdb = new ReimCaseDAO();
 		ReimbursementCase reimCase = new ReimbursementCase(
 				employeeId,
@@ -37,11 +39,9 @@ public class AddNewReimCase {
 				request.getParameter("eventType"),
 				request.getParameter("gradingFormat"),
 				Double.parseDouble(request.getParameter("cost")),
-				request.getParameter("eventDescription")
+				request.getParameter("eventDescription"),
+				emp.getSupervisorId()
 				);
-		System.out.println(reimCase);
-		System.out.println(session.getAttribute("username"));
-		System.out.println(session.getAttribute("employeeid"));
 		try {
 			PrintWriter out = response.getWriter();
 			if(reimdb.insertNewReimCase(reimCase)) {
