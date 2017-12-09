@@ -5,21 +5,29 @@
 <title>Employee Page</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 <script src="resources/JavaScript/trms.js"></script>
+<style>
+body { 
+    padding-top: 65px; 
+}
+</style>
+
 </head>
 <body>
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded fixed-top" style="background-color: #ff6347">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand" href="#requestForm">TRMS</a>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+  <a class="navbar-brand" href="#">TRMS</a>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
       <li class="nav-item active">
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="#info_requests">Info Requests</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Disabled</a>
@@ -133,24 +141,52 @@
 	</div>
 	</div>
 	
-	
-	<div id="InfoRequests" class="well">
-	<input type="button" value="Show InfoRequests" onclick="getInfoRequests()">
-		<table id="infoTable">
-		<tr><td>InfoRequestId</td><td>Reimbursement ID</td></tr>
-		</table>
+	<div class="container" id="info_requests">
+		<div class="row">
+			<div id="InfoRequests"class="card col-sm-6" style="width:40rem">
+				<div class="card-block">
+					<div class="row">
+						<h3 class="card-title">Information Requests</h3>
+						<div class="col-5">
+							<button class="btn btn-info" onclick="getInfoRequests()">Show Info Requests</button>
+						</div>
+					</div>
+					<table id="infoTable" border="2px">
+						<tr><td>InfoRequestId</td><td>Reimbursement ID</td></tr>
+					</table>
+				</div>
+			</div>	
+			
+			<div id="additionalinfo" class="card col-sm-6" style="width:40rem">
+				<div class="card-block">
+					<form action="submit_info.act" method="POST">
+						<div class="form-group row">
+							<label for="info_id">InfoRequest Id</label>
+							<div class="col-5">
+								<input type="text" class="form-control" name="infoid" required>
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="add_info">Additional Information</label>
+							<textarea class="form-control" name="addedinfo" required></textarea>
+						</div>
+						<div class="form-group row">
+							<label for="addfile">Additional File</label>
+							<input type="file" name="addedfile">
+						</div>
+						<button type="submit" class="btn btn-success" value="submit">Submit Info</button>
+					</form>
+				</div>
+				
+			</div>
+			
+		</div>
 	</div>
 	
-	<div id="additionalinfo" class="well">
-		<form action="submit_info.act" method="POST">
-			<ul style="list-style-type:none">
-				<li><input type="text" name="infoid" placeholder="InfoRequest Id"></li>
-				<li><input type="text" name="addedInfo" placeholder="info"></li>
-				<li><input type="file" name="file1"></li>
-				<li><input type="submit" value="submit"></li>
-			</ul>
-		</form>
-	</div>
+		
+	
+	
+	
 	<div id="cancel" class="well">
 		<form action="cancel.act">
 			<input type="text" placeholder="Request Id" name="rrId">
