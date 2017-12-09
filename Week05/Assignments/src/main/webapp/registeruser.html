@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Registration</title>
+</head>
+<body>
+	<h2>Register New User</h2>
+	<hr>
+	<br>
+	<br>
+	<form action="registerUser.fc" method="post">
+		<p>
+			<b>Login Information</b>
+		</p>
+		<table>
+			<tr>
+				<td>First Name:</td><td><input type="text" name="firstName" required></td>
+			</tr>
+			<tr>
+				<td>Last Name:</td>	<td><input type="text" name="lastName" required></td>
+			</tr>
+			<tr>
+				<td>Email:</td>	<td><input type="text" name="email" required></td>
+			</tr>
+			<tr>
+				<td>Login ID:</td>	<td><input type="text" name="loginUserId" required></td>
+			</tr>
+			<tr>
+				<td>Password:</td>	<td><input type="password" name="loginPassword" required></td>
+			</tr>
+			<tr>
+				<td>Confirm Password:</td>	<td><input type="password" name="confirmPassword" required></td>
+			</tr>
+		</table>
+
+		<p>
+			<b>Contact Information</b>
+		</p>
+		<table>
+			<tr>
+				<td>Phone Number:</td>	<td><input type="text" name="phone"></td>
+			</tr>
+			<tr>
+				<td>Street Address:</td>	<td><input type="text" name="streetAddr"></td>
+			</tr>
+			<tr>
+				<td>City:</td>	<td><input type="text" name="city"></td>
+			</tr>
+			<tr>
+				<td>State:</td>	<td><input type="text" name="state"></td>
+			</tr>
+			<tr>
+				<td>Zip Code:</td>	<td><input type="text" name="zipCode"></td>
+			</tr>
+		</table>
+			<p><b>Company Information</b></p>
+		<table>
+			<tr>
+				<td>Department</td><td><input type = "text" name = "department"></td>
+			</tr>
+			<tr>
+				<td>Position</td><td><input type = "text" name = "position"></td>
+			</tr>
+			<tr>
+				<td>Supervisor's ID:</td><td><input type = "text" name = "supervisor"></td>
+			</tr>
+		</table>
+
+		<input type="submit" value="Submit">
+	</form>
+	<form action="Login">
+		<input type="submit" value="Try 'login'">
+	</form>
+	<a href="index.html"><button>Back</button></a>
+</body>
+</html>
