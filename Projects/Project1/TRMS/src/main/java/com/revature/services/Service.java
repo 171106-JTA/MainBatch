@@ -249,8 +249,14 @@ public class Service {
 			int sup_id=dao.getAppSup(emp_id);
 			if(app_status[1]==0)
 				dao.supApprove(approved_id);
-			else
+			else {
+				int pay=dao.passCheck(approved_id);
+				if(pay==1)
+				{
+					dao.payUser(user_id, approved_id);
+				}
 				dao.bencoApprove(approved_id);
+			}
 		}
 		else if(user_status[1]==1)//if user is chair
 		{
@@ -428,5 +434,63 @@ public class Service {
 			e.printStackTrace();
 		}
 
+	}
+
+	public static void GradeSetup(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session= request.getSession();
+		int id= (int)session.getAttribute("id");
+		int[] status= dao.isBencoOrChair(id);
+		ArrayList<String[]> apps=dao.getGrades();
+		ArrayList<String[]> accept= new ArrayList<>();
+		System.out.println("ALL: " + apps.size() );
+		if(status[0]==1)//benco
+		{
+			for(String[] app: apps)
+			{
+				if(app[6].equals("0"))//not passed
+				{
+					accept.add(app);
+				}
+				else if(Integer.parseInt(app[8])==id && app[7].equals("0") && app[6].equals("1"))
+				{//if benco is sup, the app is passed and not approved
+					accept.add(app);
+				}
+			}
+		}
+		else {//not benco
+			for(String[] app: apps)
+			{
+				if(app[6].equals("1") && app[7].equals("0"))//check if passed but not approved 
+				{
+					accept.add(app);
+				}
+			}
+		}
+
+		response.setContentType("text/xml");
+		PrintWriter out;
+		try {
+			out = response.getWriter();
+			System.out.println("ACCEPT: " + accept.size() );
+			if(accept.size()!=0)			
+			{
+				String myXml = "<root>";			
+				for (String[] app : accept) {//for each app id
+					myXml += "<application><id>" + app[0] + "</id><fname>" + app[1] + "</fname><lname>" + app[2] + "</lname><filename>"
+							+ app[3]+"</filename><passgrade>"+app[4]+"</passgrade><presentation>"+app[5]+"</presentation><passed>"
+							+app[6]+ "</passed><approved>"+app[7]+"/approved></application>";
+				}
+				myXml += "</root>";
+				out.println(myXml);
+			}
+			else {
+				System.out.println("hello");
+				out.println("<root></root>");
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }

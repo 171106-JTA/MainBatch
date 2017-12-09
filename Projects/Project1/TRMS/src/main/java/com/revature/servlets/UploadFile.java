@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,9 +13,9 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
+import com.revature.dao.TRMSDao;
 import com.revature.util.ConnectionUtil;
 
 @MultipartConfig
@@ -35,9 +35,10 @@ public class UploadFile extends HttpServlet {
 	 */
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		TRMSDao dao= new TRMSDao();
 		try(Connection conn = ConnectionUtil.getConnection();)
 		{	
-			HttpSession session= request.getSession();
+			String gradeCheck= (String)request.getParameter("gradeCheck");
 			int id=Integer.parseInt(request.getParameter("activeID"));
 			// Part list (multi files).
             for (Part part : request.getParts()) {
@@ -49,9 +50,20 @@ public class UploadFile extends HttpServlet {
                     this.writeToDB(conn, fileName, is, id);
                 }
             }
- 
+            System.out.println("GRADECHECK: " + gradeCheck);
+            if(gradeCheck.equals("grade"))
+            {
+	            ArrayList<Integer> fileIds= dao.getFileIds();
+	            int max=0;
+	            for(int fileID: fileIds)
+	            {
+	            	if(max<fileID)
+	            		max=fileID;
+	            }
+	            dao.markGrade(id,max);
+            }
             // Upload successfully!.
-            RequestDispatcher rd = request.getRequestDispatcher("addToFile.html"); 
+            RequestDispatcher rd = request.getRequestDispatcher("addToApp.html"); 
 			rd.include(request, response);
         } catch (Exception e) {
             e.printStackTrace();
@@ -82,9 +94,7 @@ public class UploadFile extends HttpServlet {
  
     private void writeToDB(Connection conn, String fileName, InputStream is, int id) throws SQLException {
  
-    	System.out.println("!!!!!!!!!!!!!!!!!!!!   "+id);
-        String sql = "Insert into app_files(app_id, file_name, file_data)" //
-                + " values (?,?,?) ";
+        String sql = "Insert into app_files(app_id, file_name, file_data) values (?,?,?) ";
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setInt(1, id);
         pstm.setString(2, fileName);

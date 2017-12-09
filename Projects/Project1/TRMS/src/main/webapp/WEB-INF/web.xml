@@ -146,4 +146,24 @@
     <servlet-name>appFileSetup</servlet-name>
     <url-pattern>/appFileSetup</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GradeSetup</display-name>
+    <servlet-name>GradeSetup</servlet-name>
+    <servlet-class>com.revature.servlets.GradeSetup</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GradeSetup</servlet-name>
+    <url-pattern>/GradeSetup</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Account</display-name>
+    <servlet-name>Account</servlet-name>
+    <servlet-class>com.revature.servlets.Account</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Account</servlet-name>
+    <url-pattern>/Account</url-pattern>
+  </servlet-mapping>
 </web-app>

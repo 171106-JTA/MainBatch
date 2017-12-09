@@ -222,8 +222,8 @@ public class TRMSDao {
 			ps = conn.prepareStatement(sql);
 			x=ps.executeUpdate(sql);
 			//app status
-			sql="INSERT INTO app_status (urgent, sup_apr, chair_apr, benco_apr, passed, recent_date)"
-					+" values(0,0,0,0,0,?)";//default values
+			sql="INSERT INTO app_status (urgent, sup_apr, chair_apr, benco_apr, passed, approved, recent_date)"
+					+" values(0,0,0,0,0,0,?)";//default values
 			ps= conn.prepareStatement(sql);
 			Date date = new Date(Calendar.getInstance().getTime().getTime());
 			ps.setDate(1,date);
@@ -353,7 +353,7 @@ public class TRMSDao {
 				log[1]=rs.getString(3);//supervisor appr
 				log[2]=rs.getString(4);//chair appr
 				log[3]=rs.getString(5);//benco appr
-				log[4]=rs.getString(7);//date	
+				log[4]=rs.getString(8);//date	
 				logs.add(log);
 			}
 		}catch(SQLException e)
@@ -674,7 +674,7 @@ public class TRMSDao {
 			e1.printStackTrace();
 		}
 		try(Connection conn = ConnectionUtil.getConnection();){
-			String sql ="update app_status set sup_apr=-1, chair_apr=-1, benco_apr=-1, recent_date=? where app_id=?";
+			String sql ="update app_status set sup_apr=-1, chair_apr=-1, benco_apr=-1, approved=-1, recent_date=? where app_id=?";
 			ps = conn.prepareStatement(sql);
 			Date date = new Date(Calendar.getInstance().getTime().getTime());
 			ps.setDate(1,date);
@@ -702,7 +702,7 @@ public class TRMSDao {
 			e1.printStackTrace();
 		}
 		try(Connection conn = ConnectionUtil.getConnection();){
-			String sql ="update app_status set chair_apr=-1, benco_apr=-1, recent_date=? where app_id=?";
+			String sql ="update app_status set chair_apr=-1, benco_apr=-1, approved=-1, recent_date=? where app_id=?";
 			ps = conn.prepareStatement(sql);
 			Date date = new Date(Calendar.getInstance().getTime().getTime());
 			ps.setDate(1,date);
@@ -731,7 +731,7 @@ public class TRMSDao {
 			e1.printStackTrace();
 		}
 		try(Connection conn = ConnectionUtil.getConnection();){
-			String sql ="update app_status set benco_apr=-1, recent_date=? where app_id=?";
+			String sql ="update app_status set benco_apr=-1, approved=-1, recent_date=? where app_id=?";
 			ps = conn.prepareStatement(sql);
 			Date date = new Date(Calendar.getInstance().getTime().getTime());
 			ps.setDate(1,date);
@@ -837,5 +837,198 @@ public class TRMSDao {
 		}
 		return files;
 	}
+
+	public ArrayList<Integer> getFileIds() {
+		PreparedStatement ps =null;
+		ResultSet rs = null;
+		ArrayList<Integer> files= new ArrayList<>();
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		try(Connection conn = ConnectionUtil.getConnection();){
+			String sql ="SELECT file_id FROM app_files";
+			ps = conn.prepareStatement(sql);
+			rs= ps.executeQuery();		
+			while(rs.next())
+			{
+				int id=rs.getInt(1);
+				files.add(id);
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			close(ps);
+			close(rs);
+		}
+		return files;
+	}
+
+	public void markGrade(int id, int max) {
+		PreparedStatement ps =null;
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		try(Connection conn = ConnectionUtil.getConnection();){
+			String sql ="update app_pass set grade_file_id=?, grade_input_mark=1 where app_id=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1,max);
+			ps.setInt(2, id);
+			int x= ps.executeUpdate();				
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			close(ps);
+		}
+		
+	}
+
+	public int passCheck(int approved_id) {
+		PreparedStatement ps =null;
+		ResultSet rs = null;
+		int pass=0;
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		try(Connection conn = ConnectionUtil.getConnection();){
+			String sql ="SELECT passed FROM app_status where app_id=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, approved_id);
+			rs= ps.executeQuery();		
+			while(rs.next())
+			{
+				pass=rs.getInt(1);
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			close(ps);
+			close(rs);
+		}
+		return pass;
+	}
+
+	public void payUser(int user_id, int approved_id) {
+		PreparedStatement ps =null;
+		ResultSet rs = null;
+		int awarded=0;
+		int pending=0;
+		int repay=0;
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		try(Connection conn = ConnectionUtil.getConnection();){
+			String sql ="SELECT repay_awarded, repay_pending FROM employee where user_id=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, approved_id);
+			rs= ps.executeQuery();		
+			while(rs.next())
+			{
+				awarded=rs.getInt(1);
+				pending=rs.getInt(2);
+			}
+			sql ="SELECT ev_cost, ev_type_id FROM app_info where approved_id=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, approved_id);
+			rs= ps.executeQuery();
+			while(rs.next())
+			{
+				int cost=rs.getInt(1);
+				int type=rs.getInt(2);
+				if(type==1)
+					repay=(int)(cost*.8);
+				else if(type==2)
+					repay=(int)(cost*.6);
+				else if(type==2)
+					repay=(int)(cost*.6);
+				else if(type==3)
+					repay=(int)(cost*.75);
+				else if(type==5)
+					repay=(int)(cost*.9);
+				else if(type==6)
+					repay=(int)(cost*.3);
+			}
+			if(repay>pending)
+			{
+				pending=0;
+			}
+			else
+			{
+				pending-=repay;
+			}
+			awarded+=repay;
+			sql ="UPDATE employee set repay_awarded=?, repay_pending=? where user_id=?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, awarded);
+			ps.setInt(2, pending);
+			ps.setInt(3, user_id);
+			ps.executeUpdate();	
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			close(ps);
+			close(rs);
+		}
+		
+	}
+
+	public ArrayList<String[]> getGrades() {
+		PreparedStatement ps =null;
+		ResultSet rs = null;
+		ArrayList<String[]> apps= new ArrayList<>();
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+		try(Connection conn = ConnectionUtil.getConnection();){
+			String sql ="SELECT * FROM grade_approve";
+			ps = conn.prepareStatement(sql);
+			rs= ps.executeQuery();		
+			while(rs.next())
+			{
+				String[] app= new String[9];
+				app[0]=rs.getString(1);//app_id
+				app[1]=rs.getString(2);//fname
+				app[2]=rs.getString(3);//lastname
+				app[3]=rs.getString(4);//filename
+				app[4]=rs.getString(5);//pass_grade
+				app[5]=rs.getString(6);//presentation
+				app[6]=rs.getString(7);//passed
+				app[7]=rs.getString(8);//approved
+				app[8]=rs.getString(9);//sup_id
+				apps.add(app);
+			}
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally {
+			close(ps);
+			close(rs);
+		}
+		return apps;
+	}
+	
+
 }
 
