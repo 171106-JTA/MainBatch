@@ -159,13 +159,22 @@ CREATE TABLE ReimbursementForm (
     reimbursementID NUMBER(9),
     username VARCHAR(100), 
     eventDateAndTime TIMESTAMP(0), 
-    eventLocation NUMBER(9),    --Foreign key to address table
+    submissionDateAndTime TIMESTAMP(0),
+    eventLocation NUMBER(9),                --Foreign key to address table
     eventDescription CLOB, 
-    eventCost NUMBER(11,2),     --Allow maxmimum event cost to be $100,000,000.00
-    gradingFormatID NUMBER(2),  --Foreign key to grading format table
-    eventTypeID NUMBER(2),      --Foreign key to event type table
-    status NUMBER(2),           --0 -> pending, 1 -> 
-    exceeds_funds NUMBER(1),      --0 -> not exceeding funds, 1 -> Exceeds available funds
+    eventCost NUMBER(11,2),                 --Allow maxmimum event cost to be $100,000,000.00
+    gradingFormatID NUMBER(2),              --Foreign key to grading format table
+    eventTypeID NUMBER(2),                  --Foreign key to event type table
+    work_related_justification CLOB,        --Description of how the training is work related
+    passing_grade NUMBER(3),                --Passing grade between 0 < X < 100. Assume passing grade is a percentage
+    status NUMBER(2),                       --0 -> Awaiting Approval, 1 -> Pending, 2 -> Accapted
+    exceeds_funds NUMBER(1),                --0 -> not exceeding funds, 1 -> Exceeds available funds
+    reason_for_excess_funds CLOB,
+    reason_for_denial CLOB, 
+    approval_by_direct_supervisor NUMBER(1), -- 0 -> Awaiting approval by DS; 1 -> Approved by DS
+    approval_by_department_head NUMBER(1),   -- 0 -> Awaiting approval by DH; 1 -> Approved by DH
+    approval_by_benco NUMBER(1),             -- 0 -> Awaiting approval by BC; 1 -> Approved by BC
+    urgency NUMBER(1),                       -- 0 -> standard urgency; 1 -> course is less than 2 weeks from beginning
     CONSTRAINT PK_reimbursementID PRIMARY KEY (reimbursementID),
     CONSTRAINT FK_Reimbursement_Username FOREIGN KEY (username) REFERENCES Login(username),
     CONSTRAINT FK_eventLocation FOREIGN KEY (eventLocation) REFERENCES Address(addressID),
@@ -183,7 +192,7 @@ END;
 /
 --Test INSERT for ReimbursementForm
 --INSERT INTO Address (numberAndStreet, city, state, zip, aptNumber)
---VALUES('11730 Plaza America Dr.', 'Reston', 'VA', 20190, 2);
+--VALUES('123 Not Somethign', 'Reston', 'VA', 20190, 2);
 --SELECT * FROM ADDRESS;
 --INSERT INTO ReimbursementForm (
 --    username, 
@@ -196,8 +205,8 @@ END;
 --VALUES (
 --    'A', 
 --    TO_TIMESTAMP ('3-Dec-17 14:10', 'DD-Mon-RR HH24:MI'), 
---    13, --Assume test code for Address table was run
---    'This is an event description #2', 
+--    1, --Assume test code for Address table was run
+--    'This is an event description #1', 
 --    50.04, 
 --    1, --grading format
 --    3  --event type
@@ -221,7 +230,9 @@ CREATE OR REPLACE PROCEDURE newReimbursementForm(
     description IN VARCHAR,
     eventcost IN VARCHAR,
     grading_format IN VARCHAR,
-    event_type IN VARCHAR
+    event_type IN VARCHAR,
+    work_related_justification IN CLOB,
+    passing_grade NUMBER
     )
 IS
     new_address_id NUMBER;
@@ -235,31 +246,55 @@ BEGIN
     WHERE gradingFormatName = grading_format;
     SELECT eventTypeID INTO event_type_id FROM eventTypes  
     WHERE eventTypeName = event_type;
-
+    
     INSERT INTO ReimbursementForm (
         username,
         eventDateAndTime,
+        submissionDateAndTime,
         eventLocation, 
         eventDescription, 
         eventCost,
         gradingFormatID,
         eventTypeID, 
         status, 
-        exceeds_funds
+        exceeds_funds,
+        work_related_justification,
+        passing_grade,
+        reason_for_excess_funds,
+        reason_for_denial, 
+        approval_by_direct_supervisor, -- 0 -> Awaiting approval by DS; 1 -> Approved by DS
+        approval_by_department_head,   -- 0 -> Awaiting approval by DH; 1 -> Approved by DH
+        approval_by_benco,             -- 0 -> Awaiting approval by BC; 1 -> Approved by BC
+        urgency
         )
     VALUES (
         username,
         TO_TIMESTAMP (date_and_time, 'DD-Mon-YYYY HH24:MI'),
+        to_date('2005/03/01 10:05:13','YYYY/MM/DD HH:MI:SS'),
         new_address_id,
         description, 
         eventcost,
         grading_format_id,
         event_type_id,
         0,                  --Default is pending status
-        0                   --Default is not exceeding available funds
+        0,                  --Default exceeds_funds
+        work_related_justification,
+        passing_grade, 
+        null,               --Defaut reason_for_excess_funds
+        null,               --Defaut reason_for_denial
+        0,                  --Defaut approval_by_direct_supervisor
+        0,                  --Defaut approval_by_department_head
+        0,                  --Defaut approval_by_benco
+        0                   --Defaut urgency
         );
 END;
 /
+
+--DECLARE
+--  Temp DATE := TO_TIMESTAMP (CURRENT_TIMESTAMP, 'DD-Mon-YYYY HH24:MI')
+--BEGIN
+-- dbms_output.put_line(To_char (CURRENT_TIMESTAMP, 'DD-MON-YYYY HH24:MI');
+--END;
 
 INSERT INTO Login 
 values ('evan', 'password', 'employee');
