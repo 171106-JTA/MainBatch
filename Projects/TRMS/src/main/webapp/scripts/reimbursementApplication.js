@@ -1,3 +1,3 @@
-function reimbursementApplication() {
+function displayReimbursementApplication() {
 	
 }

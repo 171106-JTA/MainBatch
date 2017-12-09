@@ -1,74 +1,11 @@
-function validate(form) {
-	console.log("In validate()");
-    var passed = true;
-    for(let input of form) {
-    	if(!check(input)) {
-    		passed = false;
-    	}
-    }
-    return passed;
-}
-function check(input) {
-	console.log("In check()");
-	switch(input.id){
-		case "password":
-			if((document.getElementById("verifypassword").value != input.value) || (input.value == "")) {
-				input.style.color = "red";
-				console.log(input.id + " red");
-				return false;
-			} else if(input.style.color == "red") {
-				input.style.color = "black";
-			}
-			return true;
-		case "verifypassword":
-			if((document.getElementById("password").value != input.value) || (input.value == "")) {
-				input.style.color = "red";
-				console.log(input.id + " red");
-				return false;
-			} else if(input.style.color == "red") {
-				input.style.color = "black";
-			}
-			return true;
-		case "middlename":
-			return true;
-		default:
-			if(input.value == "") {
-				input.style.color = "red";
-				return false;
-			} else if(input.style.color == "red"){
-				input.style.color = "red";
-			}
-			return true;
+function registrationHandler(status, response){
+	if(status == 200){
+		displayAccount(response);
+	} else if(status == 204){
+		displayExistsError();
+	} else {
+		displayServerError();
 	}
-}
-function submitForm(){
-	console.log("In submitForm()");
-	var form = document.getElementsByTagName("input");
-	if(!validate(form)){
-		return;
-	}
-	
-	var request = "";
-	for(let input of form){
-		request += input.id + ":" + input.value + "&";
-	}
-	console.log(request);
-	var xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = () => {
-		var response = "";
-		if(this.readyState == 4){
-			if(this.status == 200){
-				welcome();
-			} else if (this.status == 204){
-				displayExistsError();
-			} else {
-				displayServerError();
-			}
-		}
-	}
-	
-	xhr.open("POST", "CreateEmployeeAccountServlet");
-	xhr.send(request);
 }
 function displayRegistration(){
 	document.getElementById("content").innerHTML = 
@@ -91,19 +28,13 @@ function displayRegistration(){
 		        "<li><input id='positionid' type='number' placeholder='position id'></li>" +
 		        "<li><input id='reportsto' type='number' placeholder='supervisor id'></li>" +
 		        "<li><input id='facilityid' type='number' placeholder='facility id'></li>" +
-		        "<li><button id='submitbutton' onclick='submitForm()'>submit</button></li>" +
+		        "<li><button id='submitbutton' onclick='submitForm(\"CreateEmployeeAccountServlet\", registrationHandler)'>submit</button></li>" +
 		    "</ul>" +
 		"</div>";
 }
 function displayExistsError() {
 	document.getElementById("content").innerHTML =
-		"<h1>Account Already Exists</h1>" +
+		"<h1 style='color: red'>Account Already Exists</h1>" +
 			"<button onclick='displayRegistration()'>back</button>" +
 			"<button onclick='login()'>login</button>";
-}
-function displayServerError() {
-	document.getElementById("content").innerHTML =
-		"<h1>Could Not Create Account</h1>" +
-			"<button onclick='displayRegistration()'>back</button>" +
-			"<button onclick='welcome()'>home</button>";
 }

@@ -1,7 +1,10 @@
 package com.revature.servlets;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,13 +21,22 @@ public class UpdateReimbursementApplicationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ReimbursementApplication reimbursementapplication;
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		BufferedReader content = request.getReader();
+		String[] contents = content.readLine().split("&");
+		String[] keyvalue = new String[2];
+		Map<String, String> info = new HashMap<String, String>();
+		for(int i = 0; i < contents.length; i++) {
+			keyvalue = contents[i].split(":");
+			info.put(keyvalue[0], keyvalue[1]);
+			System.out.println(keyvalue[0] + " : " + keyvalue[1]);
+		}
 		reimbursementapplication = new ReimbursementApplication();
-		reimbursementapplication.setApplicationid(Integer.parseInt(request.getParameter("applicationid")));
-		reimbursementapplication.setEmployeeid(Integer.parseInt(request.getParameter("employeeid")));
-		reimbursementapplication.setStatusid(Integer.parseInt(request.getParameter("statusid")));
-		reimbursementapplication.setEventid(Integer.parseInt(request.getParameter("eventid")));
-		reimbursementapplication.setAmount(Float.parseFloat((request.getParameter("amount"))));
-		if(Integer.parseInt(request.getParameter("isapproved")) == 1) {
+		reimbursementapplication.setApplicationid(Integer.parseInt(info.get("applicationid")));
+		reimbursementapplication.setEmployeeid(Integer.parseInt(info.get("employeeid")));
+		reimbursementapplication.setStatusid(Integer.parseInt(info.get("statusid")));
+		reimbursementapplication.setEventid(Integer.parseInt(info.get("eventid")));
+		reimbursementapplication.setAmount(Float.parseFloat(info.get("amount")));
+		if(Integer.parseInt(info.get("isapproved")) == 1) {
 			reimbursementapplication.setApproved(true);
 		} else {
 			reimbursementapplication.setApproved(false);

@@ -1,7 +1,10 @@
 package com.revature.servlets;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.ServletException;
@@ -20,12 +23,21 @@ public class NewReimbursementApplicationServlet extends HttpServlet {
 	private ReimbursementApplication reimbursementapplication;
 	private Random random;
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		BufferedReader content = request.getReader();
+		String[] contents = content.readLine().split("&");
+		String[] keyvalue = new String[2];
+		Map<String, String> info = new HashMap<String, String>();
+		for(int i = 0; i < contents.length; i++) {
+			keyvalue = contents[i].split(":");
+			info.put(keyvalue[0], keyvalue[1]);
+			System.out.println(keyvalue[0] + " : " + keyvalue[1]);
+		}
 		reimbursementapplication = new ReimbursementApplication();
 		reimbursementapplication.setApplicationid(random.nextInt(99999999));
-		reimbursementapplication.setEmployeeid(Integer.parseInt(request.getParameter("employeeid")));
+		reimbursementapplication.setEmployeeid(Integer.parseInt(info.get("employeeid")));
 		reimbursementapplication.setStatusid(0);
-		reimbursementapplication.setEventid(Integer.parseInt(request.getParameter("eventid")));
-		reimbursementapplication.setAmount(Float.parseFloat((request.getParameter("amount"))));
+		reimbursementapplication.setEventid(Integer.parseInt(info.get("eventid")));
+		reimbursementapplication.setAmount(Float.parseFloat(info.get("amount")));
 		reimbursementapplication.setApproved(false);
 		try {
 			if(ReimbursementApplicationDAO.insertReimbursementApplication(reimbursementapplication)) {

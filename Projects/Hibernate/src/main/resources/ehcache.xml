@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>
+	<defaultCache maxelementsInMemory="100" eternal="false"
+		timeToIdleSeconds="300" timeToLiveSeconds="500"
+		overflowToDisk="false"></defaultCache>
+	<!--	maxElements: simply states how much cache you will allow
+			eternal: is the cached data permanent?
+			timeToIdleSeconds: how long until data becomes stale
+			overflowToDisk: why would you save cache data outside of project anyway -->
+</ehcache>

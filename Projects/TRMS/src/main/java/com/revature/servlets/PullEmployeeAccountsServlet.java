@@ -1,10 +1,13 @@
 package com.revature.servlets;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -23,8 +26,17 @@ public class PullEmployeeAccountsServlet extends HttpServlet {
 		ArrayList<String> employeeaccounts;
 		Iterator<String> iterator;
 		PrintWriter write = response.getWriter();
+		BufferedReader content = request.getReader();
+		String[] contents = content.readLine().split("&");
+		String[] keyvalue = new String[2];
+		Map<String, String> info = new HashMap<String, String>();
+		for(int i = 0; i < contents.length; i++) {
+			keyvalue = contents[i].split(":");
+			info.put(keyvalue[0], keyvalue[1]);
+			System.out.println(keyvalue[0] + " : " + keyvalue[1]);
+		}
 		try {
-			employeeaccounts = EmployeeAccountDAO.pullEmployeeAccounts(request.getParameter("employeeid"));
+			employeeaccounts = EmployeeAccountDAO.pullEmployeeAccounts(info.get("employeeid"));
 			iterator = employeeaccounts.iterator();
 			int i = 0;
 			write.append("{");

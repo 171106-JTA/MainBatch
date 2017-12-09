@@ -37,6 +37,9 @@ public class DataConnectionUtility {
 	public boolean initializeConnection() throws SQLException {
 		if(connection == null) {
 			try {
+				System.out.println(properties[1]);
+				System.out.println(properties[2]);
+				System.out.println(properties[3]);
 				connection = DriverManager.getConnection(properties[1],properties[2],properties[3]);
 			} catch(SQLException e) {
 				System.err.println("Could not connect to database.");

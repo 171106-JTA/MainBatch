@@ -1,8 +1,11 @@
 package com.revature.servlets;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +23,17 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 		employeeaccount = null;
 		try {
-			employeeaccount = EmployeeAccountDAO.getEmployeeAccount(request.getParameter("username"), request.getParameter("password"));
+			BufferedReader content = request.getReader();
+			String[] contents = content.readLine().split("&");
+			String[] keyvalue = new String[2];
+			Map<String, String> info = new HashMap<String, String>();
+			for(int i = 0; i < contents.length; i++) {
+				keyvalue = contents[i].split(":");
+				info.put(keyvalue[0], keyvalue[1]);
+				System.out.println(keyvalue[0] + " : " + keyvalue[1]);
+			}
+			System.out.println(info.get("username"));
+			employeeaccount = EmployeeAccountDAO.getEmployeeAccount(info.get("username"), info.get("password"));
 			if(employeeaccount == null) {
 				response.setStatus(204);
 			} else {

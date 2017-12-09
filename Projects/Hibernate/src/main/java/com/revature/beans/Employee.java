@@ -1,6 +1,25 @@
 package main.java.com.revature.beans;
 
+import javax.persistence.Cacheable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+@Entity
+@Table(name="Employee_Emp")
+@Cache(usage=CacheConcurrencyStrategy.READ_ONLY)
+@Cacheable
 public class Employee {
+	@Id
+	@Column(name="EMP_ID")
+	@SequenceGenerator(sequenceName="EMP_SEQ", name="EMP_SEQ")
+	@GeneratedValue(generator="EMP_SEQ", strategy=GenerationType.SEQUENCE)
 	private int id;
 	private String firstname;
 	private String lastname;

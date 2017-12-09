@@ -40,15 +40,6 @@
     <servlet-name>ReimbursementApplicationServlet</servlet-name>
     <url-pattern>/ReimbursementApplicationServlet</url-pattern>
   </servlet-mapping>
-  <filter>
-    <display-name>ServletFilter</display-name>
-    <filter-name>ServletFilter</filter-name>
-    <filter-class>com.revature.filters.ServletFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>ServletFilter</filter-name>
-    <url-pattern>/ServletFilter</url-pattern>
-  </filter-mapping>
   <servlet>
     <description></description>
     <display-name>RetrieveReimbursementApplications</display-name>
@@ -98,5 +89,15 @@
   <servlet-mapping>
     <servlet-name>PullEmployeeAccountsServlet</servlet-name>
     <url-pattern>/PullEmployeeAccountsServlet</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <description></description>
+    <display-name>LoaderServlet</display-name>
+    <servlet-name>LoaderServlet</servlet-name>
+    <servlet-class>com.revature.servlets.LoaderServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoaderServlet</servlet-name>
+    <url-pattern>/LoaderServlet</url-pattern>
   </servlet-mapping>
 </web-app>

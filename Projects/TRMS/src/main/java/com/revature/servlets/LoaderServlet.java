@@ -17,6 +17,7 @@ public class LoaderServlet extends HttpServlet {
 	private Loader loader;
 	private PrintWriter write;
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+		System.out.println("loader");
 		try {
 			loader = new Loader();
 			write = response.getWriter();
