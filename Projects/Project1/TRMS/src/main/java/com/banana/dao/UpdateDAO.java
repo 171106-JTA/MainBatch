@@ -10,5 +10,5 @@ public interface UpdateDAO {
 	public double getPercentage(int eventId);
 	public boolean setNewAmount(int empId, double newAmount);
 	public void insertInfoRequest(int rrId, int empId);
-	public void updateInfoRequest(int irId, String additionInfo, Part file);
+	public void updateInfoRequest(int irId, String additionalInfo, Part file);
 }

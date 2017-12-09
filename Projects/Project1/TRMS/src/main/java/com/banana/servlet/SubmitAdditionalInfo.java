@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import com.banana.service.InfoRequestManipulation;
+
 
 /**
  * Servlet implementation class SubmitAdditionalInfo
@@ -35,10 +37,28 @@ public class SubmitAdditionalInfo extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		
 		try {
-			Part p1 = request.getPart("file1");
+			Part file = request.getPart("addedfile");
+			Part addedInfo = request.getPart("addedinfo");
+			Scanner scanner = new Scanner(addedInfo.getInputStream());
+			String info = scanner.nextLine();
+			Part id = request.getPart("infoid");
+			scanner = new Scanner(id.getInputStream());
+			int irId = scanner.nextInt();
+			
+			InfoRequestManipulation.update(irId, file, info);
+			out.println("<h3>Success!</h3>");
+		}catch(Exception e) {
+			out.println(e.getMessage() + " Exception");
+		}finally {
+			
+		}
+		
+		/*
+		try {
+			Part p1 = request.getPart("addedfile");
 			InputStream is = p1.getInputStream();
-			System.out.println("here");
-			Part p2 = request.getPart("info");
+			System.out.println("here in hell");
+			Part p2 = request.getPart("addedinfo");
 			Scanner s = new Scanner(p2.getInputStream());
 			String name = s.nextLine();
 			System.out.println(name);
@@ -56,7 +76,7 @@ public class SubmitAdditionalInfo extends HttpServlet {
 			out.println(e.getMessage() + "Exception");
 		}finally {
 			out.close();
-		}
+		} */
 	}
 
 }

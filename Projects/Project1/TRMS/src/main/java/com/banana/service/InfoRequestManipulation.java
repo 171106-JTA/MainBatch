@@ -5,9 +5,9 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import com.banana.bean.InfoRequest;
-import com.banana.bean.ReimburseRequest;
 import com.banana.dao.EmployeeDAOImpl;
 import com.banana.dao.UpdateDAOImpl;
 
@@ -17,6 +17,11 @@ public class InfoRequestManipulation {
 		EmployeeDAOImpl dao = new EmployeeDAOImpl();
 		int empId = dao.getEmployeeIdFromRequest(rrId);
 		udao.insertInfoRequest(rrId, empId);
+	}
+	
+	public static void update(int irId, Part part, String addedinfo) {
+		UpdateDAOImpl udao = new UpdateDAOImpl();
+		udao.updateInfoRequest(irId, addedinfo, part);
 	}
 	
 	public static void getInfoRequests(HttpServletResponse response, int requesteeId) throws IOException{

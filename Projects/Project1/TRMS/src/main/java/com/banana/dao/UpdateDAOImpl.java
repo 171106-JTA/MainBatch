@@ -118,7 +118,7 @@ public class UpdateDAOImpl implements UpdateDAO{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			ps.setString(3, file.getName());
+			ps.setString(3, "file_" + irId);
 			ps.setInt(4,  irId);
 			
 			ps.executeQuery();
