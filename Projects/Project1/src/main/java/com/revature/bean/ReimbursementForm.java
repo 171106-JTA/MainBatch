@@ -1,6 +1,8 @@
 package com.revature.bean;
 
 public class ReimbursementForm {
+	private int reimbursementID;
+
 	// User
 	private String username;
 
@@ -13,6 +15,15 @@ public class ReimbursementForm {
 	private String hour;
 	private String minute;
 
+	// Date of Form submission
+	private String submitYear;
+	private String submitMonth;
+	private String submitDay;
+
+	// Time of Form submission
+	private String submitHour;
+	private String submitMinute;
+
 	// Event info
 	private String description;
 	private String cost;
@@ -24,6 +35,18 @@ public class ReimbursementForm {
 	private String city;
 	private String state;
 	private String zip;
+
+	private String workRelatedJustification;
+	private int passingGrade;
+
+	private int status;
+	private int exceedsFundsFlag;
+	private String reason_for_excess_funds;
+	private String reason_for_denial;
+	private int approvalByDirectSupervisor;
+	private int approvalByDepartmentHead;
+	private int approvalByBenCo;
+	private int urgency;
 
 	public ReimbursementForm(String username, String year, String month, String day, String hour, String minute,
 			String description, String cost, String gradingFormat, String eventType, String street, String city,
@@ -43,6 +66,209 @@ public class ReimbursementForm {
 		this.city = city;
 		this.state = state;
 		this.zip = zip;
+	}
+
+	public ReimbursementForm(String username, String year, String month, String day, String hour, String minute,
+			String submitYear, String submitMonth, String submitDay, String submitHour, String submitMinute,
+			String description, String cost, String gradingFormat, String eventType, String street, String city,
+			String state, String zip, String workRelatedJustification, int passingGrade, int urgency) {
+		super();
+		this.username = username;
+		this.year = year;
+		this.month = month;
+		this.day = day;
+		this.hour = hour;
+		this.minute = minute;
+		this.submitYear = submitYear;
+		this.submitMonth = submitMonth;
+		this.submitDay = submitDay;
+		this.submitHour = submitHour;
+		this.description = description;
+		this.cost = cost;
+		this.gradingFormat = gradingFormat;
+		this.eventType = eventType;
+		this.street = street;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
+		this.workRelatedJustification = workRelatedJustification;
+		this.passingGrade = passingGrade;
+
+		// Default values
+		this.status = 0;
+		this.exceedsFundsFlag = 0;
+		this.reason_for_excess_funds = null;
+		this.reason_for_denial = null;
+		this.approvalByDirectSupervisor = 0;
+		this.approvalByDepartmentHead = 0;
+		this.approvalByBenCo = 0;
+
+		this.urgency = urgency;
+	}
+
+	public ReimbursementForm(String username, String year, String month, String day, String hour, String minute,
+			String submitYear, String submitMonth, String submitDay, String submitHour, String submitMinute,
+			String description, String cost, String gradingFormat, String eventType, String street, String city,
+			String state, String zip, String workRelatedJustification, int passingGrade, int status,
+			int exceedsFundsFlag, String reason_for_excess_funds, String reason_for_denial,
+			int approvalByDirectSupervisor, int approvalByDepartmentHead, int approvalByBenCo, int urgency) {
+		super();
+		this.username = username;
+		this.year = year;
+		this.month = month;
+		this.day = day;
+		this.hour = hour;
+		this.minute = minute;
+		this.submitYear = submitYear;
+		this.submitMonth = submitMonth;
+		this.submitDay = submitDay;
+		this.submitHour = submitHour;
+		this.description = description;
+		this.cost = cost;
+		this.gradingFormat = gradingFormat;
+		this.eventType = eventType;
+		this.street = street;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
+		this.workRelatedJustification = workRelatedJustification;
+		this.passingGrade = passingGrade;
+		this.status = status;
+		this.exceedsFundsFlag = exceedsFundsFlag;
+		this.reason_for_excess_funds = reason_for_excess_funds;
+		this.reason_for_denial = reason_for_denial;
+		this.approvalByDirectSupervisor = approvalByDirectSupervisor;
+		this.approvalByDepartmentHead = approvalByDepartmentHead;
+		this.approvalByBenCo = approvalByBenCo;
+		this.urgency = urgency;
+	}
+
+	public int getReimbursementID() {
+		return reimbursementID;
+	}
+
+	public void setReimbursementID(int reimbursementID) {
+		this.reimbursementID = reimbursementID;
+	}
+
+	public String getSubmitYear() {
+		return submitYear;
+	}
+
+	public void setSubmitYear(String submitYear) {
+		this.submitYear = submitYear;
+	}
+
+	public String getSubmitMonth() {
+		return submitMonth;
+	}
+
+	public void setSubmitMonth(String submitMonth) {
+		this.submitMonth = submitMonth;
+	}
+
+	public String getSubmitDay() {
+		return submitDay;
+	}
+
+	public void setSubmitDay(String submitDay) {
+		this.submitDay = submitDay;
+	}
+
+	public String getSubmitHour() {
+		return submitHour;
+	}
+
+	public void setSubmitHour(String submitHour) {
+		this.submitHour = submitHour;
+	}
+	
+	public String getSubmitMinute() {
+		return submitMinute;
+	}
+
+	public void setSubmitMinute(String submitMinute) {
+		this.submitMinute = submitMinute;
+	}
+
+	public String getWorkRelatedJustification() {
+		return workRelatedJustification;
+	}
+
+	public void setWorkRelatedJustification(String workRelatedJustification) {
+		this.workRelatedJustification = workRelatedJustification;
+	}
+
+	public int getPassingGrade() {
+		return passingGrade;
+	}
+
+	public void setPassingGrade(int passingGrade) {
+		this.passingGrade = passingGrade;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public int getExceedsFundsFlag() {
+		return exceedsFundsFlag;
+	}
+
+	public void setExceedsFundsFlag(int exceedsFundsFlag) {
+		this.exceedsFundsFlag = exceedsFundsFlag;
+	}
+
+	public String getReason_for_excess_funds() {
+		return reason_for_excess_funds;
+	}
+
+	public void setReason_for_excess_funds(String reason_for_excess_funds) {
+		this.reason_for_excess_funds = reason_for_excess_funds;
+	}
+
+	public String getReason_for_denial() {
+		return reason_for_denial;
+	}
+
+	public void setReason_for_denial(String reason_for_denial) {
+		this.reason_for_denial = reason_for_denial;
+	}
+
+	public int getApprovalByDirectSupervisor() {
+		return approvalByDirectSupervisor;
+	}
+
+	public void setApprovalByDirectSupervisor(int approvalByDirectSupervisor) {
+		this.approvalByDirectSupervisor = approvalByDirectSupervisor;
+	}
+
+	public int getApprovalByDepartmentHead() {
+		return approvalByDepartmentHead;
+	}
+
+	public void setApprovalByDepartmentHead(int approvalByDepartmentHead) {
+		this.approvalByDepartmentHead = approvalByDepartmentHead;
+	}
+
+	public int getApprovalByBenCo() {
+		return approvalByBenCo;
+	}
+
+	public void setApprovalByBenCo(int approvalByBenCo) {
+		this.approvalByBenCo = approvalByBenCo;
+	}
+
+	public int getUrgency() {
+		return urgency;
+	}
+
+	public void setUrgency(int urgency) {
+		this.urgency = urgency;
 	}
 
 	public String getYear() {
@@ -164,4 +390,6 @@ public class ReimbursementForm {
 				+ ", gradingFormat=" + gradingFormat + ", eventType=" + eventType + ", street=" + street + ", city="
 				+ city + ", state=" + state + ", zip=" + zip + "]";
 	}
+
+	
 }
