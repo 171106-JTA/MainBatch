@@ -3,14 +3,13 @@ window.onload = function(){
 	showUnverifiedUsers();
 	displayUsername();
 	displayApproveOrAssignEmployee();
-	//getRequests();
 }
 
 username = ""; admintitle = "";
 
 function displayUsername() {
 	var welcome = document.getElementById("welcome");
-	var adminTitle = documnet.getElementById("adminTitle");
+	var adminTitle = document.getElementById("adminTitle");
 	var url = "GetUsernameServlet";
 
 	var xhr = new XMLHttpRequest();
@@ -96,7 +95,7 @@ function directSupervisorSelectEmployee() {
 	div.append(p);
 
 	var f = document.createElement("form");
-	
+
 	f.setAttribute('method', 'post');
 	f.setAttribute("id", "formID");
 	f.setAttribute('action', 'javascript:directSupervisorSelectEmployeeAjax();');
@@ -105,10 +104,10 @@ function directSupervisorSelectEmployee() {
 	inputField.setAttribute('type', 'text');
 	inputField.setAttribute('placeholder', 'username');
 	inputField.setAttribute('name', 'empUsername');
-	
+
 	var submit = document.createElement("input");
 	submit.setAttribute('type', 'submit');
-	
+
 	f.appendChild(inputField);
 	f.appendChild(submit);
 	div.append(f);
@@ -117,14 +116,14 @@ function directSupervisorSelectEmployee() {
 function directSupervisorSelectEmployeeAjax() {
 
 	var f = document.getElementById("formID");
-	
+
 	var usernameField = document.createElement("input");
 	usernameField.setAttribute('type', 'hidden');
 	usernameField.setAttribute('name', "dirSup");
 	usernameField.setAttribute('value', username);
 	console.log("the username is " + username);
 	f.appendChild(usernameField);
-	
+
 	var formdata = new FormData(f);
 	var url = "AssignEmployeeToDirectSupervisor";
 	var xhr = new XMLHttpRequest();
@@ -237,45 +236,4 @@ function showUnverifiedUsers() {
 	xhr.open("GET", url);
 	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 	xhr.send();
-}
-
-function getRequests() {
-	var url = "GetRequests";
-
-	var xhr = new XMLHttpRequest();
-
-	xhr.onreadystatechange = function(){
-		if(xhr.readyState == 4 && xhr.status == 200){
-
-			var xmlText = xhr.responseXML;
-
-			var response = xmlText.getElementsByTagName("request");
-
-			var resultTable = document.getElementById("requestTable");
-
-			for(i in response){
-				var row = document.createElement("tr");
-				var td1 = document.createElement("td");
-				var td2 = document.createElement("td");
-				var td3 = document.createElement("td");
-				var td4 = document.createElement("td");
-
-				td1.innerHTML = response[i].childNodes[0].innerHTML;	
-				td2.innerHTML = response[i].childNodes[1].innerHTML;
-				td3.innerHTML = response[i].childNodes[2].innerHTML;
-				td4.innerHTML = response[i].childNodes[3].innerHTML;
-				row.appendChild(td1);
-				row.appendChild(td2);
-				row.appendChild(td3);
-				row.appendChild(td4);
-				resultTable.appendChild(row);
-			}
-
-		} else if(xhr.readyState == 4 && xhr.status != 200){
-			console.log(xhr.status);
-			document.getElementById("AJAXError").innerHTML="Unable to display requests.";
-		}
-	}
-	xhr.open("POST", url);
-	xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 }

@@ -18,6 +18,10 @@ public class Employee {
 		this.lname = lname;
 		this.title = Title.getTitle(title);
 	}
+	
+	public Employee(String username) {
+		this.username = username;
+	}
 
 	/**
 	 * 

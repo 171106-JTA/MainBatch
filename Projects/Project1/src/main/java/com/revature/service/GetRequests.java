@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.revature.beans.Employee;
 import com.revature.beans.Request;
 import com.revature.dao.TRMSDao;
 
@@ -13,7 +14,7 @@ public class GetRequests {
 	public static void getRequests(HttpServletResponse response, String username) throws IOException {
 		TRMSDao dao = TRMSDao.getDao();
 
-		List<Request> requests = dao.getRequests(username);
+		List<Request> requests = dao.getRequestsAsDirectSupervisor(username);
 		response.setContentType("text/xml");
 		PrintWriter out = response.getWriter();
 
@@ -21,9 +22,17 @@ public class GetRequests {
 			String myXml = "<root>";
 
 			for (Request r : requests) {
-				myXml += "<request><username>" + r.getUsername() + "</username>" + "<Event>" + r.getEvent() + "</Event>"
-						+ "<cost>" + r.getCost() + "</cost>" + "<submissionDate>" + r.getSubmissionDate().toString() + "</submissionDate>" 
-						+ "<dateOfEvent>" + r.getDateOfEvent().toString() + "</dateOfEvent>" + "</request>";
+				Employee emp = r.getEmp();
+				System.out.println("submissionDate: " +  r.getSubmissionDate().toString());
+				System.out.println("dateOfEvent: " +  r.getDateOfEvent().toString());
+
+				myXml += "<request><username>" + emp.getUsername() + "</username><fname>" + emp.getFname() + "</fname>" +
+						"<lname>" + emp.getLname() + "</lname><Event>" + r.getEvent() + "</Event>" +
+						"<location>" + r.getLocation() + "</location>" +
+						"<cost>" + r.getCost() + "</cost><description>" + r.getDescription() + "</description>" +
+						"<gradingFormat>" + r.getGradingFormat() + "</gradingFormat>" +
+						"<submissionDate>" + r.getSubmissionDate().toString() + "</submissionDate>" +
+						"<dateOfEvent>" + r.getDateOfEvent().toString() + "</dateOfEvent></request>";
 			}
 			myXml += "</root>";
 			out.println(myXml);

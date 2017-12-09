@@ -4,11 +4,12 @@ import java.io.InputStream;
 import java.sql.Date;
 
 public class Request {
-	private String username, event, location, description, gradingFormat;
+	private String event, location, description, gradingFormat;
 	private double cost;
 	private Date submissionDate, dateOfEvent;
 	private InputStream inputStream;
 	private int id;
+	private Employee emp;
 	
 	/**
 	 * A constructor used when a user submits a request.
@@ -22,14 +23,27 @@ public class Request {
 	 * @param dateOfEvent
 	 * @param inputStream
 	 */
-	public Request(String empUsername, String event, String location, String description,
+	public Request(Employee emp, String event, String location, String description,
 			double cost, String gradingFormat, Date dateOfEvent, InputStream inputStream) {
-		this.username = empUsername;
 		this.event = event;
 		this.location = location;
 		this.description = description;
 		this.cost = cost;
 		this.gradingFormat = gradingFormat;
+		this.dateOfEvent = dateOfEvent;
+		this.inputStream = inputStream;
+	}
+	
+	public Request(int id, Employee emp, String event, String location, String description,
+			double cost, String gradingFormat, Date submissionDate, Date dateOfEvent, InputStream inputStream) {
+		this.id = id;
+		this.emp = emp;
+		this.event = event;
+		this.location = location;
+		this.description = description;
+		this.cost = cost;
+		this.gradingFormat = gradingFormat;
+		this.submissionDate = submissionDate;
 		this.dateOfEvent = dateOfEvent;
 		this.inputStream = inputStream;
 	}
@@ -50,7 +64,6 @@ public class Request {
 	 */
 	public Request(int id, String empUsername, String event, String location, String description,
 			double cost, String gradingFormat, Date submissionDate, Date dateOfEvent, InputStream inputStream) {
-		this.username = empUsername;
 		this.event = event;
 		this.location = location;
 		this.description = description;
@@ -61,13 +74,13 @@ public class Request {
 		this.id = id;
 		this.submissionDate = submissionDate;
 	}
-
-	public String getUsername() {
-		return username;
+	
+	public Employee getEmp() {
+		return emp;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setEmp(Employee emp) {
+		this.emp = emp;
 	}
 
 	public String getEvent() {
@@ -144,7 +157,7 @@ public class Request {
 
 	@Override
 	public String toString() {
-		return "Request [username=" + username + ", event=" + event + ", location=" + location + ", description="
+		return "Request [event=" + event + ", location=" + location + ", description="
 				+ description + ", gradingFormat=" + gradingFormat + ", cost=" + cost + ", submissionDate="
 				+ submissionDate + ", dateOfEvent=" + dateOfEvent + ", inputStream=" + inputStream + "]";
 	}

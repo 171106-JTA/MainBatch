@@ -19,6 +19,7 @@ public class GetRequestServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("GetRequestServlet");
 		HttpSession session = request.getSession();
 		String name = (String) session.getAttribute("username");
 		GetRequests.getRequests(response, name);

@@ -223,9 +223,9 @@ public class TRMSDao {
 		}
 
 		try(Connection conn = ConnectionUtil.getConnection()){
-
+			
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, req.getUsername().toLowerCase());
+			ps.setString(1, req.getEmp().getUsername().toLowerCase());
 			ps.setString(2, req.getEvent());
 			java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 			ps.setDate(9, date);
@@ -247,6 +247,7 @@ public class TRMSDao {
 			close(ps);
 		}
 	}
+	
 	public List<Request> getRequests(String username) {
 		List<Request> requests = new ArrayList<Request>();
 
@@ -283,6 +284,67 @@ public class TRMSDao {
 				final Request req = new Request(id, username, eventName, eventLocation,
 						eventDescription, eventCost, gradingFormat, submissionDate, eventDate, reqFile);
 				System.out.println("pulling this request from the DB: " + req);
+				requests.add(req);
+			}
+
+			return requests;
+		} catch(SQLException e){
+			e.printStackTrace();
+			System.out.println("an error?");
+			return null;
+		} finally {
+			close(ps);
+		}
+	}
+	
+	/**
+	 * Pull every request from an employee whose direct supervisor = x
+	 * @param dirSupName of direct supervisor
+ 	 * @return
+	 */
+	public List<Request> getRequestsAsDirectSupervisor(String dirSupName) {
+		List<Request> requests = new ArrayList<Request>();
+
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		final String sql = "SELECT * FROM EMPLOYEE A "+
+				"INNER JOIN REQUEST B "+
+				"ON A.EMP_USERNAME = B.EMP_USERNAME "+
+				"WHERE EMP_SUPERVISOR = ?";
+
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+
+		try(Connection conn = ConnectionUtil.getConnection()) {
+
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, dirSupName.toLowerCase());
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				final int id = rs.getInt("REQ_ID");
+				final String empUsername = rs.getString("EMP_USERNAME");
+				final String fname = rs.getString("EMP_FNAME");
+				final String lname = rs.getString("EMP_LNAME");
+				final String eventName = rs.getString("REQ_EVENTNAME");
+				final Date eventDate = rs.getDate("REQ_EVENTDATE");
+				final Date submissionDate = rs.getDate("REQ_SUBMISSIONDATE");
+				final String eventLocation = rs.getString("REQ_LOCATION");
+				final int eventCost = rs.getInt("REQ_COST");
+				final String gradingFormat = rs.getString("REQ_GRADINGFORMAT");
+				final String eventDescription = rs.getString("REQ_DESCRIPTION");
+				
+				Employee emp = new Employee(empUsername, fname, lname);
+
+				final Blob data = rs.getBlob("REQ_FILES");
+				final InputStream reqFile = data.getBinaryStream();
+
+				final Request req = new Request(id, emp, eventName, eventLocation,
+						eventDescription, eventCost, gradingFormat, submissionDate, eventDate, reqFile);
 				requests.add(req);
 			}
 

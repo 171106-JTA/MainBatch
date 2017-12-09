@@ -61,8 +61,8 @@ public class SubmitRequest extends HttpServlet {
 			dateints[i] = Integer.parseInt(datesplit[i]);
 		}
 		final Date date = new Date(dateints[0], dateints[1], dateints[2]);
-
-		final Request req = new Request(username, eventName, location, description, cost, gradingFormat, date, inputStream);
+		
+		final Request req = new Request(new Employee(username), eventName, location, description, cost, gradingFormat, date, inputStream);
 		boolean success = dao.insertRequest(req);
 		
 		if (success) {
