@@ -57,7 +57,7 @@ public class TrmsDaoImplement implements TrmsDao {
 	public void insertNewReimbursementForm(ReimbursementForm newForm) {
 		CallableStatement cs1 = null;
 		try (Connection conn = ConnectionUtil.getConnection()) {
-			String sql = "{call newReimbursementForm(?, ?, ?, " + "?, ?, ?, " + "?, ?, ?, " + "?, ?)}";
+			String sql = "{call newReimbursementForm(?, ?, ?, " + "?, ?, ?, " + "?, ?, ?, " + "?, ?, ?, " + "?)}";
 			String username = newForm.getUsername();
 			String[] months = { "Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec" };
 			String DateAndTime = newForm.getDay() + "-" + months[Integer.parseInt(newForm.getMonth()) - 1] + "-"
@@ -74,6 +74,8 @@ public class TrmsDaoImplement implements TrmsDao {
 			cs1.setString(9, newForm.getCost());
 			cs1.setString(10, newForm.getGradingFormat());
 			cs1.setString(11, newForm.getEventType());
+			cs1.setString(12, null);
+			cs1.setInt(13, 70);
 
 			int rows_changed = cs1.executeUpdate();
 			if (rows_changed == 0) {
@@ -99,7 +101,7 @@ public class TrmsDaoImplement implements TrmsDao {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<ReimbursementForm> Forms = new ArrayList<ReimbursementForm>();
-		
+
 		try (Connection conn = ConnectionUtil.getConnection()) {
 			// String sql = "{call getUserForms(?)}";\
 			String sql = "SELECT * FROM ReimbursementForm WHERE username = ?";
@@ -107,13 +109,14 @@ public class TrmsDaoImplement implements TrmsDao {
 			ps.setString(1, username);
 			rs = ps.executeQuery();
 			while (rs.next()) {
-//				String[] months = { "Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug", "Sept", "Oct", "Nov",
-//						"Dec" };
-				
+				// String[] months = { "Jan", "Feb", "Mar", "Apr", "May", "June", "July", "Aug",
+				// "Sept", "Oct", "Nov",
+				// "Dec" };
+
 				String DateAndTime = rs.getString("eventDateAndTime");
-				String [] splitDateAndTime = DateAndTime.split("-| |:");
+				String[] splitDateAndTime = DateAndTime.split("-| |:");
 				System.out.println(splitDateAndTime[0]);
-				
+
 				String year = splitDateAndTime[0];
 				String month = splitDateAndTime[1];
 				String day = splitDateAndTime[2];
@@ -123,18 +126,17 @@ public class TrmsDaoImplement implements TrmsDao {
 				String cost = rs.getString("eventCost");
 				String gradingFormat = getGradingFormat(rs.getInt("gradingFormatID"));
 				String eventType = getEventType(rs.getInt("eventTypeID"));
-				
+
 				List<String> address = getAddress(rs.getInt("eventLocation"));
-				
+
 				String street = address.get(0);
 				String city = address.get(1);
 				String state = address.get(2);
 				String zip = address.get(3);
-				
-				Forms.add(new ReimbursementForm(username, year, month, day, hour, minute,
-						description, cost, gradingFormat, eventType, street, city,
-						state, zip));
-				System.out.println(Forms.get(Forms.size()-1));
+
+				Forms.add(new ReimbursementForm(username, year, month, day, hour, minute, description, cost,
+						gradingFormat, eventType, street, city, state, zip));
+				System.out.println(Forms.get(Forms.size() - 1));
 			}
 		} catch (SQLException e) {
 			// To Do: This catch statement executes if user was not inserted into the
@@ -152,20 +154,121 @@ public class TrmsDaoImplement implements TrmsDao {
 		}
 		return Forms;
 	}
-	
+
 	public List<String> getAddress(int addressID) {
-		List<String> temp = new ArrayList<String>(); 
-		temp.add("123 Not An Address");
-		temp.add("NotACity");
-		temp.add("NotAState");
-		temp.add("123456");
-		return temp;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		List<String> address = new ArrayList<String>();
+
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			String sql = "SELECT * FROM Address WHERE addressID = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, addressID);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				address.add(rs.getString("numberAndStreet"));
+				address.add(rs.getString("city"));
+				address.add(rs.getString("state"));
+				address.add(rs.getString("zip"));
+			}
+		} catch (SQLException e) {
+			// To Do: This catch statement executes if user was not inserted into the
+			// database.
+			// How to return the stacktrace to Driver to be logged???
+			e.printStackTrace();
+		} finally {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return address;
 	}
+
 	public String getGradingFormat(int gradingFormatID) {
-		return "A Grading Format";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		String gradingFormat = null;
+
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			String sql = "SELECT gradingFormatName FROM gradingFormats WHERE gradingFormatID = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, gradingFormatID);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				gradingFormat = rs.getString("gradingFormatName");
+			}
+		} catch (SQLException e) {
+			// To Do: This catch statement executes if user was not inserted into the
+			// database.
+			// How to return the stacktrace to Driver to be logged???
+			e.printStackTrace();
+		} finally {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return gradingFormat;
 	}
+
 	public String getEventType(int eventTypeID) {
-		
-		return "An Event Type";
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		String eventType = null;
+
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			String sql = "SELECT eventTypeName FROM eventTypes WHERE eventTypeID = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, eventTypeID);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				eventType = rs.getString("eventTypeName");
+			}
+		} catch (SQLException e) {
+			// To Do: This catch statement executes if user was not inserted into the
+			// database.
+			// How to return the stacktrace to Driver to be logged???
+			e.printStackTrace();
+		} finally {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return eventType;
 	}
 }
