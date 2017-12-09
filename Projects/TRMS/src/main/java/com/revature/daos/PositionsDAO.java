@@ -19,7 +19,7 @@ public abstract class PositionsDAO {
 		dataconnection = DataConnectionUtility.getDataConnection();
 		while(!dataconnection.initializeConnection()) {
 		}
-		resultset = dataconnection.requestQuery("SELECT * FROM Facilities;");
+		resultset = dataconnection.requestQuery("SELECT * FROM Facilities");
 		while(resultset.next()) {
 			position = new Position();
 			position.setPositionid(resultset.getInt("position_id"));

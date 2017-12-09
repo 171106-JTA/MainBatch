@@ -19,7 +19,7 @@ public abstract class ReimbursementEventsDAO {
 		dataconnection = DataConnectionUtility.getDataConnection();
 		while(!dataconnection.initializeConnection()) {
 		}
-		resultset = dataconnection.requestQuery("SELECT * FROM Facilities;");
+		resultset = dataconnection.requestQuery("SELECT * FROM Facilities");
 		while(resultset.next()) {
 			reimbursementevent = new ReimbursementEvent();
 			reimbursementevent.setEventid(resultset.getInt("event_id"));

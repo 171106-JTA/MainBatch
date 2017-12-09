@@ -37,6 +37,7 @@ public class CreateEmployeeAccountServlet extends HttpServlet {
 			employee.setReportsto(Integer.parseInt(info.get("reportsto")));
 			employee.setFacilityid(Integer.parseInt(info.get("facilityid")));
 			if(EmployeeDAO.isEmployee(employee)) {
+				System.out.println("IS AN EMPLOYEE");
 				employeeaccount = new EmployeeAccount();
 				employeeaccount.setUsername(info.get("username"));
 				employeeaccount.setPassword(info.get("password"));
@@ -58,7 +59,6 @@ public class CreateEmployeeAccountServlet extends HttpServlet {
 				System.out.println("Done");
 				response.setStatus(200);
 			} else {
-				System.out.println("Done");
 				response.setStatus(403);
 			}
 		} catch (SQLException e) {

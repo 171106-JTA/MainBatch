@@ -45,7 +45,7 @@ public abstract class ReimbursementApplicationDAO {
 					} else {
 						sql += "0, ";
 					}
-					sql += ");";
+					sql += ")";
 		rowsaffected = dataconnection.requestQuery(sql, "COMMIT;");
 		if(rowsaffected == 0) {
 			return false;
@@ -62,8 +62,7 @@ public abstract class ReimbursementApplicationDAO {
 		}
 		resultset = dataconnection.requestQuery(
 				"SELECT * FROM ReimbursementApplications"
-				+ " WHERE employee_id = " + employeeid
-				+ ";");
+				+ " WHERE employee_id = " + employeeid);
 		while(resultset.next()) {
 			reimbursementapplication = new ReimbursementApplication();
 			reimbursementapplication.setApplicationid(resultset.getInt("application_id"));
@@ -92,8 +91,7 @@ public abstract class ReimbursementApplicationDAO {
 		resultset = dataconnection.requestQuery(
 				"SELECT * FROM ReimbursementApplications"
 				+ " WHERE status_id = (SELECT status_id FROM ApprovalStatuses"
-					+ " WHERE handler_id = " + employeeid + ")"
-				+ ";");
+					+ " WHERE handler_id = " + employeeid + ")");
 		while(resultset.next()) {
 			reimbursementapplication = new ReimbursementApplication();
 			reimbursementapplication.setApplicationid(resultset.getInt("application_id"));
@@ -131,9 +129,8 @@ public abstract class ReimbursementApplicationDAO {
 				sql += " WHERE "
 					+ "application_id = " + reimbursementapplication.getApplicationid()
 					+ " AND "
-					+ "employee_id = " + reimbursementapplication.getEmployeeid()
-					+ ";";
-		rowsaffected = dataconnection.requestQuery(sql, "COMMIT;");
+					+ "employee_id = " + reimbursementapplication.getEmployeeid();
+		rowsaffected = dataconnection.requestQuery(sql, "COMMIT");
 		if(rowsaffected == 0) {
 			return false;
 		}

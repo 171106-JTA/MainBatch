@@ -20,6 +20,7 @@
 **/.recommenders/**
 **/Servers
 **/.springBeans
+**/*.properties
 
 #IDEA
 **/.idea/

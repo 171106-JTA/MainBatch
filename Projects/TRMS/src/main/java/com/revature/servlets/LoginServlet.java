@@ -32,7 +32,6 @@ public class LoginServlet extends HttpServlet {
 				info.put(keyvalue[0], keyvalue[1]);
 				System.out.println(keyvalue[0] + " : " + keyvalue[1]);
 			}
-			System.out.println(info.get("username"));
 			employeeaccount = EmployeeAccountDAO.getEmployeeAccount(info.get("username"), info.get("password"));
 			if(employeeaccount == null) {
 				response.setStatus(204);
@@ -48,6 +47,7 @@ public class LoginServlet extends HttpServlet {
 			System.err.println("Login servlet encountered SQLException.");
 			response.setStatus(500);
 		} finally {
+			System.out.println("LoginServlet end");
 			CloserUtility.close(write);
 		}
 	}

@@ -21,7 +21,7 @@ public abstract class FacilitiesDAO {
 		dataconnection = DataConnectionUtility.getDataConnection();
 		while(!dataconnection.initializeConnection()) {
 		}
-		resultset = dataconnection.requestQuery("SELECT * FROM Facilities;");
+		resultset = dataconnection.requestQuery("SELECT * FROM Facilities");
 		while(resultset.next()) {
 			facility = new Facility();
 			facility.setFacilityid(resultset.getInt("facility_id"));

@@ -17,11 +17,11 @@ public abstract class EmployeeAccountDAO {
 		String[] sqlvalues = new String[1];
 		String sql;
 		sqlvalues[0] = "" + employeeaccount.getEmployeeid();
-		int rowsaffected;
+		int rowsaffected = 0;
 		dataconnection = DataConnectionUtility.getDataConnection();
 		while(!dataconnection.initializeConnection()) {
 		}
-		if(dataconnection.exists("Employees", sqlcolumns, sqlvalues)) {
+		if(dataconnection.exists("EmployeeAccounts", sqlcolumns, sqlvalues)) {
 			return false;
 		}
 		sql = "INSERT INTO EmployeeAccounts(username, password, first_name, middle_name, last_name, email, address, city, state, is_locked, is_admin, employee_id)"
@@ -36,18 +36,17 @@ public abstract class EmployeeAccountDAO {
 					+ "'" + employeeaccount.getCity() + "', "
 					+ "'" + employeeaccount.getState() + "', ";
 					if(employeeaccount.isLocked() == true) {
-						sql +=  "is_locked = 1, ";
+						sql +=  "1, ";
 					} else {
-						sql += "is_locked = 0, ";
+						sql += "0, ";
 					}
 					if(employeeaccount.isAdmin() == true) {
-						sql +=  "is_admin = 1, ";
+						sql +=  "1, ";
 					} else {
-						sql += "is_admin = 0, ";
+						sql += "0, ";
 					}
-					sql += employeeaccount.getEmployeeid()
-					+ ");";
-		rowsaffected = dataconnection.requestQuery(sql, "COMMIT;");
+					sql += employeeaccount.getEmployeeid() + ")";
+		rowsaffected = dataconnection.requestQuery(sql, "COMMIT");
 		if(rowsaffected == 0) {
 			return false;
 		}
@@ -60,7 +59,7 @@ public abstract class EmployeeAccountDAO {
 		String[] sqlvalues = new String[1];
 		String sql;
 		sqlvalues[0] = "" + employeeaccount.getEmployeeid();
-		int rowsaffected;
+		int rowsaffected = 0;
 		dataconnection = DataConnectionUtility.getDataConnection();
 		while(!dataconnection.initializeConnection()) {
 		}
@@ -90,9 +89,8 @@ public abstract class EmployeeAccountDAO {
 						}
 					 sql += "employee_id = " + employeeaccount.getEmployeeid()
 				+ " WHERE "
-						+ "employee_id = " + employeeaccount.getEmployeeid()
-						+ ";";
- 		rowsaffected = dataconnection.requestQuery(sql, "COMMIT;");		
+						+ "employee_id = " + employeeaccount.getEmployeeid();
+ 		rowsaffected = dataconnection.requestQuery(sql, "COMMIT");		
 		if(rowsaffected == 0) {
 			return false;
 		}
@@ -108,8 +106,7 @@ public abstract class EmployeeAccountDAO {
 		resultset = dataconnection.requestQuery(
 				"SELECT * FROM EmployeeAccounts"
 				+ " WHERE username = '" + username + "'"
-				+ " AND password = '" + password + "'"
-				+ ";");
+				+ " AND password = '" + password + "'");
 		while(resultset.next()) {
 			employeeaccount = new EmployeeAccount();
 			employeeaccount.setUsername(resultset.getString("username"));
@@ -146,8 +143,7 @@ public abstract class EmployeeAccountDAO {
 		}
 		resultset = dataconnection.requestQuery(
 				"SELECT position_id FROM Employees"
-				+ " WHERE employee_id = " + employeeid
-				+ ";");
+				+ " WHERE employee_id = " + employeeid);
 		if(resultset.next()) {
 			if(resultset.getInt("position_id") < 3) {
 				return employeeaccounts;
@@ -159,8 +155,7 @@ public abstract class EmployeeAccountDAO {
 		resultset = dataconnection.requestQuery("SELECT * FROM EmployeeAccounts"
 												+ " WHERE employee_id = (SELECT employee_id FROM Employees"
 													+ " WHERE position_id < (SELECT position_id FROM Employees"
-														+ " WHERE employee_id = " + employeeid + "))"
-												+ ";");		
+														+ " WHERE employee_id = " + employeeid + "))");
 		while(resultset.next()) {
 			employeeaccount = new EmployeeAccount();
 			employeeaccount.setUsername(resultset.getString("username"));
