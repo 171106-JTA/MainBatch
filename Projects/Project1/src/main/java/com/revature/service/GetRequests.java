@@ -23,8 +23,6 @@ public class GetRequests {
 
 			for (Request r : requests) {
 				Employee emp = r.getEmp();
-				System.out.println("submissionDate: " +  r.getSubmissionDate().toString());
-				System.out.println("dateOfEvent: " +  r.getDateOfEvent().toString());
 
 				myXml += "<request><username>" + emp.getUsername() + "</username><fname>" + emp.getFname() + "</fname>" +
 						"<lname>" + emp.getLname() + "</lname><Event>" + r.getEvent() + "</Event>" +
@@ -33,7 +31,7 @@ public class GetRequests {
 						"<gradingFormat>" + r.getGradingFormat() + "</gradingFormat>" +
 						"<submissionDate>" + r.getSubmissionDate().toString() + "</submissionDate>" +
 						"<dateOfEvent>" + r.getDateOfEvent().toString() + "</dateOfEvent>" +
-						"<file>" + r.getInputStream() + "</file></request>";
+						"<file>" + r.getInputStream() + "</file><id>" + r.getId() + "</id></request>";
 			}
 			myXml += "</root>";
 			out.println(myXml);

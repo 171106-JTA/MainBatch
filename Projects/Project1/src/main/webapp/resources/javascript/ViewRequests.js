@@ -36,6 +36,7 @@ function getRequests() {
 				var td9 = document.createElement("td");
 				var td10 = document.createElement("td");
 				var td11 = document.createElement("td");
+				var id = document.createElement("td");
 				
 				td1.innerHTML = response[i].childNodes[0].innerHTML;
 				td2.innerHTML = response[i].childNodes[1].innerHTML;
@@ -48,7 +49,9 @@ function getRequests() {
 				td9.innerHTML = response[i].childNodes[8].innerHTML;
 				td10.innerHTML = response[i].childNodes[9].innerHTML;
 				td11.innerHTML = response[i].childNodes[10].innerHTML;
+				id.innerHTML = response[i].childNodes[11].innerHTML;
 				
+				row.appendChild(id);
 				row.appendChild(td1);
 				row.appendChild(td2);
 				row.appendChild(td3);
