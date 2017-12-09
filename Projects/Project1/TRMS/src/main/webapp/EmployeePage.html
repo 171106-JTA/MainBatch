@@ -28,104 +28,111 @@
   </div>
 </nav>
 
-
-	<div id="requestForm" class="card" style="width:40rem">
-		<div class="card-block">
-			<h3 class="card-title">Reimbursement Form</h3>
-		
-		<form method="post" action="submit.act" name="reimburserequest" onsubmit="return validateRequestForm()">
-				<div class="form-group row">
-					<label for="first_name">First Name</label>
-					<div class="col-5">
-						<input type="text" class="form-control" name="fname" required>
+	<div class="container">
+		<div class="row">
+			<div id="requestForm" class="card col-sm-6" style="width:40rem">
+			<div class="card-block">
+				<h3 class="card-title">Reimbursement Form</h3>
+				<form method="post" action="submit.act" name="reimburserequest" onsubmit="return validateRequestForm()">
+					<div class="form-group row">
+						<label for="first_name">First Name</label>
+						<div class="col-5">
+							<input type="text" class="form-control" name="fname" required>
+						</div>
 					</div>
-				</div>
-				<div class="form-group row">
-					<label for="last_name">Last Name</label>
-					<div class="col-5">
-						<input type="text" class="form-control" name="lname" required>
+					<div class="form-group row">
+						<label for="last_name">Last Name</label>
+						<div class="col-5">
+							<input type="text" class="form-control" name="lname" required>
+						</div>
 					</div>
-				</div>
-				<div class="form-group row">
-					<label for="date_time">Date and Time</label>
-					<div class="col-5">
-						<input type="text" class= "form-control" name="datetime" placeholder="MM/DD/YYYY HH:MM" required>
+					<div class="form-group row">
+						<label for="date_time">Date and Time</label>
+						<div class="col-5">
+							<input type="text" class= "form-control" name="datetime" placeholder="MM/DD/YYYY HH:MM" required>
+						</div>
 					</div>
-				</div>
-				<div class="form-group row">
-					<label for="location">Location</label>
-					<div class="col-5">
-						<input type="text" class="form-control" name="location" required>
+					<div class="form-group row">
+						<label for="location">Location</label>
+						<div class="col-5">
+							<input type="text" class="form-control" name="location" required>
+						</div>
 					</div>
-				</div>
-				<div class="form-group row">
-					<label for="description">Description</label>
-					<textarea class="form-control" name="description" required></textarea>
-				</div>
-				<div class="form-group row">
-					<label for="cost">Cost</label>
-					<div class="col-5">
-						<input type="text" class="form-control" name="cost" min="1" max="1000" required>
+					<div class="form-group row">
+						<label for="description">Description</label>
+						<textarea class="form-control" name="description" required></textarea>
 					</div>
-				</div>
-				<div class="form-group row">
-					<label for="event_type">Event Type</label>
-					<div class="col-5">
-						<select name="event" class="form-control">
-							<option value="1">University Course</option>
-							<option value="2">Seminars</option>
-							<option value="3">Certification Prep Class</option>
-							<option value="4">Certification</option>
-							<option value="5">Technical Training</option>
-							<option value="6" selected>Other</option>
-						</select>
+					<div class="form-group row">
+						<label for="cost">Cost</label>
+						<div class="col-5">
+							<input type="text" class="form-control" name="cost" min="1" max="1000" required>
+						</div>
 					</div>
-				</div>
-				<div class="form-group row">
-					<label for="grading_format">Grade Format</label>
-				</div>
-				<div class="form-check">
-					<div>
-						<input type="radio" name="grading" value="1" checked>Letter
+					<div class="form-group row">
+						<label for="event_type">Event Type</label>
+						<div class="col-5">
+							<select name="event" class="form-control">
+								<option value="1">University Course</option>
+								<option value="2">Seminars</option>
+								<option value="3">Certification Prep Class</option>
+								<option value="4">Certification</option>
+								<option value="5">Technical Training</option>
+								<option value="6" selected>Other</option>
+							</select>
+						</div>
 					</div>
-					<div>
-						<input type="radio" name="grading" value="2">P/F
+					<div class="form-group row">
+						<label for="grading_format">Grade Format</label>
 					</div>
-				</div>
+					<div class="form-check">
+						<div>
+							<input type="radio" name="grading" value="1" checked>Letter
+						</div>
+						<div>
+							<input type="radio" name="grading" value="2">P/F
+						</div>
+					</div>
 				
-				<div class="form-group row">
-					<label for="grade">Grade Received</label>
-					<div class="col-3">
-						<input type="text" class="form-control" name="grade" required>
+					<div class="form-group row">
+						<label for="grade">Grade Received</label>
+						<div class="col-3">
+							<input type="text" class="form-control" name="grade" required>
+						</div>
 					</div>
-				</div>
-				<div class="form-group row">
-					<label for="justification">Work-Related Justification</label>
-					<textarea class="form-control" name="justification" required></textarea>
-				</div>
-				<div class="form-group row">
-					<label for="inputfile">Additional Files</label>
-					<input type="file" name="file">
-				</div>
+					<div class="form-group row">
+						<label for="justification">Work-Related Justification</label>
+						<textarea class="form-control" name="justification" required></textarea>
+					</div>
+					<div class="form-group row">
+						<label for="inputfile">Additional Files</label>
+						<input type="file" name="file">
+					</div>
+					<div class="row">
+						<button class="btn btn-info" type="submit" name="submit">Submit</button>		
+						<div class="col-5">
+							<p id="formError" style="color:red"></p>
+						</div>
+					</div>		
+				</form>
+			</div>
+		</div>
+	
+		<div id="pendingRequestDiv" class="card col-sm-6" style="width:40rem">
+			<div class="card-block">
 				<div class="row">
-					<button class="btn btn-info" type="submit" name="submit">Submit</button>		
+					<h3 class="card-title">All Requests</h3>
 					<div class="col-5">
-						<p id="formError" style="color:red"></p>
-					</div>
-					
+						<button class="btn btn-info" onclick="getEmployeeRequests()">Show Pending Requests</button>
+					</div>	
 				</div>
-				
-		</form>
+				<table id="pendingTable" border="2px">
+					<tr><th>ID</th><th>Date-Time</th><th>Event</th><th>Projected Reimbursement</th><th>Status</th></tr>
+				</table>
+			</div>
+		</div>
 	</div>
 	</div>
 	
-	<div id="pendingRequestDiv" class="well">
-		<p id="AJAXError"></p>
-		<input type="button" value="Show PendRequests" onclick="getEmployeeRequests()">
-		<table id="pendingTable" border="2px">
-			<tr><th>ID</th><th>Date-Time</th><th>Event</th><th>Projected Reimbursement</th><th>Status</th></tr>
-		</table>
-	</div>
 	
 	<div id="InfoRequests" class="well">
 	<input type="button" value="Show InfoRequests" onclick="getInfoRequests()">
