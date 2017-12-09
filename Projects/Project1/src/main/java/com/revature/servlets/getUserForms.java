@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.revature.bean.ReimbursementForm;
 import com.revature.dao.TrmsDaoImplement;
 
@@ -20,31 +23,31 @@ public class getUserForms extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("In getUserforms");
-		
 		HttpSession session = request.getSession();
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		
+		PrintWriter out = null;
 		List<ReimbursementForm> RFs = null;
-
+		
+		//Check if user is logged in. If not, dispaly message that redirects to index.html
 		if (session.isNew()) {
-			System.out.println("Not logged in!");
+			response.setContentType("text/html");
+			out = response.getWriter();
 			out.println("You are not logged in!");
 			out.println("<hr>" + "<a href='index.html'>BACK</a>");
 			session.invalidate(); // Clears the session entirely
 		} else {
+			response.setContentType("application/json;charset=UTF-8");
+			response.setHeader("Cache-Control", "no-cache");
+			out = response.getWriter();
+			
+			//To-Do: Write code for handling a NULL username
 			String userName = (String) session.getAttribute("username");
-			
-			String greetings = "Hello There! " + userName;
-			System.out.println(greetings);
-			response.setContentType("text/plain");
-			response.getWriter().write(greetings);
-			
 			TrmsDaoImplement dao = new TrmsDaoImplement();
 			RFs = dao.getUserForms(userName);
 			
-			System.out.println(RFs);
+			JSONArray RF_JSON_Array = new JSONArray(RFs);
+			
+			//Return the JSON object of reimbursement forms
+			out.println(RF_JSON_Array);
 		}
 	}
 

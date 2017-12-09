@@ -19,16 +19,21 @@ window.onload = function() {
 //	});
 }
 
-$(document).ready(function() {
-	$.post('getUserForms.do')
+$(document).ready(function() {	
+	$.post('getUserForms.do', function(response) {
+		console.log("Iside Ajax call");
+		console.log(response);
+		console.log(response.test1)
+//		var info1=response.JSonDataFinal;
+//		$('#ajaxGetUserServletResponse').text(responseText);
+//		$.each(info1, function(i, field){
+//			console.log("Field: " + field + ", i: " + i);
+//        });
+	});
 	
 	$('#userName').blur(function(event) {
 		var name = $('#userName').val();
-		alert("name: " + name);
-		$.get('getUserForms.do', {
-			userName : name
-		}, function(responseText) {
-			$('#ajaxGetUserServletResponse').text(responseText);
-		});
+		console.log("name: " + name);
+		console.log("hello again! 4");
 	});
 });
