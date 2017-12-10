@@ -29,7 +29,7 @@
 					enctype="multipart/form-data">
 					<div class="next">
 						Event <select id="eventName" name="event" required>
-							<option value="Univeristy Course">University Course</option>
+							<option value="University Course">University Course</option>
 							<option value="Seminar">Seminar</option>
 							<option value="Certification Preparation Class">Certification
 								Preparation Course</option>
@@ -45,8 +45,8 @@
 						</select>
 					</div>
 					<div class="next">
-						Cost <input type="number" id="eventCost" name="eventCost" placeholder="Cost"
-							step="0.01" required>
+						Cost <input type="number" id="eventCost" name="eventCost"
+							placeholder="Cost" step="0.01" required>
 					</div>
 					<div class="next">
 						Date of Event <input type="date" name="dateOfEvent"
@@ -71,10 +71,11 @@
 				<div class="next">
 					<p id="requestResult"></p>
 				</div>
+				<div class="next">
+					<span>Projected Reimbursement: </span> <span id="projectedResult"
+						style="color: green">$0.0</span>
+				</div>
 			</div>
-		</div>
-		<div class="next">
-			<p id="projectedResult" style="color:green"></p>
 		</div>
 		<div class="col-lg-4" align="center">
 			<h4>Not sure yet</h4>

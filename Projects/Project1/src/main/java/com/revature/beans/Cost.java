@@ -19,14 +19,16 @@ public enum Cost {
 		eventName = eventName.toUpperCase();
 		if (eventName.equals("SEMINAR")) {
 			return Cost.SEMINAR;			
-		} else if (eventName.equals("UNIVERSITY_COURSE")) {
+		} else if (eventName.equals("UNIVERSITY COURSE")) {
 			return Cost.UNIVERSITY_COURSE;			
-		} else if (eventName.equals("CERTIFICATION_PREPARATION_CLASS")) {
+		} else if (eventName.equals("CERTIFICATION PREPARATION CLASS")) {
 			return Cost.CERTIFICATION_PREPARATION_CLASS;			
 		} else if (eventName.equals("CERTIFICATION")) {
 			return Cost.CERTIFICATION;			
 		} else if (eventName.equals("OTHER")) {
 			return Cost.OTHER;			
+		} else if (eventName.equals("TECHNICAL TRAINING")) {
+			return Cost.TECHNICAL_TRAINING;			
 		}
 		
 		return null;
