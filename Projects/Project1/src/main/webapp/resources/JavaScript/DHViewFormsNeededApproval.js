@@ -65,8 +65,7 @@ $(document).ready(function() {
 		$('#ReimbursementFormTable tbody').on( 'click', '.btn-approve', function () {
 			var data = table.row( $(this).parents('tr') ).data();
 			
-	        //Change Department Head's approval to 1
-	        //Keep the other approvals the same
+			//Logic in servlet for updating approval status
 	        $.post('updateFormApproval.do', 
 	        	{ 
 	        		reimbursementID : data[0],

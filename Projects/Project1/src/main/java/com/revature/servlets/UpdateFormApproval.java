@@ -40,24 +40,20 @@ public class UpdateFormApproval extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		String permission = (String) session.getAttribute("permission");
-		System.out.println("permission: " + permission);
 		
-		if(permission.equals("approval_by_direct_supervisor")) {
+		if(permission.equals("direct_supervisor")) {
 			approvalByDirectSupervisor = 1;
-		} else if(permission.equals("approval_by_department_head")) {
+		} else if(permission.equals("department_head")) {
 			approvalByDepartmentHead = 1;
-		} else if(permission.equals("approval_by_benco")) {
+		} else if(permission.equals("benco")) {
 			approvalByBenCo = 1;
 		}
-		
-		
 		TrmsDaoImplement dao = new TrmsDaoImplement();
 		dao.updateFormApproval(
 				reimbursementID, 
 				approvalByDirectSupervisor, 
 				approvalByDepartmentHead, 
 				approvalByBenCo);
-		System.out.println("Reimbursement Form Updated");
 	}
 
 }
