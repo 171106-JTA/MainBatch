@@ -1,0 +1,62 @@
+body{
+	color: yellow;
+	background-color: black;
+	font-family: verdana;
+}
+
+td{
+	padding: 10px;
+	background-color: black;
+	color: yellow;
+}
+
+th{
+	padding: 10px;
+	background-color: yellow;
+	color: black;
+}
+
+input{
+	background-color: black;
+	color: yellow;
+}
+
+table{
+	border-color: black;
+}
+
+a{
+	color: red;
+	undeline:none;
+	text-decoration:none;
+}
+
+p{
+	color: white;
+}
+
+hr{
+	color: yellow;
+}
+
+#logOptions{
+	width: 200px;
+	height: 90px;
+	background-color: graytext;
+	position:fixed;
+	/* position:absolute; */
+	top:100px;
+	color:yellow;
+	background-color:black;
+	/* border: 1px solid yellow; */
+	border-bottom: 1px solid yellow;
+	border-top: 1px solid yellow;
+	border-right: 1px solid yellow;
+}
+
+#indextext{
+	left: 235px;
+	position:absolute;
+	width:820px;
+}
+
