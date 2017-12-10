@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>TRMS-Tuition Reimbursement Management System</title>
+	
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	
+	<!-- jQuery library -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+	<!-- Latest compiled JavaScript -->
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css"
+		href="resources/css/MyCustomCSS.css">
+		
+	<script src="resources/JavaScript/main.js"></script>
+</head>
+<body>
+
+	<div class="container">
+	
+		<div class="well darkfont">
+			<h3>
+			<strong>TRMS</strong> - Tuition Reimbursement Management System
+			</h3>
+		</div>
+		
+		
+		<div class="well darkfont">
+			<form action="Login" method="post" id="loginForm">
+				<table>
+					<tr>
+						<td>Email</td>
+						<td><input type="email" name="email" id="email" placeholder="email"/></td>
+					</tr>
+					<tr>
+						<td>Password</td>
+						<td><input type="password" name="password" id="password" placeholder="password"/></td>
+					</tr>
+					<tr>
+						<td></td><td><input type="submit" value="Login" name="action"/></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+
+
+	<div class="well darkfont">
+			<button onclick="unhideNewEmployee()">New Employee</button>
+			<div id="NewEmployeeRegister" style="display:none;">
+				<form action="EmployeeRegistration" method="post">
+					<ul style="list-style-type: none">
+						<li><b style='color:red'>*</b>FIRST NAME</li>
+						<li><input type="text" name="firstname" placeholder="firstname" required></li>
+						
+						<li><b style='color:red'>*</b>LAST NAME</li>
+						<li><input type="text" name="lastname" placeholder="lastname" required></li>
+						
+						<li><b style='color:red'>*</b>ADDRESS</li>
+						<li><input type="text" name="address" placeholder="address" required></li>
+						
+						<li><b style='color:red'>*</b>CITY</li>
+						<li><input type="text" name="city" placeholder="city" required></li>
+						
+						<li><b style='color:red'>*</b>STATE</li>
+						<li><input type="text" name="state" placeholder="state" required></li>
+						
+						<li><b style='color:red'>*</b>ZIP</li>
+						<li><input type="text" name="zip" placeholder="zip" required></li>
+						
+						<li><b style='color:red'>*</b>SUPERVISOR ID</li>
+						<li><input type="text" name="supervisor id" placeholder="supervisor id"></li>
+						
+						<li><b style='color:red'>*</b>DEPARTMENT</li>
+						<li><select name="department">
+							    <option value="Mechanical">Mechanical</option>
+							    <option value="Electrical">Electrical</option>
+							    <option value="Civil">Civil</option>
+							    <option value="Human Resources">Human Resources</option>
+							  </select>
+							  
+						<li><b style='color:red'>*</b>EMAIL</li>
+						<li><input type="email" name="email" placeholder="email" required></li>
+						
+						<li><b style='color:red'>*</b>PASSWORD</li>
+						<li><input type="password" name="password" placeholder="password" required></li>
+						
+						<li><b style='color:red'>*</b>TITLE</li>
+						<li><select name="title">
+							    <option value="Employee">Employee</option>
+							    <option value="Manger">Manager</option>
+							    <option value="Department Head">Department Head</option>
+							    <option value="Benefit Coordinator">Benefit Coordinator</option>
+							  </select>
+						
+						<li><input type="submit" value="SUBMIT"></li>
+					</ul>
+				</form>
+			</div>
+		</div>
+		
+		<!--  
+		<footer class=page-footer>
+			<div class="footer-copyright">
+				<div class="container">
+			    	Do I want a footer...?
+			    </div>
+			</div>
+		</footer>
+		-->
+
+	</div>
+
+</body>
+</html>
+	
+	
