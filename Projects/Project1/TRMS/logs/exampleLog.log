@@ -3,3 +3,37 @@
 2017-12-10 12:03:41 INFO  Logging:27 - Info requests for 123 has been requested
 2017-12-10 12:04:31 INFO  Logging:27 - jeff has submitted a request
 2017-12-10 12:04:43 INFO  Logging:27 - jeff has logged out
+2017-12-10 13:48:02 INFO  Logging:27 - jeff has attempted to login
+2017-12-10 13:48:02 INFO  Logging:27 - Login has failed
+2017-12-10 13:48:24 INFO  Logging:27 - jeff has attempted to login
+2017-12-10 13:48:24 INFO  Logging:27 - Login has failed
+2017-12-10 13:59:34 INFO  Logging:27 - jeff has logged in as Employee
+2017-12-10 13:59:36 INFO  Logging:27 - No requests for 141
+2017-12-10 13:59:38 INFO  Logging:27 - No info requests present for 141
+2017-12-10 14:00:12 INFO  Logging:27 - jeff had an issue submitting a request
+2017-12-10 14:01:25 INFO  Logging:27 - jeff has submitted a request
+2017-12-10 14:02:33 INFO  Logging:27 - jeff has logged in as Employee
+2017-12-10 14:02:35 INFO  Logging:27 - Reimbursement requests of 141 had been requested
+2017-12-10 14:03:25 INFO  Logging:27 - jeff has logged out
+2017-12-10 14:03:35 INFO  Logging:27 - jordan has ogged in as Admin
+2017-12-10 14:04:34 INFO  Logging:27 - No info requests present
+2017-12-10 14:06:30 INFO  Logging:27 - jordan has logged out
+2017-12-10 14:06:34 INFO  Logging:27 - jeff has logged in as Employee
+2017-12-10 14:06:39 INFO  Logging:27 - Info requests for 141 has been requested
+2017-12-10 14:06:52 INFO  Logging:27 - Information Request: 21 has been updated
+2017-12-10 14:06:57 INFO  Logging:27 - Reimbursement requests of 141 had been requested
+2017-12-10 14:07:07 INFO  Logging:27 - han has ogged in as Admin
+2017-12-10 14:07:11 INFO  Logging:27 - Info requests Requested
+2017-12-10 14:11:36 INFO  Logging:27 - han has logged in as Admin
+2017-12-10 14:11:43 INFO  Logging:27 - Request of 14.8 has been approved for han
+2017-12-10 14:12:06 INFO  Logging:27 - han has logged out
+2017-12-10 14:18:13 INFO  Logging:27 - jeff has logged in as Employee
+2017-12-10 14:18:40 INFO  Logging:27 - jeff has submitted a request
+2017-12-10 14:21:12 INFO  Logging:27 - jeff has logged in as Employee
+2017-12-10 14:21:13 INFO  Logging:27 - Reimbursement requests of 141 had been requested
+2017-12-10 14:21:39 INFO  Logging:27 - jeff has submitted a request
+2017-12-10 14:21:39 INFO  Logging:27 - Request of 17.099999999999998 subtracted from available amount by jeff
+2017-12-10 14:21:41 INFO  Logging:27 - Reimbursement requests of 141 had been requested
+2017-12-10 14:22:01 INFO  Logging:27 - jeff has logged out
+2017-12-10 14:22:07 INFO  Logging:27 - han has logged in as Admin
+2017-12-10 14:22:23 INFO  Logging:27 - Request of 15.0 has been approved for jeff

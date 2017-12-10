@@ -30,7 +30,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				emp = new Employee(rs.getString(8), rs.getString(9), rs.getInt(1), rs.getDouble(4), rs.getInt(2));
+				emp = new Employee(rs.getString("username"), rs.getString("pass"), rs.getInt(1), rs.getDouble(5), rs.getInt(2), rs.getDouble(4));
 			}
 		}catch(SQLException e) {
 			
@@ -55,7 +55,7 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				emp = new Employee(rs.getString(8), rs.getString(9), rs.getInt(1), rs.getDouble(4), rs.getInt(2));
+				emp = new Employee(rs.getString("username"), rs.getString("pass"), rs.getInt(1), rs.getDouble(5), rs.getInt(2), rs.getDouble(4));
 			}
 		}catch(SQLException e) {
 			

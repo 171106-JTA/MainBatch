@@ -33,7 +33,7 @@ public class GetEmployeeData {
 			responseXML += "</root>";
 			
 			out.println(responseXML);
-			Logging.startLogging("Reimbursement requests of " + empId + "had been requested");
+			Logging.startLogging("Reimbursement requests of " + empId + " had been requested");
 		}
 		else {
 			Logging.startLogging("No requests for " + empId);

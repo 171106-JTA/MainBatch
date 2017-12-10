@@ -54,7 +54,9 @@ public class InsertReimbursement {
 		rr = new ReimburseRequest(empId, fname, lname, location, descript, actualCost, grading, event, justify, ldt);
 		
 		if(udao.submitRequest(rr)) {
+			System.out.println("here");
 			Logging.startLogging(session.getAttribute("username") + " has submitted a request");
+			UpdateEmployeeAmount.updateAvailAmount(empId, actualCost);
 			return true;
 		}
 		

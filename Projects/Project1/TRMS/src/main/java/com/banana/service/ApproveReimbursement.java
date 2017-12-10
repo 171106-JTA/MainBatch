@@ -9,8 +9,9 @@ public class ApproveReimbursement {
 		if(decision == -1) {
 			UpdateEmployeeAmount.denyAmount(rrId);
 		}
-		else if(decision == 1){
-			UpdateEmployeeAmount.updateAmount(empId, rrId);
+		else if(decision == 1 && roleId == 3){
+			System.out.println("Benco");
+			UpdateEmployeeAmount.updateAmountByBenCo(rrId);
 		}
 		
 		return udao.updateRequestApproval(roleId, rrId, decision, empId);

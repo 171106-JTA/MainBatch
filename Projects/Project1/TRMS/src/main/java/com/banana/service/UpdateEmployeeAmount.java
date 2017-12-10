@@ -8,15 +8,49 @@ import com.banana.dao.UpdateDAOImpl;
 import com.revature.log.Logging;
 
 public class UpdateEmployeeAmount {
-	public static boolean updateAmount(int empId, int rrId) {
+	public static boolean updateAvailAmount(int empId, double cost) {
 		EmployeeDAOImpl empdao = new EmployeeDAOImpl();
-		ReimbursementDAOImpl rdao = new ReimbursementDAOImpl();
 		UpdateDAOImpl udao = new UpdateDAOImpl();
 		boolean status = false;
 		
 		Employee emp = empdao.getEmployeeById(empId);
 		
+		if(emp != null) {
+			double amount = emp.getCurrAmount();
+			double newAmount = amount - cost;
+			
+			if(newAmount < 0) {
+				return false;
+			}
+			status = udao.setNewAvailAmount(empId, newAmount);
+			if(status) {
+				Logging.startLogging("Request of " + cost + " subtracted from available amount by " + emp.getUsername());
+			}
+			else {
+				Logging.startLogging("Issue updating Available amount");
+			}
+		}
+		
+		if(!status) {
+			Logging.startLogging("Issue updating amount");
+		}
+		
+		return status;
+	}
+	
+	public static boolean updateAmountByBenCo(int rrId) {
+		EmployeeDAOImpl empdao = new EmployeeDAOImpl();
+		ReimbursementDAOImpl rdao = new ReimbursementDAOImpl();
+		UpdateDAOImpl udao = new UpdateDAOImpl();
+		boolean status1 = false;
+		boolean status2 = false;
+		boolean status = false;
+		
 		ReimburseRequest rr = rdao.getSingleRequest(rrId);
+		
+		int empId = empdao.getEmployeeIdFromRequest(rrId);
+				
+		Employee emp = empdao.getEmployeeById(empId);
 		
 		if(emp != null) {
 			double amount = emp.getCurrAmount();
@@ -25,7 +59,10 @@ public class UpdateEmployeeAmount {
 			if(newAmount < 0) {
 				return false;
 			}
-			status = udao.setNewAmount(empId, newAmount);
+			status1 = udao.setNewAvailAmount(empId, newAmount);
+			status2 = udao.setNewActualAmount(empId, newAmount);
+			status = status1 & status2;
+			
 			if(status) {
 				Logging.startLogging("Request of " + rr.getCost() + " has been approved for " + emp.getUsername());
 			}
@@ -45,6 +82,8 @@ public class UpdateEmployeeAmount {
 		EmployeeDAOImpl empdao = new EmployeeDAOImpl();
 		ReimbursementDAOImpl rdao = new ReimbursementDAOImpl();
 		UpdateDAOImpl udao = new UpdateDAOImpl();
+		boolean status1 = false;
+		boolean status2 = false;
 		boolean status = false;
 		
 		int empId = empdao.getEmployeeIdFromRequest(rrId);
@@ -60,7 +99,10 @@ public class UpdateEmployeeAmount {
 			if(newAmount > 1000) {
 				return false;
 			}
-			status = udao.setNewAmount(empId, newAmount);
+			status1 = udao.setNewAvailAmount(empId, newAmount);
+			status2 = udao.setNewActualAmount(empId, newAmount);
+			status = status1 & status2;
+			
 			if(status) {
 				Logging.startLogging("Request of " + rr.getCost() + " has been denied for " + emp.getUsername());
 			}

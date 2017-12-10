@@ -42,7 +42,7 @@ public class EmployeeLogin extends HttpServlet {
 			}
 			else {
 				rd = request.getRequestDispatcher("AdminPage.html");
-				Logging.startLogging(emp.getUsername() + " has ogged in as Admin");
+				Logging.startLogging(emp.getUsername() + " has logged in as Admin");
 			}
 			
 			rd.forward(request, response);

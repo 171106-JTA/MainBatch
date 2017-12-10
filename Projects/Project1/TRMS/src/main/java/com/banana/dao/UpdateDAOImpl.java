@@ -63,7 +63,7 @@ public class UpdateDAOImpl implements UpdateDAO{
 		else {
 			return false;
 		}
-		System.out.println("here");
+		
 		PreparedStatement ps = null;
 		
 		try(Connection conn = ConnectionUtil.getConnection()){
@@ -162,7 +162,7 @@ public class UpdateDAOImpl implements UpdateDAO{
 		return percent;
 	}
 	
-	public boolean setNewAmount(int empId, double newAmount) {
+	public boolean setNewAvailAmount(int empId, double newAmount) {
 		String sql = "UPDATE Employee SET Avail_Amount = ? WHERE EID = ?";
 		PreparedStatement ps = null;
 	
@@ -172,6 +172,27 @@ public class UpdateDAOImpl implements UpdateDAO{
 			ps.setInt(2, empId);
 			
 			ps.executeQuery();
+			commitChanges();
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}finally {
+			close(ps);
+		}
+		return true;
+	}
+	
+	public boolean setNewActualAmount(int empId, double newAmount) {
+		String sql = "UPDATE Employee SET Actual_Amount = ? WHERE EID = ?";
+		PreparedStatement ps = null;
+	
+		try(Connection conn = ConnectionUtil.getConnection()){
+			ps = conn.prepareStatement(sql);
+			ps.setDouble(1, newAmount);
+			ps.setInt(2, empId);
+			
+			ps.executeQuery();
+			commitChanges();
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;

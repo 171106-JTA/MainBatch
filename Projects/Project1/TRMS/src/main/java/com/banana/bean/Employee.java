@@ -5,18 +5,31 @@ public class Employee {
 	private String password;
 	private int empId;
 	private double currAmount;
+	private double actAmount;
 	private int roleId;
 	
-	public Employee(String username, String password, int empId, double currAmount, int roleId) {
+	public Employee(String username, String password, int empId, double currAmount, int roleId, double actualAmount) {
 		this.username = username;
 		this.password = password;
 		this.empId = empId;
 		this.currAmount = currAmount;
 		this.roleId = roleId;
+		this.actAmount = actualAmount;
 	}
 	
 	
-	
+	public double getActAmount() {
+		return actAmount;
+	}
+
+
+
+	public void setActAmount(double actAmount) {
+		this.actAmount = actAmount;
+	}
+
+
+
 	public double getCurrAmount() {
 		return currAmount;
 	}
