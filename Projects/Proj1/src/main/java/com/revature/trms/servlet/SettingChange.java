@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.revature.trms.dao.EmployeeDAO;
-import com.revature.trms.dao.ReimCaseDAO;
 
 /**
  * Servlet implementation class SettingChange

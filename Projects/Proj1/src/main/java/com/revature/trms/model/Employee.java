@@ -2,6 +2,8 @@ package com.revature.trms.model;
 
 import java.sql.Time;
 
+import org.apache.log4j.Logger;
+
 public class Employee {
 	private int userId;
 	private String username;

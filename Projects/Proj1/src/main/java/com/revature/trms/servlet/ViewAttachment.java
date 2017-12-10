@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.revature.trms.dao.ReimCaseDAO;
 import com.revature.trms.model.ReimbursementCase;
 
@@ -18,7 +20,7 @@ import com.revature.trms.model.ReimbursementCase;
  */
 public class ViewAttachment extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	static Logger log = Logger.getLogger(ViewAttachment.class); 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int caseId = Integer.parseInt(request.getParameter("caseId"));
@@ -28,6 +30,7 @@ public class ViewAttachment extends HttpServlet {
 		response.setHeader("Content-Disposition",
 				"attachment; filename= case" + reimCase.getRequest_date() + "_" + reimCase.getCase_id() + ".png");
 		if (reimCase.getAttachment() != null) {
+			log.info("Attachment is found and returned");
 			InputStream is = new ByteArrayInputStream(reimCase.getAttachment());
 			OutputStream os = response.getOutputStream();
 			// We're going to read and write 1KB at a time
