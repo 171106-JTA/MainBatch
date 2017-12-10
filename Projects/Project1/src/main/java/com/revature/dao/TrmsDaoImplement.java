@@ -1,6 +1,7 @@
 package com.revature.dao;
 
 import java.sql.CallableStatement;
+import java.sql.Clob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -412,4 +413,37 @@ public class TrmsDaoImplement implements TrmsDao {
 			}
 		}
 	}
+	
+	public void denyReimbursement(int reimbursementID, String deny_msg){
+		PreparedStatement ps = null;
+		int rows_updated = -1;
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			String sql = "UPDATE ReimbursementForm "
+					+ "SET reason_for_denial = ?, "
+					+ "status = -1"  //Set the status to Denied
+					+ "WHERE reimbursementID = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, deny_msg);
+			ps.setInt(2, reimbursementID);
+			
+			rows_updated = ps.executeUpdate();
+			if (rows_updated == 0) {
+				throw new SQLException("Reimbursement Form Update Failed!");
+			}
+		} catch (SQLException e) {
+			// To Do: This catch statement executes if user was not inserted into the
+			// database.
+			// How to return the stacktrace to Driver to be logged???
+			e.printStackTrace();
+		} finally {
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 }
+

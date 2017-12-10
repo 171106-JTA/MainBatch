@@ -69,4 +69,24 @@
     <servlet-name>UpdateFormApproval</servlet-name>
     <url-pattern>/UpdateFormApproval</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SaveReimbursementID</display-name>
+    <servlet-name>SaveReimbursementID</servlet-name>
+    <servlet-class>com.revature.servlets.SaveReimbursementID</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SaveReimbursementID</servlet-name>
+    <url-pattern>/SaveReimbursementID</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DenyReimbursementForm</display-name>
+    <servlet-name>DenyReimbursementForm</servlet-name>
+    <servlet-class>com.revature.servlets.DenyReimbursementForm</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DenyReimbursementForm</servlet-name>
+    <url-pattern>/DenyReimbursementForm</url-pattern>
+  </servlet-mapping>
 </web-app>

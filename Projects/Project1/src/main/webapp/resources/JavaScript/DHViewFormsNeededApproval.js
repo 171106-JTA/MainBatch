@@ -40,7 +40,7 @@ $(document).ready(function() {
 		var table = $('#ReimbursementFormTable').DataTable({
 			data : array_data, 
 			columns : [
-				{ title : "Reimbursement ID", "visible": false},
+				{ title : "Form ID", "visible": true},
 				{ title : "Description"}, 
 				{ title : "Cost"},
 				{ title : "Date"}, 
@@ -53,13 +53,16 @@ $(document).ready(function() {
 				{ title : "Benefits Coordinator Approval", "visible": false},
 				{
 			      "data": null,
-			      "defaultContent": "<button>Approve</button>",
+			      "defaultContent": 
+			    	  "<button class='btn-approve'>Approve</button>" +
+			    	  "<button class='btn-deny'>Deny</button>",
 			      bSortable: false
 			    }
 			]
 		});
 		
-		$('#ReimbursementFormTable tbody').on( 'click', 'button', function () {
+		//Approve Button
+		$('#ReimbursementFormTable tbody').on( 'click', '.btn-approve', function () {
 			var data = table.row( $(this).parents('tr') ).data();
 			
 	        //Change Department Head's approval to 1
@@ -77,6 +80,18 @@ $(document).ready(function() {
     		.row( $(this).parents('tr') )
             .remove()
             .draw();
+	    });
+		
+		//Deny Button
+		$('#ReimbursementFormTable tbody').on( 'click', '.btn-deny', function () {
+			var data = table.row( $(this).parents('tr') ).data();
+			console.log("reimbursementID: " + data[0]);
+			//Save Reimbursement ID to session
+			$.post('saveReimbursementID.do', 
+				{
+					reimbursementID : data[0]
+				});
+			location.href = "getDenialReason.html";
 	    });
 	});
 });

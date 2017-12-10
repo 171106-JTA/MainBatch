@@ -1,5 +1,6 @@
 package com.revature.dao;
 
+import java.sql.Clob;
 import java.util.List;
 
 import com.revature.bean.ReimbursementForm;
@@ -14,6 +15,7 @@ public interface TrmsDao {
 			int directSupervisorApproval,
 			int departmentHeadApproval,
 			int benCoApproval);
+	public void denyReimbursement(int reimbursementID, String deny_msg);
 	public List<String> getAddress(int addressID);
 	public String getGradingFormat(int gradingFormatID);
 	public String getEventType(int eventTypeID);

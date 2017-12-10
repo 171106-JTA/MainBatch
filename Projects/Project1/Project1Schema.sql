@@ -167,7 +167,7 @@ CREATE TABLE ReimbursementForm (
     eventTypeID NUMBER(2),                  --Foreign key to event type table
     work_related_justification CLOB,        --Description of how the training is work related
     passing_grade NUMBER(3),                --Passing grade between 0 < X < 100. Assume passing grade is a percentage
-    status NUMBER(2),                       --0 -> Awaiting Approval, 1 -> Pending, 2 -> Accapted
+    status NUMBER(2),                       --0 -> Awaiting Approval, 1 -> Pending, 2 -> Accapted, -1 -> denied
     exceeds_funds NUMBER(1),                --0 -> not exceeding funds, 1 -> Exceeds available funds
     reason_for_excess_funds CLOB,
     reason_for_denial CLOB, 

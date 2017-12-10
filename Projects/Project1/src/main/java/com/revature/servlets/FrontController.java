@@ -72,13 +72,21 @@ public class FrontController extends HttpServlet {
 			rd.forward(request, response);
 			break;
 		case "getformsneedingapproval":
-			System.out.println("In FrontController: getFormsNeedingApproval");
 			rd = request.getRequestDispatcher("getFormsNeedingApproval");
 			rd.forward(request, response);
 			break;
 		case "updateformapproval":
-			System.out.println("In FrontController; updateFormApproval");
 			rd = request.getRequestDispatcher("UpdateFormApproval");
+			rd.forward(request, response);
+			break;
+		case "savereimbursementid":
+			System.out.println("In FrontController: saveReimbursementID");
+			rd = request.getRequestDispatcher("SaveReimbursementID");
+			rd.forward(request, response);
+			break;
+		case "denyreimbursementform":
+			System.out.println("In FrontController: denyReimbursementForm");
+			rd = request.getRequestDispatcher("DenyReimbursementForm");
 			rd.forward(request, response);
 		}
 		System.out.println("After Switch Statement");
