@@ -9,17 +9,18 @@
 
 <section class="footer-section">
     <!-- footer from: https://demo.tutorialzine.com/2015/01/freebie-5-responsive-footer-templates/footer-distributed.html -->
-    <footer class="footer footer-distributed container">
-            <div class="footer-right col-sm-2">
-                <p class="footer-links">
-                    <a href="#">Home</a>
-                    <a href="#">About</a>
-                    <a href="#">Contact</a>
-                </p>
+    <footer class="footer container">
+        <div>
+            <div class="footer-right col-xs-4">
+                <label for="footer-logo"><a routerLink="home" id="footer-logo"><img src="../../../favicon.ico"></a>TRMS © 2017</label>
             </div>
 
-            <div class="footer-left col-lg-offset-5 col-sm-6">
-                <p><span>TRMS magic © 2017</span><a routerLink="home" class="navbar-brand"><img src="../../../favicon.ico"></a> </p>
+            <div class="footer-left col-xs-8">
+                <a routerLink="home" class="col-xs-3 col-md-2 col-lg-1">Home</a>
+                <a routerLink="home" class="col-xs-3 col-md-2 col-lg-1">About</a>
+                <a routerLink="Contact" class="col-xs-4 col-md-2 col-lg-1">Contact</a>
             </div>
+        </div>
     </footer>
 </section>
+

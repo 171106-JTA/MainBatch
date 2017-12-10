@@ -3,6 +3,9 @@ package me.daxterix.trms.servlet;
 import me.daxterix.trms.model.Employee;
 import me.daxterix.trms.service.AuthenticationService;
 
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +25,7 @@ public class LoginServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        response.setContentType("text/plain");
+        response.setContentType("application/json");
         PrintWriter out = response.getWriter();
 
         if (session.isNew()) {
@@ -33,12 +36,12 @@ public class LoginServlet extends HttpServlet {
             if (emp != null) {
                 session.setAttribute("email", email);
                 session.setAttribute("password", password);
-                out.printf("LOGIN SUCCESS. Welcome %s\n", email);
+                out.print(ServletUtils.employeeToJson(emp));
             }
             else {
                 session.invalidate();
                 response.setStatus(401);
-                out.printf("Invalid credentials\n");
+                out.println("Invalid credentials");
             }
         }
         else {
@@ -46,4 +49,6 @@ public class LoginServlet extends HttpServlet {
             out.println(String.format("ALREADY LOGGED IN AS: %s", email));
         }
     }
+
 }
+

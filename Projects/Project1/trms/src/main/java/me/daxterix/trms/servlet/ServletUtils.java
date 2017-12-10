@@ -7,6 +7,9 @@ import javax.servlet.http.Part;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 public class ServletUtils {
@@ -20,12 +23,12 @@ public class ServletUtils {
 
     public static JsonArray requestsToJsonArray(List<ReimbursementRequest> requests) {
         JsonArrayBuilder arrBuilder = Json.createArrayBuilder();
-        for (ReimbursementRequest req: requests)
+        for (ReimbursementRequest req : requests)
             arrBuilder.add(requestToJson(req));
         return arrBuilder.build();
     }
 
-    public static JsonObject requestToJson(ReimbursementRequest req) {
+    private static JsonObject requestToJson(ReimbursementRequest req) {
         JsonObjectBuilder builder = Json.createObjectBuilder();
         builder.add("id", req.getId());
         builder.add("filerEmail", req.getFiler().getEmail());
@@ -40,7 +43,7 @@ public class ServletUtils {
         else builder.add("passed",
                 (grade.getPassedFailed() != null && grade.getPassedFailed()) ||
                         (grade.getGradePercent() >= grade.getCutoffPercent())
-                );
+        );
         if (req.isUrgent() != null)
             builder.add("isUrgent", req.isUrgent());
         else
@@ -55,6 +58,56 @@ public class ServletUtils {
         return builder.build();
     }
 
+    public static JsonObject addressToJson(Address address) {
+        JsonObjectBuilder builder = Json.createObjectBuilder();
+        builder.add("address", address.getAddress());
+        builder.add("city", address.getAddress());
+        builder.add("state", address.getAddress());
+        builder.add("zip", address.getAddress());
+        return builder.build();
+    }
+
+    public static JsonObject dateTimeToJsonObject(LocalDateTime date) {
+        JsonObjectBuilder builder = Json.createObjectBuilder();
+        builder.add("year", date.getYear());
+        builder.add("month", date.getMonthValue());
+        builder.add("day", date.getDayOfMonth());
+        builder.add("hour", date.getHour());
+        builder.add("minute", date.getMinute());
+        builder.add("second", date.getSecond());
+        return builder.build();
+    }
+
+
+    public static JsonObject dateTimeToJsonObject(LocalDate date) {
+        LocalDateTime dateTime = LocalDateTime.of(date, LocalTime.of(0, 0, 0));
+        return dateTimeToJsonObject(dateTime);
+    }
+
+    public static JsonObject employeeToJson(Employee emp) {
+        JsonObjectBuilder builder = Json.createObjectBuilder();
+        builder.add("email", emp.getEmail());
+        EmployeeInfo info = emp.getAccount().getInfo();
+        if (info != null) {
+            builder.add("address", addressToJson(emp.getAccount().getInfo().getAddress()));
+            builder.add("birthday", dateTimeToJsonObject(emp.getAccount().getInfo().getBirthday()));
+        }
+        else {
+            builder.addNull("address");
+            builder.addNull("birthday");
+        }
+
+        builder.add("rank", emp.getRank().getRank());
+
+        if (emp.getSupervisor() != null)
+            builder.add("supervisorEmail", emp.getSupervisor().getEmail());
+        else builder.addNull("supervisorEmail");
+        builder.add("availableFunds", emp.getAvailableFunds());
+        builder.add("firstname", emp.getFirstname());
+        builder.add("lastname", emp.getLastname());
+        builder.add("department", emp.getDepartment().getName());
+        return builder.build();
+    }
 
     /**
      * @param filePart

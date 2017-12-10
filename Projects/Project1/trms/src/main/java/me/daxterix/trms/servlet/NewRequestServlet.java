@@ -72,7 +72,7 @@ public class NewRequestServlet extends HttpServlet {
         }
         catch (NonExistentIdException | DuplicateIdException e) {
             e.printStackTrace();
-            out.print("<div>Oops! Duplicate or nonexistent id encountered.</div>");
+            out.print("Oops! Duplicate or nonexistent id encountered.");
         }
         out.print("error adding new request");
     }

@@ -16,8 +16,14 @@ import java.io.IOException;
  * ie the request has a session.
  *
  */
-@WebFilter("/employee/*")
+@WebFilter(filterName="authenticatedFilter", urlPatterns="/employee/*")
 public class AuthenticatedFilter implements Filter {
+
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
+
+    public void destroy() {
+    }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)

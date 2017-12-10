@@ -1,17 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-.alert-danger {
-    padding: 10px 10px;
-    border-radius: 2px;
-}
-
-
-.section-below-nav{
-    margin-top: 150px;
-    margin-bottom: 150px;
-    min-height: 100%;
-}
-
 html {
     min-height: 100%;
     min-width: 100%;
@@ -22,6 +10,18 @@ body {
     min-height: 100%;
     min-width: 100%;
     position: absolute;
+    font-family: cursive;
+}
+
+.alert-danger {
+    padding: 10px 10px;
+    border-radius: 2px;
+}
+
+.section-below-nav{
+    margin-top: 150px;
+    margin-bottom: 150px;
+    min-height: 100%;
 }
 
 .footer-section {
@@ -39,5 +39,4 @@ body {
 textarea.form-control {
     resize: vertical;
 }
-
 

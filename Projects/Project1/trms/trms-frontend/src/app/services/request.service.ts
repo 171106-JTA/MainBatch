@@ -32,10 +32,21 @@ export class RequestService {
             .map((data:any[]) => data.map(reqJson => new ReimbursementRequest(reqJson)));
     }
 
-    public getRequestsByDepartment(department: string): Observable<ReimbursementRequest[]> {
+    /**
+     * get all requests waiting on employee with email
+     *
+     * @param department
+     * @param {string} status
+     * @returns {Observable<ReimbursementRequest[]>}
+     */
+    public getRequstsWaitingOnMe(department: string, status: string): Observable<ReimbursementRequest[]> {
         let params = new HttpParams();
-        params.append("department", department);
-        params.append("status", "pending");
+        params.append("wantsWaitingOnMe", "true");
+        if (status != null)
+            params.append("status", status);
+        if (department != null)
+            params.append("department", department);
+
         const httpOptions = {
             headers: new HttpHeaders({'Content-Type': 'application/json'}),
             withCredentials: true,
@@ -45,9 +56,23 @@ export class RequestService {
             .map((data:any[]) => data.map(reqJson => new ReimbursementRequest(reqJson)));
     }
 
-    public getAllRequests(status: string): Observable<ReimbursementRequest[]> {
+    /**
+     * gets all requests filtered by department, status
+     *
+     * @param {string} department
+     * @param {string} status
+     * @returns {Observable<ReimbursementRequest[]>}
+     */
+    public getAllRequests(department: string, status: string): Observable<ReimbursementRequest[]> {
+        let params = new HttpParams();
+        if (status != null)
+            params.append("status", status);
+        if (department != null)
+            params.append("department", department);
+
         const httpOptions = {
             headers: new HttpHeaders({'Content-Type': 'application/json'}),
+            params: params,
             withCredentials: true
         };
         return this.http.get<ReimbursementRequest[]>(requestsUrl, httpOptions)

@@ -4,9 +4,8 @@ import {LookupsService} from '../../services/lookups.service';
 import {HttpClient} from '@angular/common/http';
 import {CredentialsService} from '../../services/credentials.service';
 import {Router} from '@angular/router';
+import {Employee} from "../../models/employee";
 
-
-const loginUrl = 'http://localhost:8085/trms/login';
 
 @Component({
     selector: 'app-login',
@@ -19,34 +18,30 @@ export class LoginComponent {
         password: new FormControl('', Validators.required),
     });
 
-    constructor(private router: Router, private lookups: LookupsService, private http: HttpClient, private credentialsService: CredentialsService) {
+    constructor(private router: Router, private lookups: LookupsService,
+                private http: HttpClient, private credentialsService: CredentialsService) {
     }
 
-    private email: string;
     private loginFailed = false;
 
     private login($event) {
-        let formData: FormData = new FormData();
-        for (let formControlKey in this.loginForm.controls)
-            formData.append(formControlKey, this.loginForm.get(formControlKey).value);
-        this.email = this.loginForm.get("email").value;
-
-        // can't set response type to not 'json' unless we remove the type parameter
-        // this.http.post<any>(loginUrl, formData,{responseType: 'text'})   // doesn't work
         console.log("logging in");
-        this.http.post(loginUrl, formData,{withCredentials: true, responseType: 'text'})
-            .subscribe(
-                data => {
-                    this.loginFailed = false;
-                    this.credentialsService.login(this.email);      // set the email for the credentials service
-                    this.router.navigate(['/requests']);
-                },
-                err => {
-                    this.loginFailed = true;
-                },
-                () => {
-                }
-            );
+        let email = this.loginForm.get("email").value;
+        let password = this.loginForm.get("password").value;
+
+        return this.credentialsService.login(email, password,
+            (emp: Employee) => {
+                console.log("login success");
+                console.log(emp);
+                this.loginFailed = false;
+                this.router.navigate(['/requests']);
+            },
+            (err) => {
+                console.warn(err);
+                this.loginFailed = true;
+            }
+        );
     }
+
 }
 

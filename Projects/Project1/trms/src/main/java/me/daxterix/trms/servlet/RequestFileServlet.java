@@ -44,18 +44,9 @@ public class RequestFileServlet extends HttpServlet {
             os.close();
             is.close();
         }
-        catch (NumberFormatException e) {
-
+        catch (NumberFormatException | NonExistentIdException | IOException e) {
+		    e.printStackTrace();
         }
-        catch (NonExistentIdException e) {
-            e.printStackTrace();
-        }
-        catch (IOException e) {
-        }
-	}
-
-	protected void doPost() {
-
     }
 
 	void hasAccessToFile() {

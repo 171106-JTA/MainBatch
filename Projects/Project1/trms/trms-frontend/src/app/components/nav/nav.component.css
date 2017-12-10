@@ -1,9 +1,9 @@
+#my-nav-container {
+    margin: 0;
+}
+
 .navbar-brand > img {
     position: relative;
     top: -8px;
-}
-
-#my-nav-container {
-    margin: 0;
 }
 

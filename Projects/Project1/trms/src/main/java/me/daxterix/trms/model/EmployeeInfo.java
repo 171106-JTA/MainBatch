@@ -17,7 +17,7 @@ public class EmployeeInfo implements Serializable {
     @JoinColumn(name="email", foreignKey=@ForeignKey(name="fk_info_acc"), updatable=false)
     private EmployeeAccount account;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="addr_id", foreignKey=@ForeignKey(name="fk_info_addr"))
     private Address address;
 

@@ -13,10 +13,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class RequestService {
-    static RequestDAO requestDao = DAOUtils.getRequestDAO();
-    static ObjectDAO objectDao = DAOUtils.getObjectDAO();
-    static RequestInfoDAO infoDao = DAOUtils.getRequestInfoDAO();
-    static HistoryDAO historyDao = DAOUtils.getHistoryDAO();
+    private static RequestDAO requestDao = DAOUtils.getRequestDAO();
+    private static ObjectDAO objectDao = DAOUtils.getObjectDAO();
+    private static RequestInfoDAO infoDao = DAOUtils.getRequestInfoDAO();
+    private static HistoryDAO historyDao = DAOUtils.getHistoryDAO();
 
     /**
      * assimes given request and requestFile is valid and exists
@@ -32,7 +32,6 @@ public class RequestService {
     }
 
     /**
-     * todo calculate urgency based on time; calculate whether user can submit because of time constraints
      * <p>
      * <p>
      * Assumes filer exists, and was retrieved from db
@@ -210,8 +209,8 @@ public class RequestService {
         }
     }
 
-    public static void persistRequestApproval(Employee approver, ReimbursementRequest theRequest, String finalStatus,
-                                              String reason) throws NonExistentIdException, DuplicateIdException { requestDao.update(theRequest);
+    private static void persistRequestApproval(Employee approver, ReimbursementRequest theRequest, String finalStatus,
+                                               String reason) throws NonExistentIdException, DuplicateIdException { requestDao.update(theRequest);
         historyDao.save(new RequestHistory(
                 theRequest, approver, null, theRequest.getStatus(), new RequestStatus(finalStatus),
                 LocalDateTime.now(), reason

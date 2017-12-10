@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @WebServlet(name="RequestStatusesServlet", urlPatterns="/lookups/requestStatuses")
 public class RequestStatusesServlet extends HttpServlet {
 
-    ObjectDAO objectDao = DAOUtils.getObjectDAO();
+    private ObjectDAO objectDao = DAOUtils.getObjectDAO();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<String> statuses = objectDao.getAllObjects(RequestStatus.class).stream()
@@ -27,4 +27,5 @@ public class RequestStatusesServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         response.getWriter().print(ServletUtils.stringsToJsonArrayString(statuses));
     }
+
 }

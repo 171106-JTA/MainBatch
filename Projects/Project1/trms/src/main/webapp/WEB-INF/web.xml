@@ -30,12 +30,4 @@
     </filter-mapping>
 
 
-    <filter>
-        <filter-name>authenticatedFilter</filter-name>
-        <filter-class>me.daxterix.trms.filter.AuthenticatedFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>authenticatedFilter</filter-name>
-        <url-pattern>/employee/*</url-pattern>
-    </filter-mapping>
 </web-app>
