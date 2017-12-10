@@ -10,9 +10,9 @@ function requestResponseSubmit() {
 }
 
 function displayAction() {
-	
+
 	var action = document.getElementById("actionType").value;
-	
+
 	if (action === "Approve") {
 		var infoDiv = document.getElementById("requestInfoDiv");
 		var reqForm = document.getElementById("approveRequestForm");
@@ -24,20 +24,20 @@ function displayAction() {
 		infoDiv.setAttribute("style", "visibility:visible");
 		reqForm.setAttribute("style", "display:none");
 	}
-	
+
 }
 
 function checkDescription() {
 	var approveOption = document.getElementById("approveOption");
 	var option = approveOption.value;
-	
+
 	var denyReasonDiv = document.getElementById("denyReasonDiv");
 	var denyReasonInput = document.getElementById("denyReasonInput");
-	
+
 	if (option === "Deny") {
 		denyReasonDiv.setAttribute("style", "visibility:visible");
 		denyReasonInput.required = true;
-		
+
 	} else {
 		denyReasonDiv.setAttribute("style", "visibility:hidden");
 		denyReasonInput.required = false;
@@ -63,7 +63,7 @@ function getRequests() {
 			var resultTableBody = document.getElementById("requestTableBody");
 
 			for (var i = 0; i < response.length; i++) {
-				
+
 				var row = document.createElement("tr");
 				var td1 = document.createElement("td");
 				var td2 = document.createElement("td");
@@ -78,7 +78,7 @@ function getRequests() {
 				var td11 = document.createElement("td");
 				var id = document.createElement("td");
 				var status = document.createElement("td");
-				
+
 				td1.innerHTML = response[i].childNodes[0].innerHTML;
 				td2.innerHTML = response[i].childNodes[1].innerHTML;
 				td3.innerHTML = response[i].childNodes[2].innerHTML;
@@ -92,7 +92,7 @@ function getRequests() {
 				td11.innerHTML = "<a href='ViewFile.html'>View File</a>";
 				id.innerHTML = response[i].childNodes[11].innerHTML;
 				status.innerHTML = response[i].childNodes[12].innerHTML;
-				
+
 				row.appendChild(id);
 				row.appendChild(td1);
 				row.appendChild(td2);
@@ -107,9 +107,8 @@ function getRequests() {
 				row.appendChild(td11);
 				row.appendChild(status);
 				resultTableBody.appendChild(row);
-				resultTable.append(resultTableBody);
 			}
- 		
+			resultTable.append(resultTableBody);
 
 		} else if(xhr.readyState == 4 && xhr.status != 200){
 			console.log(xhr.status);

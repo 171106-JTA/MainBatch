@@ -14,72 +14,103 @@
 <title>Employee Home</title>
 </head>
 <body>
-	<h2 id="welcome">Welcome.</h2>
+	<h2 id="welcome" style="margin-left: 10px">Welcome.</h2>
+	<h4 id="titleD" style="margin-left: 10px"></h4>
 	<div class="row">
-		<div class="col-lg-4" align="center">
-			<h4>Messages</h4>
-		</div>
-		<div>
-			<h1 id="AJAXError"></h1>
-		</div>
-		<div class="col-lg-4" align="center">
+		<div class="col-lg-1"></div>
+
+		<div class="col-lg-10" align="center">
 			<div class="well">
-				<h4>Submit a Tuition Reimbursement Request</h4>
-				<form action="SubmitRequest" method="post"
-					enctype="multipart/form-data">
-					<div class="next">
-						Event <select id="eventName" name="event" required>
-							<option value="University Course">University Course</option>
-							<option value="Seminar">Seminar</option>
-							<option value="Certification Preparation Class">Certification
-								Preparation Course</option>
-							<option value="Certification">Certification</option>
-							<option value="Technical Training">Technical Training</option>
-							<option value="Other">Other</option>
-						</select>
-					</div>
-					<div class="next">
-						Grading Format <select name="gradingFormat" required>
-							<option value="Pass/Fail">Pass/Fail</option>
-							<option value="Grade">Letter Grade</option>
-						</select>
-					</div>
-					<div class="next">
-						Cost <input type="number" id="eventCost" name="eventCost"
-							placeholder="Cost" step="0.01" required>
-					</div>
-					<div class="next">
-						Date of Event <input type="date" name="dateOfEvent"
-							placeholder="Date" min="2017-12-06" max="2018-12-30" required>
-					</div>
-					<div class="next">
-						Location <input type="text" name="location" placeholder="Location"
-							required>
-					</div>
-					<div class="next">
-						<textarea name="description" cols="30" rows="4"
-							placeholder="Please provide a description of the event" required></textarea>
-					</div>
-					<div class="next">
-						Additional Files <input name="fileUpload" type="file"
-							value="fileupload" id="fileupload">
-					</div>
-					<div class="next">
-						<input type="Submit" value="Submit Request">
-					</div>
-				</form>
-				<div class="next">
-					<p id="requestResult"></p>
+				<div id="radioButtons" class="next">
+					<span>Submit a Request</span><input type="radio" id="Submit a Request" name="action" value="Submit a Request" checked=true>
+					<span style="width:50px">View Messages</span><input type="radio" id="View Messages" name="action" value="View Messages">
+					View Requests<input type="radio" id="View Requests" name="action" value="View Requests">
 				</div>
-				<div class="next">
-					<span>Projected Reimbursement: </span> <span id="projectedResult"
-						style="color: green">$0.0</span>
+
+				<div id="requests" style="display: none">
+					<h4>Requests</h4>
+					<table id="requestsTable" class="table table-bordered">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Event</th>
+								<th>Location</th>
+								<th>Cost</th>
+								<th>Description</th>
+								<th>Grading Format</th>
+								<th>Submission Date</th>
+								<th>Event Date</th>
+								<th>File</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+						<tbody id="empRequestsTBody">
+
+						</tbody>
+
+					</table>
+				</div>
+
+				<div id="messages" style="display: none">
+					<h4>Messages</h4>
+				</div>
+
+				<div id="submitRequestDiv">
+					<h3>Submit a Tuition Reimbursement Request</h3>
+					<form action="SubmitRequest" method="post"
+						enctype="multipart/form-data">
+						<div class="next">
+							Event <select id="eventName" name="event" required>
+								<option value="University Course">University Course</option>
+								<option value="Seminar">Seminar</option>
+								<option value="Certification Preparation Class">Certification
+									Preparation Course</option>
+								<option value="Certification">Certification</option>
+								<option value="Technical Training">Technical Training</option>
+								<option value="Other">Other</option>
+							</select>
+						</div>
+						<div class="next">
+							Grading Format <select name="gradingFormat" required>
+								<option value="Pass/Fail">Pass/Fail</option>
+								<option value="Grade">Letter Grade</option>
+							</select>
+						</div>
+						<div class="next">
+							Cost <input type="number" id="eventCost" name="eventCost"
+								placeholder="Cost" step="0.01" required>
+						</div>
+						<div class="next">
+							Date of Event <input type="date" name="dateOfEvent"
+								placeholder="Date" min="2017-12-06" max="2018-12-30" required>
+						</div>
+						<div class="next">
+							Location <input type="text" name="location"
+								placeholder="Location" required>
+						</div>
+						<div class="next">
+							<textarea name="description" cols="30" rows="4"
+								placeholder="Please provide a description of the event" required></textarea>
+						</div>
+						<div class="next">
+							Additional Files <input name="fileUpload" type="file"
+								value="fileupload" id="fileupload">
+						</div>
+						<div class="next">
+							<input type="Submit" value="Submit Request">
+						</div>
+					</form>
+					<div class="next">
+						<p id="requestResult"></p>
+					</div>
+					<div class="next">
+						<span>Projected Reimbursement: </span> <span id="projectedResult"
+							style="color: green">$0.0</span>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-4" align="center">
-			<h4>Not sure yet</h4>
-		</div>
+		<div class="col-lg-1"></div>
 	</div>
 </body>
 </html>

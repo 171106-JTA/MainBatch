@@ -139,4 +139,14 @@
     <servlet-name>GetProjectedCost</servlet-name>
     <url-pattern>/GetProjectedCost</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EmployeeGetRequests</display-name>
+    <servlet-name>EmployeeGetRequests</servlet-name>
+    <servlet-class>com.revature.servlets.EmployeeGetRequests</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmployeeGetRequests</servlet-name>
+    <url-pattern>/EmployeeGetRequests</url-pattern>
+  </servlet-mapping>
 </web-app>

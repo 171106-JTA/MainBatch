@@ -10,11 +10,11 @@ import com.revature.beans.Employee;
 import com.revature.beans.Request;
 import com.revature.dao.TRMSDao;
 
-public class GetRequests {
+public class EmployeeGetRequestsService {
 	public static void getRequests(HttpServletResponse response, String username) throws IOException {
+
 		TRMSDao dao = TRMSDao.getDao();
-		
-		List<Request> requests = dao.getRequestsAsDirectSupervisor(username);
+		List<Request> requests = dao.getRequests(username);
 		response.setContentType("text/xml");
 		PrintWriter out = response.getWriter();
 
@@ -22,17 +22,16 @@ public class GetRequests {
 			String myXml = "<root>";
 
 			for (Request r : requests) {
-				Employee emp = r.getEmp();
 
-				myXml += "<request><username>" + emp.getUsername() + "</username><fname>" + emp.getFname() + "</fname>" +
-						"<lname>" + emp.getLname() + "</lname><Event>" + r.getEvent() + "</Event>" +
+				myXml += "<request><id>" + r.getId() + "</id><Event>" + 
+						r.getEvent() + "</Event>" +
 						"<location>" + r.getLocation() + "</location>" +
 						"<cost>" + r.getCost() + "</cost><description>" + r.getDescription() + "</description>" +
 						"<gradingFormat>" + r.getGradingFormat() + "</gradingFormat>" +
 						"<submissionDate>" + r.getSubmissionDate().toString() + "</submissionDate>" +
 						"<dateOfEvent>" + r.getDateOfEvent().toString() + "</dateOfEvent>" +
-						"<file>" + r.getInputStream() + "</file><id>" + r.getId() + "</id>"
-								+ "<status>" + r.getStatus() + "</status></request>";
+						"<file>" + r.getInputStream() + "</file>"
+						+ "<status>" + r.getStatus() + "</status></request>";
 			}
 			myXml += "</root>";
 			out.println(myXml);
@@ -41,5 +40,8 @@ public class GetRequests {
 					+ "<cost>none</cost><submissionDate>none</submissionDate>" 
 					+ "<dateOfEvent>none</dateOfEvent></request></root>");
 		}
+
+
+
 	}
 }
