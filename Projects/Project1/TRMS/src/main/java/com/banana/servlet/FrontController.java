@@ -33,18 +33,13 @@ public class FrontController extends HttpServlet {
 		String url = request.getRequestURI();
 
 		System.out.println(url);
-
 		String[] split = url.split("/");
-
-		System.out.println(split[split.length-1]);
 
 		String action = split[split.length-1].substring(0, split[split.length-1].length()-4).toLowerCase();
 
-		System.out.println(action);
-
 		response.setContentType("text/html");
 		RequestDispatcher rd = null;
-
+		
 		
 
 		switch(action){

@@ -21,8 +21,9 @@ public class ValidateUser {
 			String realPassword = emp.getPassword(); 
 			if(requestPassword.equals(realPassword)) {
 				CreateSession.makeSession(request, emp);
+				return emp;
 			}
 		}
-		return emp;
+		return null;
 	}
 }

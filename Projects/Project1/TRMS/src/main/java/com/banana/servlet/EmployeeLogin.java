@@ -35,7 +35,7 @@ public class EmployeeLogin extends HttpServlet {
 		Employee emp = ValidateUser.validate(request, response);
 		
 		if(emp != null) {
-			if(emp.getRoleId() == 1) {
+			if(emp.getRoleId() == 0) {
 				rd = request.getRequestDispatcher("EmployeePage.html");
 			}
 			else {
@@ -45,7 +45,9 @@ public class EmployeeLogin extends HttpServlet {
 			rd.forward(request, response);
 		}
 		else {
-			out.println("Try Again");
+			out.println("<script type='text/javascript'>");
+			out.println("alert('Wrong Credentials');");
+			out.println("</script>");
 			rd = request.getRequestDispatcher("index.html");
 			rd.include(request, response);
 		}
