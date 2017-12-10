@@ -25,6 +25,7 @@ public class PullEmployeeAccountsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<String> employeeaccounts;
 		Iterator<String> iterator;
+		response.setContentType("application/json");
 		PrintWriter write = response.getWriter();
 		BufferedReader content = request.getReader();
 		String[] contents = content.readLine().split("&");

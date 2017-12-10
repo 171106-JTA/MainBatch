@@ -72,10 +72,10 @@ public class Loader {
 			}
 		}
 		return "{"
-				+ "'reimbursementevents':" + events.toString() + ","
-				+ "'positions':" + pos.toString() + ","
-				+ "'facilities':" + facs.toString() + ","
-				+ "'approvalstatuses':" + stats.toString()
+				+ "\"reimbursementevents\":" + events.toString() + ","
+				+ "\"positions\":" + pos.toString() + ","
+				+ "\"facilities\":" + facs.toString() + ","
+				+ "\"approvalstatuses\":" + stats.toString()
 				+ "}"; 
 	}
 }

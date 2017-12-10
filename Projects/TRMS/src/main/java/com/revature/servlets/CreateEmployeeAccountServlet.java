@@ -55,8 +55,8 @@ public class CreateEmployeeAccountServlet extends HttpServlet {
 					employeeaccount.setAdmin(false);
 				}
 				employeeaccount.setEmployeeid(Integer.parseInt(info.get("employeeid")));
+				System.err.println(employeeaccount.toJSON());
 				EmployeeAccountDAO.insertEmployeeAccount(employeeaccount);
-				System.out.println("Done");
 				response.setStatus(200);
 			} else {
 				response.setStatus(403);

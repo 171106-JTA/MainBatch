@@ -42,13 +42,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>RetrieveReimbursementApplications</display-name>
-    <servlet-name>RetrieveReimbursementApplications</servlet-name>
-    <servlet-class>com.revature.servlets.RetrieveReimbursementApplications</servlet-class>
+    <display-name>RetrieveReimbursementApplicationsServlet</display-name>
+    <servlet-name>RetrieveReimbursementApplicationsServlet</servlet-name>
+    <servlet-class>com.revature.servlets.RetrieveReimbursementApplicationsServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>RetrieveReimbursementApplications</servlet-name>
-    <url-pattern>/RetrieveReimbursementApplications</url-pattern>
+    <servlet-name>RetrieveReimbursementApplicationsServlet</servlet-name>
+    <url-pattern>/RetrieveReimbursementApplicationsServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -62,13 +62,13 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>UpdateReimbursementApplicationsServlet</display-name>
-    <servlet-name>UpdateReimbursementApplicationsServlet</servlet-name>
-    <servlet-class>com.revature.servlets.UpdateReimbursementApplicationsServlet</servlet-class>
+    <display-name>UpdateReimbursementApplicationServlet</display-name>
+    <servlet-name>UpdateReimbursementApplicationServlet</servlet-name>
+    <servlet-class>com.revature.servlets.UpdateReimbursementApplicationServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>UpdateReimbursementApplicationsServlet</servlet-name>
-    <url-pattern>/UpdateReimbursementApplicationsServlet</url-pattern>
+    <servlet-name>UpdateReimbursementApplicationServlet</servlet-name>
+    <url-pattern>/UpdateReimbursementApplicationServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>
@@ -87,10 +87,20 @@
     <servlet-class>com.revature.servlets.PullEmployeeAccountsServlet</servlet-class>
   </servlet>
   <servlet-mapping>
+    <servlet-name>PullReimbursementApplicationsServlet</servlet-name>
+    <url-pattern>/PullReimbursementApplicationsServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PullReimbursementApplicationsServlet</display-name>
+    <servlet-name>PullReimbursementApplicationsServlet</servlet-name>
+    <servlet-class>com.revature.servlets.PullReimbursementApplicationsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
     <servlet-name>PullEmployeeAccountsServlet</servlet-name>
     <url-pattern>/PullEmployeeAccountsServlet</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <description></description>
     <display-name>LoaderServlet</display-name>
     <servlet-name>LoaderServlet</servlet-name>
@@ -99,5 +109,15 @@
   <servlet-mapping>
     <servlet-name>LoaderServlet</servlet-name>
     <url-pattern>/LoaderServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>NewReimbursementApplicationServlet</display-name>
+    <servlet-name>NewReimbursementApplicationServlet</servlet-name>
+    <servlet-class>com.revature.servlets.NewReimbursementApplicationServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewReimbursementApplicationServlet</servlet-name>
+    <url-pattern>/NewReimbursementApplicationServlet</url-pattern>
   </servlet-mapping>
 </web-app>

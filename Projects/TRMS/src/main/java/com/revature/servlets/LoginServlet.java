@@ -32,12 +32,14 @@ public class LoginServlet extends HttpServlet {
 				info.put(keyvalue[0], keyvalue[1]);
 				System.out.println(keyvalue[0] + " : " + keyvalue[1]);
 			}
+			System.out.println(info.get("username") + info.get("password"));
 			employeeaccount = EmployeeAccountDAO.getEmployeeAccount(info.get("username"), info.get("password"));
 			if(employeeaccount == null) {
 				response.setStatus(204);
 			} else {
+				response.setContentType("application/json");
 				write = response.getWriter();
-				write.append(employeeaccount.toJSON());
+				write.write(employeeaccount.toJSON());
 				response.setStatus(200);
 			}
 		} catch(IOException e) {

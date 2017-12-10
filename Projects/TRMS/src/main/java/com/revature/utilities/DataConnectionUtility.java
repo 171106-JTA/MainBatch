@@ -36,16 +36,12 @@ public class DataConnectionUtility {
 	}
 	public boolean initializeConnection() throws SQLException {
 		if(connection == null) {
-			System.out.println("CONNECTION IS NULL");
 			try {
 				 try {
 			            Class.forName ("oracle.jdbc.driver.OracleDriver");
 			        } catch (ClassNotFoundException e) {
 			            System.out.println(e.getMessage());
 			        }
-				System.out.println(properties[1]);
-				System.out.println(properties[2]);
-				System.out.println(properties[3]);
 				connection = DriverManager.getConnection(properties[1],properties[2],properties[3]);
 			} catch(SQLException e) {
 				System.err.println("Could not connect to database.");
@@ -55,7 +51,6 @@ public class DataConnectionUtility {
 			}
 			return true;
 		}
-		System.out.println("CONNECTION IS NOT NULL");
 		return false;
 	}
 	public ResultSet requestQuery(String sqlquery) throws SQLException {
@@ -70,8 +65,6 @@ public class DataConnectionUtility {
 			CloserUtility.close(connection);
 			throw e;
 		}
-		System.out.println("Database query result.");
-		System.out.println(resultset.toString());
 		try{
 			return resultset;
 		} finally {
@@ -94,7 +87,7 @@ public class DataConnectionUtility {
 		preparedstatement = connection.prepareStatement(commit);
 		preparedstatement.executeUpdate();
 		System.out.println("Database query result.");
-		System.out.println(resultset.toString());
+		System.out.println(rowsaffected);
 		try{
 			return rowsaffected;
 		} finally {

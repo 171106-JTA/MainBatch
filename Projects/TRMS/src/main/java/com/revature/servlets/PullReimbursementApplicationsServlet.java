@@ -25,6 +25,7 @@ public class PullReimbursementApplicationsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<String> reimbursementapplications;
 		Iterator<String> iterator;
+		response.setContentType("application/json");
 		PrintWriter write = response.getWriter();
 		BufferedReader content = request.getReader();
 		String[] contents = content.readLine().split("&");
@@ -38,12 +39,22 @@ public class PullReimbursementApplicationsServlet extends HttpServlet {
 		try {
 			reimbursementapplications = ReimbursementApplicationDAO.pullReimbursementApplications(info.get("employeeid"));
 			iterator = reimbursementapplications.iterator();
+			String app = "";
 			int i = 0;
-			write.append("{");
-			while(iterator.hasNext()) {
-				write.append("'application" + i++ + "':" + iterator.next() + ", ");
+			if(iterator.hasNext()) {
+				System.out.println("APPENDING {");
+				write.append("{");
 			}
-			write.append("}");
+			while(iterator.hasNext()) {
+				app = iterator.next();
+				if(!iterator.hasNext()) {
+					System.out.println("LAST APPEND");
+					write.append("\"application" + i++ + "\":" + app + "}");
+					break;
+				}
+				System.out.println("APPENDING");
+				write.append("\"application" + i++ + "\":" + app + ", ");
+			}
 			response.setStatus(200);
 		} catch (NumberFormatException e) {
 			System.err.println("Process reimbursement applications servlet encountered NumberFormatException.");

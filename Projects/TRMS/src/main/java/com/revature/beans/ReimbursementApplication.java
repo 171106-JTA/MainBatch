@@ -6,8 +6,8 @@ public class ReimbursementApplication {
 	private int statusid;
 	private int eventid;
 	private float amount;
-	private boolean ispassed;
-	private boolean isapproved;
+	private int ispassed;
+	private int isapproved;
 	public int getApplicationid() {
 		return applicationid;
 	}
@@ -38,27 +38,27 @@ public class ReimbursementApplication {
 	public void setAmount(float amount) {
 		this.amount = amount;
 	}
-	public boolean isPassed() {
+	public int isPassed() {
 		return ispassed;
 	}
-	public void setPassed(boolean ispassed) {
+	public void setPassed(int ispassed) {
 		this.ispassed = ispassed;
 	}
-	public boolean isApproved() {
+	public int isApproved() {
 		return isapproved;
 	}
-	public void setApproved(boolean isapproved) {
+	public void setApproved(int isapproved) {
 		this.isapproved = isapproved;
 	}
 	public String toJSON() {
 		return "{"
-				+ "'applicationid': " + this.getApplicationid() + ","
-				+ "'employeeid': " + this.getEmployeeid() + ","
-				+ "'statusid': " + this.getStatusid() + ","
-				+ "'eventid': " + this.getEventid() + ","
-				+ "'amount': " + this.getAmount() + ","
-				+ "'ispassed': " + this.isPassed() + ","
-				+ "'isapproved': " + this.isApproved()
+				+ "\"applicationid\": " + this.getApplicationid() + ","
+				+ "\"employeeid\": " + this.getEmployeeid() + ","
+				+ "\"statusid\": " + this.getStatusid() + ","
+				+ "\"eventid\": " + this.getEventid() + ","
+				+ "\"amount\": " + this.getAmount() + ","
+				+ "\"ispassed\": " + this.isPassed() + ","
+				+ "\"isapproved\": " + this.isApproved()
 				+ "}";
 	}
 }

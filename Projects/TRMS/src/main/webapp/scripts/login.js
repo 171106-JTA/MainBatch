@@ -1,7 +1,9 @@
 function loginHandler(status, response){
-	console.log("login handler");
 	if(status == 200){
-		displayAcount();
+		response = JSON.parse(response);
+		employee = EmployeeAccount(response);
+		grabCurrentApps("RetrieveReimbursementApplicationsServlet", employee.employeeid);
+		console.log(employee);
 	} else if(status == 403){
 		displayLoginError();
 	} else{
@@ -14,8 +16,8 @@ function displayLogin() {
 		"<div>" +
 			"<ul style='list-style-type: none;'>" +
 				"<li><h2>enter credentials</h2></li>" +
-	            "<li><input type='text' placeholder='username'></li>" +
-	            "<li><input type='text' placeholder='password'></li>" +
+	            "<li><input id='username' type='text' placeholder='username'></li>" +
+	            "<li><input id='password' type='text' placeholder='password'></li>" +
 	            "<li><button onclick='displayWelcome()'>back</button><button onclick='submitForm(\"LoginServlet\", " + loginHandler + ")'>login</button></li>" +
 	        "</ul>" +
 	    "</div>";

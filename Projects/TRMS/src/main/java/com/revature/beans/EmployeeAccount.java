@@ -112,17 +112,17 @@ public class EmployeeAccount {
 	
 	public String toJSON() {
 		return "{"
-				+ "'username': " + "'" + this.getUsername() + "',"
-				+ "'firstname': " + "'" + this.getFirstname() + "',"
-				+ "'middlename': " + "'" + this.getMiddlename() + "',"
-				+ "'lastname': " + "'" + this.getLastname() + "',"
-				+ "'email': " + "'" + this.getEmail() + "',"
-				+ "'address': " + "'" + this.getAddress() + "',"
-				+ "'city': " + "'" + this.getCity() + "',"
-				+ "'state': " + "'" + this.getState() + "',"
-				+ "'islocked': " + this.isLocked() + ","
-				+ "'isadmin': " + this.isAdmin() + ","
-				+ "'employeeid': " + this.getEmployeeid()
+				+ "\"username\": " + "\"" + this.getUsername() + "\","
+				+ "\"firstname\": " + "\"" + this.getFirstname() + "\","
+				+ "\"middlename\": " + "\"" + this.getMiddlename() + "\","
+				+ "\"lastname\": " + "\"" + this.getLastname() + "\","
+				+ "\"email\": " + "\"" + this.getEmail() + "\","
+				+ "\"address\": " + "\"" + this.getAddress() + "\","
+				+ "\"city\": " + "\"" + this.getCity() + "\","
+				+ "\"state\": " + "\"" + this.getState() + "\","
+				+ "\"islocked\": " + this.isLocked() + ","
+				+ "\"isadmin\": " + this.isAdmin() + ","
+				+ "\"employeeid\": " + this.getEmployeeid()
 				+ "}";
 	}
 }

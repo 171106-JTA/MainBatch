@@ -20,11 +20,12 @@ import com.revature.utilities.CloserUtility;
 /**
  * Servlet implementation class RetrieveReimbursementApplications
  */
-public class RetrieveReimbursementApplications extends HttpServlet {
+public class RetrieveReimbursementApplicationsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<String> reimbursementapplications;
 		Iterator<String> iterator;
+		response.setContentType("application/json");
 		PrintWriter write = response.getWriter();
 		BufferedReader content = request.getReader();
 		String[] contents = content.readLine().split("&");
@@ -39,11 +40,21 @@ public class RetrieveReimbursementApplications extends HttpServlet {
 			reimbursementapplications = ReimbursementApplicationDAO.getReimbursementApplications(Integer.parseInt(info.get("employeeid")));
 			iterator = reimbursementapplications.iterator();
 			int i = 0;
-			write.append("{");
-			while(iterator.hasNext()) {
-				write.append("'application" + i + "':" + iterator.next() + ", ");
+			String app = "";
+			if(iterator.hasNext()) {
+				write.append("{");
 			}
-			write.append("}");
+			while(iterator.hasNext()) {
+				app = iterator.next();
+				System.out.println("ADDING TO RESPONSE");
+				if(!iterator.hasNext()) {
+					System.out.println("ENDING RESPONSE");
+					write.append("\"application" + i++ + "\":" + app + "}"	);
+					break;
+				}
+				write.append("\"application" + i++ + "\":" + app + ", ");
+			}
+			
 		} catch (NumberFormatException e) {
 			System.err.println("Retrieve reimbursement applications servlet encountered NumberFormatException.");
 		} catch (SQLException e) {

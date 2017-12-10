@@ -20,6 +20,7 @@ public class LoaderServlet extends HttpServlet {
 		System.out.println("loader");
 		try {
 			loader = new Loader();
+			response.setContentType("application/json");
 			write = response.getWriter();
 			write.write(loader.toJSON());
 		} catch (IOException e) {

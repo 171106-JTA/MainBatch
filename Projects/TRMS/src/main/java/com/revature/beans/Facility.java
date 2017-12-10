@@ -31,10 +31,10 @@ public class Facility {
 	}
 	public String toJSON() {
 		return "{" 
-				+ "'facilityid': " + this.getFacilityid() + ","
-				+ "'address': " + "'" + this.getAddress() + "',"
-				+ "'city': " + "'" + this.getCity() + "',"
-				+ "'state': " + "'" + this.getState()
+				+ "\"facilityid\": " + this.getFacilityid() + ","
+				+ "\"address\": " + "\"" + this.getAddress() + "\","
+				+ "\"city\": " + "\"" + this.getCity() + "\","
+				+ "\"state\": " + "\"" + this.getState()
 				+ "}";
 	}
 }

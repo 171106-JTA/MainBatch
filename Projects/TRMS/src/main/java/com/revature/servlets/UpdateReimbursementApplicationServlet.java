@@ -21,6 +21,7 @@ public class UpdateReimbursementApplicationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ReimbursementApplication reimbursementapplication;
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println(("HELLO FROM REIMBURSEMENT APPLICATION"));
 		BufferedReader content = request.getReader();
 		String[] contents = content.readLine().split("&");
 		String[] keyvalue = new String[2];
@@ -36,19 +37,18 @@ public class UpdateReimbursementApplicationServlet extends HttpServlet {
 		reimbursementapplication.setStatusid(Integer.parseInt(info.get("statusid")));
 		reimbursementapplication.setEventid(Integer.parseInt(info.get("eventid")));
 		reimbursementapplication.setAmount(Float.parseFloat(info.get("amount")));
-		if(Integer.parseInt(info.get("isapproved")) == 1) {
-			reimbursementapplication.setApproved(true);
-		} else {
-			reimbursementapplication.setApproved(false);
-		}
+		reimbursementapplication.setPassed(Integer.parseInt(info.get("ispassed")));
+		reimbursementapplication.setApproved(Integer.parseInt(info.get("isapproved")));
 		try {
 			if(ReimbursementApplicationDAO.updateReimbursementApplication(reimbursementapplication)) {
+				System.out.println(("------------------------SUCCESS"));
 				response.setStatus(200);
 			} else {
 				System.err.println("Update reimbursement application servlet could not process update");
 				response.setStatus(500);
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
 			System.err.println("Update reimbursement application servlet encountered SQLException");
 			response.setStatus(500);
 		}

@@ -1,10 +1,11 @@
 function registrationHandler(status, response){
 	if(status == 200){
-		displayAccount(response);
+		alert("Account successfully created");
+		displayWelcome();
 	} else if(status == 204){
-		displayExistsError();
+		//displayExistsError();
 	} else {
-		displayServerError();
+		//displayServerError();
 	}
 }
 function displayRegistration(){
@@ -28,7 +29,8 @@ function displayRegistration(){
 		        "<li><input id='positionid' type='number' placeholder='position id'></li>" +
 		        "<li><input id='reportsto' type='number' placeholder='supervisor id'></li>" +
 		        "<li><input id='facilityid' type='number' placeholder='facility id'></li>" +
-		        "<li><button id='submitbutton' onclick='submitForm(\"CreateEmployeeAccountServlet\", registrationHandler)'>submit</button></li>" +
+		        "<li><button onclick='displayWelcome()'>back</button>" +
+		        "<button id='submitbutton' onclick='submitForm(\"CreateEmployeeAccountServlet\", registrationHandler)'>submit</button></li>" +
 		    "</ul>" +
 		"</div>";
 }

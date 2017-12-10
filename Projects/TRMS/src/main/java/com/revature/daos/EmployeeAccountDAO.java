@@ -22,7 +22,10 @@ public abstract class EmployeeAccountDAO {
 		while(!dataconnection.initializeConnection()) {
 		}
 		if(dataconnection.exists("EmployeeAccounts", sqlcolumns, sqlvalues)) {
+			System.out.println("RETURNING FALSE 1");
 			return false;
+		}
+		while(!dataconnection.initializeConnection()) {
 		}
 		sql = "INSERT INTO EmployeeAccounts(username, password, first_name, middle_name, last_name, email, address, city, state, is_locked, is_admin, employee_id)"
 				+ " VALUES("
@@ -48,8 +51,10 @@ public abstract class EmployeeAccountDAO {
 					sql += employeeaccount.getEmployeeid() + ")";
 		rowsaffected = dataconnection.requestQuery(sql, "COMMIT");
 		if(rowsaffected == 0) {
+			System.out.println("RETURNING FALSE 2");
 			return false;
 		}
+		System.out.println("RETURNING TRUE");
 		return true;
 	}
 	public static boolean updateEmployeeAccount(EmployeeAccount employeeaccount) throws SQLException, IOException {

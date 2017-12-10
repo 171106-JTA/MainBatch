@@ -28,25 +28,27 @@ public abstract class ReimbursementApplicationDAO {
 				reimbursementapplication.setApplicationid(reimbursementapplication.getApplicationid() - 3);
 			}
 		}
-		sql = "INSERT INTO ReimbursementApplications(application_id, employee_id, status_id, event_id, amount, is_approved)"
+		while(!dataconnection.initializeConnection()) {
+		}
+		sql = "INSERT INTO ReimbursementApplications(application_id, employee_id, status_id, event_id, amount, is_passed, is_approved)"
 				+ " VALUES("
 					+ reimbursementapplication.getApplicationid() + ", "
 					+ reimbursementapplication.getEmployeeid() + ", "
 					+ reimbursementapplication.getStatusid() + ", "
 					+ reimbursementapplication.getEventid() + ", "
 					+ reimbursementapplication.getAmount() + ", ";
-					if(reimbursementapplication.isPassed()) {
+					if(reimbursementapplication.isPassed() == 1) {
 						sql += "1, ";
 					} else {
 						sql += "0, ";
 					}
-					if(reimbursementapplication.isApproved()) {
-						sql += "1, ";
+					if(reimbursementapplication.isApproved() == 1) {
+						sql += "1 ";
 					} else {
-						sql += "0, ";
+						sql += "0";
 					}
 					sql += ")";
-		rowsaffected = dataconnection.requestQuery(sql, "COMMIT;");
+		rowsaffected = dataconnection.requestQuery(sql, "COMMIT");
 		if(rowsaffected == 0) {
 			return false;
 		}
@@ -70,11 +72,7 @@ public abstract class ReimbursementApplicationDAO {
 			reimbursementapplication.setStatusid(resultset.getInt("status_id"));
 			reimbursementapplication.setAmount(resultset.getFloat("amount"));
 			reimbursementapplication.setEventid(resultset.getInt("event_id"));
-			if(resultset.getInt("is_approved") == 1) {
-				reimbursementapplication.setApproved(true);
-			} else {
-				reimbursementapplication.setApproved(false);
-			}
+			reimbursementapplication.setApproved(resultset.getInt("is_approved"));
 			reimbursementapplications.add(reimbursementapplication.toJSON()); 
 		}
 		CloserUtility.close(resultset);
@@ -91,7 +89,8 @@ public abstract class ReimbursementApplicationDAO {
 		resultset = dataconnection.requestQuery(
 				"SELECT * FROM ReimbursementApplications"
 				+ " WHERE status_id = (SELECT status_id FROM ApprovalStatuses"
-					+ " WHERE handler_id = " + employeeid + ")");
+					+ " WHERE handler_position = (SELECT position_id FROM Employees"
+						+ " WHERE employee_id = " + employeeid + ")) AND is_passed = 0 AND is_approved = 0");
 		while(resultset.next()) {
 			reimbursementapplication = new ReimbursementApplication();
 			reimbursementapplication.setApplicationid(resultset.getInt("application_id"));
@@ -99,11 +98,8 @@ public abstract class ReimbursementApplicationDAO {
 			reimbursementapplication.setStatusid(resultset.getInt("status_id"));
 			reimbursementapplication.setAmount(resultset.getFloat("amount"));
 			reimbursementapplication.setEventid(resultset.getInt("event_id"));
-			if(resultset.getInt("is_approved") == 1) {
-				reimbursementapplication.setApproved(true);
-			} else {
-				reimbursementapplication.setApproved(false);
-			}
+			reimbursementapplication.setPassed(resultset.getInt("is_passed"));
+			reimbursementapplication.setApproved(resultset.getInt("is_approved"));
 			reimbursementapplications.add(reimbursementapplication.toJSON()); 
 		}
 		CloserUtility.close(resultset);
@@ -121,7 +117,12 @@ public abstract class ReimbursementApplicationDAO {
 				+ "status_id = " + reimbursementapplication.getStatusid() + ", "
 				+ "event_id = " + reimbursementapplication.getEventid() + ", "
 				+ "amount = " + reimbursementapplication.getAmount() + ", ";
-				if(reimbursementapplication.isApproved()) {
+				if(reimbursementapplication.isPassed() == 1) {
+					sql += "is_passed = 1, ";
+				} else {
+					sql += "is_passed = 0, ";
+				}
+				if(reimbursementapplication.isApproved() == 1) {
 					sql += "is_approved = 1";
 				} else {
 					sql += "is_approved = 0";

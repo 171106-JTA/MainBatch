@@ -17,8 +17,8 @@ public class Position {
 	}
 	public String toJSON() {
 		return "{" 
-				+ "'positionid': " + this.getPositionid() + ","
-				+ "'position': " + "'" + this.getPosition() + "'"
+				+ "\"positionid\": " + this.getPositionid() + ","
+				+ "\"position\": " + "\"" + this.getPosition() + "\""
 				+ "}";
 	}
 }

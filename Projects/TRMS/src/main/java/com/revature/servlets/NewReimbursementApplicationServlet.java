@@ -24,6 +24,7 @@ public class NewReimbursementApplicationServlet extends HttpServlet {
 	private Random random;
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BufferedReader content = request.getReader();
+		random = new Random();
 		String[] contents = content.readLine().split("&");
 		String[] keyvalue = new String[2];
 		Map<String, String> info = new HashMap<String, String>();
@@ -33,12 +34,13 @@ public class NewReimbursementApplicationServlet extends HttpServlet {
 			System.out.println(keyvalue[0] + " : " + keyvalue[1]);
 		}
 		reimbursementapplication = new ReimbursementApplication();
-		reimbursementapplication.setApplicationid(random.nextInt(99999999));
+		reimbursementapplication.setApplicationid(random.nextInt(99999999) + 1);
 		reimbursementapplication.setEmployeeid(Integer.parseInt(info.get("employeeid")));
 		reimbursementapplication.setStatusid(0);
 		reimbursementapplication.setEventid(Integer.parseInt(info.get("eventid")));
 		reimbursementapplication.setAmount(Float.parseFloat(info.get("amount")));
-		reimbursementapplication.setApproved(false);
+		reimbursementapplication.setApproved(0);
+		System.out.println(reimbursementapplication.toJSON());
 		try {
 			if(ReimbursementApplicationDAO.insertReimbursementApplication(reimbursementapplication)) {
 				response.setStatus(200);
@@ -46,6 +48,7 @@ public class NewReimbursementApplicationServlet extends HttpServlet {
 				response.setStatus(418);
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
 			System.err.println("New reimbursement application servlet encountered SQLException");
 			response.setStatus(500);
 		}

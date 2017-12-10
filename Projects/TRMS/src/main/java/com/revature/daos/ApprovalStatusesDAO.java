@@ -23,8 +23,7 @@ public abstract class ApprovalStatusesDAO {
 		while(resultset.next()) {
 			approvalstatus = new ApprovalStatus();
 			approvalstatus.setStatusid(resultset.getInt("status_id"));
-			approvalstatus.setStatus(resultset.getString("status"));
-			approvalstatus.setHandlerid(resultset.getInt("handler_id"));
+			approvalstatus.setHandlerposition(resultset.getInt("handler_id"));
 			approvalstatuses.add(approvalstatus);
 		}
 		CloserUtility.close(resultset);

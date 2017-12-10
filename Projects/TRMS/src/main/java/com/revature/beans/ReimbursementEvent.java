@@ -24,9 +24,9 @@ public class ReimbursementEvent {
 	}
 	public String toJSON() {
 		return "{" 
-				+ "'eventid': " + this.getEventid() + ","
-				+ "'eventtype': " + "'" + this.getEventtype() + "',"
-				+ "'reimbursementpercent': " + this.getReimbursementpercent()
+				+ "\"eventid\": " + this.getEventid() + ","
+				+ "\"eventtype\": " + "\"" + this.getEventtype() + "\","
+				+ "\"reimbursementpercent\": " + this.getReimbursementpercent()
 				+ "}";
 	}
 }

@@ -1,5 +1,6 @@
+var employee = null;
+var apps = null;
 var loader = null;
-var employee = null
 window.onload = function() {
 	console.log("about to load");
 //	loader = load();
