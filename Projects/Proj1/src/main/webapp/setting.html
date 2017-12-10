@@ -20,6 +20,8 @@
 	crossorigin="anonymous">
 <script src="resources/js/main.js"></script>
 <link rel="stylesheet" type="text/css" href="resources/css/myStyles.css">
+<link rel="stylesheet" type="text/css"
+	href="resources/css/settingPage.css">
 </head>
 <body>
 	<header>
@@ -51,23 +53,36 @@
 			</div>
 		</nav>
 	</header>
-	<form method="post" action="SettingChange" name="settingChange">
-		<ul style="list-style-type: none">
-			<li>User Type</li>
-			<li><select name="userType">
-					<option value="default">Default</option>
-					<option value="supervisor">Supervisor</option>
-					<option value="dept_head">Dept. Head</option>
-					<option value="admin">BenCo</option>
-			</select></li>
-			<li>User Type Change Code</li>
-			<li><input type="text" name="changeCode"></li>
-			<li>Supervisor ID</li>
-			<li><input type="number" name="supervisorId"></li>
-			<li><input class="btn btn-primary" type="submit"><input
-				class="btn btn-danger" type="reset"></li>
-		</ul>
-	</form>
+	<div class="list-group col-lg-2">
+		<a href="#" class="list-group-item list-group-item-action active">
+			Settings </a> <a href="#"
+			class="list-group-item list-group-item-action">Employee Setting </a> <a href="#"
+			class="list-group-item list-group-item-action ">Privacy </a><a
+			href="#" class="list-group-item list-group-item-action ">Dont
+		</a> <a href="#" class="list-group-item list-group-item-action ">Pay
+			Attention </a> <a href="#"
+			class="list-group-item list-group-item-action ">Here</a>
+
+	</div>
+	<div class="form-area col-lg-6">
+		<form method="post" action="SettingChange" name="settingChange">
+			<ul style="list-style-type: none">
+				<li>User Type</li>
+				<li><select name="userType">
+						<option value="default">Default</option>
+						<option value="supervisor">Supervisor</option>
+						<option value="dept_head">Dept. Head</option>
+						<option value="admin">BenCo</option>
+				</select></li>
+				<li>User Type Change Code</li>
+				<li><input type="text" name="changeCode"></li>
+				<li>Supervisor ID</li>
+				<li><input type="number" name="supervisorId"></li>
+				<li><input class="btn btn-primary" type="submit"><input
+					class="btn btn-danger" type="reset"></li>
+			</ul>
+		</form>
+	</div>
 
 </body>
 </html>

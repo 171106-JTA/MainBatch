@@ -19,25 +19,35 @@
 	integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT"
 	crossorigin="anonymous">
 <script src="resources/js/main.js"></script>
-<link rel="stylesheet" type="text/css" href="resources/css/myStyles.css">
+<link rel="stylesheet" type="text/css" href="resources/css/index.css">
+<link href="https://fonts.googleapis.com/css?family=Anton"
+	rel="stylesheet">
 
 </head>
 <body>
 	<div class="container">
-		<form action="LoginServlet" method="post">
+		<div id="main-head">
+			<h1>TRMS</h1>
+			<h4>Tuituion Reimbursement Management System</h4>
+		</div>
+		<div class="jumbotron">
+			<form action="LoginServlet" method="post">
+				<ul style="list-style-type: none;">
+					<li>Username</li>
+					<li><input type="text" name="username" placeholder="username"></li>
+					<li>Password</li>
+					<li><input type="password" name="password"
+						placeholder="password"></li>
+					<li><input type="submit" class="btn btn-primary custom-submit"
+						value="Log in"></li>
+				</ul>
+			</form>
 			<ul style="list-style-type: none;">
-			<li>Username</li>
-				<li><input type="text" name="username" placeholder="username"></li>
-				<li>Password</li>
-				<li><input type="password" name="password" placeholder="password"></li>
-				<li><input type="submit" class="btn btn-primary custom-submit" value="Log in"></li>
+				<li><a href="register.html">Sign up</a></li>
+				<li><a href="retrieve_username.html">Forgot username</a></li>
+				<li><a href="retrieve_password.html">Forgot password</a></li>
 			</ul>
-		</form>
-		<ul style="list-style-type: none;">
-			<li><a href="register.html">Sign up</a></li>
-			<li><a href="retrieve_username.html">Forgot username</a></li>
-			<li><a href="retrieve_password.html">Forgot password</a></li>
-		</ul>
+		</div>
 	</div>
 </body>
 </html>

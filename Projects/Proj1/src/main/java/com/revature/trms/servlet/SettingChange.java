@@ -29,15 +29,21 @@ public class SettingChange extends HttpServlet {
 		String changeCode = request.getParameter("changeCode");
 		String userType = request.getParameter("userType");
 		int supervisorId =0; 
-		if (request.getParameter("supervisorId") != "") {
-			supervisorId = Integer.getInteger(request.getParameter("supervisorId"));
-		}
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
+		if (request.getParameter("supervisorId") != "") {
+			System.out.println(request.getParameter("supervisorId"));
+			supervisorId = Integer.parseInt(request.getParameter("supervisorId"));
+			ed.updateUserSup((String) session.getAttribute("username"), supervisorId);
+			ed.updateUserTypeInCase((String) session.getAttribute("username"),  supervisorId);
+			out.println("Supervisor has been updated");
+		}
 		if (changeCode.equals("change")) {
 			ed.updateUserType((String) session.getAttribute("username"), userType);
-			out.println(userType);
-			out.println("usertype updated");
+			out.println("usertype updated to " + userType);
+		}
+		else {
+			out.println("usertype has not been updated.");
 		}
 		System.out.println(supervisorId);
 		out.println("<hr>" + "<a href='make_approval.html'>BACK</a>");

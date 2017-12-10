@@ -137,4 +137,14 @@
     <servlet-name>SettingChange</servlet-name>
     <url-pattern>/SettingChange</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ViewAttachment</display-name>
+    <servlet-name>ViewAttachment</servlet-name>
+    <servlet-class>com.revature.trms.servlet.ViewAttachment</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewAttachment</servlet-name>
+    <url-pattern>/ViewAttachment</url-pattern>
+  </servlet-mapping>
 </web-app>

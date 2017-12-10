@@ -22,7 +22,7 @@
 				var td1 = document.createTextNode(tableData[data].case_id);
 				var td2 = document.createTextNode(tableData[data].request_date);
 				var td3 = document.createTextNode(tableData[data].case_status);
-				var td4 = document.createTextNode(tableData[data].gradingformat);
+				var td4 = document.createTextNode(tableData[data].employeeId);
 				var td5 = document.createTextNode(tableData[data].supervisor_id);
 				var td6 = document.createTextNode(tableData[data].event_date);
 				tableData7.innerHTML="<button data-toggle='collapse' data-target='#accordion"+ count +"' class='btn btn-info btn-xs'>View Detail</button>"
@@ -52,7 +52,7 @@
 						"<tr><td><b>Employee ID</b></td><td>"+tableData[data].employeeId+"</td></tr>" +
 						"<tr><td><b>Supervisor ID</b></td><td>"+tableData[data].supervisor_id+"</td></tr>"+
 						"<tr><td><b>Description</b></td><td>"+tableData[data].description+"</td></tr>"+
-						"<tr><td><b>Grading Format</b></td><td>"+tableData[data].gradingFormat+"</td></tr>"+
+						"<tr><td><b>Grading Format</b></td><td>"+tableData[data].gradingformat+"</td></tr>"+
 						"<tr><td><b>Requested Amount</b></td><td>"+tableData[data].cost.toFixed(2)+"</td></tr>"+
 						"<tr class='approveAmt'><td><b>Approval Amount</b></td><td>$<input name='approvalAmt' type=number min='0.00' max='1000.00' step='0.01' value='"+reimValue+"' /></td></tr>"+
 						"<tr><input type='hidden' name='status' value='"+tableData[data].case_status+"'></tr>"+
@@ -60,7 +60,8 @@
 						"<tr><td><input class='btn btn-primary' type='submit' name='decision' value='Approve'></td>" +
 						"<td><input class='btn btn-danger' type='submit' name='decision' value='Disapprove'></td></tr>" +
 						"</tbody></table>"+
-						"</form>"+"</div></td>";
+						"</form>"+ "<form action='ViewAttachment' method='get'><input type='hidden' name='caseId' value='"+tableData[data].case_id+"'>"+
+						"<input style='float:right' class='btn btn-warning' type='submit' value='Attachment'></form></div></td>"
 				document.getElementById("caseDataTable").appendChild(detailTableRow);
 			
 				if(tableData[data].case_status != "Department Head Approved"){

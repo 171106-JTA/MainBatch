@@ -91,7 +91,7 @@ public class EmployeeDAO {
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				emp = new Employee(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						rs.getString(6), rs.getTime(7),rs.getInt(8),rs.getInt(9));
+						rs.getString(6), rs.getTime(7), rs.getInt(8), rs.getInt(9));
 			}
 
 		} catch (SQLException e) {
@@ -108,7 +108,7 @@ public class EmployeeDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		Employee emp = null;
-		
+
 		try (Connection conn = ConnectionUtil.getConnection()) {
 			String sql = "SELECT * FROM Employee";
 			ps = conn.prepareStatement(sql);
@@ -131,16 +131,14 @@ public class EmployeeDAO {
 	public void updateUserType(String username, String userType) {
 		PreparedStatement ps = null;
 		int usertypeNum = 4;
-		if(userType.equals("admin")) {
+		if (userType.equals("admin")) {
 			usertypeNum = 1;
-		}
-		else if(userType.equals("dept_head")) {
+		} else if (userType.equals("dept_head")) {
 			usertypeNum = 2;
-		}
-		else if(userType.equals("supervisor")) {
+		} else if (userType.equals("supervisor")) {
 			usertypeNum = 3;
 		}
-		
+
 		String sql = "UPDATE EMPLOYEE SET EMP_CATEGORY=? WHERE EMPLOYEE_USERNAME=?";
 		try (Connection conn = ConnectionUtil.getConnection()) {
 
@@ -153,6 +151,44 @@ public class EmployeeDAO {
 		} finally {
 			close(ps);
 		}
+	}
+
+	public boolean updateUserSup(String username, int supervisorId) {
+		PreparedStatement ps = null;
+		String sql = "UPDATE EMPLOYEE SET SUPERVISOR=? WHERE EMPLOYEE_USERNAME=?";
+		try (Connection conn = ConnectionUtil.getConnection()) {
+
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, supervisorId);
+			ps.setString(2, username);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			close(ps);
+		}
+		return true;
+	}
+
+	public void updateUserTypeInCase(String username, int supervisorId) {
+		PreparedStatement ps = null;
+		EmployeeDAO ed = new EmployeeDAO();
+		Employee emp = ed.selectEmployeeByUsername(username);
+		String sql = "UPDATE EMPLOYEE SET SUPERVISOR_ID=? WHERE EMPLOYEE_ID=?";
+		try (Connection conn = ConnectionUtil.getConnection()) {
+
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, supervisorId);
+			ps.setInt(2, emp.getUserId());
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		} finally {
+			close(ps);
+		}
+
 	}
 
 }

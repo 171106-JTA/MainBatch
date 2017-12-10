@@ -1,0 +1,28 @@
+.center {
+	margin: auto;
+	width: 50%;
+	border: 3px solid green;
+	padding: 10px;
+}
+
+.jumbotron {
+	width: 35%;
+	margin: auto;
+	display: block;
+	margin-top: 5%;
+	opacity: 0.9;
+}
+
+body {
+	background-image:
+		url("http://usersthink.com/wp-content/uploads/stock-photo-office-teamwork.jpg");
+}
+
+#main-head {
+	margin-left: 30%;
+	font-family: 'Anton', sans-serif;
+}
+
+.btn {
+	margin-top: 10px;
+}

@@ -5,3 +5,10 @@ input, select, textarea {
 .custom-submit{
 	width: 90px !important;
 }
+.register-form{
+	margin:auto;
+	margin-left: 20%;
+}
+.jumbotron{
+	width:50%;
+}

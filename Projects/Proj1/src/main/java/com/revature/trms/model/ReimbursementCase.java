@@ -17,15 +17,18 @@ public class ReimbursementCase {
 	private String gradingformat;
 	private String eventType;
 	private int supervisor_id;
+	private double approved_amt;
 	private byte[] attachment;
+
+	
 
 	@Override
 	public String toString() {
 		return "ReimbursementCase [case_id=" + case_id + ", employeeId=" + employeeId + ", event_date=" + event_date
 				+ ", request_date=" + request_date + ", duration_days=" + duration_days + ", case_status=" + case_status
 				+ ", location=" + location + ", description=" + description + ", cost=" + cost + ", gradingformat="
-				+ gradingformat + ", eventType=" + eventType + ", supervisor_id=" + supervisor_id + ", attachment="
-				+ Arrays.toString(attachment) + "]";
+				+ gradingformat + ", eventType=" + eventType + ", supervisor_id=" + supervisor_id + ", approved_amt="
+				+ approved_amt + ", attachment=" + Arrays.toString(attachment) + "]";
 	}
 
 	public ReimbursementCase(String employeeId, Date event_date, int duration_days, String location, String eventType,
@@ -207,5 +210,11 @@ public class ReimbursementCase {
 		} else
 			return 1;
 	}
+	public double getApproved_amt() {
+		return approved_amt;
+	}
 
+	public void setApproved_amt(double approved_amt) {
+		this.approved_amt = approved_amt;
+	}
 }

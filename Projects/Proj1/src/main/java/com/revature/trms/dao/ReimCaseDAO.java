@@ -89,6 +89,7 @@ public class ReimCaseDAO {
 				reimCase.setEventType(rs.getString("CASE_EVENT_TYPE"));
 				reimCase.setAttachment(rs.getBytes("CASE_ATTACHMENT"));
 				reimCase.setSupervisor_id(rs.getInt("SUPERVISOR_ID"));
+				reimCase.setApproved_amt(rs.getDouble("REIMBURSED_AMT"));
 				reimCases.add(reimCase);
 			}
 		} catch (SQLException e) {
@@ -148,7 +149,7 @@ public class ReimCaseDAO {
 					ps.setInt(1, 2);
 				} else if (userTypeNum == 2 && caseStatus <= 3) {
 					ps.setInt(1, 3);
-				} else if (userTypeNum == 1 && caseStatus <= 4) {
+				} else if (userTypeNum == 1) {
 					ps.setInt(1, 4);
 				}
 			} else {
@@ -201,6 +202,7 @@ public class ReimCaseDAO {
 		}
 		return reimCases;
 	}
+
 	public List<ReimbursementCase> getAllCaseBySupId(int supId) {
 		List<ReimbursementCase> reimCases = new ArrayList<>();
 		PreparedStatement ps = null;
@@ -238,6 +240,44 @@ public class ReimCaseDAO {
 			close(rs);
 		}
 		return reimCases;
+	}
+
+	public ReimbursementCase getCaseByCaseId(int caseId) {
+		ReimbursementCase reimCase = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			String sql = "SELECT * FROM REIMBURSEMENT_CASE WHERE CASE_ID = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, caseId);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				// get employee object from userID
+				reimCase = new ReimbursementCase();
+				reimCase.setCase_id(rs.getString(1));
+				reimCase.setEmployeeId(Integer.toString(rs.getInt("EMPLOYEE_ID")));
+				reimCase.setEvent_date(rs.getDate("EVENT_DATE"));
+				reimCase.setRequest_date(rs.getDate("REQUEST_DATE"));
+				reimCase.setCase_status(rs.getInt("CASE_STATUS"));
+				reimCase.setDuration_days(rs.getInt("CASE_DURATION"));
+				reimCase.setLocation(rs.getString("CASE_LOCATION"));
+				reimCase.setDescription(rs.getString("CASE_DESCRIPTION"));
+				reimCase.setCost(rs.getDouble("CASE_COST"));
+				reimCase.setGradingformat(rs.getString("CASE_GRADING_FORMAT"));
+				reimCase.setEventType(rs.getString("CASE_EVENT_TYPE"));
+				reimCase.setAttachment(rs.getBytes("CASE_ATTACHMENT"));
+				reimCase.setSupervisor_id(rs.getInt("SUPERVISOR_ID"));
+				//TODO Add attchment
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ps);
+			close(rs);
+		}
+		return reimCase;
 	}
 
 }

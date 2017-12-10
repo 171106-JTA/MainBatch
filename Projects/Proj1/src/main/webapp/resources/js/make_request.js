@@ -24,7 +24,13 @@
 			var td1 = document.createTextNode(tableData[data].case_id);
 			var td2 = document.createTextNode(tableData[data].request_date);
 			var td3 = document.createTextNode(tableData[data].case_status);
-			var td4 = document.createTextNode(tableData[data].supervisorId);
+			var td4
+			if(tableData[data].case_status == "Fully Approved"){
+				 td4 = document.createTextNode("$"+tableData[data].approved_amt.toFixed(2));
+			}
+			else{
+				td4 = document.createTextNode("Undecided");
+			}	
 			var td5 = document.createTextNode("$"+tableData[data].cost.toFixed(2));
 			var td6 = document.createTextNode(tableData[data].event_date);
 			var td7 = document.createTextNode(tableData[data].duration_days);
