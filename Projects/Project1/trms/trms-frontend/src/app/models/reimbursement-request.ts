@@ -1,3 +1,5 @@
+import {Utils} from "./utils";
+
 export class ReimbursementRequest {
     public id: number;
     public filerEmail: string;
@@ -35,36 +37,11 @@ export class ReimbursementRequest {
         this.passed = tjson["passed"];
         this.isUrgent = tjson["isUrgent"];
 
-        this.eventStart = this.stringToDate(tjson["timeFiled"]);
-        this.eventEnd = this.stringToDate(tjson["eventEnd"]);
-        this.timeFiled = this.stringToDateTime(tjson["timeFiled"]);
+        this.timeFiled = Utils.jsonToDateTime(tjson["timeFiled"]);
+        this.eventEnd = Utils.jsonToDate(tjson["eventEnd"]);
+        this.eventStart = Utils.jsonToDate(tjson["eventStart"]);
 
         this.exceedsFunds = tjson["exceedsFunds"];
         this.eventType = tjson["history"];
-    }
-
-    /**
-     * As name suggests
-     * the + sign parses string to int
-     *
-     * @param {string} str
-     * @returns {Date}
-     */
-    public stringToDate(str: string): Date {
-        let chunks = str.split('-');
-        return new Date(+chunks[0], +chunks[1], +chunks[2]);
-    }
-
-    /**
-     * As name suggests
-     * the + sign parses string to int
-
-     *
-     * @param {string} str
-     * @returns {Date}
-     */
-    public stringToDateTime(str: string): Date {
-        let chunks = str.split('-');
-        return new Date(+chunks[0], +chunks[1], +chunks[2], +chunks[3], +chunks[4], +chunks[5]);
     }
 }

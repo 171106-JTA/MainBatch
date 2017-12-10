@@ -16,13 +16,16 @@ export class RequestService {
 
     /**
      * possible statuses: all, pending, then everything in lookup-table
+     *
+     * note: request params are fuc**** immutable
      * @param {string} status
      * @returns {Observable<ReimbursementRequest[]>}
      */
     public getFiledRequests(status: string): Observable<ReimbursementRequest[]> {
         let params = new HttpParams();
-        params.append("wantsFiledRequests", "true"); // value is ignored, for the email field
-        params.append("status", status);
+        params = params.append("wantsFiledRequests", "true"); // value is ignored, for the email field
+        if (status != null)
+            params = params.append("status", status);
         const httpOptions = {
             headers: new HttpHeaders({'Content-Type': 'application/json'}),
             withCredentials: true,
@@ -41,11 +44,11 @@ export class RequestService {
      */
     public getRequstsWaitingOnMe(department: string, status: string): Observable<ReimbursementRequest[]> {
         let params = new HttpParams();
-        params.append("wantsWaitingOnMe", "true");
+        params = params.append("wantsWaitingOnMe", "true");
         if (status != null)
-            params.append("status", status);
+            params = params.append("status", status);
         if (department != null)
-            params.append("department", department);
+            params = params.append("department", department);
 
         const httpOptions = {
             headers: new HttpHeaders({'Content-Type': 'application/json'}),

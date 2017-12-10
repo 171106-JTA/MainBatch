@@ -1,20 +1,38 @@
-<ul class="request">
-    <li *ngFor="let req of requests">
-        <div>{{req.id}}</div>
-        <div>{{req.filerEmail}}</div>
-        <div>{{req.status}}</div>
-        <div>{{req.cost}}</div>
-        <div>{{req.funding}}</div>
-        <div>{{req.description}}</div>
-        <div>{{req.passed}}</div>
-        <div>{{req.isUrgent}}</div>
-        <div>{{req.timeFiled}}</div>
-        <div>{{req.eventStart}}</div>
-        <div>{{req.eventEnd}}</div>
-        <div>{{req.exceedsFunds}}</div>
-        <div>{{req.eventType}}</div>
-        <div><a routerLink="requests/files">attached-files</a></div>
-        <div><a routerLink="requests/history">attached-files</a></div>
-    </li>
-</ul>
+<table>
+    <tr>
+        <th></th>
+        <th></th>
+        <th>filer</th>
+        <th>status</th>
+        <th>cost</th>
+        <th>projected coverage</th>
+        <th>eventType</th>
+        <th>time filed</th>
+        <th>event start</th>
+        <th>event end</th>
+        <th>description</th>
+    </tr>
 
+    <tr *ngFor="let req of requests">
+        <td><span *ngIf="req.isUrgent" class="glyphicon glyphicon-alert"></span></td>
+        <td>
+            <div class="button-bar">
+                <button type="button" class="btn btn-primary">Details</button>
+            </div>
+        </td>
+        <td>{{req.filerEmail}}</td>
+        <td>{{req.status}}</td>
+        <td>{{req.cost}}</td>
+        <td>{{req.funding}}</td>
+        <td>{{req.eventType}}</td>
+        <td>{{req.timeFiled}}</td>
+        <td>{{req.eventStart | date:'mm/dd/yyyy'}}</td>
+        <td>{{req.eventEnd | date:'mm/dd/yyyy'}}</td>
+        <td>{{req.description | date:'mm/dd/yyyy'}}</td>
+    </tr>
+
+</table>
+<!--
+<div><a routerLink="requests/files">attached-files</a></div>
+<div><a routerLink="requests/history">attached-files</a></div>
+-->
