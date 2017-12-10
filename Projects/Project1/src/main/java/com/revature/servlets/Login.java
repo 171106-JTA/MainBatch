@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.revature.service.LoginValidation;
 
 /**
@@ -52,13 +55,16 @@ public class Login extends HttpServlet {
 		LoginValidation lv = new LoginValidation();
 		String permission = lv.validateLoginCredentials(username, password);
 
-		// Default error page if something goes wrong internally in the application
-		String landingPage = "applicationError.html";
-
+		String result = null;
+		String landingPage = null;
+		JSONObject myObject = new JSONObject();
+		
 		if (permission == null) {
-			System.out.println("\tLogin Failed!");
-			landingPage = "invalidLogin.html";
+			result = "FailedLogin";
+			System.out.println("Login Failed!");
+			
 		} else {
+			result = "SuccessfulLogin";
 			permission = permission.toLowerCase();
 			HttpSession session = request.getSession();
 			session.setAttribute("username", username);
@@ -74,8 +80,11 @@ public class Login extends HttpServlet {
 				landingPage = "departmentHeadLandingPage.html";
 			}
 		}
-
-		response.sendRedirect(landingPage);
+		myObject.put("LoginResult", result);
+		myObject.put("LandingPage", landingPage);
+		PrintWriter out = response.getWriter();
+		out.println(myObject);
+		
 	}
 
 }
