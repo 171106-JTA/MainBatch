@@ -328,16 +328,23 @@ public class DaoImpl implements Dao {
 
 	public int approveOrDeny(int trackingNumber, String approvalType, int value) {
 		PreparedStatement ps = null;
+		ResultSet rs = null; 
 		int rslt = 0; 
 		
 		try(Connection conn = ConnectionUtil.getConnection()) {
-			String sql = "update tuitionreimbursmentrequest set tuitionreimbursmentrequest.benCoApproved = 1 where trackingNumber = 5";
-			ps = conn.prepareStatement(sql); 
-//			ps.setString(1, approvalType);
-//			ps.setInt(2, value);
-//			ps.setInt(3, trackingNumber);
-			System.out.println("update tuitionreimbursmentrequest set " + approvalType + " = " + value + " where trackingNumber = " + trackingNumber);
+			String sql = ""; 
+			if(approvalType.equals("S"))
+				sql = "Update TuitionReimbursmentRequest set supervisorApproved = ?";
+			else if(approvalType.equals("D"))
+				sql = "Update TuitionReimbursmentRequest set deptHeadApproved = ?";
+			else if(approvalType.equals("B")) 
+				sql = "Update TuitionReimbursmentRequest set benCoApproved = ?";
+			else return 0; 
+			System.out.println(sql.substring(0, sql.length()-1) + value);
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, value); 
 			rslt = ps.executeUpdate();
+			
 		}
 		catch(SQLException e) {
 			e.printStackTrace();

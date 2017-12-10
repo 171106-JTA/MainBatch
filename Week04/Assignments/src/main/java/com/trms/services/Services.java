@@ -47,29 +47,14 @@ public class Services {
 	
 	public static int approve(String code) {
 		Dao dao = new DaoImpl();
-		String approvalType = "";
-		if(code.substring(0, 1).equals("S")) 
-			approvalType = "supervisorApproved";
-		if(code.substring(0, 1).equals("D")) 
-			approvalType = "deptHeadApproved";
-		if(code.substring(0, 1).equals("B")) 
-			approvalType = "benCoApproved";
 		System.out.println("trackingnumber=" + Integer.parseInt(code.substring(1)));
 		
-		return dao.approveOrDeny(Integer.parseInt(code.substring(1)), approvalType, 1);
-		
+		return dao.approveOrDeny(Integer.parseInt(code.substring(1)), code.substring(0,1), 1);
 	}
 	public static int deny(String code) {
 		Dao dao = new DaoImpl();
-		String approvalType = "";
-		if(code.substring(0, 1).equals("S")) 
-			approvalType = "supervisorApproved";
-		if(code.substring(0, 1).equals("D")) 
-			approvalType = "deptHeadApproved";
-		if(code.substring(0, 1).equals("B")) 
-			approvalType = "benCoApproved";
 		System.out.println("trackingnumber=" + Integer.parseInt(code.substring(1)));
 		
-		return dao.approveOrDeny(Integer.parseInt(code.substring(1)), approvalType, 0);		
+		return dao.approveOrDeny(Integer.parseInt(code.substring(1)), code.substring(0,1), 0);		
 	}
 }
