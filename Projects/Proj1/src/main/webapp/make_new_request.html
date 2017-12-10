@@ -24,6 +24,7 @@
 </head>
 <body>
 	<form method="post" action="AddCaseRequest" name="addRequest" onsubmit="return validateNewRequest()" >
+		
 		<ul style="list-style-type: none">
 			<li>Event Date (Start day of event)</li>
 			<li><input type="date" name="eventDate" required></li>
@@ -51,6 +52,9 @@
 			<li><input name="cost" type="number" min="0.00" max="10000.00" step="0.01" /></li>
 			<li>Event Description (Provide purpose of this event)</li>
 			<li><textarea name="eventDescription"></textarea></li>
+			<li>Attachment</li>
+			<li><div style="color:red" id="error"></div></li>
+			<li><input id="theFile" type="file" name="attachment" accept="image/*"></li>
 			<li><input class="btn btn-primary" type="submit"><input class="btn btn-danger" type="reset"></li>
 		</ul>
 	</form>
