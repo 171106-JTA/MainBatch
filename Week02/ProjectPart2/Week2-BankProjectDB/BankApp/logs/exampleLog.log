@@ -1,0 +1,1429 @@
+2017-11-11 06:19:01 INFO  Main:12 - Starting BankDriver
+2017-11-11 06:23:11 INFO  GLOBAL:12 - Starting BankDriver
+2017-11-11 06:23:11 INFO  GLOBAL:31 - BankDriver: In Start Menu
+2017-11-11 09:15:42 INFO  GLOBAL:12 - Main: Starting BankDriver
+2017-11-11 09:15:42 INFO  GLOBAL:29 - BankDriver: In Start Menu
+2017-11-11 11:47:13 INFO  GLOBAL:121 - Database: Retrived customerList
+2017-11-11 11:47:13 INFO  GLOBAL:125 - Database: Retrived adminList
+2017-11-11 11:47:13 INFO  GLOBAL:129 - Database: Retrived accountList
+2017-11-11 11:47:13 INFO  GLOBAL:12 - Main: Starting BankDriver
+2017-11-11 11:47:13 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 11:47:49 INFO  GLOBAL:132 - New Customer gtheriot created.
+2017-11-11 11:47:49 INFO  GLOBAL:134 - New Account 11111112 created.
+2017-11-11 11:47:49 INFO  GLOBAL:136 - User Customer [Blocked= true, firstName=Greg, lastName=Theriot, username=gtheriot, password=1234] opened Account 11111112.
+2017-11-11 11:47:49 INFO  GLOBAL:94 - Database: Updated customerList
+2017-11-11 11:47:49 INFO  GLOBAL:104 - Database: Updated accountList
+2017-11-11 11:47:49 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 11:51:50 INFO  GLOBAL:121 - Database: Retrived customerList
+2017-11-11 11:51:50 INFO  GLOBAL:125 - Database: Retrived adminList
+2017-11-11 11:51:50 INFO  GLOBAL:129 - Database: Retrived accountList
+2017-11-11 11:51:50 INFO  GLOBAL:12 - Main: Starting BankDriver
+2017-11-11 11:51:50 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 11:55:54 INFO  GLOBAL:121 - Database: Retrived customerList
+2017-11-11 11:55:54 INFO  GLOBAL:125 - Database: Retrived adminList
+2017-11-11 11:55:54 INFO  GLOBAL:129 - Database: Retrived accountList
+2017-11-11 11:55:54 INFO  GLOBAL:12 - Main: Starting BankDriver
+2017-11-11 11:55:54 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 11:56:23 INFO  GLOBAL:132 - BankDriver: New Customer mjsnee created.
+2017-11-11 11:56:23 INFO  GLOBAL:134 - BankDriver: New Account 11111112 created.
+2017-11-11 11:56:23 INFO  GLOBAL:136 - BankDriver: mjsnee opened Account 11111112.
+2017-11-11 11:56:23 INFO  GLOBAL:94 - Database: Updated customerList
+2017-11-11 11:56:24 INFO  GLOBAL:104 - Database: Updated accountList
+2017-11-11 11:56:24 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 11:59:53 INFO  GLOBAL:121 - Database: Retrived customerList
+2017-11-11 11:59:53 INFO  GLOBAL:125 - Database: Retrived adminList
+2017-11-11 11:59:53 INFO  GLOBAL:129 - Database: Retrived accountList
+2017-11-11 11:59:53 INFO  GLOBAL:12 - Main: Starting BankDriver
+2017-11-11 11:59:53 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:15:06 INFO  GLOBAL:121 - Database: Retrived customerList
+2017-11-11 12:15:06 INFO  GLOBAL:125 - Database: Retrived adminList
+2017-11-11 12:15:06 INFO  GLOBAL:129 - Database: Retrived accountList
+2017-11-11 12:15:06 INFO  GLOBAL:12 - Main: Starting BankDriver
+2017-11-11 12:15:06 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:17:16 INFO  GLOBAL:94 - Database: Updated customerList
+2017-11-11 12:17:16 INFO  GLOBAL:99 - Database: Updated adminList
+2017-11-11 12:17:16 INFO  GLOBAL:104 - Database: Updated accountList
+2017-11-11 12:17:16 INFO  GLOBAL:121 - Database: Retrived customerList
+2017-11-11 12:17:16 INFO  GLOBAL:125 - Database: Retrived adminList
+2017-11-11 12:17:16 INFO  GLOBAL:129 - Database: Retrived accountList
+2017-11-11 12:17:16 INFO  GLOBAL:12 - Main: Starting BankDriver
+2017-11-11 12:17:16 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:17:52 INFO  GLOBAL:132 - BankDriver: New Customer mjsnee created.
+2017-11-11 12:18:27 INFO  GLOBAL:121 - Database: Retrived customerList
+2017-11-11 12:18:27 INFO  GLOBAL:125 - Database: Retrived adminList
+2017-11-11 12:18:27 INFO  GLOBAL:129 - Database: Retrived accountList
+2017-11-11 12:18:27 INFO  GLOBAL:12 - Main: Starting BankDriver
+2017-11-11 12:18:27 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:18:58 INFO  GLOBAL:132 - BankDriver: New Customer mjsnee created.
+2017-11-11 12:18:58 INFO  GLOBAL:134 - BankDriver: New Account 11111112 created.
+2017-11-11 12:18:58 INFO  GLOBAL:136 - BankDriver: mjsnee opened Account 11111112.
+2017-11-11 12:18:58 INFO  GLOBAL:94 - Database: Updated customerList
+2017-11-11 12:18:58 INFO  GLOBAL:104 - Database: Updated accountList
+2017-11-11 12:18:58 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:19:16 INFO  GLOBAL:121 - Database: Retrived customerList
+2017-11-11 12:19:16 INFO  GLOBAL:125 - Database: Retrived adminList
+2017-11-11 12:19:16 INFO  GLOBAL:129 - Database: Retrived accountList
+2017-11-11 12:19:16 INFO  GLOBAL:12 - Main: Starting BankDriver
+2017-11-11 12:19:16 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:20:26 INFO  GLOBAL:121 - Database: Retrived customerList
+2017-11-11 12:20:26 INFO  GLOBAL:125 - Database: Retrived adminList
+2017-11-11 12:20:26 INFO  GLOBAL:129 - Database: Retrived accountList
+2017-11-11 12:20:26 INFO  GLOBAL:12 - Main: Starting BankDriver
+2017-11-11 12:20:26 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:20:48 INFO  GLOBAL:132 - BankDriver: New Customer gtheriot created.
+2017-11-11 12:20:48 INFO  GLOBAL:134 - BankDriver: New Account 11111112 created.
+2017-11-11 12:20:48 INFO  GLOBAL:136 - BankDriver: gtheriot opened Account 11111112.
+2017-11-11 12:20:48 INFO  GLOBAL:94 - Database: Updated customerList
+2017-11-11 12:20:48 INFO  GLOBAL:104 - Database: Updated accountList
+2017-11-11 12:20:48 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:20:52 INFO  GLOBAL:121 - Database: Retrived customerList
+2017-11-11 12:20:52 INFO  GLOBAL:125 - Database: Retrived adminList
+2017-11-11 12:20:52 INFO  GLOBAL:129 - Database: Retrived accountList
+2017-11-11 12:20:52 INFO  GLOBAL:12 - Main: Starting BankDriver
+2017-11-11 12:20:52 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:24:27 INFO  GLOBAL:121 - Database: Retrived customerList
+2017-11-11 12:24:27 INFO  GLOBAL:125 - Database: Retrived adminList
+2017-11-11 12:24:27 INFO  GLOBAL:129 - Database: Retrived accountList
+2017-11-11 12:24:27 INFO  GLOBAL:12 - Main: Starting BankDriver
+2017-11-11 12:24:27 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:24:59 INFO  GLOBAL:132 - BankDriver: New Customer rjsnee created.
+2017-11-11 12:24:59 INFO  GLOBAL:134 - BankDriver: New Account 11111112 created.
+2017-11-11 12:24:59 INFO  GLOBAL:136 - BankDriver: rjsnee opened Account 11111112.
+2017-11-11 12:24:59 INFO  GLOBAL:94 - Database: Updated customerList
+2017-11-11 12:24:59 INFO  GLOBAL:104 - Database: Updated accountList
+2017-11-11 12:24:59 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:25:42 INFO  GLOBAL:121 - Database: Retrived customerList
+2017-11-11 12:25:42 INFO  GLOBAL:125 - Database: Retrived adminList
+2017-11-11 12:25:42 INFO  GLOBAL:129 - Database: Retrived accountList
+2017-11-11 12:25:42 INFO  GLOBAL:12 - Main: Starting BankDriver
+2017-11-11 12:25:42 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:26:19 INFO  GLOBAL:121 - Database: Retrived customerList
+2017-11-11 12:26:19 INFO  GLOBAL:125 - Database: Retrived adminList
+2017-11-11 12:26:19 INFO  GLOBAL:129 - Database: Retrived accountList
+2017-11-11 12:26:19 INFO  GLOBAL:12 - Main: Starting BankDriver
+2017-11-11 12:26:19 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:26:44 INFO  GLOBAL:132 - BankDriver: New Customer mtsnee created.
+2017-11-11 12:26:44 INFO  GLOBAL:134 - BankDriver: New Account 11111112 created.
+2017-11-11 12:26:44 INFO  GLOBAL:136 - BankDriver: mtsnee opened Account 11111112.
+2017-11-11 12:26:44 INFO  GLOBAL:94 - Database: Updated customerList
+2017-11-11 12:26:44 INFO  GLOBAL:104 - Database: Updated accountList
+2017-11-11 12:26:44 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:31:23 INFO  GLOBAL:121 - Database: Retrived customerList
+2017-11-11 12:31:23 INFO  GLOBAL:125 - Database: Retrived adminList
+2017-11-11 12:31:23 INFO  GLOBAL:129 - Database: Retrived accountList
+2017-11-11 12:31:23 INFO  GLOBAL:12 - Main: Starting BankDriver
+2017-11-11 12:31:23 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:31:43 INFO  GLOBAL:132 - BankDriver: New Customer tjsnee created.
+2017-11-11 12:31:43 INFO  GLOBAL:134 - BankDriver: New Account 11111112 created.
+2017-11-11 12:31:43 INFO  GLOBAL:136 - BankDriver: tjsnee opened Account 11111112.
+2017-11-11 12:31:43 INFO  GLOBAL:94 - Database: Updated customerList
+2017-11-11 12:31:43 INFO  GLOBAL:104 - Database: Updated accountList
+2017-11-11 12:31:43 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:32:17 INFO  GLOBAL:121 - Database: Retrived customerList
+2017-11-11 12:32:17 INFO  GLOBAL:125 - Database: Retrived adminList
+2017-11-11 12:32:17 INFO  GLOBAL:129 - Database: Retrived accountList
+2017-11-11 12:32:17 INFO  GLOBAL:12 - Main: Starting BankDriver
+2017-11-11 12:32:17 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:33:42 INFO  GLOBAL:121 - Database: Retrived customerList
+2017-11-11 12:33:42 INFO  GLOBAL:125 - Database: Retrived adminList
+2017-11-11 12:33:42 INFO  GLOBAL:129 - Database: Retrived accountList
+2017-11-11 12:33:42 INFO  GLOBAL:12 - Main: Starting BankDriver
+2017-11-11 12:33:42 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:34:04 INFO  GLOBAL:132 - BankDriver: New Customer amsnee created.
+2017-11-11 12:34:04 INFO  GLOBAL:134 - BankDriver: New Account 11111113 created.
+2017-11-11 12:34:04 INFO  GLOBAL:136 - BankDriver: amsnee opened Account 11111113.
+2017-11-11 12:34:04 INFO  GLOBAL:94 - Database: Updated customerList
+2017-11-11 12:34:04 INFO  GLOBAL:104 - Database: Updated accountList
+2017-11-11 12:34:04 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:34:12 INFO  GLOBAL:121 - Database: Retrived customerList
+2017-11-11 12:34:12 INFO  GLOBAL:125 - Database: Retrived adminList
+2017-11-11 12:34:12 INFO  GLOBAL:129 - Database: Retrived accountList
+2017-11-11 12:34:12 INFO  GLOBAL:12 - Main: Starting BankDriver
+2017-11-11 12:34:12 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:35:28 INFO  GLOBAL:121 - Database: Retrived customerList
+2017-11-11 12:35:28 INFO  GLOBAL:125 - Database: Retrived adminList
+2017-11-11 12:35:28 INFO  GLOBAL:129 - Database: Retrived accountList
+2017-11-11 12:35:28 INFO  GLOBAL:12 - Main: Starting BankDriver
+2017-11-11 12:35:28 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:35:58 INFO  GLOBAL:132 - BankDriver: New Customer cjsnee created.
+2017-11-11 12:35:58 INFO  GLOBAL:134 - BankDriver: New Account 11111114 created.
+2017-11-11 12:35:58 INFO  GLOBAL:136 - BankDriver: cjsnee opened Account 11111114.
+2017-11-11 12:35:58 INFO  GLOBAL:94 - Database: Updated customerList
+2017-11-11 12:35:58 INFO  GLOBAL:104 - Database: Updated accountList
+2017-11-11 12:35:58 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:36:06 INFO  GLOBAL:121 - Database: Retrived customerList
+2017-11-11 12:36:06 INFO  GLOBAL:125 - Database: Retrived adminList
+2017-11-11 12:36:06 INFO  GLOBAL:129 - Database: Retrived accountList
+2017-11-11 12:36:06 INFO  GLOBAL:12 - Main: Starting BankDriver
+2017-11-11 12:36:06 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:43:18 INFO  GLOBAL:94 - Database: Updated customerList
+2017-11-11 12:43:18 INFO  GLOBAL:99 - Database: Updated adminList
+2017-11-11 12:43:18 INFO  GLOBAL:104 - Database: Updated accountList
+2017-11-11 12:43:18 INFO  GLOBAL:121 - Database: Retrived customerList
+2017-11-11 12:43:18 INFO  GLOBAL:125 - Database: Retrived adminList
+2017-11-11 12:43:18 INFO  GLOBAL:129 - Database: Retrived accountList
+2017-11-11 12:43:18 INFO  GLOBAL:12 - Main: Starting BankDriver
+2017-11-11 12:43:18 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:43:56 INFO  GLOBAL:132 - BankDriver: New Customer mjsnee created.
+2017-11-11 12:43:56 INFO  GLOBAL:134 - BankDriver: New Account 11111112 created.
+2017-11-11 12:43:56 INFO  GLOBAL:136 - BankDriver: mjsnee opened Account 11111112.
+2017-11-11 12:43:56 INFO  GLOBAL:94 - Database: Updated customerList
+2017-11-11 12:43:56 INFO  GLOBAL:104 - Database: Updated accountList
+2017-11-11 12:43:56 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:44:28 INFO  GLOBAL:121 - Database: Retrived customerList
+2017-11-11 12:44:28 INFO  GLOBAL:125 - Database: Retrived adminList
+2017-11-11 12:44:28 INFO  GLOBAL:129 - Database: Retrived accountList
+2017-11-11 12:44:28 INFO  GLOBAL:12 - Main: Starting BankDriver
+2017-11-11 12:44:28 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:44:45 INFO  GLOBAL:199 - BankDriver: Admin null logged in
+2017-11-11 12:44:55 INFO  GLOBAL:321 - BankDriver: Admin Administrator[username= admin1, password= bankAppPW] unblocked Customer mjsnee
+2017-11-11 12:44:55 INFO  GLOBAL:94 - Database: Updated customerList
+2017-11-11 12:45:07 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:45:15 INFO  GLOBAL:186 - BankDriver: Customer null logged in
+2017-11-11 12:45:24 INFO  GLOBAL:261 - BankDriver: Customer Customer [Blocked= false, firstName=Matthew, lastName=Snee, username=mjsnee, password=1234] deposited $500.0 and now has a balance of $500.0
+2017-11-11 12:45:24 INFO  GLOBAL:94 - Database: Updated customerList
+2017-11-11 12:45:24 INFO  GLOBAL:104 - Database: Updated accountList
+2017-11-11 12:47:10 INFO  GLOBAL:235 - BankDriver: Customer Customer [Blocked= false, firstName=Matthew, lastName=Snee, username=mjsnee, password=1234] attempted to withdraw more than their account balance.
+2017-11-11 12:47:23 INFO  GLOBAL:240 - BankDriver: Customer Customer [Blocked= false, firstName=Matthew, lastName=Snee, username=mjsnee, password=1234] withdrew $300.0 and now has a balance of $200.0
+2017-11-11 12:47:23 INFO  GLOBAL:94 - Database: Updated customerList
+2017-11-11 12:47:23 INFO  GLOBAL:104 - Database: Updated accountList
+2017-11-11 12:47:27 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:47:43 INFO  GLOBAL:199 - BankDriver: Admin Administrator[username= admin1, password= bankAppPW] logged in
+2017-11-11 12:47:56 INFO  GLOBAL:352 - Admin: Administrator[username= admin1, password= bankAppPW] promoted Customer Customer [Blocked= false, firstName=Matthew, lastName=Snee, username=mjsnee, password=1234]to admin.
+2017-11-11 12:47:56 INFO  GLOBAL:99 - Database: Updated adminList
+2017-11-11 12:47:56 INFO  GLOBAL:94 - Database: Updated customerList
+2017-11-11 12:48:00 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:48:09 INFO  GLOBAL:199 - BankDriver: Admin Administrator[username= admin1, password= bankAppPW] logged in
+2017-11-11 12:48:19 INFO  GLOBAL:321 - BankDriver: Admin Administrator[username= mjsnee, password= 1234] unblocked Customer jdoe
+2017-11-11 12:48:19 INFO  GLOBAL:94 - Database: Updated customerList
+2017-11-11 12:48:20 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:48:39 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:50:08 INFO  GLOBAL:121 - Database: Retrived customerList
+2017-11-11 12:50:08 INFO  GLOBAL:125 - Database: Retrived adminList
+2017-11-11 12:50:08 INFO  GLOBAL:129 - Database: Retrived accountList
+2017-11-11 12:50:08 INFO  GLOBAL:12 - Main: Starting BankDriver
+2017-11-11 12:50:08 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:51:13 INFO  GLOBAL:121 - Database: Retrived customerList
+2017-11-11 12:51:13 INFO  GLOBAL:125 - Database: Retrived adminList
+2017-11-11 12:51:13 INFO  GLOBAL:129 - Database: Retrived accountList
+2017-11-11 12:51:13 INFO  GLOBAL:12 - Main: Starting BankDriver
+2017-11-11 12:51:13 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:52:06 INFO  GLOBAL:132 - BankDriver: New Customer dsuk created.
+2017-11-11 12:52:06 INFO  GLOBAL:134 - BankDriver: New Account 11111113 created.
+2017-11-11 12:52:06 INFO  GLOBAL:136 - BankDriver: dsuk opened Account 11111113.
+2017-11-11 12:52:06 INFO  GLOBAL:94 - Database: Updated customerList
+2017-11-11 12:52:06 INFO  GLOBAL:104 - Database: Updated accountList
+2017-11-11 12:52:06 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 12:52:24 INFO  GLOBAL:121 - Database: Retrived customerList
+2017-11-11 12:52:24 INFO  GLOBAL:125 - Database: Retrived adminList
+2017-11-11 12:52:24 INFO  GLOBAL:129 - Database: Retrived accountList
+2017-11-11 12:52:24 INFO  GLOBAL:12 - Main: Starting BankDriver
+2017-11-11 12:52:24 INFO  GLOBAL:38 - BankDriver: In Start Menu
+2017-11-11 16:32:56 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:32:56 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:32:56 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:32:56 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:32:56 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:32:56 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:32:56 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:32:56 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:32:56 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 16:32:56 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 16:32:56 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 16:32:56 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:32:56 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:32:56 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:32:56 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:32:56 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:32:56 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:32:56 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:32:56 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:33:50 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:33:50 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:33:50 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:33:50 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:33:50 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:33:50 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:33:50 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:33:50 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:33:50 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:33:50 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:33:50 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:33:50 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:35:08 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:35:08 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:35:08 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:35:08 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:35:08 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:35:08 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:35:08 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:35:08 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:35:08 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:35:08 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:35:08 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:35:08 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:38:48 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:38:48 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:38:48 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:38:48 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:38:48 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:38:48 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:38:48 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:38:48 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:38:48 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:38:48 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:38:48 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:38:48 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:40:39 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 16:40:39 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 16:40:39 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 16:40:39 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:40:39 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:40:39 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:40:39 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:40:39 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:40:39 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:40:39 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:40:39 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:40:39 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:40:39 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:40:39 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:40:39 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:40:39 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:40:39 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:40:39 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:40:39 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:40:39 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:40:39 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:40:39 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:40:39 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:40:39 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:40:39 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:40:39 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:40:39 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:48:58 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:48:58 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:48:58 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:48:58 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:48:58 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:48:58 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:48:58 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:48:58 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:48:58 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:48:58 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:48:58 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:48:58 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:48:58 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:48:58 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:48:58 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:48:58 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:48:58 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:48:58 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:48:58 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:48:58 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:48:58 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:48:58 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:48:58 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:48:58 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:50:02 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:50:02 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:50:02 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:50:02 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:50:02 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:50:02 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:50:02 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:50:02 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:50:02 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:50:02 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:50:02 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:50:02 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:50:02 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:50:02 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:50:02 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:50:02 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:50:02 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:50:02 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:50:02 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:50:02 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:50:02 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:50:02 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:50:02 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:50:02 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:51:00 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:51:00 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:51:00 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:51:00 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:51:00 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:51:00 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:51:00 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:51:00 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:51:00 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 16:51:00 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 16:51:00 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 16:51:00 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:51:00 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:51:00 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:51:00 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:51:00 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:51:00 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:51:00 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:51:00 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:51:00 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:51:00 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:51:00 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:51:00 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:51:00 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:51:00 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:51:00 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:51:00 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:54:53 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:54:53 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:54:53 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:54:53 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:54:53 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:54:53 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:54:53 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:54:53 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:54:53 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 16:54:53 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 16:54:53 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 16:54:53 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:54:53 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:54:53 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:54:53 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:54:53 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:54:53 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:54:53 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:54:53 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:54:53 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:54:53 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:54:53 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:54:53 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:54:53 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:54:53 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:54:53 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:54:53 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:54:53 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:54:53 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:54:53 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:56:25 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:56:25 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:56:25 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:56:25 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:56:25 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:56:25 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:56:25 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:56:25 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:56:25 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 16:56:25 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 16:56:25 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 16:56:25 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:56:25 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:56:25 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:56:25 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:56:25 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:56:25 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:56:25 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:56:25 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:56:25 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:56:25 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:56:25 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:56:25 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:56:25 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:56:25 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:56:25 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:56:25 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:57:02 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:57:02 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:57:02 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:57:02 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:57:02 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:57:02 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:57:02 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:57:02 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:57:02 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 16:57:02 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 16:57:02 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 16:57:02 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:57:02 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:57:02 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:57:02 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:57:02 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:57:02 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:57:02 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:57:02 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:57:02 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:57:02 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:57:02 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:57:02 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:57:02 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:57:02 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:57:02 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:57:02 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:57:36 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:57:36 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:57:36 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:57:36 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:57:36 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:57:36 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:57:36 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:57:36 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:57:36 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 16:57:36 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 16:57:36 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 16:57:36 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:57:36 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:57:36 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:57:36 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:57:36 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:57:36 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:57:36 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:57:36 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:57:36 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:57:36 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:57:36 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:57:36 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:57:36 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:57:36 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:57:36 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:57:36 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:58:01 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:58:01 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:58:01 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:58:01 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:58:01 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:58:01 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:58:01 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:58:01 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:58:01 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 16:58:01 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 16:58:01 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 16:58:01 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:58:01 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:58:01 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:58:01 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:58:01 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:58:01 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:58:01 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:58:01 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:58:01 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:58:01 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:58:01 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:58:01 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:58:01 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:58:01 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:58:01 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:58:01 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:58:01 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:58:01 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:58:01 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:58:26 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:58:26 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:58:26 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:58:26 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:58:26 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:58:26 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:58:26 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:58:26 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:58:26 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 16:58:26 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 16:58:26 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 16:58:26 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:58:26 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:58:26 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:58:26 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:58:26 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:58:26 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:58:26 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:58:26 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:58:26 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:58:26 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:58:26 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:58:26 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:58:26 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:58:26 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:58:26 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 16:58:26 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 16:58:26 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 16:58:26 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 16:58:26 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:05:36 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:05:36 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:05:36 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:05:36 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:05:36 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:05:36 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:05:36 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:05:36 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:05:36 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 17:05:36 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 17:05:36 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 17:05:36 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:05:36 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:05:36 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:05:36 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:05:36 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:05:36 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:05:36 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:05:36 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:05:36 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:05:36 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:05:36 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:05:36 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:05:36 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:05:36 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:05:36 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:05:36 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:05:36 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:05:36 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:05:36 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:07:02 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:07:02 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:07:02 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:07:02 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:07:02 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:07:02 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:07:02 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:07:02 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:07:03 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 17:07:03 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 17:07:03 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 17:07:03 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:07:03 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:07:03 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:07:03 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:07:03 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:07:03 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:07:03 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:07:03 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:07:03 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:07:03 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:07:03 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:07:03 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:07:03 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:07:03 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:07:03 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:07:03 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:11:24 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:11:24 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:11:24 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:11:24 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:11:24 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:11:24 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:11:24 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:11:24 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:11:24 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 17:11:24 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 17:11:24 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 17:11:24 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:11:24 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:11:24 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:11:24 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:11:24 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:11:24 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:11:24 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:11:24 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:11:24 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:11:24 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:11:24 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:11:24 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:11:24 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:11:24 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:11:24 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:11:24 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:11:24 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:11:24 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:11:24 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:11:24 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:12:46 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:12:46 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:12:46 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:12:46 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:12:46 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:12:46 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:12:46 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:12:46 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:12:46 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 17:12:46 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 17:12:46 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 17:12:46 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:12:46 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:12:46 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:12:46 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:12:46 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:12:46 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:12:46 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:12:46 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:12:46 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:12:46 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:12:46 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:12:46 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:12:46 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:12:46 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:12:46 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:12:46 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:12:46 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:12:46 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:12:46 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:12:46 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:13:09 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:13:09 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:13:09 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:13:09 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:13:09 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:13:09 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:13:09 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:13:09 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:13:09 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 17:13:09 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 17:13:09 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 17:13:09 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:13:09 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:13:09 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:13:09 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:13:09 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:13:09 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:13:09 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:13:09 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:13:09 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:13:09 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:13:09 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:13:09 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:13:09 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:13:09 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:13:09 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:13:09 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:13:09 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:13:09 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:13:09 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:13:09 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:13:09 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:13:09 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:13:09 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:15:11 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 17:15:11 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 17:15:11 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 17:15:11 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:15:11 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:15:11 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:15:11 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:15:11 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:15:11 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:15:11 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:15:11 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:15:11 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 17:15:11 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 17:15:11 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 17:15:11 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:15:11 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:15:11 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:15:11 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:15:11 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:15:11 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:15:11 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:15:11 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:15:11 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:15:11 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:15:11 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:15:11 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:15:11 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:15:11 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:15:11 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:15:11 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:15:11 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:15:11 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:15:11 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:15:11 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:15:11 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:15:11 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:15:11 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:16:37 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:16:37 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:16:37 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:16:37 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:16:37 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:16:37 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:16:37 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:16:37 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:16:37 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 17:16:37 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 17:16:37 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 17:16:37 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:16:37 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:16:37 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:16:37 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:16:37 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:16:37 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:16:37 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:16:37 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:16:37 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:16:37 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:16:37 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:16:37 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:16:37 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:16:37 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:16:37 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:16:37 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:16:37 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:16:37 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:16:37 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:16:37 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:21:10 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:21:10 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:21:10 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:21:10 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:21:10 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:21:10 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:21:10 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:21:10 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:21:10 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 17:21:10 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 17:21:10 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 17:21:10 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:21:10 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:21:10 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:21:10 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:21:10 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:21:10 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:21:10 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:21:10 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:21:10 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:21:10 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:21:10 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:21:10 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:21:10 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:21:10 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:21:10 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:21:10 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:21:10 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:21:10 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:21:10 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:21:10 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:21:10 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:21:10 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:21:10 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:22:31 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:22:31 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:22:31 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:22:31 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:22:31 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:22:31 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:22:31 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:22:31 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:22:31 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 17:22:31 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 17:22:31 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 17:22:31 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:22:31 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:22:31 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:22:31 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:22:31 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:22:31 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:22:31 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:22:31 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:22:31 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:22:31 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:22:31 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:22:31 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:22:31 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:22:31 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:22:31 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:22:31 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:22:31 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:22:31 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:22:31 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:22:31 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:22:31 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:22:31 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:22:31 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:24:17 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:24:17 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:24:17 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:24:17 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:24:17 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:24:17 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:24:17 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:24:17 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:24:17 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 17:24:17 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 17:24:17 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 17:24:17 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:24:17 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:24:17 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:24:17 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:24:17 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:24:17 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:24:17 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:24:17 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:24:17 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:24:17 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:24:17 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:24:17 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:24:17 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:24:17 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:24:17 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:24:17 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:24:17 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:24:17 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:24:17 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:24:17 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:24:17 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:24:17 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:24:17 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:24:39 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:24:39 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:24:39 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:24:39 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:24:39 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:24:39 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:24:39 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:24:39 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:24:40 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 17:24:40 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 17:24:40 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 17:24:40 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:24:40 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:24:40 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:24:40 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:24:40 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:24:40 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:24:40 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:24:40 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:24:40 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:24:40 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:24:40 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:24:40 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:24:40 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:24:40 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:24:40 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:24:40 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:24:40 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:24:40 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:24:40 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 17:24:40 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 17:24:40 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 17:24:40 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 17:24:40 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 18:44:58 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 18:44:58 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 18:44:58 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 18:44:58 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 18:44:58 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 18:44:58 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 18:44:58 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 18:44:58 INFO  GLOBAL:16 - Main: Starting BankDriver
+2017-11-11 18:44:58 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 18:58:18 INFO  GLOBAL:135 - BankDriver: New Customer mjsnee created.
+2017-11-11 18:58:18 INFO  GLOBAL:137 - BankDriver: New Account 11111112 created.
+2017-11-11 18:58:18 INFO  GLOBAL:139 - BankDriver: mjsnee opened Account 11111112.
+2017-11-11 18:58:18 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 18:58:18 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 18:58:18 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 18:58:40 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 18:58:53 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 18:58:53 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 18:58:53 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 18:58:53 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 18:58:53 INFO  GLOBAL:16 - Main: Starting BankDriver
+2017-11-11 18:58:53 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 20:02:50 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:02:50 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:02:50 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:02:50 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:02:50 INFO  GLOBAL:16 - Main: Starting BankDriver
+2017-11-11 20:02:50 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 20:03:48 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:03:48 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:03:48 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:03:48 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:03:48 INFO  GLOBAL:16 - Main: Starting BankDriver
+2017-11-11 20:03:48 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 20:04:17 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:04:17 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:04:17 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:04:17 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:04:17 INFO  GLOBAL:16 - Main: Starting BankDriver
+2017-11-11 20:04:17 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 20:39:19 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:39:19 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:39:19 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:39:19 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:39:19 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:39:19 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:39:19 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:39:19 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:39:19 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 20:39:19 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 20:39:19 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 20:39:20 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:39:20 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:39:20 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:39:20 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:39:20 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:39:20 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:39:20 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:39:20 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:39:20 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:39:20 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:39:20 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:39:20 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:39:20 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:39:20 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:39:20 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:39:20 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:39:20 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:39:20 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:39:20 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:39:20 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:39:20 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:39:20 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:39:20 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:50:34 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:50:34 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:50:34 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:50:34 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:50:34 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:50:34 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:50:34 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:50:34 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:50:34 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 20:50:34 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 20:50:34 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 20:50:34 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:50:34 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:50:34 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:50:34 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:50:34 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:50:34 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:50:34 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:50:34 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:50:34 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:50:34 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:50:34 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:50:34 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:50:34 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:50:34 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:50:34 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:50:34 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:50:34 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:50:34 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:50:34 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:50:34 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:50:34 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:50:34 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:50:34 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:52:16 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:52:16 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:52:16 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:52:16 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:52:16 INFO  GLOBAL:16 - Main: Starting BankDriver
+2017-11-11 20:52:16 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 20:52:29 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:52:29 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:52:29 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:52:29 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:52:29 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:52:29 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:52:29 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:52:29 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:52:29 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 20:52:29 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 20:52:29 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 20:52:29 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:52:29 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:52:29 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:52:29 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:52:29 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:52:29 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:52:29 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:52:29 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:52:29 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:52:29 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:52:29 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:52:29 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:52:29 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:52:29 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:52:29 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:52:29 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:52:29 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:52:29 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:52:29 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:52:29 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:52:29 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:52:29 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:52:29 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:53:43 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:53:43 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:53:43 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:53:43 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:53:43 INFO  GLOBAL:16 - Main: Starting BankDriver
+2017-11-11 20:53:43 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 20:53:51 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:53:51 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:53:51 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:53:51 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:53:51 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:53:51 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:53:51 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:53:51 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:53:51 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 20:53:51 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 20:53:51 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 20:53:51 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:53:51 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:53:51 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:53:51 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:53:51 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:53:51 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:53:51 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:53:51 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:53:51 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:53:51 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:53:51 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:53:51 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:53:51 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:53:51 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:53:51 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:53:51 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:53:51 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:53:51 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:53:51 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:53:51 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:53:51 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:53:51 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:53:51 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:57:53 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 20:57:53 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 20:57:53 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 20:57:53 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 20:57:53 INFO  GLOBAL:16 - Main: Starting BankDriver
+2017-11-11 20:57:53 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 21:11:20 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 21:11:20 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 21:11:20 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 21:11:20 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 21:11:20 INFO  GLOBAL:16 - Main: Starting BankDriver
+2017-11-11 21:11:20 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 21:13:20 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 21:13:20 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 21:13:20 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 21:13:20 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 21:13:20 INFO  GLOBAL:16 - Main: Starting BankDriver
+2017-11-11 21:13:20 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 21:13:48 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 21:15:39 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 21:15:39 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 21:15:39 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 21:15:39 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 21:15:39 INFO  GLOBAL:16 - Main: Starting BankDriver
+2017-11-11 21:15:39 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 21:15:44 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 21:18:10 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 21:18:10 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 21:18:10 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 21:18:10 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 21:18:10 INFO  GLOBAL:16 - Main: Starting BankDriver
+2017-11-11 21:18:10 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 21:18:37 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 21:18:47 INFO  GLOBAL:184 - BankDriver: Block User attempted to login
+2017-11-11 21:18:47 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 21:19:05 INFO  GLOBAL:202 - BankDriver: Admin null logged in
+2017-11-11 21:19:16 INFO  GLOBAL:335 - BankDriver: Admin Administrator[username= admin1, password= bankAppPW] unblocked Customer mjsnee
+2017-11-11 21:19:16 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 21:19:18 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 21:22:34 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 21:22:34 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 21:22:34 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 21:22:34 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 21:22:34 INFO  GLOBAL:16 - Main: Starting BankDriver
+2017-11-11 21:22:34 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 21:22:47 INFO  GLOBAL:189 - BankDriver: Customer logged in
+2017-11-11 21:22:54 INFO  GLOBAL:274 - BankDriver: Customer mjsnee deposited $100.0 and now has a balance of $200.0
+2017-11-11 21:22:54 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 21:22:54 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 21:22:58 INFO  GLOBAL:248 - BankDriver: mjsnee withdrew $50.0 and now has a balance of $0.0
+2017-11-11 21:22:58 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 21:22:58 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 21:23:20 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 21:23:27 INFO  GLOBAL:189 - BankDriver: Customer logged in
+2017-11-11 21:28:42 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 21:28:48 INFO  GLOBAL:189 - BankDriver: Customer logged in
+2017-11-11 21:28:57 INFO  GLOBAL:274 - BankDriver: Customer mjsnee deposited $500.0 and now has a balance of $1000.0
+2017-11-11 21:28:57 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 21:28:57 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 21:29:11 INFO  GLOBAL:274 - BankDriver: Customer mjsnee deposited $0.5 and now has a balance of $1001.0
+2017-11-11 21:29:11 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 21:29:11 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 21:30:36 INFO  GLOBAL:248 - BankDriver: mjsnee withdrew $3.0 and now has a balance of $989.0
+2017-11-11 21:30:36 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 21:30:36 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 21:36:18 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 21:36:18 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 21:36:18 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 21:36:18 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 21:36:18 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 21:36:18 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 21:36:18 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 21:36:18 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 21:36:18 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 21:36:18 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 21:36:18 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 21:36:18 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 21:36:18 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 21:36:18 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 21:36:18 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 21:36:18 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 21:36:18 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 21:36:18 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 21:36:18 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 21:36:18 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 21:36:18 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 21:36:18 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 21:36:18 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 21:36:18 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 21:36:18 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 21:36:18 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 21:36:18 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 21:36:18 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 21:36:18 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 21:36:18 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 21:36:18 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 21:36:18 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 21:36:18 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 21:36:18 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 21:36:29 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 21:36:29 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 21:36:29 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 21:36:29 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 21:36:29 INFO  GLOBAL:16 - Main: Starting BankDriver
+2017-11-11 21:36:29 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 21:36:37 INFO  GLOBAL:189 - BankDriver: Customer logged in
+2017-11-11 21:36:49 INFO  GLOBAL:255 - BankDriver: mjsnee withdrew $489.0 and now has a balance of $500.0
+2017-11-11 21:36:49 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 21:36:49 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 21:37:01 INFO  GLOBAL:248 - BankDriver: mjsnee attempted to withdraw a negative amount.
+2017-11-11 21:37:09 INFO  GLOBAL:243 - BankDriver: mjsnee attempted to withdraw more than their account balance.
+2017-11-11 21:37:15 INFO  GLOBAL:255 - BankDriver: mjsnee withdrew $500.0 and now has a balance of $0.0
+2017-11-11 21:37:15 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 21:37:15 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 21:37:23 INFO  GLOBAL:238 - BankDriver: mjsnee tried to withdraw from a Zero Balance Account
+2017-11-11 21:37:28 INFO  GLOBAL:238 - BankDriver: mjsnee tried to withdraw from a Zero Balance Account
+2017-11-11 21:37:32 INFO  GLOBAL:238 - BankDriver: mjsnee tried to withdraw from a Zero Balance Account
+2017-11-11 21:39:34 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 21:39:34 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 21:39:34 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 21:39:34 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 21:39:34 INFO  GLOBAL:16 - Main: Starting BankDriver
+2017-11-11 21:39:34 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 21:39:41 INFO  GLOBAL:189 - BankDriver: Customer logged in
+2017-11-11 21:39:54 INFO  GLOBAL:238 - BankDriver: mjsnee tried to withdraw from a Zero Balance Account
+2017-11-11 21:40:05 INFO  GLOBAL:281 - BankDriver: Customer mjsnee deposited $55.0 and now has a balance of $55.0
+2017-11-11 21:40:05 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 21:40:05 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 21:40:10 INFO  GLOBAL:246 - BankDriver: mjsnee attempted to withdraw a negative amount.
+2017-11-11 21:40:19 INFO  GLOBAL:242 - BankDriver: mjsnee attempted to withdraw more than their account balance.
+2017-11-11 21:40:35 INFO  GLOBAL:242 - BankDriver: mjsnee attempted to withdraw more than their account balance.
+2017-11-11 21:41:05 INFO  GLOBAL:252 - BankDriver: mjsnee withdrew $5.0 and now has a balance of $50.0
+2017-11-11 21:41:05 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 21:41:05 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 21:41:34 INFO  GLOBAL:252 - BankDriver: mjsnee withdrew $2.0 and now has a balance of $48.0
+2017-11-11 21:41:34 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 21:41:34 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 21:41:44 INFO  GLOBAL:276 - BankDriver: mjsnee attempted to withdraw a negative amount.
+2017-11-11 21:41:55 INFO  GLOBAL:242 - BankDriver: mjsnee attempted to withdraw more than their account balance.
+2017-11-11 21:43:55 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 21:43:55 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 21:43:55 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 21:43:55 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 21:43:55 INFO  GLOBAL:16 - Main: Starting BankDriver
+2017-11-11 21:43:55 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 21:44:08 INFO  GLOBAL:189 - BankDriver: Customer logged in
+2017-11-11 21:44:17 INFO  GLOBAL:248 - BankDriver: mjsnee attempted to withdraw a negative amount.
+2017-11-11 21:44:23 INFO  GLOBAL:243 - BankDriver: mjsnee attempted to withdraw more than their account balance.
+2017-11-11 21:44:28 INFO  GLOBAL:255 - BankDriver: mjsnee withdrew $48.0 and now has a balance of $0.0
+2017-11-11 21:44:28 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 21:44:28 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 21:44:32 INFO  GLOBAL:238 - BankDriver: mjsnee tried to withdraw from a Zero Balance Account
+2017-11-11 21:44:38 INFO  GLOBAL:284 - BankDriver: Customer mjsnee deposited $456.0 and now has a balance of $456.0
+2017-11-11 21:44:38 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 21:44:38 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 21:45:26 INFO  GLOBAL:279 - BankDriver: mjsnee attempted to withdraw a negative amount.
+2017-11-11 21:45:32 INFO  GLOBAL:248 - BankDriver: mjsnee attempted to withdraw a negative amount.
+2017-11-11 21:45:46 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 21:45:48 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 21:45:48 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-11 21:45:50 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 21:47:45 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-11 21:47:45 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-11 21:47:45 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-11 21:47:45 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-11 21:47:45 INFO  GLOBAL:16 - Main: Starting BankDriver
+2017-11-11 21:47:45 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 21:47:57 INFO  GLOBAL:189 - BankDriver: Customer logged in
+2017-11-11 21:48:03 INFO  GLOBAL:279 - BankDriver: mjsnee attempted to withdraw a negative amount.
+2017-11-11 21:48:09 INFO  GLOBAL:279 - BankDriver: mjsnee attempted to withdraw a negative amount.
+2017-11-11 21:48:12 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 21:48:57 INFO  GLOBAL:202 - BankDriver: Admin null logged in
+2017-11-11 21:49:30 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 21:49:35 INFO  GLOBAL:189 - BankDriver: Customer logged in
+2017-11-11 21:49:38 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 21:49:50 INFO  GLOBAL:202 - BankDriver: Admin Administrator[username= admin1, password= bankAppPW] logged in
+2017-11-11 21:50:00 INFO  GLOBAL:374 - Admin: Administrator[username= admin1, password= bankAppPW] promoted Customer Customer [Blocked= false, firstName=Matt, lastName=Snee, username=mjsnee, password=1234]to admin.
+2017-11-11 21:50:00 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-11 21:50:00 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-11 21:50:03 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-11 21:50:10 INFO  GLOBAL:202 - BankDriver: Admin Administrator[username= admin1, password= bankAppPW] logged in
+2017-11-11 21:50:13 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-13 08:39:31 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-13 08:39:31 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-13 08:39:31 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-13 08:39:31 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-13 08:39:31 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-13 08:39:31 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-13 08:39:31 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-13 08:39:31 INFO  GLOBAL:16 - Main: Starting BankDriver
+2017-11-13 08:39:31 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-13 08:40:08 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-13 08:40:08 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-13 08:40:08 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-13 08:40:08 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-13 08:40:08 INFO  GLOBAL:16 - Main: Starting BankDriver
+2017-11-13 08:40:08 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-13 08:47:45 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-13 08:47:45 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-13 08:47:45 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-13 08:47:45 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-13 08:47:45 INFO  GLOBAL:16 - Main: Starting BankDriver
+2017-11-13 08:47:45 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-13 08:47:58 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-13 08:47:58 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-13 08:47:58 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-13 08:47:58 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-13 08:47:58 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-13 08:47:58 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-13 08:47:58 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-13 08:47:58 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-13 08:47:58 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-13 08:47:58 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-13 08:47:58 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-13 08:47:58 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-13 08:47:58 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-13 08:47:58 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-13 08:47:58 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-13 08:47:58 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-13 08:47:58 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-13 08:47:58 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-13 08:47:58 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-13 08:47:58 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-13 08:47:58 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-13 08:47:58 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-13 08:47:58 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-13 08:47:58 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-13 08:47:58 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-13 08:47:58 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-13 08:47:58 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-13 08:47:58 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-13 08:47:58 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-13 08:47:58 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-13 08:47:58 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-13 08:47:58 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-13 08:47:58 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-13 08:47:58 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-13 10:59:51 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-13 10:59:51 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-13 10:59:51 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-13 10:59:51 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-13 10:59:51 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-13 10:59:51 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-13 10:59:51 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-13 10:59:51 INFO  GLOBAL:16 - Main: Starting BankDriver
+2017-11-13 10:59:51 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-13 11:11:48 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-13 11:11:48 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-13 11:11:48 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-13 11:11:48 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-13 11:11:48 INFO  GLOBAL:16 - Main: Starting BankDriver
+2017-11-13 11:11:48 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-13 11:12:47 INFO  GLOBAL:135 - BankDriver: New Customer mjsnee created.
+2017-11-13 11:12:47 INFO  GLOBAL:137 - BankDriver: New Account 11111112 created.
+2017-11-13 11:12:47 INFO  GLOBAL:139 - BankDriver: mjsnee opened Account 11111112.
+2017-11-13 11:12:47 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-13 11:12:47 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-13 11:12:47 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-13 11:13:06 INFO  GLOBAL:184 - BankDriver: Block User attempted to login
+2017-11-13 11:13:06 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-13 11:13:30 INFO  GLOBAL:202 - BankDriver: Admin null logged in
+2017-11-13 11:13:56 INFO  GLOBAL:343 - BankDriver: Admin Administrator[username= admin1, password= bankAppPW] unblocked Customer mjsnee
+2017-11-13 11:13:56 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-13 11:14:05 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-13 11:14:13 INFO  GLOBAL:189 - BankDriver: Customer logged in
+2017-11-13 11:14:28 INFO  GLOBAL:284 - BankDriver: Customer mjsnee deposited $500.0 and now has a balance of $500.0
+2017-11-13 11:14:28 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-13 11:14:28 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-13 11:14:43 INFO  GLOBAL:243 - BankDriver: mjsnee attempted to withdraw more than their account balance.
+2017-11-13 11:15:03 INFO  GLOBAL:248 - BankDriver: mjsnee attempted to withdraw a negative amount.
+2017-11-13 11:15:18 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-13 11:15:30 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-13 11:15:30 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-13 11:15:30 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-13 11:15:30 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-13 11:15:30 INFO  GLOBAL:16 - Main: Starting BankDriver
+2017-11-13 11:15:30 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-13 11:15:44 INFO  GLOBAL:189 - BankDriver: Customer logged in
+2017-11-13 11:15:59 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-13 11:16:16 INFO  GLOBAL:202 - BankDriver: Admin null logged in
+2017-11-13 11:16:45 INFO  GLOBAL:374 - Admin: Administrator[username= admin1, password= bankAppPW] promoted Customer Customer [Blocked= false, firstName=Matt, lastName=Snee, username=mjsnee, password=1234]to admin.
+2017-11-13 11:16:45 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-13 11:16:45 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-13 11:16:54 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-13 11:17:01 INFO  GLOBAL:202 - BankDriver: Admin Administrator[username= admin1, password= bankAppPW] logged in
+2017-11-13 11:17:07 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-13 11:18:24 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-13 11:18:24 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-13 11:18:24 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-13 11:18:24 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-13 11:18:24 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-13 11:18:24 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-13 11:18:24 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-13 11:18:24 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-13 11:18:24 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-13 11:18:24 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-13 11:18:25 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-13 11:18:25 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-13 11:18:25 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-13 11:18:25 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-13 11:18:25 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-13 11:18:25 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-13 11:18:25 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-13 11:18:25 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-13 11:18:25 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-13 11:18:25 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-13 11:18:25 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-13 11:18:25 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-13 11:18:25 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-13 11:18:25 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-13 11:18:25 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-13 11:18:25 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-13 11:18:25 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-13 11:18:25 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-13 11:18:25 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-13 11:18:25 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-13 11:18:25 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-13 11:18:25 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-13 11:18:25 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-13 11:18:25 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-14 12:59:17 INFO  GLOBAL:115 - Database: Updated customerList
+2017-11-14 12:59:17 INFO  GLOBAL:120 - Database: Updated adminList
+2017-11-14 12:59:17 INFO  GLOBAL:125 - Database: Updated accountList
+2017-11-14 12:59:17 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-14 12:59:17 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-14 12:59:17 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-14 12:59:17 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-14 12:59:17 INFO  GLOBAL:16 - Main: Starting BankDriver
+2017-11-14 12:59:17 INFO  GLOBAL:37 - BankDriver: In Start Menu
+2017-11-14 13:00:44 INFO  GLOBAL:149 - Database: Retrived customerList
+2017-11-14 13:00:44 INFO  GLOBAL:153 - Database: Retrived adminList
+2017-11-14 13:00:44 INFO  GLOBAL:157 - Database: Retrived accountList
+2017-11-14 13:00:44 INFO  GLOBAL:47 - Database: Customer, Admin, and Account Lists successfully deserialized (loaded)
+2017-11-14 13:00:44 INFO  GLOBAL:16 - Main: Starting BankDriver
+2017-11-14 13:00:44 INFO  GLOBAL:37 - BankDriver: In Start Menu

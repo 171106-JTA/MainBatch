@@ -1,0 +1,49 @@
+171129 - In Class Assignment
+
+Make a simple HTML page that takes 2 inputs from a user:
+	-both are numbers
+
+Once submitted, generate fizzbuzz from low number to high number.
+
+Input:
+(2, 17)
+
+output:
+2
+fizz
+4
+buzz
+fizz
+7
+8
+fizz
+buzz
+11
+fizz
+13
+14
+fizzbuzz
+16
+17
+
+-----------------------------------------
+
+(17, 2)
+output:
+
+2
+fizz
+4
+buzz
+fizz
+7
+8
+fizz
+buzz
+11
+fizz
+13
+14
+fizzbuzz
+16
+17
