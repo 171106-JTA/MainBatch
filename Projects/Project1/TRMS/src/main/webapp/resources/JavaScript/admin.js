@@ -51,7 +51,7 @@ function getAllRequests(){
 			
 		}else if(xhr.readyState == 4 && xhr.status != 200){
 			console.log(xhr.status);
-			document.getElementById("AJAXError").innerHTML="Woops";
+			document.getElementById("AllRequestError").innerHTML="Woops";
 		}
 	}
 
@@ -87,7 +87,7 @@ function getAllInfoRequests(){
 			
 		}else if(xhr.readyState == 4 && xhr.status != 200){
 			console.log(xhr.status);
-			document.getElementById("AJAXError").innerHTML="Woops";
+			document.getElementById("AllInfoError").innerHTML="Woops";
 		}
 	}
 
