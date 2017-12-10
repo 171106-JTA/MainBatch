@@ -1,5 +1,6 @@
 package com.banana.bean;
 
+//Employee Beans
 public class Employee {
 	private String username;
 	private String password;

@@ -16,6 +16,14 @@ import com.banana.util.ConnectionUtil;
 
 public class EmployeeDAOImpl implements EmployeeDAO{
 	
+	/**
+	 * The method gets the Employee data from the Database by username
+	 * With the data, a new Employee object is created
+	 * 
+	 * @param username This is the username to search for
+	 * 
+	 * @return Employee object if username is found in database, else null
+	 */
 	@Override
 	public Employee getEmployeeByUsername(String username) {
 		Employee emp = null;
@@ -41,6 +49,16 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 		return emp;
 	}
 	
+	/**
+	 * This method creates an Employee object from data received
+	 * from the database
+	 * It uses the employee id to identify the Employee
+	 * 
+	 * @param empId the employee's id
+	 * 
+	 * @return Employee object if employee is found, otherwise null
+	 * 
+	 */
 	@Override
 	public Employee getEmployeeById(int empId) {
 		Employee emp = null;
@@ -66,6 +84,14 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 		return emp;
 	}
 	
+	/**
+	 * This method gets the Employee id from a particular request
+	 * 
+	 * @param rrId ReimbursementRequest id
+	 * 
+	 * @return int the employee id associated with the request, or 0 otherwise
+	 * 
+	 */
 	@Override
 	public int getEmployeeIdFromRequest(int rrId) {
 		int empId = 0;
@@ -91,6 +117,15 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 		return empId;
 	}
 	
+	/**
+	 * The method gets all information requests associated 
+	 * with a particular employee
+	 * 
+	 * @param requesteeId the id of the employee in question
+	 * 
+	 * @return List<InfoRequest> a list of InfoRequests to be displayed
+	 * 
+	 */
 	@Override
 	public List<InfoRequest> getInfoRequests(int requesteeId) {
 		List<InfoRequest> irList = new ArrayList<>();
@@ -123,6 +158,12 @@ public class EmployeeDAOImpl implements EmployeeDAO{
 		return irList;
 	}
 	
+	/**
+	 * This method gets all available InfoRequests from the database
+	 * 
+	 * @return List<InfoRequest> list of all info requests from all employees
+	 * 
+	 */
 	@Override
 	public List<InfoRequest> getAllInfoRequests() {
 		List<InfoRequest> irList = new ArrayList<>();

@@ -14,6 +14,15 @@ import com.banana.util.ConnectionUtil;
 
 public class ReimbursementDAOImpl implements ReimbursementDAO{
 	
+	/**
+	 * This method creates a ReimburseRequest from database information
+	 * A ReimburseRequest id is used to identify the request
+	 * 
+	 * @param rrId This parameter represents the id of the ReimburseRequest
+	 * 
+	 * @return ReimburseRequest object if the record is found, otherwise null
+	 * 
+	 */
 	@Override
 	public ReimburseRequest getSingleRequest(int rrId) {
 		ReimburseRequest rr = null;
@@ -40,6 +49,14 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 		return rr;
 	}
 	
+	/**
+	 * This method creates a list of requests from an employee
+	 * 
+	 * @param empId This is used as the identifier to get requests
+	 * 
+	 * @return List<ReimburseRequest> list of request from an employee
+	 * 
+	 */
 	@Override
 	public List<ReimburseRequest> getEmployeeRequests(int empId) {
 		List<ReimburseRequest> rrList = new ArrayList<>();
@@ -49,7 +66,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 		ResultSet rs = null;
 		int rrId = 0;
 		String status = "PENDING";
-		System.out.println(empId + "emp");
+		
 		try(Connection conn = ConnectionUtil.getConnection()){
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, empId);
@@ -76,6 +93,12 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 		return rrList;
 	}
 	
+	/**
+	 * This method gets all ReimburseRequests from the database for admins
+	 * 
+	 * @return List<ReimburseRequest> list of all reimbursement requests
+	 * 
+	 */
 	@Override
 	public List<ReimburseRequest> getAllRequests() {
 		List<ReimburseRequest> rrList = new ArrayList<>();
@@ -110,6 +133,15 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 		return rrList;
 	}
 	
+	/**
+	 * This method derives the status a request from 3 fields: 
+	 * the direct supervisor signature, BenCo signature, 
+	 * and direct head signature
+	 * 
+	 * @param rrId The id of the request record
+	 * 
+	 * @return the status of the request as a string
+	 */
 	private String getStatus(int rrId) {
 		String status = "PENDING";
 		String sql = "SELECT * FROM Reimburse_Request WHERE RRID = ?";
@@ -134,7 +166,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 					status = "DENIED";
 				}
 				
-				if(benCo == 1) {
+				if(benCo > 0) {
 					status = "APPROVED";
 				}
 			}
