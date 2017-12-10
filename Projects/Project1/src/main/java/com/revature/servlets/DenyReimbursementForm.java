@@ -42,7 +42,7 @@ public class DenyReimbursementForm extends HttpServlet {
 		TrmsDaoImplement dao = new TrmsDaoImplement();
 		dao.denyReimbursement(reimbursementID, reason_for_denial);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("DH_denial_success.html");
+		RequestDispatcher rd = request.getRequestDispatcher("denial_success.html");
 		rd.forward(request, response);
 	}
 }
