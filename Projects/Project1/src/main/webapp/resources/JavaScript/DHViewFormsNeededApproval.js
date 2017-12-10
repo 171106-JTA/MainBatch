@@ -71,7 +71,7 @@ $(document).ready(function() {
 	        	{ 
 	        		reimbursementID : data[0],
 	        		approvalByDirectSupervisor : data[8],
-	        		approvalByDepartmentHead: 1, //data[9] 
+	        		approvalByDepartmentHead: data[9], 
 	        		approvalByBenCo : data[10]
 	        	});
 	        

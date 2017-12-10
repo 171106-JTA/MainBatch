@@ -5,6 +5,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.revature.dao.TrmsDaoImplement;
 
@@ -36,6 +37,19 @@ public class UpdateFormApproval extends HttpServlet {
 		int approvalByDirectSupervisor = Integer.parseInt(request.getParameter("approvalByDirectSupervisor"));
 		int approvalByDepartmentHead = Integer.parseInt(request.getParameter("approvalByDepartmentHead"));
 		int approvalByBenCo = Integer.parseInt(request.getParameter("approvalByBenCo"));
+		
+		HttpSession session = request.getSession();
+		String permission = (String) session.getAttribute("permission");
+		System.out.println("permission: " + permission);
+		
+		if(permission.equals("approval_by_direct_supervisor")) {
+			approvalByDirectSupervisor = 1;
+		} else if(permission.equals("approval_by_department_head")) {
+			approvalByDepartmentHead = 1;
+		} else if(permission.equals("approval_by_benco")) {
+			approvalByBenCo = 1;
+		}
+		
 		
 		TrmsDaoImplement dao = new TrmsDaoImplement();
 		dao.updateFormApproval(
