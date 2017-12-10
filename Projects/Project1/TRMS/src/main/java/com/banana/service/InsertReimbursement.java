@@ -14,6 +14,7 @@ import com.banana.bean.Employee;
 import com.banana.bean.ReimburseRequest;
 import com.banana.dao.EmployeeDAOImpl;
 import com.banana.dao.UpdateDAOImpl;
+import com.revature.log.Logging;
 
 public class InsertReimbursement {
 	
@@ -36,8 +37,6 @@ public class InsertReimbursement {
 		String descript = request.getParameter("description");
 		double cost = Double.parseDouble(request.getParameter("cost"));
 		
-		System.out.println(request.getParameter("grading") + " mid " + request.getParameter("event"));
-		
 		int grading = Integer.parseInt(request.getParameter("grading"));
 		int event = Integer.parseInt(request.getParameter("event"));
 		
@@ -55,9 +54,11 @@ public class InsertReimbursement {
 		rr = new ReimburseRequest(empId, fname, lname, location, descript, actualCost, grading, event, justify, ldt);
 		
 		if(udao.submitRequest(rr)) {
-			UpdateEmployeeAmount.updateAmount(empId, cost);
+			Logging.startLogging(session.getAttribute("username") + " has submitted a request");
 			return true;
 		}
+		
+		Logging.startLogging(session.getAttribute("username") + " had an issue submitting a request");
 		
 		return false;
 	

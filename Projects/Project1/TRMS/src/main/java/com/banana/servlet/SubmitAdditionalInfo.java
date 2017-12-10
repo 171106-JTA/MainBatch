@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -33,6 +34,7 @@ public class SubmitAdditionalInfo extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		RequestDispatcher rd = request.getRequestDispatcher("EmployeePage.html");
 		
 		try {
 			Part file = request.getPart("addedfile");
@@ -49,7 +51,7 @@ public class SubmitAdditionalInfo extends HttpServlet {
 		}finally {
 			
 		}
-
+		rd.include(request, response);
 	}
 
 }

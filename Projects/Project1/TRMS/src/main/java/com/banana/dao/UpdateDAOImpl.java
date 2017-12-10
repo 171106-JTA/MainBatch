@@ -48,7 +48,7 @@ public class UpdateDAOImpl implements UpdateDAO{
 	}
 	
 	@Override
-	public boolean updateRequestApproval(int roleId, int rrId, int decision) {
+	public boolean updateRequestApproval(int roleId, int rrId, int decision, int approverId) {
 		String sql = null;
 		
 		if(roleId == 1) {
@@ -68,7 +68,12 @@ public class UpdateDAOImpl implements UpdateDAO{
 		
 		try(Connection conn = ConnectionUtil.getConnection()){
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, decision);
+			if(decision == -1) {
+				ps.setInt(1, decision);
+			}
+			else{
+				ps.setInt(1, approverId);
+			}
 			ps.setInt(2, rrId);
 			
 			ps.executeQuery();
@@ -108,12 +113,13 @@ public class UpdateDAOImpl implements UpdateDAO{
 		String sql = "Update Info_Request SET  ADDITIONAL_INFO = ?, MEDIA = ?, FILENAME = ?" +
 				"WHERE irId = ?";
 		PreparedStatement ps = null;
-	
+		
 		try(Connection conn = ConnectionUtil.getConnection()){
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, additionInfo);
 			try {
 				ps.setBlob(2, file.getInputStream());
+				System.out.println(file.getHeader("content-Type"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

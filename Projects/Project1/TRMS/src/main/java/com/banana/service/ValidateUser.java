@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.banana.bean.Employee;
 import com.banana.dao.EmployeeDAOImpl;
+import com.revature.log.Logging;
 
 public class ValidateUser {
 	public static Employee validate(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
@@ -24,6 +25,7 @@ public class ValidateUser {
 				return emp;
 			}
 		}
+		Logging.startLogging(requestUsername + " has attempted to login");
 		return null;
 	}
 }

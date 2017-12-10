@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.banana.bean.ReimburseRequest;
 import com.banana.dao.EmployeeDAOImpl;
 import com.banana.dao.ReimbursementDAOImpl;
+import com.revature.log.Logging;
 
 public class GetEmployeeData {
 	
@@ -32,9 +33,10 @@ public class GetEmployeeData {
 			responseXML += "</root>";
 			
 			out.println(responseXML);
+			Logging.startLogging("Reimbursement requests of " + empId + "had been requested");
 		}
 		else {
-			System.out.println("Empty");
+			Logging.startLogging("No requests for " + empId);
 			out.println("<root></root>");
 		}
 		
@@ -65,6 +67,7 @@ public class GetEmployeeData {
 			out.println(responseXML);
 		}
 		else {
+			Logging.startLogging("No requests found");
 			out.println("<root></root>");
 		}
 		

@@ -43,8 +43,9 @@ public class ApproveRequest extends HttpServlet {
 			int roleId = (Integer)session.getAttribute("role");
 			int rrId = Integer.parseInt(request.getParameter("rrId"));
 			int decision = Integer.parseInt(request.getParameter("decision"));
+			int empId = (Integer)session.getAttribute("empId");
 			
-			if(ApproveReimbursement.approve(roleId, rrId, decision)) {
+			if(ApproveReimbursement.approve(roleId, rrId, decision, empId)) {
 				out.println("Changed");
 			}
 			else {

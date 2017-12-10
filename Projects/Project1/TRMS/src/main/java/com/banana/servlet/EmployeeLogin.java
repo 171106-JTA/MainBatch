@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.banana.bean.Employee;
 import com.banana.service.ValidateUser;
+import com.revature.log.Logging;
 
 /**
  * Servlet implementation class UserAuthentication
@@ -37,9 +38,11 @@ public class EmployeeLogin extends HttpServlet {
 		if(emp != null) {
 			if(emp.getRoleId() == 0) {
 				rd = request.getRequestDispatcher("EmployeePage.html");
+				Logging.startLogging(emp.getUsername() + " has logged in as Employee");
 			}
 			else {
 				rd = request.getRequestDispatcher("AdminPage.html");
+				Logging.startLogging(emp.getUsername() + " has ogged in as Admin");
 			}
 			
 			rd.forward(request, response);
@@ -49,6 +52,7 @@ public class EmployeeLogin extends HttpServlet {
 			out.println("alert('Wrong Credentials');");
 			out.println("</script>");
 			rd = request.getRequestDispatcher("index.html");
+			Logging.startLogging("Login has failed");
 			rd.include(request, response);
 		}
 	}

@@ -10,6 +10,7 @@ import javax.servlet.http.Part;
 import com.banana.bean.InfoRequest;
 import com.banana.dao.EmployeeDAOImpl;
 import com.banana.dao.UpdateDAOImpl;
+import com.revature.log.Logging;
 
 public class InfoRequestManipulation {
 	public static void insert(int rrId) {
@@ -22,6 +23,7 @@ public class InfoRequestManipulation {
 	public static void update(int irId, Part part, String addedinfo) {
 		UpdateDAOImpl udao = new UpdateDAOImpl();
 		udao.updateInfoRequest(irId, addedinfo, part);
+		Logging.startLogging("Information Request: " + irId + " has been updated");
 	}
 	
 	public static void getInfoRequests(HttpServletResponse response, int requesteeId) throws IOException{
@@ -43,9 +45,10 @@ public class InfoRequestManipulation {
 			responseXML += "</root>";
 			
 			out.println(responseXML);
+			Logging.startLogging("Info requests for " + requesteeId + " has been requested");
 		}
 		else {
-			System.out.println("Empty");
+			Logging.startLogging("No info requests present for " + requesteeId);
 			out.println("<root></root>");
 		}
 		
@@ -73,9 +76,10 @@ public class InfoRequestManipulation {
 			responseXML += "</root>";
 			
 			out.println(responseXML);
+			Logging.startLogging("Info requests Requested");
 		}
 		else {
-			System.out.println("Empty");
+			Logging.startLogging("No info requests present");
 			out.println("<root></root>");
 		}
 		
