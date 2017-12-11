@@ -41,3 +41,16 @@ textarea.form-control {
     min-height: 140px;
 }
 
+
+table {
+    margin-bottom: 150px;
+}
+
+table > caption > h2 {
+    text-align: center;
+}
+
+.glyphicon-alert {
+    color: red;
+}
+

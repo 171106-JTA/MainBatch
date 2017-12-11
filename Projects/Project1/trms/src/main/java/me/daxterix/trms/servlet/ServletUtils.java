@@ -35,7 +35,11 @@ public class ServletUtils {
         builder.add("status", req.getStatus().getStatus());
         builder.add("cost", req.getEventCost());
         builder.add("funding", req.getFunding());
-        builder.add("description", req.getDescription());
+
+        if (req.getDescription() != null)
+            builder.add("description", req.getDescription());
+        else
+            builder.addNull("description");
 
         EventGrade grade = req.getGrade();
         if (grade == null)

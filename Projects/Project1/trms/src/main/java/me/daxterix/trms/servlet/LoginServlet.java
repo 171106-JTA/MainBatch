@@ -3,9 +3,6 @@ package me.daxterix.trms.servlet;
 import me.daxterix.trms.model.Employee;
 import me.daxterix.trms.service.AuthenticationService;
 
-import javax.json.Json;
-import javax.json.JsonArray;
-import javax.json.JsonArrayBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -19,11 +16,8 @@ import java.io.PrintWriter;
 @MultipartConfig
 @WebServlet(name="LoginServlet", urlPatterns="/login")
 public class LoginServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
-    }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();

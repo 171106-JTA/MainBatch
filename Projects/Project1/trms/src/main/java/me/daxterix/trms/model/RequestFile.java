@@ -21,7 +21,7 @@ public class RequestFile implements Serializable {
     @JoinColumn(name="file_purpose", foreignKey=@ForeignKey(name="fk_file_purpose"))
     private FilePurpose purpose;
 
-    @Column(name="file_name", length=50)
+    @Column(name="file_name", length=255)
     private String name;
 
     @ManyToOne(fetch = FetchType.EAGER)

@@ -9,7 +9,10 @@ import {Router} from "@angular/router";
 })
 export class NavComponent {
 
+    public credentials: CredentialsService;
+
     constructor(private credentialsService: CredentialsService, private router: Router) {
+        this.credentials = credentialsService;
     }
 
     public logout($event) {

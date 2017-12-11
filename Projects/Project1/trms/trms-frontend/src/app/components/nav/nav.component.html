@@ -4,7 +4,7 @@
 <nav class="navbar navbar-default navbar-fixed-top">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
-            <a routerLink="home" class="navbar-brand"><img src="../../../favicon.ico"></a>
+            <a routerLink="requests" class="navbar-brand"><img src="../../../favicon.ico"></a>
             <button type="button" class="navbar-toggle" data-toggle="collapse"
                     data-target="#my-nav-collapse-pane">
                 <span class="sr-only">Toggle navigation</span>
@@ -25,22 +25,16 @@
                         <li class="divider"></li>
                         <li><a routerLink="new-request">File New</a></li>
                         <li class="divider"></li>
-                        <li><a routerLink="requests-pending-on-me">Pending on Me</a></li>
-                        <li class="divider"></li>
-                        <li><a routerLink="home">Activity</a></li>
+                        <li><a routerLink="requests">Activity</a></li>
                         <li class="divider"></li>
                     </ul>
                 </li>
-
-                <li><a routerLink="/register">Register</a></li>
-                <li><a routerLink="/login">Login</a></li>
-
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Options <b
                         class="glyphicon glyphicon-cog"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a routerLink="edit-account">Edit account</a></li>
+                        <li><a routerLink="requests">Edit account</a></li>
                         <li class="divider"></li>
                         <li><a class="a" (click)="logout($event)">Logout</a></li>
                         <li class="divider"></li>

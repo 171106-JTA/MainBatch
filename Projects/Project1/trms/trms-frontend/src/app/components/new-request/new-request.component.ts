@@ -68,6 +68,11 @@ export class NewRequestComponent {
             formData.append('eventFile', this.eventFile, this.eventFileName);
             formData.append('eventFileName', this.eventFileName);
             formData.append('eventFileMimeType', this.eventFileMimeType);
+
+            let eventType: string = this.newRequestForm.get('eventType').value;
+            if (eventType === '')
+                eventType = this.eventTypes[0];
+            formData.set('eventType', eventType);   // FormData.append doesn't overwrite if already exists
         }
 
 

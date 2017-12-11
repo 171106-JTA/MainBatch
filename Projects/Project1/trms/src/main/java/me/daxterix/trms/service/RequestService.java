@@ -25,18 +25,18 @@ public class RequestService {
      * @param requestFile
      * @return
      */
-    public static void addRequestFile(ReimbursementRequest request, RequestFile requestFile) throws DuplicateIdException {
+    public static void addRequestFile(ReimbursementRequest request, RequestFile requestFile) throws DuplicateIdException, NonExistentIdException {
         if (requestFile.getPurpose().getPurpose().equals(FilePurpose.APPROVAL_EMAIL)) {
             switch (request.getStatus().getStatus()) {
                 case RequestStatus.AWAITING_SUPERVISOR:
                     request.setStatus(new RequestStatus(RequestStatus.AWAITING_DEPT_HEAD));
+                    break;
                 case RequestStatus.AWAITING_DEPT_HEAD:
                     request.setStatus(new RequestStatus(RequestStatus.AWAITING_BENCO));
-                case RequestStatus.AWAITING_BENCO:
-                    request.setStatus(new RequestStatus(RequestStatus.AWAITING_GRADE));
+                    break;
             }
             requestFile.setRequest(request);
-            infoDao.saveFile(requestFile);
+            requestDao.update(request);
         }
         // todo: polish, add grade
         else if (requestFile.getPurpose().getPurpose().equals(FilePurpose.GRADE_DOCUMENT) &&

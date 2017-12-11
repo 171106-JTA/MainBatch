@@ -16,12 +16,21 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @MultipartConfig
-@WebServlet(name="UpdateRequest", urlPatterns="/employee/updateRequest")
+@WebServlet(name = "UpdateRequest", urlPatterns = "/employee/updateRequest")
 public class UpdateRequestServlet extends HttpServlet {
 
     private RequestDAO requestDao = DAOUtils.getRequestDAO();
 
-    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    /**
+     * handles requests to update a request record. Deals with approval status updates,
+     * as well as the other attributes
+     *
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String idString = request.getParameter("id");
 
         String address = request.getParameter("eventAddress");
@@ -43,13 +52,11 @@ public class UpdateRequestServlet extends HttpServlet {
         try {
             ReimbursementRequest theRequest = requestDao.getRequestById(Long.parseLong(idString));
 
-            if (isDenial) {
+            if (isDenial)
                 RequestService.doDenial(response, emp, theRequest, denialReason);
-            }
-            else if (isApproval) {
+            else if (isApproval)
                 RequestService.doApproval(response, emp, theRequest,
                         approvalAmount != null ? Float.parseFloat(approvalAmount) : null);
-            }
             else {
                 theRequest.getAddress().setAddress(address);
                 theRequest.getAddress().setCity(city);
@@ -57,36 +64,16 @@ public class UpdateRequestServlet extends HttpServlet {
                 theRequest.getAddress().setZip(zip);
                 theRequest.setDescription(description);
                 requestDao.update(theRequest);
+                out.print(ServletUtils.requestToJson(theRequest));
             }
-
         } catch (NonExistentIdException | DuplicateIdException e) {
             e.printStackTrace();
+            response.setStatus(400);
             out.print("Oops! Duplicate or nonexistent id encountered.");
-        }
-        out.print("error adding new request");
-    }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String idString = request.getParameter("id");
-        String fileName = request.getParameter("eventFileName");
-        String mimeType = request.getParameter("eventFileMimeType");
-        String filePurpose = request.getParameter("eventFilePurpose");
-        PrintWriter out = response.getWriter();
-        try {
-            Part filePart = request.getPart("eventFile");
-            if (filePart != null) {
-                ReimbursementRequest theRequest = requestDao.getRequestById(Long.parseLong(idString));
-                RequestFile requestFile = ServletUtils.readUploadIntoRequestFile(filePart, fileName, mimeType, filePurpose);
-                RequestService.addRequestFile(theRequest, requestFile);
-                response.getWriter().print(ServletUtils.requestToJson(theRequest));
-            }
-        } catch (NonExistentIdException | DuplicateIdException e){
-            out.print("encountered non existent or duplicate id");
-
         } catch (NumberFormatException e) {
-            out.print("invalid request id");
+            response.setStatus(400);
+            out.print("Invalid id");
         }
-
     }
 
 }

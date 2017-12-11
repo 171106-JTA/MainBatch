@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class FilePurpose implements Serializable{
     public static final String APPROVAL_EMAIL = "Approval Email";
     public static final String GRADE_DOCUMENT = "Grade Document";
-     public static final String EVENT_INFO = "Event information";
+     public static final String EVENT_INFO = "Event Information";
 
     @Id
     @Column(name="file_purpose", length=50)

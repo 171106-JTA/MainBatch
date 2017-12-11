@@ -8,9 +8,10 @@ import {RequestFile} from "../../models/request-file";
 import {DatePipe} from "@angular/common";
 import {Employee} from "../../models/employee";
 import {CredentialsService} from "../../services/credentials.service";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 
 const updateRequestUrl = 'http://localhost:8085/trms/employee/updateRequest';
+const requestFileUrl = 'http://localhost:8085/trms/employee/requestFile';
 
 
 @Component({
@@ -31,11 +32,11 @@ export class RequestDetailsComponent {
     request: ReimbursementRequest = null;
 
     employee: Employee = null;
-    canApprove: boolean = null;
-    canUpdate: boolean = null;
+    canApprove: boolean = false;
+    canUpdate: boolean = false;
 
     newFileForm: FormGroup = new FormGroup({
-        filePurpose: new FormControl('', Validators.required),
+        eventFilePurpose: new FormControl('', Validators.required),
         eventFile: new FormControl('', Validators.required)
     });
 
@@ -147,10 +148,9 @@ export class RequestDetailsComponent {
         formData.append('id', ''+this.request.id);
 
         const httpOptions = {
-            headers: new HttpHeaders({'Content-Type': 'application/json'}),
             withCredentials: true,
         };
-        this.http.put<ReimbursementRequest>(updateRequestUrl, formData, httpOptions).subscribe(
+        this.http.post<ReimbursementRequest>(updateRequestUrl, formData, httpOptions).subscribe(
             data => {
                 console.log(data);
                 this.request = new ReimbursementRequest(data);
@@ -167,10 +167,9 @@ export class RequestDetailsComponent {
         formData.append('approvalAmount', this.updateRequestForm.get('eventFunding').value);
 
         const httpOptions = {
-            headers: new HttpHeaders({'Content-Type': 'application/json'}),
             withCredentials: true,
         };
-        this.http.put<ReimbursementRequest>(updateRequestUrl, formData, httpOptions).subscribe(
+        this.http.post<ReimbursementRequest>(updateRequestUrl, formData, httpOptions).subscribe(
             data => {
                 console.log(data);
                 this.request = new ReimbursementRequest(data);
@@ -189,11 +188,9 @@ export class RequestDetailsComponent {
         formData.append('denialReason', "no reason provided; todo: fix this");
 
         const httpOptions = {
-            headers: new HttpHeaders({'Content-Type': 'application/json'}),
             withCredentials: true,
         };
-        // -- do http post here
-        this.http.put<ReimbursementRequest>(updateRequestUrl, formData, httpOptions).subscribe(
+        this.http.post<ReimbursementRequest>(updateRequestUrl, formData, httpOptions).subscribe(
             data => {
                 console.log(data);
                 this.request = new ReimbursementRequest(data);
@@ -211,7 +208,11 @@ export class RequestDetailsComponent {
             formData.append('eventFile', this.eventFile, this.eventFileName);
             formData.append('eventFileName', this.eventFileName);
             formData.append('eventFileMimeType', this.eventFileMimeType);
-            formData.append('eventFilePurpose', this.newFileForm.get('filePurpose').value);
+
+            let filePurpose: string = this.newFileForm.get('eventFilePurpose').value;
+            if (filePurpose == '')
+                filePurpose = this.filePurposes[0];
+            formData.set('eventFilePurpose', filePurpose);   // use set to overwrite
             formData.append('id', ''+this.request.id);
 
             let xhr = new XMLHttpRequest();
@@ -220,7 +221,7 @@ export class RequestDetailsComponent {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     console.log(xhr.response);
                     let data = JSON.parse(xhr.response);
-                    this.router.navigate([`/requests/${data.id}`]) // todo
+                    this.router.navigate([`/requests/${data.id}`])
                 }
                 else
                     console.warn(xhr.response);
@@ -228,7 +229,7 @@ export class RequestDetailsComponent {
             xhr.upload.onprogress = (event) => {
                 let progress = Math.round(event.loaded / event.total * 100);
             };
-            xhr.open('POST', updateRequestUrl, true);
+            xhr.open('POST', requestFileUrl, true);
             xhr.send(formData);
         }
     }

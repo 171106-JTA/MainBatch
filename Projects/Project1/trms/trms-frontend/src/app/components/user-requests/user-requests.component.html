@@ -1,5 +1,7 @@
+<app-requests [requests]="filedRequests" [tableTitle]="'My Filed Requests'"></app-requests>
 
-<app-requests [requests]="filedRequests"></app-requests>
-<app-requests *ngIf="isBenco" [requests]="allRequests"></app-requests>
-<app-requests *ngIf="isDeptHead" [requests]="departmentRequests"></app-requests>
+<app-requests [requests]="waitingOnMe" [tableTitle]="'Waiting For Me'"></app-requests>
 
+<app-requests *ngIf="isDeptHead" [requests]="departmentRequests" [tableTitle]="'Department Wide Requests'"></app-requests>
+
+<app-requests *ngIf="isBenco" [requests]="allRequests" [tableTitle]="'Company Wide Requests'"></app-requests>

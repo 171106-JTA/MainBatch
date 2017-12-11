@@ -4,13 +4,12 @@ import {ReimbursementRequest} from '../../models/reimbursement-request';
 import {CredentialsService} from "../../services/credentials.service";
 import {Router} from "@angular/router";
 
+
 @Component({
     selector: 'app-user-requests',
     templateUrl: 'user-requests.component.html',
     styleUrls: ['user-requests.component.css']
 })
-
-
 export class UserRequestsComponent {
     filedRequests: ReimbursementRequest[] = null;
     allRequests: ReimbursementRequest[] = null;

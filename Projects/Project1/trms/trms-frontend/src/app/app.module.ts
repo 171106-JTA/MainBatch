@@ -19,6 +19,7 @@ import {RequestsComponent} from './components/requests/requests.component';
 import {UserRequestsComponent} from './components/user-requests/user-requests.component';
 import { RequestDetailsComponent } from './components/request-details/request-details.component';
 import {DatePipe} from "@angular/common";
+import { FilesComponent } from './components/files-component/files-component.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {DatePipe} from "@angular/common";
         NewRequestComponent,
         RequestsComponent,
         UserRequestsComponent,
-        RequestDetailsComponent
+        RequestDetailsComponent,
+        FilesComponent
     ],
     imports: [
         BrowserModule,

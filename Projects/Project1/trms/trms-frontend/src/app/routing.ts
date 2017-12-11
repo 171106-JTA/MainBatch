@@ -5,6 +5,7 @@ import {LoginComponent} from './components/login/login.component';
 import {NewRequestComponent} from './components/new-request/new-request.component';
 import {UserRequestsComponent} from './components/user-requests/user-requests.component';
 import {RequestDetailsComponent} from "./components/request-details/request-details.component";
+import {FilesComponent} from "./components/files-component/files-component.component";
 
 export const appRoutes: Routes = [
     {
@@ -31,6 +32,10 @@ export const appRoutes: Routes = [
     {
         path: 'requests/:id',
         component: RequestDetailsComponent
+    },
+    {
+        path: 'files',
+        component: FilesComponent
     },
     {
         path: '**',
