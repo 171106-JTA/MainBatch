@@ -28,7 +28,7 @@ public class ServletUtils {
         return arrBuilder.build();
     }
 
-    private static JsonObject requestToJson(ReimbursementRequest req) {
+    public static JsonObject requestToJson(ReimbursementRequest req) {
         JsonObjectBuilder builder = Json.createObjectBuilder();
         builder.add("id", req.getId());
         builder.add("filerEmail", req.getFiler().getEmail());
@@ -49,9 +49,11 @@ public class ServletUtils {
         else
             builder.addNull("isUrgent");
 
-        builder.add("timeFiled", req.getTimeFiled().toString());
-        builder.add("eventStart", req.getEventStart().toString());
-        builder.add("eventEnd", req.getEventEnd().toString());
+        builder.add("address", addressToJson(req.getAddress()));
+
+        builder.add("timeFiled", dateTimeToJson(req.getTimeFiled()));
+        builder.add("eventStart", dateTimeToJson(req.getEventStart()));
+        builder.add("eventEnd", dateTimeToJson(req.getEventEnd()));
 
         builder.add("exceedsFunds", req.isExceedsFunds());
         builder.add("eventType", req.getEventType().getType());
@@ -61,13 +63,13 @@ public class ServletUtils {
     public static JsonObject addressToJson(Address address) {
         JsonObjectBuilder builder = Json.createObjectBuilder();
         builder.add("address", address.getAddress());
-        builder.add("city", address.getAddress());
-        builder.add("state", address.getAddress());
-        builder.add("zip", address.getAddress());
+        builder.add("city", address.getCity());
+        builder.add("state", address.getState());
+        builder.add("zip", address.getZip());
         return builder.build();
     }
 
-    public static JsonObject dateTimeToJsonObject(LocalDateTime date) {
+    public static JsonObject dateTimeToJson(LocalDateTime date) {
         JsonObjectBuilder builder = Json.createObjectBuilder();
         builder.add("year", date.getYear());
         builder.add("month", date.getMonthValue());
@@ -79,9 +81,9 @@ public class ServletUtils {
     }
 
 
-    public static JsonObject dateTimeToJsonObject(LocalDate date) {
+    public static JsonObject dateTimeToJson(LocalDate date) {
         LocalDateTime dateTime = LocalDateTime.of(date, LocalTime.of(0, 0, 0));
-        return dateTimeToJsonObject(dateTime);
+        return dateTimeToJson(dateTime);
     }
 
     public static JsonObject employeeToJson(Employee emp) {
@@ -90,7 +92,7 @@ public class ServletUtils {
         EmployeeInfo info = emp.getAccount().getInfo();
         if (info != null) {
             builder.add("address", addressToJson(emp.getAccount().getInfo().getAddress()));
-            builder.add("birthday", dateTimeToJsonObject(emp.getAccount().getInfo().getBirthday()));
+            builder.add("birthday", dateTimeToJson(emp.getAccount().getInfo().getBirthday()));
         }
         else {
             builder.addNull("address");
@@ -102,10 +104,15 @@ public class ServletUtils {
         if (emp.getSupervisor() != null)
             builder.add("supervisorEmail", emp.getSupervisor().getEmail());
         else builder.addNull("supervisorEmail");
+
         builder.add("availableFunds", emp.getAvailableFunds());
         builder.add("firstname", emp.getFirstname());
         builder.add("lastname", emp.getLastname());
-        builder.add("department", emp.getDepartment().getName());
+
+        if (emp.getDepartment() != null)
+            builder.add("department", emp.getDepartment().getName());
+        else builder.addNull("department");
+
         return builder.build();
     }
 

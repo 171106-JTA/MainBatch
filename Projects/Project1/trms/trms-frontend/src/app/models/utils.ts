@@ -3,7 +3,7 @@ export class Utils {
         if (dateJson === null || dateJson === undefined)
             return null;
         let res = new Date();
-        res.setFullYear(dateJson.year, dateJson.month, dateJson.date);
+        res.setFullYear(dateJson.year, dateJson.month, dateJson.day);
         res.setHours(dateJson.hour, dateJson.minute, dateJson.second);
         return res;
     }
@@ -12,7 +12,7 @@ export class Utils {
         if (input === null || input === undefined)
             return null;
         let res = new Date();
-        res.setFullYear(input.year, input.month, input.date);
+        res.setFullYear(input.year, input.month, input.day);
         res.setHours(0, 0, 0);
         return res;
     }

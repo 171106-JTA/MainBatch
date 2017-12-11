@@ -58,7 +58,7 @@ public class EmployeeDAOImpl extends ObjectDAO implements EmployeeDAO {
     }
 
     @Override
-    @Transactional  // todo: test thoroughly; note order of deletion is (very) important
+    @Transactional
     public void deleteAccount(String email) throws NonExistentIdException {
         try (Session session = sessionFactory.openSession()) {
             session.getTransaction().begin();

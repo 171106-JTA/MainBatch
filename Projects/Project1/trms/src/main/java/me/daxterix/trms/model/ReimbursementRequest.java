@@ -23,7 +23,7 @@ public class ReimbursementRequest implements Serializable {
     @GeneratedValue(strategy=GenerationType.AUTO, generator="trig_seq_req")
     private long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="filer_email",foreignKey=@ForeignKey(name="fk_req_emp"))
     private Employee filer;
 
@@ -31,7 +31,7 @@ public class ReimbursementRequest implements Serializable {
     @JoinColumn(name="event_type",foreignKey=@ForeignKey(name="fk_req_type"))
     private EventType eventType;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinColumn(name="addr_id", foreignKey=@ForeignKey(name="fk_req_addr"))
     private Address address;
 

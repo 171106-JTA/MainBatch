@@ -4,6 +4,7 @@ import {RegisterComponent} from './components/register/register.component';
 import {LoginComponent} from './components/login/login.component';
 import {NewRequestComponent} from './components/new-request/new-request.component';
 import {UserRequestsComponent} from './components/user-requests/user-requests.component';
+import {RequestDetailsComponent} from "./components/request-details/request-details.component";
 
 export const appRoutes: Routes = [
     {
@@ -24,7 +25,12 @@ export const appRoutes: Routes = [
     },
     {
         path: 'requests',
-        component: UserRequestsComponent
+        component: UserRequestsComponent,
+        pathMatch: 'full'
+    },
+    {
+        path: 'requests/:id',
+        component: RequestDetailsComponent
     },
     {
         path: '**',

@@ -16,9 +16,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
 @MultipartConfig
-@WebServlet(name = "NewRequestServlet", urlPatterns="/employee/newRequest")
+@WebServlet(name = "NewRequestServlet", urlPatterns = "/employee/newRequest")
 public class NewRequestServlet extends HttpServlet {
-    private static final long serialVersionUID = 1957120628249070345L;
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String type = request.getParameter("eventType");
@@ -32,7 +31,7 @@ public class NewRequestServlet extends HttpServlet {
         String endDateStr = request.getParameter("eventEndDate");
 
         ReimbursementRequest newRequest = new ReimbursementRequest();
-        Employee emp = (Employee)request.getAttribute("employee");    // set by authentication filter
+        Employee emp = (Employee) request.getAttribute("employee");    // set by authentication filter
         newRequest.setFiler(emp);
         newRequest.setExceedsFunds(false);
         newRequest.setStatus(new RequestStatus(RequestStatus.AWAITING_SUPERVISOR));
@@ -47,14 +46,14 @@ public class NewRequestServlet extends HttpServlet {
         newRequest.setDescription(description);
         newRequest.setEventType(new EventType(type));
 
-        response.setContentType("text/html");
+        response.setContentType("application/json");
         PrintWriter out = response.getWriter();
         try {
             newRequest.setEventCost(Float.parseFloat(priceStr));
             newRequest.setEventStart(LocalDate.parse(startDateStr));
             newRequest.setEventEnd(LocalDate.parse(endDateStr));
-            if (RequestService.addRequest(newRequest)) {
-                out.print("request ok");
+            ReimbursementRequest saved = RequestService.addRequest(newRequest);
+            if (saved != null) {
                 Part filePart = request.getPart("eventFile");
                 if (filePart != null) {
                     String fileName = request.getParameter("eventFileName");
@@ -62,18 +61,17 @@ public class NewRequestServlet extends HttpServlet {
 
                     RequestFile requestFile = ServletUtils.readUploadIntoRequestFile(filePart, fileName, mimeType, FilePurpose.EVENT_INFO);
                     RequestService.addRequestFile(newRequest, requestFile);
-                    out.print("file ok");
+                    out.print(ServletUtils.requestToJson(saved));
                 }
             }
             return;
-        }
-        catch (NumberFormatException | DateTimeParseException e) {
-            out.print("<div>invalid date or price</div>");
-        }
-        catch (NonExistentIdException | DuplicateIdException e) {
+        } catch (NumberFormatException | DateTimeParseException e) {
+            out.print("invalid date or price");
+        } catch (NonExistentIdException | DuplicateIdException e) {
             e.printStackTrace();
             out.print("Oops! Duplicate or nonexistent id encountered.");
         }
         out.print("error adding new request");
     }
+
 }

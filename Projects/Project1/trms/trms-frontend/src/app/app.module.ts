@@ -17,6 +17,8 @@ import {RequestService} from './services/request.service';
 import {CredentialsService} from './services/credentials.service';
 import {RequestsComponent} from './components/requests/requests.component';
 import {UserRequestsComponent} from './components/user-requests/user-requests.component';
+import { RequestDetailsComponent } from './components/request-details/request-details.component';
+import {DatePipe} from "@angular/common";
 
 
 @NgModule({
@@ -28,19 +30,21 @@ import {UserRequestsComponent} from './components/user-requests/user-requests.co
         LoginComponent,
         NewRequestComponent,
         RequestsComponent,
-        UserRequestsComponent
+        UserRequestsComponent,
+        RequestDetailsComponent
     ],
     imports: [
         BrowserModule,
         RouterModule.forRoot(appRoutes),
         FormsModule,
         ReactiveFormsModule,
-        HttpClientModule,
+        HttpClientModule
     ],
     providers: [
         LookupsService,
         RequestService,
-        CredentialsService
+        CredentialsService,
+        DatePipe
     ],
     bootstrap: [AppComponent]
 })

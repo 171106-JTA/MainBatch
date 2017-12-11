@@ -1,14 +1,23 @@
+/* styling obtianed from https://www.w3schools.com/css/tryit.asp?filename=trycss_table_fancy */
 table {
     empty-cells: hide;
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
-    margin: 0px -150px;
+    margin-bottom: 150px;
 }
 
 td:nth-child(2), td:nth-child(1), th:nth-child(2), th:nth-child(1) {
     background-color: white;
     border: none;
+}
+
+th.description, td.description {
+    min-width: 330px;
+}
+
+td.details-button, th.details-button {
+    min-width: 85px;
 }
 
 tr:nth-child(even) {

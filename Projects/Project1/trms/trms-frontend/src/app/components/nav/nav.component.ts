@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CredentialsService} from "../../services/credentials.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-nav',
@@ -8,14 +9,19 @@ import {CredentialsService} from "../../services/credentials.service";
 })
 export class NavComponent {
 
-    constructor(private credentialsService: CredentialsService) {
+    constructor(private credentialsService: CredentialsService, private router: Router) {
     }
 
     public logout($event) {
         console.log("logging out");
         this.credentialsService.logout(
-            () => {console.log("logout success");},
-            (err) => {console.log(err);}
+            () => {
+                console.log("logout success");
+                this.router.navigate(['/login'])
+            },
+            (err) => {
+                console.log(err);
+            }
         );
     }
 }

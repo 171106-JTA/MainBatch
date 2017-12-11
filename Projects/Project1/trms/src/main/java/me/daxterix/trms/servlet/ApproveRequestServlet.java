@@ -29,9 +29,9 @@ public class ApproveRequestServlet extends HttpServlet {
 
             ReimbursementRequest theRequest = requestDao.getRequestById(Long.parseLong(requestIdStr));
             if (grantAmountStr == null)
-                RequestService.doApproval(response, approver, theRequest);
+                RequestService.doApproval(response, approver, theRequest, null);
             else
-                RequestService.doApproval(response, approver, theRequest, Long.parseLong(grantAmountStr));
+                RequestService.doApproval(response, approver, theRequest, Float.parseFloat(grantAmountStr));
 
         } catch (NumberFormatException e) {
             response.setStatus(400);

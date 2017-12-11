@@ -31,40 +31,86 @@ public class RequestsServlet extends HttpServlet {
         boolean wantsWaitingOnMe = (wantsWaiting != null);
         String department = request.getParameter("department");
 
+        String idStr = request.getParameter("id");
+
         // assume this employee exists because of the filter
         Employee emp = (Employee) request.getAttribute("employee");
 
         PrintWriter out = response.getWriter();
-        response.setContentType("text/plan");
-
+        response.setContentType("application/json");
         try {
-            if (hasAccessToRequests(emp, wantsFiledReqs, department)) {
+            if (idStr != null) {
+                ReimbursementRequest theRequest = requestDao.getRequestById(Long.parseLong(idStr));
+                if (canReadRequest(emp, theRequest)) {
+                    response.setStatus(200);
+                    out.print(ServletUtils.requestToJson(theRequest));
+                }
+            } else if (canReadRequests(emp, department, wantsFiledReqs, wantsWaitingOnMe)) {
                 List<ReimbursementRequest> result = filterRequests(emp, department, status, wantsFiledReqs, wantsWaitingOnMe);
                 if (result == null) {
-                    response.setStatus(404);
+                    response.setStatus(400);
                     out.println("Invalid options");
                 } else {
                     JsonArray jArr = ServletUtils.requestsToJsonArray(result);
-                    response.setContentType("application/json");
+                    response.setStatus(200);
                     out.print(jArr.toString());
                 }
             } else {
+                response.setStatus(403);
                 out.print("Access denied");
             }
         } catch (NonExistentIdException e) {
             response.setStatus(404);
-            out.println("Nonexistent depratment, or status");
+            out.println("Nonexistent department, or status");
+        }
+        catch (NumberFormatException e) {
+            out.println("invalid id");
         }
     }
 
-    private boolean hasAccessToRequests(Employee emp, boolean wantsFiledReqs, String department) {
-        String rank = emp.getRank().getRank();
+    /**
+     * as name suggests, some of these flags are assumed mutually exclusive
+     *
+     * @param emp
+     * @param wantsFiledReqs
+     * @param department
+     * @return
+     */
+    private boolean canReadRequests(Employee emp, String department, boolean wantsFiledReqs, boolean wantsWaitingOnMe) {
+        String myRank = emp.getRank().getRank();
+
+        if (myRank.equals(EmployeeRank.BENCO) || wantsWaitingOnMe)
+            return true;
+
+        String myDepartment = emp.getDepartment().getName();    // only bencos don't have departments
         if (wantsFiledReqs) {
             return true;
         } else if (department != null)
-            return (rank.equals(EmployeeRank.DEPARTMENT_HEAD) || rank.equals(EmployeeRank.BENCO));
-        else
-            return rank.equals(EmployeeRank.BENCO);
+            return ((myRank.equals(EmployeeRank.DEPARTMENT_HEAD) && myDepartment.equals(department)) ||
+                    myRank.equals(EmployeeRank.BENCO));
+        return false;
+    }
+
+    private boolean canReadRequest(Employee emp, ReimbursementRequest theRequest) {
+        String rank = emp.getRank().getRank();
+        if (rank.equals(EmployeeRank.BENCO))
+            return true;
+
+        String filerDept = theRequest.getFiler().getDepartment().getName();
+        String filerEmail = theRequest.getFiler().getEmail();
+
+        if (filerEmail.equals(emp.getEmail()))
+            return true;
+
+        else if (filerDept.equals(emp.getDepartment().getName()) &&
+                rank.equals(EmployeeRank.DEPARTMENT_HEAD))
+            return true;
+
+        Employee supervisor = theRequest.getFiler().getSupervisor();
+        if (supervisor != null && supervisor.getEmail().equals(emp.getEmail()))
+            return true;
+
+        return false;
     }
 
     /**
@@ -83,22 +129,19 @@ public class RequestsServlet extends HttpServlet {
             List<ReimbursementRequest> reqs = requestDao.getWaitingOnSupervisor(emp.getEmail());
             if (department != null && status != null) {
                 objectDao.getObject(Department.class, department);  // check for existence
-                objectDao.getObject(RequestStatus.class, status);  // check for existence
+                objectDao.getObject(RequestStatus.class, status);   // check for existence
                 return reqs.stream()
-                        .filter(req -> (req.getStatus().equals(status) && req.getFiler().getDepartment().getName().equals(department)))
+                        .filter(req -> (req.getStatus().getStatus().equals(status) && req.getFiler().getDepartment().getName().equals(department)))
                         .collect(Collectors.toList());
-            }
-            else if (department != null) {
+            } else if (department != null) {
                 return reqs.stream()
                         .filter(req -> req.getFiler().getDepartment().getName().equals(department))
                         .collect(Collectors.toList());
-            }
-            else if (status != null) {
+            } else if (status != null) {
                 return reqs.stream()
-                        .filter(req -> req.getStatus().equals(status))
+                        .filter(req -> req.getStatus().getStatus().equals(status))
                         .collect(Collectors.toList());
-            }
-            else return reqs;
+            } else return reqs;
         }
 
         if (!wantFiledReqs && department == null && status == null)    // 1. all requests

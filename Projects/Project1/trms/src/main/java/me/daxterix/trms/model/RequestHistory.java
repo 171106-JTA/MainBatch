@@ -113,4 +113,12 @@ public class RequestHistory implements Serializable{
     public void setReason(String reason) {
         this.reason = reason;
     }
+
+    public RequestStatus getPreStatus() {
+        return preStatus;
+    }
+
+    public void setPreStatus(RequestStatus preStatus) {
+        this.preStatus = preStatus;
+    }
 }

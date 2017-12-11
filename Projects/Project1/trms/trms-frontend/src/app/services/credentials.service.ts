@@ -24,12 +24,10 @@ export class CredentialsService {
         this.http.post<any>(loginUrl, formData, {withCredentials: true})
             .subscribe(
                 empJson => {
-                    console.log(empJson);
                     this.employee = new Employee(empJson);
                     successHandler(new Employee(empJson))
                 },
                 err => {
-                    console.log(err);
                     if (err.status < 200 || err.status >= 300)
                         errorHandler(err);
                 },
@@ -41,7 +39,6 @@ export class CredentialsService {
         this.http.post<any>(logoutUrl, new FormData(), {withCredentials: true})
             .subscribe(
                 data => {
-                    console.log(data);
                     this.employee = null;
                     successHandler();
                 },

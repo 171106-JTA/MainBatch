@@ -14,6 +14,11 @@ export class ReimbursementRequest {
     public eventStart: Date;
     public eventEnd: Date;
 
+    public address: string;
+    public city: string;
+    public state: string;
+    public zip: number;
+
     public exceedsFunds: boolean;
     public eventType: string;
 
@@ -37,11 +42,16 @@ export class ReimbursementRequest {
         this.passed = tjson["passed"];
         this.isUrgent = tjson["isUrgent"];
 
+        this.address = tjson["address"]["address"];
+        this.city = tjson["address"]["city"];
+        this.state = tjson["address"]["state"];
+        this.zip = tjson["address"]["zip"];
+
         this.timeFiled = Utils.jsonToDateTime(tjson["timeFiled"]);
         this.eventEnd = Utils.jsonToDate(tjson["eventEnd"]);
         this.eventStart = Utils.jsonToDate(tjson["eventStart"]);
 
         this.exceedsFunds = tjson["exceedsFunds"];
-        this.eventType = tjson["history"];
+        this.eventType = tjson["eventType"];
     }
 }

@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {LookupsService} from '../../services/lookups.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from "@angular/router";
 
 
 const newRequestUrl = 'http://localhost:8085/trms/employee/newRequest';
@@ -32,7 +33,7 @@ export class NewRequestComponent {
         eventFile: new FormControl() // doesn't work for file inputs, here for posterity
     });
 
-    constructor(private lookups: LookupsService) {
+    constructor(private lookups: LookupsService, private router: Router) {
         this.lookups.getEventTypes().subscribe(
             data => {
                 this.eventTypes = data;
@@ -53,6 +54,7 @@ export class NewRequestComponent {
         );
     }
 
+    // todo: move to request.service
     public submitNewRequest() {
         let formData = new FormData();
 
@@ -74,6 +76,8 @@ export class NewRequestComponent {
         xhr.onreadystatechange = () => {
             if (xhr.readyState === 4 && xhr.status === 200) {
                 console.log(xhr.response);
+                let data = JSON.parse(xhr.response);
+                this.router.navigate([`/requests/${data.id}`]) // todo
             }
             else
                 console.warn(xhr.response);

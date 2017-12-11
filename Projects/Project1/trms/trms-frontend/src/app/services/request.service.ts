@@ -12,7 +12,8 @@ const requestsUrl = 'http://localhost:8085/trms/employee/requests';
 
 @Injectable()
 export class RequestService {
-    constructor(private http: HttpClient, private credentialsService: CredentialsService) {}
+    constructor(private http: HttpClient, private credentialsService: CredentialsService) {
+    }
 
     /**
      * possible statuses: all, pending, then everything in lookup-table
@@ -32,7 +33,9 @@ export class RequestService {
             params: params
         };
         return this.http.get<ReimbursementRequest[]>(requestsUrl, httpOptions)
-            .map((data:any[]) => data.map(reqJson => new ReimbursementRequest(reqJson)));
+            .map((data: any[]) => data.map(reqJson => {
+                return new ReimbursementRequest(reqJson);
+            }));
     }
 
     /**
@@ -42,7 +45,7 @@ export class RequestService {
      * @param {string} status
      * @returns {Observable<ReimbursementRequest[]>}
      */
-    public getRequstsWaitingOnMe(department: string, status: string): Observable<ReimbursementRequest[]> {
+    public getRequestsWaitingOnMe(department: string, status: string): Observable<ReimbursementRequest[]> {
         let params = new HttpParams();
         params = params.append("wantsWaitingOnMe", "true");
         if (status != null)
@@ -56,22 +59,28 @@ export class RequestService {
             params: params
         };
         return this.http.get<ReimbursementRequest[]>(requestsUrl, httpOptions)
-            .map((data:any[]) => data.map(reqJson => new ReimbursementRequest(reqJson)));
+            .map((data: any[]) => data.map(reqJson => {
+                return new ReimbursementRequest(reqJson);
+            }));
     }
 
     /**
-     * gets all requests filtered by department, status
+     * Allows specifying desired request id
      *
+     * or gets all requests filtered by given department, status;
+     * if a category is null, does not filter in that category
+     *
+     * @param id
      * @param {string} department
      * @param {string} status
      * @returns {Observable<ReimbursementRequest[]>}
      */
-    public getAllRequests(department: string, status: string): Observable<ReimbursementRequest[]> {
+    public getRequests(department: string, status: string): Observable<ReimbursementRequest[]> {
         let params = new HttpParams();
-        if (status != null)
-            params.append("status", status);
-        if (department != null)
-            params.append("department", department);
+        if (status !== null)
+            params = params.append("status", status);
+        if (department !== null)
+            params = params.append("department", department);
 
         const httpOptions = {
             headers: new HttpHeaders({'Content-Type': 'application/json'}),
@@ -79,7 +88,24 @@ export class RequestService {
             withCredentials: true
         };
         return this.http.get<ReimbursementRequest[]>(requestsUrl, httpOptions)
-            .map((data:any[]) => data.map(reqJson => new ReimbursementRequest(reqJson)));
+            .map((data: any[]) => data.map(reqJson => {
+                return new ReimbursementRequest(reqJson);
+            }));
+    }
+    public getRequest(id: number): Observable<ReimbursementRequest> {
+        let params = new HttpParams();
+        if (id !== null)
+            params = params.append("id", '' + id);
+
+        const httpOptions = {
+            headers: new HttpHeaders({'Content-Type': 'application/json'}),
+            params: params,
+            withCredentials: true
+        };
+        return this.http.get<ReimbursementRequest>(requestsUrl, httpOptions)
+            .map((data: any) => {
+                return new ReimbursementRequest(data);
+            });
     }
 
 }

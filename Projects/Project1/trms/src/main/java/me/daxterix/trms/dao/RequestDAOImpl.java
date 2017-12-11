@@ -29,7 +29,7 @@ public class RequestDAOImpl extends ObjectDAO implements RequestDAO {
     }
 
     @Override
-    @Transactional  // todo: test thoroughly; note order of deletion is (very) important
+    @Transactional
     public void deleteRequest(long requestId) throws NonExistentIdException {
         try(Session session = sessionFactory.openSession()) {
             session.beginTransaction();

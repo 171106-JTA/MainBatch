@@ -10,7 +10,6 @@ import {ReimbursementRequest} from '../../models/reimbursement-request';
 })
 
 export class RequestsComponent {
-    public isHidden = false;
 
     @Input()
     requests: ReimbursementRequest[];

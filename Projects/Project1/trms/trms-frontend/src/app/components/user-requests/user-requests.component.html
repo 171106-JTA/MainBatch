@@ -1,6 +1,5 @@
 
 <app-requests [requests]="filedRequests"></app-requests>
-<app-requests [requests]="allRequests"></app-requests>
-<app-requests [requests]="departmentRequests"></app-requests>
-
+<app-requests *ngIf="isBenco" [requests]="allRequests"></app-requests>
+<app-requests *ngIf="isDeptHead" [requests]="departmentRequests"></app-requests>
 

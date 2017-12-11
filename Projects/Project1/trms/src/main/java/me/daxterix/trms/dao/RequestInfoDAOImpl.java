@@ -53,7 +53,7 @@ public class RequestInfoDAOImpl extends ObjectDAO implements RequestInfoDAO {
         updateObject(file, file.getId());
     }
 
-    @Override   // todo: test
+    @Override
     @Transactional
     public void deleteFile(long fileId) throws NonExistentIdException {
         try(Session session = sessionFactory.openSession()) {

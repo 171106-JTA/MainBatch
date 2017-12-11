@@ -26,10 +26,29 @@ public class RequestService {
      * @return
      */
     public static void addRequestFile(ReimbursementRequest request, RequestFile requestFile) throws DuplicateIdException {
-        // todo: update request status if a request email, and log history
+        if (requestFile.getPurpose().getPurpose().equals(FilePurpose.APPROVAL_EMAIL)) {
+            switch (request.getStatus().getStatus()) {
+                case RequestStatus.AWAITING_SUPERVISOR:
+                    request.setStatus(new RequestStatus(RequestStatus.AWAITING_DEPT_HEAD));
+                case RequestStatus.AWAITING_DEPT_HEAD:
+                    request.setStatus(new RequestStatus(RequestStatus.AWAITING_BENCO));
+                case RequestStatus.AWAITING_BENCO:
+                    request.setStatus(new RequestStatus(RequestStatus.AWAITING_GRADE));
+            }
+            requestFile.setRequest(request);
+            infoDao.saveFile(requestFile);
+        }
+        // todo: polish, add grade
+        else if (requestFile.getPurpose().getPurpose().equals(FilePurpose.GRADE_DOCUMENT) &&
+                request.getStatus().getStatus().equals(RequestStatus.AWAITING_GRADE)) {
+
+            request.setStatus(new RequestStatus(RequestStatus.GRANTED));
+        }
+
         requestFile.setRequest(request);
         infoDao.saveFile(requestFile);
     }
+
 
     /**
      * <p>
@@ -42,7 +61,7 @@ public class RequestService {
      * @param newReq
      * @return
      */
-    public static boolean addRequest(ReimbursementRequest newReq) throws NonExistentIdException, DuplicateIdException {
+    public static ReimbursementRequest addRequest(ReimbursementRequest newReq) throws NonExistentIdException, DuplicateIdException {
         EventType eventType = objectDao.getObject(EventType.class, newReq.getEventType().getType());
         Employee emp = newReq.getFiler();
 
@@ -65,11 +84,11 @@ public class RequestService {
         else if (eventStartDate.isAfter(dateFiled.plusDays(6)))
             newReq.setUrgent(true);
         else
-            return false;
+            return null;
 
         requestDao.save(newReq);
         addHistForRequest(newReq, newReq.getTimeFiled(), RequestStatus.AWAITING_SUPERVISOR, null, null);
-        return true;
+        return newReq;
     }
 
 
@@ -86,16 +105,18 @@ public class RequestService {
     private static void addHistForRequest(ReimbursementRequest request, LocalDateTime time, String postStatus,
                                           Employee approver, RequestFile approvingEmail) throws DuplicateIdException {
         RequestHistory creationHist = new RequestHistory();
-        creationHist.setApprover(approver);
-        creationHist.setFile(approvingEmail);
+        if (approver != null)
+            creationHist.setApprover(approver);
+        if (approvingEmail != null)
+            creationHist.setFile(approvingEmail);
         creationHist.setRequest(request);
+        creationHist.setPreStatus(new RequestStatus(postStatus));
         creationHist.setPostStatus(new RequestStatus(postStatus));
         creationHist.setTime(time);
         historyDao.save(creationHist);
     }
 
-
-    public static void doApproval(HttpServletResponse response, Employee approver, ReimbursementRequest theRequest)
+    public static void doApproval(HttpServletResponse response, Employee approver, ReimbursementRequest theRequest, Float amount)
             throws NonExistentIdException, IOException, DuplicateIdException {
         String requestStatus = theRequest.getStatus().getStatus();
         String filerSupeEmail = theRequest.getFiler().getSupervisor().getEmail();
@@ -105,13 +126,13 @@ public class RequestService {
 
         PrintWriter out = response.getWriter();
         response.setStatus(200);
-        response.setContentType("plain/text");
+        response.setContentType("application/json");
 
         String finalStatus = null;
         switch (requestStatus) {
             case (RequestStatus.AWAITING_SUPERVISOR):
                 if (filerSupeEmail.equals(approverEmail))// approval by only direct supervisor
-                    switch(approverRank) {
+                    switch (approverRank) {
                         case EmployeeRank.SUPERVISOR:
                             finalStatus = RequestStatus.AWAITING_DEPT_HEAD;
                             break;
@@ -123,44 +144,59 @@ public class RequestService {
                     }
                 break;
             case (RequestStatus.AWAITING_DEPT_HEAD):    // benco cannot be a Dept Head
-                if (filerDept.equals(approver.getDepartment()) && (approverRank.equals(EmployeeRank.DEPARTMENT_HEAD)))
+                if (filerDept.equals(approver.getDepartment().getName()) && (approverRank.equals(EmployeeRank.DEPARTMENT_HEAD)))
                     finalStatus = RequestStatus.AWAITING_BENCO;
                 break;
             case (RequestStatus.AWAITING_BENCO):
                 if (approverRank.equals(EmployeeRank.BENCO))
                     finalStatus = RequestStatus.AWAITING_GRADE;
                 break;
-            case (RequestStatus.AWAITING_GRADE):
-                if (approverRank.equals(EmployeeRank.BENCO))
-                    finalStatus = RequestStatus.GRANTED;
-                break;
             default:
-                out.println("NOTHING HAPPENDED; CHECK THIS");
+                doFinalApproval(response, approver, theRequest, amount);
         }
         if (finalStatus == null) {
             response.setStatus(401);
             out.println("invalid credentials for request");
-        }
-        else {
+        } else {
             out.println("approved successfully!");
             persistRequestApproval(approver, theRequest, finalStatus, null);
         }
     }
 
 
-    public static void doApproval(HttpServletResponse response, Employee approver, ReimbursementRequest theRequest, float grantAmount) throws DuplicateIdException, NonExistentIdException, IOException {
+    public static void doFinalApproval(HttpServletResponse response, Employee approver, ReimbursementRequest theRequest,
+                                       Float grantAmount) throws DuplicateIdException, NonExistentIdException, IOException {
         String approverRank = approver.getRank().getRank();
         String requestStatus = theRequest.getStatus().getStatus();
 
         response.setStatus(401);
-        response.setContentType("plain/text");
+        response.setContentType("application/json");
         if (!(requestStatus.equals(RequestStatus.AWAITING_GRADE) && approverRank.equals(EmployeeRank.BENCO)))
             response.getWriter().println("invalid credentials for request");
 
-        if (grantAmount > theRequest.getFunding())
+        if (grantAmount != null && grantAmount > theRequest.getFunding()) {
             theRequest.setExceedsFunds(true);
-        theRequest.setFunding(grantAmount);
+            theRequest.setFunding(grantAmount);
+        }
 
+        response.setStatus(200);
+        persistRequestApproval(approver, theRequest, RequestStatus.GRANTED, null);
+    }
+
+
+    /**
+     * todo: edit to not auto promote
+     *
+     * @param response
+     * @param approver
+     * @param theRequest
+     * @param thefile
+     * @throws DuplicateIdException
+     * @throws NonExistentIdException
+     * @throws IOException
+     */
+    public static void doFileApproval(HttpServletResponse response, Employee approver, ReimbursementRequest theRequest,
+                                      RequestFile thefile) throws DuplicateIdException, NonExistentIdException, IOException {
         response.setStatus(200);
         persistRequestApproval(approver, theRequest, RequestStatus.GRANTED, null);
     }
@@ -176,7 +212,7 @@ public class RequestService {
 
         PrintWriter out = response.getWriter();
         response.setStatus(200);
-        response.setContentType("plain/text");
+        response.setContentType("application/json");
 
         boolean willDeny = false;
         switch (requestStatus) {
@@ -202,15 +238,17 @@ public class RequestService {
         if (!willDeny) {
             response.setStatus(401);
             out.println("invalid credentials for request");
-        }
-        else {
-            out.println("denied successfully!");
+        } else {
+            if (reason == null)
+                reason = "no reason given";
             persistRequestApproval(approver, theRequest, RequestStatus.DENIED, reason);
+            out.println("denied successfully!");
         }
     }
 
     private static void persistRequestApproval(Employee approver, ReimbursementRequest theRequest, String finalStatus,
-                                               String reason) throws NonExistentIdException, DuplicateIdException { requestDao.update(theRequest);
+                                               String reason) throws NonExistentIdException, DuplicateIdException {
+        requestDao.update(theRequest);
         historyDao.save(new RequestHistory(
                 theRequest, approver, null, theRequest.getStatus(), new RequestStatus(finalStatus),
                 LocalDateTime.now(), reason

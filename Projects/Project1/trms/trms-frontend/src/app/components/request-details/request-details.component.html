@@ -1,0 +1,163 @@
+<form [formGroup]="updateRequestForm" (ngSubmit)="submitUpdates($event)" class="form-horizontal"
+      enctype="multipart/form-data">
+
+    <fieldset>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-5">
+                <legend>Event Details</legend>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="eventType" class="control-label eventType col-sm-4">Type</label>
+            <div class="col-sm-5">
+                <input class="form-control" type="text" id="eventType" formControlName="eventType" readonly/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="status" class="control-label eventType col-sm-4">Approval Status</label>
+            <div class="col-sm-5">
+                <input class="form-control" type="text" id="status" formControlName="status" readonly/>
+            </div>
+        </div>
+
+        <div class="form-group" [hidden]="request? request.status !== 'Granted' && request.status !== 'Denied' : true">
+            <label for="urgency" class="col-sm-4 control-label">Urgency</label>
+            <div class="col-sm-5">
+                <input class="form-control" type="text" id="urgency" formControlName="urgency" readonly/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="eventPrice" class="col-sm-4 control-label">Price</label>
+            <div class="col-sm-5">
+                <input type="number" step="0.01" class="form-control" id="eventPrice" formControlName="eventPrice"
+                       readonly/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="eventFunding" class="col-sm-4 control-label">{{request? (request.status == 'Granted'?
+                'Reimbursed Amount': 'Projected Coverage') : 'Projected Coverage'}}</label>
+            <div class="col-sm-5">
+                <input type="number" step="0.01" class="form-control" id="eventFunding" formControlName="eventFunding"
+                       [readonly]="employee == null || employee.rank !== 'Benefits Coordinator'"/>
+            </div>
+        </div>
+
+        <div class="form-group" [hidden]="request? request.status === 'Granted' : true">
+            <label for="exceedsFunds" class="col-sm-4 control-label">Exceeds Standard allocation</label>
+            <div class="col-sm-5">
+                <input class="form-control" type="text" id="exceedsFunds" formControlName="exceedsFunds" readonly/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="eventAddress" class="col-sm-4 control-label">Address</label>
+            <div class="col-sm-5">
+                <input type="text" class="form-control" id="eventAddress" formControlName="eventAddress"/>
+            </div>
+        </div>
+    </fieldset>
+
+    <div class="form-group">
+        <label for="eventCity" class="col-sm-4 control-label">City</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" id="eventCity" formControlName="eventCity"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="eventState" class="col-sm-4 control-label">State</label>
+        <div class="col-sm-5">
+            <input type="text" class="form-control" id="eventState" formControlName="eventState"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="eventZip" class="col-sm-4 control-label">Zip Code</label>
+        <div class="col-sm-5">
+            <input type="number" class="form-control" id="eventZip" formControlName="eventZip"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="timeFiled" class="col-sm-4 control-label">Time Filed</label>
+        <div class="col-sm-5">
+            <input type="datetime-local" class="form-control" id="timeFiled" formControlName="timeFiled"  readonly/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="eventStartDate" class="col-sm-4 control-label">Start Date</label>
+        <div class="col-sm-5">
+            <input type="date" class="form-control" id="eventStartDate" formControlName="eventStartDate" readonly/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="eventEndDate" class="col-sm-4 control-label">End Date</label>
+        <div class="col-sm-5">
+            <input type="date" class="form-control" id="eventEndDate" formControlName="eventEndDate" readonly/>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="eventDescription" class="col-sm-4 control-label">Description</label>
+        <div class="col-sm-5">
+            <textarea class="form-control" id="eventDescription" formControlName="eventDescription" required></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-5 btn-group-lg btn-group">
+            <button type="button" routerLink="/requests/" class="btn btn-info col-xs-3">Back</button>
+            <button type="button" (click)="submitUpdates($event)" class="btn btn-info col-xs-3"
+                    [hidden]="!canUpdate">
+                Update
+            </button>
+            <button type="button" (click)="submitApproval($event)" class="btn btn-info col-xs-3" [hidden]="!canApprove">Approve</button>
+            <button type="button" (click)="submitDenial($event)" class="btn btn-info col-xs-3" [hidden]="!canApprove">Deny</button>
+        </div>
+    </div>
+</form>
+
+
+<form [formGroup]="newFileForm" (ngSubmit)="submitNewFile($event)" class="form-horizontal"
+      enctype="multipart/form-data" [hidden]="!canUpdate">
+
+    <fieldset>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-5">
+                <legend>Attach a file</legend>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="filePurpose" class="control-label filePurpose col-sm-4">Type</label>
+            <div class="col-sm-5">
+                <select class="form-control" formControlName="filePurpose" id="filePurpose" required>
+                    <option *ngFor="let purpose of filePurposes">{{purpose}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="eventFile" class="col-sm-4 control-label">Informational Files</label>
+            <div class="col-sm-5">
+                <input type="file" class="form-control" id="eventFile" (change)="onFileChange($event)"
+                       formControlName="eventFile" required/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-5 btn-group-lg btn-group">
+                <button type="reset" class="btn btn-info col-xs-6">Clear</button>
+                <button type="button" (click)="submitNewFile($event)" class="btn btn-info col-xs-6">Attach</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+

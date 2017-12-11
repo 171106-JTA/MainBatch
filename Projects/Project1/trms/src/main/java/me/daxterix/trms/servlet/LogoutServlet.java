@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @MultipartConfig
-@WebServlet(name="LogoutServlet", urlPatterns="/employee/logout")
+@WebServlet(name="LogoutServlet", urlPatterns="/logout")
 public class LogoutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getSession().invalidate();
