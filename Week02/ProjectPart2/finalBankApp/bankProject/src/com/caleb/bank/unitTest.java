@@ -46,16 +46,16 @@ class unitTest {
 	
 	
 	/* Testing serialization class */ 
-	@Test
-	void testSerialization() {
-		// adding default admin
-		
-		bankController.bankModel.addDefaultAdmin(); // add default admin "caleb"
-		bankController.saveInformation(); // serialize the data
-		bankController.loadUserData(); // reload model 
-		assertEquals("caleb", bankController.bankModel.getDefaultAdmin().getName()); 
-		
-	}
+//	@Test
+//	void testSerialization() {
+//		// adding default admin
+//		
+//		bankController.bankModel.addDefaultAdmin(); // add default admin "caleb"
+//		bankController.saveInformation(); // serialize the data
+//		bankController.loadUserData(); // reload model 
+//		assertEquals("caleb", bankController.bankModel.getDefaultAdmin().getName()); 
+//		
+//	}
 	
 	
 	/* Testing user functionality */ 

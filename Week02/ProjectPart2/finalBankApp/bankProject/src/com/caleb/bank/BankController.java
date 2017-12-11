@@ -280,7 +280,7 @@ public class BankController {
 					break;
 				case 3: /* show all previous transactions */
 					User user = bankModel.getUser(userInformation[USER_EMAIL],true);
-					bankView.showPreviousTransactions(user);
+					//bankView.showPreviousTransactions(user);
 					break;
 				case 4:  /* Apply for a loan */ 
 					/* if user does not already have a loan and the loan is not too big or too small then sign them up */ 

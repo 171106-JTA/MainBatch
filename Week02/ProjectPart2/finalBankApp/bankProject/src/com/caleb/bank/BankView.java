@@ -300,15 +300,15 @@ class BankView {
 	 * transactions
 	 * @param user
 	 */
-	public void showPreviousTransactions(User user) {
-		List<String> previousTransactions = user.account.getPreviousTransActions();
-		for (String transaction : previousTransactions) {
-			System.out.println(transaction);
-		}
-
-		System.out.println("Please press enter to return to previous screen");
-		input.nextLine();
-	}
+//	public void showPreviousTransactions(User user) {
+//		List<String> previousTransactions = user.account.get
+//		for (String transaction : previousTransactions) {
+//			System.out.println(transaction);
+//		}
+//
+//		System.out.println("Please press enter to return to previous screen");
+//		input.nextLine();
+//	}
 	
 	/**
 	 * This method is used show the withdraw screen.
