@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import com.revature.log.Logging;
 
 public class LogOut {
+
 	/**
 	 * Logs out the user by invalidating session
 	 * 

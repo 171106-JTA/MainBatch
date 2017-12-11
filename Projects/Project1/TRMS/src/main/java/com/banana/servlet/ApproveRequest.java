@@ -40,6 +40,7 @@ public class ApproveRequest extends HttpServlet {
 		
 		if(!session.isNew()) {
 			int roleId = (Integer)session.getAttribute("role");
+			
 			int rrId = Integer.parseInt(request.getParameter("rrId"));
 			int decision = Integer.parseInt(request.getParameter("decision"));
 			int empId = (Integer)session.getAttribute("empId");
