@@ -8,6 +8,16 @@ import com.banana.dao.UpdateDAOImpl;
 import com.revature.log.Logging;
 
 public class UpdateEmployeeAmount {
+	
+	/**
+	 * Updates the Available amount of the Employee
+	 * Subtracts money from available amount, not actual amount
+	 * 
+	 * @param empId id of employee
+	 * @param cost the amount of the event
+	 * 
+	 * @return boolean to determine success
+	 */
 	public static boolean updateAvailAmount(int empId, double cost) {
 		EmployeeDAOImpl empdao = new EmployeeDAOImpl();
 		UpdateDAOImpl udao = new UpdateDAOImpl();
@@ -38,6 +48,14 @@ public class UpdateEmployeeAmount {
 		return status;
 	}
 	
+	/**
+	 * Updates the actual amount of an employee by the Benco only
+	 * Subtracts money from the employee's actual account
+	 * 
+	 * @param rrId id of the reimbursement request
+	 * 
+	 * @return boolean to determine success
+	 */
 	public static boolean updateAmountByBenCo(int rrId) {
 		EmployeeDAOImpl empdao = new EmployeeDAOImpl();
 		ReimbursementDAOImpl rdao = new ReimbursementDAOImpl();
@@ -74,6 +92,15 @@ public class UpdateEmployeeAmount {
 		return status;
 	}
 	
+	/**
+	 * Method used to deny a request
+	 * Adds money back into available amount of employee
+	 * 
+	 * 
+	 * @param rrId id of reimburse request
+	 * 
+	 * @return boolean to determine success
+	 */
 	public static boolean denyAmount(int rrId) {
 		EmployeeDAOImpl empdao = new EmployeeDAOImpl();
 		ReimbursementDAOImpl rdao = new ReimbursementDAOImpl();

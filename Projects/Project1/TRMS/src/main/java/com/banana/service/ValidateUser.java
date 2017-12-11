@@ -11,13 +11,23 @@ import com.banana.dao.EmployeeDAOImpl;
 import com.revature.log.Logging;
 
 public class ValidateUser {
+	/**
+	 * This method validates the user for login
+	 * 
+	 * @param request object that contains parameter values from the HTML
+	 * @param response object that will contain any message to be returned
+	 * 
+	 * @return Employee if one exists in the database, otherwise null
+	 * @throws IOException
+	 * @throws ServletException
+	 */
 	public static Employee validate(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
 		EmployeeDAOImpl empdao = new EmployeeDAOImpl();
 		String requestUsername = request.getParameter("username");
 		String requestPassword = request.getParameter("password");
 
 		Employee emp = empdao.getEmployeeByUsername(requestUsername);
-		System.out.println(emp);
+		
 		if(emp != null) {
 			String realPassword = emp.getPassword(); 
 			if(requestPassword.equals(realPassword)) {

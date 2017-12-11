@@ -18,6 +18,15 @@ import com.banana.util.ConnectionUtil;
 
 public class UpdateDAOImpl implements UpdateDAO{
 	
+	/**
+	 * This method executes a callable statement in the Oracle Database
+	 * in order to insert a Reimbursement request into the database
+	 * 
+	 * @param request The reimbursement request object to be inserted
+	 * 
+	 * @return boolean to indicate successful insert, or not
+	 * 
+	 */
 	@Override
 	public boolean submitRequest(ReimburseRequest request) {
 		String sql = "{call submit_request(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
@@ -47,6 +56,17 @@ public class UpdateDAOImpl implements UpdateDAO{
 		return true;
 	}
 	
+	/**
+	 * Updates the approval status of the reimbursement request
+	 * 
+	 * @param roleId the role of the admin determines which approval box should be filled in
+	 * @param rrId the reimbursement request id
+	 * @param decision maps -1 to deny, 1 to approve, 0 for pending
+	 * @param approverid empId (akin to a signature) of the admin
+	 * 
+	 * @return boolean to determine success
+	 * 
+	 */
 	@Override
 	public boolean updateRequestApproval(int roleId, int rrId, int decision, int approverId) {
 		String sql = null;
@@ -88,6 +108,14 @@ public class UpdateDAOImpl implements UpdateDAO{
 		return true;
 	}
 	
+	/**
+	 * Inserts a new info request into the database
+	 * 
+	 * @param rrId the id of the reimbursement request in need of added info
+	 * @param empId the id of the employee who is requested for info
+	 * 
+	 * 
+	 */
 	@Override
 	public void insertInfoRequest(int rrId, int empId) {
 		String sql = "INSERT INTO Info_Request (RRID, REQUESTEEID) VALUES (?, ?)";
@@ -108,6 +136,15 @@ public class UpdateDAOImpl implements UpdateDAO{
 		
 	}
 	
+	/**
+	 * Update the Info Request record
+	 * 
+	 * @param irId id of the info request record
+	 * @param additionInfo additional information string 
+	 * @param file the blob uploaded by user
+	 * 
+	 * 
+	 */
 	@Override
 	public void updateInfoRequest(int irId, String additionInfo, Part file) {
 		String sql = "Update Info_Request SET  ADDITIONAL_INFO = ?, MEDIA = ?, FILENAME = ?" +
@@ -137,6 +174,14 @@ public class UpdateDAOImpl implements UpdateDAO{
 		
 	}
 	
+	/**
+	 * Method gets the percentage coverage of an event by id
+	 * 
+	 * @param eventId id of the event in database
+	 * 
+	 * @return double the percentage
+	 * 
+	 */
 	@Override
 	public double getPercentage(int eventId) {
 		String sql = "SELECT * FROM Event_Type WHERE EVENTID = ?";
@@ -162,6 +207,15 @@ public class UpdateDAOImpl implements UpdateDAO{
 		return percent;
 	}
 	
+	/**
+	 * Sets the new value of an Employee's available reimbursement amount
+	 * 
+	 * @param empId id of the employee
+	 * @param newAmount the new available amount
+	 * 
+	 * @return boolean to determine success
+	 * 
+	 */
 	public boolean setNewAvailAmount(int empId, double newAmount) {
 		String sql = "UPDATE Employee SET Avail_Amount = ? WHERE EID = ?";
 		PreparedStatement ps = null;
@@ -182,6 +236,15 @@ public class UpdateDAOImpl implements UpdateDAO{
 		return true;
 	}
 	
+	/**
+	 * Sets the actual amount of money an employee has
+	 * 
+	 * @param empId the id of the employee
+	 * @param newAmount the new amount to be inserted
+	 * 
+	 * @return boolean to determine success
+	 * 
+	 */
 	public boolean setNewActualAmount(int empId, double newAmount) {
 		String sql = "UPDATE Employee SET Actual_Amount = ? WHERE EID = ?";
 		PreparedStatement ps = null;
@@ -202,6 +265,10 @@ public class UpdateDAOImpl implements UpdateDAO{
 		return true;
 	}
 	
+	/**
+	 * Uses a statement to commit changes done to the database
+	 * 
+	 */
 	private void commitChanges() {
 		Statement stmt = null;
 		

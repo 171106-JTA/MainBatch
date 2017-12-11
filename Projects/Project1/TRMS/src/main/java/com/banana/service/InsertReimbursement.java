@@ -18,6 +18,17 @@ import com.revature.log.Logging;
 
 public class InsertReimbursement {
 	
+	/**
+	 * Inserts the reimbursement request into the database
+	 * Calculates the actual reimbursement amount based on a table
+	 * 
+	 * @param request object contains needed parameters
+	 * @param response object contains the message to client
+	 * 
+	 * @return boolean to determine success
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public static boolean request(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		UpdateDAOImpl udao = new UpdateDAOImpl();
 		HttpSession session = request.getSession();
@@ -66,6 +77,16 @@ public class InsertReimbursement {
 	
 	}
 	
+	/**
+	 * Calculates the actual reimbursement amount
+	 * 
+	 * @param cost inputed cost of event
+	 * @param udao contains the conversion method
+	 * @param event the event id needed to find the percentage
+	 * @param currAmount the available amount of user
+	 * 
+	 * @return the result or -1 if the reimbursement exceeded the available amount
+	 */
 	private static double calcActualCost(double cost, UpdateDAOImpl udao, int event, double currAmount) {
 		double percent = udao.getPercentage(event);
 		
@@ -78,6 +99,13 @@ public class InsertReimbursement {
 		return result;
 	}
 	
+	/**
+	 * Converts a string to localdatetime
+	 * 
+	 * @param s string to convert to the LocalDateTime object
+	 * 
+	 * @return LocalDateTime, or null in case of exception
+	 */
 	public static LocalDateTime convert(String s) {
 		DateTimeFormatter format = DateTimeFormatter.ofPattern(("MM-dd-yyyy HH:mm"));
 		LocalDateTime ldt = null;

@@ -18,18 +18,20 @@ public class GetEmployeeRequest extends HttpServlet {
 	//TODO session retention issue; when you back up to the login, the session is saved as intended but this screws up the new logined in user
 	
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Get data from all employees
+	 * 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		System.out.println("get");
+		
 		if(!session.isNew()) {
 			GetEmployeeData.getAllData(response);
 		}
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * Gets data for a specific employee
+	 * 
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();

@@ -1,3 +1,9 @@
+/**
+ * For validation of dates
+ * 
+ * @param str possible date
+ * @returns boolean
+ */
 function checkDashesAndColon(str){
 	var dashes = str.match(/-/g);
 	var colon = str.match(/:/g);
@@ -11,7 +17,11 @@ function checkDashesAndColon(str){
 }
 
 
-
+/**
+ * Validate the reimbursement form for date and cost
+ * 
+ * @returns
+ */
 function validateRequestForm(){
 	var form = document.forms["reimburserequest"];
 	var cost = form["cost"].value;
@@ -67,6 +77,12 @@ function validateRequestForm(){
 	}
 	return true;
 }
+/**
+ * Clears the table of old data
+ * 
+ * @param table to be cleared
+ *
+ */
 function clearTable(table){
 	var rows = table.rows.length;
 	for(let i = 1;i < rows;i++){
@@ -74,6 +90,12 @@ function clearTable(table){
 	}
 }
 
+/**
+ * Creates the table data and rows
+ * 
+ * @param numOfRows to be created
+ * @returns array of table elements
+ */
 function createTableData(numOfRows){
 	var arr = [];
 	for(var i = 0; i < numOfRows;i++){
@@ -82,6 +104,16 @@ function createTableData(numOfRows){
 	return arr;
 }
 
+/**
+ * Populates table with data
+ * 
+ * @param arr array of table data elements
+ * @param i index of responses
+ * @param row to be appended to
+ * @param table
+ * @param response the XML elements
+ * @returns
+ */
 function populateData(arr, i, row, table, response){
 	let n = 0;
 	for(td of arr){

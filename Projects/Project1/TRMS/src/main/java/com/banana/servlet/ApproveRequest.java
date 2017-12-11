@@ -27,7 +27,8 @@ public class ApproveRequest extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * For submitting approval data
+	 * 
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
@@ -36,8 +37,6 @@ public class ApproveRequest extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		RequestDispatcher rd = request.getRequestDispatcher("AdminPage.html");
-		
-		
 		
 		if(!session.isNew()) {
 			int roleId = (Integer)session.getAttribute("role");

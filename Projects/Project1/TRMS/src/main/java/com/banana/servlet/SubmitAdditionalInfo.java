@@ -1,9 +1,6 @@
 package com.banana.servlet;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
 import java.util.Scanner;
 
 import javax.servlet.RequestDispatcher;
@@ -29,9 +26,9 @@ public class SubmitAdditionalInfo extends HttpServlet {
 	} 
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * For submitting new data for Info Requests
+	 * 
 	 */
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		RequestDispatcher rd = request.getRequestDispatcher("EmployeePage.html");

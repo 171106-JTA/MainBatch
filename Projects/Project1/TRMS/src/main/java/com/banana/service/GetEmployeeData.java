@@ -13,6 +13,15 @@ import com.revature.log.Logging;
 
 public class GetEmployeeData {
 	
+	/**
+	 * Gets the Employee data and writes the data to XML
+	 * AJAX is used to request this data and parse it for display
+	 * 
+	 * @param response object that is sent back to the client
+	 * @param empId id of employee
+	 * 
+	 * @throws IOException
+	 */
 	public static void getEmployeeData(HttpServletResponse response, int empId) throws IOException{
 		
 		ReimbursementDAOImpl rdao = new ReimbursementDAOImpl();
@@ -42,6 +51,12 @@ public class GetEmployeeData {
 		
 	}
 	
+	/**
+	 * Gets all the reimbursement request data and sends it via AJAX
+	 * 
+	 * @param response object contains the XML results
+	 * @throws IOException
+	 */
 	public static void getAllData(HttpServletResponse response) throws IOException{
 		
 		ReimbursementDAOImpl rdao = new ReimbursementDAOImpl();

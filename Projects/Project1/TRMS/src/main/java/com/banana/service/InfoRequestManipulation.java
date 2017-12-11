@@ -13,6 +13,12 @@ import com.banana.dao.UpdateDAOImpl;
 import com.revature.log.Logging;
 
 public class InfoRequestManipulation {
+	
+	/**
+	 * Inserts a info request into the database
+	 * 
+	 * @param rrId id of the reimbursement
+	 */
 	public static void insert(int rrId) {
 		UpdateDAOImpl udao = new UpdateDAOImpl();
 		EmployeeDAOImpl dao = new EmployeeDAOImpl();
@@ -20,12 +26,26 @@ public class InfoRequestManipulation {
 		udao.insertInfoRequest(rrId, empId);
 	}
 	
+	/**
+	 * Updates the info request in the database
+	 * 
+	 * @param irId id of the info request
+	 * @param part Blob to be inserted
+	 * @param addedinfo String to be inserted
+	 */
 	public static void update(int irId, Part part, String addedinfo) {
 		UpdateDAOImpl udao = new UpdateDAOImpl();
 		udao.updateInfoRequest(irId, addedinfo, part);
 		Logging.startLogging("Information Request: " + irId + " has been updated");
 	}
 	
+	/**
+	 * AJAX process to get Info request of a particular employee
+	 * 
+	 * @param response contains the XML for AJAX
+	 * @param requesteeId the id of the information provider
+	 * @throws IOException
+	 */
 	public static void getInfoRequests(HttpServletResponse response, int requesteeId) throws IOException{
 		
 		EmployeeDAOImpl dao = new EmployeeDAOImpl();
@@ -55,6 +75,12 @@ public class InfoRequestManipulation {
 	}
 	
 
+	/**
+	 * Gets all the Info requests for the admin
+	 * 
+	 * @param response contains the XML response to be displayed
+	 * @throws IOException
+	 */
 	public static void getAllInfoRequests(HttpServletResponse response) throws IOException{
 		
 		EmployeeDAOImpl dao = new EmployeeDAOImpl();

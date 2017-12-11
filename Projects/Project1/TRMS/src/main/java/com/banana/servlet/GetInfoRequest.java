@@ -19,7 +19,10 @@ import com.banana.service.InfoRequestManipulation;
 public class GetInfoRequest extends HttpServlet {
 	
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Get Info Requests:
+	 * Specific for employee
+	 * All for admin
+	 * 
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -39,7 +42,8 @@ public class GetInfoRequest extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * Inserts a Info Request into database
+	 * 
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
