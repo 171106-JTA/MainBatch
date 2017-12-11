@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Servlet Filter implementation class LogoutFilter
+ * Invalidate session on logout
  */
 public class LogoutFilter implements Filter {
 

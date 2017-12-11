@@ -9,17 +9,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.revature.services.Service;
 
 /**
- * Servlet implementation class GetUserInfo
- * Get name and money information of the current user
- * 
+ * Servlet implementation class NewCost
+ * Adjust cost and repayment of an account based on user input
  */
-public class GetUserInfo extends HttpServlet {
+public class NewCost extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetUserInfo() {
+    public NewCost() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,7 +28,7 @@ public class GetUserInfo extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Service.getUserInfo(request,response);
+		Service.newCost(request, response);
 	}
 
 	/**

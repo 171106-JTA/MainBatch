@@ -1,6 +1,8 @@
 package com.revature.servlets;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -9,17 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.revature.services.Service;
 
 /**
- * Servlet implementation class GetUserInfo
- * Get name and money information of the current user
- * 
+ * Servlet implementation class infoHold
+ * Add an information hold to an application
  */
-public class GetUserInfo extends HttpServlet {
+public class infoHold extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetUserInfo() {
+    public infoHold() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,8 +29,9 @@ public class GetUserInfo extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		Service.getUserInfo(request,response);
+		Service.infoHold(request,response);
+		RequestDispatcher rd = request.getRequestDispatcher("approve.html"); 
+		rd.include(request, response);
 	}
 
 	/**

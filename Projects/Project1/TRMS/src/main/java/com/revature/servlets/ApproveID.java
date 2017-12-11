@@ -13,6 +13,7 @@ import com.revature.services.Service;
 
 /**
  * Servlet implementation class ApproveID
+ * Approve application based on user and application status
  */
 public class ApproveID extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -32,7 +33,8 @@ public class ApproveID extends HttpServlet {
 		int approved_id=Integer.parseInt(request.getParameter("activeID"));
 		HttpSession session= request.getSession();
 		int user_id=(int)session.getAttribute("id");
-		Service.approveApp(approved_id,user_id);
+		String reason= (String)session.getAttribute("accReason");
+		Service.approveApp(approved_id,user_id, reason);
 		RequestDispatcher rd = request.getRequestDispatcher("approve.html");
 		rd.include(request, response);
 	}

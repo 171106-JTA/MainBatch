@@ -15,6 +15,7 @@ import com.revature.services.Service;
 
 /**
  * Servlet implementation class Login
+ * If username and password match a record in the database, redirect user to appropiate account page based on status and save id to session
  */
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -36,33 +37,31 @@ public class Login extends HttpServlet {
 		String pword=(String)request.getParameter("password");
 			
 		boolean validLogin= Service.checkLogin(uname,pword);
-		if(validLogin)
+		if(validLogin)//if information matchess a record
 		{
 			TRMSDao dao= new TRMSDao();
 			int id= dao.getId(uname);
-			System.out.println(id);
 			
 			HttpSession session = request.getSession();
 			session.invalidate();//invalidate existing session on new login
 			session=request.getSession();
 			
-			session.setAttribute("id", id);
+			session.setAttribute("id", id);//save id to session
 
-			if(Service.canApprove(id))
+			if(Service.canApprove(id))//if benco, chair, or supervisor
 			{
 				RequestDispatcher rd = request.getRequestDispatcher("accountSup.html"); 
 				rd.include(request, response);
 			}
-			else
+			else//base employee
 			{
 				RequestDispatcher rd = request.getRequestDispatcher("account.html");
 				rd.include(request, response);
 			}
 			
 		}
-		else
+		else//input not matching any records
 		{
-			System.out.println("not working");
 			RequestDispatcher rd = request.getRequestDispatcher("login.html");
 			rd.include(request, response);
 		}	

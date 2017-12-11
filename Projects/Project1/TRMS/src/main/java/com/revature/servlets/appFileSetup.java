@@ -12,6 +12,7 @@ import com.revature.services.Service;
 
 /**
  * Servlet implementation class appFileSetup
+ * Load information of appropriate files to appFile page
  */
 public class appFileSetup extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -29,7 +30,6 @@ public class appFileSetup extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Service.appFileSetup(request, response);
-
 	}
 
 	/**

@@ -1,27 +1,46 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
+	<head>
+		<meta charset="UTF-8">
 
-<title>Insert title here</title>
-</head>
-<body>
-	<h1>Approvals</h1>
-	<p id="empty">Empty</p>
-	<form method="post">
-		<span>
-			<input type="number" name="activeID" required>
-			<button type="submit" formaction="GetFile">Review</button>
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="resources/CSS/base.css">
+		<script src="resources/JavaScript/approveGrade.js"></script>
+		<title>Grades/Presentations</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row well">
+				<h1>Approve Grades/Presentations</h1>
+				<h4 id="empty"></h4>
+			</div>
+			<div class="row well">
+				<div class="col-xs-6">
+					<form method="post">
+						<span>
+							<input type="number" name="activeID" onchange="checkInput()" required>
+							<button type="submit" id="review" formaction="GetFile" disabled>Review</button>
+							<button type="submit" id="approve" formaction="GradeApprove" disabled>Approve</button>
+						</span>
+					</form>
+				</div>
+				<div class="col-xs-4"></div>
+				<div class="col-xs-2">
+					<form action="accountSup.html"><input type="submit" value="Back"></form>
+				</div>
+			</div>
+			<div class="row well">
+				<table id="grades" name="files" border="1">
+				<tr>
+					<th>App ID</th><th>First Name</th><th>Last Name</th><th>File Name</th><th>Passing Grade</th><th>Require Presentation</th><th>Passed</th><th>Presentation Approved</th>
+				</tr>
+				</table>
+			</div>	
 			
-		</span>
-	</form>
-	
-	<table id="files" name="files" border="1">
-	<tr>
-		<th>App ID</th><th>First Name</th><th>Last Name</th><th>File Name</th><th>Passing Grade</th><th>Require Presentation</th><th>Passed</th><th>Presentation Approved</th>
-	</tr>
-	</table>	
-	<form action="accountSup.html"><input type="submit" value="Back"></form>
-	<script src="resources/JavaScript/approveGrade.js"></script>
-</body>
+		</div>
+	</body>
 </html>

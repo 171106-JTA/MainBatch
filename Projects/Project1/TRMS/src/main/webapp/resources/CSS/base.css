@@ -1,0 +1,16 @@
+@charset "ISO-8859-1";
+body {
+	background-color:#666699;
+}
+.well {
+	background-color:#daffb3;
+}
+.container{
+	height:100%;
+}
+table { 
+    background-color:#ddcf89;
+}
+th,td {
+    text-align: center;
+}

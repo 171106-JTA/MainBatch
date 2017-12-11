@@ -10,6 +10,7 @@ import com.revature.services.Service;
 
 /**
  * Servlet implementation class GradeSetup
+ * Load file information of grade/presentation files which can be approved by the user
  */
 public class GradeSetup extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -26,6 +27,7 @@ public class GradeSetup extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/xml");
 		Service.GradeSetup(request, response);
 	}
 

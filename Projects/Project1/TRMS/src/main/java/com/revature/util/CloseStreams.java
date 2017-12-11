@@ -6,7 +6,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+/**
+ * Utility class to close resources
+ * @author Xvier Garibay
+ *
+ */
 public class CloseStreams {
 	public static void close(Statement stmt)
 	{

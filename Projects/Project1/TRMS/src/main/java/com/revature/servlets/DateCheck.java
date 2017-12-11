@@ -12,6 +12,7 @@ import com.revature.services.Service;
 
 /**
  * Servlet implementation class DateCheck
+ * Auto approve applications which have not been dealt with within a week and reset repayment awarded on beginning of a year
  */
 public class DateCheck extends HttpServlet {
 	private static final long serialVersionUID = 1L;

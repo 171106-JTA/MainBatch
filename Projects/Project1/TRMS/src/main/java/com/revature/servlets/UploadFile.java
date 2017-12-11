@@ -18,6 +18,10 @@ import javax.servlet.http.Part;
 import com.revature.dao.TRMSDao;
 import com.revature.util.ConnectionUtil;
 
+/**
+ * Servlet implementation class UploadFile
+ * Add file to the database with an id to link it to a specific application
+ */
 @MultipartConfig
 public class UploadFile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -33,24 +37,22 @@ public class UploadFile extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		TRMSDao dao= new TRMSDao();
 		try(Connection conn = ConnectionUtil.getConnection();)
 		{	
+			String description= (String)request.getParameter("description");
 			String gradeCheck= (String)request.getParameter("gradeCheck");
 			int id=Integer.parseInt(request.getParameter("activeID"));
-			// Part list (multi files).
             for (Part part : request.getParts()) {
                 String fileName = extractFileName(part);
                 if (fileName != null && fileName.length() > 0) {
                     // File data
                     InputStream is = part.getInputStream();
                     // Write to file
-                    this.writeToDB(conn, fileName, is, id);
+                    this.writeToDB(conn, fileName, is, id, description);
                 }
             }
-            System.out.println("GRADECHECK: " + gradeCheck);
             if(gradeCheck.equals("grade"))
             {
 	            ArrayList<Integer> fileIds= dao.getFileIds();
@@ -68,37 +70,50 @@ public class UploadFile extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("errorMessage", "Error: " + e.getMessage());
-            System.out.println("EROROROROROR");
         }
     }
- 
+	/**
+	 * Extract file name from the file information
+	 * @param part
+	 * @return String - file name
+	 */
     private String extractFileName(Part part) {
-        // form-data; name="file"; filename="C:\file1.zip"
-        // form-data; name="file"; filename="C:\Note\file2.zip"
         String contentDisp = part.getHeader("content-disposition");
         String[] items = contentDisp.split(";");
         for (String s : items) {
             if (s.trim().startsWith("filename")) {
-                // C:\file1.zip
-                // C:\Note\file2.zip
                 String clientFileName = s.substring(s.indexOf("=") + 2, s.length() - 1);
                 clientFileName = clientFileName.replace("\\", "/");
                 int i = clientFileName.lastIndexOf('/');
-                // file1.zip
-                // file2.zip
                 return clientFileName.substring(i + 1);
             }
         }
         return null;
     }
+    
+    /**
+     * Add file to the database and mark application as having a grade/presentation input
+     * @param conn - connection to database
+     * @param fileName - name of the file
+     * @param is - data within the file
+     * @param id - application id to attach file to
+     * @param description - description of what is in the file
+     * @throws SQLException
+     */
+    private void writeToDB(Connection conn, String fileName, InputStream is, int id, String description) throws SQLException {
  
-    private void writeToDB(Connection conn, String fileName, InputStream is, int id) throws SQLException {
- 
-        String sql = "Insert into app_files(app_id, file_name, file_data) values (?,?,?) ";
+        String sql = "Insert into app_files(app_id, file_name, file_data, file_description) values (?,?,?,?)";
         PreparedStatement pstm = conn.prepareStatement(sql);
         pstm.setInt(1, id);
         pstm.setString(2, fileName);
         pstm.setBlob(3, is);
+        pstm.setString(4, description);
+        pstm.executeUpdate();
+        
+        //remove info hold
+        sql = "update app_status set info_hold=0 where app_id=?";
+        pstm = conn.prepareStatement(sql);
+        pstm.setInt(1, id);
         pstm.executeUpdate();
     }
  
@@ -106,7 +121,6 @@ public class UploadFile extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

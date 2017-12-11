@@ -13,6 +13,7 @@ import com.revature.services.Service;
 
 /**
  * Servlet implementation class RejectID
+ * Reject application in a manner based on user and application status
  */
 public class RejectID extends HttpServlet {
 	private static final long serialVersionUID = 1L;

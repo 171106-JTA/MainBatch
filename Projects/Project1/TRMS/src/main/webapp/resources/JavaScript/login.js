@@ -1,5 +1,5 @@
 
-window.onload = function(){
+window.onload = function(){//update files based on date
 	var url = "DateCheck";
 	var xhr = new XMLHttpRequest();
 
@@ -14,6 +14,3 @@ window.onload = function(){
 	xhr.send(null);
 }
 
-function get(s){
-	return document.getElementById(s);
-}

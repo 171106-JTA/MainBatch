@@ -1,25 +1,24 @@
 package com.revature.servlets;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.revature.services.Service;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class GetUserInfo
- * Get name and money information of the current user
- * 
+ * Servlet implementation class specificApp
  */
-public class GetUserInfo extends HttpServlet {
+public class specificApp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetUserInfo() {
+    public specificApp() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,8 +27,11 @@ public class GetUserInfo extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		Service.getUserInfo(request,response);
+		HttpSession session= request.getSession();
+		int app=Integer.parseInt(request.getParameter("activeID"));
+		session.setAttribute("application", app);
+		RequestDispatcher rd = request.getRequestDispatcher("specificApp.html");
+		rd.include(request, response);
 	}
 
 	/**

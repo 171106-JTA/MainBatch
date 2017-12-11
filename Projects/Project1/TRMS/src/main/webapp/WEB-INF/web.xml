@@ -19,15 +19,6 @@
     <url-pattern>/Login</url-pattern>
   </servlet-mapping>
   <filter>
-    <display-name>LoginFilter</display-name>
-    <filter-name>LoginFilter</filter-name>
-    <filter-class>com.revature.filters.LoginFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>LoginFilter</filter-name>
-    <url-pattern>/LoginFilter</url-pattern>
-  </filter-mapping>
-  <filter>
     <display-name>LogoutFilter</display-name>
     <filter-name>LogoutFilter</filter-name>
     <filter-class>com.revature.filters.LogoutFilter</filter-class>
@@ -165,5 +156,65 @@
   <servlet-mapping>
     <servlet-name>Account</servlet-name>
     <url-pattern>/Account</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GradeApprove</display-name>
+    <servlet-name>GradeApprove</servlet-name>
+    <servlet-class>com.revature.servlets.GradeApprove</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GradeApprove</servlet-name>
+    <url-pattern>/GradeApprove</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CancelRequest</display-name>
+    <servlet-name>CancelRequest</servlet-name>
+    <servlet-class>com.revature.servlets.CancelRequest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CancelRequest</servlet-name>
+    <url-pattern>/CancelRequest</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>NewCost</display-name>
+    <servlet-name>NewCost</servlet-name>
+    <servlet-class>com.revature.servlets.NewCost</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NewCost</servlet-name>
+    <url-pattern>/NewCost</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>infoHold</display-name>
+    <servlet-name>infoHold</servlet-name>
+    <servlet-class>com.revature.servlets.infoHold</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>infoHold</servlet-name>
+    <url-pattern>/infoHold</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>specificApp</display-name>
+    <servlet-name>specificApp</servlet-name>
+    <servlet-class>com.revature.servlets.specificApp</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>specificApp</servlet-name>
+    <url-pattern>/specificApp</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SpecificAppSetup</display-name>
+    <servlet-name>SpecificAppSetup</servlet-name>
+    <servlet-class>com.revature.servlets.SpecificAppSetup</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SpecificAppSetup</servlet-name>
+    <url-pattern>/SpecificAppSetup</url-pattern>
   </servlet-mapping>
 </web-app>

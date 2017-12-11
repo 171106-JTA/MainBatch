@@ -1,10 +1,10 @@
 var valid;
 window.onload = function(){
-	var url = "appFileSetup";
+	var url = "SpecificAppSetup";
 	var xhr = new XMLHttpRequest();
 
-	xhr.onreadystatechange = function(){//fill table and create list of valid inputs
-		if(xhr.readyState == 4 && xhr.status == 200){
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4 && xhr.status == 200){//fill table and create list of valid inputs
 			var temp="";
 			var xmlText = xhr.responseXML;
 			
@@ -48,7 +48,7 @@ window.onload = function(){
 	xhr.send(null);
 }
 
-function checkInput(){//check input for validity
+function checkInput(){//check for valid inputs
 	var found=false;
 	for(let x=0; x<valid.length-1;x++){
 		if(get("activeID").value==valid[x])

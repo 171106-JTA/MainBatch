@@ -1,7 +1,11 @@
 package com.revature.beans;
 
 import java.sql.Blob;
-
+/**
+ * Bean to hold file information
+ * @author Xavier Garibay
+ *
+ */
 public class Attachment {
 	String name;
 	Blob data;

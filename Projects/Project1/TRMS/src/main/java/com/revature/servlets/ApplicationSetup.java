@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.revature.services.Service;
 
 /**
- * Servlet implementation class Application
+ * Servlet implementation class ApplicationSetup
+ * Set user info into apply page
  */
 public class ApplicationSetup extends HttpServlet {
 	private static final long serialVersionUID = 1L;

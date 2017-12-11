@@ -1,27 +1,69 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Review Requests</title>
-<script src="resources/JavaScript/approve.js"></script>
-</head>
-<body>
-	<h1>Approvals</h1>
-	<form action="Account"><input type="submit" value="Back"></form>
-	<p id="empty">Empty</p>
-	<form method="post">
-		<span>
-			<input type="number" name="activeID" required>
-			<button type="submit" formaction="ApproveID">Approve</button>
-			<span>           Reason to Reject:</span>
-			<input type="text" name="reason">
-			<button type="submit" formaction="RejectID">Reject</button>
-		</span>
-	</form>
-	<table id="requests" name="requests" border="1">
-	<tr>
-		<th>Request ID</th><th>First Name</th><th>Last Name</th><th>Event Name</th><th>Event Cost</th><th>Event Type</th><th>Repayment Left</th><th>Normal Repayment</th><th>Other</th><th>Approve</th><th>Revoke</th>
-	</tr>
-	</table>
-</body>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<title>Review Requests</title>
+
+			<!-- Bootstrap -->
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+			<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+			
+			<link rel="stylesheet" type="text/css" href="resources/CSS/base.css">
+			<script src="resources/JavaScript/approve.js"></script>
+		</head>
+	<body>
+	<div class="container">
+		<div class="row well">
+			<h1>Approval account</h1>		
+			<h4 id="empty"></h4>
+		</div>
+		<div class="row well">
+			<div class="row">
+				<form method="post">
+					<div class="col-sm-4">
+						<p>Account #:</p>
+						<input type="number" id="activeID" name="activeID" onchange="checkInput()" required>
+						<p><b>Files:</b></p>
+						<input type="submit" id="reviewFiles" formaction="specificApp" value="Review Application Files" disabled><br><br>
+						<input type="submit" id="infoHold" formaction="infoHold" value="Request Additional Information" disabled>
+					</div>
+					<div class="col-sm-4">
+						<h3>Approve/Reject:</h3>
+						<p>Reason to Accept:</p>
+						<input type="text" name="accReason">
+						<button type="submit" id="accept" formaction="ApproveID" disabled>Approve</button>
+						<br>
+						<p>Reason to Reject:</p>
+						<input type="text" name="reason">
+						<button type="submit" id="reject" formaction="RejectID" disabled>Reject</button>
+					</div>
+					<div class="col-sm-4">
+						<h3>Adjust Application:</h3>
+						<p>Change Repayment:</p>
+						<input type="number" name="newCost">
+						<button type="submit" id="cost" formaction="NewCost" disabled>New Cost</button>
+					</div>
+				</form>
+			</div>
+			<div class="row">
+				<br>
+				<div class="col-xs-5"></div>
+				<div class="col-xs-1">
+					<form action="Account"><input type="submit" value="Back"></form>
+				</div>
+			</div>
+		</div>
+		<div class="row well">
+			<div class="col-xs-3"></div>
+			<div class="col-xs-6">
+				<table class="table-bordered" id="requests" name="requests">
+				<tr>
+					<th>Request ID</th><th>First Name</th><th>Last Name</th><th>Event Name</th><th>Event Cost</th><th>Event Type</th><th>Repayment Left</th><th>Normal Repayment</th>
+				</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	</body>
 </html>

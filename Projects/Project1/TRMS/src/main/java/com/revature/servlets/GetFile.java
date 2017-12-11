@@ -18,6 +18,7 @@ import com.revature.beans.Attachment;
 import com.revature.util.ConnectionUtil;
 /**
  * Servlet implementation class GetFile
+ * Gets a file from the database for review
  */
 public class GetFile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -46,13 +47,10 @@ public class GetFile extends HttpServlet {
 	        }
 	        // file1.zip, file2.zip
 	        String fileName = attachment.getName();
-	        System.out.println("File Name: " + fileName);
+	        
 	 
-	        // abc.txt => text/plain
-	        // abc.zip => application/zip
-	        // abc.pdf => application/pdf
 	        String contentType = this.getServletContext().getMimeType(fileName);
-	        System.out.println("Content Type: " + contentType);
+	        
 	        response.setHeader("Content-Type", contentType);
 	 
 	        response.setHeader("Content-Length", String.valueOf(attachment.getData().length()));
@@ -77,6 +75,13 @@ public class GetFile extends HttpServlet {
 	       }
 	   }
 	 
+		/**
+		 * Get file information from database
+		 * @param conn
+		 * @param id - file id
+		 * @return Attachment - file information
+		 * @throws SQLException
+		 */
 	   private Attachment getAttachmentFromDB(Connection conn, int id) throws SQLException {
 	       String sql = "Select file_name, file_data, file_description from app_files where file_id = ?";
 	       Attachment file=null;

@@ -7,27 +7,41 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		
+		<link rel="stylesheet" type="text/css" href="resources/CSS/base.css">
 		<script src="resources/JavaScript/account.js"></script>
 		<title>Approvable</title>
 	</head>
 	<body>
-		<div class="container" style="background-color:blue">
-			<h3>Welcome <span id="fname"></span> <span id="lname"></span>. You currently can reimburse $<span id="repay"></span></h3>
-			<form action="apply.html">
-				<input type="submit" value="Apply for a Reimbursement">
-			</form>
-			<form action="addToApp.html">
-				<input type="submit" value="Add Materials to Application">
-			</form>
-			<form id="approve" action="approve.html">
-				<input type="submit" value="Approve Requests">
-			</form>
-			<form id="approveGrade" action="approveGrade.html">
-				<input type="submit" value="Approve Grades/Presentations">
-			</form>
-			<form id="logout" action="login.html">
-				<input type="submit" value="Logout">
-			</form>
+		<div class="container well fill">
+			<div class="row">
+				<h2>Welcome <span id="fname"></span> <span id="lname"></span>. You currently can reimburse $<span id="repay"></span></h2>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<h4>General actions:</h4>
+					<form action="apply.html">
+						<input type="submit" value="Apply for a Reimbursement">
+					</form>
+					<br>
+					<form action="addToApp.html">
+						<input type="submit" value="Add Materials to Application">
+					</form>
+					<br>
+					<form id="logout" action="login.html">
+						<input type="submit" value="Logout">
+					</form>
+				</div>
+				<div class="col-sm-6">
+					<h4>Administrative actions:</h4>
+					<form id="approve" action="approve.html">
+						<input type="submit" value="Approve Requests">
+					</form>
+					<br>
+					<form id="approveGrade" action="approveGrade.html">
+						<input type="submit" value="Approve Grades/Presentations">
+					</form>
+				</div>
+			</div>
 		</div>
 	</body>
 </html>

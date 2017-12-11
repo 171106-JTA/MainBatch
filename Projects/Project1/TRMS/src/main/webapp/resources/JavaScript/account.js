@@ -1,4 +1,4 @@
-window.onload = function(){
+window.onload = function(){//get name and money info of user and fill page
 	var url = "GetUserInfo";
 	var xhr = new XMLHttpRequest();
 
@@ -28,7 +28,7 @@ window.onload = function(){
 	xhr.send(null);
 }
 
-function RepayLeft(award, pend){
+function RepayLeft(award, pend){//calculate expected repayment left
 	
 	var x=parseInt(award);
 	var y=parseInt(pend);
@@ -38,6 +38,6 @@ function RepayLeft(award, pend){
 	return z;
 }
 
-function get(s){
+function get(s){//funcion to simplify typing document.getElementById
 	return document.getElementById(s);
 }

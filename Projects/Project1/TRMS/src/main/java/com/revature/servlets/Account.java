@@ -13,6 +13,7 @@ import com.revature.services.Service;
 
 /**
  * Servlet implementation class Account
+ * Used in redirection of site to correct account page
  */
 public class Account extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,6 +32,7 @@ public class Account extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session= request.getSession();
 		int id= (int)session.getAttribute("id");
+		//send site to page based on status
 		if(Service.canApprove(id))
 		{
 			RequestDispatcher rd = request.getRequestDispatcher("accountSup.html"); 

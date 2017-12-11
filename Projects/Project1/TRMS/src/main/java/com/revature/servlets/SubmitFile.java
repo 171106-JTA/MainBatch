@@ -12,6 +12,7 @@ import com.revature.services.Service;
 
 /**
  * Servlet implementation class SubmitFile
+ * Get all files created by user and load their information onto the page
  */
 public class SubmitFile extends HttpServlet {
 	private static final long serialVersionUID = 1L;

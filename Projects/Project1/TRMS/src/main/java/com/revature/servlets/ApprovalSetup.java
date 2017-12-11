@@ -12,6 +12,7 @@ import com.revature.services.Service;
 
 /**
  * Servlet implementation class ApprovalSetup
+ * Load application information of applications user can approve
  */
 public class ApprovalSetup extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -29,7 +30,7 @@ public class ApprovalSetup extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		boolean credCheck=Service.approvalSetup(request, response);
-		if(!credCheck) {
+		if(!credCheck) {//ensure user is authorized to approve
 			RequestDispatcher rd = request.getRequestDispatcher("login.html");
 			rd.include(request, response);
 		}
