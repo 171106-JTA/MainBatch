@@ -153,6 +153,7 @@ public class RequestService {
                 break;
             default:
                 doFinalApproval(response, approver, theRequest, amount);
+                return;
         }
         if (finalStatus == null) {
             response.setStatus(401);
@@ -171,14 +172,15 @@ public class RequestService {
 
         response.setStatus(401);
         response.setContentType("application/json");
-        if (!(requestStatus.equals(RequestStatus.AWAITING_GRADE) && approverRank.equals(EmployeeRank.BENCO)))
+        if (!(requestStatus.equals(RequestStatus.AWAITING_GRADE) && approverRank.equals(EmployeeRank.BENCO))) {
             response.getWriter().println("invalid credentials for request");
+            return;
+        }
 
         if (grantAmount != null && grantAmount > theRequest.getFunding()) {
             theRequest.setExceedsFunds(true);
             theRequest.setFunding(grantAmount);
         }
-
         response.setStatus(200);
         persistRequestApproval(approver, theRequest, RequestStatus.GRANTED, null);
     }
@@ -248,10 +250,11 @@ public class RequestService {
 
     private static void persistRequestApproval(Employee approver, ReimbursementRequest theRequest, String finalStatus,
                                                String reason) throws NonExistentIdException, DuplicateIdException {
-        requestDao.update(theRequest);
         historyDao.save(new RequestHistory(
                 theRequest, approver, null, theRequest.getStatus(), new RequestStatus(finalStatus),
                 LocalDateTime.now(), reason
         ));
+        theRequest.setStatus(new RequestStatus(finalStatus));
+        requestDao.update(theRequest);
     }
 }

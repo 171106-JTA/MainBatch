@@ -101,7 +101,6 @@ public class RequestFileServlet extends HttpServlet {
             response.setStatus(400);
             out.print("invalid request id");
         }
-
     }
 
 }

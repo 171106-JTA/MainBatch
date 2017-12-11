@@ -11,7 +11,7 @@ import {CredentialsService} from "../../services/credentials.service";
 import {HttpClient} from "@angular/common/http";
 
 const updateRequestUrl = 'http://localhost:8085/trms/employee/updateRequest';
-const requestFileUrl = 'http://localhost:8085/trms/employee/requestFile';
+const requestFileUrl = 'http://localhost:8085/trms/files';
 
 
 @Component({
@@ -89,11 +89,13 @@ export class RequestDetailsComponent {
                 this.requestService.getRequest(+params['id']).subscribe(
                     request => {
                         this.request = request;
-                        this.canUpdate = this.employee.email === this.request.filerEmail;
-                        this.canApprove = (this.employee.rank === 'Supervisor') ||  // todo filter this better
-                            (this.employee.rank === 'Department Head') ||
-                            (this.employee.rank === 'Benefits Coordinator');
+                        this.canUpdate = this.employee.email == this.request.filerEmail;
+                        this.canApprove = this.employee.rank != 'Regular' &&
+                            (this.employee.rank == 'Supervisor') ||  // todo filter this better
+                            (this.employee.rank == 'Department Head') ||
+                            (this.employee.rank == 'Benefits Coordinator' && this.request.status === 'Awaiting Benefits Coordinator Approval' || this.request.status == 'Awaiting Event Grade and Review');
                         this.populateForm();
+                        console.log('-------------------------------' + this.canUpdate, this.canApprove + '----------------------------------------');
                     },
                     err => {
                         console.log('error fetching id param');
