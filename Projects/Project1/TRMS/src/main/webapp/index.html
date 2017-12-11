@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome</title>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- JavaScript -->
+  <script src="resources/javascript/main.js"></script>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row" >
+      <div class="col-sm-2"></div>
+      <div class="col-sm-4">
+        <h3>SignUp</h3>
+        <form id="SignUp" action="Registration" method="POST">
+          <table>
+            <tr>
+              <td>First Name:</td>
+              <td>
+                <input type="text" name="fname" placeholder="fname" required>
+              </td>
+            </tr>
+            <tr>
+              <td>Last Name:</td>
+              <td>
+                <input type="text" name="lname" placeholder="lname" required>
+              </td>
+            </tr>
+            <tr>
+              <td>Username:</td>
+              <td>
+                <input type="text" name="usrnm" placeholder="usrnm" required>
+              </td>
+            </tr>
+            <tr>
+              <td>Password:</td>
+              <td>
+                <input type="password" name="pswrd" placeholder="pswrd" required>
+              </td>
+            </tr>
+            <tr>
+              <td>Email:</td>
+              <td>
+                <input type="text" name="email" placeholder="email" required >
+              </td>
+            </tr>
+            <tr>
+              <td>Phone Number:</td>
+              <td>
+                <input type="text" name="phone" placeholder="phone" required>
+              </td>
+            </tr>
+            <tr>
+              <td>Department:</td>
+              <td>
+                <input type="text" name="dept" placeholder="dept" required>
+              </td>
+            </tr>
+          </table>
+          <input type="submit" value="CREATE">
+          </form>
+          <p id="registered"></p>
+        </div>
+        <div class="col-sm-4">
+          <h3>Login</h3>
+          <form id="Login" action="Login" method="POST">
+            <table>
+              <tr>
+                <td>Username:</td>
+              <td>
+                <input type="text" name="usrnm" placeholder="usrnm" required>
+              </td>
+            </tr>
+            <tr>
+              <td>Password:</td>
+              <td>
+                <input type="password" name="pswrd" placeholder="pswrd" required>
+              </td>
+            </tr>
+          </table>
+          <input type="submit" value="LOGIN">
+          </form>
+        </div>
+        <div class="col-sm-2"></div>
+      </div>
+    </div>
+    
+</body>
+
+</html>
