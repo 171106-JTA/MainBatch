@@ -93,9 +93,9 @@ public class GetWidget {
 			case "dashboard":
 				return WIDGETPATH + "message.widget.html";
 			case "account":
-				return WIDGETPATH + "account.widget.html";
+				return WIDGETPATH + "account.admin.widget.html";
 			case "users":
-				return WIDGETPATH + "user.base.admin.html";
+				return WIDGETPATH + "user.base.master.html";
 			case "form":
 				return WIDGETPATH + "form.admin.html";
 			case "formslist":
@@ -110,9 +110,9 @@ public class GetWidget {
 			case "dashboard":
 				return WIDGETPATH + "message.widget.html";
 			case "account":
-				return WIDGETPATH + "account.widget.html";
+				return WIDGETPATH + "account.admin.widget.html";
 			case "users":
-				return WIDGETPATH + "user.base.admin.html";
+				return WIDGETPATH + "user.base.master.html";
 			case "form":
 				return WIDGETPATH + "form.admin.html";
 			case "formslist":

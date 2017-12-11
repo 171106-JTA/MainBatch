@@ -30,112 +30,114 @@
 			}
 		</style>
 		<script type="text/javascript">
-			 execute = function () { 
-				 // Assign data to fields
-				 var assignData = function () {
-					var user = data.user;
-					
-					// fill-fields 
-					$("#acctStatus").text(user.role);
-					$("#acctDepartment").text(user.department);
-					$("#acctUserName").text(user.username);
-					$("#acctFirstName").text(user.firstName);
-					$("#acctLastName").text(user.lastName);
-					$("#acctState").text(user.state);
-					$("#acctCity").text(user.city);
-					$("#acctAddress").text(user.address);
-					$("#acctEmail").text(user.email);
-					$("#accPhoneNumber").text(user.phoneNumber);
-				}
+		// Assign data to fields
+		 var assignData = function () {
+			var user = data.user;
+			
+			data.update();
+			
+			// fill-fields 
+			$("#acctStatus").text(user.role);
+			$("#acctDepartment").text(user.department);
+			$("#acctUserName").text(user.username);
+			$("#acctFirstName").text(user.firstName);
+			$("#acctLastName").text(user.lastName);
+			$("#acctState").text(user.state);
+			$("#acctCity").text(user.city);
+			$("#acctAddress").text(user.address);
+			$("#acctEmail").text(user.email);
+			$("#accPhoneNumber").text(user.phoneNumber);
+			$("#accBalance").text("$" + user.balance);
+		}
+		
+		// assign btn event handles 
+		var assignButtonEventHandlers = function() {
+			var hideFields;
+			var showFields;
+			
+			hideFields = function () {
+				// Enable buttons
+				$("#acctEditBtn").prop('disabled', false);
 				
-				// assign btn event handles 
-				var assignButtonEventHandlers = function() {
-					var hideFields;
-					var showFields;
+				// show placeholder fields
+				$("#acctPasswordPlaceholder").show();
+				
+				// hide input fields 
+				$("#acctNewUserNameRow").hide();
+				$("#acctPasswordContainer").hide();
+				$("#acctRetypePasswordRow").hide();
+				$("#acctEmailRow").hide();
+				
+				// clear input fields
+				$("#acctInfo").find("input").val("");
+				
+				// disable self and update btn
+				$("#acctCancelBtn").prop('disabled', true);
+				$("#acctUpdateBtn").prop('disabled', true);
+			};
+			
+			showFields = function () {
+				// Enable buttons
+				$("#acctCancelBtn").prop('disabled', false);
+				$("#acctUpdateBtn").prop('disabled', false);
+				
+				// hide placeholder fields
+				$("#acctPasswordPlaceholder").hide();
+				
+				// show hidden fields 
+				$("#acctNewUserNameRow").show();
+				$("#acctPasswordContainer").show();
+				$("#acctRetypePasswordRow").show();
+				$("#acctEmailRow").show();
+				
+				// disable self
+				$("#acctEditBtn").prop('disabled', true);
+			}
+			
+			
+			$("#acctEditBtn").on("click", showFields);
+			$("#acctCancelBtn").on("click", hideFields);
+			$("#acctUpdateBtn").on("click", function (){
+				var pw = $("#acctPasswordInput").val().trim();
+				var error = $("#acctPasswordMismatch");
+				var options;
+
+				// Ensure user entered the same input
+				if (pw !== $("#acctRetypePasswordInput").val().trim()) {
+					error.text("Paswords do not match");
+				} else {
+					// Reset error message
+					error.text("");
 					
-					hideFields = function () {
-						// Enable buttons
-						$("#acctEditBtn").prop('disabled', false);
-						
-						// show placeholder fields
-						$("#acctPasswordPlaceholder").show();
-						
-						// hide input fields 
-						$("#acctNewUserNameRow").hide();
-						$("#acctPasswordContainer").hide();
-						$("#acctRetypePasswordRow").hide();
-						$("#acctEmailRow").hide();
-						
-						// clear input fields
-						$("#acctInfo").find("input").val("");
-						
-						// disable self and update btn
-						$("#acctCancelBtn").prop('disabled', true);
-						$("#acctUpdateBtn").prop('disabled', true);
-					};
-					
-					showFields = function () {
-						// Enable buttons
-						$("#acctCancelBtn").prop('disabled', false);
-						$("#acctUpdateBtn").prop('disabled', false);
-						
-						// hide placeholder fields
-						$("#acctPasswordPlaceholder").hide();
-						
-						// show hidden fields 
-						$("#acctNewUserNameRow").show();
-						$("#acctPasswordContainer").show();
-						$("#acctRetypePasswordRow").show();
-						$("#acctEmailRow").show();
-						
-						// disable self
-						$("#acctEditBtn").prop('disabled', true);
+					// Perpare request options 
+					options = {
+							"transtype": "UPDATEACCOUNT",
+							"username": $("#acctNewUserNameInput").val().trim(),
+							"password": pw,
+							"email": $("#acctEmailInput").val().trim()
 					}
 					
+					// hide fields 
+					hideFields();
 					
-					$("#acctEditBtn").on("click", showFields);
-					$("#acctCancelBtn").on("click", hideFields);
-					$("#acctUpdateBtn").on("click", function (){
-						var pw = $("#acctPasswordInput").val().trim();
-						var error = $("#acctPasswordMismatch");
-						var options;
-
-						// Ensure user entered the same input
-						if (pw !== $("#acctRetypePasswordInput").val().trim()) {
-							error.text("Paswords do not match");
-						} else {
-							// Reset error message
-							error.text("");
+					// send request
+					Util.send(options, function (response) {
+							// Update client side information 
+							data.user = response;
 							
-							// Perpare request options 
-							options = {
-									"transtype": "UPDATEACCOUNT",
-									"username": $("#acctNewUserNameInput").val().trim(),
-									"password": pw,
-									"email": $("#acctEmailInput").val().trim()
-							}
-							
-							// hide fields 
-							hideFields();
-							debugger;
-							
-							// send request
-							Util.send(options, function (response) {
-									// Update client side information 
-									data.user = response;
-									
-									// update screen
-									assignData();
-									data.update();
-								},  
-								function (error) {
-									console.log(error);
-								}
-							);
+							// update screen
+							assignData();
+							data.update();
+						},  
+						function (error) {
+							console.log(error);
 						}
-					});
-				 }
-				
+					);
+				}
+			});
+		 }
+		
+			 execute = function () { 
 				// Build info icons
 				Util.buildInfoIcons($("#acctInfo"));
 				
@@ -217,6 +219,10 @@
 					<tr>
 						<th>Phone number: </th>
 						<td> <b><span id="accPhoneNumber"></span></b></td>
+					</tr>
+					<tr>
+						<th>Remaining: </th>
+						<td> <b><span id="accBalance"></span></b></td>
 					</tr>
 				</table>
 				<!-- ENABLE INFORMATION EDITING  -->

@@ -1,30 +1,33 @@
 package com.revature.businessobject;
 
+import java.sql.Date;
+
 public class FormStatus implements BusinessObject {
 	private Integer id;
 	private Integer formId;
 	private Integer processedBy;
 	private Integer statusId;
-	private Float originalEstimate;
 	private Float reimbursement;
 	private String description;
+	private Date timestamp;
 	
 	public FormStatus() {
 		// do nothing
 	}
 
 	public FormStatus(Integer id, Integer formId, Integer processedBy,
-			Integer statusId, Float originalEstimate, Float reimbursement,
-			String description) {
+			Integer statusId, Float reimbursement, String description, Date timestamp) {
 		super();
 		this.id = id;
 		this.formId = formId;
 		this.processedBy = processedBy;
 		this.statusId = statusId;
-		this.originalEstimate = originalEstimate;
 		this.reimbursement = reimbursement;
+		this.timestamp = timestamp;
 		setDescription(description);
 	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -32,6 +35,14 @@ public class FormStatus implements BusinessObject {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Date getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(Date timestamp) {
+		this.timestamp = timestamp;
 	}
 
 	public Integer getFormId() {
@@ -56,14 +67,6 @@ public class FormStatus implements BusinessObject {
 
 	public void setStatusId(Integer statusId) {
 		this.statusId = statusId;
-	}
-
-	public Float getOriginalEstimate() {
-		return originalEstimate;
-	}
-
-	public void setOriginalEstimate(Float originalEstimate) {
-		this.originalEstimate = originalEstimate;
 	}
 
 	public Float getReimbursement() {

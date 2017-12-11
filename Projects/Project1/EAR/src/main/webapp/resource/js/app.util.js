@@ -138,7 +138,7 @@ var initUtil = function () {
 						node.append(option);
 					});
 				}, function (error){
-					console.log(error);s
+					console.log(error);
 				});
 			},
 			

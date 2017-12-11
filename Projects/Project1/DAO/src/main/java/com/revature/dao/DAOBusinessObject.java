@@ -107,6 +107,46 @@ public final class DAOBusinessObject {
 		return records;
 	}
 	
+	public static List<BusinessObject> load(Connection conn, BusinessObject item) {
+		String sql = "SELECT * FROM " + map.get(item.getClass().getSimpleName());
+		List<String> params = prepareParameters(item, true);
+		List<BusinessObject> records = null;
+		PreparedStatement statement = null;
+		ResultSet res = null;
+
+		// If Where clause needed 
+		if (params.size() > 0) 
+			sql += " WHERE " + String.join(" AND ", params);
+		
+		logger.debug("preforming query " + sql + " ...");
+
+		// Attempt to load records from database
+		try {
+			// Get handle to statement 
+			statement = conn.prepareStatement(sql);
+			
+			// Sanitize/Parameterize statement
+			assignClauseValues(statement, item, 1);
+			
+			// Perform query
+			res = statement.executeQuery();
+			
+			// Transform database records into Java Objects
+			records = factory.getBusinessObject(res, item.getClass());
+		} catch (SQLException | ClassCastException e) {
+			logger.debug("query failed " + sql + ", message=" + e);
+			e.printStackTrace();
+		} catch (Exception e){
+			logger.debug("query failed " + sql + ", message=" + e);
+			e.printStackTrace();
+		}finally {
+			close(statement);
+			close(res);
+		}
+
+		return records;
+	}
+	
 	/**
 	 * Loads items which matches argument (null values ignored)
 	 * @param item - what to check records against
@@ -240,6 +280,42 @@ public final class DAOBusinessObject {
 	}
 	
 	/**
+	 * Adds item to database
+	 * @param item - what to save in database
+	 * @return 1 if item added to database else 0
+	 */
+	public static int insert(Connection conn, BusinessObject item) {
+		String sql = "INSERT INTO " + map.get(item.getClass().getSimpleName());
+		List<String> identifiers = getIdentifiers(item);
+		List<String> params = prepareParameters(item, false);
+		PreparedStatement statement = null;
+		int total = 0;
+		
+		// Build insert statement
+		sql += " (" + String.join(",", identifiers) + ") VALUES(" + String.join(",", params) +")";
+		
+		logger.debug("preforming insert " + sql + " ...");
+
+		// Attempt to insert record into database
+		try {
+			// Get handle to statement 
+			statement = conn.prepareStatement(sql);
+			
+			// Sanitize parameterized statement
+			assignClauseValues(statement, item, 1);
+			
+			// Perform transaction
+			total = statement.executeUpdate();
+		} catch (SQLException | ClassCastException e) {
+			logger.debug("insert failed " + sql + ", message=" + e);
+			e.printStackTrace();
+		}
+
+		return total;
+	}
+	
+	
+	/**
 	 * Attempts to update existing record
 	 * @param toUpdate - what to update
 	 * @param newValues - new values for record
@@ -331,6 +407,19 @@ public final class DAOBusinessObject {
 		}
 
 		return total;
+	}
+	
+	public static Blob createBlob(Connection conn, byte[] bytes) {
+		Blob blob = null;
+		
+		try {
+			blob = conn.createBlob();
+			blob.setBytes(1, bytes);
+		} catch (SQLException e) {
+			
+		}
+		
+		return blob;
 	}
 	
 	///

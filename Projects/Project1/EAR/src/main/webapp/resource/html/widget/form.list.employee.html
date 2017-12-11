@@ -10,15 +10,15 @@
 					}
 			
 					Util.send(options, function (response) {
-						var table = $("#userformTable");
+						var table = $("#userFormTable");
 						var row;
-						
+						debugger;
 						// build user list 
 						$.each(response, function (i, form){
 							// Assemble data
 							row = $("<tr></tr>");
-							row.append($("<td>" + form.id + "</td>"));
-							row.append($("<td>" + form.statusid + "</td>"));
+							row.append($("<td>" + form.formId + "</td>"));
+							row.append($("<td>" + form.status + "</td>"));
 							
 							// Append work done to table 
 							table.append(row);

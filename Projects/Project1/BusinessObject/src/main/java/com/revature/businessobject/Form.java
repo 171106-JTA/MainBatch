@@ -7,12 +7,15 @@ public class Form implements BusinessObject {
 	private Integer userId;
 	private Integer departmentId;
 	private Integer eventStateCityId;
+	private Integer gradingTypeId;
+	private Integer reimbursementRateId;
 	private String firstName;
 	private String lastName;
 	private String phoneNumber;
 	private String address;
 	private String email;
-	private Date eventDateTime;
+	private Date eventDateTimeStart;
+	private Date eventDateTimeEnd;
 	private Float eventCost;
 	private String description;
 	private Date timeOffBegin;
@@ -23,16 +26,19 @@ public class Form implements BusinessObject {
 	}
 
 	public Form(Integer id, Integer userId, Integer departmentId,
-			Integer eventStateCityId, String firstName, String lastName,
-			String phoneNumber, String address, String email,
-			Date eventDateTime, Float eventCost, String description,
+			Integer eventStateCityId, Integer gradingTypeId, Integer reimbursementRateId,
+			String firstName, String lastName, String phoneNumber, String address, String email,
+			Date eventDateTimeStart, Date eventDateTimeEnd, Float eventCost, String description,
 			Date timeOffBegin, Date timeOffEnd) {
 		super();
 		this.id = id;
 		this.userId = userId;
 		this.departmentId = departmentId;
 		this.eventStateCityId = eventStateCityId;
-		this.eventDateTime = eventDateTime;
+		this.gradingTypeId = gradingTypeId;
+		this.reimbursementRateId = reimbursementRateId;
+		this.eventDateTimeStart = eventDateTimeStart;
+		this.eventDateTimeEnd = eventDateTimeEnd;
 		this.eventCost = eventCost;
 		this.timeOffBegin = timeOffBegin;
 		this.timeOffEnd = timeOffEnd;
@@ -42,6 +48,38 @@ public class Form implements BusinessObject {
 		setAddress(address);
 		setEmail(email);	
 		setDescription(description);
+	}
+
+	public Integer getGradingTypeId() {
+		return gradingTypeId;
+	}
+
+	public void setGradingTypeId(Integer gradingTypeId) {
+		this.gradingTypeId = gradingTypeId;
+	}
+
+	public Integer getReimbursementRateId() {
+		return reimbursementRateId;
+	}
+
+	public void setReimbursementRateId(Integer reimbursementRateId) {
+		this.reimbursementRateId = reimbursementRateId;
+	}
+
+	public Date getEventDateTimeStart() {
+		return eventDateTimeStart;
+	}
+
+	public void setEventDateTimeStart(Date eventDateTimeStart) {
+		this.eventDateTimeStart = eventDateTimeStart;
+	}
+
+	public Date getEventDateTimeEnd() {
+		return eventDateTimeEnd;
+	}
+
+	public void setEventDateTimeEnd(Date eventDateTimeEnd) {
+		this.eventDateTimeEnd = eventDateTimeEnd;
 	}
 
 	public Integer getId() {
@@ -114,14 +152,6 @@ public class Form implements BusinessObject {
 
 	public void setEmail(String email) {
 		this.email = BusinessObject.validateString(email);
-	}
-
-	public Date getEventDateTime() {
-		return eventDateTime;
-	}
-
-	public void setEventDateTime(Date eventDateTime) {
-		this.eventDateTime = eventDateTime;
 	}
 
 	public Float getEventCost() {

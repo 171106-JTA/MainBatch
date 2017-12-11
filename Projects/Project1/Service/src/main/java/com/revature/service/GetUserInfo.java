@@ -20,6 +20,7 @@ public class GetUserInfo {
 		UserInfo info;
 		User user;
 		
+		try {
 		// Build view list
 		for (BusinessObject record : records) {
 			user = (User)record;
@@ -33,11 +34,15 @@ public class GetUserInfo {
 				view.setFirstName(temp.getFirstName());
 				view.setEmail(temp.getEmail());
 				view.setRole(temp.getRole());
+				view.setUserId(temp.getUserId());
 			}
 		
 			views.add(view);
 		}
-		
+		}	
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 		return views;
 	}
 	
@@ -58,7 +63,8 @@ public class GetUserInfo {
 
 			// set user data for view
 			view.setUsername(user.getUsername());
-
+			view.setUserId(userId);
+			
 			// get User role information
 			clause = "WHERE id=" + user.getRoleId();
 
@@ -151,26 +157,33 @@ public class GetUserInfo {
 			view.setAddress(info.getAddress());
 			view.setPhoneNumber(info.getPhoneNumber());
 
-			clause = "WHERE (code='CITY-CODE' AND value IN (SELECT description FROM CODE_LIST WHERE id="
-					+ info.getStateCityId() + ")) OR "
-					+ "  (code='US-STATE' AND value IN (SELECT value FROM CODE_LIST WHERE id="
-					+ info.getStateCityId() + "))";
-
-			// Get city and state values
-			if ((records = DAOBusinessObject.load(CodeList.class, clause))
-					.size() == 2) {
-				for (BusinessObject item : records) {
-					data = (CodeList) item;
-
-					if (data.getCode().equals("US-STATE"))
-						view.setState(data.getDescription());
-					else
-						view.setCity(data.getDescription());
+			try {
+				clause = "WHERE (code='CITY-CODE' AND value IN (SELECT description FROM CODE_LIST WHERE id="
+						+ info.getStateCityId() + ")) OR "
+						+ "  (code='US-STATE' AND value IN (SELECT value FROM CODE_LIST WHERE id="
+						+ info.getStateCityId() + "))";
+	
+				// Get city and state values
+				if ((records = DAOBusinessObject.load(CodeList.class, clause))
+						.size() == 2) {
+					for (BusinessObject item : records) {
+						data = (CodeList) item;
+	
+						if (data.getCode().equals("US-STATE"))
+							view.setState(data.getDescription());
+						else
+							view.setCity(data.getDescription());
+					}
 				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 			
 			// Get department data 
 			setUserViewDepartmentData(view, userId);
+			
+			// user balance
+			view.setBalance(GetUserBalance.getUserBalanceById(userId));
 		}
 	}
 	
@@ -179,6 +192,7 @@ public class GetUserInfo {
 		CodeList data; 
 		String clause;
 		
+		try {
 		// Build where clause based on role
 		switch (view.getRole()) {
 			case "EMPLOYEE":
@@ -188,10 +202,8 @@ public class GetUserInfo {
 				clause = "WHERE id in (SELECT departmentid FROM EAR_BENEFIT_COORDINATOR WHERE bencoid=" + userId + ")"; 
 				break;
 			case "HEAD-SUPERVISOR":
-				clause = "WHERE id=-9999";
-				break;
 			case "SUPERVISOR":
-				clause = "WHERE id=-9999";
+				clause = "WHERE id in (SELECT departmentid FROM EAR_BENEFIT_COORDINATOR WHERE bencoid in (SELECT bencoid FROM EAR_SUPERVISOR WHERE supervisorid=" + userId + "))"; 
 				break;
 			default:
 				clause = "WHERE id=-9999";
@@ -203,6 +215,9 @@ public class GetUserInfo {
 		if ((records = DAOBusinessObject.load(CodeList.class, clause)).size() == 1) {
 			data = (CodeList)records.get(0);
 			view.setDepartment(data.getValue());
+		}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

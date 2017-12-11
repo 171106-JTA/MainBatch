@@ -1,6 +1,21 @@
 <!--  ACCOUNT INFORMATION FOR EMPLOYEES  -->
 <body>
 	<script type="text/javascript">
+			///
+			//	INITIALIZERS
+			///
+	
+			var initEventHandlers = function () {
+				
+				
+				// Button event handlers 
+				$("#listFilter").on("click", onFilterClick);
+			}
+			
+			///
+			//	HELPER METHODS 
+			///
+	
 			var loadFormData = function () {
 				var options;
 				
@@ -8,20 +23,23 @@
 					"transtype": "GETALLFORMS"
 				}
 		
+				debugger;
 				Util.send(options, function (response) {
-					var table = $("#userformTable");
-					var row;
 					
-					// build user list 
-					$.each(response, function (i, form){
-						// Assemble data
-						row = $("<tr></tr>");
-						row.append($("<td>" + form.id + "</td>"));
-						row.append($("<td>" + form.statusid + "</td>"));
+					if (response) {
 						
-						// Append work done to table 
-						table.append(row);
-					});
+						var table = $("#userFormTable");
+						var row;
+						
+						// cache response
+						table[0].forms = response
+						
+						// build user list 
+						$.each(response, function (i, form){
+							// Append work done to table 
+							table.append(buildRow(form));
+						});
+					}
 				});
 			}
 	
@@ -48,11 +66,57 @@
 				});
 			}
 	
+			var buildRow = function (form) {
+				var row;
+				
+				// Assemble data
+				row = $("<tr></tr>");
+				row.append($("<td>" + form.formId + "</td>"));
+				row.append($("<td>" + form.status + "</td>"));
+				row.append($("<td>" + form.department + "</td>"));
+				row.append($("<td>" + form.firstName + " " + form.lastName + "</td>"));
+				row.append($("<td>" + form.eventDateTimeStart + "</td>"));
+				row.append($("<td>" + form.eventDateTimeEnd + "</td>"));
+				
+				return row;
+			}
+			
+			///
+			//	EVENT HANDLERS
+			///
+			
+			var onFilterClick = function () {
+				var table = $("#userFormTable")
+				var forms = table[0].forms;
+				var status = $("#applicationStatus").val();
+				var department = $("#applicationDepartment").val();
+				var head = $(table.find("tr")[0]).clone(true);
+				var rowOk;
+
+				// clean table
+				table.empty();
+				table.append(head);
+				
+				$.each(forms, function (i, form){
+					rowOk = true;
+					rowOk = status ? form.status === status : rowOk;
+					rowOk = department ? (rowOk && form.department === department) : rowOk;
+					
+					if (rowOk)
+						table.append(buildRow(form));					
+				});
+				
+			}
+			
+			///
+			//	EXECUTE
+			///
+			
 			execute = function(type) {
 				if (type === "screen") {
 					loadFormData();
 					loadFilterData();
-					
+					initEventHandlers();
 					
 					// Build info icons
 					Util.buildInfoIcons($("div[is-drawer]"));
@@ -75,13 +139,6 @@
 			</div>
 		</div>
 			
-		<div class="row">
-			<div class="col-xs-12">
-				<label>Role:<span info-icon="Role of admin who updated form"></span></label>
-				<select id="applicationRole" class="form-control"></select>
-			</div>
-		</div>
-			
 		<!-- SPLIT  -->
 		<div style="height: 5px; padding-top: 5px; padding-bottom: 5px;">
 			<hr class="hr-divider" style="margin: 0px;">
@@ -89,7 +146,7 @@
 		
 		<div class="row">
 			<div class="col-xs-12">
-				<button class="btn-primary form-control"><span class="fa fa-search"></span> Search</button>
+				<button id="listFilter" class="btn-primary form-control"><span class="fa fa-search"></span> Filter</button>
 			</div>
 		</div>
 	</div>
@@ -136,7 +193,7 @@
 				
 				<table id="userFormTable" class="info-table">
 					<tr>
-						<th>Form ID</th><th>STATUS</th><th>ROLE</th><th>WHO</th><th>WHEN</th>
+						<th>Form ID</th><th>STATUS</th><th>DEPARTMENT</th><th>WHO</th><th>EVENT START</th><th>EVENT END</th>
 					</tr>
 				</table>
 			</div>

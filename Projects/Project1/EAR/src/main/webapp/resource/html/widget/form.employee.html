@@ -14,7 +14,7 @@
 				Util.buildInfoIcons(screen);
 				
 				// init datepickers
-				picker.datetimepicker();
+				picker.datetimepicker({ format: 'DD/MM/YYYY' });
 				
 				loadFilterData();
 			}
@@ -23,23 +23,26 @@
 				// assign pill events 
 				$("#frmPills").find("li").on("click", onPillClick);
 				
+				// modals
+				$("#frmGradeAttachments").on("click", onOpenGradeModal);
+				$("#frmOtherAttachments").on("click", onOpenOtherModal);
+				
+				// buttons
+				$("#frmNewForm").on("click", onNewFormClick);
+				$("#frmSearchForm").on("click", onSearchFormClick);
+				$("#frmClear").on("click", onClearFormClick);
+				$("#frmSubmit").on("click", onSubmitFormClick);
+				
+				// input
+				$("#frmApplicationCost").on("input", onUpdateEstimate);
+				
+				// select
+				$("#frmReimbursementType").change(onUpdateEstimate);
 			}
 			
 			///
 			//	HELPERS
 			///
-			
-			var loadFormData = function () {
-				var options;
-				
-				options = {
-					"transtype": "GETFORM"
-				}
-		
-				Util.send(options, function (response) {
-				});
-			}
-	
 			
 			var loadFilterData = function () {
 				// Build select filter 
@@ -66,6 +69,195 @@
 					"node" : $("#frmApplicationCity"),
 					"display" : "description"
 				});
+				
+				Util.buildCodeList({
+					"code" : "GRADING-TYPE",
+					"node" : $("#frmGradeScale"),
+					"display" : "value description"
+				});
+			}
+			
+			var enableForm = function (enabled) {
+				var screen = $("div[is-screen]");
+				
+				// If state set to diabled 
+				if (!enabled) {
+					screen.find("input").prop("disabled", true);
+					screen.find("textarea").prop("disabled", true);
+					screen.find("select").prop("disabled", true);
+					screen.find("button").prop("disabled", true);
+				} else {
+					// Fields in form which are always disabled 
+					var disabledAlways = getAlwaysDisabledFields();
+					
+					// enabled form
+					screen.find("textarea").prop("disabled", false);
+					screen.find("select").prop("disabled", false);
+					screen.find("button").prop("disabled", false);
+					
+					// inputs
+					$.each(screen.find("input").toArray(), function (i, input) {
+						input = $(input);
+						
+						// If not a field which is ment to be disabled always 
+						if (disabledAlways.indexOf(input.attr("id")) < 0) 
+							input.prop("disabled", false);
+					});
+				}
+			}
+			
+			var clearForm = function () {
+				var screen = $("div[is-screen]");
+				
+				// remove all data
+				screen.find("input").val("");
+				screen.find("select").val("");
+				screen.find("textarea").val("");
+				screen.find("#formIdHeader").text("");
+
+				$("#frmGradeFileList").empty();
+				$("#frmOtherFileList").empty();
+			}
+			
+			
+			var setFormData = function (params) {
+				var screen = $("div[is-screen]");
+				
+				// Set Form data
+				screen.find("#formIdHeader").text(params.formId ? "#" + params.formId : "");
+				screen.find("#frmUserId").val(params.userId);
+				screen.find("#frmFirstName").val(params.firstName);					
+				screen.find("#frmLastName").val(params.lastName);					
+				screen.find("#frmPhoneNumber").val(params.phoneNumber);					
+				screen.find("#frmEmail").val(params.email);					
+				screen.find("#frmApplicationDepartment").val(params.department);					
+				screen.find("#frmApplicationStatus").val(params.status || "NEW");						
+				screen.find("#frmReimbursementType").val(params.reimbursementRate || "");					
+				screen.find("#frmApplicationAddress").val(params.address || "");					
+				screen.find("#frmApplicationState").val(params.state || "");					
+				screen.find("#frmApplicationCity").val(params.city || "");					
+				screen.find("#frmEventStartDTPInput").val(params.eventDateTimeStart);					
+				screen.find("#frmEventEndDTPInput").val(params.eventDateTimeEnd);					
+				screen.find("#frmWorkOffStartDTPInput").val(params.timeOffBegin);					
+				screen.find("#frmWorkOffEndDTPInput").val(params.timeOffEnd);					
+				screen.find("#frmGradeScale").val(params.gradingType || "");					
+				screen.find("#frmApplicationCost").val(params.eventCost || 0);					
+				screen.find("#frmDescription").val(params.description || "");											
+				screen.find("#frmApplicationEstimate").val(calculateEstimate());											
+				
+				assignGradeAttachments(params);
+				assignOtherAttachments(params);
+			}
+			
+			
+			var getFormData = function () {
+				var screen = $("div[is-screen]");
+				var data;
+				
+				data = {
+					"userId": screen.find("#frmUserId").val(),
+					"firstName": screen.find("#frmFirstName").val(),					
+					"lastName": screen.find("#frmLastName").val(),				
+					"phoneNumber": screen.find("#frmPhoneNumber").val(),					
+					"email": screen.find("#frmEmail").val(),
+					"department": screen.find("#frmApplicationDepartment").val(),					
+					"status": screen.find("#frmApplicationStatus").val(),						
+					"reimbursementType": screen.find("#frmReimbursementType").val(),				
+					"address": screen.find("#frmApplicationAddress").val(),					
+					"state": screen.find("#frmApplicationState").val(),	
+					"city": screen.find("#frmApplicationCity").val(),				
+					"eventDateTimeStart": screen.find("#frmEventStartDTPInput").val(),					
+					"eventDateTimeEnd": screen.find("#frmEventEndDTPInput").val(),					
+					"timeOffBegin": screen.find("#frmWorkOffStartDTPInput").val(),					
+					"timeOffEnd": screen.find("#frmWorkOffEndDTPInput").val(),					
+					"gradingType": screen.find("#frmGradeScale").val(),				
+					"eventCost": screen.find("#frmApplicationCost").val(),					
+					"description": screen.find("#frmDescription").val(),
+					"gradingAttachments": screen.find("#frmGradeFiles").val(),
+					"otherAttachments": screen.find("#frmOtherFiles").val()
+				};
+				
+				return data;
+			}
+			
+			var calculateEstimate = function () {
+				var screen = $("div[is-screen]");
+				var select = screen.find("#frmReimbursementType");
+				var option = $(select.children().toArray()[select.prop("selectedIndex")]);
+				var eventCost = screen.find("#frmApplicationCost");
+				var cost = 0.0;
+			
+				if (option.attr("desc") && eventCost.val())
+					cost = parseFloat(option.attr("desc")) * eventCost.val();
+				
+				return cost;
+			}
+			
+			var assignGradeAttachments = function (params) {
+				var list = $("#frmGradeFileList");
+				
+				$.each(params.gradeAttachments, function (i, attachment) {
+					list.append(createAttachment({ "fileName": attachment, "id": params.gradeAttachmentIds[i] }));
+				});
+			}
+			
+			var assignOtherAttachments = function (params) {
+				var list = $("#frmOtherFileList");
+				
+				$.each(params.otherAttachments, function (i, attachment) {
+					list.append(createAttachment({ "fileName": attachment, "id": params.otherAttachmentIds[i] }));
+				});
+			}
+			
+			var createAttachment = function (params) {
+				var li = $("<li></li>");
+				
+				li.html(params.fileName);
+				li.attr("id", params.id);
+				li.on("click", onDownloadFile);
+				
+				return li;
+			}
+			
+			var getAlwaysDisabledFields = function () {
+				var fields;
+				
+				fields = [
+					"frmUserId",
+					"frmEmail",
+					"frmFirstName",
+					"frmLastName",
+					"frmApplicationEstimate",
+					"frmPhoneNumber",
+					"frmEstimate",
+					"frmApplicationDepartment",
+					"frmApplicationStatus"
+				];
+				
+				return fields;
+			}
+			
+			var buildStatusList = function (statusList) {
+				var ul = $("#frmStatusList");
+				statusList = statusList || [];
+				
+				$.each(statusList, function (i, status){
+					ul.append(buildStatus(status));
+				});
+			}
+			
+			var buildStatus = function (status) {
+				var template = $("div[update-form-module-template]");
+				var module = template.children().clone(true);
+				
+				// update status select
+				module.find("#frmProcessedBy").val(status.processedBy);
+				module.find("#frmStatus").val(status.status);
+				module.find("#frmStatusTimeStamp").val(status.timestamp);
+				module.find("#frmActualPrice").val(status.reimbursement);
+				module.find("#frmStatusDescription").val(status.description);
+				module.find("#frmOriginalEstimate").val(calculateEstimate());
+				return module;
 			}
 			
 			///
@@ -89,6 +281,129 @@
 				 $("#" + self.attr("page")).fadeIn("normal");
 			}
 			
+			var onOpenOtherModal = function () {
+				$("#otherModal").modal({"show": true});
+			}
+			
+			var onOpenGradeModal = function () {
+				$("#gradeModal").modal({"show": true});
+			}
+			
+			var onNewFormClick = function () {
+				// Clear form
+				onClearFormClick();
+				
+				// enable form 
+				enableForm(true);
+			}
+			
+			
+			var onEditFormClick = function () {
+				
+			}
+			
+			var onSearchFormClick = function () {
+				var options;
+				
+				options = {
+						"transtype": "GETFORM",
+						"formId": $("#frmSearchInput").val()
+				};
+				
+				// disable form
+				enableForm(false);
+				
+				// clear all fields 
+				clearForm();
+				
+				$("#frmStatusList").empty();
+				$("#frmGradeFileList").empty();
+				$("#frmOtherFileList").empty();
+
+				// Attempt to find 
+				Util.send(options, function (response) {
+					if (response) {
+						setFormData(response);
+						$("#frmOtherAttachments").prop("disabled", false);
+						$("#frmGradeAttachments").prop("disabled", false);
+					
+						// Load status
+						options = {
+								"transtype": "GETFORMSTATUS",
+								"formId": response.formId
+						};
+						
+						Util.send(options, function (response){
+							buildStatusList(response);
+						});
+					}
+				});
+			}
+			
+			var onClearFormClick = function () {
+				var user = data.user;
+				var args;
+
+				
+				// set new form data
+				args = {
+					"userId": user.userId,
+					"firstName": user.firstName,
+					"lastName": user.lastName,
+					"email": user.email,
+					"department": user.department,
+					"phoneNumber": user.phoneNumber
+				}
+				
+				// set form data
+				setFormData(args);
+			}
+			
+			var onSubmitFormClick = function () {
+				var options = getFormData();
+				var ul = $("#frmStatusList");
+				
+				options.transtype = "SUBMITFORM";
+				
+				Util.send(options, function (response) {
+					ul[0].form = response;
+					
+					if (response) {
+						setFormData(response);
+						enableForm(false);	
+						setFormData(response);
+						$("#frmOtherAttachments").prop("disabled", false);
+						$("#frmGradeAttachments").prop("disabled", false);
+						
+						$("#frmFormIdSubmit").val(response.formId);	
+						$("#frmOtherFiles").prop("disabled", false);
+						$("#frmGradeFiles").prop("disabled", false);
+						$("#frmFormIdSubmit").prop("disabled", false);
+						$("#frmTranstype").prop("disabled", false);
+						$("#frmSubmitForm").prop("disabled", false);
+						$("#frmSubmitForm").click();
+					}
+				});
+				
+			}
+			
+			
+			var onUpdateEstimate = function () {
+				var screen = $("div[is-screen]");
+				screen.find("#frmApplicationEstimate").val(calculateEstimate());
+			}
+			
+			var onDownloadFile = function () {
+				$("#frmTranstypeDownload").prop("disabled", false);
+				$("#frmFileId").prop("disabled", false);
+				$("#frmFileDownloadSubmit").prop("disabled", false);
+				
+
+				$("#frmTranstypeDownload").val("DOWNLOADFORMFILE");
+				$("#frmFileId").val($(this).attr("id"));
+				$("#frmFileDownloadSubmit").click();
+			}
+			
 			///
 			//	EXECUTE
 			///
@@ -96,7 +411,10 @@
 			execute = function(type) {
 				if (type === "screen") {
 					initHTML();
-					initEventHandlers();
+					initEventHandlers(); 
+					
+					// set form disabled by default
+					enableForm(false);
 				}
 			}
 		</script>
@@ -105,24 +423,23 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<label>Form: <span info-icon="Pull existing form from server"></span></label>
-				<input class="form-control" type="number">
+				<input id="frmSearchInput" class="form-control" type="number">
 			</div>
 		</div>
 		<div style="padding-bottom: 5px;"></div>
 		<div class="row">
 			<div class="col-xs-12">
-				<button class="btn-primary form-control"><span class="fa fa-search"></span> Search</button>
+				<button id="frmSearchForm" class="btn-primary form-control"><span class="fa fa-search"></span> Search</button>
 			</div>
 		</div>
 
 		<!-- SPLIT  -->
-		<div style="height: 5px; padding-top: 5px; padding-bottom: 5px;">
-			<hr class="hr-divider" style="margin: 0px;">
-		</div>
-		
+		<div style="height: 5px;"></div>
+		<hr class="hr-divider" style="margin: 0px;">
+		<div style="height: 5px;"></div>
 		<div class="row">
 			<div class="col-xs-12">
-				<button class="form-control"><span class="fa fa-pencil-square-o"></span> Edit</button>
+				<button id="frmNewForm" class="form-control btn-secondary"><span class="fa fa-plus"></span> New Form</button>
 			</div>
 		</div>
 	</div>
@@ -130,6 +447,15 @@
 
 	<div is-screen>
 		<style>
+			.file-list {
+				list-style: none;
+			}
+		
+			ul[class~='file-list'] > li:hover{
+				border: 1px solid blue;
+			}
+		
+		
 			.user-info-block {
 				min-height: 790px;
 			}
@@ -154,7 +480,7 @@
 			}
 			
 		</style>
-
+	    
 		<!-- USED TO DISPLAY ACCOUNT INFORMATION -->
 		<div class="user-info-block">
 			<div class="form-max-width center-block">
@@ -169,241 +495,272 @@
 				  	<a>Status</a>
 				  </li>
 				</ul>
-				<div id="frmPageForm">
-					<label>Employee Information:</label>
-					<hr class="hr-divider">
-					<div class="row">
-						<div class="col-sm-4">
-							<label>ID: <span info-icon="What is used to idenitify your account"></span></label>
-							<input id="frmUserId" class="form-control" disabled>
+
+					<div id="frmPageForm">
+						<label>Employee Information:</label>
+						<hr class="hr-divider">
+						<div class="row">
+							<div class="col-sm-4">
+								<label>ID: <span info-icon="What is used to idenitify your account"></span></label>
+								<input id="frmUserId" class="form-control" name="userId" disabled>
+							</div>
+							<div class="col-sm-4">
+								<label>First Name:</label>
+								<input id="frmFirstName" class="form-control" name="firstName" disabled>
+							</div>
+							<div class="col-sm-4">
+								<label>Last Name:</label>
+								<input id="frmLastName" class="form-control" name="lastName" disabled>
+							</div>
 						</div>
-						<div class="col-sm-4">
-							<label>First Name:</label>
-							<input id="frmFirstName" class="form-control" disabled>
+						<div class="row">
+							<div class="col-sm-4">
+								<label>Email:</label>
+								<input id="frmEmail" type="email" class="form-control" name="email" disabled>
+							</div>
+							<div class="col-sm-4">
+								<label>Phone number:</label>
+								<input id="frmPhoneNumber" class="form-control" name="phoneNumber" disabled>
+							</div>
+							<div class="col-sm-4">
+								<label>Department:</label>
+								<input id="frmApplicationDepartment" class="form-control" name="department" disabled>
+							</div>
 						</div>
-						<div class="col-sm-4">
-							<label>Last Name:</label>
-							<input id="frmLastName" class="form-control" disabled>
+						
+						<div style="padding-bottom: 5px;"></div>
+						<label>Reimbursement Information: <span info-icon="All fields are **REQUIRED**"></span></label>
+						<hr class="hr-divider">
+						
+						<div class="row">
+							<div class="col-sm-6">
+								<label>Status:</label>
+								<input id="frmApplicationStatus" class="form-control" name="status" disabled/>
+							</div>
+							<div class="col-sm-6">
+								<label>Type:</label>
+								<select id="frmReimbursementType" class="form-control" name="reimbursementType"></select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4">
+								<label>Address: <span info-icon="Event address"></span></label>
+								<input id="frmApplicationAddress" class="form-control" name="address"></select>
+							</div>
+							<div class="col-sm-4">
+								<label>State: <span info-icon="Event State"></span></label>
+								<select id="frmApplicationState" class="form-control" name="state"></select>
+							</div>
+							<div class="col-sm-4">
+								<label>City: <span info-icon="Event City"></span></label>
+								<select id="frmApplicationCity" class="form-control" name="city"></select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<label>Event Start Date: <span info-icon="When does the event begin (Must be 7 days after today)?"></span></label>
+								 <div class="form-group">
+					                <div class='input-group date' id='frmEventStartDTP'>
+					                    <input id="frmEventStartDTPInput" type='text' class="form-control" name="eventDateTimeStart" />
+					                    <span class="input-group-addon">
+					                        <span class="glyphicon glyphicon-calendar"></span>
+					                    </span>
+					                </div>
+					            </div>
+							</div>
+							<div class="col-sm-6">
+								<label>To: <span info-icon="When does the event end?"></span></label>
+								 <div class="form-group">
+					                <div class='input-group date' id='frmEventEndDTP'>
+					                    <input id="frmEventEndDTPInput" type='text' class="form-control" name="eventDateTimeEnd" />
+					                    <span class="input-group-addon">
+					                        <span class="glyphicon glyphicon-calendar"></span>
+					                    </span>
+					                </div>
+					            </div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<label>Time-off Start: <span info-icon="Start day, when you will not be able to come to work?"></span></label>
+								 <div class="form-group">
+					                <div class='input-group date' id='frmWorkOffStartDTP'>
+					                    <input id="frmWorkOffStartDTPInput" type='text' class="form-control" name="timeOffBegin" />
+					                    <span class="input-group-addon">
+					                        <span class="glyphicon glyphicon-calendar"></span>
+					                    </span>
+					                </div>
+					            </div>
+							</div>
+							<div class="col-sm-6">
+								<label>Time-off end: <span info-icon="Last day off from work (You will go to work during the next work-day)"></span></label>
+								 <div class="form-group">
+					                <div class='input-group date' id='frmWorkOffEndDTP'>
+					                    <input id="frmWorkOffEndDTPInput" type='text' class="form-control" name="timeOffEnd"/>
+					                    <span class="input-group-addon">
+					                        <span class="glyphicon glyphicon-calendar"></span>
+					                    </span>
+					                </div>
+					            </div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<label>Grading: <span info-icon="Grading template used by organization"></span></label>
+								<select id="frmGradeScale" class="form-control" name="gradingType"></select>
+							</div>
+							<div class="col-sm-6">
+								<label style="padding-bottom: 5px;"><p></p></label>
+								<button id="frmGradeAttachments" class="form-control btn-secondary" type="button"><span class="fa fa-link"></span> Grade Attachments</button>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<label>Cost: <span info-icon="Total cost for event"></span></label>
+								<input id="frmApplicationCost" type="number" class="form-control" name="eventCost">
+							</div>
+							<div class="col-sm-6">
+								<label>Estimate: <span info-icon="Estimated reimbursement value based on form data and remaining balance"></span></label>
+								<input id="frmApplicationEstimate" class="form-control" disabled>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-sm-12">
+								<label>Description: <span info-icon="Work related description why you should be reimburset for specified amount"></span></label>
+								<textarea id="frmDescription" class="form-control form-description" name="description"></textarea>
+							</div>
+						</div>
+						
+						<div style="padding-bottom: 5px;"></div>
+						<hr class="hr-divider">
+						<div style="padding-bottom: 5px;"></div>
+						
+						<div class="row">
+							<div class="col-sm-6">
+								<button id="frmClear" class="form-control" type="button" ><span class="fa fa-times"></span> Clear</button>
+							</div>
+							<div class="col-sm-6">
+								<button id="frmOtherAttachments"  type="button" class="form-control btn-secondary"><span class="fa fa-link"></span> Other Attachments</button>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<label> </label>
+								<button id="frmSubmit" type="button" class="form-control btn-primary"><span class="fa fa-send"></span> Submit</button>
+							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-sm-4">
-							<label>Email:</label>
-							<input id="frmEmail" type="email" class="form-control" disabled>
-						</div>
-						<div class="col-sm-4">
-							<label>Phone number:</label>
-							<input id="frmFirstName" class="form-control" disabled>
-						</div>
-						<div class="col-sm-4">
-							<label>Department:</label>
-							<input id="frmApplicationDepartment" class="form-control" disabled>
-						</div>
-					</div>
-					
-					<div style="padding-bottom: 5px;"></div>
-					<label>Reimbursement Information: <span info-icon="All fields are **REQUIRED**"></span></label>
-					<hr class="hr-divider">
-					
-					<div class="row">
-						<div class="col-sm-6">
-							<label>Status:</label>
-							<select id="frmApplicationStatus" class="form-control"></select>
-						</div>
-						<div class="col-sm-6">
-							<label>Type:</label>
-							<select id="frmReimbursementType" class="form-control"></select>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-4">
-							<label>Address:</label>
-							<input id="frmApplicationAddress" class="form-control"></select>
-						</div>
-						<div class="col-sm-4">
-							<label>State:</label>
-							<select id="frmApplicationState" class="form-control"></select>
-						</div>
-						<div class="col-sm-4">
-							<label>City:</label>
-							<select id="frmApplicationCity" class="form-control"></select>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-6">
-							<label>Event Start Date: <span info-icon="When does the event begin?"></span></label>
-							 <div class="form-group">
-				                <div class='input-group date' id='frmEventStartDTP'>
-				                    <input type='text' class="form-control" />
-				                    <span class="input-group-addon">
-				                        <span class="glyphicon glyphicon-calendar"></span>
-				                    </span>
-				                </div>
-				            </div>
-						</div>
-						<div class="col-sm-6">
-							<label>To: <span info-icon="When does the event end?"></span></label>
-							 <div class="form-group">
-				                <div class='input-group date' id='frmEventEndDTP'>
-				                    <input type='text' class="form-control" />
-				                    <span class="input-group-addon">
-				                        <span class="glyphicon glyphicon-calendar"></span>
-				                    </span>
-				                </div>
-				            </div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-6">
-							<label>Time-off Start: <span info-icon="Start day, when you will not be able to come to work?"></span></label>
-							 <div class="form-group">
-				                <div class='input-group date' id='frmWorkOffStartDTP'>
-				                    <input type='text' class="form-control" />
-				                    <span class="input-group-addon">
-				                        <span class="glyphicon glyphicon-calendar"></span>
-				                    </span>
-				                </div>
-				            </div>
-						</div>
-						<div class="col-sm-6">
-							<label>Time-off end: <span info-icon="Last day off from work (You will go to work during the next work-day)"></span></label>
-							 <div class="form-group">
-				                <div class='input-group date' id='frmWorkOffEndDTP'>
-				                    <input type='text' class="form-control" />
-				                    <span class="input-group-addon">
-				                        <span class="glyphicon glyphicon-calendar"></span>
-				                    </span>
-				                </div>
-				            </div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-6">
-							<label>Grading: <span info-icon="Grading template used by organization"></span></label>
-							<select id="frmApplicationAddress" class="form-control"></select>
-						</div>
-						<div class="col-sm-6">
-							<label style="padding-bottom: 5px;"><p></p></label>
-							<button id="frmGradingAttachmentsBtn" class="form-control btn-secondary"><span class="fa fa-link"></span> Grade Attachments</button>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-6">
-							<label>Cost: <span info-icon="Total cost for event"></span></label>
-							<input id="frmApplicationCost" class="form-control">
-						</div>
-						<div class="col-sm-6">
-							<label>Estimate: <span info-icon="Estimated reimbursement value based on form data and remaining balance"></span></label>
-							<input id="frmApplicationEstimate" class="form-control" disabled>
-						</div>
-					</div>
-					
-					<div class="row">
-						<div class="col-sm-12">
-							<label>Description: <span info-icon="Work related description why you should be reimburset for specified amount"></span></label>
-							<textarea class="form-control form-description"></textarea>
-						</div>
-					</div>
-					
-					<div style="padding-bottom: 5px;"></div>
-					<hr class="hr-divider">
-					<div style="padding-bottom: 5px;"></div>
-					
-					<div class="row">
-						<div class="col-sm-6">
-							<button id="frmClear" class="form-control"><span class="fa fa-times"></span> Clear</button>
-						</div>
-						<div class="col-sm-6">
-							<button id="frmOtherAttachments" class="form-control btn-secondary"><span class="fa fa-link"></span> Other Attachments</button>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-12">
-							<label> </label>
-							<button id="frmSubmit" class="form-control btn-primary"><span class="fa fa-send"></span> Submit</button>
-						</div>
-					</div>
-				</div>
-			
+				
+				
 				<div id="frmPageStatus" hidden>
 					<label>Application Status - Most recent change is placed on-top</label>
 					<hr class="hr-divider">
-					<ul class="form-status-list"> 
-						<li>
-							<div>
-								<div class="row">
-									<div class="col-sm-4">
-										<label>Processed By: <span info-icon="Who processed/updated application status"></span></label>
-										<input class="form-control" disabled>
-									</div>
-									<div class="col-sm-4">
-										<label>Status: <span info-icon="Application status"></span></label>
-										<select class="form-control" disabled></select>
-									</div>
-									<div class="col-sm-4">
-										<label>Timestamp: <span info-icon="Time when application was updated"></span></label>
-										<input class="form-control" disabled>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-6">
-										<label>Original Estimate: <span info-icon="What was originally calculated on form"></span></label>
-										<input class="form-control" disabled>
-									</div>
-									<div class="col-sm-6">
-										<label>Actual Price: <span info-icon="Price adjusted by admin"></span></label>
-										<input class="form-control" disabled>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-12">
-										<label>Description: <span info-icon="Reasoning behind admin. decision"></span></label>
-										<textarea class="form-control form-description" disabled></textarea>
-									</div>
-								</div>
-								<div style="padding-top:5px;"></div>
-								<hr class="hr-divider">
-							</div>
-						</li>
-						<li>
-							<div>
-								<div class="row">
-									<div class="col-sm-4">
-										<label>Processed By: <span info-icon="Who processed/updated application status"></span></label>
-										<input class="form-control" disabled>
-									</div>
-									<div class="col-sm-4">
-										<label>Status: <span info-icon="Application status"></span></label>
-										<select class="form-control" disabled></select>
-									</div>
-									<div class="col-sm-4">
-										<label>Timestamp: <span info-icon="Time when application was updated"></span></label>
-										<input class="form-control" disabled>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-6">
-										<label>Original Estimate: <span info-icon="What was originally calculated on form"></span></label>
-										<input class="form-control" disabled>
-									</div>
-									<div class="col-sm-6">
-										<label>Actual Price: <span info-icon="Price adjusted by admin"></span></label>
-										<input class="form-control" disabled>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-sm-12">
-										<label>Description: <span info-icon="Reasoning behind admin. decision"></span></label>
-										<textarea class="form-control form-description" disabled></textarea>
-									</div>
-								</div>
-								<div style="padding-top:5px;"></div>
-								<hr class="hr-divider">
-							</div>
-						</li>
+					<ul id="frmStatusList" class="form-status-list"> 
 					</ul>
 				</div>
 			</div>
+			
+			
+			<form id="frmFiles" method="post" action="Dashboard" enctype="multipart/form-data">
+				<!-- Modal -->
+				<div class="modal fade" id="gradeModal" tabindex="-1" role="dialog" aria-labelledby="gradeModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="gradeModalLabel">Grading Scale Attachment Uploads</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				        <input  type="file" id="frmGradeFiles" multiple="multiple" name="gradingAttachments">
+				        <hr class="hr-divider">
+				        <ul id="frmGradeFileList" class="file-list"></ul>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				
+				<div class="modal fade" id="otherModal" tabindex="-1" role="dialog" aria-labelledby="otherModalLabel" aria-hidden="true">
+				  <div class="modal-dialog" role="document">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="otherModalLabel">Other Attachment Uploads</h5>
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				          <span aria-hidden="true">&times;</span>
+				        </button>
+				      </div>
+				      <div class="modal-body">
+				        <input type="file" id="frmOtherFiles" multiple="multiple" name="otherAttachments">
+				        <hr class="hr-divider">
+				        <ul id="frmOtherFileList" class="file-list"></ul>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				<div hidden>
+					    <input name="transtype" value="UPLOADFILES" id="frmTranstype"/>
+						<input name="formId" id="frmFormIdSubmit" />
+						<input type="submit" name="submit" value="submit" id="frmSubmitForm" />
+				</div>
+			</form>
 		</div>
+		
+		<!-- TEMPLATE USED TO REPRESENT STATUS UPDATES -->
+			<div update-form-module-template hidden>
+				<div class="new-status">
+					<div class="row">
+						<div class="col-sm-4">
+							<label>Processed By: <span info-icon="Who processed/updated application status"></span></label>
+							<input id="frmProcessedBy" class="form-control" disabled>
+						</div>
+						<div class="col-sm-4">
+							<label>Status: <span info-icon="Application status"></span></label>
+							<input id="frmStatus" class="form-control">
+						</div>
+						<div class="col-sm-4">
+							<label>Timestamp: <span info-icon="Time when application was updated"></span></label>
+							<input id="frmStatusTimeStamp" class="form-control" disabled>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<label>Original Estimate: <span info-icon="What was originally calculated on form"></span></label>
+							<input id="frmOriginalEstimate" class="form-control" disabled>
+						</div>
+						<div class="col-sm-6">
+							<label>Actual Price: <span info-icon="Price adjusted by admin"></span></label>
+							<input id="frmActualPrice" class="form-control">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-12">
+							<label>Description: <span info-icon="Reasoning behind admin. decision"></span></label>
+							<textarea id="frmStatusDescription" class="form-control form-description"></textarea>
+						</div>
+					</div>
+					<div style="padding-top:5px;"></div>
+					<hr class="hr-divider">
+				</div>
+			</div>
+		
+		<!-- HIDDEN SELECTS USED TO CACHE IMPORTANT DATA -->
+			<div hidden>
+				<select id="frmStatusData"></select>
+			</div>
+			<form  method="post" action="Dashboard">
+				<div hidden>
+					<input name="transtype" value="DOWNLOADFORMFILE" id="frmTranstypeDownload"/>
+					<input name="fileId" id="frmFileId" />
+					<input name="submit" type="submit" value="submit" id="frmFileDownloadSubmit" />
+				</div>
+			</form> 
 	</div>
 </body>

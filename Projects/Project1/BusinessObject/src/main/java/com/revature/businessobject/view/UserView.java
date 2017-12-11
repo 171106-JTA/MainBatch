@@ -1,6 +1,7 @@
 package com.revature.businessobject.view;
 
 public class UserView implements BusinessObjectView {
+	private Integer userId;
 	private String username;
 	private String password;
 	private String role;
@@ -12,6 +13,7 @@ public class UserView implements BusinessObjectView {
 	private String city;
 	private String state;
 	private String department;
+	private Float balance;
 	
 	public UserView() {
 		// do nothing
@@ -20,7 +22,7 @@ public class UserView implements BusinessObjectView {
 	public UserView(String username, String password, String role,
 			String firstName, String lastName, String phoneNumber,
 			String address, String email, String city, String state,
-			String department) {
+			String department, Float balance) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -33,6 +35,35 @@ public class UserView implements BusinessObjectView {
 		this.city = city;
 		this.state = state;
 		this.department = department;
+		this.balance = balance;
+	}
+	
+	public UserView(Integer userId, String username, String password, String role,
+			String firstName, String lastName, String phoneNumber,
+			String address, String email, String city, String state,
+			String department, Float balance) {
+		super();
+		this.userId = userId;
+		this.username = username;
+		this.password = password;
+		this.role = role;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phoneNumber = phoneNumber;
+		this.address = address;
+		this.email = email;
+		this.city = city;
+		this.state = state;
+		this.department = department;
+		this.balance = balance;
+	}
+
+	public Float getBalance() {
+		return balance;
+	}
+
+	public void setBalance(Float balance) {
+		this.balance = balance;
 	}
 
 	public String getUsername() {
@@ -122,6 +153,12 @@ public class UserView implements BusinessObjectView {
 	public void setDepartment(String department) {
 		this.department = department;
 	}
-	
-	
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 }

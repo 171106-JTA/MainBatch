@@ -2,6 +2,7 @@ package com.revature.dao.util;
 
 import java.io.Closeable;
 import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
