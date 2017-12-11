@@ -258,7 +258,7 @@ public class TRMSDao {
 			ps = conn.prepareStatement(sql);
 			x=ps.executeUpdate(sql);
 			//app status - approval status
-			sql="INSERT INTO app_status (urgent, sup_apr, chair_apr, benco_apr, passed, approved, completed, recent_date)"
+			sql="INSERT INTO app_status (urgent, sup_apr, chair_apr, benco_apr, passed, approved, completed, info_hold, recent_date)"
 					+" values(0,0,0,0,0,0,0,0,?)";//default values except for date
 			ps= conn.prepareStatement(sql);
 			Date date = new Date(Calendar.getInstance().getTime().getTime());
@@ -281,6 +281,9 @@ public class TRMSDao {
 			ps.setString(5,request.getParameter("eventType"));
 			ps.setString(6,request.getParameter("gradeType"));
 			int cost=Integer.parseInt(request.getParameter("cost"));
+			x=ps.executeUpdate();
+			sql="insert into app_pass(grade_file_id, grade_input_mark) values(0,0)";
+			ps= conn.prepareStatement(sql);
 			x=ps.executeUpdate();
 			//get user's current repay_pending
 			sql="Select repay_pending from employee where emp_id=?";
@@ -342,7 +345,7 @@ public class TRMSDao {
 			x=ps.executeUpdate(sql);
 			
 			//app status
-			sql="INSERT INTO app_status (urgent, sup_apr, chair_apr, benco_apr, passed, approved, completed, recent_date)"
+			sql="INSERT INTO app_status (urgent, sup_apr, chair_apr, benco_apr, passed, approved, completed, info_hold, recent_date)"
 					+" values(0,0,0,0,0,0,0,0,?)";
 			ps= conn.prepareStatement(sql);
 			Date date = new Date(Calendar.getInstance().getTime().getTime());
@@ -378,6 +381,9 @@ public class TRMSDao {
 			int cost=Integer.parseInt(request.getParameter("cost"));
 			x=ps.executeUpdate();
 			
+			sql="insert into app_pass(grade_file_id, grade_input_mark) values(0,0)";
+			ps= conn.prepareStatement(sql);
+			x=ps.executeUpdate();
 			//Get and update pending repayment
 			sql="Select repay_pending from employee where emp_id=?";
 			ps= conn.prepareStatement(sql);
@@ -535,7 +541,7 @@ public class TRMSDao {
 			e1.printStackTrace();
 		}
 		try(Connection conn = ConnectionUtil.getConnection();){
-			String sql ="SELECT department FROM employee where emp_id=?";
+			String sql ="SELECT DEPARTMENT FROM employee where emp_id=?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
 			rs= ps.executeQuery();		

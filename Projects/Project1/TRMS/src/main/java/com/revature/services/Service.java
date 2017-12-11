@@ -114,7 +114,9 @@ public class Service {
 	public static boolean approvalSetup(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session= request.getSession();
 		int id= (int)session.getAttribute("id");
+		
 		int[] position= dao.isBencoOrChair(id);
+		System.out.println(position);
 		boolean superior= dao.checkSuperior(id);
 		ArrayList<Integer> apps= new ArrayList<>();
 		if(position[0]==1)//if benco
@@ -137,6 +139,7 @@ public class Service {
 		PrintWriter out = response.getWriter();
 		if(apps.size()!=0)//if at least one application can be approved			
 		{
+			System.out.println(apps.size());
 			String myXml = "<root>";
 			
 			for (int app : apps) {
@@ -188,6 +191,7 @@ public class Service {
 	private static ArrayList<Integer> chairSetup(int dept, int id) {
 		ArrayList<int[]> apps= dao.getAppsStatus();//get all applications information
 		ArrayList<int[]> remove= new ArrayList<>();
+		System.out.println(apps.size());
 		for(int[] app: apps)
 		{
 			if(app[2]!=0)//check if approved by chair, don't check sup in case chair is sup
@@ -199,16 +203,21 @@ public class Service {
 		for(int[] app: remove)
 			apps.remove(app);
 		remove= new ArrayList<>();
+		System.out.println(apps.size());
 		for(int[] app:apps)//for all applications left, check if in user's department
 		{
-			int emp_id=dao.getEmpIdofApp(app[0]);//get employee id of creator		
-			int app_dept=dao.getAppDept(emp_id);//get department of creator
+			int emp_id=dao.getEmpIdofApp(app[0]);//get employee id of creator
+			if(app[0]==11)
+			{
+				System.out.println(emp_id+" found " +dao.getDepartment(emp_id));
+			}
+			int app_dept=dao.getDepartment(emp_id);//get department of creator
 			if(app_dept!=dept)//check if application is in department
 				remove.add(app);
 		}
 		for(int[] app: remove)
 			apps.remove(app);
-		
+		System.out.println(apps.size());
 		ArrayList<Integer> chairApps= new ArrayList<>();
 		for(int[] app: apps)
 			chairApps.add(app[0]);//Applications approvable by chair
@@ -227,6 +236,7 @@ public class Service {
 			if(check==false)//add applications that are in supApps but not chairApps to chairApps
 				chairApps.add(app);
 		}
+		System.out.println(chairApps.size());
 		return chairApps;
 	}
 	

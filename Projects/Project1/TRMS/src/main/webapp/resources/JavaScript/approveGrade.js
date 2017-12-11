@@ -81,3 +81,7 @@ function checkInput(){//check if input is valid
 		get("approve").disabled=true;
 	}
 }
+
+function get(s){
+	return document.getElementById(s);
+}s
