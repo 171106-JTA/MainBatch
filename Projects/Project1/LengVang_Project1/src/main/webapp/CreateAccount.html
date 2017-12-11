@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="resources/css/Project1.css">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="resources/javascript/employeeRegistration.js"></script>
+</head>
+<body>
+	<h3>Creating An Account</h3>
+	<div class="well input">
+		<h5>Still under construction. Come back later!</h5>
+		<form action="EmployeeRegistration" method="post" name="registerEmployee" onsubmit="return validateRegistration()">
+			<!-- TO BE CHANGED -->
+			<h4>Enter your information below.</h4>
+			<b><p id="error" style="color:red"></p></b>
+			<ul style="list-style-type: none;">
+				<li>EmployeeID</li>
+				<li><input type="text" name="employeeID" placeholder="Enter ID"
+					required></li>
+				<li>Password</li>
+				<li><input type="password" name="password"
+					placeholder="Enter Password" required></li>
+				<li>Confirm Password</li>
+				<li><input type="password" name="password2" required></li>
+				<li>First Name</li>
+				<li><input type="text" name="fname" required></li>
+				<li>Middle Name</li>
+				<li><input type="text" name="mname"></li>
+				<li>Last Name</li>
+				<li><input type="text" name="lname" required></li>
+				<li>EMAIL</li>
+				<li><input type="email" name="email" required></li>
+				<li><input type="reset" value="reset"></li>
+				<li><input type="submit" value="Create Account"></li>
+			</ul>
+		</form>
+
+		<hr>
+		<a href="index.html">Go Back</a>
+	</div>
+</body>
+</html>
