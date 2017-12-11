@@ -1,8 +1,9 @@
-DROP TABLE Employee;
+--DROP TABLE Employee;
 CREATE TABLE Employee(
     EID NUMBER,
     ROLEID NUMBER,
     DEPTID NUMBER,
+    ACTUAL_AMOUNT NUMBER DEFAULT 1000,
     AVAIL_AMOUNT NUMBER DEFAULT 1000,
     FNAME VARCHAR2(200),
     LNAME VARCHAR2(200),
@@ -61,7 +62,7 @@ CREATE TABLE AmountChanges(
     NEW_AMOUNT NUMBER,
     CONSTRAINT PK_ACID PRIMARY KEY(ACID)
 );
-
+TRUNCATE TABLE Info_Request;
 CREATE TABLE Info_Request(
     IRID NUMBER,
     RRID NUMBER UNIQUE,
@@ -88,6 +89,10 @@ ALTER TABLE Employee ADD CONSTRAINT FK_ROLEID FOREIGN KEY (ROLEID) REFERENCES Ro
 ALTER TABLE Reimbursement_Request ADD CONSTRAINT FK_REBTID FOREIGN KEY (REBTID) REFERENCES Reimbursement_Type(REBTID) ON DELETE CASCADE;
 ALTER TABLE Reimbursement_Request ADD CONSTRAINT FK_EID FOREIGN KEY (EID) REFERENCES Employee(EID) ON DELETE CASCADE;
 ALTER TABLE Reimbursement_Request ADD CONSTRAINT FK_GRADEID FOREIGN KEY (GRADEID) REFERENCES GRADE_FORMAT(GRADEID) ON DELETE CASCADE;
+
+--AmountChanges
+ALTER TABLE AmountChanges ADD CONSTRAINT FK_RRID FOREIGN KEY(RRID) REFERENCES Reimbursement_Request(RRID) ON DELETE CASCADE;
+--ALTER TABLE AmountChanges DROP CONSTRAINT FK_RRID;
 
 --Sequence
 CREATE SEQUENCE submitr_seq
@@ -136,14 +141,6 @@ BEGIN
     END IF;
 END;
 
-CREATE OR REPLACE TRIGGER update_amount
-AFTER INSERT ON Reimbursement_Request
-FOR EACH ROW
-BEGIN
-    UPDATE Employee SET Avail_Amount = (Avail_Amount - :old.price) WHERE EID = :old.EID;
-    COMMIT;
-END;
-
 CREATE OR REPLACE TRIGGER info_trigger
 BEFORE INSERT ON Info_Request
 FOR EACH ROW
@@ -170,6 +167,7 @@ CREATE OR REPLACE PROCEDURE yearly_update
 IS
 BEGIN
 	UPDATE Employee SET AVAIL_AMOUNT = 1000;
+    UPDATE Employee SET ACTUAL_AMOUNT = 1000;
 	
 	COMMIT;
 END;
@@ -183,7 +181,7 @@ BEIGN
 		start_date => SYSTIMESTAMP,
 		repeat_interval => 'FREQ=YEARLY; BYDATE=0101',
 		end_date => null,
-		comments => 'resets everyone\'s balance to 1000 each new year');
+		comments => 'resets balances to 1000 each new year');
 END;
 
 --Initializations
@@ -206,6 +204,7 @@ INSERT INTO Grade_Format VALUES(2, 'P/F');
 
 --EMPLOYEES
 INSERT INTO Employee (Username, Pass, Roleid) VALUES ('han', 'jung', 3);
-INSERT INTO Employee (Username, Pass, roleid) VALUES ('jeff', 'myers', 1);
+INSERT INTO Employee (Username, Pass, roleid) VALUES ('jeff', 'myers', 0);
+INSERT INTO Employee (Username, Pass, Roleid) VALUES ('jordan', 'gp', 1);
 
 COMMIT;

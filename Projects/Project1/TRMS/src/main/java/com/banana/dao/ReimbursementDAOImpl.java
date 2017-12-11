@@ -76,6 +76,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 			while(rs.next()) {
 				rrId = rs.getInt("RRID");
 				status = this.getStatus(rrId);
+				
 				rr = new ReimburseRequest(rrId, rs.getDouble("PRICE"), rs.getString("EVENTNAME"), rs.getDate("EVENT_DATETIME").toLocalDate(), status);
 				rrList.add(rr);
 			}
@@ -144,7 +145,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 	 */
 	private String getStatus(int rrId) {
 		String status = "PENDING";
-		String sql = "SELECT * FROM Reimburse_Request WHERE RRID = ?";
+		String sql = "SELECT * FROM Reimbursement_Request WHERE RRID = ?";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		int benCo = 0;
@@ -172,7 +173,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO{
 			}
 			
 		}catch(SQLException e) {
-			
+			e.printStackTrace();
 		}finally {
 			close(ps);
 		}
