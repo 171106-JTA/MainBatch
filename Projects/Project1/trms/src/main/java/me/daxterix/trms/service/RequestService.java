@@ -186,24 +186,6 @@ public class RequestService {
     }
 
 
-    /**
-     * todo: edit to not auto promote
-     *
-     * @param response
-     * @param approver
-     * @param theRequest
-     * @param thefile
-     * @throws DuplicateIdException
-     * @throws NonExistentIdException
-     * @throws IOException
-     */
-    public static void doFileApproval(HttpServletResponse response, Employee approver, ReimbursementRequest theRequest,
-                                      RequestFile thefile) throws DuplicateIdException, NonExistentIdException, IOException {
-        response.setStatus(200);
-        persistRequestApproval(approver, theRequest, RequestStatus.GRANTED, null);
-    }
-
-
     public static void doDenial(HttpServletResponse response, Employee approver, ReimbursementRequest theRequest, String reason)
             throws NonExistentIdException, DuplicateIdException, IOException {
         String requestStatus = theRequest.getStatus().getStatus();
