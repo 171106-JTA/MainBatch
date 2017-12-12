@@ -1,1 +1,0 @@
-{"version":3,"file":"of.js","sourceRoot":"","sources":["../../src/observable/of.ts"],"names":[],"mappings":";;AAAA,qDAAsD;AAEzC,QAAA,EAAE,GAAG,iCAAe,CAAC,EAAE,CAAC","sourcesContent":["import {  ArrayObservable  } from './ArrayObservable';\n\nexport const of = ArrayObservable.of;"]}

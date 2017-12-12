@@ -1,1 +1,0 @@
-{"version":3,"file":"generate.js","sourceRoot":"","sources":["../../src/observable/generate.ts"],"names":[],"mappings":";;AAAA,2DAA0D;AAE7C,QAAA,QAAQ,GAAG,uCAAkB,CAAC,MAAM,CAAC","sourcesContent":["import { GenerateObservable } from './GenerateObservable';\n\nexport const generate = GenerateObservable.create;\n"]}

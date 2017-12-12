@@ -1,1 +1,0 @@
-{"version":3,"file":"throw.js","sourceRoot":"","sources":["../../../src/add/observable/throw.ts"],"names":[],"mappings":";;AAAA,+CAA8C;AAC9C,gDAAgD;AAEhD,uBAAU,CAAC,KAAK,GAAG,cAAM,CAAC","sourcesContent":["import { Observable } from '../../Observable';\nimport { _throw } from '../../observable/throw';\n\nObservable.throw = _throw;"]}

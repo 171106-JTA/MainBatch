@@ -1,1 +1,0 @@
-{"version":3,"file":"forkJoin.js","sourceRoot":"","sources":["../../src/observable/forkJoin.ts"],"names":[],"mappings":";;AAAA,2DAA4D;AAE/C,QAAA,QAAQ,GAAG,uCAAkB,CAAC,MAAM,CAAC","sourcesContent":["import {  ForkJoinObservable  } from './ForkJoinObservable';\n\nexport const forkJoin = ForkJoinObservable.create;"]}

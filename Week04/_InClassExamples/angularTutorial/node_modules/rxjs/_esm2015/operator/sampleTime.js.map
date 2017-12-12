@@ -1,1 +1,0 @@
-{"version":3,"file":"sampleTime.js","sourceRoot":"","sources":["../../src/operator/sampleTime.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,KAAK,EAAE,MAAM,oBAAoB,CAAC;AAC3C,OAAO,EAAE,UAAU,IAAI,WAAW,EAAE,MAAM,yBAAyB,CAAC;AAEpE;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;GAmCG;AACH,MAAM,qBAA6C,MAAc,EAAE,YAAwB,KAAK;IAC9F,MAAM,CAAC,WAAW,CAAC,MAAM,EAAE,SAAS,CAAC,CAAC,IAAI,CAAkB,CAAC;AAC/D,CAAC"}

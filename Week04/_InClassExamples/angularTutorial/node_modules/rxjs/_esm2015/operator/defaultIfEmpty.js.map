@@ -1,1 +1,0 @@
-{"version":3,"file":"defaultIfEmpty.js","sourceRoot":"","sources":["../../src/operator/defaultIfEmpty.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,cAAc,IAAI,WAAW,EAAE,MAAM,6BAA6B,CAAC;AAK5E,mCAAmC;AAEnC;;;;;;;;;;;;;;;;;;;;;;;;;;;;;GA6BG;AACH,MAAM,yBAAoD,eAAkB,IAAI;IAC9E,MAAM,CAAC,WAAW,CAAO,YAAY,CAAC,CAAC,IAAI,CAAC,CAAC;AAC/C,CAAC"}

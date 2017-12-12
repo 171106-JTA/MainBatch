@@ -1,1 +1,0 @@
-{"version":3,"file":"interval.js","sourceRoot":"","sources":["../../src/observable/interval.ts"],"names":[],"mappings":";;AAAA,2DAA4D;AAE/C,QAAA,QAAQ,GAAG,uCAAkB,CAAC,MAAM,CAAC","sourcesContent":["import {  IntervalObservable  } from './IntervalObservable';\n\nexport const interval = IntervalObservable.create;"]}

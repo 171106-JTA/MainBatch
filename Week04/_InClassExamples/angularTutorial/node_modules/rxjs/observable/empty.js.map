@@ -1,1 +1,0 @@
-{"version":3,"file":"empty.js","sourceRoot":"","sources":["../../src/observable/empty.ts"],"names":[],"mappings":";;AAAA,qDAAsD;AAEzC,QAAA,KAAK,GAAG,iCAAe,CAAC,MAAM,CAAC","sourcesContent":["import {  EmptyObservable  } from './EmptyObservable';\n\nexport const empty = EmptyObservable.create;"]}

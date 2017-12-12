@@ -1,1 +1,0 @@
-{"version":3,"file":"fromEventPattern.js","sourceRoot":"","sources":["../../src/observable/fromEventPattern.ts"],"names":[],"mappings":";;AAAA,2EAA4E;AAE/D,QAAA,gBAAgB,GAAG,uDAA0B,CAAC,MAAM,CAAC","sourcesContent":["import {  FromEventPatternObservable  } from './FromEventPatternObservable';\n\nexport const fromEventPattern = FromEventPatternObservable.create;"]}

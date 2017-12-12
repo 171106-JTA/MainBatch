@@ -1,1 +1,0 @@
-{"version":3,"file":"if.js","sourceRoot":"","sources":["../../src/observable/if.ts"],"names":[],"mappings":";;AAAA,+CAAgD;AAEnC,QAAA,GAAG,GAAG,2BAAY,CAAC,MAAM,CAAC","sourcesContent":["import {  IfObservable  } from './IfObservable';\n\nexport const _if = IfObservable.create;"]}

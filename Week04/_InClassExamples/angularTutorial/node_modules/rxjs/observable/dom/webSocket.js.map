@@ -1,1 +1,0 @@
-{"version":3,"file":"webSocket.js","sourceRoot":"","sources":["../../../src/observable/dom/webSocket.ts"],"names":[],"mappings":";;AAAA,uDAAwD;AAE3C,QAAA,SAAS,GAAG,mCAAgB,CAAC,MAAM,CAAC","sourcesContent":["import {  WebSocketSubject  } from './WebSocketSubject';\n\nexport const webSocket = WebSocketSubject.create;"]}

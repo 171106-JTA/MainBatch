@@ -1,1 +1,0 @@
-{"version":3,"file":"zip.js","sourceRoot":"","sources":["../../src/observable/zip.ts"],"names":[],"mappings":";;AAAA,wCAA+C;AAElC,QAAA,GAAG,GAAG,eAAS,CAAC","sourcesContent":["import {  zipStatic  } from '../operators/zip';\n\nexport const zip = zipStatic;\n"]}

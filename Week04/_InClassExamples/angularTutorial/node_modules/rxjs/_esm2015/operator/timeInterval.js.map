@@ -1,1 +1,0 @@
-{"version":3,"file":"timeInterval.js","sourceRoot":"","sources":["../../src/operator/timeInterval.ts"],"names":[],"mappings":"AAEA,OAAO,EAAE,KAAK,EAAE,MAAM,oBAAoB,CAAC;AAC3C,OAAO,EAAE,YAAY,IAAI,WAAW,EAAE,YAAY,EAAE,MAAM,2BAA2B,CAAC;AACtF,OAAO,EAAC,YAAY,EAAC,CAAC;AAEtB;;;;;GAKG;AACH,MAAM,uBAA+C,YAAwB,KAAK;IAChF,MAAM,CAAC,WAAW,CAAC,SAAS,CAAC,CAAC,IAAI,CAAgC,CAAC;AACrE,CAAC"}
