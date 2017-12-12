@@ -1,2 +1,51 @@
 @charset "UTF-8";
 
+body {
+	margin: 50px, 50px, 50px, 50px;
+	padding: 50px 50px 50px 50px;
+	border: 2px solid black;
+}
+
+/* change border radius for the tab , apply corners on top*/
+#tab .nav-pills>li>a {
+	border-radius: 4px 4px 0 0;
+}
+
+#tab .tab-content {
+	color: black;
+	background-color: #428bca;
+	padding: 5px 15px, 5px, 15px;
+}
+
+table {
+	border-collapse: separate;
+	border-spacing: 15px;
+}
+
+input {
+	color: black;
+}
+
+.tab-content.hide {
+	display: none;
+}
+
+.tab-content.active {
+	display: block;
+}
+
+.accordion {
+	font-size: 14px;
+}
+
+textarea {
+	resize: none;
+}
+
+textarea.ta10em {
+	height: 10em;
+}
+
+.error {
+	color: $errorMsgColor;
+}

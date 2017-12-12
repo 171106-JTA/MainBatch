@@ -3,6 +3,9 @@ package com.revature.controller.filter;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.sql.SQLException;
 import java.util.Properties;
 
 import javax.servlet.Filter;
@@ -44,8 +47,8 @@ public class RegistrationAuthorizationFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 		RequestDispatcher rd;
-		String user, pass, age, ssn;
-		int type, code;
+		String user, pass, type, superId;
+		int code;
 
 		PrintWriter pw = response.getWriter();
 
@@ -54,16 +57,25 @@ public class RegistrationAuthorizationFilter implements Filter {
 		// user = prop.getProperty(this.getClass().getSimpleName() + Constants.userKey);
 		// pass = prop.getProperty(this.getClass().getSimpleName() + Constants.passKey);
 		user = request.getParameter("username");
-		pass = request.getParameter("password");
-		type = Integer.parseInt(request.getParameter("type"));
+		pass = request.getParameter("enter_password");
+		superId = request.getParameter("super_id");
+		type = request.getParameter("type");
 
-		if ((code = SessionController.register(user, pass)) != Constants.RegSuccess) {
-			pw.write(Constants.RegFail);
-			rd = request.getRequestDispatcher(request.getRemoteHost());
-			rd.forward(request, response);
-		} else {
-			request.setAttribute(Constants.SessionType, type);
-			chain.doFilter(request, response);
+		try {
+			int id  = SessionController.register(user, pass, superId, type);
+
+			if (id == Constants.AuthFail) {
+				pw.write(Constants.RegFail);
+				rd = request.getRequestDispatcher(request.getRemoteHost());
+				rd.forward(request, response);
+			} else {
+				request.setAttribute(Constants.empId, id);
+				request.setAttribute(Constants.SessionType, Integer.parseInt(type));
+				chain.doFilter(request, response);
+			}
+		} catch (NumberFormatException | InvalidKeySpecException | NoSuchAlgorithmException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

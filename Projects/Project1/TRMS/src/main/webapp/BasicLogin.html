@@ -1,20 +1,46 @@
-<!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="./js/jquery-3.2.1.min.js"></script>
-<script src="./js/BasicLogin.js"></script>
-<meta charset="UTF-8">
-<title>Employee Session</title>
+<meta charset="utf-8">
+<title>Employee Main page</title>
+<link
+	href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+	rel="stylesheet">
+<link href="./resources/css/global.css" rel="stylesheet">
+<link href="./resources/css/BasicLogin.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="./resources/js/global.js"></script>
+<script src="./resources/js/BasicLogin.js"></script>
+<script src="https://www.w3schools.com/lib/w3.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 </head>
+
 <body>
-	<hr>
-	<div id=buttons>
-		<button>New Request</button>
-	</div>
-	
-	<div id="req_list'"></div>
-	
+	<div class="container">
+		<h2>Employment Tuition Manager</h2>
+		<div class="nav nav-pills navMain">
+			<ul>
+				<li><a href="#requests" id="requestNav">Requests</a></li>
+				<li><a href="#events" id="eventNav">Events</a></li>
+				<li><a href="#inbox" id="inboxNav"> <img
+						src="./resources/images/ms-icon-150x150.png" height="22"
+						width="36" />
+				</a></li>
+			</ul>
+			<div class="tab-pane">
+				<div class="tab-content" id="requests"></div>
+
+				<div class="tab-pane">
+					<div class="tab-content" id="events"></div>
+				</div>
+
+				<div class="tab-pane">
+					<div class="tab-content" id="inbox"></div>
+				</div>
+			</div>
+		</div>
 </body>
+
 </html>

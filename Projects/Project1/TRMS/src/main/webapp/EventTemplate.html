@@ -1,0 +1,90 @@
+<div>
+	<form action="createEvent.do" id="createEventForm" method="post">
+		<table>
+			<tr>
+				<th>Department Id:</th>
+				<td><input type="text" name="deptId" id="deptId"
+					style="width: 50px;" required></td>
+			</tr>
+			<tr id="empBtnsRow">
+				<th>Employee Id(s):</th>
+				<td><button id="addEmpsBtn">Add more employees</button></td>
+			</tr>
+			<tr>
+				<th>amount</th>
+				<td><input type="text" name="eventAmount" id=evtAmount"></td>
+				
+			</tr>
+			<tr>
+				<table id="addEmpsTable">
+					<tr>
+						<th>Employee:</th>
+						<td><input type="text" name="employeeIds[0]" id="employeeId"
+							style="width: 50px;" required></td>
+					</tr>
+				</table>
+			<tr>
+				<td>
+					<div id="evtRadios">
+						<table>
+							<tr>
+								<td><input type="radio" name="evtType" value="0" required>
+									University Course</td>
+
+								<td><input type="radio" name="evtType" value="1">
+									Seminar</td>
+							</tr>
+							<tr>
+								<td><input type="radio" name="evtType" value="2">
+									Certification Preparation Class</td>
+								<td><input type="radio" name="evtType" value="3">
+									Certification</td>
+							</tr>
+							<tr>
+								<td><input type="radio" name="evtType" value="4">
+									Technical Training</td>
+								<td><input type="radio" name="evtType" value="5">
+									Other</td>
+							</tr>
+							<tr>
+								<th>Start date:</th>
+								<td><input type="datetime-local" name="startDate" id="startDate"
+									required></td>
+							</tr>
+							<tr>
+								<th>End date:</th>
+								<td><input type="datetime-local" name="endDate" id="endDate" required></td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+			<br>
+			<tr>
+				<td>
+					<div id="critRadios">
+						<table>
+							<tr>
+								<td><input type="radio" id="critType" name="critType"
+									value="0"> Grading</td>
+								<td><input type="radio" id="critType" name="critType"
+									value="1"> Presentation</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
+
+			<tr>
+				<table id="addCritsTable">
+				</table>
+			</tr>
+			<tr>
+				<input type="file" name="pic" accept="|image/jpeg|">
+			</tr>
+			<tr>
+				<td><button type="button" id="evtBtn">Submit</button></td>
+			</tr>
+		</table>
+	</form>
+</div>

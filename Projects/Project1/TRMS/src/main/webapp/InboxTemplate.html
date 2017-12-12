@@ -1,0 +1,24 @@
+<div>
+	<form id="mailForm" method="post">
+		<table>
+			<tr>
+				<th>To:</th>
+				<td><input type="text" name="toId" id="toId" required></td>
+			</tr>
+			<tr>
+				<td><input name="urgent" id="urgent" type="checkbox"
+					checked="checked">Urgent</td>
+				<td><button type="button" id="mailBtn">Submit</button></td>
+			</tr>
+			<tr>
+				<th>Subject:</th>
+				<td><input type="text" name="subject" id="subject" required></td>
+			</tr>
+			<tr>
+				<td id="charCounter"></td>
+			</tr>
+		</table>
+	</form>
+	<textarea maxlength="150" form="mailForm" id="messageBox"
+		name="messageBox" rows="5" cols="30" required></textarea>
+</div>

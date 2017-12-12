@@ -1,79 +1,94 @@
-<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="./resources/js/jquery-3.2.1.min.js"></script>
+<meta charset="utf-8">
+<title>TRMS</title>
+<link
+	href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"
+	rel="stylesheet">
+<link href="./resources/css/global.css" rel="stylesheet">
+<link href="./resources/css/portal.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script src="./resources/js/global.js"></script>
 <script src="./resources/js/portal.js"></script>
-<meta charset="UTF-8">
-<title>Employee Portal</title>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+<script src="resources/js/formValidate.js"></script>
+<link href="./resources/css/ManagementLogin.css" rel="stylesheet">
+<script src="./resources/js/ManagementLogin.js"></script>
 </head>
+
 <body>
-	<hr>
+	<div class="container">
+		<h1>Employment Tuition Manager</h1>
+		<div class="nav nav-pills" id="navMain">
+			<ul>
+				<li><a href="#login">Login</a></li>
+				<li><a href="#register">Register</a></li>
+			</ul>
+			<div class="tab-pane">
+				<div class="tab-content" id="login">
+					<form id="loginForm" method="post">
+						<table>
+							<tr>
+								<th>Username:</th>
+								<td><input type="text" name="username" id="username"
+									required></td>
+							</tr>
+							<tr>
+								<th>Password:</th>
+								<td><input type="password" name="password" id="password"
+									required></td>
+							</tr>
+							<tr>
+								<td><button type="button" id="loginBtn">Submit</button></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
 
-	<div id="login">
-		<form action="login.do" id="loginForm" method="post">
-			<table>
-				<caption>Login</caption>
-				<tr>
-					<th>Username:</th>
-					<td><input type="text" id="username" required></td>
-				</tr>
-				<tr>
-					<th>Password:</th>
-					<td><input type="password" id="password" required></td>
-				</tr>
-				<tr>
-					<td><input type="submit"></td>
-				</tr>
-			</table>
-		</form>
+			<div class="tab-pane">
+				<div class="tab-content" id="register">
+					<form id="regForm" method="post">
+						<table>
+							<tr>
+								<th>Username:</th>
+								<td><input type="text" name="username" id="username"
+									required></td>
+							</tr>
+							<tr>
+								<th>Password:</th>
+								<td><input type="text" name="enter_password"
+									id="enter_password" pattern="^(?=.*\d)(?=.*[A-Z])\w{5,16}$"
+									required
+									title="must be between 5 and 16 characters and contain 1 capital letter and 1 number"></td>
+							</tr>
+							<tr>
+								<th>Confirm Password:</th>
+								<td><input type="password" name="confirm_password"
+									id="confirm_password" required>
+									<div id="password_match"></div></td>
+							</tr>
+
+							<tr>
+								<th>Superior's Id:</th>
+								<td><input type="text" name="super_id" id="super_id"
+									pattern="\d{1,6}" required></td>
+							</tr>
+							<tr>
+								<td><input type="radio" name="type" value="0" required>
+									Employee</td>
+								<td><input type="radio" name="type" value="1">
+									Management</td>
+							</tr>
+							<tr>
+								<td><button type="button" id="regBtn">Submit</button></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+		</div>
 	</div>
-
-	<div id="register">
-		<form action="register.do" id="regForm" method="post">
-			<table>
-				<caption>Register</caption>
-				<tr>
-					<th>Username:</th>
-					<td><input type="text" id="username" required></td>
-				</tr>
-				<tr>
-					<th>Password:</th>
-					<td><input type="text" id="enter_password"
-						pattern="^(?=.*\d)(?=.*[A-Z])\w{5,20}$" required
-						title="must be between 5 and 20 characters and contain 1 capital letter and 1 number"></td>
-				</tr>
-				<tr>
-					<th>Confirm Password:</th>
-					<td><input type="password" id="confirm_password" required>
-						<div id="password_match"></td>
-				</tr>
-				<!-- 				<tr>
-					<th>Age:</th>
-					<td><input type="text" id="age" pattern="[0-9]{3}" required></td>
-				</tr>
-				<tr>
-					<th>SSN:</th>
-					<td><input type="text" id="ssn1" pattern="\d{3}"required">-
-						<input type="text" id="ssn2" pattern="\d{2}" required>- <input
-						type="text" id="ssn3" pattern="\d{4}" required></td>
-				</tr>
- -->				
- 				<tr>
- 					<th>Superior's Id:</th>
- 					<td><input type="text" id="super_id" pattern="\d{1,6}" required></td>
- 				</tr>
- 				<tr>
- 					<td><input type="radio" name="type" value="0" required>  Employee</td>
- 					<td><input type="radio" name="type" value="1">  Management</td>
-				</tr>
-				<tr>
-					<td><input type="submit"></td>
-				</tr>
-			</table>
-		</form>
-	</div>
-
 </body>
 </html>

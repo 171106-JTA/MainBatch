@@ -1,9 +1,17 @@
 package com.revature.model.dao;
 
 import java.util.Collection;
-import com.google.gson.*;
+import java.util.Map;
 
-public class DepartmentDao implements Dao<Gson> {
+import com.revature.util.Dao;
+
+// Not implemented
+public class DepartmentDao implements Dao {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2809503531132936363L;
 
 	@Override
 	public boolean insert(boolean atomic) {
@@ -24,13 +32,13 @@ public class DepartmentDao implements Dao<Gson> {
 	}
 
 	@Override
-	public Gson fetch(boolean atomic) {
+	public Map<String, String> fetch(boolean atomic) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Collection<Gson> fetchAll(boolean atomic) {
+	public Collection<Map<String, String>> fetchAll(boolean atomic) {
 		// TODO Auto-generated method stub
 		return null;
 	}

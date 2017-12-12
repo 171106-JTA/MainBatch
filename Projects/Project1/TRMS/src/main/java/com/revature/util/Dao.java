@@ -1,4 +1,4 @@
-package com.revature.model.dao;
+package com.revature.util;
 
 import java.io.IOException;
 import java.io.Serializable;
