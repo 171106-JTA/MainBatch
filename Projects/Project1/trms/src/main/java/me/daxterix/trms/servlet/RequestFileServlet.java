@@ -48,7 +48,6 @@ public class RequestFileServlet extends HttpServlet {
                 Long fileId = Long.parseLong(idStr);
                 RequestFile reqFile = objectDao.getObject(RequestFile.class, fileId);
 
-
                 response.setContentType(reqFile.getMimeType().getMimeType());
                 response.setHeader("Content-Disposition", "attachment; filename=" + reqFile.getName());
 

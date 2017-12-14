@@ -55,10 +55,9 @@ public class NewRequestServlet extends HttpServlet {
             ReimbursementRequest saved = RequestService.addRequest(newRequest);
             if (saved != null) {
                 Part filePart = request.getPart("eventFile");
-                if (filePart != null) {
-                    String fileName = request.getParameter("eventFileName");
-                    String mimeType = request.getParameter("eventFileMimeType");
-
+                String fileName = request.getParameter("eventFileName");
+                String mimeType = request.getParameter("eventFileMimeType");
+                if (filePart != null && mimeType != null) {
                     RequestFile requestFile = ServletUtils.readUploadIntoRequestFile(filePart, fileName, mimeType, FilePurpose.EVENT_INFO);
                     RequestService.addRequestFile(newRequest, requestFile);
                     out.print(ServletUtils.requestToJson(saved));
