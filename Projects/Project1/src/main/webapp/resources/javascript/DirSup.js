@@ -24,7 +24,6 @@ function displayAction() {
 		infoDiv.setAttribute("style", "visibility:visible");
 		reqForm.setAttribute("style", "display:none");
 	}
-
 }
 
 function checkDescription() {
@@ -89,9 +88,14 @@ function getRequests() {
 				td8.innerHTML = response[i].childNodes[7].innerHTML;
 				td9.innerHTML = response[i].childNodes[8].innerHTML;
 				td10.innerHTML = response[i].childNodes[9].innerHTML;
-				td11.innerHTML = "<a href='ViewFile.html'>View File</a>";
 				id.innerHTML = response[i].childNodes[11].innerHTML;
 				status.innerHTML = response[i].childNodes[12].innerHTML;
+				
+				if (response[i].childNodes[10].innerHTML === "null") 
+					td11.innerHTML =  "N/A";
+				else {
+					td11.innerHTML =  "<a href='index.html'>View File</a>";
+				}
 
 				row.appendChild(id);
 				row.appendChild(td1);

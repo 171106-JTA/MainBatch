@@ -34,6 +34,7 @@ public class Request {
 		this.dateOfEvent = dateOfEvent;
 		this.inputStream = inputStream;
 		this.status = status;
+		this.emp = emp;
 	}
 	
 	/**
@@ -77,7 +78,7 @@ public class Request {
 	 * @param dateOfEvent
 	 * @param inputStream
 	 */
-	public Request(int id, String empUsername, String event, String location, String description,
+	public Request(int id, Employee emp, String event, String location, String description,
 			double cost, String gradingFormat, Date submissionDate, Date dateOfEvent, InputStream inputStream, String status) {
 		this.event = event;
 		this.location = location;
@@ -89,6 +90,7 @@ public class Request {
 		this.id = id;
 		this.submissionDate = submissionDate;
 		this.status = status;
+		this.emp = emp;
 	}
 	
 	public Employee getEmp() {

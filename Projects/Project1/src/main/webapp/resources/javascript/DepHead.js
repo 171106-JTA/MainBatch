@@ -39,7 +39,8 @@ function displaySupervisors() {
 			var xmlText = xhr.responseXML;
 			var response = xmlText.getElementsByTagName("employee"); //grab the employees
 			var resultTable = document.getElementById("dirSupTable"); //fill our html table with the data
-
+			var resultTableBody = document.getElementById('dirSupsTBody');
+			
 			//loop through our response text and append the employee data to our table
 			for(var i = 0; i < response.length; i++) {
 				var row = document.createElement("tr");
@@ -53,8 +54,9 @@ function displaySupervisors() {
 				row.appendChild(td1);
 				row.appendChild(td2);
 				row.appendChild(td3);
-				resultTable.appendChild(row);
+				resultTableBody.appendChild(row);
 			}
+			resultTable.append(resultTableBody);
 
 		} else if(xhr.readyState == 4 && xhr.status != 200){
 			console.log(xhr.status);

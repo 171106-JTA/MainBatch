@@ -129,7 +129,12 @@ function displayRequests() {
 				gradingFormat.innerHTML = response[i].childNodes[5].innerHTML;
 				submissionDate.innerHTML = response[i].childNodes[6].innerHTML;
 				eventDate.innerHTML = response[i].childNodes[7].innerHTML;
-				file.innerHTML =  "";
+				console.log(response[i].childNodes[8].innerHTML);
+				if (response[i].childNodes[8].innerHTML === "null") 
+					file.innerHTML =  "N/A";
+				else {
+					file.innerHTML =  "<a href='index.html'>View File</a>";
+				}
 				status.innerHTML = response[i].childNodes[9].innerHTML;
 				
 				row.appendChild(id);

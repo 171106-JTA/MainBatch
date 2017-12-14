@@ -1,11 +1,8 @@
 package com.revature.servlets;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectInputStream.GetField;
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,11 +29,11 @@ public class SubmitRequest extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("We are inserting a request new print");
-		RequestDispatcher rd = null;
 		
 		final TRMSDao dao = TRMSDao.getDao(); //grab our dao
 		final HttpSession session = request.getSession();
 		final String username = (String) session.getAttribute("username");
+		System.out.println("user inserting request is: " + username);
 		
 		//grab data from input fields
 		final String eventName = request.getParameter("event");

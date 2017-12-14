@@ -44,7 +44,6 @@ public class TRMSDao {
 		try(Connection conn = ConnectionUtil.getConnection()){
 
 			ps = conn.prepareStatement(sql);
-			System.out.println("the username searching for is: " + username);
 			ps.setString(1, username);
 			rs = ps.executeQuery();
 
@@ -84,7 +83,6 @@ public class TRMSDao {
 		try(Connection conn = ConnectionUtil.getConnection()){
 
 			ps = conn.prepareStatement(sql);
-			System.out.println("the username searching for is: " + username);
 			ps.setString(1, username);
 			rs = ps.executeQuery();
 
@@ -212,9 +210,9 @@ public class TRMSDao {
 		PreparedStatement ps = null;
 
 		final String sql = "INSERT INTO REQUEST (EMP_USERNAME, REQ_EVENTNAME, REQ_EVENTDATE, "
-				+ 		   "REQ_LOCATION, REQ_COST, REQ_DESCRIPTION, REQ_GRADINGFORMAT, REQ_FILES"
+				+ 		   "REQ_LOCATION, REQ_COST, REQ_DESCRIPTION, REQ_GRADINGFORMAT, REQ_FILES, REQ_STATUS"
 				+ ", REQ_SUBMISSIONDATE) " + 
-				"VALUES(?,?,?,?,?,?,?,?,?)";
+				"VALUES(?,?,?,?,?,?,?,?,?,?)";
 
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -222,13 +220,13 @@ public class TRMSDao {
 			e1.printStackTrace();
 		}
 
-		try(Connection conn = ConnectionUtil.getConnection()){
+		try(Connection conn = ConnectionUtil.getConnection()) {
 
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, req.getEmp().getUsername().toLowerCase());
 			ps.setString(2, req.getEvent());
 			java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-			ps.setDate(9, date);
+			ps.setDate(10, date);
 			req.setSubmissionDate(date);
 			ps.setString(4, req.getLocation());
 			ps.setDouble(5, req.getCost());
@@ -236,7 +234,8 @@ public class TRMSDao {
 			ps.setString(7, req.getGradingFormat());
 			ps.setBlob(8, req.getInputStream());
 			ps.setDate(3, req.getDateOfEvent());
-
+			ps.setString(9, "PENDING");
+			
 			ps.executeUpdate();
 
 			return true;
@@ -280,9 +279,14 @@ public class TRMSDao {
 				final String status = rs.getString("REQ_STATUS");
 
 				final Blob data = rs.getBlob("REQ_FILES");
-				final InputStream reqFile = data.getBinaryStream();
+				InputStream reqFile  = null;
+				
+				Employee emp = new Employee(username);
+				
+				if (data != null)
+					reqFile = data.getBinaryStream();
 
-				final Request req = new Request(id, username, eventName, eventLocation,
+				final Request req = new Request(id, emp, eventName, eventLocation,
 						eventDescription, eventCost, gradingFormat, submissionDate, eventDate, reqFile, status);
 				requests.add(req);
 			}
@@ -337,14 +341,18 @@ public class TRMSDao {
 				final int eventCost = rs.getInt("REQ_COST");
 				final String gradingFormat = rs.getString("REQ_GRADINGFORMAT");
 				final String eventDescription = rs.getString("REQ_DESCRIPTION");
-
+				final String status = rs.getString("REQ_STATUS");
+				
 				Employee emp = new Employee(empUsername, fname, lname);
 
 				final Blob data = rs.getBlob("REQ_FILES");
-				final InputStream reqFile = data.getBinaryStream();
+				InputStream reqFile = null;
+				if (data != null) {
+					reqFile = data.getBinaryStream();
+				}
 
 				final Request req = new Request(id, emp, eventName, eventLocation,
-						eventDescription, eventCost, gradingFormat, submissionDate, eventDate, reqFile);
+						eventDescription, eventCost, gradingFormat, submissionDate, eventDate, reqFile, status);
 				requests.add(req);
 			}
 
@@ -457,14 +465,11 @@ public class TRMSDao {
 			ps = conn.prepareStatement(sql);
 			String dirSup = dirSupUsername.toLowerCase();
 			String title = Title.EMPLOYEE.toString().toUpperCase();
-			System.out.println("dirSup: " + dirSup + " title: " + title + " empUsername: " + empUsername.toLowerCase());
 
 			ps.setString(1, dirSup);
 			ps.setString(2, title);
 			ps.setString(3, empUsername.toLowerCase());
-			int affected = ps.executeUpdate();
-
-			System.out.println("rows affected from adding a supervisor to employee " + empUsername.toLowerCase() + " is " + affected);
+			ps.executeUpdate();
 
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -478,7 +483,7 @@ public class TRMSDao {
 		PreparedStatement ps = null;
 
 		final String sql = "UPDATE REQUEST "
-				+ "SET STATUS = upper(?) "
+				+ "SET REQ_STATUS = upper(?) "
 				+ "WHERE REQ_ID = ?";
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");

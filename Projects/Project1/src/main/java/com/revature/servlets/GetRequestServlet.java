@@ -23,10 +23,6 @@ public class GetRequestServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String name = (String) session.getAttribute("username");
 		GetRequests.getRequests(response, name);
-		
-		
-		
-		
 	}
 
 	/**

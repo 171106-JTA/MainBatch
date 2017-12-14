@@ -30,18 +30,14 @@ public class Registration extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Registration");
 		boolean success = RegisterEmployee.register(request);
-		RequestDispatcher rd = null;
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 
 		if (success) {
 			out.println("<h3>Your account has been successfully made.</h3>");
-			rd = request.getRequestDispatcher("index.html");
-			rd.include(request, response);
 		} else {
 			out.println("<h3>There was an error creating your account.</h3>");
-			rd = request.getRequestDispatcher("index.html");
-			rd.include(request, response);
 		}
+		response.sendRedirect("index.html");
 	}
 }

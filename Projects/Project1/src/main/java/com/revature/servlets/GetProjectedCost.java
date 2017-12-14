@@ -27,7 +27,6 @@ public class GetProjectedCost extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("GetProjectedResult");
 		String eventName = (String) request.getParameter("eventName");
-		System.out.println("cost: " + request.getParameter("eventCost"));
 		double cost = Double.parseDouble(request.getParameter("eventCost"));
 		
 		TRMSDao dao = TRMSDao.getDao();

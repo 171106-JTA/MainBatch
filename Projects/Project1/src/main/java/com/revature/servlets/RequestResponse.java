@@ -1,6 +1,8 @@
 package com.revature.servlets;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,11 +29,10 @@ public class RequestResponse extends HttpServlet {
 			TRMSDao dao = TRMSDao.getDao();
 			dao.approveDenyRequest(reqIDInput, "APPROVED");
 		} else {
-			
-			
-			
+			TRMSDao dao = TRMSDao.getDao();
+			dao.approveDenyRequest(reqIDInput, "DENIED");
 		}
-		
-		
+		RequestDispatcher rd = request.getRequestDispatcher("DirSup.html");
+		rd.include(request, response);
 	}
 }
