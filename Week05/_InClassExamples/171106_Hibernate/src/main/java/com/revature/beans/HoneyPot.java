@@ -5,8 +5,27 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+@NamedQueries({
+	@NamedQuery(name="getAllHoneypots", query="FROM HoneyPot")
+})
+@NamedNativeQueries({
+	@NamedNativeQuery(name="getSmallHoneypots", 
+			query= "SELECT * FROM HoneyPOt WHERE volume < :maxsize",
+			resultClass=HoneyPot.class)
+})
+/*
+ * You can use Native in lieu of HQL, by invoking native SQL query names.
+ * Native SQL is simply the literal SQL language for your driver.
+ * this is frowned upon as it more tightly couples application to a specific
+ * language.
+ */
 
 @Entity
 @Table(name="HONEYPOT")

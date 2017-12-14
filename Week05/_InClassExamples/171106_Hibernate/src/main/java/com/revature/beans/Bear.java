@@ -117,6 +117,12 @@ public class Bear {
 		this.height = height;
 		this.bearCubs = new HashSet<Bear>();
 	}
+	@Override
+	public String toString() {
+		return "Bear [bearId=" + bearId + ", honeypot=" + honeypot + ", bearCubs=" + bearCubs + ", bearColor="
+				+ bearColor + ", weight=" + weight + ", height=" + height + "]";
+	}
+	
 	
 	
 	
