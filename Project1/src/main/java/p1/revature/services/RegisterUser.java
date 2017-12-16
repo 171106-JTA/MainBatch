@@ -51,7 +51,7 @@ public class RegisterUser extends BaseServlet {
 				password);
 			emp.setDepartmentRoleID(new DepartmentRoleDao().getDepartmentRole(
 					new DepartmentDao().getDepartmentByName(department), deptRole)
-				.getDepartmentID());
+				.getDepartmentRoleID());
 			return empDao.createNewEmployee(emp);
 		}
 		return 0;

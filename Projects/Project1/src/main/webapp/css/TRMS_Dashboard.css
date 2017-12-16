@@ -1,0 +1,32 @@
+span
+{
+	display: block;
+}
+
+.right
+{
+	float: right;
+}
+
+.number .percentage
+{
+	text-align: right;
+}
+
+.percentage:after
+{
+	content: "%";
+}
+
+.hidden
+{
+	display: none;
+	visibility: hidden;
+	
+}
+/* AngularJS styles */
+input.ng-invalid, input:invalid
+{
+	background-color: pink;
+	border-color: red !important;
+}

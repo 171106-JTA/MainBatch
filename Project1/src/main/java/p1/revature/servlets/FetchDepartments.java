@@ -32,6 +32,7 @@ public class FetchDepartments extends BaseServlet {
 				json = GetDepartments.toJSON(GetDepartments.fetchDepartments(req));
 				break;
 			case DEPARTMENT_ROLES:
+				// need to pass in the managers for the department role the user has
 				json = GetDepartments.toJSON(GetDepartments.fetchDepartmentRoles(req)); 
 				break;
 			default:

@@ -6,7 +6,7 @@ DROP TABLE p1_reimbursment_requests CASCADE CONSTRAINTS;
 DROP TABLE p1_reimbursable_events CASCADE CONSTRAINTS;
 DROP TABLE p1_locations CASCADE CONSTRAINTS;
 DROP TABLE p1_states CASCADE CONSTRAINTS;
-DROP TABLE p1_grade_scales CASCADE CONSTRAINTS;
+DROP TABLE p1_event_grade_criteria CASCADE CONSTRAINTS;
 
 --creating all the tables
 CREATE TABLE p1_departments (
@@ -60,12 +60,14 @@ CREATE TABLE p1_reimbursable_expense_types (
     ret_coverage NUMBER(3,2)
 );
 
-CREATE TABLE p1_grade_scales (
+CREATE TABLE p1_event_grade_criteria (
     gs_id NUMBER PRIMARY KEY,
+    event_id NUMBER,
     gs_letter_grade VARCHAR(4),  -- would normally be 2 characters max but let's allow 'pass','fail' to be letter grades
     gs_percentage_low NUMBER(5,2),   -- allowing for 100%
-    gs_percentage_high NUMBER(5,2)  -- also allowing for 100%. Also maintaining consistency
-
+    gs_percentage_high NUMBER(5,2), -- also allowing for 100%. Also maintaining consistency
+    
+    CONSTRAINT FK_reim_event FOREIGN KEY (event_id) REFERENCES p1_reimbursable_events(event_id)
 );
 
 CREATE TABLE p1_reimbursable_events (
@@ -78,13 +80,11 @@ CREATE TABLE p1_reimbursable_events (
     re_cost NUMBER(7,2),
     re_is_satisfactory NUMBER(1) DEFAULT 0, -- can't use boolean type here, so let's take a C++ approach here.
     re_presentation_needed NUMBER(1),   -- here, too. 
-    re_grade_scale NUMBER,
     re_numeric_grade NUMBER(5,2),
     re_presentation_passing NUMBER(1,0) DEFAULT 0,
     
     CONSTRAINT FK_event_type FOREIGN KEY (re_ret) REFERENCES p1_reimbursable_expense_types(ret_id),
-    CONSTRAINT FK_event_location FOREIGN KEY (re_location) REFERENCES p1_locations(location_id),
-    CONSTRAINT FK_event_grade_scale FOREIGN KEY (re_grade_scale) REFERENCES p1_grade_scales(gs_id)
+    CONSTRAINT FK_event_location FOREIGN KEY (re_location) REFERENCES p1_locations(location_id)
 );
 
 CREATE TABLE p1_reimbursement_requests (
@@ -137,6 +137,17 @@ CREATE SEQUENCE p1_states_seq
 CREATE SEQUENCE p1_gs_seq
 	START WITH 1
 	INCREMENT BY 1;
+    
+
+create or replace TRIGGER p1_locations_trigger
+	BEFORE INSERT ON p1_locations
+	FOR EACH ROW
+        BEGIN
+		IF :new.location_id IS NULL THEN
+			SELECT p1_locations_seq.nextval INTO :new.location_id FROM DUAL;
+		END IF;
+END;
+    /
 
 --create our auto-increments here
 CREATE OR REPLACE TRIGGER p1_employees_trigger
@@ -212,7 +223,7 @@ CREATE OR REPLACE TRIGGER p1_states_trigger
 	END;
 /
 CREATE OR REPLACE TRIGGER p1_gs_trigger
-	BEFORE INSERT ON p1_grade_scales
+	BEFORE INSERT ON p1_event_grade_criteria
 	FOR EACH ROW
 	BEGIN
 		IF :new.gs_id IS NULL THEN
@@ -252,7 +263,7 @@ CREATE OR REPLACE VIEW p1_employees_view AS
             INNER JOIN p1_department_roles dr USING (department_role_id)
 			INNER JOIN p1_departments d ON (d.department_id = dr.department_id)
 			LEFT JOIN p1_locations l ON e.Employee_Home_Location_ID = l.Location_ID
-            JOIN p1_employees m ON e.Manager_ID = m.Employee_ID
+            LEFT JOIN p1_employees m ON e.Manager_ID = m.Employee_ID 
 ;
 
 CREATE OR REPLACE VIEW p1_re_view AS
@@ -311,6 +322,12 @@ CREATE OR REPLACE VIEW p1_department_managers_view AS
             INNER JOIN p1_employees m USING (department_role_id)
             INNER JOIN p1_departments d USING (department_id)
             JOIN p1_employees e ON m.employee_id = e.manager_id
+;
+
+CREATE OR REPLACE VIEW p1_events_and_grade_criteria_view AS
+    SELECT re.*, gc.gs_letter_grade, gc.gs_percentage_low
+        FROM p1_reimbursable_events re
+            INNER JOIN p1_event_grade_criteria gc USING (event_id)
 ;
 --do default inserts here
 INSERT INTO p1_states values ('AL', 'Alabama');
@@ -510,3 +527,7 @@ END;
 /
 
 COMMIT;
+
+
+
+

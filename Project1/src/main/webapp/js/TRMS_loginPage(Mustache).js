@@ -136,10 +136,11 @@ function login() {
 					{	
 						// let's console.log() for right now
 						console.log(response);
-						if (response.authenticated)
+						if ((response.authenticated) || (response.redirect_url))
 						{
 							window.location.href = response.redirect_url;
 						}
+						
 					}
 				)
 				// TODO: on error, re-render errors or if allotted login attempts exceeded, redirect to locked out screen

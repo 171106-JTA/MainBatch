@@ -1,0 +1,52 @@
+
+
+#loginContainer
+{
+	
+	min-width: 325px;
+	width: 40%;
+	
+}
+
+#loginForm > *:not(input[type="submit"])
+{
+	width: 100%;
+	overflow: hidden;
+}
+
+/*#loginForm > * > * 
+{
+	float: left;
+}
+
+#loginForm > * > *:not(:first-child):not([type="submit"]):not([type="reset"]):not(button)
+{
+	margin-left: -4px;	
+}*/
+
+#newUserRegistration select, #newUserRegistration input:not([type="reset"]):not([type="submit"]) 
+{
+    float: right;
+}
+/* This is thanks to @UncaughtTypeError from StackOverflow */
+#newUserRegistration label {
+    float: none;
+}
+
+
+#newUserButton
+{
+	color: blue;
+}
+.tooltip
+{
+	padding: 0;
+}
+
+.tooltip ul {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+/* input[type="submit"]*/
+

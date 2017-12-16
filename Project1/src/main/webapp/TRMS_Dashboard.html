@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf8">
+		<title>TRMS dashboard</title>
+		<!-- jQuery and Mustache -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.0/mustache.min.js"></script>
+		<!-- Async library, for the browser -->
+		<script src="https://cdn.jsdelivr.net/npm/async@2.6.0/dist/async.min.js"></script>
+		<!-- business logic -->
+		<script src="js/TRMS_Constants.js"></script>
+		<script src="js/TRMS_Dashboard.js"></script>
+		<!--  My CSS -->
+		<link rel="stylesheet" href="css/TRMS_Dashboard.css">
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+		<!--  a header bar that should print regardless -->
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">TRMS Dashboard</a>
+				</div>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a class="logout"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+				</ul>
+			</div>
+			
+		</nav>
+		
+			<!-- Dashboard template here -->
+			{{#userIsManager}}
+			<h1>Manager {{firstName}} {{lastName}} logged in</h1>
+			<!--  Side navigation bar here -->
+			<nav class="col-sm-3">
+				<ul class="nav nav-stacked">
+					<li><a href="#" data-tab="viewEmployees">View Employees</a></li>
+				</ul>
+			</nav>
+			<div class="col-sm-9">
+				<div id="viewEmployees">
+					<h2>View Employees</h2>
+					<p>This section is a work in progress (WIP). Sorry!</p>
+					<table class="table table-hover">
+						<thead>
+							<th>Employee ID</th>
+							<th>Employee Name</th>
+							<th>Employee Salary</th>
+							<th>Employee Department</th>
+							<th>Employee Email</th>
+							<th>Employee Is Locked Out?</th>
+						</thead>
+						<tbody>
+						<!-- {{#employees}} -->
+							<tr>
+								<td>{{employeeID}}</td>
+								<td>{{firstName}} {{lastName}}</td>
+								<td>{{employeeSalary}}</td>
+								<td>{{departmentName}}</td>
+								<td>{{employeeEmail}}</td>
+								<td>{{isLockedOut}}</td>
+							</tr>
+						<!-- {{/employees}} -->
+						</tbody>
+					</table>
+				</div>
+			</div>
+			{{/userIsManager}}
+			{{^userIsManager}}
+				{{#manager}}
+				{{#user}}
+			<h1>Base User {{firstName}} {{lastName}} logged in</h1>
+			<!-- Base user template here -->
+				<!-- The side menu -->
+				<nav class="col-sm-3">
+					<ul class="nav nav-stacked">
+						<li><a href="#"  data-tab="statusReport" >Check status of requests</a></li>
+						<li><a href="#" data-tab="submitRequest">Submit a request</a></li>						
+					</ul>
+				</nav>	
+				<!-- the main screen -->
+				<div class="col-sm-9">
+					<div id="statusReport">
+						<h2>Reimbursement Request History</h2>
+						<p>This section is a work in progress (WIP). Sorry!</p>
+						<table class="table table-hover">
+							<thead>
+								<th>ID</th>
+								<th>Amount</th>
+								<th>Status</th>
+								<th>Event ID</th>
+							</thead>
+							<tbody>
+							<!-- {{#reimbursementRequests}} -->
+								<tr>
+									<td>{{id}}</td>
+									<td>{{amount}}</td>
+									<td>{{status}}</td>
+									<td>{{reimbursableEventID}}</td>
+								</tr>
+							<!-- {{/reimbursementRequests}} -->
+							</tbody>
+						</table>
+					</div>
+					<div id="submitRequest">
+						<h2>Reimbursement Request Form</h2>
+						<div id="formFirstPart" class="">
+				
+							<form id="eventMainInfo">
+								<div>
+									<h3>Reimbursable Event</h3>
+									<!-- First part of form goes here -->
+									<span class="form-group">
+									    <label for="startDate" class="col-sm-3">Start Date</label>
+										<input id="startDate" name="startDate" class="col-sm-3" type="date" required>    
+									    <label for="endDate" class="col-sm-3">End Date</label>
+										<input id="endDate" name="endDate" class="col-sm-3" type="date" required>
+									</span>
+									<span class="form-group row" style="margin-left: 0; margin-right : 0;">
+									    <label for="expenseType" class="col-sm-3">Type of expense</label>
+									    <input list="expenseTypes" id="expenseType" name="expenseType" class="col-sm-3" type="text" required>
+										<datalist id="expenseTypes">
+										{{#expenseTypes}}
+											<!-- populate this via template with server data -->
+											<option value="{{name}}"></option>
+										{{/expenseTypes}}
+									    </datalist>
+									</span>
+									<div class="form-group">
+									    <label for="eventDescription" class="col-sm-3">Event description</label>
+									    <textarea id="eventDescription" name="eventDescription" style="margin: 0px; width: 590px; height: 89px;"></textarea>
+								    </div>
+								    <span class="form-group">
+									    <label for="eventCost" class="col-sm-3">Event cost</label>
+									    $<input type="text" class="number" id="eventCost" number="eventCost" required="" pattern="\d{1,6}(.\d{1,2})">
+									</span>
+								</div>
+								<div>
+								    <h3>Event Location</h3>
+								    <span class="form-group">
+									    <label for="streetAddress" class="col-sm-3">Street address</label>
+									    <input type="text" id="streetAddress" name="streetAddress" class="col-sm-9" required>
+								    </span>
+									<span class="form-group">
+                                        <label for="city" class="col-sm-3">City</label>
+                                        <input type="text" id="city" name="city" class="col-sm-3" required>
+									    <label for="state" class="col-sm-1">State</label>
+									    <input type="text" list="states" class="col-sm-1" id="state" name="state" required>
+									    <datalist id="states">
+									    {{#states}}
+											<option value="{{stateAbbreviation}}"></option>
+										{{/states}}
+										</datalist>
+									    <label for="zipCode" class="col-sm-2">Zip code</label>
+									    <input type="text" class="col-sm-2 number" id="zipCode" name="zipCode">
+                                    </span>
+								</div>
+								<ul class="pager">
+									<li class="next"><a id="showSecondPartOfTRMSForm">Next</a></li>
+								</ul>
+								
+							</form>
+						</div>
+						<div id="formSecondPart" class="hidden">
+							<form id="eventAdditionalInfo">
+								<div>
+								    <h3>Grade Info</h3>
+								    <div class="form-group">
+								    	<span title="Your percentage earned goes here. If you omit this, you will be required to give presentation">
+								    		<label for="numericGrade">Grade : </label>
+								    		<input type="text" class="number" id="numericGrade" name="numericGrade"/>
+								    	</span>
+								    	<div class="col-sm-6" id="tableContainer">
+								    		<h4>Grade scales</h4>
+											<table id="gradeRubric" class="table">
+												<thead>
+													<th>Letter grade</th>
+													<th>Cutoff percentage</th>
+												</thead>
+												<tbody id="gradeScales">
+												
+													<tr id="newGradeRubric">
+														<td>
+															<input type="text" id="letterGrade" name="letterGrade">
+														</td>
+														<td>
+															<input type="text" class="percentage" id="cutoff" name="cutoff">
+															<label for="cutoff">%</label>
+														</td>
+														<td>
+															<button id="addToRubric" title="Click to add this rule to the grade rubric">+</button>
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+								    </div>
+							    </div>
+							    <div>
+								    <h3>Supporting documentation</h3>
+								    <input type="file" id="documents" name="documents" multiple="">
+							        
+							    </div>
+								<ul class="pager">
+									<li class="previous">
+									    <a id="showFirstPartOfTRMSForm">Go back</a>
+									</li>
+								    <input type="submit" class="btn btn-default right" id="SubmitTRMSForm" value="Submit form" />
+							    </ul>
+							</form>
+						</div>
+					</div>
+				</div>
+				{{/user}}
+				{{/manager}}
+				{{^manager}}
+				<!-- This is only going to show for anyone who doesn't have a manager currently logged into this system -->
+				<div class="well pageCenter">
+					<h2 class="textCenter">Contact Admin</h2>
+					<span>There are currently nobody in this system that can claim to be your manager. Contact an admin to have this fixed.</span>
+					<span>
+						<button class="center logout">Logout</button>
+					</span>	
+				</div>
+				
+				{{/manager}}
+			{{/userIsManager}}
+		
+		
+	</body>
+</html>

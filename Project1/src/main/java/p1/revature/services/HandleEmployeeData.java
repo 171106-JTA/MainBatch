@@ -32,6 +32,11 @@ public class HandleEmployeeData extends ObjectJSONService {
 		{
 			return false;
 		}
+		// password should not be empty
+		if (password.isEmpty())
+		{
+			return false;
+		}
 		// password should equal confirmPass
 		if (!password.equals(confirmPass))
 		{

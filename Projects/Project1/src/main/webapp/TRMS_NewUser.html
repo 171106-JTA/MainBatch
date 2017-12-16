@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf8"><!-- by default, web pages are not UTF-8 -->
+		<title>New User</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/0.7.0/mustache.min.js"></script>
+		<script src="js/TRMS_Constants.js"></script>
+		<script src="js/TRMS_NewUser.js"></script>
+		<link rel="stylesheet" href="css/TRMS_base.css">
+		<link rel="stylesheet" href="css/TRMS_NewUser.css">
+	</head>
+	<body>
+		<h1 class="textCenter">New User</h1>
+		<div class="main pageCenter">
+			<form method="post" action="UserRegistration" id="newUserRegistration">
+				<span class="row">
+					<label for="firstName" class="half">First name</label>
+					<input type="text" id="firstName" name="firstName" class="half" required />
+					<span class="hidden tooltip">
+						{{#.}}
+							{{#errors}}
+							<ul>
+								<li>{{.}}</li>
+							</ul>
+							{{/errors}}
+						{{/.}}
+					</span>
+				</span>
+				<span class="row">
+					<label for="lastName" class="half">Last name</label>
+					<input type="text" id="lastName" name="lastName" class="half" required />
+					<span class="hidden tooltip">
+						{{#.}}
+							{{#errors}}
+							<ul>
+								<li>{{.}}</li>
+							</ul>
+							{{/errors}}
+						{{/.}}
+					</span>
+				</span>
+				<span class="row">
+					<label for="dept" class="half">Department</label>
+					<input list="depts" name="dept" id="dept" class="half" type="text" />
+					<datalist id="depts">
+					<!-- To be populated with data from a Mustache template-->
+					{{#departments}}
+						<option value="{{departmentName}}"></option>
+					{{/departments}}					
+					</datalist>
+					<span class="hidden tooltip">
+						{{#.}}
+							{{#errors}}
+							<ul>
+								<li>{{.}}</li>
+							</ul>
+							{{/errors}}
+						{{/.}}
+					</span>
+				</span>
+				<span class="hidden row">
+					<label for="deptRole" class="half">Department Roles</label>
+					<input list="deptRoles" name="deptRole" id="deptRole" class="half" type="text" />
+					<datalist id="deptRoles">
+					<!-- To be populated with data from a Mustache template-->
+					{{#departmentRoles}}
+						<option value="{{departmentRoleName}}"></option>
+					{{/departmentRoles}}					
+					</datalist>
+					<span class="hidden tooltip">
+						{{#.}}
+							{{#errors}}
+							<ul>
+								<li>{{.}}</li>
+							</ul>
+							{{/errors}}
+						{{/.}}
+					</span>
+				</span>
+				<!-- a field for department roles is to be inserted here once departmentName has been selected -->
+				<span class="row">
+					<label for="manager" class="half">Manager name</label>
+					<input type="text" list="managers" id="manager" name="manager" class="half" />
+					<datalist id="managers">
+					{{#managers}}
+						<!-- <option value="{{employeeID}}" {{#employeeID}}data-manager-id="{{employeeID}}"{{/employeeID}}>{{firstName}} {{lastName}}	</option> -->
+						<option value="{{firstName}} {{lastName}}" {{#employeeID}}data-manager-id="{{employeeID}}"{{/employeeID}}>
+					{{/managers}}
+					</datalist>
+					<span class="hidden tooltip">
+						{{#.}}
+							{{#errors}}
+							<ul>
+								<li>{{.}}</li>
+							</ul>
+							{{/errors}}
+						{{/.}}
+					</span>
+				</span>
+				<span class="row" title="The e-mail address of the employee.">
+					<label for="email" class="half">Username</label>
+					<input type="email" name="email" class="half" required />
+					<span class="hidden tooltip">
+						{{#.}}
+							{{#errors}}
+							<ul>
+								<li>{{.}}</li>
+							</ul>
+							{{/errors}}
+						{{/.}}
+					</span>
+				</span>
+				<span class="row" title="This will be left to the new user if not specified">
+					<label for="password" class="half">Password</label>
+					<input type="password" id="password" name="password" class="half" />
+					<span class="hidden tooltip">
+						{{#.}}
+							{{#errors}}
+							<ul>
+								<li>{{.}}</li>
+							</ul>
+							{{/errors}}
+						{{/.}}
+					</span>
+				</span>
+				<span class="row">
+					<label for="confirmPassword" class="half">Confirm password</label>
+					<input type="password" id="confirmPassword" name="confirmPassword" class="half" />
+					<span class="hidden tooltip">
+						{{#.}}
+							{{#errors}}
+							<ul>
+								<li>{{.}}</li>
+							</ul>
+							{{/errors}}
+						{{/.}}
+					</span>					
+				</span>
+				<span class="right row buttonRow">
+					<input type="reset" class="left" value="Clear"/>
+					<input type="submit" class="left" value="Submit" />
+				</span>
+			</form>
+		</div>
+		<div id="errorMessage">
+		
+		</div>
+	</body>
+</html>

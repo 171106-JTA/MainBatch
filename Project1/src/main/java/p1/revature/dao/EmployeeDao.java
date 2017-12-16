@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
 import java.util.LinkedList;
 import java.util.List;
@@ -217,9 +218,12 @@ public class EmployeeDao {
 		Employee manager     = null;
 		try (Connection conn = ConnectionUtil.getConnection())
 		{
-			String sql = "SELECT * FROM p1_employees WHERE manager_id = ?";
+			// read in the manager id of emp
+			int managerID = getManagerID(emp);
+			String sql = "SELECT * FROM p1_employees WHERE employee_id = ?";
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, emp.getEmployeeID());
+			ps.setInt(1, managerID);
+			rs = ps.executeQuery();
 			while (rs.next())
 			{
 				manager = new Employee(rs.getInt("EMPLOYEE_ID"), 
@@ -243,6 +247,44 @@ public class EmployeeDao {
 			close(rs);
 		}
 		return manager; 
+	}
+	
+	public List<Employee> getEmployeesByManager(Employee manager)
+	{
+		PreparedStatement ps = null;
+		ResultSet rs         = null;
+		
+		List<Employee> employees = new LinkedList<>();
+
+		try (Connection conn = ConnectionUtil.getConnection())
+		{
+			String sql = "SELECT * FROM p1_employees_view WHERE MANAGER_NAME = ?";
+			ps = conn.prepareStatement(sql);
+			// set parameters here
+			ps.setString(1, String.format("%s %s", manager.getFirstName(), manager.getLastName()));
+			rs = ps.executeQuery();
+			while (rs.next())
+			{
+				employees.add(new Employee(rs.getInt("EMPLOYEE_ID"),
+						rs.getString("EMPLOYEE_NAME"),
+						rs.getString("EMPLOYEE_EMAIL"),
+						rs.getString("DEPARTMENT_NAME"),
+						rs.getString("DEPARTMENT_ROLE_NAME"),
+						rs.getString("MANAGER_NAME"),
+						rs.getDouble("EMPLOYEE_SALARY")));
+			}
+		}
+		catch (SQLException exception)
+		{
+			exception.printStackTrace();
+		}
+		finally
+		{
+			close(ps);
+			close(rs);
+		}
+
+		return employees;
 	}
 	
 	/**
@@ -300,9 +342,9 @@ public class EmployeeDao {
 			cs = conn.prepareCall(sql);
 			cs.registerOutParameter(1, Types.NUMERIC);
 			cs.setInt(2, emp.getEmployeeID());
-			rs = cs.executeQuery();
+			cs.executeQuery();
 			
-			empIsManager = (rs.next() && rs.getInt(1) > 0);
+			empIsManager = (cs.getInt(1) > 0);
 		}
 		
 		catch (SQLException exception)
@@ -326,8 +368,7 @@ public class EmployeeDao {
 		
 		try (Connection conn = ConnectionUtil.getConnection())
 		{
-			// TODO: Fix this view.
-			String sql = "SELECT manager_name FROM p1_department_managers_view WHERE department_name = ?";
+			String sql = "SELECT manager_id,manager_name FROM p1_department_managers_view WHERE department_name = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, dept.getDepartmentName());
 			rs = ps.executeQuery();
@@ -460,5 +501,81 @@ public class EmployeeDao {
 			close(rs);
 		}
 		return managerID;
+	}
+	
+	/**
+	 * Gets a list of all managers in this system. Used mainly for projecting system state.
+	 * @return list of all managers in this system
+	 */
+	public List<Employee> getManagers() 
+	{ 
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		List<Employee> allManagers = new LinkedList<>();
+		try (Connection conn = ConnectionUtil.getConnection())
+		{
+			String sql = "SELECT * FROM p1_department_managers_view";
+			stmt = conn.createStatement();
+			rs   = stmt.executeQuery(sql);
+			while (rs.next())
+			{
+				allManagers.add(new Employee(rs.getInt("MANAGER_ID"), rs.getString("MANAGER_NAME")));
+			}
+		}
+		catch (SQLException exception)
+		{
+			exception.printStackTrace();
+		}
+		finally
+		{
+			close(rs);
+			close(stmt);
+		}
+		return allManagers;
+	}
+	
+	/**
+	 * A method for fetching Employee info from an active session 
+	 * (namely, by the email address stored in that session)
+	 * @param email : the email address of the Employee
+	 * @return the Employee, if they are in the system by that email address
+	 */
+	public Employee getEmployeeByEmail(String email)
+	{
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		Employee user = null;
+		
+		try (Connection conn = ConnectionUtil.getConnection())
+		{
+			String sql = "SELECT * FROM p1_employees_view WHERE employee_email = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
+			rs = ps.executeQuery();
+			
+			if (rs.next())
+			{
+				user = new Employee(rs.getInt("EMPLOYEE_ID"),
+						rs.getString("EMPLOYEE_NAME"),
+						rs.getString("EMPLOYEE_EMAIL"),
+						rs.getString("DEPARTMENT_NAME"),
+						rs.getString("DEPARTMENT_ROLE_NAME"),
+						rs.getString("MANAGER_NAME"),
+						rs.getDouble("EMPLOYEE_SALARY"));
+				
+			}
+		}
+		catch (SQLException exception)
+		{
+			exception.printStackTrace();
+		}
+		finally
+		{
+			close(ps);
+			close(rs);
+		}
+		return user;
 	}
 }

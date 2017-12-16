@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf8"><!-- by default, web pages are not UTF-8 -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
+		<script src="js/TRMS_Constants.js"></script>
+		<script src="js/TRMS_loginPage(Mustache).js"></script>
+		<title>Tuition Reimbursement Portal</title>
+		<link rel="stylesheet" href="css/TRMS_base.css">
+		<link rel="stylesheet" href="css/TRMS_loginPage.css">
+		
+	</head>
+	<body>
+		<h1 class="textCenter">Tuition Reimbursement Portal</h1>
+		<div id="loginContainer" class="main pageCenter">
+			<form id="loginForm">
+				<h2 class="row">Login</h2>
+				<span class="rowTight">
+					<label for="username" class="third">Username:</label>
+					<input type="text" id="username" class="right twoThirds" required />
+				</span>
+				<span class="rowTight">
+					<label for="password" class="third">Password:</label>
+					<input type="password" id="password" class="right twoThirds" required />
+				</span>
+				<span class="row buttonRow right">
+					<button id="newUserButton">New User?</button>
+					<input type="reset" class="" value="clear"/>
+					<input type="submit" class="" value="login"/>
+					
+				</span>
+			</form>
+		</div>
+	</body>
+</html>

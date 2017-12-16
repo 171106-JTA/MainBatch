@@ -128,6 +128,25 @@ public class Employee extends Bean{
 			email, 
 			pass);
 	}
+	/**
+	 * For use on the main page
+	 * @param id : the id of the Employee
+	 * @param name : the full name of this Employee
+	 * @param email : the Employee's username
+	 * @param department
+	 * @param departmentRole
+	 * @param managerName
+	 * @param salary : the Employee's salary
+	 */
+	public Employee(int id, String name, String email, String department, String departmentRole, 
+			String managerName, double salary) {
+		this(id, name);
+		this.employeeEmail      = email;
+		this.departmentName     = department;
+		this.departmentRoleName = departmentRole;
+		this.managerName        = managerName;
+		this.employeeSalary     = salary;
+	}
 	public int getEmployeeID() {
 		return employeeID;
 	}

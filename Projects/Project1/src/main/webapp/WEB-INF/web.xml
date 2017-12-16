@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <display-name>Project1</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>RegisterUser</display-name>
+    <servlet-name>RegisterUser</servlet-name>
+    <servlet-class>p1.revature.servlets.UserRegistration</servlet-class>
+  </servlet>
+	<!-- <servlet>
+	  	<description></description>
+	  	<display-name>FetchDepartments</display-name>
+	  	<servlet-name>FetchDepartments</servlet-name>
+	  	<servlet-class>p1.revature.servlets.FetchDepartments</servlet-class>
+  </servlet>  -->
+  <servlet-mapping>
+    <servlet-name>RegisterUser</servlet-name>
+    <url-pattern>/RegisterUser</url-pattern>
+  </servlet-mapping>
+<!-- <servlet-mapping>
+    <servlet-name>FetchDepartments</servlet-name>
+    <url-pattern>/FetchDepartments</url-pattern>
+  </servlet-mapping> --> 
+</web-app>

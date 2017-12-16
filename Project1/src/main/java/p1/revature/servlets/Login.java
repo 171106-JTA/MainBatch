@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import p1.revature.beans.Employee;
+import p1.revature.dao.EmployeeDao;
 import p1.revature.services.HandleEmployeeData;
 
 @WebServlet("/login")
@@ -19,7 +21,6 @@ public class Login extends BaseServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// if the user is already logged in, we're done
-		// TODO : implement check for existing user session
 		HttpSession session  = req.getSession();
 		boolean isNewSession = session.isNew();
 		
@@ -36,13 +37,16 @@ public class Login extends BaseServlet {
 				json = String.format("{\"%s\" : \"%s\","
 						+ "\"%s\" : \"%s\"}", 
 					"authenticated", "true",
-					"redirect_url", "dashboard.html");
+					"redirect_url", "TRMS_Dashboard.html");
 				// set status to OK
 				res.setStatus(HttpServletResponse.SC_OK);
+				// pre-fetch data to put into the session
+				fetchDataIntoSession(session, req.getParameter("user"));
 			}
 			else
 			{
 				System.out.println("Invalid user login");
+				session.invalidate();
 				//implement lockout feature
 				json = String.format("{\"%s\" : \"%s\","
 						+ "\"%s\" : \"%d\"}", 
@@ -54,8 +58,13 @@ public class Login extends BaseServlet {
 		}
 		else
 		{
+			System.out.println("User has already been signed in");
 			// send the user back to where they came from!
 			// TODO: implement feature to get the origin URL/URI and pass that to the returned JSON
+			json = String.format("{\"%s\" : \"%s\"}", "redirect_url", "TRMS_Dashboard.html");
+			res.setStatus(200);
+			// pre-fetch data to put into the session
+			fetchDataIntoSession(session, req.getParameter("user"));
 		}
 
 		res.setContentType("application/json");
@@ -66,4 +75,15 @@ public class Login extends BaseServlet {
 		out.flush();
 	}
 	
+	public void fetchDataIntoSession(HttpSession session, String email)
+	{
+		EmployeeDao empDao = new EmployeeDao();
+		// get the Employee for the current session
+		Employee user = empDao.getEmployeeByEmail(email);
+		session.setAttribute("user", user);
+		// find out if user is a manager and store that in session
+		boolean userIsManager = empDao.isManager(user);
+		session.setAttribute("userIsManager", userIsManager);
+		// TODO: handle fetching of any reimbursement requests the user might have
+	}
 }
