@@ -1,0 +1,57 @@
+===================================
+Hibernate
+===================================
+
+High performance object/relational persistance and query service
+maps java classes to database tables
+- also maps java datatypes to sql datatypes
+framework that aims to simplify java database interactions
+in summation: an open source, lightweight ORM tool
+
+Advantages: 
+Open Source
+Lightweight
+Fast Performance (achieved through caching)
+Database independant Query Language
+- Called HQL (Hibernate Query Language)
+- Object Oriented Version of SQL
+- Avoids DB specific queries
+Automatic tale creation supported
+Supports DB statistics
+
+See pg 31 For Hibernate Architecture
+
+===================================
+ORM -> Object Relational Mapping
+===================================
+Programming technique for converting RDB data to 
+object orienged languages like Java, C#, etc. 
+- Automated persistance of java objects to tables
+Business logic accesses objects instead of the DB
+Hides SQL details from Object Oriented Logic
+Uses JDBC under the hood
+No need for database implementation
+Entities based on business concepts instead of DB structure
+Transaction management + automatic key generation
+
+
+===================================
+ORM Components
+===================================
+ORM utilizes the following components:
+An API for crud operations
+An API for specifying a mapping of queries to classes and properties
+Facility for mapping meta-data 
+Technique for interacting with transactional object to perform dirty checking, lazy association fetching
+and other optimizations
+- lazy association fetching: only loads information when you fetch it
+
+
+
+JDBC									Hibernate
+Use code to query a DB 					Uses objects to map to the DB (ORM)
+Mapping is done manually				Mapping is automatic
+SQL language specific					SQL language independant
+Change SQL language is nightmarish		Changing SQL language is easy: just edit Config file
+Result sets manually translated			Translation automatic -> to objects
+Caching is manual 						Caching is Automatic

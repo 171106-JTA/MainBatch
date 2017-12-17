@@ -1,0 +1,183 @@
+
+Unit Testing (black box)
+- the most fine-grained of all testing
+- Testing individual components by themselves
+
+Integration Testing (white box)
+- Testing the separate modules together
+- Aims to identify dependancy issues
+
+System testing ()
+- System integration testing (SIT)
+- Test the entire system as a whole
+
+e2e testing (black box)
+- Test the application from start to finish
+- What's the difference between System Testing and e2e testing
+
+User acceptance testing (UAT) (block box)
+- Test the application against user requirements
+- Alpha Testing: 
+	-> Test application in-house
+	-> Your testers will most likely be IT
+	-> May have understanding of how the application is built
+	-> Should NOT be part of the development team
+- Beta Testing: 
+	-> Out of house testers
+	-> Could be actual client users
+	-> Typically not people in IT
+
+===================================
+Another Set of Broad Catagories for Testing 
+===================================
+Black Box Testing
+- Test an application without being able to see the code
+- Typically allows for only front end testing
+
+White Box Testing (aka Glass Box Testing)
+- Testing done based around actual code of application
+
+
+Grey Box Testing
+- Combination of both black box and white box
+
+
+===================================
+LOE -> Level of Effort
+===================================
+Work flow for testing team:
+Test Strategy document		16 hr
+Test Plan document			16 hr
+Test case creation			24 hr
+Test execution				120 hr
+Test result document		4 hr
+Exit criteria 				4 hr
+________________________  = 120 hr
+This is the number of hours for which funding is requested
+
+
+===================================
+Regression Testing
+===================================
+- Testing old functionality (old tests) to confirm new features/code didn't break it
+- Typically, regression tests should be automated
+
+===================================
+Smoke Testing / Sanity Testing
+===================================
+- Bare boned tests to confirm if the apploicaiton even functions
+- Are simple. DB crud operations persisted
+- Also automated
+- Smoke Tests passing is usually the pre-requisit for regression testing (i.e. we don't want to start regression until we know the bare bones works)
+
+===================================
+Functional and Non-Functional
+===================================
+So far, all the testing we've covered have been functional tests
+
+Fuctional Testing -> Any testing phase whose outcome is based off the functionality of the application
+
+Non-Functional Testing -> Any testing that does not adhere to what outputs from the functions of an app
+-> Secturiy testing, like penetraction testing
+-> Performance testing,
+	Stress Testing: how does the app handle at full+ capacity
+	Peak Testing: how does the app handle sudden bursts of users
+	Load Testing: how the application runs at heavy loads (when there alot of users on average) 
+		- different from stress testing, which tests functionality approaching full capacity
+	Usability Testing: Is the application actually usable 
+
+===================================
+Selenium: 
+===================================
+An automation framework
+Has multiple components:
+
+Selenium IDE
+-> provides an in-browser IDE for recording tests
+-> Press 'record', navigate webpage, press 'stop' and testing script is generated
+-> Don't use this! It's very buggy and finicky
+Selenium RC (remote connect)
+-> Provides a way to execute automated scripts remotely
+-> History: Previously, scripts could only be run scripts on the machine they were stored. 
+	We can now test remotely...an extremely useful functionality
+Selenium WebDriver
+-> Tool for launching browsers and automating through web application
+-> Note: Doens't automate applications. It automates Web applications
+Selenium Grid
+-> Runs multiple instances of the script at the same time. 
+-> Let's us test different browsers at the same time
+-> i.e. Runs scripts concurrently in different browsers
+
+
+WebDriver 2.0
+-> combines selenium RC and Selenium WebDriver
+
+WebDriver 3.0
+-> Built on WebDriver 2.0
+
+
+Project setup: 
+Create a new Maven project -> use jar file
+SEtup pom.xml file
+Download the selenium chrome and/or firefox (gekko) driver file. 
+-> google and downlaod appropriate zip. 
+-> Unzip and put the .exe file in a folder on your project, called somehting like "Drive"
+
+
+
+pom in Maven -> Project Object Model
+pom in Selinium -> Page Object Model
+
+
+
+Data Driven Frameworks
+- Provide a source file for configuring data used in applciation
+- These files also dictate how many runs a test will have, based on rowcount
+- Easiest to implement
+
+Keyword Driven Framework
+- Use keywords describing what data to use and where/how to use it. 
+- Provides testers a non-programatic way to create test scripts 
+- (only allows 1 test case at a time)
+
+Hibrid Driven Framework 
+- Combination of data and keyword driven frameworks
+
+example excel sheet:
+Keyword excel file ->
+SetText userName uservalue
+SetText password passvalue
+clickButton login
+
+Data excel file ->
+uservalue passwalue
+bob 	bob
+trooop 	trooper
+
+Note: Know all these frameworks for interviews!
+
+
+Selenium Waits
+Implicit Waits
+- Applied to whole driver
+- Sets how long a driver waits when finding an element before it determines it as "not found"
+Fluent Waits
+- Separate object, applied on a driver
+- Forces driver to wait until the element is found
+Explicit Waits
+- Separate object, applied on a driver
+- Waits for a hard set of time when finding an element
+
+
+
+The List: 
+Unit Testing
+Integration Testing
+System Testing
+E2E Testing
+UAT Testing: Alpha/Beta
+Black Box
+White Box 
+LOE 
+Regression 
+Smoke

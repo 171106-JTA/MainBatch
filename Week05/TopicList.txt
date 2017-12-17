@@ -1,0 +1,26 @@
+Topics:
+Devops
+continuous Integration
+Continuous deployment
+AWS
+Jenkins
+AWS acronyms/modules:
+-SSH, auto-scaling, ELB, RDS, S3, VPC, Route 53, IAM, EC2, AMI, IAAS, PAAS, SAAS, EBS
+Hibernate
+Object states
+Caching L1/L2
+Hibernate Architecture
+Hibernate Components
+ORM
+JDBC vs Hibernate
+Criteria and HQL
+Mapping objects (both xml and annotations)
+Get v load
+save v persist
+merge v update
+one2one
+one2many
+many2one
+many2many
+lazy vs eager fetching
+proxies

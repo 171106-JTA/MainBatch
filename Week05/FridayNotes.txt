@@ -1,0 +1,85 @@
+===================================
+Data Fetching
+===================================
+Handles the way we grab data for dependency fields
+- i.e. "has a" relationships
+Lazy Fetching
+- When data is grabbed, it won't brab the Objects reqresented in the dependency until you call it's getter
+Earger Fetching
+- Grab and populate all data 
+
+All fetches are lazy by default in Hibernate
+
+===================================
+Hibernate In Practice
+===================================
+Session
+- Used for physical connections to the DB
+- Persisted objects are stored and received from a database
+Persistant Object
+- These objects are not typically thread safe (make sure the transactions are not long.)
+- Keep holds on the object to a minimum!
+- Session should aim to perform CRUD quickly
+- Maintain an instance of the mapped class
+
+===================================
+States of a Hibernate Object
+===================================
+Transient
+- New instance of a persistant class
+- Not associated with a session yet. (doesn't represented anything on backend yet)
+Persistent
+- Once the object is associated with a session, it is persistent
+- Object has representation in the database, an ID, and its associated with a sesison
+Detached 
+- Session was closed. (without a session, the object is detached)
+
+===================================
+Session Factory: 
+===================================
+Holds 2nd level cache (optional) 	--> level two caching
+Houses the connection provider
+Level 2 caching is shared among all sessions
+
+===================================
+Session Component
+===================================
+Wraps around the JDBC connection
+Short lived object
+A Factory for transactions, queries, and criteria
+Holds 1st level caching (mandatory)  --> level one caching
+level 1caching is unique to each session
+
+===================================
+Transaction
+===================================
+Atomic Units of Work
+
+===================================
+Connection Provider Component
+===================================
+Factory of JDBC connections
+
+===================================
+Configuration Component
+===================================
+First object
+Congigures Hibernate
+
+===================================
+Query Comnponent
+===================================
+Used for HQL
+Utilizes parameters to execute queries (like prepared statements)
+
+===================================
+Criteria
+===================================
+Let's you execute Object Oriented criteria queries to retrieve objects
+
+Memorize These components!!!! Looks amazing in interview
+You can memorize these using the lifecycle of an angular project
+
+Hibernate
+AWS
+There will be a few SQL questions

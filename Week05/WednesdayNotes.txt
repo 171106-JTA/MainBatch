@@ -1,0 +1,225 @@
+===================================
+AWS
+===================================
+A framework provided by Amazon that offers users a platform deploying web applictions
+Provides hardware, software, and network services needed for full stask web applications
+
+===================================
+Cloud Computing
+===================================
+Accessing IT infrastructure over internet
+
+Infrastructure
+- Harddrives
+- Processors
+- Operating Systems
+- Servers
+
+Platrorms
+- Operating Systems
+- Web/Applicaiton Servers
+- Databases
+
+Software
+- Email clients
+- SQL engines
+- Etc.
+
+===================================
+PAAS - Platform As A Service
+===================================
+AWS offers to deliver an outlet for you to use different tools & servers remotely
+all tools are stored on Amazon's size
+
+===================================
+IAAS - Infrastructure AS A Service
+===================================
+Allows for highly scalable web applications
+The automation of administrative tasks
+Support for dynamic scaling
+
+===================================
+SAAS - Software As A Service
+===================================
+Provisioning of software used for developing web applications
+- This includes alot of commercial software such as Oracle, Salesforce, etc.
+
+===================================
+Availability Zones
+===================================
+A discrete data center
+located in "regions" around the glob
+- Each region can have multiple AZ
+
+===================================
+EC2 - Elastic Cloud Compute
+===================================
+A virtual machine on the cloud
+You pay for what you use
+Attaches on AMI for use
+- AMI -> Amazon Machine Image
+- AMI is the operating system software
+EC2 also attaches on EBS for use. (Elastic Block Storage)
+Typically configuring files on the EC2, you would use SSH (Secure Shell)
+
+===================================
+Elastic Block Storage
+===================================
+Provides persistent block level storage for an EC2
+Consisten and low latency
+Functionality for snapshots
+- A saved state of data you can rollback to
+Able to scale capacity (Supports Auto Scaling)
+
+===================================
+Auto Scaling
+===================================
+Ensure proper amount of ec2 & available memory for your application 
+You can create a collectin of ec2's that are running or stopped Based on demand os system (auto-scaling groups)
+- You can set Max#/Min# of ec2's to run
+
+===================================
+ELB - Elastic Load Balancing
+===================================
+Directs incomming traffic to different ec2's depending on the amount of congestion between each ec2
+Helps with fault toleracne (if a server goes down, traffic is directed to a different server)
+
+===================================
+RDS - Relational Database Service
+===================================
+Set up, operate and sclae a database on the cloud
+Supports automation of time consuming tasks
+Allows point in time backups of databases
+Offers database usage reports
+
+===================================
+S3 - Simple Storage Service
+===================================
+A Storage service for storing basic files
+It is a bucket
+it is NOT block storage, you can not run files on S3
+Secure, deurable, highly sclalable
+gauranteed %99.99 availablitily
+
+===================================
+Route 53
+===================================
+Amazon's domain name service
+Route's users to applciation through DNS names
+Can be used to perform on end points
+
+===================================
+Dev pipline Steps
+===================================
+#1 Central Repository
+Create a new github project (one person does this)
+Create a new Maven Project (one person does this)
+	- Create project
+	- Change pom.xml file
+	- Add to git and push
+#2 Create Database
+- Oracle -> Oracle Enterprise Edition
+- Select "free tier only"
+- Don't worry about licensing
+- 12.1 
+#3 Create EC2
+IAM -> Extra security. Multiple people can have acces to multiple credentials
+Include Tags!!! Especially when managing multiple EC2s
+Download the EC2 key
+
+Open the key PEM file using putty-keygen
+Click "save private key" from putty-keygen
+
+In putty: 
+Host Name: ec2-user@<IPv4 Public IP for EC2 instance>
+On left Hand side bar: SSH -> Auth: browse for and select the private key file
+
+On ec2 session:
+Install Tomcat: wget 
+
+Install JDK onto the EC2
+-> install the linux 64bit .rpm file from Oracle and move to folder with key in it
+-> open command line in file with ppk key in it
+-> Copy in directory putty directory, put directory in quotes as follows: 
+"C:\Program Files (x86)\PuTTY\pscp" -i PipelineExample.ppk jdk-8u151-linux-x64.rpm ec2-user@18.217.81.165:<desired file name on ec2 server>
+-> When done installing, run: sudo rpm -ivh jdk8.rmp
+-> Open .bash_profile
+	Add in lines 
+
+Add the following to the ned of apache-tomcat-7.0.82/conf: 
+
+<role rolename="manager-gui"/>
+<role rolename="manager-script"/>
+<user username="tomcatgui" password="password" roles="manager-gui" />
+<user username="tomcatscript" password="password" roles="manager-script"/>
+
+
+Setup Jenkins
+sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+sudo rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
+sudo yum install jenkins -y
+
+start Jenkins
+sudo service jenkins start --> To test jenkins install
+
+Start Jenkins not as a service: 
+java jar jenkins.war ???
+
+"reset" jenkins password
+Remove .jenkins from home directory. 
+Rerun jenkins
+Password will be given to you
+
+
+Setup Maven
+sudo wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+
+sudo sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
+
+sudo yum install -y apache-maven
+
+
+Setup Git
+sudo yum install git
+
+
+
+
+===================================
+Linux File Permissions
+===================================
+_ _ _ _ _ _ _ _ _ _ 
+
+first _: directory
+next 3 _: user/author
+next 3 _: groups
+next 3 _: Other
+
+Use the chmod command to edit the permissions of a file
+
+r => read
+w -> write
+x -> execute
+
+d   user    group   other
+_   _ _ _   _ _ _   _ _ _
+
+
+Be able to talk about:
+AWS -> Amazon Web Service
+DevOps -> Development Operations
+CI/CD -> 
+EC2 -> Elastic Cloud Compute
+AMI -> Amazon Machine Image
+IAAS -> Infrastructure As A Service
+PAAS -> Platform As A Service
+SAAS -> Software As A Service
+EBS -> Elastic Block Storage
+SSH -> Secure Shell
+Auto-Scaling
+ELB -> Elastic Load Balancing
+RDS -> Rlational Database Service
+S3 -> Simple Storage Service
+VPC 
+Route 53
+Be able to talk about the WHYs!!!!!

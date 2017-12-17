@@ -1,0 +1,226 @@
+Topics:
+===================================
+DevOps
+===================================
+
+A practice being widely adopted by companies 
+Combination of development and project operations
+Follows the main goal of automating as much of the project operations as possible
+
+DevOps is knowing everything from start to end of project deployment
+
+Method of improving communication and collaboration between development and business analyst teams
+
+
+===================================
+Continuous Integration (CI)
+===================================
+- Push code fast and often (commits should be about 15 lines of code)
+- Have it verified for you every time
+- Team should push code often throughout the day
+- This code should get automatically tested
+
+Pros: 	Detect errors quickly
+		Quick detection = quick resolving
+		Ensure high test coverage
+Cons: 	Hard to come up with
+
+================
+CI Practices
+================
+Have ONE central SCM (Source Code Management system)
+Never push into master
+Automate build processes
+Automate Testing
+Test in a clone of production 
+- When the application is in production (the deployed applicaiton that users are utlizing!), you should never work on the production branch
+- Test in a clone of production
+- Automate deployment
+
+===================================
+Continuous deployment
+===================================
+Deploy changes quickly and often
+
+===================================
+AWS
+===================================
+AWS -> Amazon Web Services
+Amazon's version of Cloud Computing. Provide Infrastruture, Platforms, and Software for building and deploying applications
+
+===================================
+Cloud Computing
+===================================
+Accessing IT infrastructure over internet
+
+Infrastructure
+- Harddrives
+- Processors
+- Operating Systems
+- Servers
+
+Platrorms
+- Operating Systems
+- Web/Applicaiton Servers
+- Databases
+
+Software
+- Email clients
+- SQL engines
+- Etc.
+
+===================================
+Jenkins
+===================================
+Continuous Integration Framwork. 
+Written in Java
+Tests code and reports on changes
+Runs network every time
+
+AWS acronyms/modules:
+SSH -> ??? ; A method of connecting remotely to resources...more and more, resources on the web
+auto-scaling -> Automatically allocate more rss, as loads on systems change 
+ELB -> Elastic load balancing; The ability to releive stress on a busy instance of an applicaiton by redirecting traffic to other regions or instances depending
+RDS -> Relational Database Service; Provide hardware and software for storing data on the cloud
+S3 -> Simple Storage Service; A no-sql method of storing , 
+VPC -> Virtual Private Cloud; A virtual counterpart to traditional hardwired networks. A security feature in AWS designed to limit who/what has access to resources 
+Route 53, IAM, EC2, AMI, IAAS, PAAS, SAAS, EBS
+- Availablitiy Zones, Elastic Block Storage, Auto Scaling
+
+===================================
+Hibernate
+===================================
+
+High performance object/relational persistance and query service
+maps java classes to database tables
+- also maps java datatypes to sql datatypes
+framework that aims to simplify java database interactions
+in summation: an open source, lightweight ORM tool
+
+
+Object Relational Mapping system
+Object/relation peristence and query service
+
+Advantages: 
+Open Source
+Lightweight
+Fast Performance (achieved through caching)
+Database independant Query Language
+- Called HQL (Hibernate Query Language)
+- Object Oriented Version of SQL
+- Avoids DB specific queries
+Automatic tale creation supported
+Supports DB statistics
+
+
+
+
+===================================
+States of a Hibernate Object
+===================================
+Transient
+- New instance of a persistant class
+- Not associated with a session yet. (doesn't represented anything on backend yet)
+Persistent
+- Once the object is associated with a session, it is persistent
+- Object has representation in the database, an ID, and its associated with a sesison
+Detached 
+- Session was closed. (without a session, the object is detached)
+
+===================================
+Caching L1/L2
+===================================
+L1 -> mandatory
+	-> L1 internal to session objects 
+	-> Built in to Hibernate...clients do not communicate with L1 caching
+	-> First time objects accessed in a session, they are fetched from the database. After that, the object is stored in L1 cache
+	-> L1 caching is how hibernate determines if object is transient, persistant, detached. 
+	-> use Evict() and Clear() to remove specific objects or all objects (respectively) from the cache
+	-> use flush() to force synchornization between L1 cache (in session memory) and database
+	-> L1 caching stores every object in persistent state, unitil we hit the heap size limit at which point we get a OutOfMemoryException
+L2 -> Optionaly
+	-> Operates at the session factory level 
+	-> stores objects across sessions
+	-> First time an entity is fetched, it is stored in L1 and L2 caching (if the option is set)
+	-> Subsequently, if an entity is not found in L1, L2 is searched
+	-> Mark as "cachable" using the @Cache tag, designating Concurrency Strategy using 'usage' parameter
+	-> In web.xml, set hibernate.cache.use_second_level_cache property to TRUE
+
+
+Hibernate Architecture
+	
+
+===================================
+Hibernate Components
+===================================
+Configuration, Session Factory, Session, Transaction, Query, Criteria
+
+Configuration: 
+-> Initialized once
+-> The properties file -> contains? or is the property file? 
+-> Used to instantiate a session factory object for each database (usually, one sessoin factory per database)
+
+Session Factory
+-> Generates sessions objects
+-> 'Contains' ??? L2 cache 
+-> Thread safe
+
+Session 
+-> Typically instantiated for each interaction with a database
+-> Handles persisted objects
+-> Not typically thread safe?????? what does it mean by typically? (i.e. don't keep open for very long)
+-> Ued to perform ??? multiple transactions relating to a single purpose
+
+Transaction
+-> Optional feature in our application, which may choose to implement transaction functionality in its own code
+-> Used to perform a single unit of work and based on JDBC
+
+Query Object
+-> Retreive data and create objects
+-> bind query parameters, limit results of query, and execture query
+
+Criteria Object
+-> used to execture object oriented criteria queries to retrieve objects. ??? From the databaes?
+
+
+===================================
+ORM
+===================================
+A practice in programming for mapping database queries to objects in OOP's 
+
+
+JDBC vs Hibernate
+-> JDBC = 'low-level', Hibernate = 'High-level'
+-> Hibernate 'encapsulates' JDBC to allow changes to database expressed through changes to objects rather than sql code
+
+
+
+Criteria and HQL
+
+
+Mapping objects (both xml and annotations)
+
+===================================
+Get v load
+===================================
+Get
+-> get retrives objects immediately from the database. 
+-> performs issues if just retrieves identifier 
+Load: 
+-> Returns a proxy (an object with uninitialized properties). 
+-> Lazy initialization, only fetch properties when those properties are used.
+-> Better performance, since only retrieves properties
+-> Throws ObjectNotFoundException if object doesn't exist in the session cache
+
+
+save v persist
+merge v update
+-> Flush synchronizes 
+one2one
+one2many
+many2one
+many2many
+lazy vs eager fetching
+proxies
+Exceptions in Hibernate
+

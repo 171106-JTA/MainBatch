@@ -1,0 +1,199 @@
+We need to get into the mindset of testers
+- How to break any application we come across
+
+Postive Testing
+Does the application handle good (standard, expected) input properly
+
+Negative Testing
+Does the application handle bad (inexpected) input properly.
+Example: incorrect text, empty fields on submission, etc.
+
+Boundary Testing
+Testing the extreme ranges of an input both within bounds and out of bounds
+Example: 
+	A password feild that requires 4-9 characters, should be tested with inputs of length 0, 3, 4, 9, 10, and <crazy long> 
+
+When testing: 
+- try date input
+- try code input
+- try alt codes input
+
+Example of testing date field: 
+current - current
+current - X/X/9999
+current - yesterday
+current - 0
+
+===================================
+Re-Testing vs. Regression Testing
+===================================
+Re-Testing -> Testing code that previously failed testing.
+
+Regression Testing -> Testing past functionality to ensure new functionality did not break it.
+(went over this yesterday)
+
+===================================
+Defect, Bug, Error
+===================================
+Defect -> An issue with code that yields unexpected outcomes
+Bug -> The result of a defect
+
+===================================
+Defect Lifecycle
+===================================
+See pg 35, or Google
+(or, if you are Antony, see Slack)
+
+===================================
+TDD vs. 
+===================================
+TDD -> Test Driven Development
+BDD -> Behavorial Driven Development
+
+==========
+TDD
+==========								
+Write tests first, then develope
+Write unit tests that fail, then develop the application until the tests pass
+
+Pros: 
+Well defined requirements
+
+Cons: 
+Developers typically think this is a waste of time, and don't follow this practice very well
+If the requirements ever change, an entire testing framework needs to be refactored
+
+==========
+BDD
+==========
+Exactly the same as TDD but with extra restrictions
+The tests are written in a business-readable language
+
+How different from TDD?
+The business team is capable of writing unit tests for an application
+Cucumber is used to acheive this
+
+From week 05: 
+SRS
+System Requriement Specifications
+- fine grain technical details
+BRS 
+Business Requirement Spcecificaitons
+
+
+=========================================================================================================
+Cucumber
+=========================================================================================================
+Installing Cucumber in Eclipse:
+Help -> Install new software
+Add -> put 'Cucumber' for name, paste the following link in the location: 
+http://cucumber.github.com/cucumber-eclipse/update-site
+Select the Cucumber Eclise Plugin, next -> next -> accapt terms -> finish
+
+
+What is Cucumber?
+A BDD Tool 
+Exteds TDD by offering a human language called Gherkin
+
+===================================
+Gherkin
+===================================
+- Gherkin can understnad 50+ different languages
+- Provides a stronger team environment by allowing businesses and devs to collaborate
+	on project development
+
+===================================
+Notes To Accompany in-class work:
+===================================
+Create folder at root level called 'Features'
+Create a new 'file': MercuryLogin.feature
+If installed correctly, Selenium will autofil document with Gherkin 
+ 
+Run MercuryLogin.feature under Features folder as a Feature
+ the generated console output, copy the classes, and copy those into a new class (we put the class in src/test/java/com.revature.gherkin/MercuryLogin.java)
+
+Run TestRunner.java as a Unit Test
+
+===================================
+Summary of topics
+===================================
+==========
+Cucumber Overview 
+==========
+What is Cucumber? A BDD tool (i.e. not a framework)
+What is Gherkin? 
+Gerkin Keywords:
+	Given 				-> precondition
+	When 				-> key actions
+	Then 				-> expected result
+	And 				-> For multiple implementations
+	But 				-> Same as above, but like !And
+	Scenario: 			-> Designates a feature file
+	Scenario Outline: 	-> Prepares a data-driven scenario (i.e. multiple test runs for mutliple data)
+	Examples: 			-> The dataset in which to run multiple tests
+	DataTable 			-> A collection of input for a specific phase. Can be overridden with a list of input spcific objects
+
+Cumcumber Feature File
+- Where Gherkin Resides
+
+Glue Code
+- Definitions, via code, of the Gherkin Scenario
+- Descripts Script execution for the Gherkin
+
+Step Definition File (Same as Glue Code)
+
+Test Runner
+- The test suite for Cucumber
+- @RunWith(Cucumber Classes)
+- @CucumberOptions(
+		features = "directory";   
+		flue = "dir";
+
+	) i.e. how we configure the unit tests
+-- Run multiple files by specifying a drectory with file
+-- Run a single file using drectory/featureFile.feature
+
+==========
+Selenium Overview
+==========
+When to NOT use Automation Testing:
+- penetration testing
+- usability testing 
+
+When to use Automation Testing: 
+- Regression Testing: Testing old functionality to test against changes 
+- Smoke Testing: Sanity Testing. Testing if the application works at the broadest level
+- Re-Testing: Testing functionality to check that a bug is fixed
+---- confirming an issue/defect fix has caused the feature to work correctly
+
+Side note: Robust applications are applications that are hard to break
+
+Question: How to configure selinium to access google.com?
+
+Selectors: 
+By 	Class
+	ID
+	TagName
+	cssSelector
+	xpath
+		- Absolute: html/some/thing/...
+		- Relative: //element[@...]
+	name
+	LinkTest
+	Link
+
+==========
+Waits in Selenium
+==========
+Implicit -> applied to driver directly
+
+Explicit -> Similar to Fluent wait....will need to google difference
+
+Fluent -> Wait until elementis available, or thro exeception after x amount of time
+
+
+===================================
+Resources
+===================================
+Selenium Examples: Guru94
+Cucumber Examples: ToolsSQA

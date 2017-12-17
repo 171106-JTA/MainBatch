@@ -1,0 +1,185 @@
+===================================
+Unit Testing
+===================================
+What: Testing individual components
+Why: 
+- Saves time and money!
+- Aids in isolating problems at the finest grained level. 
+- Having a good converage of unit tests makes finding bugs in indiviual components easy and straight forward
+How: Usually unit test framework. For us, Junit. Others include TestNG (unit testing only part of the story)
+
+
+===================================
+Integration Testing
+===================================
+What: Testing different modules together. Checking their interactions
+Why: Aims to identify dependency issues 
+How: ???
+
+===================================
+System Integration Testing (SIT)
+===================================
+What: Test the entire system as a whole
+Why: 
+- Save time and money.
+- Make sure that the system meets its specifications
+How: ???
+
+===================================
+UAT Testing
+===================================
+User Accaptence Testing
+- Test the application against user requirements
+- Alpha Testing: 
+	-> Test application in-house
+	-> Your testers will most likely be IT
+	-> May have understanding of how the application is built
+	-> Should NOT be part of the development team
+- Beta Testing: 
+	-> Out of house testers
+	-> Could be actual client users
+	-> Typically not people in IT
+
+===================================
+E2E Testing
+===================================
+What: Testing the Application from Start to finish. Test the flow of the application
+Why: Identify system dependencies. Make sure data is passed among components correctly
+- System Dependencies: Dependencies between a server application and it's host computer
+https://www.ibm.com/support/knowledgecenter/en/SSPLFC_7.2.1/com.ibm.taddm.doc_721/SDKDevGuide/c_cmdbsdk_modelobject_dependencies.html
+
+===================================
+Data Driven Framework
+===================================
+Provide a source file to data configuration. Dictates how many times a test will run
+What: A Autmated Testing Framework, where data is stored in CSV (excel) and fed into the applicattion. 
+Why: 
+
+===================================
+Keyword Driven Framework
+===================================
+Use keywords describing what data to use and where/how to use it. 
+Provides testers a non-programatic way to create test scripts 
+(only allows 1 test case at a time)
+
+===================================
+Hybrid Framework
+===================================
+Combination of data driven and keyword driven framework
+
+===================================
+Black Box
+===================================
+Testing that doesn't view the code being tested, only the results
+Testers don't need to know the particulars of the code, only what the code does
+Tests designed around specifications and requirements
+
+
+
+===================================
+White Box 
+===================================
+What: 
+- Testing done around the actual code of the application
+- Testers require intimate knowledge of the application
+- Testers chose test cases based on paths in the code...ideally testing every possible path. 
+Why: 
+- Useful for highly robust systems (landers on mars) where random bugs are fatel. 
+- Security testing
+Where: 
+- Applicable to unit testing, integration testing and system testing
+
+
+Advantages: 
+- Testing can start early, independant of gui
+- Most paths can be tested
+
+Disavantages:
+- Tests are tightly coupled with the code, and cat be a pain to maintain
+
+
+===================================
+Grey Testing
+===================================
+Combination of Black Box and White Box: Depth of testing usually determined along the way
+
+===================================
+LOE
+===================================
+A Document defining the amount of time to complete tasks for a single developer
+Used by companies to determine the amount of funding for tasks
+
+===================================
+Regression Testing
+===================================
+Testing old functionality to make sure new functionality didn't break it
+Test cases are stored in the test bucket
+Run time is company specific but occurs before new software is released
+
+===================================
+Smoke Testing
+===================================
+Bare boned tests to confirm if the apploicaiton even functions
+Are simple. DB crud operations persisted
+Also automated
+Smoke Tests passing is usually the pre-requisit for regression testing (i.e. we don't want to start regression until we know the bare bones works)
+
+===================================
+Positive Testing
+===================================
+Testing of the standard or expected paths within an application
+
+===================================
+Negative
+===================================
+Testing of non-standard and unexpected input. That is, testing incorrect input and usage
+
+===================================
+Boundary
+===================================
+Testing the edge cases
+
+===================================
+Re-testing
+===================================
+Testing if a bug fix actually fixed the bug
+
+===================================
+Behavioral Driven Development -> BDD
+===================================
+Exactly the same as TDD but with extra restrictions
+The tests are written in a business-readable language
+
+How different from TDD?
+The business team is capable of writing unit tests for an application
+Cucumber is used to acheive this
+
+From week 05: 
+SRS
+System Requriement Specifications
+- fine grain technical details
+BRS 
+Business Requirement Spcecificaitons
+
+===================================
+Test Driven Development -> TDD
+===================================
+Write tests first, then develope
+Write unit tests that fail, then develop the application until the tests pass
+
+Pros: 
+Well defined requirements
+
+Cons: 
+Developers typically think this is a waste of time, and don't follow this practice very well
+If the requirements ever change, an entire testing framework needs to be refactored
+
+===================================
+Cucumber 
+===================================
+
+===================================
+Gherkin
+===================================
+- Given, When, Then, And, But, Scenario, Scenario Outline, Examples
+

@@ -1,0 +1,62 @@
+===================================
+DevOps
+===================================
+
+A practice being widely adopted by companies 
+Combination of development and project operations
+Follows the main goal of automating as much of the project operations as possible
+
+
+Maven -> Project automation tool
+Jenkins -> 
+
+SCM -> Source Code Management
+
+DevOps is knowing everything from start to end of project deployment
+
+===================================
+Continuous Integration (CI)
+===================================
+- Push code fast and often (commits should be about 15 lines of code)
+- Have it verified for you every time
+- Team should push code often throughout the day
+- This code should get automatically tested
+
+Pros: 	Detect errors quickly
+		Quick detection = quick resolving
+		Ensure high test coverage
+Cons: 	Hard to come up with
+
+===================================
+CI Practices
+===================================
+Have ONE central SCM (Source Code Management system)
+Never push into master
+Automate build processes
+Automate Testing
+Test in a clone of production 
+- When the application is in production (the deployed applicaiton that users are utlizing!), you should never work on the production branch
+- Test in a clone of production
+- Automate deployment
+
+===================================
+Continuous Deployment (CD)
+===================================
+Deploy changes fast, deploy changes often
+
+===================================
+Team Responsiblities
+===================================
+Always pull before pushing
+Check in code frequently
+Do NOT checkin broken code
+Do NOT checkin untested code
+Do NOT checkin code when the build is broken
+Do NOT go home until the build is fixed
+- Best way to get a project done and to save money!
+
+
+Know these terms and the why behind them!!!
+
+Presentation on Monday: 
+Assume that group doesn't know anything about project before hand 

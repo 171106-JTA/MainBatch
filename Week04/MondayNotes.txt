@@ -1,0 +1,308 @@
+Bootstrap
+- CSS library
+- Prewritten CSS that looks fantastic
+
+Jquery 
+- A library of javascript
+
+=================================
+CSS
+=================================
+CSS -> Cascading Style Sheets
+A language for formating web applications
+
+2 Main Elements: 
+Classes and IDs
+
+MyCustomCSS.css
+p {
+	color:red
+	color:#880022 //RGB Number
+	Font:jokerman
+}
+#div1
+
+=================================
+CSS Selector
+=================================
+The "p" is a CSS Selector
+Select by ID using # (#div1 for example)
+ID's must be unique
+We can also select by class (.class)
+Can use block comments like java /* */
+
+Example css:
+<body>
+	<p>STuff </p>
+	<div id='div1' class='divs'>stuff</div>
+	<div class='divs'>mor stuff</div>
+</body>
+
+How to Use CSS: 
+- Inline CSS
+	<tag 	style="color:'red'"> stuff </tag> 
+- Internal Style Sheets
+ 	Somewhere in page we have <style> tags that contain css
+ 	<Style> 
+ 		P{color:'red';}
+ 	</Style>
+- External Style Sheets
+	<link rel="styleshet" type="text/css" href="location/of/file.css">
+
+=================================
+Selectors Advanced
+=================================
+So far we've seen:
+.class
+#id
+tag
+*							-> select all
+p,body,div{ ... }   		-> multi-selector
+p b {All b inside of p}
+[<Attribute>]					-> Anything with this <Attribute>, alter. Examples: 	[type], [type="text"]
+:state						-> anything that has the specified state. Example: 			:required{ ... }
+
+=================================
+Project notes: 
+=================================
+Functionality over css in upcomming projects
+Typically, don't store passwords! If do, encrypt them
+
+Example login service: 
+Create a new class
+-> see his code from Today (monday) 11/27/2017
+
+=================================
+Bootstrap Continued
+=================================
+Bootstrap uses classes
+
+4 sizes: 
+	xs - extra samll -> mobile
+	sm - small -> small computers
+	md - medium -> average screens
+	lg - large -> 4K resolution screens
+
+Note: Cannot have nested containers in bootstrap
+
+examnple: 
+<body>
+	<div class="container">
+		<div class="row">
+			<!-- col -> what we are defining sizes for. md -> Size for "normal" computer screens. 6 -> the number of our 12 width segments that we are using (i.e. half our screen--> 
+			<div class="col-md-6"> 
+
+			<div class="col-md-3">
+			<div class="col-md-3"
+
+		</div>
+
+
+	</div>
+</body>
+- Page is separated into 12 segments
+
+=================================
+Tracking Sessions
+=================================
+
+URL ReWriting -> append session info (session ID) to the end of URL
+- Cons: Security, and limited length in URL
+- Lost on browser closing
+- Dynamic IDs rely solely on the developer to generate
+
+
+Hidden Fields
+- Use the hidden input tag. 
+Can only persist data if use "submits" to pass around
+If user clicks hyperlink, the session data is lost
+
+Cookies
+File on web client that contains session information
+- Some browsers do not support cookies
+
+HTTPSessions
+Servlets can use the Session interface to keep track of session infomation throughout multiple pages and connections 
+
+=================================
+HTTP
+=================================
+Statelss 		-> This means for every page received by the server, a separate conneciton is made.
+				-> Any information pertaining to the last conneciton is lost. As a result, maintaining sessions require work arounds
+
+
+=================================
+Status Codes
+=================================
+First line of Response from Server
+
+5 Code Levels:
+100 series 	-> Informational (just provide information)
+			-> 100 - Continue. Server notifying Client of long processing time for request. Waiting for more packets from client
+200 series 	-> Success (notification of success)
+			-> 200 - OK. The request was processed correctly 
+			-> 201 - Created: Request fullfilled resulting in creation of a new resource
+			-> 202 - Accepted. Request fully received, waiting for processing
+300 series 	-> Redirection (moving request to somewhere else to fix a problem)
+			-> 301 - Page moved permantly
+			-> 302 - Temporarily moved
+400 series 	-> Client Error (The client found an error)
+			-> 400 - Bad request
+			-> 401 - Unauthorized. User messed up username or password. Usually a custom page is used, not the built-in error message
+			-> 403 - Forbidden
+			-> 404 - Server not found
+			-> 418 - I'm A Teapot
+500 series 	-> Server Error (The server found an error and sent it back to the client)
+			-> 500 - Server internal error. i.e. an exception occured on the server side
+			-> 503 - Server is down
+			
+=================================
+Filters
+=================================
+Apply Checks (conditional) on requests to resources (servlets or static rss), on replys from resources, or both. 
+doFilter() method 
+
+
+=================================
+Servlet 
+=================================
+3 Interfaces that servlet inherits from: ServletConfig, Servlet, and Serializable.
+See pg 26 in notebook for servlet tree!!!
+Need to know the entire tree for a servlet in the interview!
+
+Servlet Config
+A configuration that is unique to each servlet
+Has initialization methods and parameters 
+
+Servlet Contex 
+A shared configuraiton for all servlets on the server
+
+Servlet
+
+Serializble
+
+=================================
+Servlet Config VS Servlet Contex
+=================================
+Very similar except ServletContex is a shared resource for all servlets...application wide
+
+=================================
+Redirection
+=================================
+SendRedirect
+Declared in the HTTP Servlet Response Interface
+Redirects the client request to a different location for further processing
+Can be given to a new server or context
+Goes beck to the client, then a new connection begins. The new location is used.
+Hits the client
+
+RequestDispatcher
+Uses the forward method (or include()). 
+It works server-side and all redirection is done via the server
+
+SendRedirect VS RequestDispatcher
+SendRedirect - 
+	redirects are handled on client, 
+	2 full trips. Goes back to client, then back through server
+	New Request is made and old data is lost
+	Transfers to a different server or domain
+	New address is visible
+	Has more overhead
+Request Disptacher - Uses Forward()
+	redirects are handled on server, 
+	Web Container handles the redirect request (i.e. less overtime. request doesn't need to go all the way back to client)
+	Same request and response data is preserved
+	Can hide the url on the client side. 
+	Transfer to other resources within a server or domain
+	New address is hidden
+	Faster
+
+=================================
+Web.xml
+=================================
+need to know all the following tags in the web.xml
+
+From Class: 
+welcome-file
+Servlet-name
+servlet-class
+servlet-mapping
+url-mapping
+filter-name
+filter-class
+filter-mapping
+load-on-startup
+param-name
+param-value
+init-param
+context-param
+
+My Review
+welcome-file-list
+welcome-file
+context-param
+	param-name
+	param-value
+servlet
+	description
+	display-name
+	servlet-name
+	servlet-class
+	init-param
+		param-name
+		param-value
+	load-on-startup
+servlet-mapping
+	servlet-name
+	url-pattern
+filter
+	filter-name
+	filter-class
+	init-param
+		param-name
+		param-value
+filter-mapping
+	filter-name
+	url-pattern
+
+=================================
+Front Controller
+=================================
+Takes all forms and redirects them to appropriate servlets
+
+How actually create a front-controller?
+See Code...user generic URL path
+
+
+Tomorrow: 
+Interview on HTTP to Servlets
+LMS tomorrow
+
+HTML - elements, attributes, tags
+CSS - Bootstrap, Inline, internal, external sheets, css selectors
+XML - vlaid vs well formed, DTD vs XML schema, namespaces, parsers
+Servlets -
+-lifecycle
+-inhertiance tree
+-deployment descriptor
+--Know a majority of hte tags
+-config vs context
+-front controller
+-status codes
+-request dispatcher vs sendRedirect
+-Custom error pages
+-cookies
+-sessions
+--Different ways to handle sessions
+-Lifecycle starting from a request
+-filters
+-POST VS GET
+-Project Structure: front end, service layer, dao layer, backend
+
+LMS is on:
+HTML
+Bootstrap
+CSS
+Servlets
+
+JavaScript and Angular for the rest of the week 
