@@ -23,12 +23,12 @@ import com.revature.pages.MercuryLoginFactory;
 public class MercuryLogin {
 	private static WebDriver driver;
 	private String url = "http://newtours.demoaut.com";
-  @Test
+  @Test(priority=0, groups={"smoke"})
   public void validateLandingPage() {
 	Assert.assertEquals(driver.getTitle(), "Welcome: Mercury Tours");  
   }
   
-  @Test(priority=2, dataProvider="provideAccountDetailsDynamic")
+  @Test(dependsOnMethods="validateLandingPage", priority=2, groups={"regression", "somethingElse"}, dataProvider="provideAccountDetailsDynamic")
   public void loginToMercury(String username, String password)
   {
 	  MercuryLoginFactory mlf = new MercuryLoginFactory(driver);
@@ -76,7 +76,7 @@ public class MercuryLogin {
 	  return data;
   }
   
-  @BeforeTest
+  @BeforeTest(groups= {"smoke"})
   public void beforeTest() {
 	  System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe");
 	  driver = new ChromeDriver();
@@ -85,7 +85,7 @@ public class MercuryLogin {
 	  
   }
 
-  @AfterTest
+  @AfterTest(groups= {"smoke", "regression"})
   public void afterTest() {
 	  driver.quit();
   }

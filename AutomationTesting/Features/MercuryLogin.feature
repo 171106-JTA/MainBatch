@@ -33,6 +33,7 @@ Feature: Mercury Tours Login
 		Then I shall be redirected to the find flights page
   	#utilize 'examples:' with a table as written above to allow cucumber to run with multiple sets of 
   	
+  
 #Deprecated notes:
 #When I input my username, "bobbert" and my password, "bobbert" and click submit   
 ## By using quotes, you allow for dynamic input on the spot

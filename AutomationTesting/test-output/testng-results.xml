@@ -1,61 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" total="2" passed="2">
+<testng-results skipped="0" failed="0" total="1" passed="1">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="263" started-at="2017-12-15T20:21:52Z" finished-at="2017-12-15T20:21:53Z">
+  <suite name="MySmokeTestSuite" duration-ms="12233" started-at="2017-12-18T15:23:22Z" finished-at="2017-12-18T15:23:35Z">
     <groups>
+      <group name="smoke">
+        <method signature="MercuryLogin.validateLandingPage()[pri:0, instance:com.revature.testsuites.MercuryLogin@604ed9f0]" name="validateLandingPage" class="com.revature.testsuites.MercuryLogin"/>
+      </group> <!-- smoke -->
     </groups>
-    <test name="Default test" duration-ms="263" started-at="2017-12-15T20:21:52Z" finished-at="2017-12-15T20:21:53Z">
-      <class name="com.revature.testsuites.NewTest">
-        <test-method status="PASS" signature="beforeSuite()[pri:0, instance:com.revature.testsuites.NewTest@59f99ea]" name="beforeSuite" is-config="true" duration-ms="81" started-at="2017-12-15T15:21:52Z" finished-at="2017-12-15T15:21:52Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- beforeSuite -->
-        <test-method status="PASS" signature="beforeTest()[pri:0, instance:com.revature.testsuites.NewTest@59f99ea]" name="beforeTest" is-config="true" duration-ms="1" started-at="2017-12-15T15:21:52Z" finished-at="2017-12-15T15:21:52Z">
+    <test name="MyFirstTest" duration-ms="12233" started-at="2017-12-18T15:23:22Z" finished-at="2017-12-18T15:23:35Z">
+      <class name="com.revature.testsuites.MercuryLogin">
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:com.revature.testsuites.MercuryLogin@604ed9f0]" name="beforeTest" is-config="true" duration-ms="12126" started-at="2017-12-18T10:23:22Z" finished-at="2017-12-18T10:23:35Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeTest -->
-        <test-method status="PASS" signature="beforeClass()[pri:0, instance:com.revature.testsuites.NewTest@59f99ea]" name="beforeClass" is-config="true" duration-ms="2" started-at="2017-12-15T15:21:52Z" finished-at="2017-12-15T15:21:52Z">
+        <test-method status="PASS" signature="validateLandingPage()[pri:0, instance:com.revature.testsuites.MercuryLogin@604ed9f0]" name="validateLandingPage" duration-ms="57" started-at="2017-12-18T10:23:35Z" finished-at="2017-12-18T10:23:35Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- beforeClass -->
-        <test-method status="PASS" signature="beforeMethod()[pri:0, instance:com.revature.testsuites.NewTest@59f99ea]" name="beforeMethod" is-config="true" duration-ms="5" started-at="2017-12-15T15:21:52Z" finished-at="2017-12-15T15:21:52Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- beforeMethod -->
-        <test-method status="PASS" signature="f3()[pri:0, instance:com.revature.testsuites.NewTest@59f99ea]" name="f3" duration-ms="102" started-at="2017-12-15T15:21:52Z" finished-at="2017-12-15T15:21:53Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- f3 -->
-        <test-method status="PASS" signature="afterMethod()[pri:0, instance:com.revature.testsuites.NewTest@59f99ea]" name="afterMethod" is-config="true" duration-ms="1" started-at="2017-12-15T15:21:53Z" finished-at="2017-12-15T15:21:53Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- afterMethod -->
-        <test-method status="PASS" signature="beforeMethod()[pri:0, instance:com.revature.testsuites.NewTest@59f99ea]" name="beforeMethod" is-config="true" duration-ms="2" started-at="2017-12-15T15:21:53Z" finished-at="2017-12-15T15:21:53Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- beforeMethod -->
-        <test-method status="PASS" signature="f1()[pri:0, instance:com.revature.testsuites.NewTest@59f99ea]" name="f1" duration-ms="17" started-at="2017-12-15T15:21:53Z" finished-at="2017-12-15T15:21:53Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- f1 -->
-        <test-method status="PASS" signature="afterMethod()[pri:0, instance:com.revature.testsuites.NewTest@59f99ea]" name="afterMethod" is-config="true" duration-ms="1" started-at="2017-12-15T15:21:53Z" finished-at="2017-12-15T15:21:53Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- afterMethod -->
-        <test-method status="PASS" signature="afterClass()[pri:0, instance:com.revature.testsuites.NewTest@59f99ea]" name="afterClass" is-config="true" duration-ms="2" started-at="2017-12-15T15:21:53Z" finished-at="2017-12-15T15:21:53Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- afterClass -->
-        <test-method status="PASS" signature="afterTest()[pri:0, instance:com.revature.testsuites.NewTest@59f99ea]" name="afterTest" is-config="true" duration-ms="3" started-at="2017-12-15T15:21:53Z" finished-at="2017-12-15T15:21:53Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- afterTest -->
-        <test-method status="PASS" signature="afterSuite()[pri:0, instance:com.revature.testsuites.NewTest@59f99ea]" name="afterSuite" is-config="true" duration-ms="5" started-at="2017-12-15T15:21:53Z" finished-at="2017-12-15T15:21:53Z">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- afterSuite -->
-      </class> <!-- com.revature.testsuites.NewTest -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+        </test-method> <!-- validateLandingPage -->
+      </class> <!-- com.revature.testsuites.MercuryLogin -->
+    </test> <!-- MyFirstTest -->
+  </suite> <!-- MySmokeTestSuite -->
 </testng-results>
