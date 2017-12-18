@@ -74,8 +74,6 @@ Testing that doesn't view the code being tested, only the results
 Testers don't need to know the particulars of the code, only what the code does
 Tests designed around specifications and requirements
 
-
-
 ===================================
 White Box 
 ===================================
