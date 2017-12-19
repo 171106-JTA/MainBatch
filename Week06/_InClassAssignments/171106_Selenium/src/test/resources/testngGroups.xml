@@ -1,0 +1,23 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!-- Root tag for testng.xml will always be suite. The name can be whatever 
+	you want. -->
+<suite name="MySmokeTestSuite">
+	<test name="WhateverYouWant">
+		<groups>
+			<run>
+				<exclude name="regression"></exclude>
+				<include name="smoke"></include>
+			</run>
+		</groups>
+		<classes>
+			<class name="com.revature.testsuites.MercuryLogin">
+<!-- 				<methods>
+					<include name="methodName"></include>
+				</methods> 
+				You can also include/exclude specific methods.
+				-->
+			</class>
+			<!-- You can have the class tag for multiple classes, of unique name. -->
+		</classes>
+	</test>
+</suite>

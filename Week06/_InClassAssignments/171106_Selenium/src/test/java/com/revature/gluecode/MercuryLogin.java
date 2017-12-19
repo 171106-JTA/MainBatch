@@ -48,7 +48,9 @@ public class MercuryLogin {
 	
 	@After
 	public void after(Scenario scenario){
-
-		driver.quit();
+		if(driver!=null){
+			driver.quit();
+		}
+		
 	}
 }
