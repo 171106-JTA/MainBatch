@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!-- Root tag for testng.xml will always be suite. The name can be whatever 
+	you want. -->
+<suite name="MyCustomSuite">
+	<test name="WhateverYouWant">
+		<classes>
+			<class name="com.revature.testsuites.MercuryLogin"></class>
+			<!-- You can have the class tag for multiple classes, of unique name. -->
+		</classes>
+	</test>
+</suite>
