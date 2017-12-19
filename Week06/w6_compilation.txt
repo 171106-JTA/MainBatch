@@ -175,6 +175,17 @@ If the requirements ever change, an entire testing framework needs to be refacto
 ===================================
 Cucumber 
 ===================================
+Feature -> entry point to Cucumber tests
+		-> one to many scenarios
+Scenarios 	-> Defines a cucumber test
+			-> Given: Initial condition
+			-> When: Action that is performs
+			-> Then:  And, But
+
+Scenario Outline  	-> A template that is used in tandem with Examples
+					-> Never run directly
+					-> Generates scenarios from data in example table and runs each one
+Examples -> Run with Scenario Outline
 
 ===================================
 Gherkin

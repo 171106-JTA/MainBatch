@@ -2,20 +2,29 @@
 <testng-results skipped="0" failed="0" total="5" passed="5">
   <reporter-output>
   </reporter-output>
-  <suite name="Default suite" duration-ms="14189" started-at="2017-12-13T20:41:12Z" finished-at="2017-12-13T20:41:26Z">
+  <suite name="Default suite" duration-ms="16552" started-at="2017-12-18T15:23:15Z" finished-at="2017-12-18T15:23:32Z">
     <groups>
+      <group name="AnotherGroups">
+        <method signature="MercuryLogin.loginToMercury(java.lang.String, java.lang.String)[pri:0, instance:com.revature.testsuites.MercuryLogin@29ee9faa]" name="loginToMercury" class="com.revature.testsuites.MercuryLogin"/>
+      </group> <!-- AnotherGroups -->
+      <group name="regression">
+        <method signature="MercuryLogin.loginToMercury(java.lang.String, java.lang.String)[pri:0, instance:com.revature.testsuites.MercuryLogin@29ee9faa]" name="loginToMercury" class="com.revature.testsuites.MercuryLogin"/>
+      </group> <!-- regression -->
+      <group name="smoke">
+        <method signature="MercuryLogin.validateLandingPage()[pri:0, instance:com.revature.testsuites.MercuryLogin@29ee9faa]" name="validateLandingPage" class="com.revature.testsuites.MercuryLogin"/>
+      </group> <!-- smoke -->
     </groups>
-    <test name="Default test" duration-ms="14189" started-at="2017-12-13T20:41:12Z" finished-at="2017-12-13T20:41:26Z">
+    <test name="Default test" duration-ms="16552" started-at="2017-12-18T15:23:15Z" finished-at="2017-12-18T15:23:32Z">
       <class name="com.revature.testsuites.MercuryLogin">
-        <test-method status="PASS" signature="beforeTest()[pri:0, instance:com.revature.testsuites.MercuryLogin@6767c1fc]" name="beforeTest" is-config="true" duration-ms="4425" started-at="2017-12-13T15:41:12Z" finished-at="2017-12-13T15:41:17Z">
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:com.revature.testsuites.MercuryLogin@29ee9faa]" name="beforeTest" is-config="true" duration-ms="9006" started-at="2017-12-18T10:23:15Z" finished-at="2017-12-18T10:23:24Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeTest -->
-        <test-method status="PASS" signature="validateLandingPage()[pri:0, instance:com.revature.testsuites.MercuryLogin@6767c1fc]" name="validateLandingPage" duration-ms="13" started-at="2017-12-13T15:41:17Z" finished-at="2017-12-13T15:41:17Z">
+        <test-method status="PASS" signature="validateLandingPage()[pri:0, instance:com.revature.testsuites.MercuryLogin@29ee9faa]" name="validateLandingPage" duration-ms="21" started-at="2017-12-18T10:23:24Z" finished-at="2017-12-18T10:23:24Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- validateLandingPage -->
-        <test-method status="PASS" signature="loginToMercury(java.lang.String, java.lang.String)[pri:0, instance:com.revature.testsuites.MercuryLogin@6767c1fc]" name="loginToMercury" duration-ms="2129" started-at="2017-12-13T15:41:17Z" data-provider="provideAccountDetailsDynamic" finished-at="2017-12-13T15:41:19Z">
+        <test-method status="PASS" signature="loginToMercury(java.lang.String, java.lang.String)[pri:0, instance:com.revature.testsuites.MercuryLogin@29ee9faa]" name="loginToMercury" duration-ms="1685" started-at="2017-12-18T10:23:25Z" data-provider="provideAccountDetailsDynamic" finished-at="2017-12-18T10:23:27Z">
           <params>
             <param index="0">
               <value>
@@ -31,7 +40,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginToMercury -->
-        <test-method status="PASS" signature="loginToMercury(java.lang.String, java.lang.String)[pri:0, instance:com.revature.testsuites.MercuryLogin@6767c1fc]" name="loginToMercury" duration-ms="2153" started-at="2017-12-13T15:41:19Z" data-provider="provideAccountDetailsDynamic" finished-at="2017-12-13T15:41:21Z">
+        <test-method status="PASS" signature="loginToMercury(java.lang.String, java.lang.String)[pri:0, instance:com.revature.testsuites.MercuryLogin@29ee9faa]" name="loginToMercury" duration-ms="1446" started-at="2017-12-18T10:23:27Z" data-provider="provideAccountDetailsDynamic" finished-at="2017-12-18T10:23:28Z">
           <params>
             <param index="0">
               <value>
@@ -47,7 +56,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginToMercury -->
-        <test-method status="PASS" signature="loginToMercury(java.lang.String, java.lang.String)[pri:0, instance:com.revature.testsuites.MercuryLogin@6767c1fc]" name="loginToMercury" duration-ms="1740" started-at="2017-12-13T15:41:21Z" data-provider="provideAccountDetailsDynamic" finished-at="2017-12-13T15:41:23Z">
+        <test-method status="PASS" signature="loginToMercury(java.lang.String, java.lang.String)[pri:0, instance:com.revature.testsuites.MercuryLogin@29ee9faa]" name="loginToMercury" duration-ms="1433" started-at="2017-12-18T10:23:28Z" data-provider="provideAccountDetailsDynamic" finished-at="2017-12-18T10:23:30Z">
           <params>
             <param index="0">
               <value>
@@ -63,7 +72,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginToMercury -->
-        <test-method status="PASS" signature="loginToMercury(java.lang.String, java.lang.String)[pri:0, instance:com.revature.testsuites.MercuryLogin@6767c1fc]" name="loginToMercury" duration-ms="2661" started-at="2017-12-13T15:41:23Z" data-provider="provideAccountDetailsDynamic" finished-at="2017-12-13T15:41:26Z">
+        <test-method status="PASS" signature="loginToMercury(java.lang.String, java.lang.String)[pri:0, instance:com.revature.testsuites.MercuryLogin@29ee9faa]" name="loginToMercury" duration-ms="1451" started-at="2017-12-18T10:23:30Z" data-provider="provideAccountDetailsDynamic" finished-at="2017-12-18T10:23:31Z">
           <params>
             <param index="0">
               <value>
@@ -79,7 +88,7 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- loginToMercury -->
-        <test-method status="PASS" signature="afterTest()[pri:0, instance:com.revature.testsuites.MercuryLogin@6767c1fc]" name="afterTest" is-config="true" duration-ms="647" started-at="2017-12-13T15:41:26Z" finished-at="2017-12-13T15:41:26Z">
+        <test-method status="PASS" signature="afterTest()[pri:0, instance:com.revature.testsuites.MercuryLogin@29ee9faa]" name="afterTest" is-config="true" duration-ms="784" started-at="2017-12-18T10:23:31Z" finished-at="2017-12-18T10:23:32Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterTest -->

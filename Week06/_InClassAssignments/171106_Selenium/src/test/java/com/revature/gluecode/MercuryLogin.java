@@ -46,9 +46,10 @@ public class MercuryLogin {
 		//driver.quit();
 	}
 	
-	@After
-	public void after(Scenario scenario){
-
-		driver.quit();
-	}
+//	@After
+//	public void after(Scenario scenario){
+//		if(driver!=null) {
+//			driver.quit();
+//		}
+//	}
 }

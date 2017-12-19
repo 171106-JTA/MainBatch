@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<!-- Root tag for testng.wml will always be suite. The name can be wwhatever you want -->
+<suit name="MySmokeTestingSuits">
+	<test name="WhateverUWant">
+		<groups>
+			<run>
+				<exclude name="regression"></exclude>
+				<include name="smoke"></include>
+			</run>
+		</groups>
+		<class name="com.revature.testsuites.MercuryLogin">
+			<!-- WE can also exclude specific methods??? See Ryan's code -->
+		</class>
+		<!-- You can have the class tag for multiple classes, of unigue name -->
+	</test>
+</suit>

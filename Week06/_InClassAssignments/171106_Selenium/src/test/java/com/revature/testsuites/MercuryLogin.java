@@ -24,12 +24,13 @@ public class MercuryLogin {
 	private static WebDriver driver;
 	private String url = "http://newtours.demoaut.com";
 
-	@Test(priority = 0)
+	@Test(priority = 0, groups= {"smoke"}) //A test can be assigned to groups
 	public void validateLandingPage() {
 		Assert.assertEquals(driver.getTitle(), "Welcome: Mercury Tours");
 	}
 	
-	@Test(priority = 2, dataProvider="provideAccountDetailsDynamic")
+	//A test can have multiple groups
+	@Test(dependsOnMethods = {"validateLandingPage"}, priority = 2, groups= {"regression", "AnotherGroups"}, dataProvider="provideAccountDetailsDynamic")
 	public void loginToMercury(String username, String password){
 		MercuryLoginFactory mlf = new MercuryLoginFactory(driver);
 		mlf.driverLogIntoMercury(username, password);
@@ -38,14 +39,14 @@ public class MercuryLogin {
 		driver.findElement(By.xpath("//a[contains(text(), 'Home')]")).click();
 	}
 
-	@BeforeTest
+	@BeforeTest(groups= {"smoke"})
 	public void beforeTest() {
 		System.setProperty("webdriver.chrome.driver", "Drivers/chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.get(url);
 	}
 
-	@AfterTest
+	@AfterTest(groups= {"smoke"})
 	public void afterTest() {
 		driver.quit();
 	}
