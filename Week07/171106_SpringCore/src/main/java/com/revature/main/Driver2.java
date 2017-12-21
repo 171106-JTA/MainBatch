@@ -41,6 +41,14 @@ public class Driver2 {
 		bob1.getOccupation().setSalary(300000);
 		System.out.println(bob1);
 		System.out.println(bob2);
+		
+		System.out.println("=====AUTOWIRE BY NAME=====");
+		bob1 = (Person)context.getBean("personBeanByName");
+		System.out.println(bob1);
+		
+		System.out.println("=====AUTOWIRE BY TYPE=====");
+		bob1 = (Person)context.getBean("personBeanByType");
+		System.out.println(bob1);
 	}
 
 }

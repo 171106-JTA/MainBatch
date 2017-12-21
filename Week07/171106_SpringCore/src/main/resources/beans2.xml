@@ -2,34 +2,57 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-	
+
+
+
 	<bean id="personBean" class="com.revature.beans.Person" scope="prototype">
-		<property name="name" value="Bobbert"/>
-		<property name="occupation" ref="occupationBean"/>
+		<property name="name" value="Bobbert" />
+		<property name="occupation" ref="occupationBean" />
 	</bean>
-	
-	<bean id="occupationBean" class="com.revature.beans.Occupation">
+
+	<bean id="occupationBean" class="com.revature.beans.Occupation" autowire-candidate="false">
 		<property name="occupation" value="Professional Bob"></property>
-		<property name="salary" value="225000"/> <!-- Monthly -->
+		<property name="salary" value="225000" /> <!-- Monthly -->
 	</bean>
-	<!-- The scope attribute determines if the bean is a singleton or not.
-		By default, the scope will be singleton.
-		All possible scopes include: 
-		singleton -		Bean is a singleton, same instance shared by all
-		prototype - 	Every instance is it's own, but initially set the same
-		request	  -		Bean stored in an httypRequest (For webapps)
-		session	  -		Bean stored in httpSession (For webapps)
-		session-global	Bean stored in global session, (Portlets only, spring 4+)-->
+	<!-- The scope attribute determines if the bean is a singleton or not. By 
+		default, the scope will be singleton. All possible scopes include: singleton 
+		- Bean is a singleton, same instance shared by all prototype - Every instance 
+		is it's own, but initially set the same request - Bean stored in an httypRequest 
+		(For webapps) session - Bean stored in httpSession (For webapps) session-global 
+		Bean stored in global session, (Portlets only, spring 4+) -->
 	<bean id="occupationBeanProto" class="com.revature.beans.Occupation"
-			scope="prototype">
-		<property name="occupation" value="Proto Bob"/>
-		<property name="salary" value="12"/>		
+		scope="prototype" autowire-candidate="false">
+		<property name="occupation" value="Proto Bob" />
+		<property name="salary" value="12" />
 	</bean>
-	<bean id="personBeanProto" class="com.revature.beans.Person" scope="prototype">
-		<property name="name" value="Bobbert"/>
-		<property name="occupation" ref="occupationBeanProto"/>
+	<bean id="personBeanProto" class="com.revature.beans.Person"
+		scope="prototype">
+		<property name="name" value="Bobbert" />
+		<property name="occupation" ref="occupationBeanProto" />
 	</bean>
-	
-	
-	
+
+	<bean id="personBeanByName" class="com.revature.beans.Person"
+		autowire="byName">
+		<property name="name" value="Bobbert"></property>
+	</bean>
+	<bean id="occupation" class="com.revature.beans.Occupation" >
+		<property name="occupation" value="Proto Bob" />
+		<property name="salary" value="12" />
+	</bean>
+
+	<!-- Autowiring: Act of creating an association between an application component 
+		(bean) with the spring container. This describes what bean wiring is. To 
+		have spring determine how to map different components together for you, this 
+		is autowiring. Autowiring can have the following types: -no: Autowiring is 
+		not used, this is the default. -default: See above -byName: Map a bean via 
+		the property name, matching the bean id -byType: Map a bean via datatype 
+		of the property, to the bean representing the datatype class. -constructor: 
+		Exactly like byType, but uses constructor names instead. -autodetect: Attempts 
+		constructor autowiring first, if fails, then attempts byType -->
+	<bean id="personBeanByType" class="com.revature.beans.Person"
+		autowire="byType">
+		<property name="name" value="Bobbert"></property>
+	</bean>
+
+
 </beans>
