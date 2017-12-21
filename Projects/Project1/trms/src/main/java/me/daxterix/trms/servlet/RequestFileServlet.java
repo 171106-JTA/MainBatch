@@ -34,22 +34,18 @@ public class RequestFileServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 		try {
-		    String idStr = request.getParameter("fileId");
+		    String idStr = request.getParameter("id");
 		    if(idStr == null) {
 		        List<RequestFile> files = objectDao.getAllObjects(RequestFile.class);
-		        List<Long> ids = files.stream().map(file -> file.getId()).collect(Collectors.toList());
-		        List<String> strIds  = new ArrayList<>(ids.size());
-		        for (Long id : ids)
-		            strIds.add("" + id);
 		        response.setContentType("application/json");
-		        response.getWriter().print(ServletUtils.stringsToJsonArrayString(strIds).toString());
+		        response.getWriter().print(ServletUtils.requestFilesToJsonArr(files).toString());
             }
             else {
                 Long fileId = Long.parseLong(idStr);
                 RequestFile reqFile = objectDao.getObject(RequestFile.class, fileId);
 
                 response.setContentType(reqFile.getMimeType().getMimeType());
-                response.setHeader("Content-Disposition", "attachment; filename=" + reqFile.getName());
+                response.setHeader("Content-Disposition", "inline; filename=" + reqFile.getName());
 
                 InputStream is = new ByteArrayInputStream(reqFile.getContent());
                 OutputStream os = response.getOutputStream();

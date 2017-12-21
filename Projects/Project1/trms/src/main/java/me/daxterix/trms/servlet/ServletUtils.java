@@ -120,6 +120,20 @@ public class ServletUtils {
         return builder.build();
     }
 
+    static JsonArray requestFilesToJsonArr(List<RequestFile> files) {
+        JsonArrayBuilder jsonArr = Json.createArrayBuilder();
+        for (RequestFile file: files)
+            jsonArr.add(requestFileToInfoJson(file));
+        return jsonArr.build();
+    }
+
+    static JsonObject requestFileToInfoJson(RequestFile file) {
+        JsonObjectBuilder jsonObj = Json.createObjectBuilder();
+        jsonObj.add("id", file.getId());
+        jsonObj.add("mimeType", file.getMimeType().getMimeType());
+        return jsonObj.build();
+    }
+
     /**
      * @param filePart
      * @param fileName

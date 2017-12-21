@@ -1,5 +1,8 @@
 import {Component} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {ObjectDelayDirective} from "../../directives/object-delay-directive";
+
+type FileInfo = {id: number, mimeType: string};
 
 const filesUrl = 'http://localhost:8085/trms/files';
 
@@ -9,19 +12,24 @@ const filesUrl = 'http://localhost:8085/trms/files';
     styleUrls: ['./files-component.component.css']
 })
 
+
 export class FilesComponent {
-    public ids: number[] = [];
+    public filesInfo: FileInfo[] = [];
 
     constructor(private http: HttpClient) {
 
-        this.http.get<number[]>(filesUrl, {withCredentials: true})
+        this.http.get<FileInfo[]>(filesUrl, {withCredentials: true})
             .subscribe(
                 (data) => {
                     console.log(data);
-                    this.ids = data;
+                    this.filesInfo = data;
                 },
                 console.log
             );
+    }
+
+    public getFileUrl(info: FileInfo): string {
+        return `${filesUrl}?id=${info.id}`;
     }
 
 }

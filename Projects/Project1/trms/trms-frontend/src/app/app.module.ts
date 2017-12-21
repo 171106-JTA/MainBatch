@@ -20,10 +20,12 @@ import {UserRequestsComponent} from './components/user-requests/user-requests.co
 import { RequestDetailsComponent } from './components/request-details/request-details.component';
 import {DatePipe} from "@angular/common";
 import { FilesComponent } from './components/files-component/files-component.component';
+import {ObjectDelayDirective} from "./directives/object-delay-directive";
 
 
 @NgModule({
     declarations: [
+        // components
         AppComponent,
         RegisterComponent,
         HomeComponent,
@@ -33,7 +35,10 @@ import { FilesComponent } from './components/files-component/files-component.com
         RequestsComponent,
         UserRequestsComponent,
         RequestDetailsComponent,
-        FilesComponent
+        FilesComponent,
+
+        // directives
+        ObjectDelayDirective
     ],
     imports: [
         BrowserModule,
