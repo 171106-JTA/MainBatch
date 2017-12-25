@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="resources/CSS/base.css">
+		<script src="resources/JavaScript/account.js"></script>
+		<title>No Approve</title>
+	</head>
+	<body>
+		<div class="container well fill">
+			<div class="row">
+				<h3>Welcome <span id="fname"></span> <span id="lname"></span>. You currently can reimburse $<span id="repay"></span></h3>
+			</div>
+			<div class="row">
+				<form action="apply.html">
+					<input type="submit" value="Apply for a Reimbursement">
+				</form>
+				<br>
+				<form action="addToApp.html">
+					<input type="submit" value="Add Materials to Application">
+				</form>
+				<br>
+				<form id="logout" action="login.html">
+					<input type="submit" value="Logout">
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

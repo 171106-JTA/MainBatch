@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="resources/CSS/base.css">
+	<script src="resources/JavaScript/apply.js"></script>
+	<title>Reimbursement Application</title>
+	</head>
+	<body>
+		<div class="container">	
+			<form action="ApplicationSubmit">
+				<div class="row well"><h2>Apply for Reimbursement</h2></div>
+				<div class="row well">
+					<div class="col-sm-3">
+						<h3>User Information</h3>
+						<b>First Name:</b>
+						<input id="fname" name="fname" type="text" required>
+						<p><b>Last Name:</b></p>
+						<input id="lname" name="lname" type="text" required>
+						<p><b>Email:</b></p>
+						<input id="email" name="email" type="email" required>
+					</div>
+					<div class="col-sm-3">
+						<h3>Event Information</h3>
+						<p><b>Cost of Event</b></p>
+						<input id="cost" name="cost" onchange="update()" type="number" required>
+						<p> Normal Repayment: $<span  id="repayment"></span></p>
+						<p>&#42;&#42;Maximum to be repayed: &#36;<span id="repay"></span></p>
+						<p><b>Date of Event</b></p>
+						<input id="eventDate" name="eventDate" type="date" onchange="dateCheck()" required>
+						<p><b>Time of Event</b></p>
+						<input id="eventTime" name="eventTime" type="time" required>
+						<p><b>Name of Event</b></p>
+						<input id="eventName" name="eventName" type="text" required>
+					</div>
+					<div class="col-sm-3">
+						<h3>Type of Event</h3>
+						<p><b>Form of Event:</b></p>
+						<select id="eventType" onchange="update()" name="eventType">
+							<option value="1">University Course</option>
+							<option value="2">Seminar</option>
+							<option value="3">Certification Prep Class</option>
+							<option value="4">Certification</option>
+							<option value="5">Technical Training</option>
+							<option value="6">Other</option>
+						</select>
+						<p><b>Grading of Event</b></p>
+						<select id="gradeType" name="gradeType" onchange="customGrade()">
+							<option value="1">School grading - 65%</option>
+							<option value="2">Pass/Fail</option>
+							<option value="3">Attendance</option>
+							<option value="0">Custom</option>
+						</select>
+						<p id="custom">Passing Grade: <input type="text" id="customPass" name="customPass">Presentation:<input type="checkbox" name="present" value="present"></p>
+					</div>
+					<div class="col-sm-3">
+						<h3>Submit Application</h3>
+						<br><br><br><br><br><br>
+						<input type="submit" id="submitApp" disabled>
+					</div>
+				</div>
+			</form>
+			<div class="row">
+				<div class="col-xs-5"></div>
+					
+				<div class="col-xs-1 well"><form action="Account"><input type="submit" value="Back"></form></div>
+			</div>
+		</div>
+	</body>
+</html>

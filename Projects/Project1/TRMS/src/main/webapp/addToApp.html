@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>addToApp</title>
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="resources/CSS/base.css">
+		<script src="resources/JavaScript/addToApp.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row well">
+				<h1>Review Applications</h1>
+				<h4 id="empty"></h4>
+			</div>
+			<div class="row well">
+				<div class="row">
+					<form method="POST" enctype="multipart/form-data" >
+						<div class=" col-sm-4">	
+						<h3></h3>
+							<p>Add to Application #:</p>
+							<input class="form-control" id="activeID" type="number" name="activeID" onchange="checkInput()" required>
+							<p>Description:</p>
+							<input class="form-control" type="text" name="description">
+						</div>
+						<div class="col-sm-4">
+							<h3>Files</h3>	
+							<p>File to add:<input type="file" name="appFile"></p>
+							<input type="checkbox" name="gradeCheck" value="grade"><span>Grade/Presentation</span>
+							
+						</div>		
+						<div class="col-sm-4">
+							<h3>Actions</h3>
+							<div class="row">
+								<div class="col-sm-1"></div>	
+								<div class="col-sm-10">		
+									<button type="submit" id="submit" formaction="UploadFile" disabled>Add File to Application</button>
+									<br><br>								
+									<input type="submit" id="cancel" value="Cancel Application" formaction="CancelRequest" disabled>
+								</div>
+								<div class="col-sm-1"></div>
+							</div>
+						</div>	
+					</form>	
+				</div>
+				<br>		
+				<div class="row">
+					<div class="col-sm-5"></div>
+					<div class="col-sm-5">
+						<form>
+							<span>				
+								<input type="submit" id="appFiles" value="Review Added Files" formaction="appFiles.html">
+								<input type="submit" value="Back" formaction="Account">
+							</span>
+						</form>
+					</div>
+					<div class="col-sm-2"></div>
+				</div>
+			</div>
+			
+			<div class="row well">	
+				<table id="requests" name="requests" border="1">
+				<tr>
+					<th>Request ID</th><th>Event Descr</th><th>Event Date</th><th>Event Cost</th><th>Event Type</th><th>Normal Repayment</th>
+					<th>Sup Approval</th><th>Chair Approval</th><th>BenCo Approval</th><th>Passed</th><th>Latest Change</th><th>Info Hold</th>
+				</tr>
+				</table>
+				
+			</div>
+		</div>
+	</body>
+</html>

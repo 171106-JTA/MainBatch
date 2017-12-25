@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Review Files</title>
+		
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+		<link rel="stylesheet" type="text/css" href="resources/CSS/base.css">
+		<script src="resources/JavaScript/specificApp.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row well">
+				<h1>Review Files</h1>
+				<h4 id="empty"></h4>
+			</div>	
+			<div class="row well">
+				<div class="col-xs-4">
+				<p>Application #: </p>
+					<form method="post">
+						<span>
+							<input type="number" id="activeID" name="activeID" onchange="checkInput()" required>
+							<button id="review" type="submit" formaction="GetFile" disabled>Review</button>
+							
+						</span>
+					</form>
+				</div>
+				<div class="col-xs-6"></div>
+				<div class="col-xs-2">
+					<br>
+					<form action="approve.html"><input type="submit" value="Back"></form>
+				</div>
+			</div>
+			<div class="row well">
+				<div class="col-xs-5"></div>
+				<div class="col-xs-5">
+					<table id="files" name="files" border="1">
+						<tr>
+							<th>File ID</th><th>Title</th><th>Description</th>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
