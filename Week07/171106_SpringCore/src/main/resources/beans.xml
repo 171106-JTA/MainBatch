@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- To map a bean to our spring container, we use the "bean" tag.
+	With it you must use two attributes to finalize it:
+	id: in order to uniquely identify the bean.
+	class: in order for Spring to know which class it being used. -->
+	<bean id="helloBean" class="com.revature.beans.HelloBean">
+		<!-- Optional configuration for the bean specifically is done via
+		the "property" tag. 
+		You can write a default value for attributes of the bean using the 
+		"name" & "value" attribute.
+		NOTE: Name MUST match the class attribute perfectly, in order work.
+		This includes both spelling AND casing. -->
+		<property name="message" value="Hello World!"></property>
+	</bean>
+
+</beans>
