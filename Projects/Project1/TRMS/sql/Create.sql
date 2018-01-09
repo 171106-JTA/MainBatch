@@ -1,4 +1,4 @@
---select 'DROP table', table_name, 'cascade constraints;' from user_tables;
+select 'DROP table', table_name, 'cascade constraints;' from user_tables;
 
 -- Create tables
 CREATE TABLE CRITERIA_TYPE (

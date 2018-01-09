@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="43020" started-at="2018-01-07T18:11:56Z" finished-at="2018-01-07T18:12:39Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="43020" started-at="2018-01-07T18:11:56Z" finished-at="2018-01-07T18:12:39Z">
+      <class name="com.revature.testsuites.PhpTravelsAuto">
+        <test-method status="PASS" signature="beforeTest()[pri:0, instance:com.revature.testsuites.PhpTravelsAuto@675d3402]" name="beforeTest" is-config="true" duration-ms="46" started-at="2018-01-07T13:11:56Z" finished-at="2018-01-07T13:11:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeTest -->
+        <test-method status="PASS" signature="beforeMethod()[pri:0, instance:com.revature.testsuites.PhpTravelsAuto@675d3402]" name="beforeMethod" is-config="true" duration-ms="16101" started-at="2018-01-07T13:11:56Z" finished-at="2018-01-07T13:12:12Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeMethod -->
+        <test-method status="PASS" signature="validateNavbar()[pri:0, instance:com.revature.testsuites.PhpTravelsAuto@675d3402]" name="validateNavbar" duration-ms="26672" started-at="2018-01-07T13:12:12Z" finished-at="2018-01-07T13:12:39Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validateNavbar -->
+        <test-method status="PASS" signature="afterMethod()[pri:0, instance:com.revature.testsuites.PhpTravelsAuto@675d3402]" name="afterMethod" is-config="true" duration-ms="155" started-at="2018-01-07T13:12:39Z" finished-at="2018-01-07T13:12:39Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterMethod -->
+      </class> <!-- com.revature.testsuites.PhpTravelsAuto -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
