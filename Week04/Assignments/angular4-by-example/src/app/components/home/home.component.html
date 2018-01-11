@@ -1,0 +1,47 @@
+<div> 
+  HOME 
+  Learn AngularJS using best practice real world examples.;
+</div>
+<div class="home-frame">
+  <div class="home-banner">
+    <div class="container inner">
+      <img class="hidden-sm hidden-xs" src="assets/images/angular.png" width="400" height="400" />
+      <h1>LEARN ANGULARJS
+        <span>THE EASY WAY</span>.</h1>
+      <h2>Learn how to build superb AngularJS web applications using real world best practice examples coupled with in-depth
+        tutorials from
+        <a href="#">revillweb.com</a>.</h2>
+      <p>This website is a living and breathing AngularJS web application built using recommended best practices.
+        <strong>AngularJS by example</strong> provides you with a complete application demonstrating recommended best practices from
+        app structure all the way through to production deployment.</p>
+      <div class="home-buttons">
+        <a href="https://github.com/RevillWeb/angularjs-by-example" target="_blank" class="btn btn-lg btn-primary">
+          <span class="icon icon-github2"></span> GitHub</a>
+        <a href="http://www.revillweb.com" target="_blank" class="btn btn-lg btn-default">
+          <span class="icon icon-home"></span> RevillWeb</a>
+      </div>
+    </div>
+  </div>
+  <div class="clearbanner"></div>
+  <div class="tutorials-title">
+    <div class="container">
+      ARTICLES & TUTORIALS
+      <div class="hidden-xs share-buttons">
+        <div class='shareaholic-canvas' data-app='share_buttons' data-app-id='15135403'></div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <ul class="tutorials">
+      <li data-ng-repeat="tutorial in home.tutorials track by $index" data-ng-class="{'offline': (tutorial.link == '#')}">
+        <div class="number">#{{$index + 1}}</div>
+        <h3>{{tutorial.title}}</h3>
+        <p>{{tutorial.description}}</p>
+        <a href="{{tutorial.link}}" data-ng-class="{'disabled': (tutorial.link == '#')}" class="btn btn-lg btn-primary">
+          <span class="icon icon-arrow-up-right5"></span> View</a>
+        <div class="clearfix"></div>
+      </li>
+    </ul>
+    <p class="no-data tuts">More tutorials coming soon...</p>
+  </div>
+</div>

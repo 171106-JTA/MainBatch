@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tomee>
+    <!-- see http://tomee.apache.org/containers-and-resources.html -->
+
+    <!-- activate next line to be able to deploy applications in apps -->
+    <!-- <Deployments dir="apps" /> -->
+
+    <Resource id="helloworldDB" type="DataSource">
+        JdbcDriver com.mysql.jdbc.Driver
+        JdbcUrl jdbc:mysql://127.0.0.1:3306/HelloworldDB
+        UserName localuser
+        Password password
+        JtaManaged true
+        DefaultAutoCommit false
+    </Resource>
+
+
+    <Resource id="helloworldH2" type="DataSource">
+        JdbcDriver com.mysql.jdbc.Driver
+        JdbcUrl jdbc:mysql://127.0.0.1:3306/HelloworldDB
+        UserName localuser
+        Password password
+        JtaManaged true
+        DefaultAutoCommit false
+    </Resource>
+
+
+    <Resource id="helloworldActiveMQ" type="DataSource">
+        JdbcDriver com.mysql.jdbc.Driver
+        JdbcUrl jdbc:mysql://127.0.0.1:3306/activemq
+        UserName localuser
+        Password password
+    </Resource>
+
+
+    <Resource id="jmsResourceAdapter" type="ActiveMQResourceAdapter">
+        BrokerXmlConfig =  broker:(tcp://localhost:61616)?persistent=true
+	DataSource = helloworldActiveMQ
+        ServerUrl       =  vm://localhost
+    </Resource>
+
+    <Resource id="connectionFactory" type="javax.jms.ConnectionFactory">
+        ResourceAdapter = jmsResourceAdapter
+    </Resource>
+
+    <Resource id="helloworldQueue" type="javax.jms.Queue"/>
+
+
+</tomee>

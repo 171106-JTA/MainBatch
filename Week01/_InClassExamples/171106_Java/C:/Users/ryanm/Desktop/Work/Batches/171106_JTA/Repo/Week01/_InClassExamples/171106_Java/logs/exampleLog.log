@@ -1,0 +1,8 @@
+2017-11-11 04:42:48 TRACE LoggingExample:17 - Approaching exception.
+2017-11-11 04:42:48 INFO  LoggingExample:22 - Exception occurred: / by zero
+2017-11-11 04:42:48 TRACE LoggingExample:25 - My first log!
+2017-11-11 04:42:48 DEBUG LoggingExample:26 - My first log!
+2017-11-11 04:42:48 INFO  LoggingExample:27 - My first log!
+2017-11-11 04:42:48 WARN  LoggingExample:28 - My first log!
+2017-11-11 04:42:48 ERROR LoggingExample:29 - My first log!
+2017-11-11 04:42:48 FATAL LoggingExample:30 - My first log!
